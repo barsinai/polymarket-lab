@@ -50,6 +50,12 @@ def active_markets(min_volume):
     return list(out.values())
 
 
+STATIC = ("id", "conditionId", "question", "slug", "startDate", "endDate", "outcomes", "clobTokenIds",
+          "negRisk", "orderPriceMinTickSize", "orderMinSize", "rewardsMinSize", "rewardsMaxSpread",
+          "createdAt", "event_id", "event_title")
+DYNAMIC = [k for k in KEEP if k not in STATIC]  # stored hourly as compact rows
+
+
 def parallel_books(tokens, workers=6):
     chunks = [tokens[i:i + 500] for i in range(0, len(tokens), 500)]
     got = {}
@@ -60,8 +66,13 @@ def parallel_books(tokens, workers=6):
 
 
 def holders(cid):
+    """Top holders per outcome, slimmed to [wallet, outcomeIndex, amount] (no names/profiles)."""
     r = collect.get(f"{DATA_API}/holders", {"market": cid, "limit": 20}, tries=3)
-    return {"conditionId": cid, "holders": r}
+    rows = None
+    if isinstance(r, list):
+        rows = [[h.get("proxyWallet"), h.get("outcomeIndex"), round(float(h.get("amount") or 0), 2)]
+                for tok in r for h in (tok.get("holders") or [])]
+    return {"conditionId": cid, "holders": rows}
 
 
 def main():
@@ -76,10 +87,19 @@ def main():
     mk = active_markets(a.min_volume)
     tokens = [str(t) for m in mk if m.get("acceptingOrders", True) for t in collect.as_list(m.get("clobTokenIds"))]
     t1 = time.time()
-    books = {k: trim(v, a.band) for k, v in parallel_books(tokens).items()}
+    raw = parallel_books(tokens)
     t2 = time.time()
+    # compact: book key "<market id>:<outcome index>" -> [ts_ms, last, bids, asks, far_bid, far_ask]
+    books = {}
+    for m in mk:
+        for j, t in enumerate(collect.as_list(m.get("clobTokenIds"))):
+            if str(t) in raw:
+                b = trim(raw[str(t)], a.band)
+                books[f"{m['id']}:{j}"] = [b.get("timestamp"), b.get("last_trade_price"), b["bids"], b["asks"],
+                                           b["far_bid_size"], b["far_ask_size"]]
     snap = {"ts": int(now.timestamp()), "iso": now.isoformat(), "min_volume": a.min_volume,
-            "band": a.band, "markets": mk, "books": books,
+            "band": a.band, "market_columns": DYNAMIC, "markets": {m["id"]: [m.get(k) for k in DYNAMIC] for m in mk},
+            "book_columns": ["ts_ms", "last", "bids", "asks", "far_bid_size", "far_ask_size"], "books": books,
             "list_seconds": round(t1 - t0, 1), "book_seconds": round(t2 - t1, 1)}
     os.makedirs(f"data/live/{now:%Y-%m-%d}", exist_ok=True)
     path = f"data/live/{now:%Y-%m-%d}/{now:%H%M}.json.gz"
@@ -88,7 +108,9 @@ def main():
     print(f"{now.isoformat()}: {len(mk)} markets, {len(books)}/{len(tokens)} books, list {t1-t0:.0f}s, "
           f"books {t2-t1:.0f}s, saved {os.path.getsize(path)/1e6:.2f} MB", flush=True)
 
-    if a.holders:
+    if a.holders:  # once a day: static market info (questions, token ids...) and top holders
+        os.makedirs("data/live/meta", exist_ok=True)
+        collect.write_jsonl_gz(f"data/live/meta/{now:%Y-%m-%d}.jsonl.gz", [{k: m.get(k) for k in STATIC} for m in mk])
         cids = [m["conditionId"] for m in mk if m.get("conditionId")]
         os.makedirs("data/live/holders", exist_ok=True)
         hp = f"data/live/holders/{now:%Y-%m-%d}.jsonl.gz"
