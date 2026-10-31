@@ -1,0 +1,1487 @@
+{
+ "generated": "2026-10-31T15:35:40.774514+00:00",
+ "overview": {
+  "markets": 2093,
+  "events": 1014,
+  "total_volume": 43184401193.82222,
+  "median_volume": 9048522.265029998,
+  "min_volume": 4931220.50609,
+  "price_points": 5167670,
+  "median_duration_days": 75.94633710847133,
+  "by_category": [
+   {
+    "category": "Sports",
+    "markets": 1017,
+    "volume": 18732495745.79697
+   },
+   {
+    "category": "Elections & politics",
+    "markets": 430,
+    "volume": 13816533299.565115
+   },
+   {
+    "category": "Geopolitics",
+    "markets": 334,
+    "volume": 6327982246.392844
+   },
+   {
+    "category": "Crypto",
+    "markets": 142,
+    "volume": 1904992145.5609183
+   },
+   {
+    "category": "Culture & social media",
+    "markets": 63,
+    "volume": 689582873.3264058
+   },
+   {
+    "category": "Other",
+    "markets": 60,
+    "volume": 1245496296.1263604
+   },
+   {
+    "category": "Economy & business",
+    "markets": 47,
+    "volume": 467318587.0535929
+   }
+  ],
+  "by_year": [
+   {
+    "year": 2023,
+    "markets": 1
+   },
+   {
+    "year": 2024,
+    "markets": 278
+   },
+   {
+    "year": 2025,
+    "markets": 613
+   },
+   {
+    "year": 2026,
+    "markets": 1201
+   }
+  ]
+ },
+ "calibration": {
+  "1 day": [
+   {
+    "bucket": "0-5c",
+    "n": 1255,
+    "price": 0.004923505976095613,
+    "won": 0.0015936254980079682,
+    "lo": 0.0,
+    "hi": 0.0041556742734028046
+   },
+   {
+    "bucket": "5-10c",
+    "n": 63,
+    "price": 0.07085714285714287,
+    "won": 0.1111111111111111,
+    "lo": 0.03389830508474576,
+    "hi": 0.19704545454545447
+   },
+   {
+    "bucket": "10-20c",
+    "n": 116,
+    "price": 0.1507198275862069,
+    "won": 0.23275862068965517,
+    "lo": 0.15126050420168066,
+    "hi": 0.30581593446425975
+   },
+   {
+    "bucket": "20-30c",
+    "n": 149,
+    "price": 0.2541359060402684,
+    "won": 0.24161073825503357,
+    "lo": 0.1700392995035852,
+    "hi": 0.31125827814569534
+   },
+   {
+    "bucket": "30-40c",
+    "n": 203,
+    "price": 0.3536194581280788,
+    "won": 0.4039408866995074,
+    "lo": 0.34,
+    "hi": 0.46734480862021555
+   },
+   {
+    "bucket": "40-50c",
+    "n": 268,
+    "price": 0.45001212686567166,
+    "won": 0.5223880597014925,
+    "lo": 0.4584267701388706,
+    "hi": 0.5849446730032628
+   },
+   {
+    "bucket": "50-60c",
+    "n": 268,
+    "price": 0.5499878731343284,
+    "won": 0.47761194029850745,
+    "lo": 0.4122080224147297,
+    "hi": 0.5373282504445283
+   },
+   {
+    "bucket": "60-70c",
+    "n": 202,
+    "price": 0.646115099009901,
+    "won": 0.599009900990099,
+    "lo": 0.5329949238578681,
+    "hi": 0.6616216512955644
+   },
+   {
+    "bucket": "70-80c",
+    "n": 150,
+    "price": 0.7455583333333334,
+    "won": 0.7533333333333333,
+    "lo": 0.6841660739687055,
+    "hi": 0.8188221476510067
+   },
+   {
+    "bucket": "80-90c",
+    "n": 116,
+    "price": 0.8492801724137929,
+    "won": 0.7672413793103449,
+    "lo": 0.6869436256448047,
+    "hi": 0.8429877829680201
+   },
+   {
+    "bucket": "90-95c",
+    "n": 63,
+    "price": 0.929142857142857,
+    "won": 0.8888888888888888,
+    "lo": 0.7903225806451613,
+    "hi": 0.9697299077733861
+   },
+   {
+    "bucket": "95-100c",
+    "n": 1255,
+    "price": 0.9950764940239043,
+    "won": 0.998406374501992,
+    "lo": 0.9956709018884062,
+    "hi": 1.0
+   }
+  ],
+  "7 days": [
+   {
+    "bucket": "0-5c",
+    "n": 977,
+    "price": 0.006570624360286591,
+    "won": 0.009211873080859774,
+    "lo": 0.0031275314764863536,
+    "hi": 0.01643238217181879
+   },
+   {
+    "bucket": "5-10c",
+    "n": 108,
+    "price": 0.07108333333333333,
+    "won": 0.2037037037037037,
+    "lo": 0.11965811965811966,
+    "hi": 0.29413077731092435
+   },
+   {
+    "bucket": "10-20c",
+    "n": 129,
+    "price": 0.1514108527131783,
+    "won": 0.23255813953488372,
+    "lo": 0.16278597088296465,
+    "hi": 0.3058017861903492
+   },
+   {
+    "bucket": "20-30c",
+    "n": 118,
+    "price": 0.24905084745762712,
+    "won": 0.2966101694915254,
+    "lo": 0.204879827729925,
+    "hi": 0.3913348232425843
+   },
+   {
+    "bucket": "30-40c",
+    "n": 145,
+    "price": 0.3516310344827587,
+    "won": 0.3724137931034483,
+    "lo": 0.2957628320257113,
+    "hi": 0.4546401515151514
+   },
+   {
+    "bucket": "40-50c",
+    "n": 171,
+    "price": 0.45106432748538017,
+    "won": 0.4619883040935672,
+    "lo": 0.3895023939808482,
+    "hi": 0.5402535496957404
+   },
+   {
+    "bucket": "50-60c",
+    "n": 178,
+    "price": 0.5453258426966292,
+    "won": 0.5280898876404494,
+    "lo": 0.45761501210653754,
+    "hi": 0.5989285714285714
+   },
+   {
+    "bucket": "60-70c",
+    "n": 147,
+    "price": 0.6470306122448979,
+    "won": 0.6394557823129252,
+    "lo": 0.562841059602649,
+    "hi": 0.7162186122292505
+   },
+   {
+    "bucket": "70-80c",
+    "n": 119,
+    "price": 0.7505210084033613,
+    "won": 0.6974789915966386,
+    "lo": 0.6032655133772237,
+    "hi": 0.78335
+   },
+   {
+    "bucket": "80-90c",
+    "n": 128,
+    "price": 0.8481874999999999,
+    "won": 0.7734375,
+    "lo": 0.7048570654382875,
+    "hi": 0.840938995215311
+   },
+   {
+    "bucket": "90-95c",
+    "n": 109,
+    "price": 0.9286513761467889,
+    "won": 0.7889908256880734,
+    "lo": 0.6989641123439667,
+    "hi": 0.8637121212121212
+   },
+   {
+    "bucket": "95-100c",
+    "n": 977,
+    "price": 0.9934293756397135,
+    "won": 0.9907881269191402,
+    "lo": 0.9831149450806687,
+    "hi": 0.9966996699669967
+   }
+  ],
+  "30 days": [
+   {
+    "bucket": "0-5c",
+    "n": 788,
+    "price": 0.00792005076142132,
+    "won": 0.011421319796954314,
+    "lo": 0.005050187008625296,
+    "hi": 0.02014222271471922
+   },
+   {
+    "bucket": "5-10c",
+    "n": 92,
+    "price": 0.07323369565217393,
+    "won": 0.07608695652173914,
+    "lo": 0.030295454545454546,
+    "hi": 0.13751077586206897
+   },
+   {
+    "bucket": "10-20c",
+    "n": 123,
+    "price": 0.14596341463414636,
+    "won": 0.21951219512195122,
+    "lo": 0.1451339529797704,
+    "hi": 0.2984274193548387
+   },
+   {
+    "bucket": "20-30c",
+    "n": 106,
+    "price": 0.24831132075471696,
+    "won": 0.3867924528301887,
+    "lo": 0.28846153846153844,
+    "hi": 0.48598773900368686
+   },
+   {
+    "bucket": "30-40c",
+    "n": 95,
+    "price": 0.3444736842105263,
+    "won": 0.3157894736842105,
+    "lo": 0.22340425531914893,
+    "hi": 0.4158209496194273
+   },
+   {
+    "bucket": "40-50c",
+    "n": 102,
+    "price": 0.45430392156862753,
+    "won": 0.43137254901960786,
+    "lo": 0.3333333333333333,
+    "hi": 0.5247524752475248
+   },
+   {
+    "bucket": "50-60c",
+    "n": 99,
+    "price": 0.544050505050505,
+    "won": 0.5555555555555556,
+    "lo": 0.4583333333333333,
+    "hi": 0.6535428542854285
+   },
+   {
+    "bucket": "60-70c",
+    "n": 92,
+    "price": 0.6508152173913043,
+    "won": 0.7065217391304348,
+    "lo": 0.6091440886699507,
+    "hi": 0.7959699031127602
+   },
+   {
+    "bucket": "70-80c",
+    "n": 108,
+    "price": 0.7470277777777778,
+    "won": 0.6018518518518519,
+    "lo": 0.5046707536654377,
+    "hi": 0.6923076923076923
+   },
+   {
+    "bucket": "80-90c",
+    "n": 126,
+    "price": 0.8519563492063491,
+    "won": 0.7777777777777778,
+    "lo": 0.6946454482367044,
+    "hi": 0.848
+   },
+   {
+    "bucket": "90-95c",
+    "n": 88,
+    "price": 0.9251420454545454,
+    "won": 0.9431818181818182,
+    "lo": 0.8876369382022471,
+    "hi": 0.9875038580246914
+   },
+   {
+    "bucket": "95-100c",
+    "n": 793,
+    "price": 0.9918146279949559,
+    "won": 0.9861286254728878,
+    "lo": 0.9773462549355915,
+    "hi": 0.9938053562691761
+   }
+  ]
+ },
+ "accuracy_by_horizon": [
+  {
+   "hours": 1,
+   "label": "1h",
+   "n": 2070,
+   "brier": 0.03291293894927537,
+   "favorite_won": 0.9497584541062802,
+   "skill_vs_coinflip": 0.8683482442028985
+  },
+  {
+   "hours": 3,
+   "label": "3h",
+   "n": 2073,
+   "brier": 0.06121192085745297,
+   "favorite_won": 0.8991799324650265,
+   "skill_vs_coinflip": 0.7551523165701881
+  },
+  {
+   "hours": 6,
+   "label": "6h",
+   "n": 2080,
+   "brier": 0.07600929783653847,
+   "favorite_won": 0.8793269230769231,
+   "skill_vs_coinflip": 0.6959628086538461
+  },
+  {
+   "hours": 12,
+   "label": "12h",
+   "n": 2079,
+   "brier": 0.08255254362073114,
+   "favorite_won": 0.8667628667628667,
+   "skill_vs_coinflip": 0.6697898255170754
+  },
+  {
+   "hours": 24,
+   "label": "24h",
+   "n": 2054,
+   "brier": 0.08456290308544304,
+   "favorite_won": 0.8568646543330087,
+   "skill_vs_coinflip": 0.6617483876582279
+  },
+  {
+   "hours": 48,
+   "label": "2d",
+   "n": 2018,
+   "brier": 0.08632355100966305,
+   "favorite_won": 0.8596926127912742,
+   "skill_vs_coinflip": 0.6547057959613478
+  },
+  {
+   "hours": 72,
+   "label": "3d",
+   "n": 1988,
+   "brier": 0.0906919666750503,
+   "favorite_won": 0.8523929471032745,
+   "skill_vs_coinflip": 0.6372321332997988
+  },
+  {
+   "hours": 168,
+   "label": "7d",
+   "n": 1653,
+   "brier": 0.09325011343012704,
+   "favorite_won": 0.8610436893203883,
+   "skill_vs_coinflip": 0.6269995462794918
+  },
+  {
+   "hours": 336,
+   "label": "14d",
+   "n": 1483,
+   "brier": 0.08588561867835469,
+   "favorite_won": 0.8769438810006761,
+   "skill_vs_coinflip": 0.6564575252865812
+  },
+  {
+   "hours": 720,
+   "label": "30d",
+   "n": 1306,
+   "brier": 0.08347595865237366,
+   "favorite_won": 0.8790199081163859,
+   "skill_vs_coinflip": 0.6660961653905053
+  },
+  {
+   "hours": 1440,
+   "label": "60d",
+   "n": 1097,
+   "brier": 0.07729220168641751,
+   "favorite_won": 0.8933454876937101,
+   "skill_vs_coinflip": 0.69083119325433
+  }
+ ],
+ "underdog": {
+  "overall_7d": {
+   "bets": 237,
+   "events": 162,
+   "avg_price": 0.1148059071729958,
+   "win_rate": 0.21940928270042195,
+   "win_lo": 0.1696775062881782,
+   "win_hi": 0.2811903865461847,
+   "roi": 1.0873862789178628,
+   "roi_lo": 0.5192415488374738,
+   "roi_hi": 1.7696719565083725
+  },
+  "by_horizon": [
+   {
+    "horizon": "1d",
+    "bets": 179,
+    "events": 146,
+    "avg_price": 0.1226117318435754,
+    "win_rate": 0.18994413407821228,
+    "win_lo": 0.12983127194991603,
+    "win_hi": 0.25429811370100364,
+    "roi": 0.5753079596961745,
+    "roi_lo": 0.0327141473599099,
+    "roi_hi": 1.137464108451168
+   },
+   {
+    "horizon": "3d",
+    "bets": 227,
+    "events": 167,
+    "avg_price": 0.11814977973568282,
+    "win_rate": 0.14977973568281938,
+    "win_lo": 0.10642976753349094,
+    "win_hi": 0.2028660787530763,
+    "roi": 0.24181108741261656,
+    "roi_lo": -0.15451191335459122,
+    "roi_hi": 0.7321470629446277
+   },
+   {
+    "horizon": "7d",
+    "bets": 237,
+    "events": 162,
+    "avg_price": 0.1148059071729958,
+    "win_rate": 0.21940928270042195,
+    "win_lo": 0.16630359612724757,
+    "win_hi": 0.2822382478632478,
+    "roi": 1.0873862789178628,
+    "roi_lo": 0.5568025401704044,
+    "roi_hi": 1.7576350141793955
+   },
+   {
+    "horizon": "14d",
+    "bets": 220,
+    "events": 158,
+    "avg_price": 0.11452272727272728,
+    "win_rate": 0.2,
+    "win_lo": 0.14897286821705427,
+    "win_hi": 0.25531782511210754,
+    "roi": 0.8270288066336998,
+    "roi_lo": 0.3527610040979545,
+    "roi_hi": 1.3905746003823871
+   },
+   {
+    "horizon": "30d",
+    "bets": 215,
+    "events": 146,
+    "avg_price": 0.1148418604651163,
+    "win_rate": 0.15813953488372093,
+    "win_lo": 0.10916826757302596,
+    "win_hi": 0.20924596582819174,
+    "roi": 0.3631835990266937,
+    "roi_lo": -0.06665951016101157,
+    "roi_hi": 0.9142698822893462
+   }
+  ],
+  "by_category": [
+   {
+    "category": "Sports",
+    "bets": 70,
+    "events": 44,
+    "avg_price": 0.11728571428571427,
+    "win_rate": 0.12857142857142856,
+    "win_lo": 0.05714285714285714,
+    "win_hi": 0.22501390433815327,
+    "roi": -0.0721330769597216,
+    "roi_lo": -0.6365661268913813,
+    "roi_hi": 0.6795377581981541
+   },
+   {
+    "category": "Elections & politics",
+    "bets": 51,
+    "events": 30,
+    "avg_price": 0.10724509803921568,
+    "win_rate": 0.19607843137254902,
+    "win_lo": 0.09567307692307693,
+    "win_hi": 0.32631987577639743,
+    "roi": 0.9394758667010109,
+    "roi_lo": -0.174471077357488,
+    "roi_hi": 2.5540635064000137
+   },
+   {
+    "category": "Geopolitics",
+    "bets": 73,
+    "events": 51,
+    "avg_price": 0.12186301369863012,
+    "win_rate": 0.3698630136986301,
+    "win_lo": 0.2631578947368421,
+    "win_hi": 0.5,
+    "roi": 2.552121178998229,
+    "roi_lo": 1.3033205309701688,
+    "roi_hi": 4.109925983816745
+   },
+   {
+    "category": "Crypto",
+    "bets": 27,
+    "events": 23,
+    "avg_price": 0.11892592592592592,
+    "win_rate": 0.14814814814814814,
+    "win_lo": 0.034482758620689655,
+    "win_hi": 0.3076923076923077,
+    "roi": 0.7746943785959901,
+    "roi_lo": -0.6666666666666666,
+    "roi_hi": 2.833255238694999
+   }
+  ],
+  "volume_cutoffs": [
+   7112996.3035436645,
+   13574637.218136996
+  ],
+  "by_volume": [
+   {
+    "tier": "lower third",
+    "bets": 89,
+    "events": 80,
+    "avg_price": 0.12243258426966291,
+    "win_rate": 0.24719101123595505,
+    "win_lo": 0.15789473684210525,
+    "win_hi": 0.3533177905308464,
+    "roi": 1.311452758566629,
+    "roi_lo": 0.3676465619847651,
+    "roi_hi": 2.3843946546008357
+   },
+   {
+    "tier": "middle third",
+    "bets": 79,
+    "events": 57,
+    "avg_price": 0.10740506329113926,
+    "win_rate": 0.21518987341772153,
+    "win_lo": 0.12658227848101267,
+    "win_hi": 0.3150684931506849,
+    "roi": 1.0215928212049077,
+    "roi_lo": 0.19192058854593652,
+    "roi_hi": 2.029432357727665
+   },
+   {
+    "tier": "top third",
+    "bets": 69,
+    "events": 43,
+    "avg_price": 0.11344202898550725,
+    "win_rate": 0.18840579710144928,
+    "win_lo": 0.1044776119402985,
+    "win_hi": 0.28943858560794017,
+    "roi": 0.873701735013273,
+    "roi_lo": -0.04947499282483178,
+    "roi_hi": 2.062233563940739
+   }
+  ],
+  "by_year": [
+   {
+    "year": 2024,
+    "bets": 34,
+    "events": 21,
+    "avg_price": 0.10561764705882352,
+    "win_rate": 0.38235294117647056,
+    "win_lo": 0.21428571428571427,
+    "win_hi": 0.64,
+    "roi": 2.8334978493355663,
+    "roi_lo": 0.9929270206835558,
+    "roi_hi": 5.535178193442205
+   },
+   {
+    "year": 2025,
+    "bets": 75,
+    "events": 54,
+    "avg_price": 0.11162000000000001,
+    "win_rate": 0.14666666666666667,
+    "win_lo": 0.07142857142857142,
+    "win_hi": 0.2447713097713094,
+    "roi": 0.5590127458030271,
+    "roi_lo": -0.2769251985665406,
+    "roi_hi": 1.633155477111528
+   },
+   {
+    "year": 2026,
+    "bets": 128,
+    "events": 88,
+    "avg_price": 0.11911328125000001,
+    "win_rate": 0.21875,
+    "win_lo": 0.1516407894736842,
+    "win_hi": 0.2958347826086956,
+    "roi": 0.9331692600851346,
+    "roi_lo": 0.21366236888771858,
+    "roi_hi": 1.7536186090583343
+   }
+  ],
+  "by_price_band": [
+   {
+    "band": "1-5c",
+    "bets": 179,
+    "events": 113,
+    "avg_price": 0.026304469273743015,
+    "win_rate": 0.03910614525139665,
+    "win_lo": 0.010957485137813007,
+    "win_hi": 0.07462786463910899,
+    "roi": 0.44507869687264245,
+    "roi_lo": -0.5782677529800292,
+    "roi_hi": 1.9199115891378615
+   },
+   {
+    "band": "5-10c",
+    "bets": 108,
+    "events": 79,
+    "avg_price": 0.07108333333333333,
+    "win_rate": 0.2037037037037037,
+    "win_lo": 0.12873010610079574,
+    "win_hi": 0.2920794025157232,
+    "roi": 1.8008409874520241,
+    "roi_lo": 0.770690678945929,
+    "roi_hi": 3.0705923381711897
+   },
+   {
+    "band": "10-20c",
+    "bets": 129,
+    "events": 104,
+    "avg_price": 0.1514108527131783,
+    "win_rate": 0.23255813953488372,
+    "win_lo": 0.16666666666666666,
+    "win_hi": 0.3052637525826445,
+    "roi": 0.49007536014507674,
+    "roi_lo": 0.05900052027583611,
+    "roi_hi": 0.9782252170658379
+   },
+   {
+    "band": "20-30c",
+    "bets": 118,
+    "events": 101,
+    "avg_price": 0.2490508474576271,
+    "win_rate": 0.2966101694915254,
+    "win_lo": 0.20948049512378095,
+    "win_hi": 0.3869522215459525,
+    "roi": 0.22312268215783637,
+    "roi_lo": -0.146158096827932,
+    "roi_hi": 0.5926505821487964
+   },
+   {
+    "band": "30-40c",
+    "bets": 145,
+    "events": 133,
+    "avg_price": 0.3516310344827586,
+    "win_rate": 0.3724137931034483,
+    "win_lo": 0.296551724137931,
+    "win_hi": 0.4510636737089201,
+    "roi": 0.059717064454669316,
+    "roi_lo": -0.16304789454085303,
+    "roi_hi": 0.2816595547891398
+   }
+  ],
+  "deadline_vs_other": [
+   {
+    "group": "deadline questions",
+    "bets": 91,
+    "events": 59,
+    "avg_price": 0.11630219780219779,
+    "win_rate": 0.2857142857142857,
+    "win_lo": 0.20219155844155845,
+    "win_hi": 0.39216130687649664,
+    "roi": 1.6635373669662092,
+    "roi_lo": 0.75019085456751,
+    "roi_hi": 2.848238654597092
+   },
+   {
+    "group": "other questions",
+    "bets": 146,
+    "events": 108,
+    "avg_price": 0.11387328767123286,
+    "win_rate": 0.1780821917808219,
+    "win_lo": 0.11417759646179655,
+    "win_hi": 0.25,
+    "roi": 0.7282784089699209,
+    "roi_lo": 0.07471544073908949,
+    "roi_hi": 1.4776144755739253
+   }
+  ]
+ },
+ "momentum": [
+  {
+   "move": "fell >15c",
+   "n": 687,
+   "events": 238,
+   "mispricing": 0.013080058224163024,
+   "lo": -0.015873862973280754,
+   "hi": 0.03934115572457344
+  },
+  {
+   "move": "fell 5-15c",
+   "n": 2274,
+   "events": 427,
+   "mispricing": 0.026801451187335092,
+   "lo": 0.008917639533836856,
+   "hi": 0.043432449186631875
+  },
+  {
+   "move": "fell 2-5c",
+   "n": 3515,
+   "events": 606,
+   "mispricing": 0.008920056899004268,
+   "lo": -0.0065071368021631555,
+   "hi": 0.027056922080648336
+  },
+  {
+   "move": "flat (\u00b12c)",
+   "n": 25117,
+   "events": 750,
+   "mispricing": 5.354938886013685e-06,
+   "lo": 0.0,
+   "hi": 1.1604978015082046e-05
+  },
+  {
+   "move": "rose 2-5c",
+   "n": 3485,
+   "events": 606,
+   "mispricing": -0.00923615494978479,
+   "lo": -0.02716546295913559,
+   "hi": 0.008521591542224066
+  },
+  {
+   "move": "rose 5-15c",
+   "n": 2301,
+   "events": 428,
+   "mispricing": -0.02646762277270752,
+   "lo": -0.04563915211238907,
+   "hi": -0.009072387664240263
+  },
+  {
+   "move": "rose >15c",
+   "n": 693,
+   "events": 239,
+   "mispricing": -0.012021645021645018,
+   "lo": -0.04267597007867389,
+   "hi": 0.017108408744203076
+  }
+ ],
+ "favorites": [
+  {
+   "horizon": "6h",
+   "days": 0.25,
+   "bets": 175,
+   "avg_price": 0.9595142857142857,
+   "hit_rate": 0.9714285714285714,
+   "roi": 0.012187378426005768,
+   "roi_lo": -0.016091362391992832,
+   "roi_hi": 0.03558119433964553
+  },
+  {
+   "horizon": "1d",
+   "days": 1.0,
+   "bets": 233,
+   "avg_price": 0.9621459227467811,
+   "hit_rate": 0.9613733905579399,
+   "roi": -0.0012420282577298419,
+   "roi_lo": -0.027625083352749852,
+   "roi_hi": 0.023547467933879677
+  },
+  {
+   "horizon": "3d",
+   "days": 3.0,
+   "bets": 277,
+   "avg_price": 0.9590018050541517,
+   "hit_rate": 0.9530685920577617,
+   "roi": -0.006565683347250478,
+   "roi_lo": -0.03951208058855334,
+   "roi_hi": 0.020247920216201053
+  },
+  {
+   "horizon": "7d",
+   "days": 7.0,
+   "bets": 286,
+   "avg_price": 0.9564143356643356,
+   "hit_rate": 0.8951048951048951,
+   "roi": -0.06604692901248378,
+   "roi_lo": -0.11052114563529025,
+   "roi_hi": -0.02737675475825132
+  },
+  {
+   "horizon": "14d",
+   "days": 14.0,
+   "bets": 296,
+   "avg_price": 0.9593530405405406,
+   "hit_rate": 0.9222972972972973,
+   "roi": -0.03911643947833852,
+   "roi_lo": -0.07753943035164475,
+   "roi_hi": -0.009594878550080605
+  },
+  {
+   "horizon": "30d",
+   "days": 30.0,
+   "bets": 289,
+   "avg_price": 0.9598788927335641,
+   "hit_rate": 0.9515570934256056,
+   "roi": -0.008597520278493668,
+   "roi_lo": -0.037150425512896136,
+   "roi_hi": 0.014479482312314737
+  }
+ ],
+ "yes_bias": [
+  {
+   "group": "All Yes/No markets",
+   "markets": 1564,
+   "events": 623,
+   "yes_underpriced_by": 0.0376611253196931,
+   "lo": 0.024051937539854747,
+   "hi": 0.05398726414845034
+  },
+  {
+   "group": "\"...by <date>?\" deadline questions",
+   "markets": 356,
+   "events": 180,
+   "yes_underpriced_by": 0.10655898876404495,
+   "lo": 0.07247707344632769,
+   "hi": 0.14597562449711066
+  },
+  {
+   "group": "Other Yes/No questions",
+   "markets": 1208,
+   "events": 465,
+   "yes_underpriced_by": 0.017356788079470203,
+   "lo": 0.003735658336322186,
+   "hi": 0.03325716347673994
+  },
+  {
+   "group": "Sports",
+   "markets": 586,
+   "events": 199,
+   "yes_underpriced_by": 0.010841296928327648,
+   "lo": -0.009820460183560531,
+   "hi": 0.03450951923076922
+  },
+  {
+   "group": "Elections & politics",
+   "markets": 398,
+   "events": 139,
+   "yes_underpriced_by": 0.026837939698492463,
+   "lo": 0.010762473481535112,
+   "hi": 0.04710239104537491
+  },
+  {
+   "group": "Geopolitics",
+   "markets": 288,
+   "events": 156,
+   "yes_underpriced_by": 0.12997222222222224,
+   "lo": 0.08854573908147279,
+   "hi": 0.17769314403945594
+  },
+  {
+   "group": "Crypto",
+   "markets": 130,
+   "events": 70,
+   "yes_underpriced_by": 0.014696153846153857,
+   "lo": -0.03731553158967391,
+   "hi": 0.06724198841698842
+  },
+  {
+   "group": "Culture & social media",
+   "markets": 63,
+   "events": 14,
+   "yes_underpriced_by": 0.0017460317460317506,
+   "lo": -0.051334778225806454,
+   "hi": 0.039539500000000005
+  },
+  {
+   "group": "Other",
+   "markets": 55,
+   "events": 20,
+   "yes_underpriced_by": -0.009027272727272726,
+   "lo": -0.02085222984562607,
+   "hi": -0.0019798076923076917
+  },
+  {
+   "group": "Economy & business",
+   "markets": 44,
+   "events": 25,
+   "yes_underpriced_by": 0.06617045454545455,
+   "lo": 0.0076368819266837175,
+   "hi": 0.1580796313364055
+  }
+ ],
+ "upsets_7d": [
+  {
+   "question": "Will Bulgaria win Eurovision 2026?",
+   "side": "other side",
+   "price_7d": 0.9935,
+   "volume": 6729770.157830087,
+   "category": "Culture & social media"
+  },
+  {
+   "question": "Aleksandar Vu\u010di\u0107 out as Serbian President by June 30, 2026?",
+   "side": "other side",
+   "price_7d": 0.9905,
+   "volume": 5368566.6323790215,
+   "category": "Geopolitics"
+  },
+  {
+   "question": "US x Iran ceasefire by April 7?",
+   "side": "other side",
+   "price_7d": 0.9845,
+   "volume": 173696184.17746878,
+   "category": "Geopolitics"
+  },
+  {
+   "question": "Khamenei out as Supreme Leader of Iran by February 28?",
+   "side": "other side",
+   "price_7d": 0.9815,
+   "volume": 131114970.827221,
+   "category": "Geopolitics"
+  },
+  {
+   "question": "U.S. anti-cartel ground operation in Mexico by January 31?",
+   "side": "other side",
+   "price_7d": 0.9745,
+   "volume": 30194309.815936,
+   "category": "Geopolitics"
+  },
+  {
+   "question": "Epstein blackmail evidence released in 2025? ",
+   "side": "other side",
+   "price_7d": 0.9655,
+   "volume": 9257039.920657,
+   "category": "Elections & politics"
+  },
+  {
+   "question": "US x Iran permanent peace deal by June 15, 2026?",
+   "side": "other side",
+   "price_7d": 0.961,
+   "volume": 177370818.43892464,
+   "category": "Geopolitics"
+  },
+  {
+   "question": "Will Elon Musk be named in newly released Epstein files?",
+   "side": "other side",
+   "price_7d": 0.9575,
+   "volume": 7924514.669527,
+   "category": "Elections & politics"
+  },
+  {
+   "question": "Will Stephen Colbert be named in newly released Epstein files?",
+   "side": "other side",
+   "price_7d": 0.956,
+   "volume": 11385724.578479,
+   "category": "Elections & politics"
+  },
+  {
+   "question": "Iran closes its airspace by June 8?",
+   "side": "other side",
+   "price_7d": 0.945,
+   "volume": 11787943.203117052,
+   "category": "Geopolitics"
+  },
+  {
+   "question": "Will the US next strike Iran on February 28, 2026 (ET)?",
+   "side": "other side",
+   "price_7d": 0.945,
+   "volume": 5837356.570176992,
+   "category": "Geopolitics"
+  },
+  {
+   "question": "Lighter Airdrop on December 30?",
+   "side": "other side",
+   "price_7d": 0.9415,
+   "volume": 5242579.930738,
+   "category": "Crypto"
+  }
+ ],
+ "upsets_7d_count": 32,
+ "comebacks": {
+  "markets": 2061,
+  "winner_was_below_10c": 0.052886948083454635,
+  "winner_was_below_20c": 0.10383309073265405,
+  "winner_was_below_30c": 0.16545366327025715
+ },
+ "resolution_lag_hours": {
+  "median": 3.091666666666667,
+  "p90": 115.31222222222215,
+  "closed_early_share": 0.3520309477756286
+ },
+ "books": {
+  "snapshots": 22,
+  "first": "2026-10-31T09:01:27.227256+00:00",
+  "last": "2026-10-31T15:30:05.155340+00:00",
+  "median_spread_c": 1.0000000000000009,
+  "by_band": [
+   {
+    "band": "1-5c",
+    "books": 1249,
+    "spread_pct": 0.23157894736842097,
+    "cost_100": 0.1700889788679187,
+    "cost_1000": 0.3461679002557263,
+    "cost_10000": 0.9855143895319112,
+    "fillable_10000": 0.27702161729383507
+   },
+   {
+    "band": "5-20c",
+    "books": 865,
+    "spread_pct": 0.09523809523809518,
+    "cost_100": 0.05263157894736847,
+    "cost_1000": 0.07692307692307698,
+    "cost_10000": 0.11181751423316352,
+    "fillable_10000": 0.5653179190751445
+   },
+   {
+    "band": "20-40c",
+    "books": 1348,
+    "spread_pct": 0.035087719298245446,
+    "cost_100": 0.018181818181818195,
+    "cost_1000": 0.01960784313725492,
+    "cost_10000": 0.039690019020942456,
+    "fillable_10000": 0.8649851632047477
+   },
+   {
+    "band": "40-60c",
+    "books": 2251,
+    "spread_pct": 0.02020202020202022,
+    "cost_100": 0.010309278350515474,
+    "cost_1000": 0.01075268817204302,
+    "cost_10000": 0.018708884313409144,
+    "fillable_10000": 0.9098178587294535
+   },
+   {
+    "band": "60-80c",
+    "books": 1351,
+    "spread_pct": 0.014184397163120581,
+    "cost_100": 0.007092198581560133,
+    "cost_1000": 0.0075187969924812095,
+    "cost_10000": 0.013781694127510175,
+    "fillable_10000": 0.9496669133974833
+   },
+   {
+    "band": "80-95c",
+    "books": 860,
+    "spread_pct": 0.011560693641618507,
+    "cost_100": 0.0057803468208092535,
+    "cost_1000": 0.005847953216374275,
+    "cost_10000": 0.010393286430896079,
+    "fillable_10000": 0.8546511627906976
+   },
+   {
+    "band": "95-99c",
+    "books": 1254,
+    "spread_pct": 0.0051948051948052,
+    "cost_100": 0.0030549898167007267,
+    "cost_1000": 0.00222971378118465,
+    "cost_10000": 0.002552404878427887,
+    "fillable_10000": 0.5733652312599681
+   }
+  ]
+ },
+ "multi_outcome_complete": {
+  "events": 51,
+  "ask_sum_below_100": 6,
+  "bid_sum_above_100": 2,
+  "rows": [
+   {
+    "event": "MLB: AL Rookie of the Year",
+    "outcomes": 7,
+    "sum_best_ask": 0.972,
+    "sum_best_bid": 0.938
+   },
+   {
+    "event": "Which company has best AI model end of 2026?",
+    "outcomes": 15,
+    "sum_best_ask": 0.9890000000000001,
+    "sum_best_bid": 0.9440000000000001
+   },
+   {
+    "event": "MLB: 2026 AL Cy Young Winner",
+    "outcomes": 3,
+    "sum_best_ask": 0.992,
+    "sum_best_bid": 0.982
+   },
+   {
+    "event": "Alaska Governor Election Winner  ",
+    "outcomes": 6,
+    "sum_best_ask": 0.993,
+    "sum_best_bid": 0.977
+   },
+   {
+    "event": "Israeli Legislative Election Winner",
+    "outcomes": 3,
+    "sum_best_ask": 0.996,
+    "sum_best_bid": 0.992
+   },
+   {
+    "event": "Israel Election: Likud # of seats?",
+    "outcomes": 5,
+    "sum_best_ask": 0.996,
+    "sum_best_bid": 0.97
+   },
+   {
+    "event": "F1 Drivers' Champion",
+    "outcomes": 3,
+    "sum_best_ask": 1.0,
+    "sum_best_bid": 0.997
+   },
+   {
+    "event": "LALIGA: 2027 Champion",
+    "outcomes": 18,
+    "sum_best_ask": 1.0,
+    "sum_best_bid": 0.962
+   },
+   {
+    "event": "OpenAI IPO Closing Market Cap",
+    "outcomes": 7,
+    "sum_best_ask": 1.001,
+    "sum_best_bid": 0.9680000000000001
+   },
+   {
+    "event": "EPL: 2027 Champion",
+    "outcomes": 20,
+    "sum_best_ask": 1.002,
+    "sum_best_bid": 0.9610000000000001
+   },
+   {
+    "event": "Who wins the Senate pending Hormuz Agreement before the midterms?",
+    "outcomes": 3,
+    "sum_best_ask": 1.002,
+    "sum_best_bid": 0.984
+   },
+   {
+    "event": "Which movie has biggest opening weekend in 2026?",
+    "outcomes": 4,
+    "sum_best_ask": 1.002,
+    "sum_best_bid": 0.98
+   },
+   {
+    "event": "Next Prime Minister of Spain?",
+    "outcomes": 7,
+    "sum_best_ask": 1.004,
+    "sum_best_bid": 0.975
+   },
+   {
+    "event": "How many Fed rate cuts in 2026?",
+    "outcomes": 13,
+    "sum_best_ask": 1.006,
+    "sum_best_bid": 0.987
+   },
+   {
+    "event": "Where will Zelenskyy and Putin meet next before 2027?",
+    "outcomes": 14,
+    "sum_best_ask": 1.006,
+    "sum_best_bid": 0.9770000000000001
+   },
+   {
+    "event": "How many Fed rate hikes in 2026?",
+    "outcomes": 5,
+    "sum_best_ask": 1.007,
+    "sum_best_bid": 0.974
+   },
+   {
+    "event": "Which company has the best AI model end of October?",
+    "outcomes": 9,
+    "sum_best_ask": 1.008,
+    "sum_best_bid": 0.991
+   },
+   {
+    "event": "Where will 2026 rank among the hottest years on record?",
+    "outcomes": 6,
+    "sum_best_ask": 1.008,
+    "sum_best_bid": 0.962
+   },
+   {
+    "event": "Largest Company end of December 2026?",
+    "outcomes": 8,
+    "sum_best_ask": 1.01,
+    "sum_best_bid": 0.988
+   },
+   {
+    "event": "Who wins the Senate pending Hormuz Agreement by Oct 23 and oil below $80 before the midterms?",
+    "outcomes": 4,
+    "sum_best_ask": 1.01,
+    "sum_best_bid": 0.984
+   },
+   {
+    "event": "Where will Trump and Putin meet next in 2026?",
+    "outcomes": 11,
+    "sum_best_ask": 1.014,
+    "sum_best_bid": 0.9720000000000001
+   },
+   {
+    "event": "\"Resident Evil\" total domestic gross by October 31?",
+    "outcomes": 3,
+    "sum_best_ask": 1.014,
+    "sum_best_bid": 0.989
+   },
+   {
+    "event": "Israel Election: Ra'am # of seats?",
+    "outcomes": 4,
+    "sum_best_ask": 1.015,
+    "sum_best_bid": 0.976
+   },
+   {
+    "event": "MLB: 2026 NL MVP",
+    "outcomes": 4,
+    "sum_best_ask": 1.016,
+    "sum_best_bid": 0.967
+   },
+   {
+    "event": "Balance of Power: 2026 Midterms",
+    "outcomes": 5,
+    "sum_best_ask": 1.017,
+    "sum_best_bid": 0.985
+   },
+   {
+    "event": "Largest IPO by market cap in 2026?",
+    "outcomes": 12,
+    "sum_best_ask": 1.0170000000000001,
+    "sum_best_bid": 0.952
+   },
+   {
+    "event": "First to hit $1B FDV: ANSEM, CASHCAT, AI, or NET?",
+    "outcomes": 4,
+    "sum_best_ask": 1.018,
+    "sum_best_bid": 1.002
+   },
+   {
+    "event": "Taipei Mayor Election Winner",
+    "outcomes": 3,
+    "sum_best_ask": 1.019,
+    "sum_best_bid": 0.9770000000000001
+   },
+   {
+    "event": "Who wins the Senate pending oil above or below $80 before the midterms?",
+    "outcomes": 4,
+    "sum_best_ask": 1.019,
+    "sum_best_bid": 0.985
+   },
+   {
+    "event": "Highest grossing movie in 2026?",
+    "outcomes": 14,
+    "sum_best_ask": 1.02,
+    "sum_best_bid": 0.98
+   },
+   {
+    "event": "China Annual GDP Growth 2026",
+    "outcomes": 6,
+    "sum_best_ask": 1.02,
+    "sum_best_bid": 0.983
+   },
+   {
+    "event": "Nebraska Senate Election Winner  ",
+    "outcomes": 3,
+    "sum_best_ask": 1.021,
+    "sum_best_bid": 0.99
+   },
+   {
+    "event": "Who wins the Senate pending oil below $85 before the midterms?",
+    "outcomes": 4,
+    "sum_best_ask": 1.021,
+    "sum_best_bid": 0.9600000000000001
+   },
+   {
+    "event": "California Governor Election Winner",
+    "outcomes": 23,
+    "sum_best_ask": 1.022,
+    "sum_best_bid": 0.998
+   },
+   {
+    "event": "Fed Decision in January?",
+    "outcomes": 5,
+    "sum_best_ask": 1.022,
+    "sum_best_bid": 0.985
+   },
+   {
+    "event": "Next French Presidential Election",
+    "outcomes": 43,
+    "sum_best_ask": 1.024,
+    "sum_best_bid": 0.9540000000000001
+   },
+   {
+    "event": "Fed Decision in December?",
+    "outcomes": 5,
+    "sum_best_ask": 1.024,
+    "sum_best_bid": 0.996
+   },
+   {
+    "event": "Iran leader end of 2026?",
+    "outcomes": 30,
+    "sum_best_ask": 1.025,
+    "sum_best_bid": 0.954
+   },
+   {
+    "event": "Top Spotify Artist 2026",
+    "outcomes": 8,
+    "sum_best_ask": 1.025,
+    "sum_best_bid": 0.97
+   },
+   {
+    "event": "Venezuela leader end of 2026?",
+    "outcomes": 16,
+    "sum_best_ask": 1.026,
+    "sum_best_bid": 0.985
+   },
+   {
+    "event": "Elon Musk # tweets October 29 - October 31, 2026?",
+    "outcomes": 6,
+    "sum_best_ask": 1.026,
+    "sum_best_bid": 0.987
+   },
+   {
+    "event": "Richest person on December 31, 2026?",
+    "outcomes": 9,
+    "sum_best_ask": 1.03,
+    "sum_best_bid": 0.982
+   },
+   {
+    "event": "Worlds 2026 Winning Region",
+    "outcomes": 5,
+    "sum_best_ask": 1.032,
+    "sum_best_bid": 0.9910000000000001
+   },
+   {
+    "event": "NBA: 2027 Champion",
+    "outcomes": 30,
+    "sum_best_ask": 1.034,
+    "sum_best_bid": 0.956
+   },
+   {
+    "event": "Next Prime Minister of Sweden",
+    "outcomes": 10,
+    "sum_best_ask": 1.039,
+    "sum_best_bid": 0.983
+   },
+   {
+    "event": "Republican Senate seats after the 2026 midterm elections?",
+    "outcomes": 11,
+    "sum_best_ask": 1.039,
+    "sum_best_bid": 0.982
+   },
+   {
+    "event": "Bitcoin vs. Gold vs. S&P 500 in 2026",
+    "outcomes": 3,
+    "sum_best_ask": 1.04,
+    "sum_best_bid": 0.9800000000000001
+   },
+   {
+    "event": "Pro Football: 2027 Champion",
+    "outcomes": 32,
+    "sum_best_ask": 1.049,
+    "sum_best_bid": 0.977
+   },
+   {
+    "event": "Anthropic IPO Closing Market Cap",
+    "outcomes": 10,
+    "sum_best_ask": 1.069,
+    "sum_best_bid": 0.991
+   },
+   {
+    "event": "Worlds 2026: Winner",
+    "outcomes": 11,
+    "sum_best_ask": 1.078,
+    "sum_best_bid": 1.01
+   },
+   {
+    "event": "UEFA Champions League: 2027 Champion",
+    "outcomes": 36,
+    "sum_best_ask": 1.087,
+    "sum_best_bid": 0.983
+   }
+  ]
+ },
+ "multi_outcome": {
+  "events_checked": 88,
+  "sum_ask_below_100": 36,
+  "sum_bid_above_100": 2,
+  "median_sum_ask": 1.005,
+  "examples": [
+   {
+    "event": "MLS: 2026 Golden Boot Winner",
+    "outcomes": 3,
+    "sum_best_ask": 0.003,
+    "sum_best_bid": 0
+   },
+   {
+    "event": "Anthropic IPO Closing Market Cap (Lower Brackets)",
+    "outcomes": 3,
+    "sum_best_ask": 0.004,
+    "sum_best_bid": 0
+   },
+   {
+    "event": "MLB: 2026 NL Cy Young Winner",
+    "outcomes": 4,
+    "sum_best_ask": 0.005,
+    "sum_best_bid": 0
+   },
+   {
+    "event": "Bachelorette Season 22 Winner",
+    "outcomes": 3,
+    "sum_best_ask": 0.006,
+    "sum_best_bid": 0.003
+   },
+   {
+    "event": "NBA: 2026-27 Rookie of the Year",
+    "outcomes": 9,
+    "sum_best_ask": 0.019,
+    "sum_best_bid": 0.01
+   },
+   {
+    "event": "Who will be UFC Light Heavyweight champion at the end of 2026?",
+    "outcomes": 3,
+    "sum_best_ask": 0.025,
+    "sum_best_bid": 0.014
+   },
+   {
+    "event": "Oura IPO Closing Market Cap",
+    "outcomes": 5,
+    "sum_best_ask": 0.062,
+    "sum_best_bid": 0.036
+   },
+   {
+    "event": "Who will be UFC Middleweight champion at the end of 2026?",
+    "outcomes": 7,
+    "sum_best_ask": 0.07200000000000001,
+    "sum_best_bid": 0.043
+   }
+  ],
+  "note": "only open markets in our top-2,000 snapshot; events with outcomes outside it are skipped, which can miss cheap long-tail outcomes"
+ }
+}
