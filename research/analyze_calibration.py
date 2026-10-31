@@ -72,9 +72,18 @@ def load(min_volume):
         meta[str(m["id"])] = {"won": [1 if x > 0.5 else 0 for x in p],
                               "category": m.get("category") or "", "question": m.get("question")}
     rows = []
-    for fn in sorted(os.listdir(f"{DATA}/prices")):
-        if fn.endswith(".jsonl.gz"):
-            rows += [r for r in read_jsonl_gz(f"{DATA}/prices/{fn}") if r["market_id"] in meta]
+    for root, _, files in os.walk(f"{DATA}/prices"):
+        for fn in sorted(files):
+            if fn.endswith(".jsonl.gz"):
+                with gzip.open(os.path.join(root, fn), "rt") as f:
+                    for line in f:
+                        r = json.loads(line)
+                        if r["market_id"] in meta and r["tokens"]:
+                            # only the first token is needed; drop the rest to save memory
+                            r["tokens"] = r["tokens"][:1]
+                            rows.append(r)
+    seen = set()
+    rows = [r for r in rows if not (r["market_id"] in seen or seen.add(r["market_id"]))]
     return meta, rows
 
 
