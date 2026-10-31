@@ -1,0 +1,40 @@
+name: Phase 2 - record order books
+
+on:
+  schedule:
+    - cron: "17 * * * *"   # hourly (private repo: keeps us inside the free 2,000 min/month)
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["research/record_books.py", ".github/workflows/record_books.yml"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: record-books
+  cancel-in-progress: false
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            research
+            data/books
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - run: python research/record_books.py
+      - name: Commit snapshot
+        run: |
+          git config user.name "polymarket-lab-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/books
+          git commit -qm "Order book snapshot $(date -u +%FT%H:%M)" || exit 0
+          for i in 1 2 3 4 5; do git pull -q --rebase origin main && git push -q && exit 0; sleep $((RANDOM % 10 + 3)); done
+          exit 1
