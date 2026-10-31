@@ -8,7 +8,7 @@ on:
         default: ""
   push:
     branches: [main]
-    paths: ["research/**", ".github/workflows/calibration.yml"]
+    paths: ["research/collect.py", "research/analyze_calibration.py", ".github/workflows/calibration.yml"]
 
 permissions:
   contents: write
