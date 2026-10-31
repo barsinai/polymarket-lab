@@ -1,0 +1,62 @@
+name: Phase 2b - wide live recording (all markets, hourly)
+
+# Same self-chaining pattern as record_books.yml: one job runs ~5.5h taking an hourly
+# snapshot of every open market above $5k (stats + order books), plus top holders once
+# a day, then re-launches itself. Checkout is lean (scripts only, no data blobs) so the
+# job stays fast however large data/live grows.
+
+on:
+  schedule:
+    - cron: "23 */2 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["research/record_live.py", ".github/workflows/record_live.yml"]
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: record-live
+  cancel-in-progress: false
+
+jobs:
+  record:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout: research
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - name: Hourly snapshot for ~5.5 hours
+        run: |
+          git config user.name "polymarket-lab-bot"
+          git config user.email "actions@users.noreply.github.com"
+          mkdir -p logs
+          end=$(( $(date +%s) + 320*60 ))
+          while [ "$(date +%s)" -lt "$end" ]; do
+            day=$(date -u +%F)
+            git fetch -q origin main
+            extra=""
+            if ! git cat-file -e "origin/main:data/live/holders/$day.jsonl.gz" 2>/dev/null; then extra="--holders"; fi
+            python -u research/record_live.py $extra 2>&1 | tee -a logs/live-log.txt || echo "snapshot failed, will retry next hour"
+            git add --sparse data/live logs/live-log.txt
+            if git commit -qm "Live snapshot $(date -u +%FT%H:%M) [skip ci]"; then
+              for i in 1 2 3 4 5; do
+                git pull -q --rebase origin main && git push -q && break
+                sleep $((RANDOM % 10 + 3))
+              done
+            fi
+            now=$(date +%s); sleep $(( 3600 - now % 3600 + 120 ))
+          done
+      - name: Hand over to the next run
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run record_live.yml --ref main -R ${{ github.repository }}
