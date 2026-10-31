@@ -1,0 +1,35 @@
+name: Phase 1 - calibration study
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["research/**", ".github/workflows/calibration.yml"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: calibration
+  cancel-in-progress: true
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - name: Run study
+        run: python research/calibration.py --max-markets 3000 --min-volume 10000 2>&1 | tee results-log.txt
+      - name: Commit results
+        run: |
+          mkdir -p results && mv results-log.txt results/log.txt
+          git config user.name "polymarket-lab-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add results
+          git commit -m "Calibration results $(date -u +%F)" || echo "nothing to commit"
+          git pull --rebase origin main && git push
