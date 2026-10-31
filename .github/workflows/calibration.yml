@@ -28,7 +28,7 @@ jobs:
           python-version: "3.12"
       - run: pip install requests
       - name: Collect raw data
-        run: python research/collect.py --time-budget-min 150 ${{ inputs.args || '--max-markets 300 --max-new-histories 40' }} 2>&1 | tee collect-log.txt
+        run: python research/collect.py --time-budget-min 150 ${{ inputs.args }} 2>&1 | tee collect-log.txt
       - name: Analyze (offline, from saved data)
         run: python research/analyze_calibration.py 2>&1 | tee analyze-log.txt
       - name: Commit data and results

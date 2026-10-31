@@ -62,6 +62,23 @@ def active_markets(params, cap):
     return out[:cap]
 
 
+def trim(bk, band=0.20):
+    """Keep levels within `band` of the best price on each side (that's all a small
+    trader can realistically trade against); summarize the rest so nothing is silently lost."""
+    bids = [(float(x["price"]), float(x["size"])) for x in bk.get("bids") or []]
+    asks = [(float(x["price"]), float(x["size"])) for x in bk.get("asks") or []]
+    bb = max((p for p, _ in bids), default=None)
+    ba = min((p for p, _ in asks), default=None)
+    kb = sorted([l for l in bids if bb is not None and l[0] >= bb - band - 1e-9], reverse=True)
+    ka = sorted([l for l in asks if ba is not None and l[0] <= ba + band + 1e-9])
+    out = {k: bk.get(k) for k in ("market", "asset_id", "timestamp", "hash", "min_order_size",
+                                  "tick_size", "neg_risk", "last_trade_price")}
+    out["bids"], out["asks"] = kb, ka  # [[price, size], ...], best first
+    out["far_bid_size"] = round(sum(s for _, s in bids) - sum(s for _, s in kb), 2)
+    out["far_ask_size"] = round(sum(s for _, s in asks) - sum(s for _, s in ka), 2)
+    return out
+
+
 def books_for(tokens):
     """Batch endpoint first; fall back to one request per token."""
     got = {}
@@ -104,7 +121,7 @@ def main():
         tokens += [str(t) for t in as_list(m.get("clobTokenIds"))]
 
     t0 = time.time()
-    books = books_for(tokens)
+    books = {k: trim(v) for k, v in books_for(tokens).items()}
     snap = {"ts": int(now.timestamp()), "iso": now.isoformat(), "markets": summary,
             "books": books, "fetch_seconds": round(time.time() - t0, 1)}
 

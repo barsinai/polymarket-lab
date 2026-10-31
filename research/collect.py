@@ -186,7 +186,7 @@ def main():
         shard = datetime.fromtimestamp(close, timezone.utc).strftime("%Y-%m") + ".jsonl.gz"
         shards.setdefault(shard, []).append(row)
         have.add(mid); new += 1
-        if new % 100 == 0:
+        if new % 25 == 0:
             print(f"histories: {new} new ({i}/{len(closed)} scanned, "
                   f"{(time.time()-t0)/60:.0f} min)", flush=True)
             for fn, rows in shards.items():  # checkpoint
