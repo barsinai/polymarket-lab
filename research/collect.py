@@ -211,34 +211,63 @@ def saved_ids():
     return have
 
 
-def list_markets(a):
-    stamp = f"{DATA}/LISTED_AT"
-    if os.path.exists(stamp) and time.time() - float(open(stamp).read() or 0) < 20 * 3600:
-        log("listing is fresh (<20h), reusing it")
-        return read_jsonl_gz(f"{DATA}/markets_closed.jsonl.gz")
+def list_markets(a, ckpt):
+    """Closed markets above --min-volume, month by month. Each month is saved to
+    data/listing/YYYY-MM.jsonl.gz as soon as it's listed, so a killed run resumes;
+    months older than 60 days are final and never re-listed.
+
+    (Events are NOT enumerated here: Gamma can't filter events by volume, so listing
+    them meant paging through every tiny sports event. Each market record already
+    names its event; tags are fetched later, only for events we need.)"""
+    os.makedirs(f"{DATA}/listing", exist_ok=True)
     since = datetime(2020, 6, 1, tzinfo=timezone.utc)
-    closed, events = [], []
+    now = datetime.now(timezone.utc)
+    closed = []
     for lo, hi in months(since):
-        closed += paginate_windows("markets", {"closed": "true", "order": "volumeNum",
-                                               "ascending": "false", "volume_num_min": a.min_volume},
-                                   a.min_volume, "volumeNum", lo, hi)
-        events += paginate_windows("events", {"closed": "true", "order": "volume",
-                                              "ascending": "false"},
-                                   a.min_volume, "volume", lo, hi, fn=slim_event)
-        log(f"listed through {lo:%Y-%m}: {len(closed)} markets, {len(events)} events")
-    closed = merge_by_id(f"{DATA}/markets_closed.jsonl.gz", closed)  # also dedupes
-    write_jsonl_gz(f"{DATA}/markets_closed.jsonl.gz", closed)
-    events = merge_by_id(f"{DATA}/events_closed.jsonl.gz", events)
-    write_jsonl_gz(f"{DATA}/events_closed.jsonl.gz", [slim_event(e) for e in events])
-    n_events = len(events)
-    del events
+        path = f"{DATA}/listing/{lo:%Y-%m}.jsonl.gz"
+        final = (now - hi).days > 60
+        if final and os.path.exists(path):
+            closed += read_jsonl_gz(path)
+            continue
+        got = paginate_windows("markets", {"closed": "true", "order": "volumeNum",
+                                           "ascending": "false", "volume_num_min": a.min_volume},
+                               a.min_volume, "volumeNum", lo, hi)
+        write_jsonl_gz(path, got)
+        closed += got
+        log(f"listed {lo:%Y-%m}: {len(got)} markets (total {len(closed)})")
+        ckpt(f"Market listing through {lo:%Y-%m}")
+    seen, out = set(), []
+    for m in closed:
+        if str(m.get("id")) not in seen:
+            seen.add(str(m.get("id"))); out.append(m)
     active = paginate("markets", {"closed": "false", "active": "true", "order": "volumeNum",
                                   "ascending": "false"}, 0, "volumeNum", 2000)
     write_jsonl_gz(f"{DATA}/markets_active.jsonl.gz", active)
-    with open(stamp, "w") as f:
-        f.write(str(time.time()))
-    log(f"listing: {len(closed)} closed markets, {n_events} closed events, {len(active)} active")
-    return closed
+    log(f"listing: {len(out)} closed markets, {len(active)} active")
+    return out
+
+
+def fetch_event_tags(closed, minutes):
+    """Topic tags for the events our markets belong to, fetched one event at a time,
+    only for events we don't have yet."""
+    path = f"{DATA}/events_closed.jsonl.gz"
+    known = {str(e.get("id")) for e in read_jsonl_gz(path)}
+    want = []
+    for m in closed:
+        ev = (m.get("events") or [{}])[0]
+        eid = str(ev.get("id") or "")
+        if eid and eid not in known:
+            known.add(eid); want.append(eid)
+    log(f"event tags: {len(want)} events to fetch")
+    t0, got = time.time(), []
+    with ThreadPoolExecutor(max_workers=4) as pool:
+        for k in range(0, len(want), 100):
+            if (time.time() - t0) / 60 > minutes:
+                break
+            got += [slim_event(e) for e in pool.map(lambda i: get(f"{GAMMA}/events/{i}"), want[k:k + 100]) if e]
+    if got:
+        write_jsonl_gz(path, merge_by_id(path, got))
+    log(f"event tags: fetched {len(got)}")
 
 
 def main():
@@ -252,9 +281,16 @@ def main():
     os.makedirs(f"{DATA}/prices/parts", exist_ok=True)
     run = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M")
 
-    closed = list_markets(a)
+    last = {"t": time.time()}
+
+    def ckpt(msg, every_min=10):
+        if a.git_checkpoint and time.time() - last["t"] > every_min * 60:
+            git_checkpoint(msg); last["t"] = time.time()
+
+    closed = list_markets(a, ckpt)
+    write_jsonl_gz(f"{DATA}/markets_closed.jsonl.gz", closed)
     if a.git_checkpoint:
-        git_checkpoint(f"Market listing {run}")
+        git_checkpoint(f"Market listing {run}"); last["t"] = time.time()
 
     have = saved_ids()
     log(f"{len(have)} market histories already saved")
@@ -264,7 +300,6 @@ def main():
                                    "clobTokenIds", "outcomes")}
             for m in closed if str(m.get("id")) not in have]
     total = len(closed)
-    del closed
     random.Random(42).shuffle(todo)
     log(f"{len(todo)} histories still to fetch")
 
@@ -282,7 +317,7 @@ def main():
                                   "history": history(tokens[j], start, close)})
         return row
 
-    new, done_idx, step, last_ckpt = 0, 0, 200, time.time()
+    new, done_idx, step = 0, 0, 200
     with ThreadPoolExecutor(max_workers=4) as pool:
         for k in range(0, min(len(todo), a.max_new_histories), step):
             if (time.time() - t0) / 60 > a.time_budget_min:
@@ -293,14 +328,14 @@ def main():
             new += len(rows); done_idx = k + step
             log(f"histories: {new} new this run, {max(len(todo) - done_idx, 0)} left")
             del rows
-            if a.git_checkpoint and time.time() - last_ckpt > 30 * 60:
+            if time.time() - last["t"] > 30 * 60:
                 with open(f"{DATA}/REMAINING", "w") as f:
                     f.write(str(max(len(todo) - done_idx, 0)))
-                git_checkpoint(f"Price histories checkpoint {run} (+{new})")
-                last_ckpt = time.time()
+                ckpt(f"Price histories checkpoint {run} (+{new})", 30)
     remaining = max(len(todo) - done_idx, 0)
     with open(f"{DATA}/REMAINING", "w") as f:
         f.write(str(remaining))
+    fetch_event_tags(closed, minutes=15)
     log(f"done: {total} closed markets listed, {new} new histories, {remaining} remaining")
 
 
