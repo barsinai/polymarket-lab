@@ -1,156 +1,1335 @@
-markets: offset=0 kept=100
-markets: offset=100 kept=200
-markets: offset=200 kept=300
-markets: offset=300 kept=400
-markets: offset=400 kept=500
-markets: offset=500 kept=600
-markets: offset=600 kept=700
-markets: offset=700 kept=800
-markets: offset=800 kept=900
-markets: offset=900 kept=1000
-markets: offset=1000 kept=1100
-markets: offset=1100 kept=1200
-markets: offset=1200 kept=1300
-markets: offset=1300 kept=1400
-markets: offset=1400 kept=1500
-markets: offset=1500 kept=1600
-markets: offset=1600 kept=1700
-markets: offset=1700 kept=1800
-markets: offset=1800 kept=1900
-markets: offset=1900 kept=2000
-markets: offset=2000 kept=2100
-  ! 422 {'closed': 'true', 'order': 'volumeNum', 'ascending': 'false', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+markets 2020-06-01..2020-07-01: 1
+events 2020-06-01..2020-07-01: 0
+[15:10:24 mem=32MB] listed through 2020-06: 1 markets, 0 events
+markets 2020-07-01..2020-08-01: 1
+events 2020-07-01..2020-08-01: 0
+[15:10:24 mem=32MB] listed through 2020-07: 2 markets, 0 events
+markets 2020-08-01..2020-09-01: 0
+events 2020-08-01..2020-09-01: 0
+[15:10:24 mem=32MB] listed through 2020-08: 2 markets, 0 events
+markets 2020-09-01..2020-10-01: 0
+events 2020-09-01..2020-10-01: 0
+[15:10:25 mem=32MB] listed through 2020-09: 2 markets, 0 events
+markets 2020-10-01..2020-11-01: 3
+events 2020-10-01..2020-11-01: 1
+[15:10:25 mem=32MB] listed through 2020-10: 5 markets, 1 events
+markets 2020-11-01..2020-12-01: 20
+events 2020-11-01..2020-12-01: 8
+[15:10:25 mem=33MB] listed through 2020-11: 25 markets, 9 events
+markets 2020-12-01..2021-01-01: 10
+events 2020-12-01..2021-01-01: 1
+[15:10:26 mem=33MB] listed through 2020-12: 35 markets, 10 events
+markets 2021-01-01..2021-02-01: 43
+events 2021-01-01..2021-02-01: 24
+[15:10:26 mem=34MB] listed through 2021-01: 78 markets, 34 events
+markets 2021-02-01..2021-03-01: 66
+events 2021-02-01..2021-03-01: 58
+[15:10:27 mem=35MB] listed through 2021-02: 144 markets, 92 events
+markets 2021-03-01..2021-04-01: 45
+events 2021-03-01..2021-04-01: 39
+[15:10:27 mem=36MB] listed through 2021-03: 189 markets, 131 events
+markets 2021-04-01..2021-05-01: 68
+events 2021-04-01..2021-05-01: 64
+[15:10:28 mem=38MB] listed through 2021-04: 257 markets, 195 events
+markets 2021-05-01..2021-06-01: 115
+events 2021-05-01..2021-06-01: 113
+[15:10:29 mem=40MB] listed through 2021-05: 372 markets, 308 events
+markets 2021-06-01..2021-07-01: 132
+events 2021-06-01..2021-07-01: 135
+[15:10:30 mem=44MB] listed through 2021-06: 504 markets, 443 events
+markets 2021-07-01..2021-08-01: 78
+events 2021-07-01..2021-08-01: 76
+[15:10:30 mem=45MB] listed through 2021-07: 582 markets, 519 events
+markets 2021-08-01..2021-09-01: 74
+events 2021-08-01..2021-09-01: 75
+[15:10:31 mem=46MB] listed through 2021-08: 656 markets, 594 events
+markets 2021-09-01..2021-10-01: 86
+events 2021-09-01..2021-10-01: 86
+[15:10:32 mem=47MB] listed through 2021-09: 742 markets, 680 events
+markets 2021-10-01..2021-11-01: 181
+events 2021-10-01..2021-11-01: 181
+[15:10:33 mem=51MB] listed through 2021-10: 923 markets, 861 events
+markets 2021-11-01..2021-12-01: 309
+events 2021-11-01..2021-12-01: 308
+[15:10:35 mem=58MB] listed through 2021-11: 1232 markets, 1169 events
+markets 2021-12-01..2022-01-01: 168
+events 2021-12-01..2022-01-01: 161
+[15:10:36 mem=62MB] listed through 2021-12: 1400 markets, 1330 events
+markets 2022-01-01..2022-02-01: 122
+events 2022-01-01..2022-02-01: 106
+[15:10:37 mem=65MB] listed through 2022-01: 1522 markets, 1436 events
+markets 2022-02-01..2022-03-01: 117
+events 2022-02-01..2022-03-01: 79
+[15:10:39 mem=69MB] listed through 2022-02: 1639 markets, 1515 events
+markets 2022-03-01..2022-04-01: 242
+events 2022-03-01..2022-04-01: 132
+[15:10:40 mem=74MB] listed through 2022-03: 1881 markets, 1647 events
+markets 2022-04-01..2022-05-01: 198
+events 2022-04-01..2022-05-01: 122
+[15:10:40 mem=76MB] listed through 2022-04: 2079 markets, 1769 events
+markets 2022-05-01..2022-06-01: 159
+events 2022-05-01..2022-06-01: 113
+[15:10:41 mem=78MB] listed through 2022-05: 2238 markets, 1882 events
+markets 2022-06-01..2022-07-01: 99
+events 2022-06-01..2022-07-01: 73
+[15:10:42 mem=79MB] listed through 2022-06: 2337 markets, 1955 events
+markets 2022-07-01..2022-08-01: 83
+events 2022-07-01..2022-08-01: 64
+[15:10:42 mem=80MB] listed through 2022-07: 2420 markets, 2019 events
+markets 2022-08-01..2022-09-01: 72
+events 2022-08-01..2022-09-01: 53
+[15:10:43 mem=81MB] listed through 2022-08: 2492 markets, 2072 events
+markets 2022-09-01..2022-10-01: 56
+events 2022-09-01..2022-10-01: 37
+[15:10:43 mem=81MB] listed through 2022-09: 2548 markets, 2109 events
+markets 2022-10-01..2022-11-01: 51
+events 2022-10-01..2022-11-01: 33
+[15:10:44 mem=82MB] listed through 2022-10: 2599 markets, 2142 events
+markets 2022-11-01..2022-12-01: 93
+events 2022-11-01..2022-12-01: 35
+[15:10:44 mem=83MB] listed through 2022-11: 2692 markets, 2177 events
+markets 2022-12-01..2023-01-01: 105
+events 2022-12-01..2023-01-01: 66
+[15:10:45 mem=87MB] listed through 2022-12: 2797 markets, 2243 events
+markets 2023-01-01..2023-02-01: 43
+events 2023-01-01..2023-02-01: 30
+[15:10:46 mem=88MB] listed through 2023-01: 2840 markets, 2273 events
+markets 2023-02-01..2023-03-01: 63
+events 2023-02-01..2023-03-01: 39
+[15:10:46 mem=91MB] listed through 2023-02: 2903 markets, 2312 events
+markets 2023-03-01..2023-04-01: 66
+events 2023-03-01..2023-04-01: 48
+[15:10:47 mem=95MB] listed through 2023-03: 2969 markets, 2360 events
+markets 2023-04-01..2023-05-01: 70
+events 2023-04-01..2023-05-01: 61
+[15:10:47 mem=96MB] listed through 2023-04: 3039 markets, 2421 events
+markets 2023-05-01..2023-06-01: 62
+events 2023-05-01..2023-06-01: 56
+[15:10:48 mem=96MB] listed through 2023-05: 3101 markets, 2477 events
+markets 2023-06-01..2023-07-01: 64
+events 2023-06-01..2023-07-01: 50
+[15:10:49 mem=96MB] listed through 2023-06: 3165 markets, 2527 events
+markets 2023-07-01..2023-08-01: 69
+events 2023-07-01..2023-08-01: 57
+[15:10:49 mem=96MB] listed through 2023-07: 3234 markets, 2584 events
+markets 2023-08-01..2023-09-01: 72
+events 2023-08-01..2023-09-01: 53
+[15:10:50 mem=97MB] listed through 2023-08: 3306 markets, 2637 events
+markets 2023-09-01..2023-10-01: 49
+events 2023-09-01..2023-10-01: 48
+[15:10:51 mem=98MB] listed through 2023-09: 3355 markets, 2685 events
+markets 2023-10-01..2023-11-01: 75
+events 2023-10-01..2023-11-01: 64
+[15:10:52 mem=98MB] listed through 2023-10: 3430 markets, 2749 events
+markets 2023-11-01..2023-12-01: 80
+events 2023-11-01..2023-12-01: 61
+[15:10:52 mem=100MB] listed through 2023-11: 3510 markets, 2810 events
+markets 2023-12-01..2024-01-01: 151
+events 2023-12-01..2024-01-01: 128
+[15:10:54 mem=101MB] listed through 2023-12: 3661 markets, 2938 events
+markets 2024-01-01..2024-02-01: 187
+events 2024-01-01..2024-02-01: 103
+[15:10:55 mem=104MB] listed through 2024-01: 3848 markets, 3041 events
+markets 2024-02-01..2024-03-01: 244
+events 2024-02-01..2024-03-01: 139
+[15:10:56 mem=109MB] listed through 2024-02: 4092 markets, 3180 events
+markets 2024-03-01..2024-04-01: 347
+events 2024-03-01..2024-04-01: 199
+[15:10:57 mem=114MB] listed through 2024-03: 4439 markets, 3379 events
+markets 2024-04-01..2024-05-01: 282
+events 2024-04-01..2024-05-01: 172
+[15:11:00 mem=118MB] listed through 2024-04: 4721 markets, 3551 events
+markets 2024-05-01..2024-06-01: 394
+events 2024-05-01..2024-06-01: 200
+[15:11:01 mem=123MB] listed through 2024-05: 5115 markets, 3751 events
+markets 2024-06-01..2024-07-01: 616
+events 2024-06-01..2024-07-01: 320
+[15:11:04 mem=133MB] listed through 2024-06: 5731 markets, 4071 events
+markets 2024-07-01..2024-08-01: 609
+events 2024-07-01..2024-08-01: 283
+[15:11:06 mem=140MB] listed through 2024-07: 6340 markets, 4354 events
+markets 2024-08-01..2024-09-01: 1082
+events 2024-08-01..2024-09-01: 421
+[15:11:10 mem=155MB] listed through 2024-08: 7422 markets, 4775 events
+markets 2024-09-01..2024-10-01: 1352
+events 2024-09-01..2024-10-01: 529
+[15:11:16 mem=175MB] listed through 2024-09: 8774 markets, 5304 events
+markets 2024-10-01..2024-11-01: 1743
+events 2024-10-01..2024-11-01: 628
+[15:11:22 mem=202MB] listed through 2024-10: 10517 markets, 5932 events
+  ! 422 {'closed': 'true', 'order': 'volumeNum', 'ascending': 'false', 'volume_num_min': 5000, 'end_date_min': '2024-11-01T00:00:00Z', 'end_date_max': '2024-12-01T00:00:00Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
 
-events: offset=0 kept=100
-events: offset=100 kept=200
-events: offset=200 kept=300
-events: offset=300 kept=400
-events: offset=400 kept=500
-events: offset=500 kept=600
-events: offset=600 kept=700
-events: offset=700 kept=800
-events: offset=800 kept=900
-events: offset=900 kept=1000
-events: offset=1000 kept=1100
-events: offset=1100 kept=1200
-events: offset=1200 kept=1300
-events: offset=1300 kept=1400
-events: offset=1400 kept=1500
-events: offset=1500 kept=1600
-events: offset=1600 kept=1700
-events: offset=1700 kept=1800
-events: offset=1800 kept=1900
-events: offset=1900 kept=2000
-events: offset=2000 kept=2100
-  ! 422 {'closed': 'true', 'order': 'volume', 'ascending': 'false', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /events/keyset for deeper pagination"}
+markets 2024-11-01..2024-12-01: 2100
+markets 2024-11-01..2024-11-16: 1549
+markets 2024-11-16..2024-12-01: 555
+events 2024-11-01..2024-12-01: 1053
+[15:11:35 mem=244MB] listed through 2024-11: 12621 markets, 6985 events
+markets 2024-12-01..2025-01-01: 1986
+events 2024-12-01..2025-01-01: 1087
+[15:11:44 mem=262MB] listed through 2024-12: 14607 markets, 8072 events
+markets 2025-01-01..2025-02-01: 2042
+markets 2025-01-01..2025-01-16: 789
+markets 2025-01-16..2025-02-01: 1254
+events 2025-01-01..2025-02-01: 1015
+[15:11:59 mem=308MB] listed through 2025-01: 16650 markets, 9087 events
+  ! 422 {'closed': 'true', 'order': 'volumeNum', 'ascending': 'false', 'volume_num_min': 5000, 'end_date_min': '2025-02-01T00:00:00Z', 'end_date_max': '2025-03-01T00:00:00Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
 
-markets: offset=0 kept=100
-markets: offset=100 kept=200
-markets: offset=200 kept=300
-markets: offset=300 kept=400
-markets: offset=400 kept=500
-markets: offset=500 kept=600
-markets: offset=600 kept=700
-markets: offset=700 kept=800
-markets: offset=800 kept=900
-markets: offset=900 kept=1000
-markets: offset=1000 kept=1100
-markets: offset=1100 kept=1200
-markets: offset=1200 kept=1300
-markets: offset=1300 kept=1400
-markets: offset=1400 kept=1500
-markets: offset=1500 kept=1600
-markets: offset=1600 kept=1700
-markets: offset=1700 kept=1800
-markets: offset=1800 kept=1900
-markets: offset=1900 kept=2000
-markets: offset=2000 kept=2100
-  ! 422 {'closed': 'false', 'active': 'true', 'order': 'volumeNum', 'ascending': 'false', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+markets 2025-02-01..2025-03-01: 2100
+markets 2025-02-01..2025-02-15: 1126
+markets 2025-02-15..2025-03-01: 1146
+events 2025-02-01..2025-03-01: 981
+[15:12:17 mem=351MB] listed through 2025-02: 18922 markets, 10068 events
+  ! 422 {'closed': 'true', 'order': 'volumeNum', 'ascending': 'false', 'volume_num_min': 5000, 'end_date_min': '2025-03-01T00:00:00Z', 'end_date_max': '2025-04-01T00:00:00Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
 
-0 market histories already saved
-histories: 25 new (24/2100 scanned, 2 min)
-histories: 50 new (49/2100 scanned, 4 min)
-histories: 75 new (74/2100 scanned, 7 min)
-histories: 100 new (99/2100 scanned, 9 min)
-histories: 125 new (124/2100 scanned, 11 min)
-histories: 150 new (149/2100 scanned, 13 min)
-histories: 175 new (174/2100 scanned, 14 min)
-histories: 200 new (199/2100 scanned, 16 min)
-histories: 225 new (224/2100 scanned, 18 min)
-histories: 250 new (249/2100 scanned, 19 min)
-histories: 275 new (274/2100 scanned, 21 min)
-histories: 300 new (299/2100 scanned, 23 min)
-histories: 325 new (324/2100 scanned, 24 min)
-histories: 350 new (349/2100 scanned, 25 min)
-histories: 375 new (374/2100 scanned, 27 min)
-histories: 400 new (399/2100 scanned, 29 min)
-histories: 425 new (424/2100 scanned, 30 min)
-histories: 450 new (449/2100 scanned, 32 min)
-histories: 475 new (474/2100 scanned, 33 min)
-histories: 500 new (499/2100 scanned, 35 min)
-histories: 525 new (524/2100 scanned, 37 min)
-histories: 550 new (549/2100 scanned, 38 min)
-histories: 575 new (574/2100 scanned, 39 min)
-histories: 600 new (599/2100 scanned, 40 min)
-histories: 625 new (624/2100 scanned, 42 min)
-histories: 650 new (649/2100 scanned, 43 min)
-histories: 675 new (674/2100 scanned, 45 min)
-histories: 700 new (699/2100 scanned, 46 min)
-histories: 725 new (724/2100 scanned, 48 min)
-histories: 750 new (749/2100 scanned, 49 min)
-histories: 775 new (774/2100 scanned, 51 min)
-histories: 800 new (799/2100 scanned, 52 min)
-histories: 825 new (824/2100 scanned, 54 min)
-histories: 850 new (849/2100 scanned, 55 min)
-histories: 875 new (874/2100 scanned, 57 min)
-  ! https://clob.polymarket.com/prices-history {'market': '45490428844116430227464511946812179496772833301930709619155920762438980078343', 'startTs': 1769040487, 'endTs': 1770250087, 'fidelity': 60}: HTTPSConnectionPool(host='clob.polymarket.com', port=443): Read timed out. (read timeout=30)
-histories: 900 new (899/2100 scanned, 59 min)
-histories: 925 new (924/2100 scanned, 60 min)
-histories: 950 new (949/2100 scanned, 62 min)
-histories: 975 new (974/2100 scanned, 63 min)
-histories: 1000 new (999/2100 scanned, 65 min)
-histories: 1025 new (1024/2100 scanned, 66 min)
-histories: 1050 new (1049/2100 scanned, 68 min)
-histories: 1075 new (1074/2100 scanned, 69 min)
-histories: 1100 new (1099/2100 scanned, 71 min)
-histories: 1125 new (1124/2100 scanned, 72 min)
-histories: 1150 new (1149/2100 scanned, 74 min)
-histories: 1175 new (1174/2100 scanned, 75 min)
-histories: 1200 new (1199/2100 scanned, 76 min)
-histories: 1225 new (1224/2100 scanned, 77 min)
-histories: 1250 new (1249/2100 scanned, 79 min)
-histories: 1275 new (1274/2100 scanned, 80 min)
-histories: 1300 new (1299/2100 scanned, 81 min)
-histories: 1325 new (1324/2100 scanned, 83 min)
-histories: 1350 new (1349/2100 scanned, 84 min)
-histories: 1375 new (1374/2100 scanned, 86 min)
-histories: 1400 new (1399/2100 scanned, 87 min)
-histories: 1425 new (1424/2100 scanned, 88 min)
-histories: 1450 new (1449/2100 scanned, 89 min)
-histories: 1475 new (1474/2100 scanned, 91 min)
-histories: 1500 new (1499/2100 scanned, 92 min)
-histories: 1525 new (1524/2100 scanned, 93 min)
-histories: 1550 new (1549/2100 scanned, 94 min)
-histories: 1575 new (1574/2100 scanned, 96 min)
-histories: 1600 new (1599/2100 scanned, 97 min)
-histories: 1625 new (1624/2100 scanned, 98 min)
-histories: 1650 new (1649/2100 scanned, 100 min)
-histories: 1675 new (1674/2100 scanned, 101 min)
-histories: 1700 new (1699/2100 scanned, 103 min)
-histories: 1725 new (1724/2100 scanned, 104 min)
-histories: 1750 new (1749/2100 scanned, 106 min)
-histories: 1775 new (1774/2100 scanned, 107 min)
-histories: 1800 new (1799/2100 scanned, 109 min)
-histories: 1825 new (1824/2100 scanned, 110 min)
-histories: 1850 new (1849/2100 scanned, 112 min)
-histories: 1875 new (1874/2100 scanned, 113 min)
-histories: 1900 new (1899/2100 scanned, 114 min)
-histories: 1925 new (1924/2100 scanned, 116 min)
-histories: 1950 new (1949/2100 scanned, 117 min)
-histories: 1975 new (1974/2100 scanned, 119 min)
-histories: 2000 new (1999/2100 scanned, 120 min)
-histories: 2025 new (2024/2100 scanned, 121 min)
-histories: 2050 new (2049/2100 scanned, 122 min)
-histories: 2075 new (2074/2100 scanned, 124 min)
-histories: 2100 new (2099/2100 scanned, 125 min)
-done: 2100 closed markets, 2100 events, 2100 active, 2100 histories (2100 new), 10354181 price points
+markets 2025-03-01..2025-04-01: 2100
+markets 2025-03-01..2025-03-16: 1259
+markets 2025-03-16..2025-04-01: 1455
+events 2025-03-01..2025-04-01: 1301
+[15:12:37 mem=402MB] listed through 2025-03: 21636 markets, 11369 events
+  ! 422 {'closed': 'true', 'order': 'volumeNum', 'ascending': 'false', 'volume_num_min': 5000, 'end_date_min': '2025-04-01T00:00:00Z', 'end_date_max': '2025-05-01T00:00:00Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2025-04-01..2025-05-01: 2100
+markets 2025-04-01..2025-04-16: 1336
+markets 2025-04-16..2025-05-01: 1542
+events 2025-04-01..2025-05-01: 1357
+[15:12:56 mem=446MB] listed through 2025-04: 24514 markets, 12726 events
+  ! 422 {'closed': 'true', 'order': 'volumeNum', 'ascending': 'false', 'volume_num_min': 5000, 'end_date_min': '2025-05-01T00:00:00Z', 'end_date_max': '2025-06-01T00:00:00Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2025-05-01..2025-06-01: 2100
+markets 2025-05-01..2025-05-16: 1383
+  ! 422 {'closed': 'true', 'order': 'volumeNum', 'ascending': 'false', 'volume_num_min': 5000, 'end_date_min': '2025-05-16T12:00:00Z', 'end_date_max': '2025-06-01T00:00:00Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2025-05-16..2025-06-01: 2100
+markets 2025-05-16..2025-05-24: 1020
+markets 2025-05-24..2025-06-01: 1273
+events 2025-05-01..2025-06-01: 1527
+[15:13:23 mem=512MB] listed through 2025-05: 28190 markets, 14253 events
+  ! 422 {'closed': 'true', 'order': 'volumeNum', 'ascending': 'false', 'volume_num_min': 5000, 'end_date_min': '2025-06-01T00:00:00Z', 'end_date_max': '2025-07-01T00:00:00Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2025-06-01..2025-07-01: 2100
+markets 2025-06-01..2025-06-16: 2024
+markets 2025-06-01..2025-06-08: 1085
+markets 2025-06-08..2025-06-16: 1025
+  ! 422 {'closed': 'true', 'order': 'volumeNum', 'ascending': 'false', 'volume_num_min': 5000, 'end_date_min': '2025-06-16T00:00:00Z', 'end_date_max': '2025-07-01T00:00:00Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2025-06-16..2025-07-01: 2100
+markets 2025-06-16..2025-06-23: 1234
+  ! 422 {'closed': 'true', 'order': 'volumeNum', 'ascending': 'false', 'volume_num_min': 5000, 'end_date_min': '2025-06-23T12:00:00Z', 'end_date_max': '2025-07-01T00:00:00Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2025-06-23..2025-07-01: 2100
+markets 2025-06-23..2025-06-27: 741
+markets 2025-06-27..2025-07-01: 1406
+  ! 422 {'closed': 'true', 'order': 'volume', 'ascending': 'false', 'end_date_min': '2025-06-01T00:00:00Z', 'end_date_max': '2025-07-01T00:00:00Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /events/keyset for deeper pagination"}
+
+events 2025-06-01..2025-07-01: 2100
+events 2025-06-01..2025-06-16: 1138
+  ! 422 {'closed': 'true', 'order': 'volume', 'ascending': 'false', 'end_date_min': '2025-06-16T00:00:00Z', 'end_date_max': '2025-07-01T00:00:00Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /events/keyset for deeper pagination"}
+
+events 2025-06-16..2025-07-01: 1978
+[15:14:20 mem=621MB] listed through 2025-06: 33681 markets, 17369 events
+  ! 422 {'closed': 'true', 'order': 'volumeNum', 'ascending': 'false', 'volume_num_min': 5000, 'end_date_min': '2025-07-01T00:00:00Z', 'end_date_max': '2025-08-01T00:00:00Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2025-07-01..2025-08-01: 2100
+  ! 422 {'closed': 'true', 'order': 'volumeNum', 'ascending': 'false', 'volume_num_min': 5000, 'end_date_min': '2025-07-01T00:00:00Z', 'end_date_max': '2025-07-16T12:00:00Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2025-07-01..2025-07-16: 2100
+markets 2025-07-01..2025-07-08: 1075
+markets 2025-07-08..2025-07-16: 1199
+  ! 422 {'closed': 'true', 'order': 'volumeNum', 'ascending': 'false', 'volume_num_min': 5000, 'end_date_min': '2025-07-16T12:00:00Z', 'end_date_max': '2025-08-01T00:00:00Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2025-07-16..2025-08-01: 2100
+markets 2025-07-16..2025-07-24: 1307
+markets 2025-07-24..2025-08-01: 1807
+  ! 422 {'closed': 'true', 'order': 'volume', 'ascending': 'false', 'end_date_min': '2025-07-01T00:00:00Z', 'end_date_max': '2025-08-01T00:00:00Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /events/keyset for deeper pagination"}
+
+events 2025-07-01..2025-08-01: 2100
+  ! 422 {'closed': 'true', 'order': 'volume', 'ascending': 'false', 'end_date_min': '2025-07-01T00:00:00Z', 'end_date_max': '2025-07-16T12:00:00Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /events/keyset for deeper pagination"}
+
+events 2025-07-01..2025-07-16: 1579
+  ! 422 {'closed': 'true', 'order': 'volume', 'ascending': 'false', 'end_date_min': '2025-07-16T12:00:00Z', 'end_date_max': '2025-08-01T00:00:00Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /events/keyset for deeper pagination"}
+
+events 2025-07-16..2025-08-01: 2100
+events 2025-07-16..2025-07-24: 1005
+events 2025-07-24..2025-08-01: 1253
+[15:15:24 mem=718MB] listed through 2025-07: 39069 markets, 21206 events
+  ! 422 {'closed': 'true', 'order': 'volumeNum', 'ascending': 'false', 'volume_num_min': 5000, 'end_date_min': '2025-08-01T00:00:00Z', 'end_date_max': '2025-09-01T00:00:00Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2025-08-01..2025-09-01: 2100
+  ! 422 {'closed': 'true', 'order': 'volumeNum', 'ascending': 'false', 'volume_num_min': 5000, 'end_date_min': '2025-08-01T00:00:00Z', 'end_date_max': '2025-08-16T12:00:00Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2025-08-01..2025-08-16: 2100
+markets 2025-08-01..2025-08-08: 1557
+markets 2025-08-08..2025-08-16: 1492
+  ! 422 {'closed': 'true', 'order': 'volumeNum', 'ascending': 'false', 'volume_num_min': 5000, 'end_date_min': '2025-08-16T12:00:00Z', 'end_date_max': '2025-09-01T00:00:00Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2025-08-16..2025-09-01: 2100
+markets 2025-08-16..2025-08-24: 1855
+markets 2025-08-24..2025-09-01: 2093
+markets 2025-08-24..2025-08-28: 886
+markets 2025-08-28..2025-09-01: 1211
+events 2025-08-01..2025-09-01: 2100
+events 2025-08-01..2025-08-16: 2100
+events 2025-08-01..2025-08-08: 1119
+events 2025-08-08..2025-08-16: 1114
+events 2025-08-16..2025-09-01: 2100
+events 2025-08-16..2025-08-24: 1237
+events 2025-08-24..2025-09-01: 1372
+[15:16:42 mem=850MB] listed through 2025-08: 46070 markets, 26048 events
+markets 2025-09-01..2025-10-01: 2100
+markets 2025-09-01..2025-09-16: 2100
+markets 2025-09-01..2025-09-08: 2100
+markets 2025-09-01..2025-09-04: 1170
+markets 2025-09-04..2025-09-08: 1579
+markets 2025-09-08..2025-09-16: 2100
+markets 2025-09-08..2025-09-12: 1211
+markets 2025-09-12..2025-09-16: 1418
+markets 2025-09-16..2025-10-01: 2100
+markets 2025-09-16..2025-09-23: 2100
+markets 2025-09-16..2025-09-19: 1123
+markets 2025-09-19..2025-09-23: 1314
+markets 2025-09-23..2025-10-01: 2100
+markets 2025-09-23..2025-09-27: 1088
+markets 2025-09-27..2025-10-01: 1825
+events 2025-09-01..2025-10-01: 2100
+events 2025-09-01..2025-09-16: 2100
+events 2025-09-01..2025-09-08: 1478
+events 2025-09-08..2025-09-16: 1439
+events 2025-09-16..2025-10-01: 2100
+events 2025-09-16..2025-09-23: 1404
+events 2025-09-23..2025-10-01: 1607
+[15:18:37 mem=1036MB] listed through 2025-09: 56798 markets, 31976 events
+markets 2025-10-01..2025-11-01: 2100
+markets 2025-10-01..2025-10-16: 2100
+markets 2025-10-01..2025-10-08: 2100
+markets 2025-10-01..2025-10-04: 1421
+markets 2025-10-04..2025-10-08: 1426
+markets 2025-10-08..2025-10-16: 2100
+markets 2025-10-08..2025-10-12: 1926
+markets 2025-10-12..2025-10-16: 2048
+markets 2025-10-12..2025-10-14: 1059
+markets 2025-10-14..2025-10-16: 991
+markets 2025-10-16..2025-11-01: 2100
+markets 2025-10-16..2025-10-24: 2100
+markets 2025-10-16..2025-10-20: 2100
+markets 2025-10-16..2025-10-18: 925
+markets 2025-10-18..2025-10-20: 1386
+markets 2025-10-20..2025-10-24: 2071
+markets 2025-10-20..2025-10-22: 1044
+markets 2025-10-22..2025-10-24: 1029
+markets 2025-10-24..2025-11-01: 2100
+markets 2025-10-24..2025-10-28: 2100
+markets 2025-10-24..2025-10-26: 1220
+markets 2025-10-26..2025-10-28: 1263
+markets 2025-10-28..2025-11-01: 2100
+markets 2025-10-28..2025-10-30: 1313
+markets 2025-10-30..2025-11-01: 1500
+events 2025-10-01..2025-11-01: 2100
+events 2025-10-01..2025-10-16: 2100
+events 2025-10-01..2025-10-08: 1683
+events 2025-10-08..2025-10-16: 2100
+events 2025-10-08..2025-10-12: 1261
+events 2025-10-12..2025-10-16: 1301
+events 2025-10-16..2025-11-01: 2100
+events 2025-10-16..2025-10-24: 2100
+events 2025-10-16..2025-10-20: 1353
+events 2025-10-20..2025-10-24: 1311
+events 2025-10-24..2025-11-01: 2100
+events 2025-10-24..2025-10-28: 1409
+events 2025-10-28..2025-11-01: 1628
+[15:22:04 mem=1325MB] listed through 2025-10: 73301 markets, 41922 events
+markets 2025-11-01..2025-12-01: 2100
+markets 2025-11-01..2025-11-16: 2100
+markets 2025-11-01..2025-11-08: 2100
+markets 2025-11-01..2025-11-04: 2100
+markets 2025-11-01..2025-11-02: 1568
+markets 2025-11-02..2025-11-04: 1530
+markets 2025-11-04..2025-11-08: 2100
+markets 2025-11-04..2025-11-06: 1227
+markets 2025-11-06..2025-11-08: 1335
+markets 2025-11-08..2025-11-16: 2100
+markets 2025-11-08..2025-11-12: 2100
+markets 2025-11-08..2025-11-10: 1675
+markets 2025-11-10..2025-11-12: 1093
+markets 2025-11-12..2025-11-16: 2100
+markets 2025-11-12..2025-11-14: 1272
+markets 2025-11-14..2025-11-16: 1683
+markets 2025-11-16..2025-12-01: 2100
+markets 2025-11-16..2025-11-23: 2100
+markets 2025-11-16..2025-11-19: 2100
+markets 2025-11-16..2025-11-17: 1748
+markets 2025-11-17..2025-11-19: 1311
+markets 2025-11-19..2025-11-23: 2100
+markets 2025-11-19..2025-11-21: 1354
+markets 2025-11-21..2025-11-23: 1686
+markets 2025-11-23..2025-12-01: 2100
+markets 2025-11-23..2025-11-27: 2100
+markets 2025-11-23..2025-11-25: 1479
+markets 2025-11-25..2025-11-27: 1432
+markets 2025-11-27..2025-12-01: 2100
+markets 2025-11-27..2025-11-29: 1663
+markets 2025-11-29..2025-12-01: 2100
+markets 2025-11-29..2025-11-30: 1272
+markets 2025-11-30..2025-12-01: 896
+events 2025-11-01..2025-12-01: 2100
+events 2025-11-01..2025-11-16: 2100
+events 2025-11-01..2025-11-08: 2100
+events 2025-11-01..2025-11-04: 1666
+events 2025-11-04..2025-11-08: 1559
+events 2025-11-08..2025-11-16: 2100
+events 2025-11-08..2025-11-12: 1691
+events 2025-11-12..2025-11-16: 1717
+events 2025-11-16..2025-12-01: 2100
+events 2025-11-16..2025-11-23: 2100
+events 2025-11-16..2025-11-19: 1624
+events 2025-11-19..2025-11-23: 1777
+events 2025-11-23..2025-12-01: 2100
+events 2025-11-23..2025-11-27: 1755
+events 2025-11-27..2025-12-01: 1985
+[15:26:48 mem=1747MB] listed through 2025-11: 97525 markets, 55696 events
+markets 2025-12-01..2026-01-01: 2100
+markets 2025-12-01..2025-12-16: 2100
+markets 2025-12-01..2025-12-08: 2100
+markets 2025-12-01..2025-12-04: 2100
+markets 2025-12-01..2025-12-02: 1659
+markets 2025-12-02..2025-12-04: 1342
+markets 2025-12-04..2025-12-08: 2100
+markets 2025-12-04..2025-12-06: 1816
+markets 2025-12-06..2025-12-08: 2060
+markets 2025-12-06..2025-12-07: 1237
+markets 2025-12-07..2025-12-08: 826
+markets 2025-12-08..2025-12-16: 2100
+markets 2025-12-08..2025-12-12: 2100
+markets 2025-12-08..2025-12-10: 1346
+markets 2025-12-10..2025-12-12: 1545
+markets 2025-12-12..2025-12-16: 2100
+markets 2025-12-12..2025-12-14: 1844
+markets 2025-12-14..2025-12-16: 1752
+markets 2025-12-16..2026-01-01: 2100
+markets 2025-12-16..2025-12-24: 2100
+markets 2025-12-16..2025-12-20: 2100
+markets 2025-12-16..2025-12-18: 1414
+markets 2025-12-18..2025-12-20: 1728
+markets 2025-12-20..2025-12-24: 2100
+markets 2025-12-20..2025-12-22: 2035
+markets 2025-12-20..2025-12-21: 1057
+markets 2025-12-21..2025-12-22: 982
+markets 2025-12-22..2025-12-24: 1602
+markets 2025-12-24..2026-01-01: 2100
+markets 2025-12-24..2025-12-28: 2100
+markets 2025-12-24..2025-12-26: 1327
+markets 2025-12-26..2025-12-28: 1880
+markets 2025-12-28..2026-01-01: 2100
+markets 2025-12-28..2025-12-30: 1740
+markets 2025-12-30..2026-01-01: 2100
+markets 2025-12-30..2025-12-31: 2100
+markets 2025-12-30..2025-12-30: 249
+markets 2025-12-30..2025-12-31: 2100
+markets 2025-12-30..2025-12-30: 240
+markets 2025-12-30..2025-12-31: 2099
+markets 2025-12-31..2026-01-01: 2100
+markets 2025-12-31..2025-12-31: 1378
+markets 2025-12-31..2026-01-01: 850
+events 2025-12-01..2026-01-01: 2100
+events 2025-12-01..2025-12-16: 2100
+events 2025-12-01..2025-12-08: 2100
+events 2025-12-01..2025-12-04: 1669
+events 2025-12-04..2025-12-08: 2027
+events 2025-12-04..2025-12-06: 1049
+events 2025-12-06..2025-12-08: 986
+events 2025-12-08..2025-12-16: 2100
+events 2025-12-08..2025-12-12: 1701
+events 2025-12-12..2025-12-16: 1907
+events 2025-12-16..2026-01-01: 2100
+events 2025-12-16..2025-12-24: 2100
+events 2025-12-16..2025-12-20: 1926
+events 2025-12-20..2025-12-24: 1992
+events 2025-12-24..2026-01-01: 2100
+events 2025-12-24..2025-12-28: 1816
+events 2025-12-28..2026-01-01: 2100
+events 2025-12-28..2025-12-30: 909
+events 2025-12-30..2026-01-01: 1902
+[15:32:46 mem=2275MB] listed through 2025-12: 127438 markets, 71553 events
+markets 2026-01-01..2026-02-01: 2100
+markets 2026-01-01..2026-01-16: 2100
+markets 2026-01-01..2026-01-08: 2100
+markets 2026-01-01..2026-01-04: 2100
+markets 2026-01-01..2026-01-02: 2100
+markets 2026-01-01..2026-01-01: 1400
+markets 2026-01-01..2026-01-02: 952
+markets 2026-01-02..2026-01-04: 2100
+markets 2026-01-02..2026-01-03: 1259
+markets 2026-01-03..2026-01-04: 1226
+markets 2026-01-04..2026-01-08: 2100
+markets 2026-01-04..2026-01-06: 1750
+markets 2026-01-06..2026-01-08: 1747
+markets 2026-01-08..2026-01-16: 2100
+markets 2026-01-08..2026-01-12: 2100
+markets 2026-01-08..2026-01-10: 2100
+markets 2026-01-08..2026-01-09: 994
+markets 2026-01-09..2026-01-10: 1421
+markets 2026-01-10..2026-01-12: 2100
+markets 2026-01-10..2026-01-11: 1470
+markets 2026-01-11..2026-01-12: 1052
+markets 2026-01-12..2026-01-16: 2100
+markets 2026-01-12..2026-01-14: 1976
+markets 2026-01-14..2026-01-16: 2100
+markets 2026-01-14..2026-01-15: 1071
+markets 2026-01-15..2026-01-16: 1090
+markets 2026-01-16..2026-02-01: 2100
+markets 2026-01-16..2026-01-24: 2100
+markets 2026-01-16..2026-01-20: 2100
+markets 2026-01-16..2026-01-18: 2100
+markets 2026-01-16..2026-01-17: 1239
+markets 2026-01-17..2026-01-18: 1559
+markets 2026-01-18..2026-01-20: 2100
+markets 2026-01-18..2026-01-19: 1291
+markets 2026-01-19..2026-01-20: 1068
+markets 2026-01-20..2026-01-24: 2100
+markets 2026-01-20..2026-01-22: 2100
+markets 2026-01-20..2026-01-21: 1141
+markets 2026-01-21..2026-01-22: 1276
+markets 2026-01-22..2026-01-24: 2100
+markets 2026-01-22..2026-01-23: 1311
+markets 2026-01-23..2026-01-24: 1291
+markets 2026-01-24..2026-02-01: 2100
+markets 2026-01-24..2026-01-28: 2100
+markets 2026-01-24..2026-01-26: 2100
+markets 2026-01-24..2026-01-25: 1653
+markets 2026-01-25..2026-01-26: 1254
+markets 2026-01-26..2026-01-28: 2100
+markets 2026-01-26..2026-01-27: 1219
+markets 2026-01-27..2026-01-28: 1153
+markets 2026-01-28..2026-02-01: 2100
+markets 2026-01-28..2026-01-30: 2100
+markets 2026-01-28..2026-01-29: 1312
+markets 2026-01-29..2026-01-30: 1279
+markets 2026-01-30..2026-02-01: 2100
+markets 2026-01-30..2026-01-31: 2100
+markets 2026-01-30..2026-01-30: 438
+markets 2026-01-30..2026-01-31: 1823
+markets 2026-01-31..2026-02-01: 2035
+markets 2026-01-31..2026-01-31: 482
+markets 2026-01-31..2026-02-01: 1553
+events 2026-01-01..2026-02-01: 2100
+events 2026-01-01..2026-01-16: 2100
+events 2026-01-01..2026-01-08: 2100
+events 2026-01-01..2026-01-04: 2100
+events 2026-01-01..2026-01-02: 981
+events 2026-01-02..2026-01-04: 1334
+events 2026-01-04..2026-01-08: 2100
+events 2026-01-04..2026-01-06: 1057
+events 2026-01-06..2026-01-08: 1146
+events 2026-01-08..2026-01-16: 2100
+events 2026-01-08..2026-01-12: 2100
+events 2026-01-08..2026-01-10: 1415
+events 2026-01-10..2026-01-12: 1506
+events 2026-01-12..2026-01-16: 2100
+events 2026-01-12..2026-01-14: 1295
+events 2026-01-14..2026-01-16: 1398
+events 2026-01-16..2026-02-01: 2100
+events 2026-01-16..2026-01-24: 2100
+events 2026-01-16..2026-01-20: 2100
+events 2026-01-16..2026-01-18: 1631
+events 2026-01-18..2026-01-20: 1406
+events 2026-01-20..2026-01-24: 2100
+events 2026-01-20..2026-01-22: 1416
+events 2026-01-22..2026-01-24: 1540
+events 2026-01-24..2026-02-01: 2100
+events 2026-01-24..2026-01-28: 2100
+events 2026-01-24..2026-01-26: 1713
+events 2026-01-26..2026-01-28: 1514
+events 2026-01-28..2026-02-01: 2100
+events 2026-01-28..2026-01-30: 1620
+events 2026-01-30..2026-02-01: 2076
+events 2026-01-30..2026-01-31: 961
+events 2026-01-31..2026-02-01: 1119
+[15:42:12 mem=2979MB] listed through 2026-01: 167188 markets, 94605 events
+markets 2026-02-01..2026-03-01: 2100
+markets 2026-02-01..2026-02-15: 2100
+markets 2026-02-01..2026-02-08: 2100
+markets 2026-02-01..2026-02-04: 2100
+markets 2026-02-01..2026-02-02: 2100
+markets 2026-02-01..2026-02-01: 1991
+markets 2026-02-01..2026-02-02: 965
+markets 2026-02-02..2026-02-04: 2100
+markets 2026-02-02..2026-02-03: 964
+markets 2026-02-03..2026-02-04: 1156
+markets 2026-02-04..2026-02-08: 2100
+markets 2026-02-04..2026-02-06: 2100
+markets 2026-02-04..2026-02-05: 1182
+markets 2026-02-05..2026-02-06: 1203
+markets 2026-02-06..2026-02-08: 2100
+markets 2026-02-06..2026-02-07: 1280
+markets 2026-02-07..2026-02-08: 1738
+markets 2026-02-08..2026-02-15: 2100
+markets 2026-02-08..2026-02-11: 2100
+markets 2026-02-08..2026-02-09: 2100
+markets 2026-02-08..2026-02-08: 1600
+markets 2026-02-08..2026-02-09: 1152
+markets 2026-02-09..2026-02-11: 2100
+markets 2026-02-09..2026-02-10: 1087
+markets 2026-02-10..2026-02-11: 1245
+markets 2026-02-11..2026-02-15: 2100
+markets 2026-02-11..2026-02-13: 2100
+markets 2026-02-11..2026-02-12: 1421
+markets 2026-02-12..2026-02-13: 1476
+markets 2026-02-13..2026-02-15: 2100
+markets 2026-02-13..2026-02-14: 1632
+markets 2026-02-14..2026-02-15: 1890
+markets 2026-02-15..2026-03-01: 2100
+markets 2026-02-15..2026-02-22: 2100
+markets 2026-02-15..2026-02-18: 2100
+markets 2026-02-15..2026-02-16: 2100
+markets 2026-02-15..2026-02-15: 1724
+markets 2026-02-15..2026-02-16: 1340
+markets 2026-02-16..2026-02-18: 2100
+markets 2026-02-16..2026-02-17: 1154
+markets 2026-02-17..2026-02-18: 1446
+markets 2026-02-18..2026-02-22: 2100
+markets 2026-02-18..2026-02-20: 2100
+markets 2026-02-18..2026-02-19: 1518
+markets 2026-02-19..2026-02-20: 1758
+markets 2026-02-20..2026-02-22: 2100
+markets 2026-02-20..2026-02-21: 1774
+markets 2026-02-21..2026-02-22: 2100
+markets 2026-02-21..2026-02-21: 757
+markets 2026-02-21..2026-02-22: 1528
+markets 2026-02-22..2026-03-01: 2100
+markets 2026-02-22..2026-02-25: 2100
+markets 2026-02-22..2026-02-23: 2100
+markets 2026-02-22..2026-02-22: 2100
+markets 2026-02-22..2026-02-22: 1110
+markets 2026-02-22..2026-02-22: 1125
+markets 2026-02-22..2026-02-23: 2100
+markets 2026-02-22..2026-02-23: 1272
+markets 2026-02-23..2026-02-23: 1060
+markets 2026-02-23..2026-02-25: 2100
+markets 2026-02-23..2026-02-24: 1597
+markets 2026-02-24..2026-02-25: 1740
+markets 2026-02-25..2026-03-01: 2100
+markets 2026-02-25..2026-02-27: 2100
+markets 2026-02-25..2026-02-26: 1908
+markets 2026-02-26..2026-02-27: 1856
+markets 2026-02-27..2026-03-01: 2100
+markets 2026-02-27..2026-02-28: 2100
+markets 2026-02-27..2026-02-27: 741
+markets 2026-02-27..2026-02-28: 2064
+markets 2026-02-27..2026-02-27: 858
+markets 2026-02-27..2026-02-28: 1214
+markets 2026-02-28..2026-03-01: 2100
+markets 2026-02-28..2026-02-28: 854
+markets 2026-02-28..2026-03-01: 1467
+events 2026-02-01..2026-03-01: 2100
+events 2026-02-01..2026-02-15: 2100
+events 2026-02-01..2026-02-08: 2100
+events 2026-02-01..2026-02-04: 2100
+events 2026-02-01..2026-02-02: 1549
+events 2026-02-02..2026-02-04: 1360
+events 2026-02-04..2026-02-08: 2100
+events 2026-02-04..2026-02-06: 1511
+events 2026-02-06..2026-02-08: 1564
+events 2026-02-08..2026-02-15: 2100
+events 2026-02-08..2026-02-11: 2100
+events 2026-02-08..2026-02-09: 1419
+events 2026-02-09..2026-02-11: 1368
+events 2026-02-11..2026-02-15: 2100
+events 2026-02-11..2026-02-13: 1815
+events 2026-02-13..2026-02-15: 2100
+events 2026-02-13..2026-02-14: 1003
+events 2026-02-14..2026-02-15: 1157
+events 2026-02-15..2026-03-01: 2100
+events 2026-02-15..2026-02-22: 2100
+events 2026-02-15..2026-02-18: 2100
+events 2026-02-15..2026-02-16: 1910
+events 2026-02-16..2026-02-18: 1748
+events 2026-02-18..2026-02-22: 2100
+events 2026-02-18..2026-02-20: 2100
+events 2026-02-18..2026-02-19: 1033
+events 2026-02-19..2026-02-20: 1209
+events 2026-02-20..2026-02-22: 2100
+events 2026-02-20..2026-02-21: 1179
+events 2026-02-21..2026-02-22: 1307
+events 2026-02-22..2026-03-01: 2100
+events 2026-02-22..2026-02-25: 2100
+events 2026-02-22..2026-02-23: 2100
+events 2026-02-22..2026-02-22: 1251
+events 2026-02-22..2026-02-23: 1433
+events 2026-02-23..2026-02-25: 2040
+events 2026-02-23..2026-02-24: 1045
+events 2026-02-24..2026-02-25: 1008
+events 2026-02-25..2026-03-01: 2100
+events 2026-02-25..2026-02-27: 2100
+events 2026-02-25..2026-02-26: 1240
+events 2026-02-26..2026-02-27: 1212
+events 2026-02-27..2026-03-01: 2100
+events 2026-02-27..2026-02-28: 1507
+events 2026-02-28..2026-03-01: 1543
+[15:53:54 mem=3890MB] listed through 2026-02: 218971 markets, 125976 events
+markets 2026-03-01..2026-04-01: 2100
+markets 2026-03-01..2026-03-16: 2100
+markets 2026-03-01..2026-03-08: 2100
+markets 2026-03-01..2026-03-04: 2100
+markets 2026-03-01..2026-03-02: 2100
+markets 2026-03-01..2026-03-01: 2100
+markets 2026-03-01..2026-03-01: 1228
+markets 2026-03-01..2026-03-01: 1313
+markets 2026-03-01..2026-03-02: 1915
+markets 2026-03-02..2026-03-04: 2100
+markets 2026-03-02..2026-03-03: 2019
+markets 2026-03-02..2026-03-03: 846
+markets 2026-03-03..2026-03-03: 1173
+markets 2026-03-03..2026-03-04: 2000
+markets 2026-03-03..2026-03-04: 1086
+markets 2026-03-04..2026-03-04: 914
+markets 2026-03-04..2026-03-08: 685
+markets 2026-03-08..2026-03-16: 1380
+markets 2026-03-16..2026-04-01: 2100
+markets 2026-03-16..2026-03-24: 1541
+markets 2026-03-24..2026-04-01: 2100
+markets 2026-03-24..2026-03-28: 2100
+markets 2026-03-24..2026-03-26: 76
+markets 2026-03-26..2026-03-28: 2100
+markets 2026-03-26..2026-03-27: 1063
+markets 2026-03-27..2026-03-28: 2100
+markets 2026-03-27..2026-03-27: 1118
+markets 2026-03-27..2026-03-28: 1261
+markets 2026-03-28..2026-04-01: 2100
+markets 2026-03-28..2026-03-30: 2100
+markets 2026-03-28..2026-03-29: 2100
+markets 2026-03-28..2026-03-28: 1048
+markets 2026-03-28..2026-03-29: 1192
+markets 2026-03-29..2026-03-30: 2100
+markets 2026-03-29..2026-03-29: 1109
+markets 2026-03-29..2026-03-30: 1101
+markets 2026-03-30..2026-04-01: 2100
+markets 2026-03-30..2026-03-31: 2100
+markets 2026-03-30..2026-03-30: 1044
+markets 2026-03-30..2026-03-31: 2100
+markets 2026-03-30..2026-03-30: 526
+markets 2026-03-30..2026-03-31: 1616
+markets 2026-03-31..2026-04-01: 2100
+markets 2026-03-31..2026-03-31: 876
+markets 2026-03-31..2026-04-01: 1418
+events 2026-03-01..2026-04-01: 2100
+events 2026-03-01..2026-03-16: 2100
+events 2026-03-01..2026-03-08: 2100
+events 2026-03-01..2026-03-04: 2100
+events 2026-03-01..2026-03-02: 2100
+events 2026-03-01..2026-03-01: 1523
+events 2026-03-01..2026-03-02: 1404
+events 2026-03-02..2026-03-04: 2100
+events 2026-03-02..2026-03-03: 1495
+events 2026-03-03..2026-03-04: 1577
+events 2026-03-04..2026-03-08: 527
+events 2026-03-08..2026-03-16: 1108
+events 2026-03-16..2026-04-01: 2100
+events 2026-03-16..2026-03-24: 1301
+events 2026-03-24..2026-04-01: 2100
+events 2026-03-24..2026-03-28: 2100
+events 2026-03-24..2026-03-26: 36
+events 2026-03-26..2026-03-28: 2100
+events 2026-03-26..2026-03-27: 730
+events 2026-03-27..2026-03-28: 1707
+events 2026-03-28..2026-04-01: 2100
+events 2026-03-28..2026-03-30: 2100
+events 2026-03-28..2026-03-29: 1577
+events 2026-03-29..2026-03-30: 1564
+events 2026-03-30..2026-04-01: 2100
+events 2026-03-30..2026-03-31: 1919
+events 2026-03-31..2026-04-01: 1748
+[16:01:11 mem=4357MB] listed through 2026-03: 244500 markets, 144192 events
+markets 2026-04-01..2026-05-01: 2100
+markets 2026-04-01..2026-04-16: 2100
+markets 2026-04-01..2026-04-08: 2100
+markets 2026-04-01..2026-04-04: 2100
+markets 2026-04-01..2026-04-02: 2100
+markets 2026-04-01..2026-04-01: 2100
+markets 2026-04-01..2026-04-01: 1211
+markets 2026-04-01..2026-04-01: 1349
+markets 2026-04-01..2026-04-02: 2100
+markets 2026-04-01..2026-04-02: 985
+markets 2026-04-02..2026-04-02: 1342
+markets 2026-04-02..2026-04-04: 2100
+markets 2026-04-02..2026-04-03: 2100
+markets 2026-04-02..2026-04-03: 974
+markets 2026-04-03..2026-04-03: 1235
+markets 2026-04-03..2026-04-04: 2100
+markets 2026-04-03..2026-04-04: 888
+markets 2026-04-04..2026-04-04: 1394
+markets 2026-04-04..2026-04-08: 2100
+markets 2026-04-04..2026-04-06: 2100
+markets 2026-04-04..2026-04-05: 2100
+markets 2026-04-04..2026-04-05: 1018
+markets 2026-04-05..2026-04-05: 1213
+markets 2026-04-05..2026-04-06: 2100
+markets 2026-04-05..2026-04-06: 1172
+markets 2026-04-06..2026-04-06: 1233
+markets 2026-04-06..2026-04-08: 2100
+markets 2026-04-06..2026-04-07: 2082
+markets 2026-04-06..2026-04-07: 1144
+markets 2026-04-07..2026-04-07: 945
+markets 2026-04-07..2026-04-08: 2100
+markets 2026-04-07..2026-04-08: 1170
+markets 2026-04-08..2026-04-08: 989
+markets 2026-04-08..2026-04-16: 2100
+markets 2026-04-08..2026-04-12: 2100
+markets 2026-04-08..2026-04-10: 2100
+markets 2026-04-08..2026-04-09: 1941
+markets 2026-04-09..2026-04-10: 2053
+markets 2026-04-09..2026-04-09: 1191
+markets 2026-04-09..2026-04-10: 868
+markets 2026-04-10..2026-04-12: 2100
+markets 2026-04-10..2026-04-11: 2100
+markets 2026-04-10..2026-04-10: 1361
+markets 2026-04-10..2026-04-11: 852
+markets 2026-04-11..2026-04-12: 2100
+markets 2026-04-11..2026-04-11: 1421
+markets 2026-04-11..2026-04-12: 1460
+markets 2026-04-12..2026-04-16: 2100
+markets 2026-04-12..2026-04-14: 2100
+markets 2026-04-12..2026-04-13: 2100
+markets 2026-04-12..2026-04-12: 1269
+markets 2026-04-12..2026-04-13: 1247
+markets 2026-04-13..2026-04-14: 2090
+markets 2026-04-13..2026-04-13: 1063
+markets 2026-04-13..2026-04-14: 1034
+markets 2026-04-14..2026-04-16: 2100
+markets 2026-04-14..2026-04-15: 2043
+markets 2026-04-14..2026-04-14: 985
+markets 2026-04-14..2026-04-15: 1065
+markets 2026-04-15..2026-04-16: 2029
+markets 2026-04-15..2026-04-15: 1033
+markets 2026-04-15..2026-04-16: 1006
+markets 2026-04-16..2026-05-01: 2100
+markets 2026-04-16..2026-04-23: 2100
+markets 2026-04-16..2026-04-19: 2100
+markets 2026-04-16..2026-04-17: 2100
+markets 2026-04-16..2026-04-16: 2024
+markets 2026-04-16..2026-04-16: 722
+markets 2026-04-16..2026-04-16: 1307
+markets 2026-04-16..2026-04-17: 2063
+markets 2026-04-16..2026-04-17: 701
+markets 2026-04-17..2026-04-17: 1368
+markets 2026-04-17..2026-04-19: 2100
+markets 2026-04-17..2026-04-18: 2100
+markets 2026-04-17..2026-04-18: 803
+markets 2026-04-18..2026-04-18: 1467
+markets 2026-04-18..2026-04-19: 2100
+markets 2026-04-18..2026-04-19: 1052
+markets 2026-04-19..2026-04-19: 1359
+markets 2026-04-19..2026-04-23: 2100
+markets 2026-04-19..2026-04-21: 2100
+markets 2026-04-19..2026-04-20: 1995
+markets 2026-04-20..2026-04-21: 1841
+markets 2026-04-21..2026-04-23: 2100
+markets 2026-04-21..2026-04-22: 1954
+markets 2026-04-22..2026-04-23: 2071
+markets 2026-04-22..2026-04-23: 1102
+markets 2026-04-23..2026-04-23: 973
+markets 2026-04-23..2026-05-01: 2100
+markets 2026-04-23..2026-04-27: 2100
+markets 2026-04-23..2026-04-25: 2100
+markets 2026-04-23..2026-04-24: 1967
+markets 2026-04-24..2026-04-25: 2053
+markets 2026-04-24..2026-04-24: 1250
+markets 2026-04-24..2026-04-25: 808
+markets 2026-04-25..2026-04-27: 2100
+markets 2026-04-25..2026-04-26: 2100
+markets 2026-04-25..2026-04-25: 1452
+markets 2026-04-25..2026-04-26: 851
+markets 2026-04-26..2026-04-27: 2060
+markets 2026-04-26..2026-04-26: 1241
+markets 2026-04-26..2026-04-27: 841
+markets 2026-04-27..2026-05-01: 2100
+markets 2026-04-27..2026-04-29: 2100
+markets 2026-04-27..2026-04-28: 1789
+markets 2026-04-28..2026-04-29: 1588
+markets 2026-04-29..2026-05-01: 2100
+markets 2026-04-29..2026-04-30: 2100
+markets 2026-04-29..2026-04-29: 971
+markets 2026-04-29..2026-04-30: 1907
+markets 2026-04-30..2026-05-01: 1632
+events 2026-04-01..2026-05-01: 2100
+events 2026-04-01..2026-04-16: 2100
+events 2026-04-01..2026-04-08: 2100
+events 2026-04-01..2026-04-04: 2100
+events 2026-04-01..2026-04-02: 2100
+events 2026-04-01..2026-04-01: 1629
+events 2026-04-01..2026-04-02: 1665
+events 2026-04-02..2026-04-04: 2100
+events 2026-04-02..2026-04-03: 1429
+events 2026-04-03..2026-04-04: 1425
+events 2026-04-04..2026-04-08: 2100
+events 2026-04-04..2026-04-06: 2100
+events 2026-04-04..2026-04-05: 1398
+events 2026-04-05..2026-04-06: 1517
+events 2026-04-06..2026-04-08: 2100
+events 2026-04-06..2026-04-07: 1405
+events 2026-04-07..2026-04-08: 1402
+events 2026-04-08..2026-04-16: 2100
+events 2026-04-08..2026-04-12: 2100
+events 2026-04-08..2026-04-10: 2100
+events 2026-04-08..2026-04-09: 1332
+events 2026-04-09..2026-04-10: 1375
+events 2026-04-10..2026-04-12: 2100
+events 2026-04-10..2026-04-11: 1440
+events 2026-04-11..2026-04-12: 1510
+events 2026-04-12..2026-04-16: 2100
+events 2026-04-12..2026-04-14: 2100
+events 2026-04-12..2026-04-13: 1382
+events 2026-04-13..2026-04-14: 1424
+events 2026-04-14..2026-04-16: 2100
+events 2026-04-14..2026-04-15: 1347
+events 2026-04-15..2026-04-16: 1356
+events 2026-04-16..2026-05-01: 2100
+events 2026-04-16..2026-04-23: 2100
+events 2026-04-16..2026-04-19: 2100
+events 2026-04-16..2026-04-17: 2100
+events 2026-04-16..2026-04-16: 1219
+events 2026-04-16..2026-04-17: 1347
+events 2026-04-17..2026-04-19: 2100
+events 2026-04-17..2026-04-18: 1393
+events 2026-04-18..2026-04-19: 1331
+events 2026-04-19..2026-04-23: 2100
+events 2026-04-19..2026-04-21: 2100
+events 2026-04-19..2026-04-20: 1231
+events 2026-04-20..2026-04-21: 1210
+events 2026-04-21..2026-04-23: 2100
+events 2026-04-21..2026-04-22: 1175
+events 2026-04-22..2026-04-23: 1243
+events 2026-04-23..2026-05-01: 2100
+events 2026-04-23..2026-04-27: 2100
+events 2026-04-23..2026-04-25: 2100
+events 2026-04-23..2026-04-24: 1218
+events 2026-04-24..2026-04-25: 1204
+events 2026-04-25..2026-04-27: 2100
+events 2026-04-25..2026-04-26: 1310
+events 2026-04-26..2026-04-27: 1223
+events 2026-04-27..2026-05-01: 2100
+events 2026-04-27..2026-04-29: 2100
+events 2026-04-27..2026-04-28: 1218
+events 2026-04-28..2026-04-29: 982
+events 2026-04-29..2026-05-01: 2100
+events 2026-04-29..2026-04-30: 1424
+events 2026-04-30..2026-05-01: 1058
+[16:20:00 mem=5629MB] listed through 2026-04: 313499 markets, 187014 events
+markets 2026-05-01..2026-06-01: 2100
+markets 2026-05-01..2026-05-16: 2100
+markets 2026-05-01..2026-05-08: 2100
+markets 2026-05-01..2026-05-04: 2100
+markets 2026-05-01..2026-05-02: 2100
+markets 2026-05-01..2026-05-01: 2100
+markets 2026-05-01..2026-05-01: 1039
+markets 2026-05-01..2026-05-01: 1206
+markets 2026-05-01..2026-05-02: 1920
+markets 2026-05-02..2026-05-04: 2100
+markets 2026-05-02..2026-05-03: 2001
+markets 2026-05-02..2026-05-03: 768
+markets 2026-05-03..2026-05-03: 1233
+markets 2026-05-03..2026-05-04: 1709
+markets 2026-05-04..2026-05-08: 2100
+markets 2026-05-04..2026-05-06: 2100
+markets 2026-05-04..2026-05-05: 1742
+markets 2026-05-05..2026-05-06: 1824
+markets 2026-05-06..2026-05-08: 2100
+markets 2026-05-06..2026-05-07: 1777
+markets 2026-05-07..2026-05-08: 1845
+markets 2026-05-08..2026-05-16: 2100
+markets 2026-05-08..2026-05-12: 2100
+markets 2026-05-08..2026-05-10: 2100
+markets 2026-05-08..2026-05-09: 2078
+markets 2026-05-08..2026-05-09: 848
+markets 2026-05-09..2026-05-09: 1230
+markets 2026-05-09..2026-05-10: 2056
+markets 2026-05-09..2026-05-10: 851
+markets 2026-05-10..2026-05-10: 1205
+markets 2026-05-10..2026-05-12: 2100
+markets 2026-05-10..2026-05-11: 1843
+markets 2026-05-11..2026-05-12: 1890
+markets 2026-05-12..2026-05-16: 2100
+markets 2026-05-12..2026-05-14: 2100
+markets 2026-05-12..2026-05-13: 1873
+markets 2026-05-13..2026-05-14: 1858
+markets 2026-05-14..2026-05-16: 2100
+markets 2026-05-14..2026-05-15: 1818
+markets 2026-05-15..2026-05-16: 2100
+markets 2026-05-15..2026-05-16: 1166
+markets 2026-05-16..2026-05-16: 935
+markets 2026-05-16..2026-06-01: 2100
+markets 2026-05-16..2026-05-24: 2100
+markets 2026-05-16..2026-05-20: 2100
+markets 2026-05-16..2026-05-18: 2100
+markets 2026-05-16..2026-05-17: 2100
+markets 2026-05-16..2026-05-16: 1388
+markets 2026-05-16..2026-05-17: 777
+markets 2026-05-17..2026-05-18: 2100
+markets 2026-05-17..2026-05-17: 1619
+markets 2026-05-17..2026-05-18: 740
+markets 2026-05-18..2026-05-20: 2100
+markets 2026-05-18..2026-05-19: 1584
+markets 2026-05-19..2026-05-20: 1583
+markets 2026-05-20..2026-05-24: 2100
+markets 2026-05-20..2026-05-22: 2100
+markets 2026-05-20..2026-05-21: 1646
+markets 2026-05-21..2026-05-22: 1656
+markets 2026-05-22..2026-05-24: 2100
+markets 2026-05-22..2026-05-23: 1686
+markets 2026-05-23..2026-05-24: 1982
+markets 2026-05-24..2026-06-01: 2100
+markets 2026-05-24..2026-05-28: 2100
+markets 2026-05-24..2026-05-26: 2100
+markets 2026-05-24..2026-05-25: 2011
+markets 2026-05-24..2026-05-24: 1216
+markets 2026-05-24..2026-05-25: 795
+markets 2026-05-25..2026-05-26: 1634
+markets 2026-05-26..2026-05-28: 2100
+markets 2026-05-26..2026-05-27: 1761
+markets 2026-05-27..2026-05-28: 1826
+markets 2026-05-28..2026-06-01: 2100
+markets 2026-05-28..2026-05-30: 2100
+markets 2026-05-28..2026-05-29: 1534
+markets 2026-05-29..2026-05-30: 1739
+markets 2026-05-30..2026-06-01: 2100
+markets 2026-05-30..2026-05-31: 2100
+markets 2026-05-30..2026-05-30: 838
+markets 2026-05-30..2026-05-31: 1611
+markets 2026-05-31..2026-06-01: 1945
+events 2026-05-01..2026-06-01: 2100
+events 2026-05-01..2026-05-16: 2100
+events 2026-05-01..2026-05-08: 2100
+events 2026-05-01..2026-05-04: 2100
+events 2026-05-01..2026-05-02: 2100
+events 2026-05-01..2026-05-01: 1277
+events 2026-05-01..2026-05-02: 1159
+events 2026-05-02..2026-05-04: 2100
+events 2026-05-02..2026-05-03: 1177
+events 2026-05-03..2026-05-04: 1153
+events 2026-05-04..2026-05-08: 2100
+events 2026-05-04..2026-05-06: 2100
+events 2026-05-04..2026-05-05: 1141
+events 2026-05-05..2026-05-06: 1172
+events 2026-05-06..2026-05-08: 2100
+events 2026-05-06..2026-05-07: 1136
+events 2026-05-07..2026-05-08: 1169
+events 2026-05-08..2026-05-16: 2100
+events 2026-05-08..2026-05-12: 2100
+events 2026-05-08..2026-05-10: 2100
+events 2026-05-08..2026-05-09: 1249
+events 2026-05-09..2026-05-10: 1182
+events 2026-05-10..2026-05-12: 2100
+events 2026-05-10..2026-05-11: 1159
+events 2026-05-11..2026-05-12: 1197
+events 2026-05-12..2026-05-16: 2100
+events 2026-05-12..2026-05-14: 2100
+events 2026-05-12..2026-05-13: 1154
+events 2026-05-13..2026-05-14: 1146
+events 2026-05-14..2026-05-16: 2100
+events 2026-05-14..2026-05-15: 1159
+events 2026-05-15..2026-05-16: 1158
+events 2026-05-16..2026-06-01: 2100
+events 2026-05-16..2026-05-24: 2100
+events 2026-05-16..2026-05-20: 2100
+events 2026-05-16..2026-05-18: 2100
+events 2026-05-16..2026-05-17: 1188
+events 2026-05-17..2026-05-18: 1252
+events 2026-05-18..2026-05-20: 2100
+events 2026-05-18..2026-05-19: 1140
+events 2026-05-19..2026-05-20: 1101
+events 2026-05-20..2026-05-24: 2100
+events 2026-05-20..2026-05-22: 1845
+events 2026-05-22..2026-05-24: 1959
+events 2026-05-24..2026-06-01: 2100
+events 2026-05-24..2026-05-28: 2100
+events 2026-05-24..2026-05-26: 1803
+events 2026-05-26..2026-05-28: 1835
+events 2026-05-28..2026-06-01: 2100
+events 2026-05-28..2026-05-30: 1652
+events 2026-05-30..2026-06-01: 1839
+[16:35:28 mem=6670MB] listed through 2026-05: 373639 markets, 221416 events
+markets 2026-06-01..2026-07-01: 2100
+markets 2026-06-01..2026-06-16: 2100
+markets 2026-06-01..2026-06-08: 2100
+markets 2026-06-01..2026-06-04: 2100
+markets 2026-06-01..2026-06-02: 2100
+markets 2026-06-01..2026-06-01: 1884
+markets 2026-06-01..2026-06-02: 1635
+markets 2026-06-02..2026-06-04: 2100
+markets 2026-06-02..2026-06-03: 1665
+markets 2026-06-03..2026-06-04: 1607
+markets 2026-06-04..2026-06-08: 2100
+markets 2026-06-04..2026-06-06: 2100
+markets 2026-06-04..2026-06-05: 1581
+markets 2026-06-05..2026-06-06: 1828
+markets 2026-06-06..2026-06-08: 2100
+markets 2026-06-06..2026-06-07: 1757
+markets 2026-06-07..2026-06-08: 1654
+markets 2026-06-08..2026-06-16: 2100
+markets 2026-06-08..2026-06-12: 2100
+markets 2026-06-08..2026-06-10: 2100
+markets 2026-06-08..2026-06-09: 1627
+markets 2026-06-09..2026-06-10: 1828
+markets 2026-06-10..2026-06-12: 2100
+markets 2026-06-10..2026-06-11: 1575
+markets 2026-06-11..2026-06-12: 1496
+markets 2026-06-12..2026-06-16: 2100
+markets 2026-06-12..2026-06-14: 2100
+markets 2026-06-12..2026-06-13: 1632
+markets 2026-06-13..2026-06-14: 1604
+markets 2026-06-14..2026-06-16: 2100
+markets 2026-06-14..2026-06-15: 1708
+markets 2026-06-15..2026-06-16: 1820
+markets 2026-06-16..2026-07-01: 2100
+markets 2026-06-16..2026-06-23: 2100
+markets 2026-06-16..2026-06-19: 2100
+markets 2026-06-16..2026-06-17: 2100
+markets 2026-06-16..2026-06-16: 1635
+markets 2026-06-16..2026-06-17: 1851
+markets 2026-06-17..2026-06-19: 2100
+markets 2026-06-17..2026-06-18: 1640
+markets 2026-06-18..2026-06-19: 1526
+markets 2026-06-19..2026-06-23: 2100
+markets 2026-06-19..2026-06-21: 2100
+markets 2026-06-19..2026-06-20: 1774
+markets 2026-06-20..2026-06-21: 1797
+markets 2026-06-21..2026-06-23: 2100
+markets 2026-06-21..2026-06-22: 1735
+markets 2026-06-22..2026-06-23: 1744
+markets 2026-06-23..2026-07-01: 2100
+markets 2026-06-23..2026-06-27: 2100
+markets 2026-06-23..2026-06-25: 2100
+markets 2026-06-23..2026-06-24: 1843
+markets 2026-06-24..2026-06-25: 1877
+markets 2026-06-25..2026-06-27: 2100
+markets 2026-06-25..2026-06-26: 1810
+markets 2026-06-26..2026-06-27: 1993
+markets 2026-06-27..2026-07-01: 2100
+markets 2026-06-27..2026-06-29: 2100
+markets 2026-06-27..2026-06-28: 1810
+markets 2026-06-28..2026-06-29: 1406
+markets 2026-06-29..2026-07-01: 2100
+markets 2026-06-29..2026-06-30: 2100
+markets 2026-06-29..2026-06-29: 951
+markets 2026-06-29..2026-06-30: 2088
+markets 2026-06-29..2026-06-29: 392
+markets 2026-06-29..2026-06-30: 1696
+markets 2026-06-30..2026-07-01: 1990
+events 2026-06-01..2026-07-01: 2100
+events 2026-06-01..2026-06-16: 2100
+events 2026-06-01..2026-06-08: 2100
+events 2026-06-01..2026-06-04: 2100
+events 2026-06-01..2026-06-02: 1718
+events 2026-06-02..2026-06-04: 1554
+events 2026-06-04..2026-06-08: 2100
+events 2026-06-04..2026-06-06: 1575
+events 2026-06-06..2026-06-08: 1653
+events 2026-06-08..2026-06-16: 2100
+events 2026-06-08..2026-06-12: 2100
+events 2026-06-08..2026-06-10: 1753
+events 2026-06-10..2026-06-12: 1411
+events 2026-06-12..2026-06-16: 2100
+events 2026-06-12..2026-06-14: 1362
+events 2026-06-14..2026-06-16: 1630
+events 2026-06-16..2026-07-01: 2100
+events 2026-06-16..2026-06-23: 2100
+events 2026-06-16..2026-06-19: 2100
+events 2026-06-16..2026-06-17: 1947
+events 2026-06-17..2026-06-19: 1967
+events 2026-06-19..2026-06-23: 2100
+events 2026-06-19..2026-06-21: 2010
+events 2026-06-19..2026-06-20: 1056
+events 2026-06-20..2026-06-21: 958
+events 2026-06-21..2026-06-23: 2065
+events 2026-06-21..2026-06-22: 1022
+events 2026-06-22..2026-06-23: 1049
+events 2026-06-23..2026-07-01: 2100
+events 2026-06-23..2026-06-27: 2100
+events 2026-06-23..2026-06-25: 2100
+events 2026-06-23..2026-06-24: 1087
+events 2026-06-24..2026-06-25: 1117
+events 2026-06-25..2026-06-27: 2081
+events 2026-06-25..2026-06-26: 1050
+events 2026-06-26..2026-06-27: 1036
+events 2026-06-27..2026-07-01: 2100
+events 2026-06-27..2026-06-29: 1815
+events 2026-06-29..2026-07-01: 2100
+events 2026-06-29..2026-06-30: 1386
+events 2026-06-30..2026-07-01: 1091
+[16:49:01 mem=7712MB] listed through 2026-06: 430010 markets, 250653 events
+markets 2026-07-01..2026-08-01: 2100
+markets 2026-07-01..2026-07-16: 2100
+markets 2026-07-01..2026-07-08: 2100
+markets 2026-07-01..2026-07-04: 2100
+markets 2026-07-01..2026-07-02: 2100
+markets 2026-07-01..2026-07-01: 2100
+markets 2026-07-01..2026-07-01: 1193
+markets 2026-07-01..2026-07-01: 1310
+markets 2026-07-01..2026-07-02: 1764
+markets 2026-07-02..2026-07-04: 2100
+markets 2026-07-02..2026-07-03: 1908
+markets 2026-07-03..2026-07-04: 2049
+markets 2026-07-03..2026-07-04: 851
+markets 2026-07-04..2026-07-04: 1198
+markets 2026-07-04..2026-07-08: 2100
+markets 2026-07-04..2026-07-06: 2100
+markets 2026-07-04..2026-07-05: 1729
+markets 2026-07-05..2026-07-06: 1895
+markets 2026-07-06..2026-07-08: 2100
+markets 2026-07-06..2026-07-07: 1883
+markets 2026-07-07..2026-07-08: 1905
+markets 2026-07-08..2026-07-16: 2100
+markets 2026-07-08..2026-07-12: 2100
+markets 2026-07-08..2026-07-10: 2100
+markets 2026-07-08..2026-07-09: 1661
+markets 2026-07-09..2026-07-10: 1780
+markets 2026-07-10..2026-07-12: 2100
+markets 2026-07-10..2026-07-11: 1617
+markets 2026-07-11..2026-07-12: 1932
+markets 2026-07-12..2026-07-16: 2100
+markets 2026-07-12..2026-07-14: 2100
+markets 2026-07-12..2026-07-13: 1532
+markets 2026-07-13..2026-07-14: 1503
+markets 2026-07-14..2026-07-16: 2100
+markets 2026-07-14..2026-07-15: 1804
+markets 2026-07-15..2026-07-16: 1687
+markets 2026-07-16..2026-08-01: 2100
+markets 2026-07-16..2026-07-24: 2100
+markets 2026-07-16..2026-07-20: 2100
+markets 2026-07-16..2026-07-18: 2100
+markets 2026-07-16..2026-07-17: 1880
+markets 2026-07-17..2026-07-18: 1820
+markets 2026-07-18..2026-07-20: 2100
+markets 2026-07-18..2026-07-19: 1920
+markets 2026-07-19..2026-07-20: 2100
+markets 2026-07-19..2026-07-19: 1217
+markets 2026-07-19..2026-07-20: 1104
+markets 2026-07-20..2026-07-24: 2100
+markets 2026-07-20..2026-07-22: 2100
+markets 2026-07-20..2026-07-21: 1497
+markets 2026-07-21..2026-07-22: 1782
+markets 2026-07-22..2026-07-24: 2100
+markets 2026-07-22..2026-07-23: 1940
+markets 2026-07-23..2026-07-24: 1790
+markets 2026-07-24..2026-08-01: 2100
+markets 2026-07-24..2026-07-28: 2100
+markets 2026-07-24..2026-07-26: 2100
+markets 2026-07-24..2026-07-25: 1577
+markets 2026-07-25..2026-07-26: 1831
+markets 2026-07-26..2026-07-28: 2100
+markets 2026-07-26..2026-07-27: 1816
+markets 2026-07-27..2026-07-28: 1615
+markets 2026-07-28..2026-08-01: 2100
+markets 2026-07-28..2026-07-30: 2100
+markets 2026-07-28..2026-07-29: 1658
+markets 2026-07-29..2026-07-30: 1706
+markets 2026-07-30..2026-08-01: 2100
+markets 2026-07-30..2026-07-31: 1907
+markets 2026-07-31..2026-08-01: 1746
+events 2026-07-01..2026-08-01: 2100
+events 2026-07-01..2026-07-16: 2100
+events 2026-07-01..2026-07-08: 2100
+events 2026-07-01..2026-07-04: 2100
+events 2026-07-01..2026-07-02: 2100
+events 2026-07-01..2026-07-01: 1214
+events 2026-07-01..2026-07-02: 1181
+events 2026-07-02..2026-07-04: 2100
+events 2026-07-02..2026-07-03: 1169
+events 2026-07-03..2026-07-04: 1100
+events 2026-07-04..2026-07-08: 2100
+events 2026-07-04..2026-07-06: 2100
+events 2026-07-04..2026-07-05: 994
+events 2026-07-05..2026-07-06: 1189
+events 2026-07-06..2026-07-08: 2100
+events 2026-07-06..2026-07-07: 1140
+events 2026-07-07..2026-07-08: 1249
+events 2026-07-08..2026-07-16: 2100
+events 2026-07-08..2026-07-12: 2100
+events 2026-07-08..2026-07-10: 2100
+events 2026-07-08..2026-07-09: 1130
+events 2026-07-09..2026-07-10: 1123
+events 2026-07-10..2026-07-12: 2051
+events 2026-07-10..2026-07-11: 1017
+events 2026-07-11..2026-07-12: 1039
+events 2026-07-12..2026-07-16: 2100
+events 2026-07-12..2026-07-14: 2100
+events 2026-07-12..2026-07-13: 1052
+events 2026-07-13..2026-07-14: 1122
+events 2026-07-14..2026-07-16: 2100
+events 2026-07-14..2026-07-15: 1209
+events 2026-07-15..2026-07-16: 1110
+events 2026-07-16..2026-08-01: 2100
+events 2026-07-16..2026-07-24: 2100
+events 2026-07-16..2026-07-20: 2100
+events 2026-07-16..2026-07-18: 2100
+events 2026-07-16..2026-07-17: 1179
+events 2026-07-17..2026-07-18: 1122
+events 2026-07-18..2026-07-20: 2100
+events 2026-07-18..2026-07-19: 988
+events 2026-07-19..2026-07-20: 1138
+events 2026-07-20..2026-07-24: 2100
+events 2026-07-20..2026-07-22: 2100
+events 2026-07-20..2026-07-21: 1015
+events 2026-07-21..2026-07-22: 1129
+events 2026-07-22..2026-07-24: 2100
+events 2026-07-22..2026-07-23: 1183
+events 2026-07-23..2026-07-24: 1118
+events 2026-07-24..2026-08-01: 2100
+events 2026-07-24..2026-07-28: 2100
+events 2026-07-24..2026-07-26: 2073
+events 2026-07-24..2026-07-25: 985
+events 2026-07-25..2026-07-26: 1091
+events 2026-07-26..2026-07-28: 2100
+events 2026-07-26..2026-07-27: 1096
+events 2026-07-27..2026-07-28: 1053
+events 2026-07-28..2026-08-01: 2100
+events 2026-07-28..2026-07-30: 2040
+events 2026-07-28..2026-07-29: 1024
+events 2026-07-29..2026-07-30: 1018
+events 2026-07-30..2026-08-01: 1766
+[17:06:30 mem=8840MB] listed through 2026-07: 487968 markets, 285596 events
+markets 2026-08-01..2026-09-01: 2100
+markets 2026-08-01..2026-08-16: 2100
+markets 2026-08-01..2026-08-08: 2100
+markets 2026-08-01..2026-08-04: 2100
+markets 2026-08-01..2026-08-02: 2100
+markets 2026-08-01..2026-08-01: 2100
+markets 2026-08-01..2026-08-01: 980
+markets 2026-08-01..2026-08-01: 1211
+markets 2026-08-01..2026-08-02: 1757
+markets 2026-08-02..2026-08-04: 2100
+markets 2026-08-02..2026-08-03: 1374
+markets 2026-08-03..2026-08-04: 1430
+markets 2026-08-04..2026-08-08: 2100
+markets 2026-08-04..2026-08-06: 2100
+markets 2026-08-04..2026-08-05: 1715
+markets 2026-08-05..2026-08-06: 1837
+markets 2026-08-06..2026-08-08: 2100
+markets 2026-08-06..2026-08-07: 1655
+markets 2026-08-07..2026-08-08: 1919
+markets 2026-08-08..2026-08-16: 2100
+markets 2026-08-08..2026-08-12: 2100
+markets 2026-08-08..2026-08-10: 2100
+markets 2026-08-08..2026-08-09: 2000
+markets 2026-08-08..2026-08-09: 882
+markets 2026-08-09..2026-08-09: 1118
+markets 2026-08-09..2026-08-10: 1703
+markets 2026-08-10..2026-08-12: 2100
+markets 2026-08-10..2026-08-11: 1430
+markets 2026-08-11..2026-08-12: 1748
+markets 2026-08-12..2026-08-16: 2100
+markets 2026-08-12..2026-08-14: 2100
+markets 2026-08-12..2026-08-13: 1602
+markets 2026-08-13..2026-08-14: 1783
+markets 2026-08-14..2026-08-16: 2100
+markets 2026-08-14..2026-08-15: 1765
+markets 2026-08-15..2026-08-16: 2097
+markets 2026-08-15..2026-08-16: 1287
+markets 2026-08-16..2026-08-16: 810
+markets 2026-08-16..2026-09-01: 2100
+markets 2026-08-16..2026-08-24: 2100
+markets 2026-08-16..2026-08-20: 2100
+markets 2026-08-16..2026-08-18: 2100
+markets 2026-08-16..2026-08-17: 1800
+markets 2026-08-17..2026-08-18: 1567
+markets 2026-08-18..2026-08-20: 2100
+markets 2026-08-18..2026-08-19: 1565
+markets 2026-08-19..2026-08-20: 1776
