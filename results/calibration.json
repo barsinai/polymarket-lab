@@ -1,0 +1,61 @@
+{
+  "generated": "2026-10-31T08:58:06.623017+00:00",
+  "markets": 100,
+  "observations": 2,
+  "calibration": {
+    "1h": [
+      {
+        "bucket": "0.00-0.05",
+        "n": 1,
+        "avg_price": 0.0005,
+        "win_rate": 0.0,
+        "edge": -0.0005,
+        "se": 0.0
+      },
+      {
+        "bucket": "0.95-1.00",
+        "n": 1,
+        "avg_price": 0.9995,
+        "win_rate": 1.0,
+        "edge": 0.0005,
+        "se": 0.0
+      }
+    ],
+    "1d": [
+      {
+        "bucket": "0.00-0.05",
+        "n": 1,
+        "avg_price": 0.002,
+        "win_rate": 0.0,
+        "edge": -0.002,
+        "se": 0.0
+      },
+      {
+        "bucket": "0.95-1.00",
+        "n": 1,
+        "avg_price": 0.998,
+        "win_rate": 1.0,
+        "edge": 0.002,
+        "se": 0.0
+      }
+    ],
+    "7d": [],
+    "30d": []
+  },
+  "strategies": {
+    "longshot (<10c)": {
+      "1h": {
+        "bets": 1,
+        "avg_return_per_$": -1.0,
+        "se": 0.0,
+        "hit_rate": 0.0
+      },
+      "1d": {
+        "bets": 1,
+        "avg_return_per_$": -1.0,
+        "se": 0.0,
+        "hit_rate": 0.0
+      }
+    }
+  }
+}
