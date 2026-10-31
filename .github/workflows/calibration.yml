@@ -1,7 +1,11 @@
-name: Phase 1 - calibration study
+name: Phase 1 - collect data and run calibration study
 
 on:
   workflow_dispatch:
+    inputs:
+      args:
+        description: "extra args for collect.py"
+        default: ""
   push:
     branches: [main]
     paths: ["research/**", ".github/workflows/calibration.yml"]
@@ -10,26 +14,29 @@ permissions:
   contents: write
 
 concurrency:
-  group: calibration
+  group: collect
   cancel-in-progress: true
 
 jobs:
   run:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 180
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - run: pip install requests
-      - name: Run study
-        run: python research/calibration.py --max-markets 3000 --min-volume 10000 2>&1 | tee results-log.txt
-      - name: Commit results
+      - name: Collect raw data
+        run: python research/collect.py --time-budget-min 150 ${{ inputs.args || '--max-markets 300 --max-new-histories 40' }} 2>&1 | tee collect-log.txt
+      - name: Analyze (offline, from saved data)
+        run: python research/analyze_calibration.py 2>&1 | tee analyze-log.txt
+      - name: Commit data and results
+        if: always()
         run: |
-          mkdir -p results && mv results-log.txt results/log.txt
+          mkdir -p results logs && mv collect-log.txt analyze-log.txt logs/ 2>/dev/null || true
           git config user.name "polymarket-lab-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add results
-          git commit -m "Calibration results $(date -u +%F)" || echo "nothing to commit"
+          git add data results logs
+          git commit -m "Data + calibration results $(date -u +%F)" || echo "nothing to commit"
           git pull --rebase origin main && git push
