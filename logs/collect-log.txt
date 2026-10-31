@@ -1,10 +1,156 @@
 markets: offset=0 kept=100
 markets: offset=100 kept=200
 markets: offset=200 kept=300
+markets: offset=300 kept=400
+markets: offset=400 kept=500
+markets: offset=500 kept=600
+markets: offset=600 kept=700
+markets: offset=700 kept=800
+markets: offset=800 kept=900
+markets: offset=900 kept=1000
+markets: offset=1000 kept=1100
+markets: offset=1100 kept=1200
+markets: offset=1200 kept=1300
+markets: offset=1300 kept=1400
+markets: offset=1400 kept=1500
+markets: offset=1500 kept=1600
+markets: offset=1600 kept=1700
+markets: offset=1700 kept=1800
+markets: offset=1800 kept=1900
+markets: offset=1900 kept=2000
+markets: offset=2000 kept=2100
+  ! 422 {'closed': 'true', 'order': 'volumeNum', 'ascending': 'false', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
 events: offset=0 kept=100
 events: offset=100 kept=200
 events: offset=200 kept=300
+events: offset=300 kept=400
+events: offset=400 kept=500
+events: offset=500 kept=600
+events: offset=600 kept=700
+events: offset=700 kept=800
+events: offset=800 kept=900
+events: offset=900 kept=1000
+events: offset=1000 kept=1100
+events: offset=1100 kept=1200
+events: offset=1200 kept=1300
+events: offset=1300 kept=1400
+events: offset=1400 kept=1500
+events: offset=1500 kept=1600
+events: offset=1600 kept=1700
+events: offset=1700 kept=1800
+events: offset=1800 kept=1900
+events: offset=1900 kept=2000
+events: offset=2000 kept=2100
+  ! 422 {'closed': 'true', 'order': 'volume', 'ascending': 'false', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /events/keyset for deeper pagination"}
+
 markets: offset=0 kept=100
 markets: offset=100 kept=200
 markets: offset=200 kept=300
+markets: offset=300 kept=400
+markets: offset=400 kept=500
+markets: offset=500 kept=600
+markets: offset=600 kept=700
+markets: offset=700 kept=800
+markets: offset=800 kept=900
+markets: offset=900 kept=1000
+markets: offset=1000 kept=1100
+markets: offset=1100 kept=1200
+markets: offset=1200 kept=1300
+markets: offset=1300 kept=1400
+markets: offset=1400 kept=1500
+markets: offset=1500 kept=1600
+markets: offset=1600 kept=1700
+markets: offset=1700 kept=1800
+markets: offset=1800 kept=1900
+markets: offset=1900 kept=2000
+markets: offset=2000 kept=2100
+  ! 422 {'closed': 'false', 'active': 'true', 'order': 'volumeNum', 'ascending': 'false', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
 0 market histories already saved
+histories: 25 new (24/2100 scanned, 2 min)
+histories: 50 new (49/2100 scanned, 4 min)
+histories: 75 new (74/2100 scanned, 7 min)
+histories: 100 new (99/2100 scanned, 9 min)
+histories: 125 new (124/2100 scanned, 11 min)
+histories: 150 new (149/2100 scanned, 13 min)
+histories: 175 new (174/2100 scanned, 14 min)
+histories: 200 new (199/2100 scanned, 16 min)
+histories: 225 new (224/2100 scanned, 18 min)
+histories: 250 new (249/2100 scanned, 19 min)
+histories: 275 new (274/2100 scanned, 21 min)
+histories: 300 new (299/2100 scanned, 23 min)
+histories: 325 new (324/2100 scanned, 24 min)
+histories: 350 new (349/2100 scanned, 25 min)
+histories: 375 new (374/2100 scanned, 27 min)
+histories: 400 new (399/2100 scanned, 29 min)
+histories: 425 new (424/2100 scanned, 30 min)
+histories: 450 new (449/2100 scanned, 32 min)
+histories: 475 new (474/2100 scanned, 33 min)
+histories: 500 new (499/2100 scanned, 35 min)
+histories: 525 new (524/2100 scanned, 37 min)
+histories: 550 new (549/2100 scanned, 38 min)
+histories: 575 new (574/2100 scanned, 39 min)
+histories: 600 new (599/2100 scanned, 40 min)
+histories: 625 new (624/2100 scanned, 42 min)
+histories: 650 new (649/2100 scanned, 43 min)
+histories: 675 new (674/2100 scanned, 45 min)
+histories: 700 new (699/2100 scanned, 46 min)
+histories: 725 new (724/2100 scanned, 48 min)
+histories: 750 new (749/2100 scanned, 49 min)
+histories: 775 new (774/2100 scanned, 51 min)
+histories: 800 new (799/2100 scanned, 52 min)
+histories: 825 new (824/2100 scanned, 54 min)
+histories: 850 new (849/2100 scanned, 55 min)
+histories: 875 new (874/2100 scanned, 57 min)
+  ! https://clob.polymarket.com/prices-history {'market': '45490428844116430227464511946812179496772833301930709619155920762438980078343', 'startTs': 1769040487, 'endTs': 1770250087, 'fidelity': 60}: HTTPSConnectionPool(host='clob.polymarket.com', port=443): Read timed out. (read timeout=30)
+histories: 900 new (899/2100 scanned, 59 min)
+histories: 925 new (924/2100 scanned, 60 min)
+histories: 950 new (949/2100 scanned, 62 min)
+histories: 975 new (974/2100 scanned, 63 min)
+histories: 1000 new (999/2100 scanned, 65 min)
+histories: 1025 new (1024/2100 scanned, 66 min)
+histories: 1050 new (1049/2100 scanned, 68 min)
+histories: 1075 new (1074/2100 scanned, 69 min)
+histories: 1100 new (1099/2100 scanned, 71 min)
+histories: 1125 new (1124/2100 scanned, 72 min)
+histories: 1150 new (1149/2100 scanned, 74 min)
+histories: 1175 new (1174/2100 scanned, 75 min)
+histories: 1200 new (1199/2100 scanned, 76 min)
+histories: 1225 new (1224/2100 scanned, 77 min)
+histories: 1250 new (1249/2100 scanned, 79 min)
+histories: 1275 new (1274/2100 scanned, 80 min)
+histories: 1300 new (1299/2100 scanned, 81 min)
+histories: 1325 new (1324/2100 scanned, 83 min)
+histories: 1350 new (1349/2100 scanned, 84 min)
+histories: 1375 new (1374/2100 scanned, 86 min)
+histories: 1400 new (1399/2100 scanned, 87 min)
+histories: 1425 new (1424/2100 scanned, 88 min)
+histories: 1450 new (1449/2100 scanned, 89 min)
+histories: 1475 new (1474/2100 scanned, 91 min)
+histories: 1500 new (1499/2100 scanned, 92 min)
+histories: 1525 new (1524/2100 scanned, 93 min)
+histories: 1550 new (1549/2100 scanned, 94 min)
+histories: 1575 new (1574/2100 scanned, 96 min)
+histories: 1600 new (1599/2100 scanned, 97 min)
+histories: 1625 new (1624/2100 scanned, 98 min)
+histories: 1650 new (1649/2100 scanned, 100 min)
+histories: 1675 new (1674/2100 scanned, 101 min)
+histories: 1700 new (1699/2100 scanned, 103 min)
+histories: 1725 new (1724/2100 scanned, 104 min)
+histories: 1750 new (1749/2100 scanned, 106 min)
+histories: 1775 new (1774/2100 scanned, 107 min)
+histories: 1800 new (1799/2100 scanned, 109 min)
+histories: 1825 new (1824/2100 scanned, 110 min)
+histories: 1850 new (1849/2100 scanned, 112 min)
+histories: 1875 new (1874/2100 scanned, 113 min)
+histories: 1900 new (1899/2100 scanned, 114 min)
+histories: 1925 new (1924/2100 scanned, 116 min)
+histories: 1950 new (1949/2100 scanned, 117 min)
+histories: 1975 new (1974/2100 scanned, 119 min)
+histories: 2000 new (1999/2100 scanned, 120 min)
+histories: 2025 new (2024/2100 scanned, 121 min)
+histories: 2050 new (2049/2100 scanned, 122 min)
+histories: 2075 new (2074/2100 scanned, 124 min)
+histories: 2100 new (2099/2100 scanned, 125 min)
+done: 2100 closed markets, 2100 events, 2100 active, 2100 histories (2100 new), 10354181 price points
