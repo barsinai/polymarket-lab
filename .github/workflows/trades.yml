@@ -1,0 +1,53 @@
+name: Phase 1b - download trades for a random market sample
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["research/collect_trades.py", ".github/workflows/trades.yml"]
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: trades
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 345
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout: |
+            research
+            data/listing
+            data/trades
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - name: Download trades (checkpoint every 30 min)
+        run: |
+          git config user.name "polymarket-lab-bot"
+          git config user.email "actions@users.noreply.github.com"
+          mkdir -p logs
+          set -o pipefail
+          python -u research/collect_trades.py --git-checkpoint 2>&1 | tee logs/trades-log.txt
+      - name: Save log
+        if: always()
+        run: |
+          git add --sparse logs/trades-log.txt data/trades || true
+          git commit -qm "Trades log [skip ci]" || true
+          for i in 1 2 3 4 5; do git pull -q --rebase origin main && git push -q && break; sleep $((RANDOM % 10 + 3)); done
+      - name: Continue if markets remain
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          left=$(cat data/trades/REMAINING 2>/dev/null || echo 0)
+          echo "remaining: $left"
+          if [ "$left" -gt 0 ]; then gh workflow run trades.yml --ref main -R ${{ github.repository }}; fi
