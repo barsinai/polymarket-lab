@@ -19,7 +19,9 @@ import json
 import os
 import sys
 import time
-from datetime import datetime, timezone
+from concurrent.futures import ThreadPoolExecutor
+from datetime import datetime, timedelta, timezone
+import random
 
 import requests
 
@@ -87,25 +89,63 @@ def read_jsonl_gz(path):
 
 
 def paginate(endpoint, params, min_volume, vol_key, cap):
+    """Simple offset pagination. Gamma refuses offsets beyond ~2,000, so this is only
+    used where a capped list is fine (active markets); see paginate_windows."""
     out, offset, page = [], 0, 100
     while len(out) < cap:
         batch = get(f"{GAMMA}/{endpoint}", {**params, "limit": page, "offset": offset})
         if not batch:
             break
-        below = 0
-        for m in batch:
-            vol = float(m.get(vol_key) or m.get("volume") or 0)
-            if vol >= min_volume:
-                out.append(m)
-            else:
-                below += 1
-        print(f"{endpoint}: offset={offset} kept={len(out)}", flush=True)
+        out += [m for m in batch if float(m.get(vol_key) or m.get("volume") or 0) >= min_volume]
         offset += page
-        # sorted by volume desc: once a whole page is below threshold we're done
-        if len(batch) < page or below == len(batch):
+        if len(batch) < page:
             break
+    print(f"{endpoint} {params.get('end_date_min', '')[:10]}..{params.get('end_date_max', '')[:10]}: "
+          f"{len(out)}", flush=True)
     return out
 
+
+def paginate_windows(endpoint, params, min_volume, vol_key, start, end, cap=2000):
+    """Walk end-date windows; split any window that hits the offset cap, so every
+    market is reached however many there are."""
+    lo, hi = start.isoformat().replace("+00:00", "Z"), end.isoformat().replace("+00:00", "Z")
+    got = paginate(endpoint, {**params, "end_date_min": lo, "end_date_max": hi},
+                   min_volume, vol_key, cap + 200)
+    # guard: if the API ignored the date filter, splitting would never converge
+    ends = [parse_ts(m.get("endDate")) for m in got if m.get("endDate")]
+    outside = sum(1 for t in ends if t < start.timestamp() - 86400 or t > end.timestamp() + 86400)
+    if ends and outside > 0.2 * len(ends):
+        print(f"  ! {endpoint}: date filter ignored ({outside}/{len(ends)} outside window)", flush=True)
+        return got
+    if len(got) >= cap and (end - start).total_seconds() > 6 * 3600:
+        mid = start + (end - start) / 2
+        return (paginate_windows(endpoint, params, min_volume, vol_key, start, mid, cap)
+                + paginate_windows(endpoint, params, min_volume, vol_key, mid, end, cap))
+    return got
+
+
+def months(since):
+    t = since
+    now = datetime.now(timezone.utc)
+    while t < now:
+        n = (t.replace(day=1) + timedelta(days=32)).replace(day=1)
+        yield t, min(n, now + timedelta(days=1))
+        t = n
+
+
+def merge_by_id(path, fresh):
+    """Never lose records because one run's listing came back short."""
+    old = {str(r.get("id")): r for r in read_jsonl_gz(path)}
+    old.update({str(r.get("id")): r for r in fresh})
+    return list(old.values())
+
+
+def slim_event(e):
+    e = dict(e)
+    e["markets"] = [{k: m.get(k) for k in ("id", "conditionId", "question", "groupItemTitle",
+                                           "negRisk", "outcomePrices", "volumeNum")}
+                    for m in e.get("markets") or []]
+    return e
 
 
 def history(token, start_ts, end_ts):
@@ -138,22 +178,30 @@ def history(token, start_ts, end_ts):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--min-volume", type=float, default=5000)
-    ap.add_argument("--max-markets", type=int, default=20000)
-    ap.add_argument("--max-new-histories", type=int, default=6000)
-    ap.add_argument("--time-budget-min", type=float, default=150)
+    ap.add_argument("--max-new-histories", type=int, default=100000)
+    ap.add_argument("--time-budget-min", type=float, default=300)
     a = ap.parse_args()
     t0 = time.time()
     os.makedirs(f"{DATA}/prices", exist_ok=True)
 
-    closed = paginate("markets", {"closed": "true", "order": "volumeNum", "ascending": "false"},
-                      a.min_volume, "volumeNum", a.max_markets)
+    since = datetime(2020, 6, 1, tzinfo=timezone.utc)
+    closed, events = [], []
+    for lo, hi in months(since):
+        closed += paginate_windows("markets", {"closed": "true", "order": "volumeNum",
+                                               "ascending": "false", "volume_num_min": a.min_volume},
+                                   a.min_volume, "volumeNum", lo, hi)
+        events += paginate_windows("events", {"closed": "true", "order": "volume",
+                                              "ascending": "false"},
+                                   a.min_volume, "volume", lo, hi)
+    closed = merge_by_id(f"{DATA}/markets_closed.jsonl.gz", closed)  # also dedupes
     write_jsonl_gz(f"{DATA}/markets_closed.jsonl.gz", closed)
-    events = paginate("events", {"closed": "true", "order": "volume", "ascending": "false"},
-                      a.min_volume, "volume", a.max_markets)
-    write_jsonl_gz(f"{DATA}/events_closed.jsonl.gz", events)
+    events = merge_by_id(f"{DATA}/events_closed.jsonl.gz", [slim_event(e) for e in events])
+    write_jsonl_gz(f"{DATA}/events_closed.jsonl.gz", [slim_event(e) for e in events])
     active = paginate("markets", {"closed": "false", "active": "true", "order": "volumeNum",
-                                  "ascending": "false"}, 0, "volumeNum", a.max_markets)
+                                  "ascending": "false"}, 0, "volumeNum", 2000)
     write_jsonl_gz(f"{DATA}/markets_active.jsonl.gz", active)
+    print(f"listing: {len(closed)} closed markets, {len(events)} closed events, "
+          f"{len(active)} active", flush=True)
 
     # existing histories, by shard
     shards, have = {}, set()
@@ -164,39 +212,51 @@ def main():
             have.update(r["market_id"] for r in rows)
     print(f"{len(have)} market histories already saved", flush=True)
 
-    new = 0
-    for i, m in enumerate(closed):
-        mid = str(m.get("id"))
-        if mid in have:
-            continue
-        if new >= a.max_new_histories or (time.time() - t0) / 60 > a.time_budget_min:
-            print("budget reached; re-run to continue", flush=True)
-            break
+    # Random order (fixed seed) so every partial run is an unbiased sample across
+    # volume tiers, not just the biggest markets.
+    todo = [m for m in closed if str(m.get("id")) not in have]
+    random.Random(42).shuffle(todo)
+    print(f"{len(todo)} histories still to fetch", flush=True)
+
+    def fetch(m):
         close = parse_ts(m.get("closedTime")) or parse_ts(m.get("endDate"))
         start = parse_ts(m.get("startDate")) or parse_ts(m.get("createdAt"))
-        tokens = as_list(m.get("clobTokenIds"))
+        tokens, outcomes = as_list(m.get("clobTokenIds")), as_list(m.get("outcomes"))
         if not tokens or not close:
-            continue
-        outcomes = as_list(m.get("outcomes"))
-        row = {"market_id": mid, "close_ts": close, "tokens": []}
-        for j, tok in enumerate(tokens):
-            row["tokens"].append({"token": tok, "outcome": outcomes[j] if j < len(outcomes) else None,
-                                  "history": history(tok, start, close)})
-            time.sleep(0.05)
-        shard = datetime.fromtimestamp(close, timezone.utc).strftime("%Y-%m") + ".jsonl.gz"
-        shards.setdefault(shard, []).append(row)
-        have.add(mid); new += 1
-        if new % 25 == 0:
-            print(f"histories: {new} new ({i}/{len(closed)} scanned, "
-                  f"{(time.time()-t0)/60:.0f} min)", flush=True)
+            return None
+        # binary: second token is the mirror of the first, so fetch one (halves the time)
+        idx = [0] if len(tokens) == 2 else range(len(tokens))
+        row = {"market_id": str(m.get("id")), "close_ts": close, "tokens": []}
+        for j in idx:
+            row["tokens"].append({"token": tokens[j], "outcome": outcomes[j] if j < len(outcomes) else None,
+                                  "history": history(tokens[j], start, close)})
+        return row
+
+    new, step = 0, 200
+    with ThreadPoolExecutor(max_workers=4) as pool:
+        for k in range(0, min(len(todo), a.max_new_histories), step):
+            if (time.time() - t0) / 60 > a.time_budget_min:
+                print("budget reached; re-run to continue", flush=True)
+                break
+            for row in pool.map(fetch, todo[k:k + step]):
+                if not row:
+                    continue
+                shard = datetime.fromtimestamp(row["close_ts"], timezone.utc).strftime("%Y-%m") + ".jsonl.gz"
+                shards.setdefault(shard, []).append(row)
+                have.add(row["market_id"]); new += 1
+            print(f"histories: {new} new, {len(todo) - k - step} left, "
+                  f"{(time.time()-t0)/60:.0f} min", flush=True)
             for fn, rows in shards.items():  # checkpoint
                 write_jsonl_gz(f"{DATA}/prices/{fn}", rows)
+    remaining = len([m for m in closed if str(m.get("id")) not in have])
+    with open(f"{DATA}/REMAINING", "w") as f:
+        f.write(str(remaining))
 
     for fn, rows in shards.items():
         write_jsonl_gz(f"{DATA}/prices/{fn}", rows)
     pts = sum(len(t["history"]) for rows in shards.values() for r in rows for t in r["tokens"])
     print(f"done: {len(closed)} closed markets, {len(events)} events, {len(active)} active, "
-          f"{len(have)} histories ({new} new), {pts} price points", flush=True)
+          f"{len(have)} histories ({new} new, {remaining} remaining), {pts} price points", flush=True)
 
 
 if __name__ == "__main__":
