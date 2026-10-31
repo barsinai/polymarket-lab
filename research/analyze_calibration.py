@@ -29,6 +29,20 @@ def read_jsonl_gz(path):
         return [json.loads(line) for line in f if line.strip()]
 
 
+def all_closed_markets():
+    """Closed markets from data/listing/ (full listing) plus the first run's file, deduped."""
+    seen = set()
+    paths = [os.path.join(f"{DATA}/listing", f) for f in sorted(os.listdir(f"{DATA}/listing"))
+             if f.endswith(".jsonl.gz")] if os.path.isdir(f"{DATA}/listing") else []
+    paths.append(f"{DATA}/markets_closed.jsonl.gz")
+    for path in paths:
+        if os.path.exists(path):
+            for m in read_jsonl_gz(path):
+                if str(m.get("id")) not in seen:
+                    seen.add(str(m.get("id")))
+                    yield m
+
+
 def as_list(v):
     if isinstance(v, list):
         return v
@@ -57,7 +71,7 @@ def bucket_of(p):
 
 def load(min_volume):
     meta = {}
-    for m in read_jsonl_gz(f"{DATA}/markets_closed.jsonl.gz"):
+    for m in all_closed_markets():
         prices, outcomes = as_list(m.get("outcomePrices")), as_list(m.get("outcomes"))
         if len(prices) != 2 or len(outcomes) != 2:
             continue

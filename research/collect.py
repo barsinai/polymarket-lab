@@ -1,8 +1,10 @@
 """Download raw Polymarket data and save it to data/ so analysis can run offline.
 
 Saves, untouched, everything the public APIs return:
-  data/markets_closed.jsonl.gz   every closed market above --min-volume (all fields, all
-                                 market types, not just binary)
+  data/listing/YYYY-MM.jsonl.gz  every closed market above --min-volume, by month of its
+                                 end date (all market types; image URLs and the embedded event
+                                 copy trimmed). data/markets_closed.jsonl.gz is the original
+                                 top-2,100 sample from the first run.
   data/events_closed.jsonl.gz    closed events (groups of related markets)
   data/markets_active.jsonl.gz   snapshot of currently open markets
   data/prices/**.jsonl.gz        full price history of every outcome token. New histories
@@ -143,6 +145,16 @@ def merge_by_id(path, fresh):
     return list(old.values())
 
 
+def slim_market(m):
+    """Market record minus bulk: the embedded event copy (over half the size) is cut to
+    its identity, and image URLs are dropped. Everything else is kept as returned."""
+    m = {k: v for k, v in m.items() if k not in ("image", "icon")}
+    m["events"] = [{k: e.get(k) for k in ("id", "ticker", "slug", "title", "negRisk", "startDate",
+                                          "endDate", "volume")}
+                   for e in m.get("events") or []]
+    return m
+
+
 def slim_event(e):
     e = dict(e)
     e["markets"] = [{k: m.get(k) for k in ("id", "conditionId", "question", "groupItemTitle",
@@ -227,11 +239,11 @@ def list_markets(a, ckpt):
         path = f"{DATA}/listing/{lo:%Y-%m}.jsonl.gz"
         final = (now - hi).days > 60
         if final and os.path.exists(path):
-            closed += read_jsonl_gz(path)
+            closed += [slim_market(m) for m in read_jsonl_gz(path)]
             continue
         got = paginate_windows("markets", {"closed": "true", "order": "volumeNum",
                                            "ascending": "false", "volume_num_min": a.min_volume},
-                               a.min_volume, "volumeNum", lo, hi)
+                               a.min_volume, "volumeNum", lo, hi, fn=slim_market)
         write_jsonl_gz(path, got)
         closed += got
         log(f"listed {lo:%Y-%m}: {len(got)} markets (total {len(closed)})")
@@ -287,8 +299,7 @@ def main():
         if a.git_checkpoint and time.time() - last["t"] > every_min * 60:
             git_checkpoint(msg); last["t"] = time.time()
 
-    closed = list_markets(a, ckpt)
-    write_jsonl_gz(f"{DATA}/markets_closed.jsonl.gz", closed)
+    closed = list_markets(a, ckpt)  # stored per month in data/listing/ (one file would pass 100 MB)
     if a.git_checkpoint:
         git_checkpoint(f"Market listing {run}"); last["t"] = time.time()
 

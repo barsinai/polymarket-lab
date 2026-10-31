@@ -71,7 +71,19 @@ def bootstrap(groups, stat, n=2000):
 # ---------------------------------------------------------------- load
 events = {str(e["id"]): e for e in jl(f"{DATA}/events_closed.jsonl.gz")}
 markets = {}
-for m in jl(f"{DATA}/markets_closed.jsonl.gz"):
+def all_closed():
+    seen = set()
+    paths = sorted(os.path.join(f"{DATA}/listing", f) for f in os.listdir(f"{DATA}/listing")
+                   if f.endswith(".jsonl.gz")) if os.path.isdir(f"{DATA}/listing") else []
+    for path in paths + [f"{DATA}/markets_closed.jsonl.gz"]:
+        if os.path.exists(path):
+            for m in jl(path):
+                if str(m.get("id")) not in seen:
+                    seen.add(str(m.get("id")))
+                    yield m
+
+
+for m in all_closed():
     prices, outs = as_list(m.get("outcomePrices")), as_list(m.get("outcomes"))
     if len(prices) != 2 or len(outs) != 2:
         continue
