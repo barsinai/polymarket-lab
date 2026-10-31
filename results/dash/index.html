@@ -1,0 +1,442 @@
+<meta name="dash-one-writer">
+<style>
+#dash-root { --dash-gutter: var(--cds-pad-lg); }
+.pl { font-family: var(--font-anthropic-sans); color: var(--color-fg); max-width: 1180px; margin-inline: auto; }
+.pl h1 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0 0 var(--cds-gap-xs); }
+.pl h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: var(--cds-gap-xl) 0 var(--cds-gap-xs); }
+.pl h3 { font-size: var(--cds-font-size-body); font-weight: var(--cds-font-weight-medium); margin: 0 0 var(--cds-gap-xs); }
+.pl p { margin: 0 0 var(--cds-gap-sm); line-height: 1.5; max-width: 72ch; }
+.pl .lede { font-size: var(--cds-font-size-body); color: var(--color-fg-muted); }
+.pl .note { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: 0 0 var(--cds-gap-sm); }
+.pl b { font-weight: 600; font-variant-numeric: tabular-nums; }
+.pl .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr)); gap: var(--cds-gap-md); margin: var(--cds-gap-lg) 0; }
+.pl .tile { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-md); }
+.pl .tile .big { font-family: var(--font-anthropic-serif); font-size: var(--cds-font-size-title); font-weight: 400; display: block; font-variant-numeric: tabular-nums; }
+.pl .tile .lab { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.pl .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr)); gap: var(--cds-gap-md); }
+.pl .card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); min-width: 0; }
+.pl .chart { position: relative; min-height: 260px; }
+.pl .chart.tall { min-height: 320px; }
+.pl .tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); white-space: nowrap; z-index: 2; }
+.pl .tip .t1 { color: var(--cds-text-secondary); }
+.pl .legend { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin-bottom: var(--cds-gap-xs); }
+.pl .legend span { display: inline-flex; align-items: center; gap: 6px; }
+.pl .sw { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+.pl .sw.ring { background: transparent; border: 2px solid var(--color-fg-muted); border-radius: 50%; width: 8px; height: 8px; }
+.pl .sw.dot { border-radius: 50%; }
+.pl .sw.line { height: 2px; width: 14px; }
+.pl .tabs { display: flex; flex-wrap: wrap; gap: var(--cds-gap-xs); margin-bottom: var(--cds-gap-sm); }
+.pl select { font: inherit; font-size: var(--cds-font-size-caption); padding: 4px 8px; border-radius: var(--cds-radius); border: 1px solid var(--color-border-line); background: var(--color-bg); color: var(--color-fg); }
+.pl .tablebox { max-height: 420px; overflow: auto; }
+.pl table { width: 100%; border-collapse: collapse; font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
+.pl th { text-align: left; font-weight: var(--cds-font-weight-medium); color: var(--color-fg-muted); position: sticky; top: 0; background: var(--color-panel); padding: 6px 8px; border-bottom: 1px solid var(--color-border-line); }
+.pl td { padding: 6px 8px; border-bottom: 1px solid var(--color-border-line); vertical-align: top; }
+.pl td.num, .pl th.num { text-align: right; }
+.pl .verdict { border-left: 3px solid var(--color-border-line); padding-left: var(--cds-pad-md); margin: var(--cds-gap-sm) 0; }
+.pl .verdict.go { border-color: var(--color-ok); }
+.pl .verdict.maybe { border-color: var(--color-warn); }
+.pl .verdict.no { border-color: var(--color-bad); }
+.pl ul { margin: 0 0 var(--cds-gap-sm); padding-left: 1.2em; line-height: 1.5; max-width: 72ch; }
+.pl svg text { font-family: var(--font-anthropic-sans); fill: var(--color-fg-muted); font-size: 11px; }
+.pl svg .lbl { fill: var(--color-fg); }
+[data-dash-source-state=empty] { color: transparent; }
+[data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+</style>
+
+<div class="pl">
+  <h1 id="top">Polymarket lab: first research findings</h1>
+  <p class="lede">Based on <b data-draw="n" data-source="overview" data-field="markets" data-row="0" data-fmt="int">—</b> of the largest resolved yes/no markets, plus <b data-draw="n" data-source="overview" data-field="book_snapshots" data-row="0" data-fmt="int">—</b> live order book snapshots recorded today. Two leads are worth testing further, two ideas look dead, and one big caveat hangs over everything: so far we have only looked at the very biggest markets.</p>
+
+  <div class="tiles">
+    <div class="tile"><span class="big" data-draw="n" data-source="overview" data-field="markets" data-row="0" data-fmt="int">—</span><span class="lab">resolved markets analyzed</span></div>
+    <div class="tile"><span class="big" data-draw="n" data-source="overview" data-field="events" data-row="0" data-fmt="int">—</span><span class="lab">distinct events</span></div>
+    <div class="tile"><span class="big" data-draw="n" data-source="overview" data-field="total_volume" data-row="0" data-fmt="usd">—</span><span class="lab">total traded in these markets</span></div>
+    <div class="tile"><span class="big" data-draw="n" data-source="overview" data-field="price_points" data-row="0" data-fmt="compact">—</span><span class="lab">hourly prices</span></div>
+    <div class="tile"><span class="big" data-draw="n" data-source="overview" data-field="min_volume" data-row="0" data-fmt="usd">—</span><span class="lab">smallest market in the sample</span></div>
+  </div>
+
+  <h2 id="verdicts">Where we stand</h2>
+  <div class="verdict maybe"><p><b>Lead 1, "it will happen by &lt;date&gt;" questions:</b> in the past, these resolved Yes more often than their price said, by <b data-draw="n" data-source="yes_bias" data-field="underpriced" data-where="group=%22…by %3Cdate%3E?%22 questions" data-fmt="cents">—</b> on average. Strongest in geopolitics. Could be a real bias, or an artifact of which markets we sampled (below).</p></div>
+  <div class="verdict maybe"><p><b>Lead 2, overreaction:</b> after a side jumped 5–15¢ in a day, it was then overpriced by <b data-draw="n" data-source="momentum" data-field="mispricing" data-where="move=rose 5-15c" data-fmt="cents-abs">—</b> on average; after a 5–15¢ drop, underpriced by about as much. That is small, but larger than the cost of trading a mid-priced market (about <b data-draw="n" data-source="book_costs" data-field="cost_1000" data-where="band=40-60c" data-fmt="pct1">—</b> of the price to buy $1,000).</p></div>
+  <div class="verdict no"><p><b>Dead, at least for now: buying near-certain favorites</b> (90–99¢) and holding to the end. Gains of a cent or two per bet are wiped out by the occasional shock loss of the whole stake. <b>Also no edge in sports</b>, the biggest category: prices there were accurate.</p></div>
+  <div class="verdict no"><p><b>The caveat:</b> every market here traded at least <b data-draw="n" data-source="overview" data-field="min_volume" data-row="0" data-fmt="usd">—</b>. Markets where something dramatic happens attract huge trading, so they are over-represented in a "biggest markets" sample, which flatters exactly the bets that won. The full download now running covers smaller markets in random order; both leads have to survive that test.</p></div>
+
+  <h2 id="accuracy">1. How accurate are Polymarket prices?</h2>
+  <p>Quite accurate overall. If prices were perfect, every dot below would sit on the diagonal: things priced at 30¢ would happen 30% of the time. The dots stay close to it, with two exceptions: cheap outcomes (5–20¢) happened more often than priced, and favorites (80–95¢) less often. Those are two sides of the same coin.</p>
+  <div class="grid">
+    <div class="card">
+      <h3>Price vs how often it actually happened</h3>
+      <p class="note">Each dot is one price range. Bars show the 95% range of uncertainty. Diagonal = perfectly accurate.</p>
+      <div class="legend"><span><i class="sw dot" data-sw="0"></i>1 day before close</span><span><i class="sw dot" data-sw="1"></i>7 days before</span><span><i class="sw dot" data-sw="2"></i>30 days before</span></div>
+      <div class="chart tall dash-skeleton" data-draw="calib" data-source="calibration"></div>
+    </div>
+    <div class="card">
+      <h3>How often the favorite won, by time left</h3>
+      <p class="note">The side priced above 50¢ at that moment. Even a day out, the favorite won only <b data-draw="n" data-source="accuracy" data-field="favorite_won" data-where="label=24h" data-fmt="pct0">—</b> of the time.</p>
+      <div class="chart tall dash-skeleton" data-draw="acc" data-source="accuracy"></div>
+    </div>
+  </div>
+
+  <h2 id="underdogs">2. Cheap outcomes won more often than priced</h2>
+  <p>Seven days before close, outcomes priced 5–20¢ (<b data-draw="n" data-source="underdog" data-field="avg_price" data-row="0" data-fmt="pct1">—</b> on average) actually happened <b data-draw="n" data-source="underdog" data-field="win_rate" data-row="0" data-fmt="pct1">—</b> of the time, across <b data-draw="n" data-source="underdog" data-field="events" data-row="0" data-fmt="int">—</b> different events. Before trading costs, buying all of them would have returned <b data-draw="n" data-source="underdog" data-field="roi" data-row="0" data-fmt="pct0s">—</b> on the money staked. Use the menu to see where the effect lives. It is concentrated in geopolitics and "by &lt;date&gt;" questions, it is absent in sports, and it does not grow with market size.</p>
+  <div class="card">
+    <div class="tabs"><select data-draw="udsel" data-source="underdog" aria-label="Break down by"></select></div>
+    <div class="legend"><span><i class="sw ring"></i>Price paid (what the market said)</span><span><i class="sw dot" data-sw="0"></i>How often it actually happened, with 95% range</span></div>
+    <div class="chart dash-skeleton" data-draw="ud" data-source="underdog"></div>
+    <p class="note">Ranges come from re-sampling whole events, since markets in one event move together. A dot to the right of its ring means the outcome was underpriced.</p>
+  </div>
+
+  <h2 id="yes">3. "Yes, it will happen" was underpriced, especially for "by &lt;date&gt;" questions</h2>
+  <p>Another view of the same pattern: across Yes/No markets, how far "Yes" was underpriced 7 days before close. Questions like "Will X happen by March 31?" stand out, as does geopolitics. Common wisdom on Polymarket is the opposite ("bet No, things rarely happen"), which is why I suspect our sample: when the thing <i>does</i> happen, trading explodes and the market lands in our top-volume list. For example, "Khamenei out as Supreme Leader by Feb 28?" traded at a few cents a week before, then resolved Yes and became one of the most-traded markets of the year.</p>
+  <div class="card">
+    <h3>How much "Yes" was underpriced, 7 days before close</h3>
+    <p class="note">In cents per $1 contract. Zero = priced right. Bars show the 95% range.</p>
+    <div class="chart dash-skeleton" data-draw="yes" data-source="yes_bias"></div>
+  </div>
+
+  <h2 id="moves">4. Big daily moves partly reverse</h2>
+  <p>For every market and every day in its last month, I compared the price move over the previous 24 hours with how the market later resolved. Sides that just rose 5–15¢ ended up slightly overpriced, and sides that just fell were slightly underpriced: a mild overreaction. Very large moves (&gt;15¢) did not reverse, which suggests those were real news.</p>
+  <div class="card">
+    <h3>Mispricing after a move in the previous 24 hours</h3>
+    <p class="note">Positive = the side was underpriced after the move (it later did better than its price). In cents. Bars show the 95% range.</p>
+    <div class="chart dash-skeleton" data-draw="mom" data-source="momentum"></div>
+  </div>
+
+  <h2 id="favorites">5. Buying near-certain favorites doesn't pay</h2>
+  <p>Buying the side priced 90–99¢ and waiting to collect $1 sounds safe. In these markets, the rare upsets cost more than the small gains brought in. Seven days out it lost about <b data-draw="n" data-source="favorites" data-field="roi" data-where="horizon=7d" data-fmt="pct1abs">—</b> per bet; closer to the end it roughly breaks even, before costs.</p>
+  <div class="grid">
+    <div class="card">
+      <h3>Return per bet on 90–99¢ favorites</h3>
+      <p class="note">Before trading costs. Bars show the 95% range.</p>
+      <div class="chart dash-skeleton" data-draw="fav" data-source="favorites"></div>
+    </div>
+    <div class="card">
+      <h3>Favorites priced 90¢+ a week out that lost</h3>
+      <p class="note">The largest upsets in the sample, as recorded on Polymarket.</p>
+      <div class="tablebox">
+        <table data-source="upsets" data-row-key="question">
+          <thead><tr><th data-field="question">Market</th><th data-field="favorite">Favorite</th><th class="num" data-field="favorite_price_7d">Price 7d out</th><th class="num" data-field="volume">Traded</th></tr></thead>
+          <tbody data-draw="upsets"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <h2 id="costs">6. What it costs to trade (from today's live order books)</h2>
+  <p>Polymarket charges little or no fee on most markets; the real cost is the gap between buying and selling prices, plus pushing the price as you buy. In the middle of the range it costs about <b data-draw="n" data-source="book_costs" data-field="cost_1000" data-where="band=40-60c" data-fmt="pct1">—</b> to buy $1,000. For cheap 5–20¢ contracts, where Lead 1 lives, it costs about <b data-draw="n" data-source="book_costs" data-field="cost_1000" data-where="band=5-20c" data-fmt="pct1">—</b>, and for anything under 5¢ about <b data-draw="n" data-source="book_costs" data-field="cost_1000" data-where="band=1-5c" data-fmt="pct0">—</b>, which is prohibitive. None of the returns above include these costs, so they come off every number shown.</p>
+  <div class="card">
+    <h3>Cost of buying, as % of the mid price</h3>
+    <p class="note">Median across <b data-draw="n" data-source="overview" data-field="book_snapshots" data-row="0" data-fmt="int">—</b> snapshots taken Oct 31. "Room for $10k" = share of books deep enough to absorb a $10,000 buy within 20¢ of the best price.</p>
+    <div class="tablebox">
+      <table data-source="book_costs" data-row-key="band">
+        <thead><tr><th data-field="band">Price range</th><th class="num" data-field="spread_pct">Buy/sell gap</th><th class="num" data-field="cost_100">Buy $100</th><th class="num" data-field="cost_1000">Buy $1,000</th><th class="num" data-field="cost_10000">Buy $10,000</th><th class="num" data-field="fillable_10000">Room for $10k</th></tr></thead>
+        <tbody data-draw="costs"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <h2 id="multi">7. Multi-outcome markets: do the prices add up?</h2>
+  <p>In a market like "Who will win the election?", exactly one outcome pays $1, so buying every "Yes" should cost about $1. If it costs less, that's risk-free profit. In today's snapshot, <b data-draw="n" data-source="overview" data-field="multi_ask_below" data-row="0" data-fmt="int">—</b> of <b data-draw="n" data-source="overview" data-field="multi_complete_events" data-row="0" data-fmt="int">—</b> events summed to under $1, but only by a few cents, and most likely because cheap outcomes outside our snapshot are missing. Not a finding yet: it needs complete outcome lists and live depth, which is cheap to add to the recorder.</p>
+  <div class="card">
+    <h3>Cost to buy one of every outcome, today</h3>
+    <p class="note">Sum of the best asking prices across an event's outcomes. Only events whose outcomes all appear in our snapshot of the top 2,000 open markets.</p>
+    <div class="tablebox">
+      <table data-source="multi_outcome" data-row-key="event">
+        <thead><tr><th data-field="event">Event</th><th class="num" data-field="outcomes">Outcomes</th><th class="num" data-field="sum_best_ask">Cost to buy all</th><th class="num" data-field="sum_best_bid">Value if sold all</th></tr></thead>
+        <tbody data-draw="multi"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <h2 id="more">Other facts worth knowing</h2>
+  <ul>
+    <li><b data-draw="n" data-source="overview" data-field="comeback_10c" data-row="0" data-fmt="pct1">—</b> of eventual winners traded at 10¢ or less at some point in their final month, and <b data-draw="n" data-source="overview" data-field="comeback_20c" data-row="0" data-fmt="pct1">—</b> at 20¢ or less. Comebacks are common.</li>
+    <li><b data-draw="n" data-source="overview" data-field="closed_early_share" data-row="0" data-fmt="pct0">—</b> of markets closed before their scheduled end date, because the thing happened early. Any "hold until the end" strategy has to plan for money being tied up for an unknown time.</li>
+    <li>The typical market in this sample stayed open for <b data-draw="n" data-source="overview" data-field="median_duration_days" data-row="0" data-fmt="int">—</b> days. The typical buy/sell gap today is <b data-draw="n" data-source="overview" data-field="median_spread_cents" data-row="0" data-fmt="c1">—</b>.</li>
+  </ul>
+  <div class="card">
+    <h3>What's in the sample, by topic</h3>
+    <p class="note">Number of resolved markets analyzed. Topic comes from Polymarket's own tags.</p>
+    <div class="chart dash-skeleton" data-draw="cats" data-source="categories"></div>
+  </div>
+
+  <h2 id="next">What happens next</h2>
+  <ul>
+    <li><b>The decisive test:</b> rerun every chart here on the full set of markets above $5k, including small ones, once the download finishes. If both leads survive, I'll design a simulated strategy for each.</li>
+    <li><b>Costs built in:</b> rerun the underdog and overreaction tests at the prices you could actually have bought at, using the order books we're recording.</li>
+    <li><b>A proper "do prices add up?" check:</b> extend the recorder to capture every outcome of the multi-outcome events it watches.</li>
+  </ul>
+  <p class="note">All figures are before trading costs unless labelled. Prices are Polymarket's hourly price history; "won" is the official resolution. Uncertainty ranges resample whole events. Code and raw data: the polymarket-lab repository on GitHub.</p>
+</div>
+
+<script>
+(() => {
+  const F = {
+    int: d3.format(','), pct0: d3.format('.0%'), pct1: d3.format('.1%'),
+    pct0s: (v) => (v >= 0 ? '+' : '') + d3.format('.0%')(v),
+    pct1abs: (v) => d3.format('.1%')(Math.abs(v)),
+    cents: (v) => d3.format('.1f')(v * 100) + '¢',
+    'cents-abs': (v) => d3.format('.1f')(Math.abs(v) * 100) + '¢',
+    c1: (v) => d3.format('.1f')(v) + '¢',
+    compact: (v) => new Intl.NumberFormat('en', {notation: 'compact', maximumFractionDigits: 1}).format(v),
+    usd: (v) => '$' + new Intl.NumberFormat('en', {notation: 'compact', maximumFractionDigits: 1}).format(v),
+  };
+  window.plF = F;
+
+  const pick = (el, rows) => {
+    if (el.dataset.row != null) return rows[+el.dataset.row];
+    if (el.dataset.where) {
+      const conds = el.dataset.where.split('&').map((kv) => kv.split('=').map(decodeURIComponent));
+      return rows.find((r) => conds.every(([k, v]) => String(r[k]) === v));
+    }
+    return rows[0];
+  };
+  dash.draw('n', (el) => {
+    const d = dash.data(el.dataset.source);
+    if (d.status !== 'ok') { el.textContent = '—'; return; }
+    const r = pick(el, d.data);
+    const v = r ? Number(r[el.dataset.field]) : NaN;
+    el.textContent = Number.isFinite(v) ? (F[el.dataset.fmt] || F.int)(v) : '—';
+  });
+
+  // swatches take the series colors
+  document.querySelectorAll('[data-sw]').forEach((s) => { s.style.background = dash.colors[+s.dataset.sw]; });
+
+  // ---------- shared helpers
+  const tipFor = (el) => {
+    const t = document.createElement('div'); t.className = 'tip'; t.style.display = 'none'; el.appendChild(t); return t;
+  };
+  const showTip = (el, tip, ev, title, lines) => {
+    tip.replaceChildren();
+    const a = document.createElement('div'); a.className = 't1'; a.textContent = title; tip.appendChild(a);
+    lines.forEach((l) => { const b = document.createElement('div'); b.textContent = l; tip.appendChild(b); });
+    tip.style.display = 'block';
+    const box = el.getBoundingClientRect();
+    let x = ev.clientX - box.left + 12, y = ev.clientY - box.top + 12;
+    const w = tip.offsetWidth, h = tip.offsetHeight;
+    if (x + w > box.width) x = Math.max(0, ev.clientX - box.left - w - 12);
+    if (y + h > box.height) y = Math.max(0, ev.clientY - box.top - h - 12);
+    tip.style.left = x + 'px'; tip.style.top = y + 'px';
+  };
+  const hideTip = (tip) => { tip.style.display = 'none'; };
+  const clean = (g) => g.attr('font-size', null).attr('font-family', null);
+  const measure = (svg, texts) => {
+    const t = svg.append('text').attr('font-size', 11);
+    let m = 0; texts.forEach((s) => { t.text(s); m = Math.max(m, t.node().getComputedTextLength()); });
+    t.remove(); return m;
+  };
+
+  // Horizontal interval chart: one row per item, a dot with a 95% whisker, optional ring for a reference value.
+  window.plInterval = (el, rows, o) => {
+    el.replaceChildren();
+    const W = el.clientWidth || 600, rowH = 30, top = 24, bottom = 8;
+    const H = top + rows.length * rowH + bottom;
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+    const labW = Math.min(W * 0.42, measure(svg, rows.map(o.label)) + 12);
+    const vals = rows.flatMap((r) => [o.lo(r), o.hi(r), o.ref ? o.ref(r) : o.zero ?? 0]).filter(Number.isFinite);
+    let [mn, mx] = d3.extent(vals.concat(o.zero != null ? [o.zero] : []));
+    const pad = (mx - mn) * 0.06; mn -= pad; mx += pad;
+    if (o.floor0) mn = Math.max(0, mn);
+    const x = d3.scaleLinear([mn, mx], [labW, W - 16]).nice();
+    const y = (i) => top + i * rowH + rowH / 2;
+    svg.append('g').selectAll('line').data(x.ticks(5)).join('line')
+      .attr('x1', (d) => x(d)).attr('x2', (d) => x(d)).attr('y1', top - 6).attr('y2', H - bottom)
+      .attr('stroke', 'var(--cds-chart-grid)');
+    svg.append('g').selectAll('text').data(x.ticks(5)).join('text')
+      .attr('x', (d) => x(d)).attr('y', top - 10).attr('text-anchor', 'middle').text(o.tick);
+    if (o.zero != null) svg.append('line').attr('x1', x(o.zero)).attr('x2', x(o.zero)).attr('y1', top - 6).attr('y2', H - bottom)
+      .attr('stroke', 'var(--cds-chart-reference)').attr('stroke-dasharray', '4 3');
+    const g = svg.append('g').selectAll('g').data(rows).join('g');
+    g.append('text').attr('class', 'lbl').attr('x', labW - 10).attr('y', (d, i) => y(i) + 4).attr('text-anchor', 'end').text(o.label);
+    g.append('line').attr('x1', (d) => x(o.lo(d))).attr('x2', (d) => x(o.hi(d))).attr('y1', (d, i) => y(i)).attr('y2', (d, i) => y(i))
+      .attr('stroke', (d) => o.color ? o.color(d) : dash.colors[0]).attr('stroke-width', 2).attr('stroke-linecap', 'round').attr('opacity', 0.55);
+    if (o.ref) g.append('circle').attr('cx', (d) => x(o.ref(d))).attr('cy', (d, i) => y(i)).attr('r', 5)
+      .attr('fill', 'var(--color-panel)').attr('stroke', 'var(--color-fg-muted)').attr('stroke-width', 2);
+    g.append('circle').attr('cx', (d) => x(o.val(d))).attr('cy', (d, i) => y(i)).attr('r', 5)
+      .attr('fill', (d) => o.color ? o.color(d) : dash.colors[0]).attr('stroke', 'var(--color-panel)').attr('stroke-width', 2);
+    const tip = tipFor(el);
+    g.append('rect').attr('x', 0).attr('width', W).attr('y', (d, i) => y(i) - rowH / 2).attr('height', rowH).attr('fill', 'transparent')
+      .on('mousemove', (ev, d) => showTip(el, tip, ev, o.label(d), o.tip(d))).on('mouseleave', () => hideTip(tip));
+  };
+  window.plTip = {tipFor, showTip, hideTip, clean, measure};
+})();
+</script>
+
+<script>
+(() => {
+  const F = window.plF, T = window.plTip;
+  const hz = ['1 day', '7 days', '30 days'];
+  dash.draw('calib', (el) => {
+    const d = dash.data('calibration');
+    el.replaceChildren();
+    if (d.status !== 'ok') { el.textContent = ''; return; }
+    el.classList.remove('dash-skeleton');
+    const rows = d.data.map((r) => ({...r, price: +r.price, won: +r.won, lo: +r.lo, hi: +r.hi, n: +r.n}));
+    const W = el.clientWidth || 500, H = 320, m = {l: 40, r: 12, t: 8, b: 34};
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+    const x = d3.scaleLinear([0, 1], [m.l, W - m.r]), y = d3.scaleLinear([0, 1], [H - m.b, m.t]);
+    svg.append('g').selectAll('line').data(y.ticks(5)).join('line').attr('x1', m.l).attr('x2', W - m.r)
+      .attr('y1', y).attr('y2', y).attr('stroke', 'var(--cds-chart-grid)');
+    T.clean(svg.append('g').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).ticks(5).tickFormat(d3.format('.0%')).tickSize(0).tickPadding(8)))
+      .call((g) => g.select('.domain').attr('stroke', 'var(--cds-chart-axis)'));
+    T.clean(svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(5).tickFormat(d3.format('.0%')).tickSize(0).tickPadding(6)))
+      .call((g) => g.select('.domain').remove());
+    svg.append('text').attr('x', W - m.r).attr('y', H - 4).attr('text-anchor', 'end').text('Price (what the market said)');
+    svg.append('text').attr('x', m.l + 4).attr('y', m.t + 10).text('How often it happened');
+    svg.append('line').attr('x1', x(0)).attr('y1', y(0)).attr('x2', x(1)).attr('y2', y(1))
+      .attr('stroke', 'var(--cds-chart-reference)').attr('stroke-dasharray', '4 3');
+    const tip = T.tipFor(el);
+    hz.forEach((h, i) => {
+      const s = rows.filter((r) => r.horizon === h).sort((a, b) => a.price - b.price);
+      const off = (i - 1) * 4;
+      svg.append('path').datum(s).attr('fill', 'none').attr('stroke', dash.colors[i]).attr('stroke-width', 1.5).attr('opacity', 0.5)
+        .attr('d', d3.line().x((r) => x(r.price) + off).y((r) => y(r.won)));
+      const g = svg.append('g').selectAll('g').data(s).join('g');
+      g.append('line').attr('x1', (r) => x(r.price) + off).attr('x2', (r) => x(r.price) + off).attr('y1', (r) => y(r.lo)).attr('y2', (r) => y(r.hi))
+        .attr('stroke', dash.colors[i]).attr('stroke-width', 2).attr('opacity', 0.45).attr('stroke-linecap', 'round');
+      g.append('circle').attr('cx', (r) => x(r.price) + off).attr('cy', (r) => y(r.won)).attr('r', 4)
+        .attr('fill', dash.colors[i]).attr('stroke', 'var(--color-panel)').attr('stroke-width', 2);
+      g.append('circle').attr('cx', (r) => x(r.price) + off).attr('cy', (r) => y(r.won)).attr('r', 12).attr('fill', 'transparent')
+        .on('mousemove', (ev, r) => T.showTip(el, tip, ev, `${r.bucket}, ${h} before close`,
+          [`Average price ${F.pct1(r.price)}`, `Happened ${F.pct1(r.won)} (95% range ${F.pct0(r.lo)}–${F.pct0(r.hi)})`, `${F.int(r.n)} outcomes`]))
+        .on('mouseleave', () => T.hideTip(tip));
+    });
+  });
+
+  dash.draw('acc', (el) => {
+    const d = dash.data('accuracy');
+    el.replaceChildren();
+    if (d.status !== 'ok') return;
+    el.classList.remove('dash-skeleton');
+    const rows = d.data.map((r) => ({...r, hours: +r.hours, favorite_won: +r.favorite_won, n: +r.n}));
+    const W = el.clientWidth || 500, H = 320, m = {l: 40, r: 16, t: 12, b: 34};
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+    const x = d3.scalePoint(rows.map((r) => r.label), [m.l + 8, W - m.r - 8]);
+    const y = d3.scaleLinear([0.8, 1], [H - m.b, m.t]);
+    svg.append('g').selectAll('line').data(y.ticks(4)).join('line').attr('x1', m.l).attr('x2', W - m.r)
+      .attr('y1', y).attr('y2', y).attr('stroke', 'var(--cds-chart-grid)');
+    const every = W < 420 ? 2 : 1;
+    T.clean(svg.append('g').attr('transform', `translate(0,${H - m.b})`)
+      .call(d3.axisBottom(x).tickSize(0).tickPadding(8).tickFormat((t, i) => (i % every ? '' : t))))
+      .call((g) => g.select('.domain').attr('stroke', 'var(--cds-chart-axis)'));
+    T.clean(svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(4).tickFormat(d3.format('.0%')).tickSize(0).tickPadding(6)))
+      .call((g) => g.select('.domain').remove());
+    svg.append('text').attr('x', W - m.r).attr('y', H - 4).attr('text-anchor', 'end').text('Time left before the market closed');
+    svg.append('path').datum(rows).attr('fill', 'none').attr('stroke', dash.colors[0]).attr('stroke-width', 2)
+      .attr('stroke-linejoin', 'round').attr('stroke-linecap', 'round').attr('d', d3.line().x((r) => x(r.label)).y((r) => y(r.favorite_won)));
+    const tip = T.tipFor(el);
+    const g = svg.append('g').selectAll('g').data(rows).join('g');
+    g.append('circle').attr('cx', (r) => x(r.label)).attr('cy', (r) => y(r.favorite_won)).attr('r', 4).attr('fill', dash.colors[0])
+      .attr('stroke', 'var(--color-panel)').attr('stroke-width', 2);
+    g.append('rect').attr('x', (r) => x(r.label) - x.step() / 2).attr('width', x.step()).attr('y', m.t).attr('height', H - m.t - m.b).attr('fill', 'transparent')
+      .on('mousemove', (ev, r) => T.showTip(el, tip, ev, `${r.label} before close`, [`Favorite won ${F.pct1(r.favorite_won)}`, `${F.int(r.n)} markets`]))
+      .on('mouseleave', () => T.hideTip(tip));
+  });
+
+  // underdog breakdown with a chooser
+  window.plDim = window.plDim || 'Topic';
+  dash.draw('udsel', (sel) => {
+    const d = dash.data('underdog');
+    const dims = d.status === 'ok' ? [...new Set(d.data.map((r) => r.dimension))].filter((x) => x !== 'All') : [];
+    sel.replaceChildren(...dims.map((x) => new Option('By ' + x.toLowerCase(), x)));
+    sel.value = window.plDim;
+    sel.onchange = () => { window.plDim = sel.value; dash.draw('ud'); };
+  });
+  dash.draw('ud', (el) => {
+    const d = dash.data('underdog');
+    el.replaceChildren();
+    if (d.status !== 'ok') return;
+    el.classList.remove('dash-skeleton');
+    const rows = d.data.filter((r) => r.dimension === window.plDim);
+    window.plInterval(el, rows, {
+      label: (r) => r.group, val: (r) => +r.win_rate, lo: (r) => +r.win_lo, hi: (r) => +r.win_hi, ref: (r) => +r.avg_price,
+      floor0: true, tick: d3.format('.0%'),
+      tip: (r) => [`Price paid ${F.pct1(+r.avg_price)}, happened ${F.pct1(+r.win_rate)}`, `95% range ${F.pct0(+r.win_lo)}–${F.pct0(+r.win_hi)}`,
+        `Return before costs ${F.pct0s(+r.roi)}`, `${F.int(+r.bets)} outcomes in ${F.int(+r.events)} events`],
+    });
+  });
+
+  dash.draw('yes', (el) => {
+    const d = dash.data('yes_bias');
+    el.replaceChildren();
+    if (d.status !== 'ok') return;
+    el.classList.remove('dash-skeleton');
+    window.plInterval(el, d.data, {
+      label: (r) => r.group, val: (r) => +r.underpriced, lo: (r) => +r.lo, hi: (r) => +r.hi, zero: 0,
+      tick: (v) => d3.format('+.0f')(v * 100) + '¢',
+      color: (r) => (r.group.startsWith('"') || r.group === 'Geopolitics' ? dash.colors[0] : 'var(--cds-chart-muted)'),
+      tip: (r) => [`"Yes" underpriced by ${F.cents(+r.underpriced)}`, `95% range ${F.cents(+r.lo)} to ${F.cents(+r.hi)}`, `${F.int(+r.markets)} markets, ${F.int(+r.events)} events`],
+    });
+  });
+
+  dash.draw('mom', (el) => {
+    const d = dash.data('momentum');
+    el.replaceChildren();
+    if (d.status !== 'ok') return;
+    el.classList.remove('dash-skeleton');
+    window.plInterval(el, d.data.filter((r) => !String(r.move).startsWith('flat')), {
+      label: (r) => r.move.replace('c', '¢'), val: (r) => +r.mispricing, lo: (r) => +r.lo, hi: (r) => +r.hi, zero: 0,
+      tick: (v) => d3.format('+.0f')(v * 100) + '¢',
+      tip: (r) => [`Afterwards ${+r.mispricing >= 0 ? 'underpriced' : 'overpriced'} by ${F['cents-abs'](+r.mispricing)}`,
+        `95% range ${F.cents(+r.lo)} to ${F.cents(+r.hi)}`, `${F.int(+r.n)} market-days, ${F.int(+r.events)} events`],
+    });
+  });
+
+  dash.draw('fav', (el) => {
+    const d = dash.data('favorites');
+    el.replaceChildren();
+    if (d.status !== 'ok') return;
+    el.classList.remove('dash-skeleton');
+    window.plInterval(el, d.data, {
+      label: (r) => r.horizon + ' before close', val: (r) => +r.roi, lo: (r) => +r.roi_lo, hi: (r) => +r.roi_hi, zero: 0,
+      tick: (v) => d3.format('+.0%')(v),
+      tip: (r) => [`Return per bet ${d3.format('+.1%')(+r.roi)}`, `Won ${F.pct1(+r.hit_rate)} at ${F.pct1(+r.avg_price)} average price`, `${F.int(+r.bets)} bets`],
+    });
+  });
+
+  dash.draw('cats', (el) => {
+    const d = dash.data('categories');
+    el.replaceChildren();
+    if (d.status !== 'ok') return;
+    el.classList.remove('dash-skeleton');
+    const rows = d.data.map((r) => ({...r, markets: +r.markets, volume: +r.volume}));
+    const W = el.clientWidth || 600, rowH = 28, H = rows.length * rowH + 8;
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+    const labW = T.measure(svg, rows.map((r) => r.category)) + 12;
+    const x = d3.scaleLinear([0, d3.max(rows, (r) => r.markets)], [labW, W - 120]);
+    const tip = T.tipFor(el);
+    const g = svg.selectAll('g').data(rows).join('g').attr('transform', (r, i) => `translate(0,${i * rowH + 4})`);
+    g.append('text').attr('class', 'lbl').attr('x', labW - 10).attr('y', 15).attr('text-anchor', 'end').text((r) => r.category);
+    g.append('rect').attr('x', labW).attr('y', 5).attr('height', 16).attr('rx', 3).attr('width', (r) => x(r.markets) - labW).attr('fill', dash.colors[0]);
+    g.append('text').attr('x', (r) => x(r.markets) + 6).attr('y', 17).text((r) => `${F.int(r.markets)} · ${F.usd(r.volume)} traded`);
+    g.append('rect').attr('x', 0).attr('width', W).attr('height', rowH).attr('fill', 'transparent')
+      .on('mousemove', (ev, r) => T.showTip(el, tip, ev, r.category, [`${F.int(r.markets)} markets`, `${F.usd(r.volume)} traded`]))
+      .on('mouseleave', () => T.hideTip(tip));
+  });
+
+  const fillBody = (tb, rows, cols) => {
+    tb.replaceChildren(...rows.map((r) => {
+      const tr = document.createElement('tr');
+      cols.forEach(([k, fmt, num]) => { const td = document.createElement('td'); if (num) td.className = 'num'; td.textContent = fmt ? fmt(r[k]) : r[k]; tr.appendChild(td); });
+      return tr;
+    }));
+  };
+  dash.draw('upsets', (tb) => {
+    const d = dash.data('upsets');
+    if (d.status !== 'ok') { tb.replaceChildren(); return; }
+    fillBody(tb, d.data, [['question'], ['favorite'], ['favorite_price_7d', (v) => d3.format('.1f')(+v * 100) + '¢', 1], ['volume', (v) => F.usd(+v), 1]]);
+  });
+  dash.draw('costs', (tb) => {
+    const d = dash.data('book_costs');
+    if (d.status !== 'ok') { tb.replaceChildren(); return; }
+    const p = (v) => (Number.isFinite(+v) && v !== null ? F.pct1(+v) : '—');
+    fillBody(tb, d.data, [['band'], ['spread_pct', p, 1], ['cost_100', p, 1], ['cost_1000', p, 1], ['cost_10000', p, 1], ['fillable_10000', (v) => F.pct0(+v), 1]]);
+  });
+  dash.draw('multi', (tb) => {
+    const d = dash.data('multi_outcome');
+    if (d.status !== 'ok') { tb.replaceChildren(); return; }
+    const c = (v) => '$' + d3.format('.3f')(+v);
+    fillBody(tb, d.data, [['event'], ['outcomes', null, 1], ['sum_best_ask', c, 1], ['sum_best_bid', c, 1]]);
+  });
+})();
+</script>
