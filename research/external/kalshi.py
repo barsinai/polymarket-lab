@@ -27,7 +27,21 @@ for status in ("settled", "open"):
             break
         d = r.json()
         ms = d.get("markets") or []
-        out += [{k: m.get(k) for k in KEEP} for m in ms if (m.get("volume") or 0) >= 1000]
+        if n == 0 and ms:  # log the real field names once (the API has renamed fields before)
+            print("sample market keys:", sorted(ms[0].keys()), flush=True)
+            print("sample market:", json.dumps(ms[0])[:1500], flush=True)
+        def vol(m):
+            for k in ("volume", "volume_fp", "volume_24h", "dollar_volume", "notional_value"):
+                try:
+                    v = float(m.get(k) or 0)
+                except (TypeError, ValueError):
+                    v = 0
+                if v:
+                    return v
+            return 0.0
+        out += [{**{k: m.get(k) for k in KEEP}, "_vol": vol(m),
+                 **{k: m[k] for k in m if k.endswith("_dollars") or k.endswith("_fp")}}
+                for m in ms if vol(m) >= 1000]
         n += len(ms)
         cursor = d.get("cursor")
         if n % 20000 < 1000:
