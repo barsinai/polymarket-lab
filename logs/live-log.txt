@@ -174,3 +174,92 @@ markets 2028-09-01..2030-10-31: 196
 <!--[if IE 8]>    <html class="no-
 2026-11-01T09:02:01.238216+00:00: 9549 markets, 19094/19098 books, list 181s, books 21s, open interest 9315 (46s), saved 2.21 MB
 paper: 1587 signals this hour; 61/2011 signalled markets resolved; {"model": {"signals": 1826, "resolved": 59, "stake": 590.0, "pnl": -370.30303030303025, "wins": 4, "profit_per_$": -0.6276}, "fade_jump": {"signals": 359, "resolved": 33, "stake": 330.0, "pnl": -152.5649143559591, "wins": 5, "profit_per_$": -0.4623}, "longshot": {"signals": 47, "resolved": 3, "stake": 30.0, "pnl": -30.0, "wins": 0, "profit_per_$": -1.0}, "fade_week": {"signals": 33, "resolved": 1, "stake": 10.0, "pnl": -10.0, "wins": 0, "profit_per_$": -1.0}}
+  ! 422 {'closed': 'false', 'active': 'true', 'volume_num_min': 5000, 'end_date_min': '2026-07-04T10:02:00.856006Z', 'end_date_max': '2030-10-31T10:02:00.856006Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2026-07-04..2030-10-31: 2100
+  ! 422 {'closed': 'false', 'active': 'true', 'volume_num_min': 5000, 'end_date_min': '2026-07-04T10:02:00.856006Z', 'end_date_max': '2028-09-01T10:02:00.856006Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2026-07-04..2028-09-01: 2100
+  ! 422 {'closed': 'false', 'active': 'true', 'volume_num_min': 5000, 'end_date_min': '2026-07-04T10:02:00.856006Z', 'end_date_max': '2027-08-03T10:02:00.856006Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2026-07-04..2027-08-03: 2100
+  ! 422 {'closed': 'false', 'active': 'true', 'volume_num_min': 5000, 'end_date_min': '2026-07-04T10:02:00.856006Z', 'end_date_max': '2027-01-17T22:02:00.856006Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2026-07-04..2027-01-17: 2100
+markets 2026-07-04..2026-10-11: 136
+  ! 422 {'closed': 'false', 'active': 'true', 'volume_num_min': 5000, 'end_date_min': '2026-10-11T04:02:00.856006Z', 'end_date_max': '2027-01-17T22:02:00.856006Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2026-10-11..2027-01-17: 2100
+  ! 422 {'closed': 'false', 'active': 'true', 'volume_num_min': 5000, 'end_date_min': '2026-10-11T04:02:00.856006Z', 'end_date_max': '2026-11-29T13:02:00.856006Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2026-10-11..2026-11-29: 2100
+  ! 422 {'closed': 'false', 'active': 'true', 'volume_num_min': 5000, 'end_date_min': '2026-10-11T04:02:00.856006Z', 'end_date_max': '2026-11-04T20:32:00.856006Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2026-10-11..2026-11-04: 2100
+markets 2026-10-11..2026-10-23: 9
+  ! 422 {'closed': 'false', 'active': 'true', 'volume_num_min': 5000, 'end_date_min': '2026-10-23T12:17:00.856006Z', 'end_date_max': '2026-11-04T20:32:00.856006Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2026-10-23..2026-11-04: 2100
+markets 2026-10-23..2026-10-29: 108
+  ! 422 {'closed': 'false', 'active': 'true', 'volume_num_min': 5000, 'end_date_min': '2026-10-29T16:24:30.856006Z', 'end_date_max': '2026-11-04T20:32:00.856006Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2026-10-29..2026-11-04: 2100
+markets 2026-10-29..2026-11-01: 478
+  ! 422 {'closed': 'false', 'active': 'true', 'volume_num_min': 5000, 'end_date_min': '2026-11-01T18:28:15.856006Z', 'end_date_max': '2026-11-04T20:32:00.856006Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2026-11-01..2026-11-04: 2100
+markets 2026-11-01..2026-11-03: 258
+  ! 422 {'closed': 'false', 'active': 'true', 'volume_num_min': 5000, 'end_date_min': '2026-11-03T07:30:08.356006Z', 'end_date_max': '2026-11-04T20:32:00.856006Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2026-11-03..2026-11-04: 2100
+markets 2026-11-03..2026-11-04: 268
+markets 2026-11-04..2026-11-04: 2093
+markets 2026-11-04..2026-11-04: 2058
+markets 2026-11-04..2026-11-04: 2058
+markets 2026-11-04..2026-11-04: 0
+markets 2026-11-04..2026-11-04: 35
+markets 2026-11-04..2026-11-29: 601
+  ! 422 {'closed': 'false', 'active': 'true', 'volume_num_min': 5000, 'end_date_min': '2026-11-29T13:02:00.856006Z', 'end_date_max': '2027-01-17T22:02:00.856006Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2026-11-29..2027-01-17: 2100
+markets 2026-11-29..2026-12-24: 390
+  ! 422 {'closed': 'false', 'active': 'true', 'volume_num_min': 5000, 'end_date_min': '2026-12-24T05:32:00.856006Z', 'end_date_max': '2027-01-17T22:02:00.856006Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2026-12-24..2027-01-17: 2100
+  ! 422 {'closed': 'false', 'active': 'true', 'volume_num_min': 5000, 'end_date_min': '2026-12-24T05:32:00.856006Z', 'end_date_max': '2027-01-05T13:47:00.856006Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2026-12-24..2027-01-05: 2100
+markets 2026-12-24..2026-12-30: 28
+  ! 422 {'closed': 'false', 'active': 'true', 'volume_num_min': 5000, 'end_date_min': '2026-12-30T09:39:30.856006Z', 'end_date_max': '2027-01-05T13:47:00.856006Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2026-12-30..2027-01-05: 2100
+  ! 422 {'closed': 'false', 'active': 'true', 'volume_num_min': 5000, 'end_date_min': '2026-12-30T09:39:30.856006Z', 'end_date_max': '2027-01-02T11:43:15.856006Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2026-12-30..2027-01-02: 2100
+markets 2026-12-30..2026-12-31: 232
+  ! 422 {'closed': 'false', 'active': 'true', 'volume_num_min': 5000, 'end_date_min': '2026-12-31T22:41:23.356006Z', 'end_date_max': '2027-01-02T11:43:15.856006Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2026-12-31..2027-01-02: 2100
+  ! 422 {'closed': 'false', 'active': 'true', 'volume_num_min': 5000, 'end_date_min': '2026-12-31T22:41:23.356006Z', 'end_date_max': '2027-01-01T17:12:19.606006Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2026-12-31..2027-01-01: 2100
+markets 2026-12-31..2027-01-01: 2096
+markets 2026-12-31..2027-01-01: 146
+markets 2027-01-01..2027-01-01: 1950
+markets 2027-01-01..2027-01-01: 28
+markets 2027-01-01..2027-01-02: 60
+markets 2027-01-02..2027-01-05: 128
+markets 2027-01-05..2027-01-17: 138
+markets 2027-01-17..2027-08-03: 1837
+markets 2027-08-03..2028-09-01: 511
+markets 2028-09-01..2030-10-31: 196
+  ! 403 {'market': '0xbf867169eb94c37800e92b7fc04b68783a2bf8f68fc6b1f43bca578cacb8af32,0x195953559bb46e6ccb548571d3a8c3838d044c08962576c6bb95bde0067827ea,0xd4dfcf9cdf615c3b41b399b7d57933210fb8070ae32d277656a3c0d65bbb936c,0x6da8f9fa454b1ba254071b1d205287301380d258c05ef65437073e8bf5055945,0x76fcc2d8ff23410f0194eee1dd77261d7d05cc11c310ac3d8bd49e0d0190dba1,0xb18fd8d19291dfcb2e620bdb4e1bb7b4bc8cc226c950561bcecdb25209c03046,0xa0cc3bb21d851ee65626781d5612054b113ec48b3d07feffceb3df3a7cde1cd0,0x34bce454270d3df48f88a6b034779bae269922845e616eeaf59d0d5fb0983ec8,0x9bf56f4889fa87565b70a98912116fc32087e5847c6dc55e416008cc339f571f,0x31d64f37cf59d710c35fdb183bed99f03069490ba23e57adbc34fb1f3f2f53f9,0x7c244e821e6e05649169b265b46c5aaf2f38f670977927963709a2c8df5dd19e,0x43c73a08281c4db24da63a9d6441fcf22e04a9316213fa05b08a9ff36d528b19,0x57e01f6341d46140fd06a4ea68c811f564bb051af2ecb64dbd452cca054b4c41,0x3b3b3df7e2cf92521060749dcbb65fb70ffc83630c52454cabd0423cdf2997f4,0x953eff97fa20d6686730c25c44c1fabe7de99722f6cf9c78752ae0c87be35021,0x8898d296ba996a3309ea2239159987b3bd3c85261b5b4d5979f7a7249557996a,0xb0af78b5a1db14b55770289133d2e38def5d447e95ada5d56dec5f54ba8965cf,0x93cc999fd382a0d263a4e5bd5fb3b1cf07b1c1e65bdb7baf6fe77343fa9e5178,0x9673049a117f113ff1362d7855a99be28476071bcabad59ef5ef8286961e99db,0x5edce499ce0bc4dba865ff7abd0695b4159a267836a2b9eb61e7aea8fcf3659a,0x31dc24d6a007fe525173e684e20afd830f17658a319cb85401e41047187e8433,0x83c7e0b98b43339e638fb92389ab80f476a38251145565f7319d4f8d80c2cf5d,0x94b0f382e8f16d370dd05da83115721bc80953ff17d4908a3889021bc9d87f54,0x099a5f142115e74a69bac2f8e9aadccadd2da8a72df39cc5e858d26a3c69d74e,0x7b1fce03e45e0c81841201b388062f9101f9e1852f6089ba79f09539a42a5567,0x05be46f6aeb700f0f9c11f1b1f91e1d5f2b11cde1ad4270c6c8a91dccc86eff4,0x6c9b412d7c5038693e0dde93c387ea2390341d9c750ec9231fab6b13f03d4c6c,0x53289624241ef24d67539fe2458d722965016365c5ba48280bf73de423b1f191,0x478e762a3abab9d9b8201f2c59e4089316b68eb6e52ad75f23b5a68c17c21bc0,0x1b6739bd853a1185da1c3633d3dc007771b70e34c6779a0d9cb03f4c2811f780,0x7a5c8a5066f8efdfafa14d063bfb91b3d0cf995898f6999e329ec5d2db8a6aa3,0x9be01cf5ef5038b68bb8043d325c687f5d07c1313978a4f92b6017da8dd112c8,0xa2b22b596441201e236b758f8933dc1fe7715de69f6e91c3a302b93101e83ff8,0x20f294f132f175e0ce7cbda1443fa3626784f0e4163254f40ea2ae782ac975a3,0x5b768f729d280c7989e48c243618b66aff0ccee53a5b6d4c46c1ebdedeb506fc,0xf6c99db625750b3797eae30fc51285edc747aee25e6beba2b5caf8e71f1312ee,0x27835839417c54e264bbdc7736f7437587ad1e33329c32207df0269395b54a9a,0x0d4729066f6de72383664c1972326c9c005af42d9318347d964a7e445562a570,0xc73920bf9dfcd3c0852cf61ffa95637c3373767b9b452d907a6927e2630bf0c4,0x9af1b3b0e65efc1fade6bd1b965e6640f5f3323c85f37811fa25f7b83511a749,0x2ccfb793b994d3a38fee573136a15773a9e852257babc68df6471a60016d51c3,0xda5081222fe4c4cbc2b44185c32ad5e0678dab53168126eb9f213a44af4b6bc0,0x7fc4f08a8a79fb43e05d7cf9a231cbcb09ff0f59bb3a784d8c3d6a79503b39bd,0x8cff885de6c2b02556c6e9b98d366364df970224fdc48959482c31e850beb6ce,0x4d967657afbff24d46ab0265e656d9799f57eadbd4d21550c2686b0c9d013ab2,0x75fb93691ac141af5c09118f2c86201bea1df1bb6231cbdbcad295414e36b02a,0x413a8e74f4bd531f6cf0835789ce37d53c3370d6b10e7f8d0e21cbdfd0de010f,0x24947108ea0aa91814673554b04b0b85fdcfd3b16ffbb7d2a0b6642e5870c53b,0xfe5e864c6bdb259f92a610bf77ff95d878d4aebfa47e97acaea6c8d576aa0e36,0xa6eaacd795a583b0b2de54a3479d3de77811a1411a25019f27374ceaf1821621'}: <!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en-US"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en-US"> <![endif]-->
+<!--[if IE 8]>    <html class="no-
+  ! 403 {'market': '0x892be926c43213274152486eef0872711a5b66f56098565ed91f8e6a7aae82b1,0x90086c301c676cb9a6e030b5bc48993caf46c2c31a76b0fa75f125a26cf84e3b,0x8d38d55df4e0023458e2435af1ef3bdf008c781d83d696d50b2a697a75fa5369,0x179d61ed5e9194dc031e2b056cc3c1a463ee083c82843f2443c3483550ff5e3e,0xd5e58d41ae53140a09b05b71c8645a8e5bf7ae8c06cfde520a3adc7e6e59dcd4,0x511ab52dfe4c637118b4640dfcaeeceaa8655119bbb0fac1ee88d8f465081491,0x68bbfff95f1d4a195fe3244e253ceb7e5c6637c4635cb3e027ba10c49415e72e,0x000e930bef34b6d6b2e78b157af7ca26e5083566544d0b521ef3ae99e116d7f3,0xc4ef5b9e9b30ba6580c541847b9895d1d300c372a09b904459abdb125a7cff5a,0x66375d0eee0dcdcbafa6b379e8cd5397b3784fe5b8af06c106ba002cbbf1b85a,0xaf911ed916608f5068b1c313301564963cd51526ffa3144edaef2ab0bee503c9,0xe909a253410eab405239b4278f115c3a9bf963e286455002e996c79c64f0e6f6,0xe339a0b2ed101cda7a249af7177c2eca99ddea5ca97bf09b9440aef88049dc75,0x3258a6d767918e39f9965ae58384bc1fde22f66c6dd94cccf23bcd867cee4397,0xd307521d66702f4c867b4ae2f710bda0e68aafc810238a8e63e699c9a7184a59,0x98640089510aa31f7cb8dd2cdac87fa56c1eb364dbd81197eb69d3a360ce5d5e,0x41a40be39bab8f030e01304de128159f652f4b87f34ac50135116ab3aa0d8560,0x33b62d02112a258ac7766efdfd24b55f706a17c3a1cd2691a5f91d3b3495faa6,0x33905f3d6562ff4233bc3512cdb3e4f1386c3c932f5f8e1b2adbe38a30640d76,0xc92e3e053c29bb0976eb6f77f3045dc9bdb85d215a1065d235a1b30ff8baa44a,0xb1e00888104edd350bbcc78af0b44f8709a52c77d65fdd737e30f0abbb150484,0xf7e88e678403b52b1fa1bcaf615d2cb6d365ee68a0e97a496d734de86146856e,0x62e8e38bde08e3a05bd5f7a1d3a2d966eff20daf7f6c2e4568973b7f099d3f02,0xf7447ec95080e3ebdb2e25cd7c40ad676ee69facd18a626364996d80b97879ce,0xe6698819b1eef1135540b68d31dba84fb2f216ae386ed16d636f45d2bdce32a2,0xef92fe38c1b5de5e14421f599440f3d75b0203bd78c2c2a857c32cd81aa7750a,0xd7d7087f69b2c79526341ca9a20140a39b426e64db17572743a868e2b09921d9,0xef762dfd6df38e84f1f79c1634ced97b4770ba10bd57797827ed201a85928530,0xf17050ad243048a84b5f183107a344ad94e771cb9803aa24d1ecc0e6ad580361,0x8fa6650b683ef8f224ed09b16967cacdad0b3ac87e8c18603080ae0a67771a83,0x4c55a1e54542c2094a0c65a56f2c2d96694f37579da5625947464763924f698f,0x6306e7d530fbacca18647504661dfe845ab685265a9641d7afa59e1b63b88ebc,0xef824fc02344371918ae62efc27aae089cfbc4707ceda0650ddb450140672ee8,0xee552e15060112c62219be7404c0aa203f2015039df4d4b5f39c9426c44f2eb9,0xc849236c244292207363db53fe485acd36a53799a8ea2387596af9c5765a72d4,0xa6b83d0b7d0658bbec2cd6b343012a07d89e0a70880704e11ff0c62a38fe79e7,0x84875c2799922461d61cd57e68b1738b3f6157a01fba15ff4838b3bc76af3de2,0x67465e976df3bb7e86d367a14a1068fd22b253ab4cbd7ef83d459110c77d4410,0x983dca122a5e652687cf85d1816e926af2b4082b19d94e53e68056b0bea9c3bc,0x4d8b49ef49d3f4c005e11c1838eba67b766cbf4e2021b94fd2fea81a0d87eb4c,0x7a7e737db04270fc9261a42b4523985b04b5844711039ec4c3b1d39e5dbdd115,0x21819fdf4ec562ed8d54cdbd7a404e0f896ff4f7d03815a7aeb77e87ca5b494f,0x848f928b6b7ac69da69a9f2ecf1bda2038231f3f1f20d9d5592161fb4344e0fd,0x2d270e2ede8927f6cf1e3f63c3a7f5e16c4a5284a81fdf6023c01fb0d9597266,0x2af78854a0ff4d964f6478bbc56af3a527b0d386b3ef09d7c99650eb2251771d,0xa6e70d8bee1107948c38d2309d3ec2c9169fe0e1528d75a8ba0c4e880a7625c0,0xcf4635d023909989d1a864d41bb817f382fa98b9d30e9dd0d74298758526374e,0x05bd536c8c4263130c4562f6cac317e5bf67f098e6a277dd97bd45ec68aa3113,0x37dc22b055853beff593965910e08b1019ad48efd6c5ada2506dc07b36705398,0x6d2e0298b80eaa3cd7e45109ba57cde9d085bf224790be05437ae0c645181cb3'}: <!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en-US"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en-US"> <![endif]-->
+<!--[if IE 8]>    <html class="no-
+2026-11-01T10:02:00.855999+00:00: 9595 markets, 19188/19190 books, list 178s, books 21s, open interest 9355 (37s), saved 2.23 MB
+paper: 1598 signals this hour; 72/2134 signalled markets resolved; {"model": {"signals": 1948, "resolved": 69, "stake": 690.0, "pnl": -430.33437826541274, "wins": 6, "profit_per_$": -0.6237}, "fade_jump": {"signals": 394, "resolved": 39, "stake": 390.0, "pnl": -186.24912488227488, "wins": 6, "profit_per_$": -0.4776}, "longshot": {"signals": 51, "resolved": 5, "stake": 50.0, "pnl": -50.0, "wins": 0, "profit_per_$": -1.0}, "fade_week": {"signals": 36, "resolved": 3, "stake": 30.0, "pnl": -30.0, "wins": 0, "profit_per_$": -1.0}}
