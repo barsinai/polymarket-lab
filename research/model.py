@@ -83,7 +83,7 @@ def category(tags, q):
 # ------------------------------------------------------------------ build
 FEATS = ["p", "logit_p", "dist50", "chg_1h", "chg_6h", "chg_1d", "chg_3d", "chg_7d", "vol_1d", "vol_7d",
          "range_7d", "max_7d_gap", "min_7d_gap", "log_days_left", "frac_elapsed", "log_age_days",
-         "yes_no", "deadline", "neg_risk", "log_event_size", "fees", "hist_density_7d"] + \
+         "yes_no", "deadline", "neg_risk", "log_event_size", "fees", "hist_density_7d", "n_moves_7d", "at_half"] + \
         [f"cat_{c}" for c in CATS] + ["has_1d", "has_7d"]
 
 
@@ -119,6 +119,8 @@ def features(t_, p_, t, m):
          "yes_no": float(m["yes"]), "deadline": float(m["deadline"]), "neg_risk": float(m["neg_risk"]),
          "log_event_size": np.log(m["event_size"]), "fees": float(m["fees"]),
          "hist_density_7d": float(w7.sum()) / 168.0,
+         "n_moves_7d": float((np.abs(d7) > 1e-9).sum()),  # how many hours the price actually changed
+         "at_half": float(abs(p - 0.5) < 0.005),
          **{f"cat_{c}": float(m["cat"] == c) for c in CATS},
          "has_1d": float(at(DAY) is not None), "has_7d": float(at(7 * DAY) is not None)}
     return [f[k] for k in FEATS]
@@ -160,7 +162,14 @@ def build():
         v["event_size"] = ev_size[v["event"]]
     print(f"{len(meta)} resolved binary markets in listing", flush=True)
 
-    X, y, info, seen = [], [], [], set()
+    X, y, info, fut, seen = [], [], [], [], set()
+
+    def future(t_, p_, t, close):
+        """price at time t (for short-term trading targets); nan if missing or after close."""
+        if t >= close - H:
+            return np.nan
+        j = np.searchsorted(t_, t, side="right") - 1
+        return p_[j] if j >= 0 and t - t_[j] <= 6 * H else np.nan
     for root, _, files in os.walk(f"{DATA}/prices"):
         for fn in sorted(files):
             if not fn.endswith(".jsonl.gz"):
@@ -181,11 +190,13 @@ def build():
                     if f is None:
                         continue
                     X.append(f); y.append(m["won"] - f[0])
+                    fut.append([future(t_, p_, t + h, m["close"]) for h in (6 * H, DAY, 3 * DAY)])
                     info.append((int(mid), int(m["event"]) if m["event"].isdigit() else -1, int(t), d, m["vol"]))
             print(f"  {fn}: {len(seen)} markets, {len(X)} rows", flush=True)
     os.makedirs(DERIVED, exist_ok=True)
     np.savez_compressed(f"{DERIVED}/rows.npz", X=np.array(X, dtype=np.float32), y=np.array(y, dtype=np.float32),
-                        info=np.array(info, dtype=np.float64), feats=np.array(FEATS))
+                        info=np.array(info, dtype=np.float64), feats=np.array(FEATS),
+                        fut=np.array(fut, dtype=np.float32))  # price +6h, +1d, +3d
     print(f"saved {len(X)} rows from {len(seen)} markets")
 
 
