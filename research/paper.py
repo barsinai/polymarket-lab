@@ -7,6 +7,7 @@ For every open binary market, three strategies decide whether to bet (one side, 
   fade_jump - the simple rule: price moved >15c in a day -> buy the side that fell
   fade_week - price moved >25c in a week, 1-7 days before the end -> buy the side that fell
   soccer_low - soccer draws, "O/U 0.5" Under, exact score 0-0, 1-3 days before kick-off
+  multi_no  - multi-option events summing to >108%: "No" on options priced above their share
   longshot  - the cheap side (5-20c) about a week (5-9 days) before the scheduled end
 Only markets >= 1 day before their scheduled end, fillable for $10 within 5c of the listed
 price (v2, from 2026-11-01 10:40 UTC). Every signal is logged with the real fill price; scoring (score()) later looks up how
@@ -116,6 +117,12 @@ def run(markets, raw_books, now, out_dir="data/paper"):
     if not X:
         return 0
     pred = M["model"].predict(np.array(X, dtype=np.float32))
+    # multi-option events: total of all options' Yes prices (should be ~1)
+    ev_sum, ev_n = {}, {}
+    for (m, toks, p, cat) in meta:
+        if m.get("negRisk") and m.get("event_id"):
+            ev_sum[m["event_id"]] = ev_sum.get(m["event_id"], 0) + p
+            ev_n[m["event_id"]] = ev_n.get(m["event_id"], 0) + 1
     for (m, toks, p, cat), err in zip(meta, pred):
         end = ts(m.get("endDate"))
         days_left = (end - now) / 86400 if end else None
@@ -151,6 +158,12 @@ def run(markets, raw_books, now, out_dir="data/paper"):
             for side, sp in ((0, p), (1, 1 - p)):
                 if 0.05 <= sp < 0.20:
                     signals.append(("longshot", side))
+        # multi-option event whose options add up to > 1.08: 'No' on options priced above
+        # their share (exp_multi.py; historical edge mostly eaten by wide books - test live)
+        e_id = m.get("event_id")
+        if m.get("negRisk") and e_id and ev_n.get(e_id, 0) >= 3 and 1.08 < ev_sum[e_id] < 1.5 \
+                and p - p / ev_sum[e_id] > 0.01:
+            signals.append(("multi_no", 1))
         # soccer 'few goals' outcomes looked underpriced (exp_soccer_low.py): draws, O/U 0.5
         # Under, exact score 0-0. Fixed in advance: 1-3 days before kick-off, the 'few goals' side.
         q = (m.get("question") or "").lower()
