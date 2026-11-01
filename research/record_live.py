@@ -143,6 +143,13 @@ def main():
         import traceback
         print(f"paper trading error: {e}\n{traceback.format_exc()[-1500:]}", flush=True)
 
+    if a.holders:  # once a day: liquidity-reward terms (record_rewards.py)
+        try:
+            import subprocess
+            subprocess.run([sys.executable, os.path.join(os.path.dirname(os.path.abspath(__file__)), "record_rewards.py")], timeout=900)
+        except Exception as e:  # noqa: BLE001
+            print(f"rewards snapshot error: {e}", flush=True)
+
     if a.holders:  # once a day: static market info (questions, token ids...) and top holders
         os.makedirs("data/live/meta", exist_ok=True)
         collect.write_jsonl_gz(f"data/live/meta/{now:%Y-%m-%d}.jsonl.gz", [{k: m.get(k) for k in STATIC} for m in mk])

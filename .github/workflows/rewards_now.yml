@@ -1,0 +1,33 @@
+name: Rewards snapshot (run now)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["research/record_rewards.py"]
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout: research
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - run: python -u research/record_rewards.py 2>&1 | tee /tmp/rw.txt
+      - name: Save
+        if: always()
+        run: |
+          git config user.name "polymarket-lab-bot"
+          git config user.email "actions@users.noreply.github.com"
+          mkdir -p logs && cp /tmp/rw.txt logs/rewards-log.txt
+          git add --sparse data/live/rewards logs/rewards-log.txt
+          git commit -qm "Rewards snapshot [skip ci]" || true
+          for i in 1 2 3 4 5; do git pull -q --rebase origin main && git push -q && break; sleep 5; done
