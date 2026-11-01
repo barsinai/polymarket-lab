@@ -50,3 +50,7 @@ one bet per market where repeats would inflate counts. Anything that survives ->
 - 11-01 16:20 Live recording widened (+markets ending within 4 days with >=$500): 12,059
   markets/hour (was ~9,700); first v3 hour: model 1226, fade_jump 102, multi_no 37,
   fade_week 31, longshot 26, soccer_low 6 signals.
+- 11-01 16:40 Draws by league (tags cover 39%): no edge in big leagues (Premier League +3c n.s.,
+  La Liga -4c, UCL -2c, UEL -6c); the +6c gap sits in untagged, mostly lower-profile leagues.
+  => draw edge = less-watched leagues (thinner books). Paper trading decides.
+- 11-01 16:35 Kalshi download restarted (own job, no parlays, 2025+, saves as it goes).
