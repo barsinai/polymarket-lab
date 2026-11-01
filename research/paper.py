@@ -159,7 +159,8 @@ def score(out_dir="data/paper"):
     todo = sorted(i for i in ids if not res.get(i, {}).get("resolved"))
     for k in range(0, len(todo), 40):
         chunk = todo[k:k + 40]
-        got = collect.get(f"{collect.GAMMA}/markets", [("id", i) for i in chunk] + [("limit", 100)]) or []
+        # closed=true: Gamma hides closed markets unless asked; only resolved ones matter here
+        got = collect.get(f"{collect.GAMMA}/markets", [("id", i) for i in chunk] + [("closed", "true"), ("limit", 100)]) or []
         for m in got:
             pr = [fnum(x) for x in collect.as_list(m.get("outcomePrices"))]
             resolved = bool(m.get("closed")) and len(pr) == 2 and max(pr) >= 0.99

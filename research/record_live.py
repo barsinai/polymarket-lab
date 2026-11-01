@@ -130,6 +130,9 @@ def main():
         import paper
         n = paper.run(mk, raw, now.timestamp())
         resolved, signalled = paper.score()
+        with open("data/paper/report.json", "w") as fh:  # running scoreboard
+            json.dump({"updated": now.isoformat(), "resolved_markets": resolved, "signalled_markets": signalled,
+                       "strategies": paper.report()}, fh, indent=1)
         print(f"paper: {n} signals this hour; {resolved}/{signalled} signalled markets resolved; "
               f"{json.dumps(paper.report())}", flush=True)
     except Exception as e:  # noqa: BLE001
