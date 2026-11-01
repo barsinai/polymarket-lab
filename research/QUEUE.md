@@ -89,3 +89,7 @@ BEFORE RISK. Unknowns: (1) adverse selection - fills when the price moves agains
 13. [ ] Paper market-making simulator: each hour, pretend to quote mid+-1c in the best reward
         markets; fills detected from real trades in the following hour; P&L = fills marked to
         later prices/resolution + estimated rewards. This is the honest test.
+- 11-01 22:40 Paper market making live (paper_mm.py, inside the hourly job): 40 best reward
+  markets, quotes mid+-1c, 200 shares/side, fills from real taker trades the next hour,
+  inventory limit 3x size, settles at resolution. Reward credit is an ESTIMATE (published
+  formula shape); fills and inventory P&L are real-data based. Watch: fills vs rewards.
