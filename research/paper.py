@@ -5,6 +5,7 @@ For every open binary market, three strategies decide whether to bet (one side, 
   model     - live_v1 model: bet when its estimated win chance minus the real average
               price for $10 (walking the sell orders) is more than 2c
   fade_jump - the simple rule: price moved >15c in a day -> buy the side that fell
+  fade_week - price moved >25c in a week, 1-7 days before the end -> buy the side that fell
   longshot  - the cheap side (5-20c) about a week (5-9 days) before the scheduled end
 Every signal is logged with the real fill price; scoring (score()) later looks up how
 each market resolved. Analysis counts each market once per strategy (its first signal).
@@ -125,6 +126,10 @@ def run(markets, raw_books, now, out_dir="data/paper"):
                 signals.append(("model", side))
         if abs(chg) > 0.15 and 0.03 < p < 0.97:
             signals.append(("fade_jump", 1 if chg > 0 else 0))
+        chg7 = fnum(m.get("oneWeekPriceChange"))
+        if abs(chg7) > 0.25 and 0.03 < p < 0.97 and days_left is not None and 1 <= days_left <= 7:
+            # best historical result (R3 in experiments.py), mostly small soccer side-markets
+            signals.append(("fade_week", 1 if chg7 > 0 else 0))
         if days_left is not None and 5 <= days_left <= 9:
             for side, sp in ((0, p), (1, 1 - p)):
                 if 0.05 <= sp < 0.20:
