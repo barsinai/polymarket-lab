@@ -34,7 +34,7 @@ KEEP = ("id", "conditionId", "question", "slug", "startDate", "endDate", "outcom
         "volume1wk", "volume1mo", "liquidityNum", "oneHourPriceChange", "oneDayPriceChange",
         "oneWeekPriceChange", "oneMonthPriceChange", "competitive", "negRisk", "acceptingOrders",
         "orderPriceMinTickSize", "orderMinSize", "rewardsMinSize", "rewardsMaxSpread",
-        "umaResolutionStatus", "createdAt", "updatedAt")
+        "umaResolutionStatus", "createdAt", "updatedAt", "feesEnabled")
 
 
 def active_markets(min_volume):
@@ -52,7 +52,7 @@ def active_markets(min_volume):
 
 STATIC = ("id", "conditionId", "question", "slug", "startDate", "endDate", "outcomes", "clobTokenIds",
           "negRisk", "orderPriceMinTickSize", "orderMinSize", "rewardsMinSize", "rewardsMaxSpread",
-          "createdAt", "event_id", "event_title")
+          "createdAt", "event_id", "event_title", "feesEnabled")
 DYNAMIC = [k for k in KEEP if k not in STATIC]  # stored hourly as compact rows
 
 
@@ -125,6 +125,16 @@ def main():
         json.dump(snap, f, separators=(",", ":"))
     print(f"{now.isoformat()}: {len(mk)} markets, {len(books)}/{len(tokens)} books, list {t1-t0:.0f}s, "
           f"books {t2-t1:.0f}s, open interest {len(oi)} ({t3-t2:.0f}s), saved {os.path.getsize(path)/1e6:.2f} MB", flush=True)
+
+    try:  # paper trading never blocks the recording
+        import paper
+        n = paper.run(mk, raw, now.timestamp())
+        resolved, signalled = paper.score()
+        print(f"paper: {n} signals this hour; {resolved}/{signalled} signalled markets resolved; "
+              f"{json.dumps(paper.report())}", flush=True)
+    except Exception as e:  # noqa: BLE001
+        import traceback
+        print(f"paper trading error: {e}\n{traceback.format_exc()[-1500:]}", flush=True)
 
     if a.holders:  # once a day: static market info (questions, token ids...) and top holders
         os.makedirs("data/live/meta", exist_ok=True)

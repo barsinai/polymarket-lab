@@ -29,11 +29,13 @@ jobs:
       - uses: actions/checkout@v4
         with:
           filter: blob:none
-          sparse-checkout: research
+          sparse-checkout: |
+            research
+            data/paper
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install requests
+      - run: pip install requests numpy scikit-learn==1.9.1
       - name: Hourly snapshot for ~5.5 hours
         run: |
           git config user.name "polymarket-lab-bot"
@@ -49,7 +51,7 @@ jobs:
             # git removes files outside the sparse checkout after each commit, so the log
             # lives in /tmp and is copied in right before saving
             mkdir -p logs && cp /tmp/live-log.txt logs/live-log.txt
-            git add --sparse data/live logs/live-log.txt
+            mkdir -p data/paper && git add --sparse data/live data/paper logs/live-log.txt
             if git commit -qm "Live snapshot $(date -u +%FT%H:%M) [skip ci]"; then
               for i in 1 2 3 4 5; do
                 git pull -q --rebase origin main && git push -q && break
