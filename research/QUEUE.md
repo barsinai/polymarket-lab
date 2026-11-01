@@ -33,3 +33,9 @@ one bet per market where repeats would inflate counts. Anything that survives ->
   Boosted model in cheap markets at typical costs: +7c..+10c/$ (Jun-Oct), CI above 0.
 - 11-01 15:35 Weather fair value (2-day-old gridded forecast, per-city bias/spread fit on
   training): worse than market on Jun-Oct (Brier .199 vs .164 at 1 day), loses money. DEAD.
+- 11-01 15:50 Model robustness (cheap markets, typical costs, Jun-Oct): positive in 4/5 months
+  (Sep ~0), days 1-7, both sides; strongest in soccer props; LOSES when buying >70c favourites.
+  PRE-REGISTERED (before any paper outcome seen): "model_v2" = live model signal with
+  model edge > 3c, side priced 10-70c, 1-7 days to scheduled end. Score from paper logs.
+10. [ ] Kalshi comparison: download Kalshi settled markets + price history; match questions
+        (Fed, CPI, elections, sports); does the gap between the two predict the outcome?
