@@ -9,8 +9,10 @@ src = open("research/experiments.py").read().split("def model_edges")[0]
 exec(src)
 sys.path.insert(0, "research")
 from costs import kind, tier, band  # noqa: E402
-C = {(g["kind"], g["size"], g["price"]): g["extra_cost_c_$10_mean"] / 100 for g in json.load(open("results/costs.json"))["groups"]
-     if g["extra_cost_c_$10_mean"] is not None}
+import os
+COSTSTAT = os.environ.get("COSTSTAT", "mean")  # "median" = typical book (trader skips wide books)
+C = {(g["kind"], g["size"], g["price"]): g[f"extra_cost_c_$10_{COSTSTAT}"] / 100 for g in json.load(open("results/costs.json"))["groups"]
+     if g[f"extra_cost_c_$10_{COSTSTAT}"] is not None}
 q = {}
 need = set(MID.astype(int))
 for f in glob.glob("data/listing/*.gz"):

@@ -1,0 +1,270 @@
+{
+ "found": [
+  {
+   "template": "x post #-# tweets from x # to x #, #?",
+   "days": 1,
+   "markets": 219,
+   "events": 94,
+   "first_side_mispriced_by_c": 6.4,
+   "buy": "first"
+  },
+  {
+   "template": "x vs. x end in a draw?",
+   "days": 1,
+   "markets": 1521,
+   "events": 1521,
+   "first_side_mispriced_by_c": 4.05,
+   "buy": "first"
+  },
+  {
+   "template": "x win the # x?",
+   "days": 3,
+   "markets": 211,
+   "events": 85,
+   "first_side_mispriced_by_c": 4.63,
+   "buy": "first"
+  },
+  {
+   "template": "x vs. x",
+   "days": 3,
+   "markets": 2279,
+   "events": 2235,
+   "first_side_mispriced_by_c": -3.49,
+   "buy": "second"
+  },
+  {
+   "template": "x the price of x be above $# on x #?",
+   "days": 3,
+   "markets": 2411,
+   "events": 774,
+   "first_side_mispriced_by_c": -4.51,
+   "buy": "second"
+  },
+  {
+   "template": "x post #-# tweets from x # to x #, #?",
+   "days": 3,
+   "markets": 336,
+   "events": 93,
+   "first_side_mispriced_by_c": 3.78,
+   "buy": "first"
+  },
+  {
+   "template": "x vs. x end in a draw?",
+   "days": 3,
+   "markets": 1484,
+   "events": 1484,
+   "first_side_mispriced_by_c": 3.83,
+   "buy": "first"
+  },
+  {
+   "template": "x vs. x: x to x",
+   "days": 3,
+   "markets": 419,
+   "events": 419,
+   "first_side_mispriced_by_c": 6.32,
+   "buy": "first"
+  },
+  {
+   "template": "x: x (-#)",
+   "days": 7,
+   "markets": 655,
+   "events": 555,
+   "first_side_mispriced_by_c": -6.47,
+   "buy": "second"
+  },
+  {
+   "template": "x win on #-#-#?",
+   "days": 7,
+   "markets": 4078,
+   "events": 3344,
+   "first_side_mispriced_by_c": -3.05,
+   "buy": "second"
+  },
+  {
+   "template": "x vs. x: x to x",
+   "days": 7,
+   "markets": 340,
+   "events": 340,
+   "first_side_mispriced_by_c": 6.65,
+   "buy": "first"
+  }
+ ],
+ "confirmed": [
+  {
+   "template": "x post #-# tweets from x # to x #, #?",
+   "days": 1,
+   "buy": "first",
+   "train_mispricing_c": 6.4,
+   "test_markets": 177,
+   "test_events": 94,
+   "test_avg_price": 0.268,
+   "test_win_rate": 0.26,
+   "test_avg_cost_c": 0.96,
+   "test_profit_per_$": [
+    -0.1602,
+    -0.3951,
+    0.0947
+   ]
+  },
+  {
+   "template": "x vs. x end in a draw?",
+   "days": 1,
+   "buy": "first",
+   "train_mispricing_c": 4.05,
+   "test_markets": 1297,
+   "test_events": 1297,
+   "test_avg_price": 0.241,
+   "test_win_rate": 0.285,
+   "test_avg_cost_c": 2.18,
+   "test_profit_per_$": [
+    0.0832,
+    -0.0221,
+    0.1887
+   ]
+  },
+  {
+   "template": "x win the # x?",
+   "days": 3,
+   "buy": "first",
+   "train_mispricing_c": 4.63,
+   "test_markets": 54,
+   "test_events": 21,
+   "test_avg_price": 0.142,
+   "test_win_rate": 0.185,
+   "test_avg_cost_c": 1.23,
+   "test_profit_per_$": [
+    0.1683,
+    -0.7385,
+    1.7122
+   ]
+  },
+  {
+   "template": "x vs. x",
+   "days": 3,
+   "buy": "second",
+   "train_mispricing_c": -3.49,
+   "test_markets": 585,
+   "test_events": 585,
+   "test_avg_price": 0.545,
+   "test_win_rate": 0.573,
+   "test_avg_cost_c": 0.53,
+   "test_profit_per_$": [
+    0.0737,
+    -0.0167,
+    0.1763
+   ]
+  },
+  {
+   "template": "x the price of x be above $# on x #?",
+   "days": 3,
+   "buy": "second",
+   "train_mispricing_c": -4.51,
+   "test_markets": 813,
+   "test_events": 364,
+   "test_avg_price": 0.489,
+   "test_win_rate": 0.486,
+   "test_avg_cost_c": 0.78,
+   "test_profit_per_$": [
+    -0.0977,
+    -0.2377,
+    0.0636
+   ]
+  },
+  {
+   "template": "x post #-# tweets from x # to x #, #?",
+   "days": 3,
+   "buy": "first",
+   "train_mispricing_c": 3.78,
+   "test_markets": 208,
+   "test_events": 84,
+   "test_avg_price": 0.178,
+   "test_win_rate": 0.154,
+   "test_avg_cost_c": 0.95,
+   "test_profit_per_$": [
+    0.1222,
+    -0.3187,
+    0.6967
+   ]
+  },
+  {
+   "template": "x vs. x end in a draw?",
+   "days": 3,
+   "buy": "first",
+   "train_mispricing_c": 3.83,
+   "test_markets": 1233,
+   "test_events": 1233,
+   "test_avg_price": 0.252,
+   "test_win_rate": 0.287,
+   "test_avg_cost_c": 2.23,
+   "test_profit_per_$": [
+    0.0591,
+    -0.0384,
+    0.1646
+   ]
+  },
+  {
+   "template": "x vs. x: x to x",
+   "days": 3,
+   "buy": "first",
+   "train_mispricing_c": 6.32,
+   "test_markets": 736,
+   "test_events": 723,
+   "test_avg_price": 0.537,
+   "test_win_rate": 0.561,
+   "test_avg_cost_c": 13.72,
+   "test_profit_per_$": [
+    -0.1208,
+    -0.1843,
+    -0.0552
+   ]
+  },
+  {
+   "template": "x: x (-#)",
+   "days": 7,
+   "buy": "second",
+   "train_mispricing_c": -6.47,
+   "test_markets": 1691,
+   "test_events": 1126,
+   "test_avg_price": 0.657,
+   "test_win_rate": 0.708,
+   "test_avg_cost_c": 12.31,
+   "test_profit_per_$": [
+    -0.0826,
+    -0.12,
+    -0.0439
+   ]
+  },
+  {
+   "template": "x win on #-#-#?",
+   "days": 7,
+   "buy": "second",
+   "train_mispricing_c": -3.05,
+   "test_markets": 2712,
+   "test_events": 2235,
+   "test_avg_price": 0.586,
+   "test_win_rate": 0.603,
+   "test_avg_cost_c": 1.43,
+   "test_profit_per_$": [
+    0.0017,
+    -0.026,
+    0.0302
+   ]
+  },
+  {
+   "template": "x vs. x: x to x",
+   "days": 7,
+   "buy": "first",
+   "train_mispricing_c": 6.65,
+   "test_markets": 383,
+   "test_events": 383,
+   "test_avg_price": 0.524,
+   "test_win_rate": 0.58,
+   "test_avg_cost_c": 11.08,
+   "test_profit_per_$": [
+    -0.0482,
+    -0.1302,
+    0.0505
+   ]
+  }
+ ]
+}

@@ -1,0 +1,42 @@
+name: Download external data (crypto exchange prices)
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "37 3 * * *"
+  push:
+    branches: [main]
+    paths: ["research/external/**", ".github/workflows/external.yml"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: external
+  cancel-in-progress: false
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout: |
+            research
+            data/external
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - run: python -u research/external/crypto_prices.py 2>&1 | tee /tmp/ext-log.txt
+      - name: Save
+        if: always()
+        run: |
+          git config user.name "polymarket-lab-bot"
+          git config user.email "actions@users.noreply.github.com"
+          mkdir -p logs data/external && cp /tmp/ext-log.txt logs/external-log.txt
+          git add --sparse data/external logs/external-log.txt
+          git commit -qm "External data [skip ci]" || true
+          for i in 1 2 3 4 5; do git pull -q --rebase origin main && git push -q && break; sleep $((RANDOM % 10 + 3)); done
