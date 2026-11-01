@@ -65,3 +65,16 @@ won-minus-price on Jun-Oct but CI includes 0 (n=175-496); retrained on unbiased 
 (3.6k): nothing. => Historical "edges" were mostly the bias. Paper trading (selects markets by
 volume at the time) is unbiased. Building a fair history: collect_volume.py (all markets,
 volume before each bet moment).
+
+## 11-01 21:45 Full-data rebuild (631k markets, 1.0M rows) judged on FAIR rows only
+>= $5k traded before the bet (fully fair; 4,845 test rows Jun-Oct): every model and rule is
+~0c won-minus-price (all CIs include 0) and negative after costs. Models trained on fair rows
+only: also ~0 or negative. At >= $1k (only partly fair: $1-5k-before markets still needed a
+$5k final to be listed) the boosted model's edge>6c shows +3.5c (CI +0.7..+6.3) - a hint at
+most, contaminated by the same bias.
+CONCLUSION: no evidence that simple price-pattern or price-based model strategies beat
+Polymarket prices once selection is fair. Market prices are well calibrated.
+Next directions (no prediction needed): 11. market making / liquidity rewards (earn the
+spread + Polymarket's reward payments; risk = being picked off). 12. live cross-site gaps
+(Kalshi vs Polymarket on identical questions, real time). Paper trading continues as the
+unbiased forward test of everything already pre-registered.

@@ -1,0 +1,189 @@
+{
+ "fair_min_usd": 1000.0,
+ "fair_test_rows": 10690,
+ "known_share": 0.14813640583040308,
+ "results": {
+  "boosted (trained on all rows), edge>3c": {
+   "bets": 3721,
+   "events": 2240,
+   "won_minus_price": [
+    0.0151,
+    -0.0068,
+    0.0338
+   ],
+   "profit_per_$": [
+    0.0369,
+    -0.0442,
+    0.1245
+   ]
+  },
+  "boosted (trained on all rows), edge>6c": {
+   "bets": 1457,
+   "events": 997,
+   "won_minus_price": [
+    0.035,
+    0.0069,
+    0.063
+   ],
+   "profit_per_$": [
+    0.0873,
+    -0.0008,
+    0.208
+   ]
+  },
+  "logistic (trained on all rows), edge>3c": {
+   "bets": 1617,
+   "events": 990,
+   "won_minus_price": [
+    0.0136,
+    -0.0196,
+    0.0472
+   ],
+   "profit_per_$": [
+    0.0125,
+    -0.0729,
+    0.0874
+   ]
+  },
+  "logistic (trained on all rows), edge>6c": {
+   "bets": 326,
+   "events": 232,
+   "won_minus_price": [
+    0.033,
+    -0.0286,
+    0.102
+   ],
+   "profit_per_$": [
+    0.1051,
+    -0.0773,
+    0.2954
+   ]
+  },
+  "boosted (trained on fair rows only), edge>3c": {
+   "bets": 2820,
+   "events": 1663,
+   "won_minus_price": [
+    -0.0021,
+    -0.0216,
+    0.0204
+   ],
+   "profit_per_$": [
+    -0.0331,
+    -0.0945,
+    0.0356
+   ]
+  },
+  "boosted (trained on fair rows only), edge>6c": {
+   "bets": 438,
+   "events": 317,
+   "won_minus_price": [
+    -0.0053,
+    -0.0677,
+    0.0501
+   ],
+   "profit_per_$": [
+    -0.0188,
+    -0.1802,
+    0.1391
+   ]
+  },
+  "logistic (trained on fair rows only), edge>3c": {
+   "bets": 4461,
+   "events": 2508,
+   "won_minus_price": [
+    0.011,
+    -0.0077,
+    0.0315
+   ],
+   "profit_per_$": [
+    0.0086,
+    -0.0415,
+    0.0616
+   ]
+  },
+  "logistic (trained on fair rows only), edge>6c": {
+   "bets": 1222,
+   "events": 709,
+   "won_minus_price": [
+    0.0098,
+    -0.0309,
+    0.0474
+   ],
+   "profit_per_$": [
+    0.0023,
+    -0.0885,
+    0.1002
+   ]
+  },
+  "fade 1-day jump >15c": {
+   "bets": 1122,
+   "events": 851,
+   "won_minus_price": [
+    0.0103,
+    -0.0139,
+    0.0354
+   ],
+   "profit_per_$": [
+    -0.0411,
+    -0.1469,
+    0.0944
+   ]
+  },
+  "fade 7-day move >25c": {
+   "bets": 642,
+   "events": 354,
+   "won_minus_price": [
+    0.0352,
+    -0.0064,
+    0.0809
+   ],
+   "profit_per_$": [
+    0.1193,
+    -0.1771,
+    0.4465
+   ]
+  },
+  "follow 7-day move >25c": {
+   "bets": 642,
+   "events": 354,
+   "won_minus_price": [
+    -0.0352,
+    -0.0853,
+    0.0101
+   ],
+   "profit_per_$": [
+    -0.064,
+    -0.132,
+    -0.0094
+   ]
+  },
+  "long shot 5-20c (buy cheap side), 7d": {
+   "bets": 319,
+   "events": 296,
+   "won_minus_price": [
+    -0.0033,
+    -0.0359,
+    0.0334
+   ],
+   "profit_per_$": [
+    -0.0888,
+    -0.3703,
+    0.2336
+   ]
+  },
+  "favourite 80-95c, 1d": {
+   "bets": 1338,
+   "events": 1248,
+   "won_minus_price": [
+    0.005,
+    -0.0122,
+    0.0229
+   ],
+   "profit_per_$": [
+    -0.007,
+    -0.0275,
+    0.0083
+   ]
+  }
+ }
+}
