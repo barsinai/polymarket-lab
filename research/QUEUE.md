@@ -39,3 +39,6 @@ one bet per market where repeats would inflate counts. Anything that survives ->
   model edge > 3c, side priced 10-70c, 1-7 days to scheduled end. Score from paper logs.
 10. [ ] Kalshi comparison: download Kalshi settled markets + price history; match questions
         (Fed, CPI, elections, sports); does the gap between the two predict the outcome?
+- 11-01 15:55 Paper bug #2: some tennis/basketball markets have an end date ~7 days after the
+  game, so v2 still bet on matches in progress (lost almost all). v3: skip if gameStartTime is
+  within 1 day, or the price moved >5c in the last hour. Scoreboard counts v3 only (from ~13:00 UTC).
