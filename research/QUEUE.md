@@ -47,3 +47,6 @@ one bet per market where repeats would inflate counts. Anything that survives ->
   (Jun-Oct) at average costs - BUT live books show the real No price is 4c (median) / 8c (mean)
   above 1 - listed Yes in exactly those events (wide books are why sums exceed 1). Lesson:
   costs must be measured conditional on the signal. Added to paper trading as multi_no.
+- 11-01 16:20 Live recording widened (+markets ending within 4 days with >=$500): 12,059
+  markets/hour (was ~9,700); first v3 hour: model 1226, fade_jump 102, multi_no 37,
+  fade_week 31, longshot 26, soccer_low 6 signals.
