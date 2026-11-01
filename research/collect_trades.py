@@ -87,7 +87,10 @@ def fetch(m):
 
 
 def checkpoint(msg):
-    for c in ["git add --sparse data/trades logs/trades-log.txt", f'git commit -qm "{msg} [skip ci]"',
+    # git deletes files outside the sparse checkout after each commit (logs/ is outside),
+    # so the log is kept in /tmp and copied in right before every save
+    for c in ["mkdir -p logs && cp /tmp/trades-log.txt logs/trades-log.txt",
+              "git add --sparse data/trades logs/trades-log.txt", f'git commit -qm "{msg} [skip ci]"',
               "git pull -q --rebase origin main", "git push -q"]:
         r = subprocess.run(c, shell=True, capture_output=True, text=True)
         if r.returncode and "commit" not in c:

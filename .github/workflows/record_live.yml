@@ -38,14 +38,17 @@ jobs:
         run: |
           git config user.name "polymarket-lab-bot"
           git config user.email "actions@users.noreply.github.com"
-          mkdir -p logs
+          set +e  # one bad hour must not kill the loop
           end=$(( $(date +%s) + 320*60 ))
           while [ "$(date +%s)" -lt "$end" ]; do
             day=$(date -u +%F)
             git fetch -q origin main
             extra=""
             if ! git cat-file -e "origin/main:data/live/holders/$day.jsonl.gz" 2>/dev/null; then extra="--holders"; fi
-            python -u research/record_live.py $extra 2>&1 | tee -a logs/live-log.txt || echo "snapshot failed, will retry next hour"
+            python -u research/record_live.py $extra 2>&1 | tee -a /tmp/live-log.txt || echo "snapshot failed, will retry next hour"
+            # git removes files outside the sparse checkout after each commit, so the log
+            # lives in /tmp and is copied in right before saving
+            mkdir -p logs && cp /tmp/live-log.txt logs/live-log.txt
             git add --sparse data/live logs/live-log.txt
             if git commit -qm "Live snapshot $(date -u +%FT%H:%M) [skip ci]"; then
               for i in 1 2 3 4 5; do

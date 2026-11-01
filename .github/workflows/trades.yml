@@ -36,10 +36,11 @@ jobs:
           git config user.email "actions@users.noreply.github.com"
           mkdir -p logs
           set -o pipefail
-          python -u research/collect_trades.py --git-checkpoint 2>&1 | tee logs/trades-log.txt
+          python -u research/collect_trades.py --git-checkpoint 2>&1 | tee /tmp/trades-log.txt
       - name: Save log
         if: always()
         run: |
+          mkdir -p logs && cp /tmp/trades-log.txt logs/trades-log.txt || true
           git add --sparse logs/trades-log.txt data/trades || true
           git commit -qm "Trades log [skip ci]" || true
           for i in 1 2 3 4 5; do git pull -q --rebase origin main && git push -q && break; sleep $((RANDOM % 10 + 3)); done
