@@ -30,7 +30,7 @@ jobs:
           python-version: "3.12"
       - run: pip install requests
       - name: Market list (skipped when inputs.ties_only)
-        if: ${{ !inputs.ties_only }}
+        if: ${{ github.event_name == 'workflow_dispatch' && !inputs.ties_only }}
         run: timeout 150m python -u research/external/kalshi.py 2>&1 | tee /tmp/k.txt || true
       - name: Tie-market price histories
         run: BUDGET_MIN=200 python -u research/external/kalshi_ties.py 2>&1 | tee -a /tmp/k.txt || true
