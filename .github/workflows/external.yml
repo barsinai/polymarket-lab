@@ -1,4 +1,4 @@
-name: Download external data (crypto exchange prices)
+name: Download external data (crypto prices, weather forecasts)
 
 on:
   workflow_dispatch:
@@ -31,6 +31,7 @@ jobs:
           python-version: "3.12"
       - run: pip install requests
       - run: python -u research/external/crypto_prices.py 2>&1 | tee /tmp/ext-log.txt
+      - run: python -u research/external/weather.py 2>&1 | tee -a /tmp/ext-log.txt
       - name: Save
         if: always()
         run: |
