@@ -21,3 +21,9 @@ one bet per market where repeats would inflate counts. Anything that survives ->
 - 11-01 14:40 Draws deep dive: draw priced 24.7c, happened 29.8% (4,818 matches); +11c/$ after
   typical costs, both periods positive. Already paper-traded (soccer_low). TOP LEAD.
 - 11-01 14:45 Started crypto fair-value work (item 5): Coinbase hourly prices download.
+- 11-01 15:05 Crypto fair value: looked like a big edge, but it came from using exchange prices
+  up to 1h fresher than the market price. With exchange prices >=1h old the fair value is no
+  better than the market and loses money. DEAD (any edge is latency, i.e. bots' territory).
+- 11-01 15:10 Next: template track record as a model feature (item 9).
+9. [ ] Model + template feature: each template's training-period mispricing (shrunk) as a
+       feature; test with typical costs, cheap markets.
