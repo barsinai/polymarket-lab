@@ -43,8 +43,11 @@ KW = [("Crypto", r"\b(bitcoin|btc|ethereum|eth|solana|sol|xrp|doge|crypto|token|
 def ts(s):
     if not s:
         return None
+    s = s.replace(" ", "T").replace("Z", "+00:00")
+    if s.endswith("+00"):
+        s += ":00"
     try:
-        return datetime.fromisoformat(s.replace("Z", "+00:00")).timestamp()
+        return datetime.fromisoformat(s).timestamp()
     except ValueError:
         return None
 
@@ -120,6 +123,14 @@ def run(markets, raw_books, now, out_dir="data/paper"):
         # the kick-off time, so anything later is a game in progress - the model never saw those.
         if days_left is None or days_left < 1:
             continue
+        # v3: some sports markets' end date is a placeholder a week after the game, so also
+        # skip games starting within 1 day (Gamma's gameStartTime) and anything moving fast
+        # within the hour (a live event).
+        gst = ts(m.get("gameStartTime") or "")
+        if gst and gst - now < 86400:
+            continue
+        if abs(fnum(m.get("oneHourPriceChange"))) > 0.05:
+            continue
         chg = fnum(m.get("oneDayPriceChange"))
         prob0 = min(max(p + float(err), 0.001), 0.999)
         sides = {}
@@ -154,7 +165,7 @@ def run(markets, raw_books, now, out_dir="data/paper"):
             p_side = p if side == 0 else 1 - p
             if avg is None or spent < STAKE - 0.01 or abs(avg - p_side) > 0.05:
                 continue  # can't buy $10, or the book is far from the listed price (stale price)
-            rows.append({"v": 2, "ts": int(now), "market_id": str(m["id"]), "strategy": strat, "side": side,
+            rows.append({"v": 3, "ts": int(now), "market_id": str(m["id"]), "strategy": strat, "side": side,
                          "outcome": (collect.as_list(m.get("outcomes")) or ["?", "?"])[side], "p_side": round(p if side == 0 else 1 - p, 4),
                          "model_prob": round(prob, 4), "best_ask": best, "avg_fill": avg and round(avg, 4),
                          "filled_usd": round(spent, 2), "days_left": days_left and round(days_left, 2),
@@ -195,7 +206,7 @@ def report(out_dir="data/paper"):
     first = {}
     for f in sorted(glob.glob(f"{out_dir}/*/*.jsonl.gz")):
         for r in collect.read_jsonl_gz(f):
-            if r.get("v", 1) >= 2:  # v1 rows (before 2026-11-01 10:40 UTC) bet on games in progress
+            if r.get("v", 1) >= 3:  # v1/v2 rows (before 2026-11-01 13:00 UTC) could bet on games in progress
                 first.setdefault((r["strategy"], r["market_id"]), r)
     out = {}
     for (strat, mid), r in first.items():

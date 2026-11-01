@@ -34,7 +34,7 @@ KEEP = ("id", "conditionId", "question", "slug", "startDate", "endDate", "outcom
         "volume1wk", "volume1mo", "liquidityNum", "oneHourPriceChange", "oneDayPriceChange",
         "oneWeekPriceChange", "oneMonthPriceChange", "competitive", "negRisk", "acceptingOrders",
         "orderPriceMinTickSize", "orderMinSize", "rewardsMinSize", "rewardsMaxSpread",
-        "umaResolutionStatus", "createdAt", "updatedAt", "feesEnabled")
+        "umaResolutionStatus", "createdAt", "updatedAt", "feesEnabled", "gameStartTime")
 
 
 def active_markets(min_volume):
@@ -52,7 +52,7 @@ def active_markets(min_volume):
 
 STATIC = ("id", "conditionId", "question", "slug", "startDate", "endDate", "outcomes", "clobTokenIds",
           "negRisk", "orderPriceMinTickSize", "orderMinSize", "rewardsMinSize", "rewardsMaxSpread",
-          "createdAt", "event_id", "event_title", "feesEnabled")
+          "createdAt", "event_id", "event_title", "feesEnabled", "gameStartTime")
 DYNAMIC = [k for k in KEEP if k not in STATIC]  # stored hourly as compact rows
 
 
