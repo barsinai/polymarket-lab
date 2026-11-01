@@ -78,3 +78,14 @@ Next directions (no prediction needed): 11. market making / liquidity rewards (e
 spread + Polymarket's reward payments; risk = being picked off). 12. live cross-site gaps
 (Kalshi vs Polymarket on identical questions, real time). Paper trading continues as the
 unbiased forward test of everything already pre-registered.
+
+## 11-01 22:15 NEW DIRECTION: liquidity rewards (market making) - most promising so far
+Polymarket pays ~$585k/day in liquidity rewards across 14.8k markets (sampling-markets API;
+recorded daily from now on). Using our hourly books: a small two-sided quote (200 shares/side,
+~$196, at 1c from mid) would capture a reward share worth a median ~0.9%/day of capital
+(top decile ~5.7%/day), stable over 20 hours, excluding live games / markets ending < 2 days.
+BEFORE RISK. Unknowns: (1) adverse selection - fills when the price moves against us;
+(2) exact reward formula (we use the published shape, simplified); (3) intra-hour competition.
+13. [ ] Paper market-making simulator: each hour, pretend to quote mid+-1c in the best reward
+        markets; fills detected from real trades in the following hour; P&L = fills marked to
+        later prices/resolution + estimated rewards. This is the honest test.
