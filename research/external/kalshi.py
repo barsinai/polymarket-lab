@@ -13,7 +13,9 @@ out = []
 for status in ("settled", "open"):
     cursor, n = None, 0
     while True:
-        params = {"limit": 1000, "status": status}
+        # exclude auto-generated combination ("multivariate") markets: millions of tiny parlays
+        params = {"limit": 1000, "status": status, "mve_filter": "exclude",
+                  "min_close_ts": 1735689600}  # closing from 2025-01-01
         if cursor:
             params["cursor"] = cursor
         for k in range(5):
@@ -30,6 +32,9 @@ for status in ("settled", "open"):
         cursor = d.get("cursor")
         if n % 20000 < 1000:
             print(f"{status}: {n} seen, {len(out)} kept", flush=True)
+            with gzip.open("data/external/kalshi/markets.jsonl.gz", "wt") as f:  # save as we go
+                for m in out:
+                    f.write(json.dumps(m) + "\n")
         if not cursor or not ms:
             break
         time.sleep(0.2)

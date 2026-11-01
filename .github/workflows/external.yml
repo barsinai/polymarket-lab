@@ -32,7 +32,6 @@ jobs:
       - run: pip install requests
       - run: python -u research/external/crypto_prices.py 2>&1 | tee /tmp/ext-log.txt
       - run: python -u research/external/weather.py 2>&1 | tee -a /tmp/ext-log.txt
-      - run: python -u research/external/kalshi.py 2>&1 | tee -a /tmp/ext-log.txt
       - name: Save
         if: always()
         run: |
