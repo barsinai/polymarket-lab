@@ -1,26 +1,11 @@
-data/live/2026-10-31/2042.json.gz: 9673 markets, 1541 signals
-data/live/2026-10-31/2102.json.gz: 9683 markets, 1558 signals
-data/live/2026-10-31/2110.json.gz: 9690 markets, 1547 signals
-data/live/2026-10-31/2205.json.gz: 9726 markets, 1555 signals
-data/live/2026-10-31/2302.json.gz: 9784 markets, 1543 signals
-data/live/2026-11-01/0011.json.gz: 9899 markets, 1567 signals
-data/live/2026-11-01/0106.json.gz: 9777 markets, 1562 signals
-data/live/2026-11-01/0202.json.gz: 9728 markets, 1609 signals
-data/live/2026-11-01/0305.json.gz: 9635 markets, 1547 signals
-data/live/2026-11-01/0402.json.gz: 9581 markets, 1538 signals
-data/live/2026-11-01/0500.json.gz: 9485 markets, 1670 signals
-data/live/2026-11-01/0551.json.gz: 9469 markets, 1672 signals
-data/live/2026-11-01/0602.json.gz: 9420 markets, 1635 signals
-data/live/2026-11-01/0626.json.gz: 9333 markets, 1640 signals
-data/live/2026-11-01/0702.json.gz: 9317 markets, 1654 signals
-data/live/2026-11-01/0800.json.gz: 9307 markets, 1680 signals
-data/live/2026-11-01/0902.json.gz: 9285 markets, 1703 signals
-data/live/2026-11-01/1002.json.gz: 9279 markets, 1704 signals
-data/live/2026-11-01/1035.json.gz: 9274 markets, 1688 signals
-data/live/2026-11-01/1102.json.gz: 9271 markets, 1675 signals
-data/live/2026-11-01/1202.json.gz: 9267 markets, 1682 signals
-data/live/2026-11-01/1207.json.gz: 9267 markets, 1705 signals
-resolved 8/2802 signalled markets
+data/live/2026-11-01/1246.json.gz: 9265 markets, 1679 signals
+data/live/2026-11-01/1302.json.gz: 9261 markets, 1685 signals
+data/live/2026-11-01/1318.json.gz: 9261 markets, 1681 signals
+data/live/2026-11-01/1402.json.gz: 9255 markets, 1681 signals
+data/live/2026-11-01/1502.json.gz: 9250 markets, 1703 signals
+data/live/2026-11-01/1602.json.gz: 9239 markets, 1660 signals
+data/live/2026-11-01/1702.json.gz: 9211 markets, 1619 signals
+resolved 9/2992 signalled markets
 {
  "fade_jump": {
   "bets": 2,
@@ -50,12 +35,33 @@ resolved 8/2802 signalled markets
   "wins": 1,
   "profit_per_$": 1.439
  },
+ "longshot": {
+  "bets": 1,
+  "stake": 10.0,
+  "pnl": -10.0,
+  "wins": 0,
+  "profit_per_$": -1.0
+ },
+ "longshot | $5-20k": {
+  "bets": 1,
+  "stake": 10.0,
+  "pnl": -10.0,
+  "wins": 0,
+  "profit_per_$": -1.0
+ },
+ "longshot | game winner": {
+  "bets": 1,
+  "stake": 10.0,
+  "pnl": -10.0,
+  "wins": 0,
+  "profit_per_$": -1.0
+ },
  "model": {
-  "bets": 6,
-  "stake": 60.0,
-  "pnl": -18.33333333333333,
+  "bets": 7,
+  "stake": 70.0,
+  "pnl": -28.33333333333333,
   "wins": 1,
-  "profit_per_$": -0.3056
+  "profit_per_$": -0.4048
  },
  "model | $100k-1M": {
   "bets": 1,
@@ -72,9 +78,9 @@ resolved 8/2802 signalled markets
   "profit_per_$": 3.1667
  },
  "model | $5-20k": {
-  "bets": 4,
-  "stake": 40.0,
-  "pnl": -40.0,
+  "bets": 5,
+  "stake": 50.0,
+  "pnl": -50.0,
   "wins": 0,
   "profit_per_$": -1.0
  },
@@ -86,11 +92,11 @@ resolved 8/2802 signalled markets
   "profit_per_$": -1.0
  },
  "model | game winner": {
-  "bets": 2,
-  "stake": 20.0,
-  "pnl": 21.66666666666667,
+  "bets": 3,
+  "stake": 30.0,
+  "pnl": 11.666666666666671,
   "wins": 1,
-  "profit_per_$": 1.0833
+  "profit_per_$": 0.3889
  },
  "model | other": {
   "bets": 3,
