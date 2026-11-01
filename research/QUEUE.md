@@ -42,3 +42,8 @@ one bet per market where repeats would inflate counts. Anything that survives ->
 - 11-01 15:55 Paper bug #2: some tennis/basketball markets have an end date ~7 days after the
   game, so v2 still bet on matches in progress (lost almost all). v3: skip if gameStartTime is
   within 1 day, or the price moved >5c in the last hour. Scoreboard counts v3 only (from ~13:00 UTC).
+- 11-01 16:20 Multi-option events (item 4, on ~85% data): options normalised by the event sum
+  predict slightly better; "No on over-share options when sum>1.08" +15c (before May) / +10.5c
+  (Jun-Oct) at average costs - BUT live books show the real No price is 4c (median) / 8c (mean)
+  above 1 - listed Yes in exactly those events (wide books are why sums exceed 1). Lesson:
+  costs must be measured conditional on the signal. Added to paper trading as multi_no.
