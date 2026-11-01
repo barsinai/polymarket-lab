@@ -7,8 +7,8 @@ Every hour (called from record_live.py with the fresh snapshot):
     below 1 - ask) fills our ask - up to our size. Fills update inventory and cash.
  2. Credit rewards for the hour while both quotes were resting: pool/24 * our score share.
  3. Value inventory at the current midpoint; settle positions of resolved markets at 0/1.
- 4. Choose up to N markets (reward pool, not live, >2 days to end, mid 10-90c) and post new
-    quotes: bid = mid - 1c, ask = mid + 1c, size = max(min_size, 200) shares each side,
+ 4. Choose up to N markets (reward pool, not live, >5 days to end, mid 10-90c) and post new
+    quotes (v2 from 11-02 00:55 UTC: >5 days to end, away from catalysts): bid = mid - 1c, ask = mid + 1c, size = max(min_size, 200) shares each side,
     skipping a side if inventory there is already over 3x size (risk limit).
 State: data/paper_mm/state.json. Log: data/paper_mm/<day>/<HHMM>.json. Scoreboard: data/paper_mm/report.json
 """
@@ -130,7 +130,7 @@ def run(markets, raw_books, now):
         asks = sorted((float(x["price"]), float(x["size"])) for x in b["asks"])
         mid = (bids[0][0] + asks[0][0]) / 2
         end = ts(m.get("endDate")); gst = ts(m.get("gameStartTime") or "")
-        if not (0.10 < mid < 0.90) or (end and end - now < 2 * 86400) or (gst and gst - now < 6 * 3600):
+        if not (0.10 < mid < 0.90) or (end and end - now < 5 * 86400) or (gst and gst - now < 6 * 3600):
             continue
         rate, v, minsize = rw[cid]
         if 100 * OFFSET >= v:

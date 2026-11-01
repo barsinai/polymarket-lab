@@ -93,3 +93,11 @@ BEFORE RISK. Unknowns: (1) adverse selection - fills when the price moves agains
   markets, quotes mid+-1c, 200 shares/side, fills from real taker trades the next hour,
   inventory limit 3x size, settles at resolution. Reward credit is an ESTIMATE (published
   formula shape); fills and inventory P&L are real-data based. Watch: fills vs rewards.
+- 11-01 22:55 Paper MM first 3 hours: 57 fills, estimated rewards $321, trading P&L about -$30
+  (cash +5, inventory at mid -35), total +$291 on $7,840 of quotes. Reward formula checked vs
+  Polymarket docs (S=((v-s)/v)^2*b, Q_min two-sided rule, c=3, per-minute sampling, $/day
+  pools): our shape matches; aggregating competitors instead of per-maker Q_min can misstate
+  our share by up to ~3x. Practitioner guide: main risk = news jumps near catalysts. Change:
+  only markets >5 days from their end (was 2).
+14. [ ] Verify reward share more tightly: per-maker scoring needs order-level books (we
+        record price levels only); consider recording the raw book for the 40 quoted markets.
