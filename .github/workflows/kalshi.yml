@@ -2,9 +2,14 @@ name: Download Kalshi market list
 
 on:
   workflow_dispatch:
+    inputs:
+      ties_only:
+        description: "skip re-downloading the market list"
+        type: boolean
+        default: true
   push:
     branches: [main]
-    paths: ["research/external/kalshi.py", ".github/workflows/kalshi.yml"]
+    paths: ["research/external/kalshi_ties.py"]
 
 permissions:
   contents: write
@@ -12,7 +17,7 @@ permissions:
 jobs:
   download:
     runs-on: ubuntu-latest
-    timeout-minutes: 240
+    timeout-minutes: 350
     steps:
       - uses: actions/checkout@v4
         with:
@@ -24,7 +29,11 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install requests
-      - run: timeout 220m python -u research/external/kalshi.py 2>&1 | tee /tmp/k.txt || true
+      - name: Market list (skipped when inputs.ties_only)
+        if: ${{ !inputs.ties_only }}
+        run: timeout 150m python -u research/external/kalshi.py 2>&1 | tee /tmp/k.txt || true
+      - name: Tie-market price histories
+        run: BUDGET_MIN=200 python -u research/external/kalshi_ties.py 2>&1 | tee -a /tmp/k.txt || true
       - name: Save
         if: always()
         run: |
