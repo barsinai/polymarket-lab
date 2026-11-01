@@ -6,6 +6,7 @@ For every open binary market, three strategies decide whether to bet (one side, 
               price for $10 (walking the sell orders) is more than 2c
   fade_jump - the simple rule: price moved >15c in a day -> buy the side that fell
   fade_week - price moved >25c in a week, 1-7 days before the end -> buy the side that fell
+  soccer_low - soccer draws, "O/U 0.5" Under, exact score 0-0, 1-3 days before kick-off
   longshot  - the cheap side (5-20c) about a week (5-9 days) before the scheduled end
 Only markets >= 1 day before their scheduled end, fillable for $10 within 5c of the listed
 price (v2, from 2026-11-01 10:40 UTC). Every signal is logged with the real fill price; scoring (score()) later looks up how
@@ -139,6 +140,15 @@ def run(markets, raw_books, now, out_dir="data/paper"):
             for side, sp in ((0, p), (1, 1 - p)):
                 if 0.05 <= sp < 0.20:
                     signals.append(("longshot", side))
+        # soccer 'few goals' outcomes looked underpriced (exp_soccer_low.py): draws, O/U 0.5
+        # Under, exact score 0-0. Fixed in advance: 1-3 days before kick-off, the 'few goals' side.
+        q = (m.get("question") or "").lower()
+        outs = collect.as_list(m.get("outcomes"))
+        if 1 <= days_left <= 3:
+            want = ("Yes" if re.search(r"end in a draw|exact score: .* 0 - 0 ", q)
+                    else "Under" if re.search(r"o/u 0\.5\b", q) else None)
+            if want and want in outs:
+                signals.append(("soccer_low", outs.index(want)))
         for strat, side in signals:
             avg, spent, best, prob = sides[side]
             p_side = p if side == 0 else 1 - p
