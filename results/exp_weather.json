@@ -1,0 +1,312 @@
+{
+ "cities_fitted": {
+  "Ankara": [
+   0.5,
+   1.25
+  ],
+  "Atlanta": [
+   0.75,
+   1.75
+  ],
+  "Austin": [
+   -0.75,
+   1.75
+  ],
+  "Beijing": [
+   0.75,
+   1.5
+  ],
+  "Buenos Aires": [
+   1.5,
+   1.75
+  ],
+  "Chengdu": [
+   0.25,
+   2.0
+  ],
+  "Chicago": [
+   0.25,
+   1.75
+  ],
+  "Chongqing": [
+   1.25,
+   2.25
+  ],
+  "Dallas": [
+   0.5,
+   2.25
+  ],
+  "Hong Kong": [
+   0.75,
+   1.0
+  ],
+  "Istanbul": [
+   0.0,
+   0.75
+  ],
+  "London": [
+   0.75,
+   1.25
+  ],
+  "Los Angeles": [
+   0.5,
+   1.5
+  ],
+  "Lucknow": [
+   -0.25,
+   1.0
+  ],
+  "Madrid": [
+   0.5,
+   0.5
+  ],
+  "Miami": [
+   0.25,
+   0.75
+  ],
+  "Moscow": [
+   -0.5,
+   2.25
+  ],
+  "Munich": [
+   0.25,
+   1.25
+  ],
+  "New York City": [
+   0.25,
+   1.75
+  ],
+  "Paris": [
+   1.25,
+   0.75
+  ],
+  "San Francisco": [
+   -2.25,
+   3.25
+  ],
+  "Sao Paulo": [
+   0.25,
+   1.5
+  ],
+  "Seattle": [
+   0.25,
+   1.5
+  ],
+  "Seoul": [
+   2.0,
+   4.0
+  ],
+  "Shanghai": [
+   0.25,
+   1.75
+  ],
+  "Shenzhen": [
+   0.75,
+   2.0
+  ],
+  "Singapore": [
+   1.25,
+   2.75
+  ],
+  "Taipei": [
+   1.75,
+   4.0
+  ],
+  "Tokyo": [
+   0.75,
+   1.75
+  ],
+  "Toronto": [
+   0.5,
+   1.5
+  ],
+  "Wellington": [
+   1.25,
+   1.25
+  ],
+  "Wuhan": [
+   0.0,
+   2.25
+  ]
+ },
+ "training period (fit) | 1 day(s) before": {
+  "rows": 5120,
+  "brier_market": 0.1311,
+  "brier_fair": 0.1439,
+  "brier_blend": 0.1321,
+  "fair differs >5c": {
+   "bets": 3281,
+   "events": 1836,
+   "cost_c": 1.58,
+   "profit_per_$": [
+    0.0275,
+    -0.0352,
+    0.1
+   ]
+  },
+  "fair differs >10c": {
+   "bets": 2118,
+   "events": 1407,
+   "cost_c": 1.62,
+   "profit_per_$": [
+    0.0695,
+    -0.0228,
+    0.1784
+   ]
+  },
+  "fair differs >20c": {
+   "bets": 753,
+   "events": 623,
+   "cost_c": 1.67,
+   "profit_per_$": [
+    0.2106,
+    0.0834,
+    0.3496
+   ]
+  }
+ },
+ "training period (fit) | 2 day(s) before": {
+  "rows": 3552,
+  "brier_market": 0.1246,
+  "brier_fair": 0.1237,
+  "brier_blend": 0.1193,
+  "fair differs >5c": {
+   "bets": 2100,
+   "events": 1073,
+   "cost_c": 1.56,
+   "profit_per_$": [
+    0.0866,
+    0.0118,
+    0.1514
+   ]
+  },
+  "fair differs >10c": {
+   "bets": 1185,
+   "events": 744,
+   "cost_c": 1.62,
+   "profit_per_$": [
+    0.1755,
+    0.0734,
+    0.2668
+   ]
+  },
+  "fair differs >20c": {
+   "bets": 416,
+   "events": 303,
+   "cost_c": 1.75,
+   "profit_per_$": [
+    0.4252,
+    0.2899,
+    0.5811
+   ]
+  }
+ },
+ "training period (fit) | 3 day(s) before": {
+  "rows": 1863,
+  "brier_market": 0.1145,
+  "brier_fair": 0.1075,
+  "brier_blend": 0.1068,
+  "fair differs >5c": {
+   "bets": 1084,
+   "events": 512,
+   "cost_c": 1.47,
+   "profit_per_$": [
+    0.2092,
+    0.115,
+    0.3228
+   ]
+  },
+  "fair differs >10c": {
+   "bets": 584,
+   "events": 345,
+   "cost_c": 1.5,
+   "profit_per_$": [
+    0.3542,
+    0.2011,
+    0.4911
+   ]
+  },
+  "fair differs >20c": {
+   "bets": 186,
+   "events": 135,
+   "cost_c": 1.69,
+   "profit_per_$": [
+    0.5207,
+    0.2996,
+    0.7568
+   ]
+  }
+ },
+ "Jun-Oct (test) | 1 day(s) before": {
+  "rows": 8299,
+  "brier_market": 0.1639,
+  "brier_fair": 0.1987,
+  "brier_blend": 0.1734,
+  "fair differs >5c": {
+   "bets": 6193,
+   "events": 3622,
+   "cost_c": 1.72,
+   "profit_per_$": [
+    -0.0292,
+    -0.074,
+    0.0197
+   ]
+  },
+  "fair differs >10c": {
+   "bets": 4489,
+   "events": 3050,
+   "cost_c": 1.77,
+   "profit_per_$": [
+    -0.0641,
+    -0.1159,
+    -0.0081
+   ]
+  },
+  "fair differs >20c": {
+   "bets": 2072,
+   "events": 1709,
+   "cost_c": 1.85,
+   "profit_per_$": [
+    -0.0685,
+    -0.1262,
+    -0.0067
+   ]
+  }
+ },
+ "Jun-Oct (test) | 2 day(s) before": {
+  "rows": 6335,
+  "brier_market": 0.1576,
+  "brier_fair": 0.1804,
+  "brier_blend": 0.1638,
+  "fair differs >5c": {
+   "bets": 4261,
+   "events": 2438,
+   "cost_c": 1.69,
+   "profit_per_$": [
+    -0.0007,
+    -0.0586,
+    0.0594
+   ]
+  },
+  "fair differs >10c": {
+   "bets": 2719,
+   "events": 1845,
+   "cost_c": 1.73,
+   "profit_per_$": [
+    0.0041,
+    -0.069,
+    0.0852
+   ]
+  },
+  "fair differs >20c": {
+   "bets": 1035,
+   "events": 843,
+   "cost_c": 1.82,
+   "profit_per_$": [
+    -0.0063,
+    -0.1064,
+    0.103
+   ]
+  }
+ }
+}
