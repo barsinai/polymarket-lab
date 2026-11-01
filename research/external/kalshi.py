@@ -8,7 +8,8 @@ S = requests.Session(); S.headers["User-Agent"] = "polymarket-lab-research/0.1"
 os.makedirs("data/external/kalshi", exist_ok=True)
 KEEP = ("ticker", "event_ticker", "series_ticker", "title", "subtitle", "yes_sub_title", "no_sub_title", "status",
         "result", "open_time", "close_time", "expiration_time", "settlement_value", "last_price", "yes_bid", "yes_ask",
-        "volume", "open_interest", "liquidity", "category", "rules_primary", "strike_type", "floor_strike", "cap_strike")
+        "volume", "open_interest", "liquidity", "category", "rules_primary", "strike_type", "floor_strike", "cap_strike",
+        "occurrence_datetime", "expected_expiration_time", "market_type", "settlement_ts", "created_time")
 out = []
 for status in ("settled", "open"):
     cursor, n = None, 0
