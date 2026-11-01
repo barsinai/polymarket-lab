@@ -54,3 +54,14 @@ one bet per market where repeats would inflate counts. Anything that survives ->
   La Liga -4c, UCL -2c, UEL -6c); the +6c gap sits in untagged, mostly lower-profile leagues.
   => draw edge = less-watched leagues (thinner books). Paper trading decides.
 - 11-01 16:35 Kalshi download restarted (own job, no parlays, 2025+, saves as it goes).
+
+## 11-01 17:30 MAJOR: selection bias in all historical tests
+Kalshi draws: priced ~25%, happened 12% in the least-traded games vs 32% in the most-traded
+(by FINAL volume); by volume BEFORE the bet: 25% vs 25%. Our listing keeps markets by FINAL
+volume >= $5k, so dramatic outcomes (upsets, comebacks, late equalisers) are over-represented.
+Re-test on rows with >= $5k traded BEFORE the bet (trades sample): fade-7-day, fade-1-day,
+long shots: gone or negative. Draws: correctly priced. Boosted model (biased-trained): +4-6c
+won-minus-price on Jun-Oct but CI includes 0 (n=175-496); retrained on unbiased rows only
+(3.6k): nothing. => Historical "edges" were mostly the bias. Paper trading (selects markets by
+volume at the time) is unbiased. Building a fair history: collect_volume.py (all markets,
+volume before each bet moment).
