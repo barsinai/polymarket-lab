@@ -13,7 +13,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import collect, paper  # noqa: E402
 from costs import kind, tier  # noqa: E402
 
-OUT = "data/replay"
+OUT = "data/replay"  # hours already replayed are skipped; delete data/replay/20* to recompute after rule changes
 meta = {}
 for f in sorted(glob.glob("data/live/meta/*.jsonl.gz")):
     for m in collect.read_jsonl_gz(f):
