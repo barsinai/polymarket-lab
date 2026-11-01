@@ -142,6 +142,12 @@ def main():
     except Exception as e:  # noqa: BLE001
         import traceback
         print(f"paper trading error: {e}\n{traceback.format_exc()[-1500:]}", flush=True)
+    try:  # paper market making for liquidity rewards
+        import paper_mm
+        print(f"paper_mm: {json.dumps(paper_mm.run(mk, raw, now.timestamp()))}", flush=True)
+    except Exception as e:  # noqa: BLE001
+        import traceback
+        print(f"paper_mm error: {e}\n{traceback.format_exc()[-1500:]}", flush=True)
 
     if a.holders:  # once a day: liquidity-reward terms (record_rewards.py)
         try:
