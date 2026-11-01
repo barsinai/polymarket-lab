@@ -42,6 +42,10 @@ def active_markets(min_volume):
     got = collect.paginate_windows("markets", {"closed": "false", "active": "true",
                                                "volume_num_min": min_volume}, min_volume,
                                    "volumeNum", now - timedelta(days=120), now + timedelta(days=4 * 365))
+    # plus markets ending within 4 days that haven't reached min_volume yet (e.g. soccer side
+    # markets before kick-off: most of their volume comes near/during the game)
+    got += collect.paginate_windows("markets", {"closed": "false", "active": "true", "volume_num_min": 500}, 500,
+                                    "volumeNum", now, now + timedelta(days=4))
     out = {}
     for m in got:
         ev = (m.get("events") or [{}])[0]
