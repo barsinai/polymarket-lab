@@ -45,7 +45,7 @@ jobs:
           while [ "$(date +%s)" -lt "$end" ]; do
             git fetch -q origin main
             # pick up the newest daily rewards file written by the hourly job
-            git checkout -q origin/main -- data/live/rewards data/live/meta 2>/dev/null
+            git checkout -q origin/main -- data/live/rewards data/live/meta data/live/mids_48h.json.gz 2>/dev/null
             for V in 1c 2c edge wide; do MM_VARIANT=$V python -u research/paper_mm2.py 2>&1 | tee -a /tmp/mm2-log.txt; done
             if [ $(( $(date +%s) - last )) -ge 3300 ]; then
               mkdir -p logs data/paper_mm2 data/paper_mm2_2c data/paper_mm2_edge data/paper_mm2_wide && cp /tmp/mm2-log.txt logs/mm2-log.txt

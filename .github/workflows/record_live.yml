@@ -34,6 +34,7 @@ jobs:
             data/paper
             data/paper_mm
             data/live/rewards
+            data/live/mids_48h.json.gz
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"

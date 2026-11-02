@@ -15,7 +15,7 @@ time quotes rested (pool/day x our score share at the time), mark to midpoint, s
 resolved markets (CLOB /markets/<id> winner flags), requote.
 State: data/paper_mm2/state.json; report: data/paper_mm2/report.json; hourly logs.
 """
-import glob, json, math, os, re, sys, time
+import glob, gzip, json, math, os, re, sys, time
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -96,6 +96,23 @@ def load():
                 "mids": {}, "universe": [], "universe_ts": 0, "settled": {}}
 
 
+def jump_table():
+    """conditionId -> (max abs 1h mid move over the last 48h, std of hourly moves), from the
+    hourly live recording. Markets that have jumped >10c in a day are the ones that pick off
+    a market maker; exclude them."""
+    try:
+        h = json.load(gzip.open("data/live/mids_48h.json.gz", "rt"))
+    except (OSError, ValueError):
+        return {}
+    out = {}
+    for c, v in h.items():
+        ps = [p for _, p in v]
+        if len(ps) >= 6:
+            d = [abs(b - a) for a, b in zip(ps, ps[1:])]
+            out[c] = (max(d), (sum(x * x for x in d) / len(d)) ** 0.5)
+    return out
+
+
 def event_map():
     """conditionId -> Polymarket event id, from the daily meta files of the live recording"""
     out = {}
@@ -151,9 +168,11 @@ def tick(now=None):
     log = {"ts": int(now), "fills": [], "rewards": 0.0, "settled": []}
 
     # refresh the universe hourly: books for all reward markets, keep the best 150 candidates
+    JT = jump_table()
     if now - st["universe_ts"] > 3300 or not st["universe"]:
         cands = []
-        ok = {c: r for c, r in rw.items() if not SKIP.search(r["q"]) and not (r["end"] and r["end"] - now < 7 * 86400)}
+        ok = {c: r for c, r in rw.items() if not SKIP.search(r["q"]) and not (r["end"] and r["end"] - now < 7 * 86400)
+              and JT.get(c, (0, 0))[0] <= 0.10}  # no market that jumped >10c in an hour during the last 2 days
         toks = [r["token"] for r in ok.values()]
         chunks = [toks[i:i + 500] for i in range(0, len(toks), 500)]
         books = {}
@@ -261,8 +280,13 @@ def tick(now=None):
             if len(dirs) == 1:
                 st["tape_skips"] = st.get("tape_skips", 0) + 1
                 rpd = 0.0
-        hist = [p for _, p in st["mids"].get(cid, [])][-36:]
-        vol = (sum((b - a) ** 2 for a, b in zip(hist, hist[1:])) / max(len(hist) - 1, 1)) ** 0.5 if len(hist) > 3 else 0.01
+        if cid in JT:
+            vol = JT[cid][1]
+            if JT[cid][0] > 0.10:
+                rpd = 0.0  # jumped recently: exit only
+        else:
+            hist = [p for _, p in st["mids"].get(cid, [])][-36:]
+            vol = (sum((b - a) ** 2 for a, b in zip(hist, hist[1:])) / max(len(hist) - 1, 1)) ** 0.5 if len(hist) > 3 else 0.01
         ranked.append((rpd / (size * (1 + 20 * vol)), cid, mid, size, rpd))
     ranked.sort(reverse=True)
     chosen = {c for sc_, c, *_ in ranked[:N] if sc_ > 0}

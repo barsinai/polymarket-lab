@@ -119,6 +119,27 @@ def main():
         for part in ex.map(open_interest, [cids[i:i + 50] for i in range(0, len(cids), 50)]):
             oi.update(part)
     t3 = time.time()
+    # rolling 48h of hourly mid-prices per market (conditionId -> [[ts, mid], ...]) for the
+    # market makers' jump filter; small, rewritten every hour
+    try:
+        mp = "data/live/mids_48h.json.gz"
+        hist = json.load(gzip.open(mp, "rt")) if os.path.exists(mp) else {}
+        cutoff = now.timestamp() - 48 * 3600
+        for m in mk:
+            toks = collect.as_list(m.get("clobTokenIds")); cid = m.get("conditionId")
+            b = raw.get(str(toks[0])) if toks and cid else None
+            if b and b.get("bids") and b.get("asks"):
+                bb = max(float(x["price"]) for x in b["bids"]); ba = min(float(x["price"]) for x in b["asks"])
+                if ba - bb <= 0.10:
+                    hist.setdefault(cid, []).append([int(now.timestamp()), round((bb + ba) / 2, 4)])
+        hist = {c: [p for p in v if p[0] >= cutoff] for c, v in hist.items()}
+        hist = {c: v for c, v in hist.items() if v}
+        with gzip.open(mp, "wt") as fh:
+            json.dump(hist, fh, separators=(",", ":"))
+        print(f"mids_48h: {len(hist)} markets", flush=True)
+    except Exception as e:  # noqa: BLE001
+        print(f"mids_48h error: {e}", flush=True)
+
     snap = {"ts": int(now.timestamp()), "open_interest": oi, "oi_seconds": round(t3 - t2, 1), "iso": now.isoformat(), "min_volume": a.min_volume,
             "band": a.band, "market_columns": DYNAMIC, "markets": {m["id"]: [m.get(k) for k in DYNAMIC] for m in mk},
             "book_columns": ["ts_ms", "last", "bids", "asks", "far_bid_size", "far_ask_size"], "books": books,
