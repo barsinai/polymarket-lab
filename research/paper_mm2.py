@@ -133,7 +133,7 @@ def tick(now=None):
     # refresh the universe hourly: books for all reward markets, keep the best 150 candidates
     if now - st["universe_ts"] > 3300 or not st["universe"]:
         cands = []
-        ok = {c: r for c, r in rw.items() if not SKIP.search(r["q"]) and not (r["end"] and r["end"] - now < 5 * 86400)}
+        ok = {c: r for c, r in rw.items() if not SKIP.search(r["q"]) and not (r["end"] and r["end"] - now < 7 * 86400)}
         toks = [r["token"] for r in ok.values()]
         chunks = [toks[i:i + 500] for i in range(0, len(toks), 500)]
         books = {}

@@ -108,3 +108,15 @@ BEFORE RISK. Unknowns: (1) adverse selection - fills when the price moves agains
   exit-only quotes for held positions, $300 cap per question family, rank by reward/vol, skip
   data releases / rate decisions / numeric ranges. Compare v1 vs v2 over the week.
 - 11-02 06:05 Price download COMPLETE (REMAINING 0; final save worked after the events-file fix).
+
+## 11-02 09:10 Toxic-flow study (2.8M taker trades >= $20, 53k markets): results/toxicity.json
+Price drift in the trade's direction (what a market maker on the other side loses):
+  by days to end: <1d +0.8c (in-game), 3-7d +1.0c, 7-30d -0.2c, >30d -0.2c  (REVERTS!)
+  by kind: game winner +1.0c, crypto +0.7c, other +0.3c, soccer prop ~0, politics -0.3c
+  by trade size: $20-100 +0.3c, $100-500 +0.7c, $500-2k +1.4c, >$2k +2.3c (big = informed)
+  by hour: mild; US afternoon slightly worse, 21 UTC oddly benign. Not decisive.
+=> In markets > 7 days from their end, flow is noise on average: fills earn the half-spread AND
+   the price tends to come back. Exactly the MM habitat. (Final-volume bias, if anything,
+   overstates toxicity here.) Changed v2: only markets > 7 days from end (was 5).
+   Three v2 variants now live: 1c / 2c / reward-zone-edge offsets; book-width <= 4c required;
+   exposure cap by Polymarket event id.
