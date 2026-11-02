@@ -1,39 +1,64 @@
-data/live/2026-11-01/1802.json.gz: 9163 markets, 1515 signals
-data/live/2026-11-01/1902.json.gz: 9148 markets, 1500 signals
-data/live/2026-11-01/1940.json.gz: 9137 markets, 1500 signals
-data/live/2026-11-01/2002.json.gz: 9135 markets, 1494 signals
-data/live/2026-11-01/2102.json.gz: 9130 markets, 1518 signals
-resolved 10/3145 signalled markets
+data/live/2026-11-01/2202.json.gz: 11454 markets, 1440 signals
+data/live/2026-11-01/2302.json.gz: 11432 markets, 1376 signals
+data/live/2026-11-02/0002.json.gz: 11646 markets, 1378 signals
+data/live/2026-11-02/0102.json.gz: 11504 markets, 1425 signals
+data/live/2026-11-02/0202.json.gz: 11412 markets, 1437 signals
+data/live/2026-11-02/0302.json.gz: 11364 markets, 1416 signals
+data/live/2026-11-02/0402.json.gz: 11329 markets, 1434 signals
+data/live/2026-11-02/0502.json.gz: 11097 markets, 1413 signals
+data/live/2026-11-02/0602.json.gz: 11124 markets, 1442 signals
+resolved 30/3911 signalled markets
 {
  "fade_jump": {
-  "bets": 2,
-  "stake": 20.0,
-  "pnl": 4.390243902439025,
-  "wins": 1,
-  "profit_per_$": 0.2195
+  "bets": 8,
+  "stake": 80.0,
+  "pnl": -40.22514071294559,
+  "wins": 2,
+  "profit_per_$": -0.5028
  },
- "fade_jump | $5-20k": {
-  "bets": 2,
-  "stake": 20.0,
-  "pnl": 4.390243902439025,
-  "wins": 1,
-  "profit_per_$": 0.2195
- },
- "fade_jump | crypto": {
+ "fade_jump | $100k-1M": {
   "bets": 1,
   "stake": 10.0,
   "pnl": -10.0,
   "wins": 0,
   "profit_per_$": -1.0
  },
+ "fade_jump | $20-100k": {
+  "bets": 3,
+  "stake": 30.0,
+  "pnl": -30.0,
+  "wins": 0,
+  "profit_per_$": -1.0
+ },
+ "fade_jump | $5-20k": {
+  "bets": 4,
+  "stake": 40.0,
+  "pnl": -0.22514071294559201,
+  "wins": 2,
+  "profit_per_$": -0.0056
+ },
+ "fade_jump | crypto": {
+  "bets": 2,
+  "stake": 20.0,
+  "pnl": -20.0,
+  "wins": 0,
+  "profit_per_$": -1.0
+ },
  "fade_jump | other": {
-  "bets": 1,
-  "stake": 10.0,
-  "pnl": 14.390243902439025,
-  "wins": 1,
-  "profit_per_$": 1.439
+  "bets": 6,
+  "stake": 60.0,
+  "pnl": -20.225140712945592,
+  "wins": 2,
+  "profit_per_$": -0.3371
  },
  "longshot": {
+  "bets": 5,
+  "stake": 50.0,
+  "pnl": 21.428571428571423,
+  "wins": 1,
+  "profit_per_$": 0.4286
+ },
+ "longshot | $20-100k": {
   "bets": 1,
   "stake": 10.0,
   "pnl": -10.0,
@@ -41,11 +66,11 @@ resolved 10/3145 signalled markets
   "profit_per_$": -1.0
  },
  "longshot | $5-20k": {
-  "bets": 1,
-  "stake": 10.0,
-  "pnl": -10.0,
-  "wins": 0,
-  "profit_per_$": -1.0
+  "bets": 4,
+  "stake": 40.0,
+  "pnl": 31.428571428571423,
+  "wins": 1,
+  "profit_per_$": 0.7857
  },
  "longshot | game winner": {
   "bets": 1,
@@ -54,53 +79,102 @@ resolved 10/3145 signalled markets
   "wins": 0,
   "profit_per_$": -1.0
  },
- "model": {
-  "bets": 8,
-  "stake": 80.0,
-  "pnl": -38.33333333333333,
-  "wins": 1,
-  "profit_per_$": -0.4792
- },
- "model | $100k-1M": {
-  "bets": 1,
-  "stake": 10.0,
-  "pnl": -10.0,
-  "wins": 0,
-  "profit_per_$": -1.0
- },
- "model | $20-100k": {
-  "bets": 1,
-  "stake": 10.0,
-  "pnl": 31.66666666666667,
-  "wins": 1,
-  "profit_per_$": 3.1667
- },
- "model | $5-20k": {
-  "bets": 6,
-  "stake": 60.0,
-  "pnl": -60.0,
-  "wins": 0,
-  "profit_per_$": -1.0
- },
- "model | crypto": {
-  "bets": 1,
-  "stake": 10.0,
-  "pnl": -10.0,
-  "wins": 0,
-  "profit_per_$": -1.0
- },
- "model | game winner": {
-  "bets": 3,
-  "stake": 30.0,
-  "pnl": 11.666666666666671,
-  "wins": 1,
-  "profit_per_$": 0.3889
- },
- "model | other": {
+ "longshot | other": {
   "bets": 4,
   "stake": 40.0,
-  "pnl": -40.0,
+  "pnl": 31.428571428571423,
+  "wins": 1,
+  "profit_per_$": 0.7857
+ },
+ "model": {
+  "bets": 27,
+  "stake": 270.0,
+  "pnl": -22.924650737912167,
+  "wins": 12,
+  "profit_per_$": -0.0849
+ },
+ "model | $100k-1M": {
+  "bets": 3,
+  "stake": 30.0,
+  "pnl": -17.04663212435233,
+  "wins": 1,
+  "profit_per_$": -0.5682
+ },
+ "model | $20-100k": {
+  "bets": 6,
+  "stake": 60.0,
+  "pnl": 4.7650338510553585,
+  "wins": 3,
+  "profit_per_$": 0.0794
+ },
+ "model | $5-20k": {
+  "bets": 16,
+  "stake": 160.0,
+  "pnl": -21.89305246461518,
+  "wins": 6,
+  "profit_per_$": -0.1368
+ },
+ "model | >$1M": {
+  "bets": 2,
+  "stake": 20.0,
+  "pnl": 11.25,
+  "wins": 2,
+  "profit_per_$": 0.5625
+ },
+ "model | crypto": {
+  "bets": 4,
+  "stake": 40.0,
+  "pnl": -16.29394395230932,
+  "wins": 2,
+  "profit_per_$": -0.4073
+ },
+ "model | game winner": {
+  "bets": 4,
+  "stake": 40.0,
+  "pnl": 1.6666666666666714,
+  "wins": 1,
+  "profit_per_$": 0.0417
+ },
+ "model | other": {
+  "bets": 15,
+  "stake": 150.0,
+  "pnl": 0.4526265477304978,
+  "wins": 7,
+  "profit_per_$": 0.003
+ },
+ "model | politics": {
+  "bets": 2,
+  "stake": 20.0,
+  "pnl": 11.25,
+  "wins": 2,
+  "profit_per_$": 0.5625
+ },
+ "model | soccer prop": {
+  "bets": 2,
+  "stake": 20.0,
+  "pnl": -20.0,
   "wins": 0,
   "profit_per_$": -1.0
+ },
+ "multi_no": {
+  "bets": 1,
+  "stake": 10.0,
+  "pnl": 3.3333333333333326,
+  "wins": 1,
+  "profit_per_$": 0.3333
+ },
+ "multi_no | $5-20k": {
+  "bets": 1,
+  "stake": 10.0,
+  "pnl": 3.3333333333333326,
+  "wins": 1,
+  "profit_per_$": 0.3333
+ },
+ "multi_no | other": {
+  "bets": 1,
+  "stake": 10.0,
+  "pnl": 3.3333333333333326,
+  "wins": 1,
+  "profit_per_$": 0.3333
  }
 }
