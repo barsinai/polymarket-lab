@@ -101,3 +101,9 @@ BEFORE RISK. Unknowns: (1) adverse selection - fills when the price moves agains
   only markets >5 days from their end (was 2).
 14. [ ] Verify reward share more tightly: per-maker scoring needs order-level books (we
         record price levels only); consider recording the raw book for the 40 quoted markets.
+- 11-02 05:45 Paper MM v1 after 11h: est. rewards $944 (upper bound), trading -$91, 153 fills in
+  40 markets; 26/40 filled on one side only; 122 markets ever quoted (hourly re-pick abandons
+  positions); losses from one-sided inventory in news-sensitive markets (Shas, ISM PMI).
+  => Paper MM v2 live (paper_mm2.py, own job, every 10 min): requote 10 min, inventory skew,
+  exit-only quotes for held positions, $300 cap per question family, rank by reward/vol, skip
+  data releases / rate decisions / numeric ranges. Compare v1 vs v2 over the week.
