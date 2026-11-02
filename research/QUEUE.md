@@ -142,3 +142,10 @@ Price drift in the trade's direction (what a market maker on the other side lose
   are attractive for MM; rewards snapshot now refreshed every 6h so they enter the universe.
 - Known-outcome weather (buy the winning temperature bucket after the day's max is in): by
   21:00 local the winner already trades at ~$1.00 in 99% of 36k markets. Bots. DEAD.
+- 11-02 20:40 Evening review (per hour): v1 $86 rewards / -$13 trading (26h); v2-1c $58/-21
+  (12h); v2-2c $41/-12; v2-edge $5/0; v2-wide $48/-20 (5.6h, 332 fills in 200 mkts).
+  Losses in every variant come from "by <date>" news-event markets (US x Cuba meeting,
+  Trump speaks to Merz / al-Sharaa, Anthropic IPO): a single fill then a 20-30c jump.
+  Added a data-driven JUMP FILTER: hourly recorder keeps 48h of mids per market
+  (data/live/mids_48h.json.gz; 750 of 10.7k markets jumped >10c/h in the last 2 days);
+  v2 excludes them and uses their 48h vol for ranking. Betting paper: 33 resolved, negative.
