@@ -120,3 +120,10 @@ Price drift in the trade's direction (what a market maker on the other side lose
    overstates toxicity here.) Changed v2: only markets > 7 days from end (was 5).
    Three v2 variants now live: 1c / 2c / reward-zone-edge offsets; book-width <= 4c required;
    exposure cap by Polymarket event id.
+- 11-02 12:05 MM comparison (per hour, est. rewards / trading / net): v1 hourly-1c $84/-9/+74
+  (18h); v2-1c $49/-17/+32 (6.7h, incl. one hour pruned to 13 mkts); v2-2c $32/-7/+25 (5.5h);
+  v2-edge $3/+2/+5 (quadratic score ~0 at the edge: dead as a reward strategy, keep as
+  control). All variants concentrate in the same few "AI release date" markets (Gemini
+  Carbon, GPT Astra, Anthropic IPO): high pool, low competition, binary news risk -> winner's
+  curse candidate; event cap ($300) is the backstop. Checks: exit-only quotes active (10),
+  event cap respected (max $236), no settlements yet (all >7d). Too early to rank v1 vs v2.
