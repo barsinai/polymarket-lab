@@ -149,3 +149,10 @@ Price drift in the trade's direction (what a market maker on the other side lose
   Added a data-driven JUMP FILTER: hourly recorder keeps 48h of mids per market
   (data/live/mids_48h.json.gz; 750 of 10.7k markets jumped >10c/h in the last 2 days);
   v2 excludes them and uses their 48h vol for ranking. Betting paper: 33 resolved, negative.
+- 11-02 22:15 BIG SPARSE RIDGE (39,306 features: numeric, price band x horizon/category/
+  deadline/negrisk, market age, weekday, hour, event size, sibling sum, 3,000 question words,
+  words x band; 1.0M rows; alpha by validation). On BIASED rows it looks real: +3.3c (val),
+  +2.5c (lockbox) for lean>2c. On FAIR rows: +1.5c val (CI +0.2..+2.7), -0.4c lockbox (CI
+  -3.6..+2.7); trained on fair rows only: ~0 / negative. => no robust edge yet; fair sample
+  still small (12k val / 8k lockbox rows). Rerun when data/volume completes (~Wed). The
+  biased-vs-fair gap is the lesson: a convincing +3c that is pure selection bias.
