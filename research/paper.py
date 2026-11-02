@@ -67,6 +67,15 @@ def fnum(x, default=0.0):
         return default
 
 
+# Polymarket taker fee (docs.polymarket.com/trading/fees): fee per share = rate * p * (1-p);
+# makers pay nothing and earn 15-25% of taker fees as rebates. Geopolitics is fee-free.
+FEE_RATE = {"Crypto": 0.07, "Sports": 0.05, "Geopolitics": 0.0, "Politics": 0.04, "Economy": 0.04}
+
+
+def taker_fee_per_share(p, cat):
+    return FEE_RATE.get(cat, 0.05) * p * (1 - p)
+
+
 def fill(book, dollars=STAKE):
     """Walk the sell orders: average price and dollars actually spent for a `dollars` buy."""
     asks = sorted((float(a["price"]), float(a["size"])) for a in (book or {}).get("asks") or [])
@@ -230,7 +239,10 @@ def report(out_dir="data/paper"):
             continue
         won = z["winner"] == r["side"]
         o["resolved"] += 1; o["wins"] += won; o["stake"] += r["filled_usd"]
-        o["pnl"] += r["filled_usd"] * ((1 / r["avg_fill"]) - 1 if won else -1)
+        shares = r["filled_usd"] / r["avg_fill"]
+        fee = shares * taker_fee_per_share(r["avg_fill"], r.get("category", ""))  # taker fee on the way in
+        o["pnl"] += r["filled_usd"] * ((1 / r["avg_fill"]) - 1 if won else -1) - fee
+        o["fees"] = o.get("fees", 0.0) + fee
     for o in out.values():
         o["profit_per_$"] = round(o["pnl"] / o["stake"], 4) if o["stake"] else None
     return out

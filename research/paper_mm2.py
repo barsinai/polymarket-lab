@@ -24,10 +24,17 @@ from record_books import books_for  # noqa: E402
 
 # Variant (env MM_VARIANT): "1c" offers at mid+-1c (default), "2c" at mid+-2c,
 # "edge" just inside the reward zone's outer edge (max_spread - 0.5c). Each has its own state dir.
+# "wide": 1c offers, but the smallest size each market's reward programme accepts, in up to
+# 200 markets (same capital spread thin: reward share saturates per market, so breadth should
+# earn more per dollar and no single market can hurt much).
 VARIANT = os.environ.get("MM_VARIANT", "1c")
 D = "data/paper_mm2" if VARIANT == "1c" else f"data/paper_mm2_{VARIANT}"
-N, SIZE, SKEW, EVENT_CAP, MAX_BOOK_SPREAD = 40, 200, 0.01, 300.0, 0.04
-OFF = {"1c": 0.01, "2c": 0.02}.get(VARIANT, 0.01)
+N = 200 if VARIANT == "wide" else 40
+SIZE = 0 if VARIANT == "wide" else 200          # max(min_size, SIZE); wide -> min_size only
+SKEW, EVENT_CAP, MAX_BOOK_SPREAD = 0.01, 300.0, 0.04
+OFF = {"1c": 0.01, "2c": 0.02, "wide": 0.01}.get(VARIANT, 0.01)
+# trade-tape filter: pull quotes for a tick when the last trades were big and one-directional
+TAPE_USD, TAPE_N = 500.0, 3
 
 
 def offset(v):
@@ -39,6 +46,19 @@ DATA_API = "https://data-api.polymarket.com"
 SKIP = re.compile(r"\b(cpi|ppi|pmi|gdp|payroll|jobless|unemployment|inflation|nonfarm|retail sales|ism|jobs report|fed funds"
                   r"|sentiment|claims|interest rate|cash rate|policy rate|repo rate|rate cut|rate hike|bps)\b"
                   r"|be between -?[\d.,]+ and -?[\d.,]+", re.I)
+
+
+# maker rebate (docs.polymarket.com/market-makers/maker-rebates): a maker fill earns
+# rebate_share * taker_fee_rate * p * (1-p) per share, credited daily. Geopolitics: none.
+def rebate_per_share(p, q):
+    ql = (q or "").lower()
+    if re.search(r"\b(bitcoin|btc|ethereum|eth|solana|xrp|doge|crypto)\b", ql):
+        return 0.20 * 0.07 * p * (1 - p)
+    if re.search(r"\b(vs\.?|nba|nfl|mlb|nhl|ufc|o/u|spread)\b", ql):
+        return 0.15 * 0.05 * p * (1 - p)
+    if re.search(r"\b(war|israel|iran|russia|ukraine|ceasefire|nato|gaza|hamas|houthi)\b", ql):
+        return 0.0
+    return 0.25 * 0.05 * p * (1 - p)
 
 
 def template(q):
@@ -153,10 +173,10 @@ def tick(now=None):
                 continue  # a wide book means the mid is not a real price: don't quote around it
             cb, ca = score(bids, mid, r["v"], r["minsize"], True), score(asks, mid, r["v"], r["minsize"], False)
             comp = min(cb, ca) if min(cb, ca) > 0 else max(cb, ca) / 3
-            size = max(r["minsize"], SIZE)
+            size = max(r["minsize"], SIZE, 20)
             ours = ((r["v"] - 100 * off) / r["v"]) ** 2 * size
             cands.append((r["rate"] * ours / (ours + comp) / size, c))
-        st["universe"] = [c for _, c in sorted(cands, reverse=True)[:150]]
+        st["universe"] = [c for _, c in sorted(cands, reverse=True)[:max(150, 3 * N)]]
         st["universe_ts"] = now
         print(f"universe refreshed: {len(st['universe'])} candidates from {len(ok)} eligible reward markets", flush=True)
 
@@ -175,9 +195,11 @@ def tick(now=None):
             yp = px if oc == 0 else 1 - px
             if ((oc == 0 and side == "SELL") or (oc == 1 and side == "BUY")) and lb > 0 and yp <= q["bid"] + 1e-9:
                 f = min(lb, sz); lb -= f; pos["yes"] += f; st["cash"] -= f * q["bid"]; st["fills"] += 1
+                st["rebates"] = st.get("rebates", 0.0) + f * rebate_per_share(q["bid"], q["q"])
                 log["fills"].append([cid, "buy", q["bid"], f])
             elif ((oc == 0 and side == "BUY") or (oc == 1 and side == "SELL")) and la > 0 and yp >= q["ask"] - 1e-9:
                 f = min(la, sz); la -= f; pos["yes"] -= f; st["cash"] += f * q["ask"]; st["fills"] += 1
+                st["rebates"] = st.get("rebates", 0.0) + f * rebate_per_share(q["ask"], q["q"])
                 log["fills"].append([cid, "sell", q["ask"], f])
         # 2. rewards for the time rested: full credit if both sides still had size, a third if one side
         dt_days = (now - q["ts"]) / 86400
@@ -229,9 +251,16 @@ def tick(now=None):
         wide = asks[0][0] - bids[0][0] > MAX_BOOK_SPREAD
         cb, ca = score(bids, mid, r["v"], r["minsize"], True), score(asks, mid, r["v"], r["minsize"], False)
         comp = min(cb, ca) if min(cb, ca) > 0 else max(cb, ca) / 3
-        size = max(r["minsize"], SIZE)
+        size = max(r["minsize"], SIZE, 20)
         ours = ((r["v"] - 100 * off) / r["v"]) ** 2 * size
         rpd = 0.0 if wide else r["rate"] * ours / (ours + comp)
+        # tape filter: recent taker trades big and all one way -> informed flow, stand aside
+        tape = sorted(tr.get(cid, []), key=lambda t: float(t["timestamp"]))[-TAPE_N:]
+        if len(tape) == TAPE_N and all(float(t["price"]) * float(t["size"]) >= TAPE_USD for t in tape):
+            dirs = {((t.get("side") == "BUY") == (int(t.get("outcomeIndex") or 0) == 0)) for t in tape}
+            if len(dirs) == 1:
+                st["tape_skips"] = st.get("tape_skips", 0) + 1
+                rpd = 0.0
         hist = [p for _, p in st["mids"].get(cid, [])][-36:]
         vol = (sum((b - a) ** 2 for a, b in zip(hist, hist[1:])) / max(len(hist) - 1, 1)) ** 0.5 if len(hist) > 3 else 0.01
         ranked.append((rpd / (size * (1 + 20 * vol)), cid, mid, size, rpd))
@@ -260,10 +289,12 @@ def tick(now=None):
     mtm = sum(p["yes"] * p.get("mid", 0.5) for p in st["positions"].values())
     capital = sum(q["size"] * ((q["bid"] or 0) + (1 - (q["ask"] or 1))) for q in st["quotes"].values() if q["rpd"] > 0)
     rep = {"variant": VARIANT, "updated": datetime.fromtimestamp(now, timezone.utc).isoformat(), "ticks": st["ticks"], "fills": st["fills"],
-           "rewards_earned": round(st["rewards"], 2), "trading_cash": round(st["cash"], 2), "inventory_value_at_mid": round(mtm, 2),
-           "total_pnl": round(st["cash"] + mtm + st["rewards"], 2), "quoting": sum(1 for q in st["quotes"].values() if q["rpd"] > 0),
+           "rewards_earned": round(st["rewards"], 2), "maker_rebates": round(st.get("rebates", 0.0), 2),
+           "trading_cash": round(st["cash"], 2), "inventory_value_at_mid": round(mtm, 2),
+           "total_pnl": round(st["cash"] + mtm + st["rewards"] + st.get("rebates", 0.0), 2), "quoting": sum(1 for q in st["quotes"].values() if q["rpd"] > 0),
            "exit_only": sum(1 for q in st["quotes"].values() if q["rpd"] == 0), "capital_in_quotes_now": round(capital, 2),
-           "open_positions": sum(1 for p in st["positions"].values() if abs(p["yes"]) > 1e-9)}
+           "open_positions": sum(1 for p in st["positions"].values() if abs(p["yes"]) > 1e-9),
+           "tape_skips": st.get("tape_skips", 0)}
     d = datetime.fromtimestamp(now, timezone.utc)
     os.makedirs(f"{D}/{d:%Y-%m-%d}", exist_ok=True)
     with open(f"{D}/{d:%Y-%m-%d}/{d:%H}.jsonl", "a") as f:
