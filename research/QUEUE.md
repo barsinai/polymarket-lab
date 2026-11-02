@@ -107,3 +107,4 @@ BEFORE RISK. Unknowns: (1) adverse selection - fills when the price moves agains
   => Paper MM v2 live (paper_mm2.py, own job, every 10 min): requote 10 min, inventory skew,
   exit-only quotes for held positions, $300 cap per question family, rank by reward/vol, skip
   data releases / rate decisions / numeric ranges. Compare v1 vs v2 over the week.
+- 11-02 06:05 Price download COMPLETE (REMAINING 0; final save worked after the events-file fix).
