@@ -1,4 +1,4 @@
-name: Paper market making v2 (every 10 minutes)
+name: Paper market making v2 - three variants (every 10 minutes)
 
 on:
   schedule:
@@ -27,6 +27,9 @@ jobs:
           sparse-checkout: |
             research
             data/paper_mm2
+            data/paper_mm2_2c
+            data/paper_mm2_edge
+            data/live/meta
             data/live/rewards
       - uses: actions/setup-python@v5
         with:
@@ -41,11 +44,11 @@ jobs:
           while [ "$(date +%s)" -lt "$end" ]; do
             git fetch -q origin main
             # pick up the newest daily rewards file written by the hourly job
-            git checkout -q origin/main -- data/live/rewards 2>/dev/null
-            python -u research/paper_mm2.py 2>&1 | tee -a /tmp/mm2-log.txt
+            git checkout -q origin/main -- data/live/rewards data/live/meta 2>/dev/null
+            for V in 1c 2c edge; do MM_VARIANT=$V python -u research/paper_mm2.py 2>&1 | tee -a /tmp/mm2-log.txt; done
             if [ $(( $(date +%s) - last )) -ge 3300 ]; then
-              mkdir -p logs data/paper_mm2 && cp /tmp/mm2-log.txt logs/mm2-log.txt
-              git add --sparse data/paper_mm2 logs/mm2-log.txt
+              mkdir -p logs data/paper_mm2 data/paper_mm2_2c data/paper_mm2_edge && cp /tmp/mm2-log.txt logs/mm2-log.txt
+              git add --sparse data/paper_mm2 data/paper_mm2_2c data/paper_mm2_edge logs/mm2-log.txt
               if git commit -qm "Paper MM v2 $(date -u +%FT%H:%M) [skip ci]"; then
                 for i in 1 2 3 4 5; do git pull -q --rebase origin main && git push -q && break; sleep $((RANDOM % 10 + 3)); done
               fi
@@ -54,7 +57,7 @@ jobs:
             now=$(date +%s); sleep $(( 600 - now % 600 + 30 ))
           done
           mkdir -p logs && cp /tmp/mm2-log.txt logs/mm2-log.txt
-          git add --sparse data/paper_mm2 logs/mm2-log.txt
+          git add --sparse data/paper_mm2 data/paper_mm2_2c data/paper_mm2_edge logs/mm2-log.txt
           git commit -qm "Paper MM v2 $(date -u +%FT%H:%M) [skip ci]" && for i in 1 2 3 4 5; do git pull -q --rebase origin main && git push -q && break; sleep 5; done
       - name: Hand over to the next run
         if: always()

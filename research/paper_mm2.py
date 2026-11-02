@@ -22,8 +22,19 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import collect  # noqa: E402
 from record_books import books_for  # noqa: E402
 
-D = "data/paper_mm2"
-N, SIZE, OFF, SKEW, EVENT_CAP = 40, 200, 0.01, 0.01, 300.0
+# Variant (env MM_VARIANT): "1c" offers at mid+-1c (default), "2c" at mid+-2c,
+# "edge" just inside the reward zone's outer edge (max_spread - 0.5c). Each has its own state dir.
+VARIANT = os.environ.get("MM_VARIANT", "1c")
+D = "data/paper_mm2" if VARIANT == "1c" else f"data/paper_mm2_{VARIANT}"
+N, SIZE, SKEW, EVENT_CAP, MAX_BOOK_SPREAD = 40, 200, 0.01, 300.0, 0.04
+OFF = {"1c": 0.01, "2c": 0.02}.get(VARIANT, 0.01)
+
+
+def offset(v):
+    """distance from mid for this variant, in dollars; v = market max spread in cents"""
+    if VARIANT == "edge":
+        return max(0.01, (v - 0.5) / 100)
+    return OFF
 DATA_API = "https://data-api.polymarket.com"
 SKIP = re.compile(r"\b(cpi|ppi|pmi|gdp|payroll|jobless|unemployment|inflation|nonfarm|retail sales|ism|jobs report|fed funds"
                   r"|sentiment|claims|interest rate|cash rate|policy rate|repo rate|rate cut|rate hike|bps)\b"
@@ -63,6 +74,16 @@ def load():
     except (OSError, ValueError):
         return {"positions": {}, "cash": 0.0, "rewards": 0.0, "quotes": {}, "fills": 0, "ticks": 0,
                 "mids": {}, "universe": [], "universe_ts": 0, "settled": {}}
+
+
+def event_map():
+    """conditionId -> Polymarket event id, from the daily meta files of the live recording"""
+    out = {}
+    for f in sorted(glob.glob("data/live/meta/*.jsonl.gz"))[-3:]:
+        for m in collect.read_jsonl_gz(f):
+            if m.get("conditionId") and m.get("event_id"):
+                out[m["conditionId"]] = str(m["event_id"])
+    return out
 
 
 def rewards_table():
@@ -127,12 +148,13 @@ def tick(now=None):
             if not bids or not asks:
                 continue
             mid = (bids[0][0] + asks[0][0]) / 2
-            if not (0.10 < mid < 0.90) or 100 * OFF >= r["v"]:
-                continue
+            off = offset(r["v"])
+            if not (0.10 < mid < 0.90) or 100 * off >= r["v"] or asks[0][0] - bids[0][0] > MAX_BOOK_SPREAD:
+                continue  # a wide book means the mid is not a real price: don't quote around it
             cb, ca = score(bids, mid, r["v"], r["minsize"], True), score(asks, mid, r["v"], r["minsize"], False)
             comp = min(cb, ca) if min(cb, ca) > 0 else max(cb, ca) / 3
             size = max(r["minsize"], SIZE)
-            ours = ((r["v"] - 100 * OFF) / r["v"]) ** 2 * size
+            ours = ((r["v"] - 100 * off) / r["v"]) ** 2 * size
             cands.append((r["rate"] * ours / (ours + comp) / size, c))
         st["universe"] = [c for _, c in sorted(cands, reverse=True)[:150]]
         st["universe_ts"] = now
@@ -184,10 +206,12 @@ def tick(now=None):
                     log["settled"].append([cid, pos["yes"], pay])
                     pos["yes"] = 0.0; st["settled"][cid] = pay
 
-    # exposure per question family
+    # exposure per event (Polymarket's own grouping; sentence-shape template only as fallback)
+    EVM = event_map()
     fam = {}
     for cid, pos in st["positions"].items():
-        fam[pos.get("tpl", "")] = fam.get(pos.get("tpl", ""), 0) + abs(pos["yes"]) * pos.get("mid", 0.5)
+        g = EVM.get(cid) or pos.get("tpl", "")
+        fam[g] = fam.get(g, 0) + abs(pos["yes"]) * pos.get("mid", 0.5)
 
     # 4. requote: best N by reward vs recent movement, plus exit-only quotes where we hold inventory
     ranked = []
@@ -201,16 +225,18 @@ def tick(now=None):
         mid = (bids[0][0] + asks[0][0]) / 2
         if not (0.05 < mid < 0.95):
             continue
+        off = offset(r["v"])
+        wide = asks[0][0] - bids[0][0] > MAX_BOOK_SPREAD
         cb, ca = score(bids, mid, r["v"], r["minsize"], True), score(asks, mid, r["v"], r["minsize"], False)
         comp = min(cb, ca) if min(cb, ca) > 0 else max(cb, ca) / 3
         size = max(r["minsize"], SIZE)
-        ours = ((r["v"] - 100 * OFF) / r["v"]) ** 2 * size
-        rpd = r["rate"] * ours / (ours + comp)
+        ours = ((r["v"] - 100 * off) / r["v"]) ** 2 * size
+        rpd = 0.0 if wide else r["rate"] * ours / (ours + comp)
         hist = [p for _, p in st["mids"].get(cid, [])][-36:]
         vol = (sum((b - a) ** 2 for a, b in zip(hist, hist[1:])) / max(len(hist) - 1, 1)) ** 0.5 if len(hist) > 3 else 0.01
         ranked.append((rpd / (size * (1 + 20 * vol)), cid, mid, size, rpd))
     ranked.sort(reverse=True)
-    chosen = {c for _, c, *_ in ranked[:N]}
+    chosen = {c for sc_, c, *_ in ranked[:N] if sc_ > 0}
     for _, cid, mid, size, rpd in ranked:
         pos = st["positions"].get(cid, {"yes": 0.0})
         inv = pos["yes"]
@@ -218,9 +244,10 @@ def tick(now=None):
             continue
         tpl = template(rw[cid]["q"])
         exit_only = cid not in chosen
+        off = offset(rw[cid]["v"])
         centre = mid - SKEW * (inv / size)
-        bid = round(centre - OFF, 3); ask = round(centre + OFF, 3)
-        over_cap = fam.get(tpl, 0) > EVENT_CAP
+        bid = round(centre - off, 3); ask = round(centre + off, 3)
+        over_cap = fam.get(EVM.get(cid) or tpl, 0) > EVENT_CAP
         want_bid = inv < 2 * size and not (exit_only and inv >= 0) and not (over_cap and inv >= 0)
         want_ask = inv > -2 * size and not (exit_only and inv <= 0) and not (over_cap and inv <= 0)
         if exit_only:  # only work the position off, at the mid, no reward expected
@@ -231,8 +258,8 @@ def tick(now=None):
                              "rpd": 0.0 if exit_only else rpd}
     st["ticks"] += 1
     mtm = sum(p["yes"] * p.get("mid", 0.5) for p in st["positions"].values())
-    capital = sum(q["size"] * (1 - 2 * OFF) for q in st["quotes"].values() if q["rpd"] > 0)
-    rep = {"updated": datetime.fromtimestamp(now, timezone.utc).isoformat(), "ticks": st["ticks"], "fills": st["fills"],
+    capital = sum(q["size"] * ((q["bid"] or 0) + (1 - (q["ask"] or 1))) for q in st["quotes"].values() if q["rpd"] > 0)
+    rep = {"variant": VARIANT, "updated": datetime.fromtimestamp(now, timezone.utc).isoformat(), "ticks": st["ticks"], "fills": st["fills"],
            "rewards_earned": round(st["rewards"], 2), "trading_cash": round(st["cash"], 2), "inventory_value_at_mid": round(mtm, 2),
            "total_pnl": round(st["cash"] + mtm + st["rewards"], 2), "quoting": sum(1 for q in st["quotes"].values() if q["rpd"] > 0),
            "exit_only": sum(1 for q in st["quotes"].values() if q["rpd"] == 0), "capital_in_quotes_now": round(capital, 2),
