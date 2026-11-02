@@ -127,3 +127,18 @@ Price drift in the trade's direction (what a market maker on the other side lose
   Carbon, GPT Astra, Anthropic IPO): high pool, low competition, binary news risk -> winner's
   curse candidate; event cap ($300) is the backstop. Checks: exit-only quotes active (10),
   event cap respected (max $236), no settlements yet (all >7d). Too early to rank v1 vs v2.
+
+## 11-02 14:00-16:00 deep dive (Fable)
+- Fees (Polymarket docs): takers pay rate*p*(1-p) per share (crypto 7%, sports/most 5%,
+  politics/finance 4%, geopolitics 0); MAKERS PAY NOTHING and earn 15-25% of taker fees as
+  rebates. Added: taker fees to the betting paper trader (makes it honest), maker rebates to
+  MM v2 (small extra income, shown separately).
+- MM "wide" variant live: min-size quotes in 200 markets, same ~$7.9k capital.
+- Trade-tape filter in v2: pull quotes after 3 consecutive >=$500 one-directional taker trades.
+- Date-ladder logic arbitrage ("by Nov 15" vs "by Nov 30" etc., 468 ladders, 51 hours of
+  books): essentially none (47c total). Bots keep ladders consistent. DEAD as a taker trade.
+- New reward markets (1-3 days old): median competitor score 49 vs ~250 for older ones, pool
+  $32/day; price volatility only modestly higher (0.6c/h vs 0.45c/h median). => fresh markets
+  are attractive for MM; rewards snapshot now refreshed every 6h so they enter the universe.
+- Known-outcome weather (buy the winning temperature bucket after the day's max is in): by
+  21:00 local the winner already trades at ~$1.00 in 99% of 36k markets. Bots. DEAD.
