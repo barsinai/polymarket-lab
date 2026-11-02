@@ -200,7 +200,8 @@ def tick(now=None):
         print(f"universe refreshed: {len(st['universe'])} candidates from {len(ok)} eligible reward markets", flush=True)
 
     watch = list(dict.fromkeys(st["universe"] + [c for c, p in st["positions"].items() if abs(p["yes"]) > 1e-9 and c not in st["settled"]]))
-    books = books_for([rw[c]["token"] for c in watch if c in rw])
+    tok_of = {c: (rw[c]["token"] if c in rw else st["positions"].get(c, {}).get("token")) for c in watch}
+    books = books_for([t for t in tok_of.values() if t])
 
     # 1. fills on standing quotes, from real taker trades since they were placed
     qs = st["quotes"]
@@ -220,17 +221,35 @@ def tick(now=None):
                 f = min(la, sz); la -= f; pos["yes"] -= f; st["cash"] += f * q["ask"]; st["fills"] += 1
                 st["rebates"] = st.get("rebates", 0.0) + f * rebate_per_share(q["ask"], q["q"])
                 log["fills"].append([cid, "sell", q["ask"], f])
-        # 2. rewards for the time rested: full credit if both sides still had size, a third if one side
+        # 2. rewards for the time rested: full credit if both sides still had size, a third if one
+        #    side. Scaled by how far our quotes sit from the CURRENT mid (a quote that drifted out of
+        #    the reward zone scores 0), and zero if the market would pay us < $1/day (Polymarket's
+        #    minimum payout).
         dt_days = (now - q["ts"]) / 86400
         both = lb > 0 and la > 0
         one = (lb > 0) != (la > 0)
-        credit = q["rpd"] * dt_days * (1 if both else (1 / 3 if one else 0))
+        drift = 1.0
+        bk_now = books.get(q.get("token"))
+        if bk_now and q.get("rpd", 0) > 0:
+            b_, a_ = book_view(bk_now)
+            if b_ and a_:
+                mid_now = (b_[0][0] + a_[0][0]) / 2
+                v = rw.get(cid, {}).get("v", 3.0)
+                def sc(dist_c):
+                    return ((v - dist_c) / v) ** 2 if 0 <= dist_c < v else 0.0
+                s_old = sc(100 * q.get("off", OFF))
+                s_new = min(sc(100 * abs(mid_now - q["bid"])) if q["bid"] else 1.0,
+                            sc(100 * abs(q["ask"] - mid_now)) if q["ask"] else 1.0)
+                drift = (0.5 * (s_old + s_new) / s_old) if s_old > 0 else 0.0
+        credit = q["rpd"] * dt_days * (1 if both else (1 / 3 if one else 0)) * drift
+        if q.get("rpd", 0) * (1 if both else 1 / 3) < 1.0:
+            credit = 0.0  # below the $1/day minimum: nothing is paid
         st["rewards"] += credit; log["rewards"] += credit
     st["quotes"] = {}
 
     # 3. mark to mid; settle closed markets
     for cid, pos in st["positions"].items():
-        bk = books.get(rw.get(cid, {}).get("token"))
+        bk = books.get(tok_of.get(cid) or pos.get("token"))
         if bk:
             bids, asks = book_view(bk)
             if bids and asks:
@@ -306,17 +325,19 @@ def tick(now=None):
         if exit_only:  # only work the position off, at the mid, no reward expected
             bid, ask = (round(mid - 0.005, 3), None) if inv < 0 else (None, round(mid + 0.005, 3))
             want_bid, want_ask = inv < 0, inv > 0
-        st["quotes"][cid] = {"ts": int(now), "q": rw[cid]["q"], "tpl": tpl, "token": rw[cid]["token"], "size": size if not exit_only else abs(inv),
+        st["quotes"][cid] = {"ts": int(now), "q": rw[cid]["q"], "tpl": tpl, "token": rw[cid]["token"], "off": off, "size": size if not exit_only else abs(inv),
                              "bid": bid if want_bid and 0 < bid < 1 else None, "ask": ask if want_ask and ask and 0 < ask < 1 else None,
                              "rpd": 0.0 if exit_only else rpd}
     st["ticks"] += 1
     mtm = sum(p["yes"] * p.get("mid", 0.5) for p in st["positions"].values())
-    capital = sum(q["size"] * ((q["bid"] or 0) + (1 - (q["ask"] or 1))) for q in st["quotes"].values() if q["rpd"] > 0)
+    inv_capital = sum(abs(p["yes"]) * (p.get("mid", 0.5) if p["yes"] > 0 else 1 - p.get("mid", 0.5)) for p in st["positions"].values())
+    capital = sum(q["size"] * ((q["bid"] or 0) + (1 - (q["ask"] or 1))) for q in st["quotes"].values() if q["rpd"] > 0) + inv_capital
     rep = {"variant": VARIANT, "updated": datetime.fromtimestamp(now, timezone.utc).isoformat(), "ticks": st["ticks"], "fills": st["fills"],
            "rewards_earned": round(st["rewards"], 2), "maker_rebates": round(st.get("rebates", 0.0), 2),
            "trading_cash": round(st["cash"], 2), "inventory_value_at_mid": round(mtm, 2),
            "total_pnl": round(st["cash"] + mtm + st["rewards"] + st.get("rebates", 0.0), 2), "quoting": sum(1 for q in st["quotes"].values() if q["rpd"] > 0),
-           "exit_only": sum(1 for q in st["quotes"].values() if q["rpd"] == 0), "capital_in_quotes_now": round(capital, 2),
+           "exit_only": sum(1 for q in st["quotes"].values() if q["rpd"] == 0), "capital_in_use": round(capital, 2),
+           "capital_in_inventory": round(inv_capital, 2),
            "open_positions": sum(1 for p in st["positions"].values() if abs(p["yes"]) > 1e-9),
            "tape_skips": st.get("tape_skips", 0)}
     d = datetime.fromtimestamp(now, timezone.utc)
