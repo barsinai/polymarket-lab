@@ -13,6 +13,7 @@ Step 1 (slow, streams all saved price files): python research/model.py build
 Step 2 (fast):                                python research/model.py fit
 """
 
+import glob
 import gzip
 import json
 import os
@@ -128,6 +129,8 @@ def features(t_, p_, t, m):
 
 def build():
     events = {str(e["id"]): e.get("tags") for e in jl(f"{DATA}/events_closed.jsonl.gz")}
+    for f in sorted(glob.glob(f"{DATA}/events/*.jsonl.gz")):  # newer event tags, one file per run
+        events.update({str(e["id"]): e.get("tags") for e in jl(f)})
     raw, ev_size = {}, Counter()
     paths = sorted(os.path.join(f"{DATA}/listing", f) for f in os.listdir(f"{DATA}/listing") if f.endswith(".gz"))
     for path in paths + [f"{DATA}/markets_closed.jsonl.gz"]:

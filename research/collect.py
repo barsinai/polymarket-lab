@@ -261,9 +261,14 @@ def list_markets(a, ckpt):
 
 def fetch_event_tags(closed, minutes):
     """Topic tags for the events our markets belong to, fetched one event at a time,
-    only for events we don't have yet."""
-    path = f"{DATA}/events_closed.jsonl.gz"
-    known = {str(e.get("id")) for e in read_jsonl_gz(path)}
+    only for events we don't have yet. New ones go to a new small file per run in
+    data/events/ (the original events_closed.jsonl.gz is ~93 MB: rewriting it would pass
+    GitHub's 100 MB file limit and make the whole final save fail)."""
+    known = {str(e.get("id")) for e in read_jsonl_gz(f"{DATA}/events_closed.jsonl.gz")}
+    os.makedirs(f"{DATA}/events", exist_ok=True)
+    for f in os.listdir(f"{DATA}/events"):
+        if f.endswith(".jsonl.gz"):
+            known |= {str(e.get("id")) for e in read_jsonl_gz(f"{DATA}/events/{f}")}
     want = []
     for m in closed:
         ev = (m.get("events") or [{}])[0]
@@ -276,9 +281,11 @@ def fetch_event_tags(closed, minutes):
         for k in range(0, len(want), 100):
             if (time.time() - t0) / 60 > minutes:
                 break
-            got += [slim_event(e) for e in pool.map(lambda i: get(f"{GAMMA}/events/{i}"), want[k:k + 100]) if e]
+            got += [{"id": e.get("id"), "title": e.get("title"), "slug": e.get("slug"),
+                     "tags": [{"label": t.get("label")} for t in e.get("tags") or []]}
+                    for e in pool.map(lambda i: get(f"{GAMMA}/events/{i}"), want[k:k + 100]) if e]
     if got:
-        write_jsonl_gz(path, merge_by_id(path, got))
+        write_jsonl_gz(f"{DATA}/events/{datetime.now(timezone.utc):%Y%m%dT%H%M}.jsonl.gz", got)
     log(f"event tags: fetched {len(got)}")
 
 
