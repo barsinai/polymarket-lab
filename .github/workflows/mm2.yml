@@ -1,0 +1,63 @@
+name: Paper market making v2 (every 10 minutes)
+
+on:
+  schedule:
+    - cron: "11 */2 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["research/paper_mm2.py", ".github/workflows/mm2.yml"]
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: mm2
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout: |
+            research
+            data/paper_mm2
+            data/live/rewards
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - name: Tick every 10 minutes for ~5.5 hours, save hourly
+        run: |
+          git config user.name "polymarket-lab-bot"
+          git config user.email "actions@users.noreply.github.com"
+          set +e
+          end=$(( $(date +%s) + 325*60 )); last=0
+          while [ "$(date +%s)" -lt "$end" ]; do
+            git fetch -q origin main
+            # pick up the newest daily rewards file written by the hourly job
+            git checkout -q origin/main -- data/live/rewards 2>/dev/null
+            python -u research/paper_mm2.py 2>&1 | tee -a /tmp/mm2-log.txt
+            if [ $(( $(date +%s) - last )) -ge 3300 ]; then
+              mkdir -p logs data/paper_mm2 && cp /tmp/mm2-log.txt logs/mm2-log.txt
+              git add --sparse data/paper_mm2 logs/mm2-log.txt
+              if git commit -qm "Paper MM v2 $(date -u +%FT%H:%M) [skip ci]"; then
+                for i in 1 2 3 4 5; do git pull -q --rebase origin main && git push -q && break; sleep $((RANDOM % 10 + 3)); done
+              fi
+              last=$(date +%s)
+            fi
+            now=$(date +%s); sleep $(( 600 - now % 600 + 30 ))
+          done
+          mkdir -p logs && cp /tmp/mm2-log.txt logs/mm2-log.txt
+          git add --sparse data/paper_mm2 logs/mm2-log.txt
+          git commit -qm "Paper MM v2 $(date -u +%FT%H:%M) [skip ci]" && for i in 1 2 3 4 5; do git pull -q --rebase origin main && git push -q && break; sleep 5; done
+      - name: Hand over to the next run
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run mm2.yml --ref main -R ${{ github.repository }}
