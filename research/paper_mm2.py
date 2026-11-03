@@ -60,6 +60,7 @@ TAG = os.environ.get("MM_TAG", "").lower()                        # only markets
 OFF = float(os.environ["MM_OFF"]) if os.environ.get("MM_OFF") else OFF   # offset override, dollars
 LEAN = os.environ.get("MM_LEAN") == "1"                           # shift quotes one tick toward the heavier side of the book
 SV_LO, SV_HI = float(os.environ.get("MM_SV_LO", "0.5")), float(os.environ.get("MM_SV_HI", "2.0"))  # size-by-calmness clamp
+SV_REF = float(os.environ.get("MM_SV_REF", "0.005"))              # size-by-calmness: size *= SV_REF / vol (clamped)
 VOL_W = float(os.environ.get("MM_VOL_W", "20"))                   # ranking: reward / (size * (1 + VOL_W * hourly vol))
 VOL14 = os.environ.get("MM_VOL14") == "1"                         # vol from 14-day hourly history instead of the last 48h
 JUMP14 = os.environ.get("MM_JUMP14") == "1"                       # ...and apply MAX_JUMP to the 14-day max move too
@@ -399,7 +400,7 @@ def tick(now=None):
         exit_only = cid not in chosen
         off = offset(rw[cid]["v"], rw[cid]["tick"])
         if SIZE_BY_VOL and cid in JT and not PARK:
-            size = max(rw[cid]["minsize"], 20, round(size * min(SV_HI, max(SV_LO, 0.005 / max(JT[cid][1], 0.001)))))
+            size = max(rw[cid]["minsize"], 20, round(size * min(SV_HI, max(SV_LO, SV_REF / max(JT[cid][1], 0.001)))))
         centre = mid - SKEW * (inv / size)
         if LEAN and not PARK:  # heavier bid side within 2c of mid -> price tends to drift up (+0.1c/h at the extremes)
             bk_ = books.get(rw[cid]["token"]); bids_, asks_ = book_view(bk_) if bk_ else ([], [])
