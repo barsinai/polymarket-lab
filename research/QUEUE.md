@@ -190,3 +190,38 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - Rule switches on 2c: SIZE BY CALMNESS net +9.4/h on $7.2k (vs +4.7 on $9.2k): doubles net
   per $. Max-jump 5c: rewards fall more than losses. Pool floor $20: no effect. Pause-after-
   fill: rerunning. => new live variant "2cv" (2c + size by calmness) replaces the dead "edge".
+- Pause-after-fill: net +4.55/h vs +4.69 plain 2c. No gain. Dropped.
+
+## 11-03 18:15 IDEATION ROUND (user asked for novel ideas) - studies + replays
+- Hourly-book microstructure (exp_micro.py, 173k market-hours, reward universe):
+  * Book imbalance within 2c of mid predicts next-hour mid move, monotonic over deciles:
+    top decile +0.12c, bottom -0.09c (corr 0.04). Microprice is WORSE than mid (dropped).
+  * 1h reversal: after a >=0.5c move the next hour gives back ~0.13c; after >=3c, 0.35c
+    (4,790 cases). Supports keeping quotes up after moves (and explains pause-after-fill).
+  * Competition: flat by hour of day and weekday (no timing edge). Markets <3 days old have
+    ~1/4 the competing depth and 7-20x reward per competing share, but move 2c/h vs 0.3c.
+    Weather: 850 shares competing, 25x reward yield, 2c/h moves.
+- Replays (2c + size-by-calmness base = +9.42/h): LEAN one tick toward the heavier side when
+  |imbalance|>0.4 -> +10.35/h (trading -9.0 vs -10.8, rewards 18.3 vs 19.1). Adopted as live
+  variant "2cl" (replaces park, which lost -8/h). YOUNG markets (<3d old): almost no universe
+  survives the >7d-to-end + jump filters (18 fills) - dropped. WEATHER: rewards 24/h but
+  trading -36/h -> net -8/h. Dead.
+- Wallet skill (exp_wallets.py, 80M trades, 54k random markets, train markets closed before
+  May 1 / test after): persistence is weak (Spearman 0.06 across 20.7k wallets). LOSERS
+  PERSIST: worst-decile wallets lose -3.7%/$ out of sample on outcomes and the price drifts
+  -1.9% against them in 24h; decile 2 -1.7%. Winners barely: top decile +2.3%/$ on outcomes
+  but +0.5% 24h drift; decile 9 negative. 94% of trades come from wallets with no record
+  (sample covers 1/12 of markets). Uses: (a) fade bottom-decile wallets - gross +3.7%/$ to
+  resolution vs ~1.3% taker fee: thin but real, needs full-market wallet coverage; (b) as a
+  maker, fills from top-decile wallets cost ~0.5-1% - mild protection value. Queued: keep
+  wallet ids in the replay trade record and test wallet-aware quoting.
+- Holding rewards: Polymarket pays ~3.25-4% APY (daily, from its treasury) on position value
+  in selected long-dated markets ("Earn x%" tag). Both Yes and No count. Not a strategy, but
+  inventory parked in those markets is not dead money.
+- Soccer vs Pinnacle: pipeline built (soccer.yml: football-data.co.uk closing odds for 8
+  leagues + hourly Polymarket histories for 12k moneyline/draw markets since Aug 2025);
+  analysis exp_pinnacle.py ready: calibration vs Pinnacle, taker test at 1h/6h/24h before
+  kickoff with fees. Running tonight.
+- Tax/legal notes for Israel written (TAX_ISRAEL.md): no official position; gambling 35% on
+  gross (bad for an MM) vs business income (deductible losses, likely for a bot); crypto
+  treated as an asset; ledger from day one.
