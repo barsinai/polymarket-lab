@@ -50,6 +50,11 @@ PAUSE_AFTER_FILL = os.environ.get("MM_PAUSE_AFTER_FILL") == "1"   # filled last 
 SIZE_BY_VOL = os.environ.get("MM_SIZE_BY_VOL") == "1"             # quote more in calm markets, less in jumpy ones
 MAX_JUMP = float(os.environ.get("MM_MAX_JUMP", "0.10"))           # exclude markets that moved more than this in an hour (48h)
 MIN_POOL = float(os.environ.get("MM_MIN_POOL", "0"))              # ignore markets whose daily pool is below this
+MIN_DAYS = float(os.environ.get("MM_MIN_DAYS", "7"))              # only markets at least this many days from their end
+AGE_MAX = float(os.environ.get("MM_AGE_MAX", "1e9"))              # only markets created within this many days (new-market liquidity)
+TAG = os.environ.get("MM_TAG", "").lower()                        # only markets carrying this tag (e.g. "weather")
+OFF = float(os.environ["MM_OFF"]) if os.environ.get("MM_OFF") else OFF   # offset override, dollars
+LEAN = os.environ.get("MM_LEAN") == "1"                           # shift quotes one tick toward the heavier side of the book
 
 
 def offset(v, tick=0.01):
@@ -146,6 +151,16 @@ def event_map():
     return out
 
 
+def created_map():
+    """conditionId -> creation time (from the live meta files)"""
+    out = {}
+    for f in sorted(glob.glob("data/live/meta/*.jsonl.gz"))[-5:]:
+        for m in collect.read_jsonl_gz(f):
+            if m.get("conditionId") and m.get("createdAt"):
+                out[m["conditionId"]] = ts(m["createdAt"])
+    return out
+
+
 def rewards_table():
     files = sorted(glob.glob("data/live/rewards/*.jsonl.gz"))
     out = {}
@@ -159,6 +174,7 @@ def rewards_table():
             out[m["condition_id"]] = {"rate": rate, "v": float(r["max_spread"]), "minsize": float(r.get("min_size") or 0),
                                       "tick": float(m.get("minimum_tick_size") or 0.01),
                                       "q": m.get("question") or "", "end": ts(m.get("end_date_iso")),
+                                      "tags": " ".join(t for t in (collect.as_list(m.get("tags")) or []) if isinstance(t, str)).lower(),
                                       "token": str(toks[0]["token_id"])}
     return out
 
@@ -189,8 +205,10 @@ def tick(now=None):
             ok = {c: r for c, r in rw.items() if r["end"] and 1 * 86400 <= r["end"] - now <= 5 * 86400
                   and not re.search(r"\b(hit|reach|dip to|settle over|settle under)\s+\$", r["q"], re.I)}
         else:
-            ok = {c: r for c, r in rw.items() if not SKIP.search(r["q"]) and not (r["end"] and r["end"] - now < 7 * 86400)
-                  and JT.get(c, (0, 0))[0] <= MAX_JUMP and r["rate"] >= MIN_POOL}  # no recent jumpers, decent pool
+            CM = created_map() if AGE_MAX < 1e8 else {}
+            ok = {c: r for c, r in rw.items() if not SKIP.search(r["q"]) and not (r["end"] and r["end"] - now < MIN_DAYS * 86400)
+                  and JT.get(c, (0, 0))[0] <= MAX_JUMP and r["rate"] >= MIN_POOL
+                  and (not TAG or TAG in r["tags"]) and (AGE_MAX > 1e8 or (CM.get(c) and now - CM[c] <= AGE_MAX * 86400))}
         toks = [r["token"] for r in ok.values()]
         chunks = [toks[i:i + 500] for i in range(0, len(toks), 500)]
         books = {}
@@ -341,6 +359,12 @@ def tick(now=None):
         if SIZE_BY_VOL and cid in JT and not PARK:
             size = max(rw[cid]["minsize"], 20, round(size * min(2.0, max(0.5, 0.005 / max(JT[cid][1], 0.001)))))
         centre = mid - SKEW * (inv / size)
+        if LEAN and not PARK:  # heavier bid side within 2c of mid -> price tends to drift up (+0.1c/h at the extremes)
+            bk_ = books.get(rw[cid]["token"]); bids_, asks_ = book_view(bk_) if bk_ else ([], [])
+            db = sum(s_ for p_, s_ in bids_ if mid - p_ <= 0.02); da = sum(s_ for p_, s_ in asks_ if p_ - mid <= 0.02)
+            imb = (db - da) / (db + da) if db + da > 0 else 0.0
+            if abs(imb) > 0.4:
+                centre += (rw[cid]["tick"] if imb > 0 else -rw[cid]["tick"])
         bid = round(centre - off, 3); ask = round(centre + off, 3)
         over_cap = fam.get(EVM.get(cid) or tpl, 0) > EVENT_CAP
         want_bid = inv < 2 * size and not (exit_only and inv >= 0) and not (over_cap and inv >= 0)
