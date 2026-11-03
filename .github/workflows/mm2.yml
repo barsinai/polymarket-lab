@@ -50,6 +50,7 @@ jobs:
             # pick up the newest daily rewards file written by the hourly job
             git checkout -q origin/main -- data/live/rewards data/live/meta data/live/mids_48h.json.gz 2>/dev/null
             for V in 1c 2c 2cv 2cl wide tight; do MM_VARIANT=$V python -u research/paper_mm2.py 2>&1 | tee -a /tmp/mm2-log.txt; done
+            MM_VARIANT=2cl python -u research/live/quoter.py 2>&1 | tail -c 600 | tee -a /tmp/mm2-log.txt   # dry-run orders, never sent
             if [ $(( $(date +%s) - last )) -ge 3300 ]; then
               mkdir -p logs data/paper_mm2 data/paper_mm2_2c data/paper_mm2_2cv data/paper_mm2_edge data/paper_mm2_wide data/paper_mm2_2cl data/paper_mm2_tight && cp /tmp/mm2-log.txt logs/mm2-log.txt
               git add --sparse data/paper_mm2 data/paper_mm2_2c data/paper_mm2_2cv data/paper_mm2_edge data/paper_mm2_wide data/paper_mm2_2cl data/paper_mm2_tight logs/mm2-log.txt
