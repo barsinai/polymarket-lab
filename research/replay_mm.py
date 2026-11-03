@@ -10,6 +10,7 @@ Usage: MM_VARIANT=1c python research/replay_mm.py [--start 2026-10-31T20:00] [--
 Output: data/replay_mm/results/<variant>.json (same report shape) + per-hour series.
 """
 import argparse, glob, gzip, json, os, sys
+_real_glob = glob.glob
 from datetime import datetime, timezone
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import collect  # noqa: E402
@@ -78,7 +79,7 @@ for f in snaps:
     P.jump_table = lambda: {c: (max(abs(b[1] - a_[1]) for a_, b in zip(v, v[1:])), (sum((b[1] - a_[1]) ** 2 for a_, b in zip(v, v[1:])) / max(len(v) - 1, 1)) ** 0.5)
                             for c, v in mids_hist.items() if len(v) >= 6}
     rf = [x for x in rewards_files if os.path.basename(x)[:10] <= datetime.fromtimestamp(now, timezone.utc).strftime("%Y-%m-%d")] or rewards_files[:1]
-    P.glob.glob = (lambda pat, rf=rf: rf if "rewards" in pat else glob.glob(pat))
+    P.glob.glob = (lambda pat, rf=rf: rf if "rewards" in pat else _real_glob(pat))
     collect.get = lambda *args, **kw: {}  # no network: no resolution settlement in replay (positions stay marked to mid)
     rep = P.tick(now)
     if rep:

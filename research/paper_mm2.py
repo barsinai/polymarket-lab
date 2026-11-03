@@ -42,6 +42,11 @@ SKEW, EVENT_CAP, MAX_BOOK_SPREAD = 0.01, 150.0, 0.04
 OFF = {"1c": 0.01, "2c": 0.02, "wide": 0.01, "park": 0.005, "tight": 0.01}.get(VARIANT, 0.01)
 # trade-tape filter: pull quotes for a tick when the last trades were big and one-directional
 TAPE_USD, TAPE_N = 500.0, 3
+# experimental switches (env), so the same code runs live and in replay:
+PAUSE_AFTER_FILL = os.environ.get("MM_PAUSE_AFTER_FILL") == "1"   # filled last tick -> stand aside this tick
+SIZE_BY_VOL = os.environ.get("MM_SIZE_BY_VOL") == "1"             # quote more in calm markets, less in jumpy ones
+MAX_JUMP = float(os.environ.get("MM_MAX_JUMP", "0.10"))           # exclude markets that moved more than this in an hour (48h)
+MIN_POOL = float(os.environ.get("MM_MIN_POOL", "0"))              # ignore markets whose daily pool is below this
 
 
 def offset(v, tick=0.01):
@@ -182,7 +187,7 @@ def tick(now=None):
                   and not re.search(r"\b(hit|reach|dip to|settle over|settle under)\s+\$", r["q"], re.I)}
         else:
             ok = {c: r for c, r in rw.items() if not SKIP.search(r["q"]) and not (r["end"] and r["end"] - now < 7 * 86400)
-                  and JT.get(c, (0, 0))[0] <= 0.10}  # no market that jumped >10c in an hour during the last 2 days
+                  and JT.get(c, (0, 0))[0] <= MAX_JUMP and r["rate"] >= MIN_POOL}  # no recent jumpers, decent pool
         toks = [r["token"] for r in ok.values()]
         chunks = [toks[i:i + 500] for i in range(0, len(toks), 500)]
         books = {}
@@ -312,8 +317,10 @@ def tick(now=None):
                 rpd = 0.0
         if cid in JT:
             vol = JT[cid][1]
-            if JT[cid][0] > 0.10:
+            if JT[cid][0] > MAX_JUMP:
                 rpd = 0.0  # jumped recently: exit only
+        if PAUSE_AFTER_FILL and any(f_[0] == cid for f_ in log["fills"]):
+            rpd = 0.0  # someone just traded with us: let the price settle before quoting again
         else:
             hist = [p for _, p in st["mids"].get(cid, [])][-36:]
             vol = (sum((b - a) ** 2 for a, b in zip(hist, hist[1:])) / max(len(hist) - 1, 1)) ** 0.5 if len(hist) > 3 else 0.01
@@ -328,6 +335,8 @@ def tick(now=None):
         tpl = template(rw[cid]["q"])
         exit_only = cid not in chosen
         off = offset(rw[cid]["v"], rw[cid]["tick"])
+        if SIZE_BY_VOL and cid in JT and not PARK:
+            size = max(rw[cid]["minsize"], 20, round(size * min(2.0, max(0.5, 0.005 / max(JT[cid][1], 0.001)))))
         centre = mid - SKEW * (inv / size)
         bid = round(centre - off, 3); ask = round(centre + off, 3)
         over_cap = fam.get(EVM.get(cid) or tpl, 0) > EVENT_CAP
