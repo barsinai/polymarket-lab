@@ -225,3 +225,20 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - Tax/legal notes for Israel written (TAX_ISRAEL.md): no official position; gambling 35% on
   gross (bad for an MM) vs business income (deductible losses, likely for a bot); crypto
   treated as an asset; ledger from day one.
+- REQUOTE SPEED (replay_fast.py: intra-hour simulation from the trade tape, mid estimated
+  from last taker buy/sell prices, 2c+sizevol selection): trading loss per hour at requote
+  every 3600s -7.3, 600s -9.0, 60s -8.6, 5s -8.5 (fills 536 -> 590). => Speed does NOT fix
+  the loss (correction to the 16:30 note). The loss is adverse selection at the moment of the
+  trade, not stale quotes afterwards. Caveat: tape-based mids lag the real book, so a bot that
+  watches the book could still do somewhat better; cannot be measured offline.
+- LOSS DECOMPOSITION (2c+sizevol replay, 804 fills, mm_loss_decomp.py): -941 marked at the
+  next snapshot, -635 marked 24h later (a third reverts). 236 fills in hours with a >=5c move
+  account for -772 of -941; hours with <2c moves are breakeven. Per-$ loss ~7% of notional.
+  Worst markets: date-specific announcements (Gemini release window, Anthropic IPO on Nov 20),
+  Oscar nominations (4 sibling markets, -187), James Bond casting, benchmark score. Category:
+  "Other" -15%/$, Sports -11%, Economy -10%, Tech -6%, Politics -3%.
+  => SKIP extended: "on/between <month> <day>", "nominated for", "announced as", "be released".
+  Overfitting risk acknowledged (3 days of data); these are news-binary templates by nature.
+- Offset 3c: rewards 11.8 / trading -6.4 / net +6.1 (< +9.4 at 2c). HOLD inventory with
+  two-sided quotes instead of dumping at mid: net +5.4 (worse: catches more toxic flow in
+  de-selected markets). Dumping at mid stays.
