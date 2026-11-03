@@ -1,0 +1,101 @@
+{
+ "T0": "2026-05-01",
+ "train_markets": 25012,
+ "test_markets": 28429,
+ "wallets_with_record": 87292,
+ "decile_edges_profit_per_usd": [
+  -0.2228,
+  -0.0932,
+  -0.0357,
+  -0.0062,
+  0.0003,
+  0.0077,
+  0.0243,
+  0.0577,
+  0.1342
+ ],
+ "by_decile": {
+  "no record": {
+   "trades": 19860357,
+   "usd": 943377933,
+   "profit_per_usd": -0.0065,
+   "drift_3600s_per_usd": -0.0014,
+   "drift_86400s_per_usd": -0.0014
+  },
+  "decile 1": {
+   "trades": 438783,
+   "usd": 51184136,
+   "profit_per_usd": -0.0372,
+   "drift_3600s_per_usd": -0.0032,
+   "drift_86400s_per_usd": -0.0189
+  },
+  "decile 2": {
+   "trades": 850123,
+   "usd": 65334865,
+   "profit_per_usd": -0.0174,
+   "drift_3600s_per_usd": -0.0025,
+   "drift_86400s_per_usd": -0.0077
+  },
+  "decile 3": {
+   "trades": 1528014,
+   "usd": 130006917,
+   "profit_per_usd": 0.0036,
+   "drift_3600s_per_usd": -0.001,
+   "drift_86400s_per_usd": 0.0026
+  },
+  "decile 4": {
+   "trades": 2694903,
+   "usd": 164541018,
+   "profit_per_usd": 0.002,
+   "drift_3600s_per_usd": 0.003,
+   "drift_86400s_per_usd": 0.0045
+  },
+  "decile 5": {
+   "trades": 1255832,
+   "usd": 58372450,
+   "profit_per_usd": 0.003,
+   "drift_3600s_per_usd": 0.001,
+   "drift_86400s_per_usd": 0.0027
+  },
+  "decile 6": {
+   "trades": 3213544,
+   "usd": 285649773,
+   "profit_per_usd": 0.0023,
+   "drift_3600s_per_usd": 0.0022,
+   "drift_86400s_per_usd": 0.0004
+  },
+  "decile 7": {
+   "trades": 4324323,
+   "usd": 227378985,
+   "profit_per_usd": 0.0142,
+   "drift_3600s_per_usd": 0.0082,
+   "drift_86400s_per_usd": 0.0103
+  },
+  "decile 8": {
+   "trades": 2296840,
+   "usd": 131079478,
+   "profit_per_usd": 0.0072,
+   "drift_3600s_per_usd": 0.0058,
+   "drift_86400s_per_usd": 0.0055
+  },
+  "decile 9": {
+   "trades": 1516153,
+   "usd": 81537830,
+   "profit_per_usd": -0.0147,
+   "drift_3600s_per_usd": 0.002,
+   "drift_86400s_per_usd": -0.0048
+  },
+  "decile 10": {
+   "trades": 809199,
+   "usd": 95984136,
+   "profit_per_usd": 0.0227,
+   "drift_3600s_per_usd": 0.0011,
+   "drift_86400s_per_usd": 0.0048
+  }
+ },
+ "persistence": {
+  "wallets": 20740,
+  "pearson": 0.0473,
+  "spearman": 0.0581
+ }
+}

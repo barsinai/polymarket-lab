@@ -1,0 +1,41 @@
+name: Soccer prices + Pinnacle odds
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 2 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: soccer
+  cancel-in-progress: false
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout: |
+            research
+            data/external/soccer
+            data/external/football
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - run: python -u research/external/football_data.py 2>&1 | tee /tmp/soccer-log.txt
+      - run: BUDGET_MIN=300 python -u research/collect_soccer.py 2>&1 | tee -a /tmp/soccer-log.txt
+      - name: Save
+        if: always()
+        run: |
+          git config user.name "polymarket-lab-bot"
+          git config user.email "actions@users.noreply.github.com"
+          mkdir -p logs && cp /tmp/soccer-log.txt logs/soccer-log.txt
+          git add --sparse data/external/soccer data/external/football logs/soccer-log.txt
+          git commit -qm "Soccer data [skip ci]" || true
+          for i in 1 2 3 4 5; do git pull -q --rebase origin main && git push -q && break; sleep $((RANDOM % 10 + 3)); done

@@ -1,0 +1,26 @@
+645778 resolved markets in listing
+train 5000 markets, 399699 wallets
+train 10000 markets, 590639 wallets
+train 15000 markets, 737099 wallets
+train 20000 markets, 845878 wallets
+train 25000 markets, 935394 wallets
+train: 25012 markets, 935560 wallets, 87292 with record; decile edges [-0.223, -0.093, -0.036, -0.006, 0.0, 0.008, 0.024, 0.058, 0.134]
+test 5000 markets
+test 10000 markets
+test 15000 markets
+test 20000 markets
+test 25000 markets
+
+bucket        trades  usd($M)    pnl/$  drift1h/$  drift24h/$
+no record   19860357   943.38  -0.0065    -0.0014     -0.0014
+decile 1      438783    51.18  -0.0372    -0.0032     -0.0189
+decile 2      850123    65.33  -0.0174    -0.0025     -0.0077
+decile 3     1528014   130.01  +0.0036    -0.0010     +0.0026
+decile 4     2694903   164.54  +0.0020    +0.0030     +0.0045
+decile 5     1255832    58.37  +0.0030    +0.0010     +0.0027
+decile 6     3213544   285.65  +0.0023    +0.0022     +0.0004
+decile 7     4324323   227.38  +0.0142    +0.0082     +0.0103
+decile 8     2296840   131.08  +0.0072    +0.0058     +0.0055
+decile 9     1516153    81.54  -0.0147    +0.0020     -0.0048
+decile 10     809199    95.98  +0.0227    +0.0011     +0.0048
+persistence {'wallets': 20740, 'pearson': 0.0473, 'spearman': 0.0581}
