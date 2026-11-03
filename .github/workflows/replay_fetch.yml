@@ -2,6 +2,11 @@ name: Fetch trades for market-making replay
 
 on:
   workflow_dispatch:
+    inputs:
+      refetch:
+        description: "re-download everything (adds the wallet column)"
+        type: boolean
+        default: false
   schedule:
     - cron: "29 */6 * * *"
   push:
@@ -31,7 +36,7 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install requests
-      - run: BUDGET_MIN=300 python -u research/replay_mm_fetch.py 2>&1 | tee /tmp/rf.txt
+      - run: REFETCH=${{ inputs.refetch && '1' || '0' }} BUDGET_MIN=300 python -u research/replay_mm_fetch.py 2>&1 | tee /tmp/rf.txt
       - name: Save
         if: always()
         run: |

@@ -2,7 +2,8 @@
 reward pool, so market-making rules can be replayed offline against real books + real trades.
 Data API v2, cursor pages, newest first; stops at START_TS. Incremental: keeps what it has and
 fetches only newer trades per market. Output: data/replay_mm/trades/<cid>.json.gz
-  [[ts, side(1=BUY), outcome_index, price, size], ...] sorted by time.
+  [[ts, side(1=BUY), outcome_index, price, size, wallet], ...] sorted by time.
+REFETCH=1 re-downloads everything since START_TS (used once to add the wallet column).
 """
 import glob, gzip, json, os, sys, time
 from concurrent.futures import ThreadPoolExecutor
@@ -28,11 +29,16 @@ def fetch(cid):
         return 0
     p = f"{OUT}/{cid}.json.gz"
     old = json.load(gzip.open(p, "rt")) if os.path.exists(p) else []
-    since = max([START_TS] + [t[0] for t in old])
+    since = START_TS if os.environ.get("REFETCH") == "1" else max([START_TS] + [t[0] for t in old])
     new = collect.trades_since(cid, since, max_rows=20000)
-    rows = sorted({(int(t["timestamp"]), 1 if t["side"] == "BUY" else 0, int(t["outcomeIndex"] or 0), float(t["price"]), float(t["size"]))
-                   for t in new} | {tuple(t) for t in old})
-    if rows != [tuple(t) for t in old]:
+    merged = {}
+    for t in old:
+        merged[tuple(t[:5])] = t[5] if len(t) > 5 else None
+    for t in new:
+        k = (int(t["timestamp"]), 1 if t["side"] == "BUY" else 0, int(t["outcomeIndex"] or 0), float(t["price"]), float(t["size"]))
+        merged[k] = t.get("proxyWallet") or merged.get(k)
+    rows = sorted([list(k) + [w] for k, w in merged.items()])
+    if rows != [list(t) + ([None] if len(t) == 5 else []) for t in old]:
         with gzip.open(p, "wt") as fh:
             json.dump(rows, fh, separators=(",", ":"))
     return len(new)
