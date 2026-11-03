@@ -60,6 +60,8 @@ OFF = float(os.environ["MM_OFF"]) if os.environ.get("MM_OFF") else OFF   # offse
 LEAN = os.environ.get("MM_LEAN") == "1"                           # shift quotes one tick toward the heavier side of the book
 SV_LO, SV_HI = float(os.environ.get("MM_SV_LO", "0.5")), float(os.environ.get("MM_SV_HI", "2.0"))  # size-by-calmness clamp
 VOL_W = float(os.environ.get("MM_VOL_W", "20"))                   # ranking: reward / (size * (1 + VOL_W * hourly vol))
+VOL14 = os.environ.get("MM_VOL14") == "1"                         # vol from 14-day hourly history instead of the last 48h
+JUMP14 = os.environ.get("MM_JUMP14") == "1"                       # ...and apply MAX_JUMP to the 14-day max move too
 HOLD = os.environ.get("MM_HOLD") == "1"                           # markets no longer chosen: keep two-sided quotes at the normal offset instead of dumping at mid
 WALLET = os.environ.get("MM_WALLET") == "1"                       # filled by a wallet with a good record -> stand aside 1h in that market
 WALLET_TOP = float(os.environ.get("MM_WALLET_TOP", "0.058"))      # "good" = profit per $ above this (decile 9 edge of the sample)
@@ -157,6 +159,16 @@ def jump_table():
         if len(ps) >= 6:
             d = [abs(b - a) for a, b in zip(ps, ps[1:])]
             out[c] = (max(d), (sum(x * x for x in d) / len(d)) ** 0.5)
+    if VOL14:  # 14-day hourly history (collect_hist.py): steadier vol estimate; optionally the 14-day max jump
+        files = sorted(glob.glob("data/live/volfeat/*.json.gz"))
+        if files:
+            try:
+                vf = json.load(gzip.open(files[-1], "rt"))
+            except (OSError, ValueError):
+                vf = {}
+            for c, (sd, mx, n) in vf.items():
+                j48 = out.get(c, (0.0, sd))[0]
+                out[c] = (max(j48, mx) if JUMP14 else j48, sd)
     return out
 
 

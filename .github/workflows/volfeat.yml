@@ -1,0 +1,46 @@
+name: 14-day vol features for the MM universe
+
+on:
+  workflow_dispatch:
+    inputs:
+      full:
+        description: "also save the full 30-day histories (for replay)"
+        type: boolean
+        default: false
+  schedule:
+    - cron: "13 5 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: volfeat
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 200
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout: |
+            research
+            data/live/rewards
+            data/live/volfeat
+            data/live/hist
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - run: FULL=${{ inputs.full && '1' || '0' }} DAYS=${{ inputs.full && '30' || '14' }} BUDGET_MIN=150 python -u research/collect_hist.py 2>&1 | tee /tmp/vf.txt
+      - name: Save
+        if: always()
+        run: |
+          git config user.name "polymarket-lab-bot"
+          git config user.email "actions@users.noreply.github.com"
+          mkdir -p logs data/live/volfeat data/live/hist && cp /tmp/vf.txt logs/volfeat-log.txt
+          git add --sparse data/live/volfeat data/live/hist logs/volfeat-log.txt
+          git commit -qm "Vol features [skip ci]" || true
+          for i in 1 2 3 4 5; do git pull -q --rebase -X theirs origin main && git push -q && break; sleep $((RANDOM % 10 + 3)); done

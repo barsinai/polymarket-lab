@@ -41,6 +41,20 @@ for f in glob.glob("data/replay_mm/trades/*.json.gz"):
     TR[os.path.basename(f)[:-8]] = json.load(gzip.open(f, "rt"))
 print(f"{len(TR)} markets with trade records", flush=True)
 snaps = sorted(glob.glob("data/live/20*/*.json.gz"))
+HIST = {}
+for f in sorted(glob.glob("data/live/hist/*.json.gz"))[-1:]:
+    HIST = json.load(gzip.open(f, "rt"))
+    print(f"{len(HIST)} markets with 14-day history for vol features", flush=True)
+
+
+def vol14(now):
+    out = {}
+    for c, h in HIST.items():
+        ps = [p for t, p in h if now - 14 * 86400 <= t <= now]
+        if len(ps) >= 12:
+            d = [abs(b - a) for a, b in zip(ps, ps[1:])]
+            out[c] = ((sum(x * x for x in d) / len(d)) ** 0.5, max(d))
+    return out
 mids_hist = {}  # cid -> [[ts, mid]] rolling 48h, built as we go (what the live job would have had)
 
 
@@ -77,8 +91,13 @@ for f in snaps:
     P.trades_since = lambda cid, t0, now=now: [{"price": r_[3], "size": r_[4], "side": "BUY" if r_[1] else "SELL", "outcomeIndex": r_[2], "timestamp": r_[0],
                                                "proxyWallet": r_[5] if len(r_) > 5 else None}
                                               for r_ in TR.get(cid, []) if t0 < r_[0] <= now]
-    P.jump_table = lambda: {c: (max(abs(b[1] - a_[1]) for a_, b in zip(v, v[1:])), (sum((b[1] - a_[1]) ** 2 for a_, b in zip(v, v[1:])) / max(len(v) - 1, 1)) ** 0.5)
-                            for c, v in mids_hist.items() if len(v) >= 6}
+    JT48 = {c: (max(abs(b[1] - a_[1]) for a_, b in zip(v, v[1:])), (sum((b[1] - a_[1]) ** 2 for a_, b in zip(v, v[1:])) / max(len(v) - 1, 1)) ** 0.5)
+            for c, v in mids_hist.items() if len(v) >= 6}
+    if P.VOL14 and HIST:
+        for c, (sd, mx) in vol14(now).items():
+            j48 = JT48.get(c, (0.0, sd))[0]
+            JT48[c] = (max(j48, mx) if P.JUMP14 else j48, sd)
+    P.jump_table = lambda JT48=JT48: JT48
     rf = [x for x in rewards_files if os.path.basename(x)[:10] <= datetime.fromtimestamp(now, timezone.utc).strftime("%Y-%m-%d")] or rewards_files[:1]
     P.glob.glob = (lambda pat, rf=rf: rf if "rewards" in pat else _real_glob(pat))
     collect.get = lambda *args, **kw: {}  # no network: no resolution settlement in replay (positions stay marked to mid)
