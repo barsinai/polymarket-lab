@@ -322,11 +322,11 @@ def tick(now=None):
             vol = JT[cid][1]
             if JT[cid][0] > MAX_JUMP:
                 rpd = 0.0  # jumped recently: exit only
-        if PAUSE_AFTER_FILL and any(f_[0] == cid for f_ in log["fills"]):
-            rpd = 0.0  # someone just traded with us: let the price settle before quoting again
         else:
             hist = [p for _, p in st["mids"].get(cid, [])][-36:]
             vol = (sum((b - a) ** 2 for a, b in zip(hist, hist[1:])) / max(len(hist) - 1, 1)) ** 0.5 if len(hist) > 3 else 0.01
+        if PAUSE_AFTER_FILL and any(f_[0] == cid for f_ in log["fills"]):
+            rpd = 0.0  # someone just traded with us: let the price settle before quoting again
         ranked.append((rpd / (size * (1 + 20 * vol)), cid, mid, size, rpd))
     ranked.sort(reverse=True)
     chosen = {c for sc_, c, *_ in ranked[:N] if sc_ > 0}
