@@ -58,6 +58,8 @@ AGE_MAX = float(os.environ.get("MM_AGE_MAX", "1e9"))              # only markets
 TAG = os.environ.get("MM_TAG", "").lower()                        # only markets carrying this tag (e.g. "weather")
 OFF = float(os.environ["MM_OFF"]) if os.environ.get("MM_OFF") else OFF   # offset override, dollars
 LEAN = os.environ.get("MM_LEAN") == "1"                           # shift quotes one tick toward the heavier side of the book
+SV_LO, SV_HI = float(os.environ.get("MM_SV_LO", "0.5")), float(os.environ.get("MM_SV_HI", "2.0"))  # size-by-calmness clamp
+VOL_W = float(os.environ.get("MM_VOL_W", "20"))                   # ranking: reward / (size * (1 + VOL_W * hourly vol))
 HOLD = os.environ.get("MM_HOLD") == "1"                           # markets no longer chosen: keep two-sided quotes at the normal offset instead of dumping at mid
 WALLET = os.environ.get("MM_WALLET") == "1"                       # filled by a wallet with a good record -> stand aside 1h in that market
 WALLET_TOP = float(os.environ.get("MM_WALLET_TOP", "0.058"))      # "good" = profit per $ above this (decile 9 edge of the sample)
@@ -371,7 +373,7 @@ def tick(now=None):
             rpd = 0.0  # someone just traded with us: let the price settle before quoting again
         if WALLET and st.get("toxic_until", {}).get(cid, 0) > now:
             rpd = 0.0  # a wallet with a good track record just traded against us: stand aside
-        ranked.append((rpd / (size * (1 + 20 * vol)), cid, mid, size, rpd))
+        ranked.append((rpd / (size * (1 + VOL_W * vol)), cid, mid, size, rpd))
     ranked.sort(reverse=True)
     chosen = {c for sc_, c, *_ in ranked[:N] if sc_ > 0}
     for _, cid, mid, size, rpd in ranked:
@@ -383,7 +385,7 @@ def tick(now=None):
         exit_only = cid not in chosen
         off = offset(rw[cid]["v"], rw[cid]["tick"])
         if SIZE_BY_VOL and cid in JT and not PARK:
-            size = max(rw[cid]["minsize"], 20, round(size * min(2.0, max(0.5, 0.005 / max(JT[cid][1], 0.001)))))
+            size = max(rw[cid]["minsize"], 20, round(size * min(SV_HI, max(SV_LO, 0.005 / max(JT[cid][1], 0.001)))))
         centre = mid - SKEW * (inv / size)
         if LEAN and not PARK:  # heavier bid side within 2c of mid -> price tends to drift up (+0.1c/h at the extremes)
             bk_ = books.get(rw[cid]["token"]); bids_, asks_ = book_view(bk_) if bk_ else ([], [])
