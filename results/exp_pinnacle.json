@@ -1,0 +1,72 @@
+{
+ "games_matched": 1110,
+ "games_unmatched": 2166,
+ "by_horizon": {
+  "1h": {
+   "n": 3148,
+   "mean_abs_diff_cents": 1.07,
+   "brier_polymarket": 0.1939,
+   "brier_pinnacle": 0.1947,
+   "corr_diff_vs_error": -0.0405,
+   "take_thr2c": {
+    "bets": 459,
+    "profit_per_share_cents": -7.6,
+    "stderr_cents": 2.08
+   },
+   "take_thr4c": {
+    "bets": 78,
+    "profit_per_share_cents": -10.29,
+    "stderr_cents": 5.14
+   },
+   "take_thr6c": {
+    "bets": 14,
+    "profit_per_share_cents": -0.7,
+    "stderr_cents": 12.62
+   }
+  },
+  "6h": {
+   "n": 3148,
+   "mean_abs_diff_cents": 1.17,
+   "brier_polymarket": 0.1941,
+   "brier_pinnacle": 0.1947,
+   "corr_diff_vs_error": -0.0221,
+   "take_thr2c": {
+    "bets": 545,
+    "profit_per_share_cents": -4.85,
+    "stderr_cents": 1.94
+   },
+   "take_thr4c": {
+    "bets": 97,
+    "profit_per_share_cents": -0.59,
+    "stderr_cents": 4.81
+   },
+   "take_thr6c": {
+    "bets": 16,
+    "profit_per_share_cents": -1.32,
+    "stderr_cents": 12.04
+   }
+  },
+  "24h": {
+   "n": 3145,
+   "mean_abs_diff_cents": 1.66,
+   "brier_polymarket": 0.1942,
+   "brier_pinnacle": 0.1946,
+   "corr_diff_vs_error": 0.0108,
+   "take_thr2c": {
+    "bets": 946,
+    "profit_per_share_cents": -2.59,
+    "stderr_cents": 1.48
+   },
+   "take_thr4c": {
+    "bets": 250,
+    "profit_per_share_cents": -0.28,
+    "stderr_cents": 2.92
+   },
+   "take_thr6c": {
+    "bets": 66,
+    "profit_per_share_cents": 2.35,
+    "stderr_cents": 5.78
+   }
+  }
+ }
+}

@@ -39,6 +39,7 @@ if VARIANT in ("2cv", "2cl"):
 # "2cl": 2cv plus a one-tick lean toward the heavier side of the book (replay: net/hour +10% vs 2cv)
 if VARIANT == "2cl":
     os.environ.setdefault("MM_LEAN", "1")
+    os.environ.setdefault("MM_VOL14", "1")   # 11-03: vol from 14-day history (replay: net per $ +50% vs 48h vol)
 D = "data/paper_mm2" if VARIANT == "1c" else f"data/paper_mm2_{VARIANT}"
 N = 200 if VARIANT == "wide" else 40
 SIZE = 0 if VARIANT == "wide" else 200          # max(min_size, SIZE); wide -> min_size only

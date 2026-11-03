@@ -260,3 +260,13 @@ Price drift in the trade's direction (what a market maker on the other side lose
   baseline rerun on the same record +9.0/h. Fills unchanged (820 vs 836). No gain: the fills
   that hurt are not predicted by the wallet's past record. Dropped for the MM. (The persistent
   LOSERS finding stands; it is a taker idea, not an MM one, and its edge is thin after fees.)
+- 14-DAY VOL (collect_hist.py: hourly prices for 30 days, all 15k reward markets; daily job
+  volfeat.yml): size-by-calmness + ranking using 14-day vol instead of 48h -> net +10.8/h on
+  $5.3k (vs +9.0 on $6.7k same record): net per $ +50%. Biggest gain since size-by-calmness,
+  and principled (less noisy vol estimate). ADOPTED in live "2cl" (now = 2c + size by 14d
+  calmness + lean); 2cv stays as the 48h control. Applying MAX_JUMP to the 14-day max move
+  (jump14): rewards collapse, net +4.0 - not adopted.
+- SOCCER vs PINNACLE (exp_pinnacle.py; 1,110 matched games, 3,148 markets, 8 leagues since Aug
+  2025): Polymarket pre-kickoff prices are as sharp as Pinnacle closing (Brier 0.1939 vs
+  0.1947 at 1h); mean |difference| ~1c; betting toward Pinnacle LOSES after fees (-7.6c/share at
+  2c threshold, 1h). Polymarket soccer is efficient. Dead. (Pipeline kept; daily job disabled.)
