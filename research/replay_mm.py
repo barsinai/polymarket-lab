@@ -74,8 +74,9 @@ for f in snaps:
         mids_hist[c] = [x for x in mids_hist[c] if x[0] >= cutoff]
     # serve recorded data to the paper trader
     P.books_for = lambda toks, B=B: {t: B[t] for t in toks if t in B}
-    P.trades_since = lambda cid, t0, now=now: [{"price": p, "size": s, "side": "BUY" if sd else "SELL", "outcomeIndex": oc, "timestamp": ts_}
-                                              for ts_, sd, oc, p, s in TR.get(cid, []) if t0 < ts_ <= now]
+    P.trades_since = lambda cid, t0, now=now: [{"price": r_[3], "size": r_[4], "side": "BUY" if r_[1] else "SELL", "outcomeIndex": r_[2], "timestamp": r_[0],
+                                               "proxyWallet": r_[5] if len(r_) > 5 else None}
+                                              for r_ in TR.get(cid, []) if t0 < r_[0] <= now]
     P.jump_table = lambda: {c: (max(abs(b[1] - a_[1]) for a_, b in zip(v, v[1:])), (sum((b[1] - a_[1]) ** 2 for a_, b in zip(v, v[1:])) / max(len(v) - 1, 1)) ** 0.5)
                             for c, v in mids_hist.items() if len(v) >= 6}
     rf = [x for x in rewards_files if os.path.basename(x)[:10] <= datetime.fromtimestamp(now, timezone.utc).strftime("%Y-%m-%d")] or rewards_files[:1]

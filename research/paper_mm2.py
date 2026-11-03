@@ -58,6 +58,19 @@ AGE_MAX = float(os.environ.get("MM_AGE_MAX", "1e9"))              # only markets
 TAG = os.environ.get("MM_TAG", "").lower()                        # only markets carrying this tag (e.g. "weather")
 OFF = float(os.environ["MM_OFF"]) if os.environ.get("MM_OFF") else OFF   # offset override, dollars
 LEAN = os.environ.get("MM_LEAN") == "1"                           # shift quotes one tick toward the heavier side of the book
+WALLET = os.environ.get("MM_WALLET") == "1"                       # filled by a wallet with a good record -> stand aside 1h in that market
+WALLET_TOP = float(os.environ.get("MM_WALLET_TOP", "0.058"))      # "good" = profit per $ above this (decile 9 edge of the sample)
+WSCORES = None
+
+
+def wallet_scores():
+    global WSCORES
+    if WSCORES is None:
+        try:
+            WSCORES = json.load(gzip.open("data/replay_mm/wallet_scores.json.gz", "rt"))["wallets"]
+        except (OSError, ValueError):
+            WSCORES = {}
+    return WSCORES
 
 
 def offset(v, tick=0.01):
@@ -253,11 +266,18 @@ def tick(now=None):
         for t in sorted(tr.get(cid, []), key=lambda t: float(t["timestamp"])):
             px, sz, side, oc = float(t["price"]), float(t["size"]), t.get("side"), int(t.get("outcomeIndex") or 0)
             yp = px if oc == 0 else 1 - px
-            if ((oc == 0 and side == "SELL") or (oc == 1 and side == "BUY")) and lb > 0 and yp <= q["bid"] + 1e-9:
+            hit_bid = ((oc == 0 and side == "SELL") or (oc == 1 and side == "BUY")) and lb > 0 and yp <= q["bid"] + 1e-9
+            hit_ask = ((oc == 0 and side == "BUY") or (oc == 1 and side == "SELL")) and la > 0 and yp >= q["ask"] - 1e-9
+            if WALLET and (hit_bid or hit_ask):
+                w = wallet_scores().get(str(t.get("proxyWallet") or ""))
+                if w and w[0] >= WALLET_TOP:
+                    st.setdefault("toxic_until", {})[cid] = now + 3600
+                    st["wallet_skips"] = st.get("wallet_skips", 0) + 1
+            if hit_bid:
                 f = min(lb, sz); lb -= f; pos["yes"] += f; st["cash"] -= f * q["bid"]; st["fills"] += 1
                 st["rebates"] = st.get("rebates", 0.0) + f * rebate_per_share(q["bid"], q["q"])
                 log["fills"].append([cid, "buy", q["bid"], f])
-            elif ((oc == 0 and side == "BUY") or (oc == 1 and side == "SELL")) and la > 0 and yp >= q["ask"] - 1e-9:
+            elif hit_ask:
                 f = min(la, sz); la -= f; pos["yes"] -= f; st["cash"] += f * q["ask"]; st["fills"] += 1
                 st["rebates"] = st.get("rebates", 0.0) + f * rebate_per_share(q["ask"], q["q"])
                 log["fills"].append([cid, "sell", q["ask"], f])
@@ -348,6 +368,8 @@ def tick(now=None):
             vol = (sum((b - a) ** 2 for a, b in zip(hist, hist[1:])) / max(len(hist) - 1, 1)) ** 0.5 if len(hist) > 3 else 0.01
         if PAUSE_AFTER_FILL and any(f_[0] == cid for f_ in log["fills"]):
             rpd = 0.0  # someone just traded with us: let the price settle before quoting again
+        if WALLET and st.get("toxic_until", {}).get(cid, 0) > now:
+            rpd = 0.0  # a wallet with a good track record just traded against us: stand aside
         ranked.append((rpd / (size * (1 + 20 * vol)), cid, mid, size, rpd))
     ranked.sort(reverse=True)
     chosen = {c for sc_, c, *_ in ranked[:N] if sc_ > 0}
