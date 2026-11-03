@@ -34,7 +34,7 @@ def fetch(item):
     if time.time() > budget:
         return cid, None
     # the API caps startTs/endTs windows (~2 weeks at fidelity 60?): use the interval shorthand, then 7-day windows
-    d = collect.get(f"{collect.CLOB}/prices-history", {"market": tok, "interval": "1m" if DAYS > 14 else "2w", "fidelity": 60})
+    d = collect.get(f"{collect.CLOB}/prices-history", {"market": tok, "interval": "1m", "fidelity": 60})
     hist = (d or {}).get("history") or []
     if len(hist) < 12:
         hist = []
