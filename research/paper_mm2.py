@@ -33,13 +33,16 @@ from record_books import books_for  # noqa: E402
 # maker there is no fee, plus rebates and (one-sided) rewards. Risk = upsets.
 VARIANT = os.environ.get("MM_VARIANT", "1c")
 PARK = VARIANT == "park"
+# "2cv": 2c offers with size scaled by calmness (replay: net/hour doubled vs plain 2c)
+if VARIANT == "2cv":
+    os.environ.setdefault("MM_SIZE_BY_VOL", "1")
 D = "data/paper_mm2" if VARIANT == "1c" else f"data/paper_mm2_{VARIANT}"
 N = 200 if VARIANT == "wide" else 40
 SIZE = 0 if VARIANT == "wide" else 200          # max(min_size, SIZE); wide -> min_size only
 SKEW, EVENT_CAP, MAX_BOOK_SPREAD = 0.01, 150.0, 0.04
 # "tight": 0.4c from mid in markets with 0.1c ticks (the quadratic reward score roughly doubles
 # vs 1c), 1c elsewhere. More reward share, more fills: the trade-off to measure.
-OFF = {"1c": 0.01, "2c": 0.02, "wide": 0.01, "park": 0.005, "tight": 0.01}.get(VARIANT, 0.01)
+OFF = {"1c": 0.01, "2c": 0.02, "2cv": 0.02, "wide": 0.01, "park": 0.005, "tight": 0.01}.get(VARIANT, 0.01)
 # trade-tape filter: pull quotes for a tick when the last trades were big and one-directional
 TAPE_USD, TAPE_N = 500.0, 3
 # experimental switches (env), so the same code runs live and in replay:
