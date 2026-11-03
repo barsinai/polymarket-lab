@@ -255,3 +255,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
   competitor estimate (book-aggregate min) overstates competition => share estimate conservative.
   Note: spread is measured from the "size-cutoff-adjusted midpoint" (orders below min size ignored)
   - we use the raw mid; small difference.
+- WALLET-AWARE stand-aside (replay, trade record refetched with wallet addresses; 75% of taker
+  trades come from wallets with a score): threshold decile 9 -> net +8.7/h; decile 7 -> +8.3/h;
+  baseline rerun on the same record +9.0/h. Fills unchanged (820 vs 836). No gain: the fills
+  that hurt are not predicted by the wallet's past record. Dropped for the MM. (The persistent
+  LOSERS finding stands; it is a taker idea, not an MM one, and its edge is thin after fees.)
