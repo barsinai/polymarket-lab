@@ -206,7 +206,7 @@ def rewards_table():
                                       "tick": float(m.get("minimum_tick_size") or 0.01),
                                       "q": m.get("question") or "", "end": ts(m.get("end_date_iso")),
                                       "tags": " ".join(t for t in (collect.as_list(m.get("tags")) or []) if isinstance(t, str)).lower(),
-                                      "token": str(toks[0]["token_id"])}
+                                      "token": str(toks[0]["token_id"]), "tokens": [str(t["token_id"]) for t in toks]}
     return out
 
 
@@ -270,6 +270,7 @@ def tick(now=None):
     watch = list(dict.fromkeys(st["universe"] + [c for c, p in st["positions"].items() if abs(p["yes"]) > 1e-9 and c not in st["settled"]]))
     tok_of = {c: (rw[c]["token"] if c in rw else st["positions"].get(c, {}).get("token")) for c in watch}
     books = books_for([t for t in tok_of.values() if t])
+    st["last_books_ts"] = int(now) if books else st.get("last_books_ts", 0)
 
     # 1. fills on standing quotes, from real taker trades since they were placed
     qs = st["quotes"]
