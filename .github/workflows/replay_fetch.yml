@@ -45,4 +45,4 @@ jobs:
           mkdir -p logs data/replay_mm && cp /tmp/rf.txt logs/replay-fetch-log.txt
           git add --sparse data/replay_mm logs/replay-fetch-log.txt
           git commit -qm "Replay trades [skip ci]" || true
-          for i in 1 2 3 4 5; do git pull -q --rebase origin main && git push -q && break; sleep $((RANDOM % 10 + 3)); done
+          for i in 1 2 3 4 5; do git pull -q --rebase -X theirs origin main && git push -q && break; sleep $((RANDOM % 10 + 3)); done
