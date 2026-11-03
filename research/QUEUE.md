@@ -176,3 +176,17 @@ Price drift in the trade's direction (what a market maker on the other side lose
   CHANGE (all v2 variants): exclude by-<date>/through-<month>, $-threshold, ceasefire/truce
   questions; event cap $150. v1 stays as the unfiltered reference.
 - Betting paper: model 79 resolved -42%; fade_week -81%; fade_jump -12%. Negative as expected.
+
+## 11-03 16:30 Data API v1 retired + REPLAY ENGINE
+- Polymarket retired Data API v1 at ~06:35 UTC: fills undetected in all paper MMs until ~14:50
+  UTC (rewards still accrued). Migrated trades/holders/OI to v2 (cursor pages). Live lesson:
+  need a "no trades seen while markets active" alarm that pulls quotes.
+- Replay engine (replay_mm.py): paper_mm2.tick() over 64h of recorded hourly books with fills
+  from the full v2 trade record (11.8k markets). Hourly requotes => pessimistic vs 10-min live.
+  Results ($/hour; capital ~$9-11k): 1c 25.9 rew / -25.2 trade / +3.2 net; 2c 19.1/-15.9/+4.7;
+  wide 15.4/-15.9/+1.6; tight 26.7/-26.6/+2.7; park 3.9/-12.5/-8.2 (favourites drift down).
+  => at hourly speed trading losses ~= rewards: requote speed is decisive; the live loop must
+  be seconds, not minutes. 2c beats 1c.
+- Rule switches on 2c: SIZE BY CALMNESS net +9.4/h on $7.2k (vs +4.7 on $9.2k): doubles net
+  per $. Max-jump 5c: rewards fall more than losses. Pool floor $20: no effect. Pause-after-
+  fill: rerunning. => new live variant "2cv" (2c + size by calmness) replaces the dead "edge".
