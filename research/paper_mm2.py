@@ -162,17 +162,7 @@ def book_view(bk):
 
 
 def trades_since(cid, t0):
-    out, offset = [], 0
-    while offset <= 1500:
-        b = collect.get(f"{DATA_API}/trades", {"market": cid, "limit": 500, "offset": offset, "takerOnly": "true"}, tries=3)
-        if not b:
-            break
-        new = [t for t in b if float(t.get("timestamp") or 0) > t0]
-        out += new
-        if len(b) < 500 or len(new) < len(b):
-            break
-        offset += 500
-    return out
+    return collect.trades_since(cid, t0)
 
 
 def tick(now=None):

@@ -57,6 +57,34 @@ def get(url, params=None, tries=5):
     return None
 
 
+DATA_API = "https://data-api.polymarket.com"
+
+
+def trades_since(cid, t0, max_rows=3000):
+    """Taker trades of a market newer than t0, via Data API v2 (v1 was retired 2026-11-03):
+    GET /v2/trades?condition_id=...&limit=500 with cursor pages, newest first. Rows are
+    normalised to the old field names (price, size, side, outcomeIndex, timestamp, proxyWallet)."""
+    out, cursor = [], None
+    while len(out) < max_rows:
+        params = {"condition_id": cid, "limit": 500}
+        if cursor:
+            params["cursor"] = cursor
+        d = get(f"{DATA_API}/v2/trades", params, tries=3)
+        rows = (d or {}).get("data") if isinstance(d, dict) else None
+        if not rows:
+            break
+        new = [{"price": r.get("price"), "size": r.get("size"), "side": r.get("side"),
+                "outcomeIndex": r.get("outcome_index"), "timestamp": r.get("timestamp"),
+                "proxyWallet": r.get("proxy_wallet"), "token_id": r.get("token_id")}
+               for r in rows if float(r.get("timestamp") or 0) > t0]
+        out += new
+        pg = d.get("pagination") or {}
+        if len(new) < len(rows) or not pg.get("has_more") or not pg.get("next_cursor"):
+            break
+        cursor = pg["next_cursor"]
+    return out
+
+
 def as_list(v):
     if isinstance(v, list):
         return v

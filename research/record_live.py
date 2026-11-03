@@ -70,24 +70,22 @@ def parallel_books(tokens, workers=6):
 
 
 def open_interest(cids):
-    """Open interest (money currently held in positions) per market; batch of condition ids,
-    falling back to one request each if the batch form isn't accepted."""
-    r = collect.get(f"{DATA_API}/oi", {"market": ",".join(cids)}, tries=3)
-    if not isinstance(r, list) or (len(cids) > 1 and len(r) <= 1):
-        r = []
-        for c in cids:
-            x = collect.get(f"{DATA_API}/oi", {"market": c}, tries=2)
-            r += x if isinstance(x, list) else []
-    return {str(x.get("market")): x.get("value") for x in r if isinstance(x, dict)}
+    """Open interest per market (Data API v2: /v2/oi?condition_id=...)."""
+    out = {}
+    for c in cids:
+        d = collect.get(f"{DATA_API}/v2/oi", {"condition_id": c}, tries=2)
+        for x in (d or {}).get("data") or [] if isinstance(d, dict) else []:
+            out[str(x.get("condition_id"))] = x.get("value")
+    return out
 
 
 def holders(cid):
-    """Top holders per outcome, slimmed to [wallet, outcomeIndex, amount] (no names/profiles)."""
-    r = collect.get(f"{DATA_API}/holders", {"market": cid, "limit": 20}, tries=3)
+    """Top holders per outcome (Data API v2), slimmed to [wallet, outcomeIndex, amount]."""
+    d = collect.get(f"{DATA_API}/v2/holders", {"condition_id": cid, "limit": 20}, tries=3)
     rows = None
-    if isinstance(r, list):
-        rows = [[h.get("proxyWallet"), h.get("outcomeIndex"), round(float(h.get("amount") or 0), 2)]
-                for tok in r for h in (tok.get("holders") or [])]
+    if isinstance(d, dict) and isinstance(d.get("data"), list):
+        rows = [[h.get("proxy_wallet"), h.get("outcome_index"), round(float(h.get("amount") or 0), 2)]
+                for tok in d["data"] for h in (tok.get("holders") or [])]
     return {"conditionId": cid, "holders": rows}
 
 
@@ -113,9 +111,9 @@ def main():
                 b = trim(raw[str(t)], a.band)
                 books[f"{m['id']}:{j}"] = [b.get("timestamp"), b.get("last_trade_price"), b["bids"], b["asks"],
                                            b["far_bid_size"], b["far_ask_size"]]
-    cids = [m["conditionId"] for m in mk if m.get("conditionId")]
-    oi = {}
-    with ThreadPoolExecutor(6) as ex:
+    cids = [m["conditionId"] for m in sorted(mk, key=lambda m: -(m.get("volume24hr") or 0)) if m.get("conditionId")][:2000]
+    oi = {}  # v2 has no batch form: top 2,000 markets by 24h volume, 8 threads
+    with ThreadPoolExecutor(8) as ex:
         for part in ex.map(open_interest, [cids[i:i + 50] for i in range(0, len(cids), 50)]):
             oi.update(part)
     t3 = time.time()
