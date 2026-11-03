@@ -58,6 +58,7 @@ AGE_MAX = float(os.environ.get("MM_AGE_MAX", "1e9"))              # only markets
 TAG = os.environ.get("MM_TAG", "").lower()                        # only markets carrying this tag (e.g. "weather")
 OFF = float(os.environ["MM_OFF"]) if os.environ.get("MM_OFF") else OFF   # offset override, dollars
 LEAN = os.environ.get("MM_LEAN") == "1"                           # shift quotes one tick toward the heavier side of the book
+HOLD = os.environ.get("MM_HOLD") == "1"                           # markets no longer chosen: keep two-sided quotes at the normal offset instead of dumping at mid
 WALLET = os.environ.get("MM_WALLET") == "1"                       # filled by a wallet with a good record -> stand aside 1h in that market
 WALLET_TOP = float(os.environ.get("MM_WALLET_TOP", "0.058"))      # "good" = profit per $ above this (decile 9 edge of the sample)
 WSCORES = None
@@ -403,10 +404,12 @@ def tick(now=None):
             want_ask = (not fav_yes) and inv > -size * 0.99
             if not (want_bid or want_ask):
                 continue
+        elif exit_only and HOLD:  # keep both quotes up at the normal offset (prices revert ~1/3 within a day); no reward counted
+            want_bid, want_ask = inv < size, inv > -size
         elif exit_only:  # only work the position off, at the mid, no reward expected
             bid, ask = (round(mid - 0.005, 3), None) if inv < 0 else (None, round(mid + 0.005, 3))
             want_bid, want_ask = inv < 0, inv > 0
-        st["quotes"][cid] = {"ts": int(now), "q": rw[cid]["q"], "tpl": tpl, "token": rw[cid]["token"], "off": off, "size": size if not exit_only else abs(inv),
+        st["quotes"][cid] = {"ts": int(now), "q": rw[cid]["q"], "tpl": tpl, "token": rw[cid]["token"], "off": off, "size": size if (not exit_only or HOLD) else abs(inv),
                              "bid": bid if want_bid and 0 < bid < 1 else None, "ask": ask if want_ask and ask and 0 < ask < 1 else None,
                              "rpd": 0.0 if exit_only else rpd}
     st["ticks"] += 1
