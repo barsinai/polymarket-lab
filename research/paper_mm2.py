@@ -27,20 +27,29 @@ from record_books import books_for  # noqa: E402
 # "wide": 1c offers, but the smallest size each market's reward programme accepts, in up to
 # 200 markets (same capital spread thin: reward share saturates per market, so breadth should
 # earn more per dollar and no single market can hurt much).
+# "park": maker-only favourites. Markets 1-5 days from their end priced 80-95c (or 5-20c: then
+# the favourite is No): post ONE resting order on the favourite side just inside the best price,
+# hold to resolution. Fair history: favourites 80-95c one day out were ~2.6c underpriced; as a
+# maker there is no fee, plus rebates and (one-sided) rewards. Risk = upsets.
 VARIANT = os.environ.get("MM_VARIANT", "1c")
+PARK = VARIANT == "park"
 D = "data/paper_mm2" if VARIANT == "1c" else f"data/paper_mm2_{VARIANT}"
 N = 200 if VARIANT == "wide" else 40
 SIZE = 0 if VARIANT == "wide" else 200          # max(min_size, SIZE); wide -> min_size only
 SKEW, EVENT_CAP, MAX_BOOK_SPREAD = 0.01, 150.0, 0.04
-OFF = {"1c": 0.01, "2c": 0.02, "wide": 0.01}.get(VARIANT, 0.01)
+# "tight": 0.4c from mid in markets with 0.1c ticks (the quadratic reward score roughly doubles
+# vs 1c), 1c elsewhere. More reward share, more fills: the trade-off to measure.
+OFF = {"1c": 0.01, "2c": 0.02, "wide": 0.01, "park": 0.005, "tight": 0.01}.get(VARIANT, 0.01)
 # trade-tape filter: pull quotes for a tick when the last trades were big and one-directional
 TAPE_USD, TAPE_N = 500.0, 3
 
 
-def offset(v):
+def offset(v, tick=0.01):
     """distance from mid for this variant, in dollars; v = market max spread in cents"""
     if VARIANT == "edge":
         return max(0.01, (v - 0.5) / 100)
+    if VARIANT == "tight" and tick <= 0.001:
+        return 0.004
     return OFF
 DATA_API = "https://data-api.polymarket.com"
 SKIP = re.compile(r"\b(cpi|ppi|pmi|gdp|payroll|jobless|unemployment|inflation|nonfarm|retail sales|ism|jobs report|fed funds"
@@ -140,6 +149,7 @@ def rewards_table():
         toks = m.get("tokens") or []
         if rate > 0 and r.get("max_spread") and toks and m.get("accepting_orders", True):
             out[m["condition_id"]] = {"rate": rate, "v": float(r["max_spread"]), "minsize": float(r.get("min_size") or 0),
+                                      "tick": float(m.get("minimum_tick_size") or 0.01),
                                       "q": m.get("question") or "", "end": ts(m.get("end_date_iso")),
                                       "token": str(toks[0]["token_id"])}
     return out
@@ -177,8 +187,12 @@ def tick(now=None):
     JT = jump_table()
     if now - st["universe_ts"] > 3300 or not st["universe"]:
         cands = []
-        ok = {c: r for c, r in rw.items() if not SKIP.search(r["q"]) and not (r["end"] and r["end"] - now < 7 * 86400)
-              and JT.get(c, (0, 0))[0] <= 0.10}  # no market that jumped >10c in an hour during the last 2 days
+        if PARK:
+            ok = {c: r for c, r in rw.items() if r["end"] and 1 * 86400 <= r["end"] - now <= 5 * 86400
+                  and not re.search(r"\b(hit|reach|dip to|settle over|settle under)\s+\$", r["q"], re.I)}
+        else:
+            ok = {c: r for c, r in rw.items() if not SKIP.search(r["q"]) and not (r["end"] and r["end"] - now < 7 * 86400)
+                  and JT.get(c, (0, 0))[0] <= 0.10}  # no market that jumped >10c in an hour during the last 2 days
         toks = [r["token"] for r in ok.values()]
         chunks = [toks[i:i + 500] for i in range(0, len(toks), 500)]
         books = {}
@@ -193,8 +207,9 @@ def tick(now=None):
             if not bids or not asks:
                 continue
             mid = (bids[0][0] + asks[0][0]) / 2
-            off = offset(r["v"])
-            if not (0.10 < mid < 0.90) or 100 * off >= r["v"] or asks[0][0] - bids[0][0] > MAX_BOOK_SPREAD:
+            off = offset(r["v"], r["tick"])
+            in_band = (0.80 <= mid <= 0.95 or 0.05 <= mid <= 0.20) if PARK else (0.10 < mid < 0.90)
+            if not in_band or 100 * off >= r["v"] or asks[0][0] - bids[0][0] > MAX_BOOK_SPREAD:
                 continue  # a wide book means the mid is not a real price: don't quote around it
             cb, ca = score(bids, mid, r["v"], r["minsize"], True), score(asks, mid, r["v"], r["minsize"], False)
             comp = min(cb, ca) if min(cb, ca) > 0 else max(cb, ca) / 3
@@ -289,9 +304,9 @@ def tick(now=None):
         if not bids or not asks:
             continue
         mid = (bids[0][0] + asks[0][0]) / 2
-        if not (0.05 < mid < 0.95):
+        if not (0.05 < mid < 0.95) if not PARK else not (0.80 <= mid <= 0.96 or 0.04 <= mid <= 0.20):
             continue
-        off = offset(r["v"])
+        off = offset(r["v"], r["tick"])
         wide = asks[0][0] - bids[0][0] > MAX_BOOK_SPREAD
         cb, ca = score(bids, mid, r["v"], r["minsize"], True), score(asks, mid, r["v"], r["minsize"], False)
         comp = min(cb, ca) if min(cb, ca) > 0 else max(cb, ca) / 3
@@ -322,13 +337,22 @@ def tick(now=None):
             continue
         tpl = template(rw[cid]["q"])
         exit_only = cid not in chosen
-        off = offset(rw[cid]["v"])
+        off = offset(rw[cid]["v"], rw[cid]["tick"])
         centre = mid - SKEW * (inv / size)
         bid = round(centre - off, 3); ask = round(centre + off, 3)
         over_cap = fam.get(EVM.get(cid) or tpl, 0) > EVENT_CAP
         want_bid = inv < 2 * size and not (exit_only and inv >= 0) and not (over_cap and inv >= 0)
         want_ask = inv > -2 * size and not (exit_only and inv <= 0) and not (over_cap and inv <= 0)
-        if exit_only:  # only work the position off, at the mid, no reward expected
+        if PARK:  # one resting order on the favourite side, hold to resolution, never add past 1x size
+            if exit_only:
+                continue
+            fav_yes = mid >= 0.5
+            bid, ask = (round(mid - OFF, 3), None) if fav_yes else (None, round(mid + OFF, 3))
+            want_bid = fav_yes and inv < size * 0.99
+            want_ask = (not fav_yes) and inv > -size * 0.99
+            if not (want_bid or want_ask):
+                continue
+        elif exit_only:  # only work the position off, at the mid, no reward expected
             bid, ask = (round(mid - 0.005, 3), None) if inv < 0 else (None, round(mid + 0.005, 3))
             want_bid, want_ask = inv < 0, inv > 0
         st["quotes"][cid] = {"ts": int(now), "q": rw[cid]["q"], "tpl": tpl, "token": rw[cid]["token"], "off": off, "size": size if not exit_only else abs(inv),
