@@ -31,7 +31,7 @@ VARIANT = os.environ.get("MM_VARIANT", "1c")
 D = "data/paper_mm2" if VARIANT == "1c" else f"data/paper_mm2_{VARIANT}"
 N = 200 if VARIANT == "wide" else 40
 SIZE = 0 if VARIANT == "wide" else 200          # max(min_size, SIZE); wide -> min_size only
-SKEW, EVENT_CAP, MAX_BOOK_SPREAD = 0.01, 300.0, 0.04
+SKEW, EVENT_CAP, MAX_BOOK_SPREAD = 0.01, 150.0, 0.04
 OFF = {"1c": 0.01, "2c": 0.02, "wide": 0.01}.get(VARIANT, 0.01)
 # trade-tape filter: pull quotes for a tick when the last trades were big and one-directional
 TAPE_USD, TAPE_N = 500.0, 3
@@ -45,7 +45,13 @@ def offset(v):
 DATA_API = "https://data-api.polymarket.com"
 SKIP = re.compile(r"\b(cpi|ppi|pmi|gdp|payroll|jobless|unemployment|inflation|nonfarm|retail sales|ism|jobs report|fed funds"
                   r"|sentiment|claims|interest rate|cash rate|policy rate|repo rate|rate cut|rate hike|bps)\b"
-                  r"|be between -?[\d.,]+ and -?[\d.,]+", re.I)
+                  r"|be between -?[\d.,]+ and -?[\d.,]+"
+                  # 11-03: news-deadline and crypto-threshold questions jump without warning (overnight
+                  # Iran-ceasefire / US-Cuba losses; historically 22% vs 17% of days with a >15c move,
+                  # crypto thresholds ~50%): out of the universe for every v2 variant
+                  r"|\b(by|before|through)\s+(january|february|march|april|may|june|july|august|september|october|november|december)\b"
+                  r"|\b(hit|reach|dip to|settle over|settle under|above|below)\s+\$"
+                  r"|\b(ceasefire|truce)\b", re.I)
 
 
 # maker rebate (docs.polymarket.com/market-makers/maker-rebates): a maker fill earns
