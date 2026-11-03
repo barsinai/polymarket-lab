@@ -156,3 +156,23 @@ Price drift in the trade's direction (what a market maker on the other side lose
   -3.6..+2.7); trained on fair rows only: ~0 / negative. => no robust edge yet; fair sample
   still small (12k val / 8k lockbox rows). Rerun when data/volume completes (~Wed). The
   biased-vs-fair gap is the lesson: a convincing +3c that is pure selection bias.
+
+## 11-03 07:00 Morning review
+- Volume-before-bet collection COMPLETE (646k markets): fair filter now covers 95.6% of rows;
+  77k rows fair at >= $5k (most moments simply had < $5k traded yet).
+- Big ridge rerun on complete fair data: same picture - fair val +1.7c (CI +0.4..+2.8),
+  fair lockbox -0.2c (CI -2.8..+2.3). Biased rows still show +3.3c/+2.5c. No robust edge.
+- Fair battery (Jun-Oct, 18k fair rows): all rules ~0 or negative after costs. Two faint
+  positives: boosted model trained on fair rows, edge>3c: +1.9c won-minus-price (CI +0.6..
+  +3.1) but ~0 after taker costs (lean candidate only); FAVOURITES 80-95c one day before the
+  end: +2.6c (CI +1.3..+4.1), +1.6%/bet after typical taker cost -> as a MAKER this is the
+  "parking" idea. => new paper variant "park" to build.
+- MM overnight: v1 $86/-7 per hour (37h); v2-1c $56/-16; v2-2c $41/-20; v2-edge $5/-5;
+  v2-wide $42/-27 (15h). Losses dominated by "US x Iran ceasefire continues through Nov"
+  (-$100+ per market in 2c/edge/wide; the event cap allowed ~3 such markets) and "by <date>"
+  diplomacy questions. Jump filter cut fills ~20-60% with no reward loss (short sample).
+  Jump-risk study (535k market-days): "by <date>" questions move >15c on 22% of days vs 17%
+  for others; crypto $-threshold questions ~50%; sports/election futures 2-9%.
+  CHANGE (all v2 variants): exclude by-<date>/through-<month>, $-threshold, ceasefire/truce
+  questions; event cap $150. v1 stays as the unfiltered reference.
+- Betting paper: model 79 resolved -42%; fade_week -81%; fade_jump -12%. Negative as expected.
