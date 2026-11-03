@@ -246,3 +246,12 @@ Price drift in the trade's direction (what a market maker on the other side lose
   -7.9 (+2.9/h): net +7.6 < +9.4. NOT adopted - the jumpy markets are also the ones with the
   big pools, and the vol-penalised ranking already handles the trade-off. Lesson: every
   "obvious" exclusion must be replayed; two of three so far made things worse.
+- Size-by-calmness clamp 0.25-3x (was 0.5-2x): net +9.8/h on $6.2k vs +9.4 on $7.2k: ~+20% per $
+  (cap 4x never binds). Ranking vol weight 50 (was 20): +8.2 - worse. Keep 20; clamp change is a
+  candidate for the final config, not adopted live yet (live variants stay fixed for the week).
+- Reward formula re-checked against docs.polymarket.com/market-makers/liquidity-rewards: S=((v-s)/v)^2*b,
+  Q_min = max(min(Q1,Q2), max(Q1,Q2)/3) for mids 10-90c (single-sided scores at 1/3), sampled
+  once a minute, Q_normal per sample, summed per UTC day, $1 minimum. Our model matches; our
+  competitor estimate (book-aggregate min) overstates competition => share estimate conservative.
+  Note: spread is measured from the "size-cutoff-adjusted midpoint" (orders below min size ignored)
+  - we use the raw mid; small difference.
