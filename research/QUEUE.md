@@ -242,3 +242,7 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - Offset 3c: rewards 11.8 / trading -6.4 / net +6.1 (< +9.4 at 2c). HOLD inventory with
   two-sided quotes instead of dumping at mid: net +5.4 (worse: catches more toxic flow in
   de-selected markets). Dumping at mid stays.
+- Extended SKIP (date-specific announcements etc.) replayed: rewards 14.6 (-4.5/h) vs losses
+  -7.9 (+2.9/h): net +7.6 < +9.4. NOT adopted - the jumpy markets are also the ones with the
+  big pools, and the vol-penalised ranking already handles the trade-off. Lesson: every
+  "obvious" exclusion must be replayed; two of three so far made things worse.
