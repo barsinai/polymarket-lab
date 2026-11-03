@@ -33,8 +33,17 @@ def fetch(item):
     cid, tok = item
     if time.time() > budget:
         return cid, None
-    d = collect.get(f"{collect.CLOB}/prices-history", {"market": tok, "startTs": now - DAYS * 86400, "endTs": now, "fidelity": 60})
-    h = sorted({(int(x["t"]), float(x["p"])) for x in (d or {}).get("history") or [] if "t" in x and "p" in x})
+    # the API caps startTs/endTs windows (~2 weeks at fidelity 60?): use the interval shorthand, then 7-day windows
+    d = collect.get(f"{collect.CLOB}/prices-history", {"market": tok, "interval": "1m" if DAYS > 14 else "2w", "fidelity": 60})
+    hist = (d or {}).get("history") or []
+    if len(hist) < 12:
+        hist = []
+        t = now - DAYS * 86400
+        while t < now:
+            d = collect.get(f"{collect.CLOB}/prices-history", {"market": tok, "startTs": t, "endTs": min(t + 7 * 86400, now), "fidelity": 60})
+            hist += (d or {}).get("history") or []
+            t += 7 * 86400
+    h = sorted({(int(x["t"]), float(x["p"])) for x in hist if "t" in x and "p" in x})
     return cid, [list(x) for x in h]
 
 
