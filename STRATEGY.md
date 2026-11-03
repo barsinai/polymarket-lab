@@ -27,14 +27,30 @@ no edge once the data is selected fairly.
 - Paper trading (real books, real trades, pretend offers) over the first day: estimated rewards
   about ten times larger than trading losses.
 
-## The rules (version 2, running as four variants)
+## What the replay engine taught us (11-03; 65 hours of recorded books + every real trade)
+
+- Every variant is net positive at hourly re-quoting, but only by a few dollars an hour: rewards
+  ~$19/h vs trading losses ~$11-16/h on ~$7k.
+- **Losses are adverse selection, not slow quotes.** Re-quoting every 5 seconds instead of every
+  hour changes the loss by under 15%. Three quarters of the loss comes from fills in hours when
+  the price moved 5c or more. A third of the loss reverts within a day.
+- **Size is the lever.** Scaling size by calmness (14-day hourly volatility; small size in jumpy
+  markets, large in calm ones; clamp 0.25-3x) keeps the rewards and halves the loss: net
+  ~$13.5/h on ~$4k capital in the (pessimistic) replay, 2.5x the plain rule per dollar.
+- Offsets: 2c beats 1c and 3c. Filters that remove jumpy-but-rich markets cut rewards more than
+  losses (three tried, all worse). Pausing after a fill, holding inventory instead of exiting,
+  wallet-track-record stand-asides: no gain.
+
+## The rules (version 2, running as six variants; "2cl" = current best)
 
 - Only markets with a reward pool, a book no wider than 4c, mid-price between 10c and 90c,
   **more than 7 days** from their end, no game within 6 hours, no data releases / rate
   decisions / "between X and Y" number questions.
 - Rank by expected reward per dollar, divided by recent price movement. Quote the best 40
   (variant "wide": the best 200 at minimum size).
-- Offers at mid +-1c (variants: +-2c, reward-zone edge), size 200 shares per side.
+- Offers at mid +-1c (variants: +-2c, 0.4c in fine-tick markets), size 200 shares per side;
+  "2cv"/"2cl": size scaled by calmness (48h / 14-day volatility), "2cl" also capped at the
+  competing depth.
 - Re-quote every 10 minutes. Lean offers against what we hold; stop adding above 2x size.
 - Keep working off positions in markets we leave. Cap exposure at $300 per Polymarket event.
 - Stand aside after three big (>= $500) one-directional trades in a row.
@@ -62,7 +78,10 @@ no edge once the data is selected fairly.
 
 ## Ideas tested and dropped (so we don't redo them)
 
-Price-pattern bets (fade jumps, long shots, favourites), ML models on price features, trade-flow
-and "smart wallet" features, question-template effects, soccer draws/unders, crypto fair value,
-weather forecasts, weather known-outcome, date-ladder logic arbitrage, multi-option sum
-arbitrage (all either no edge, bot-dominated, or an artefact of selection bias).
+Price-pattern bets (fade jumps, long shots, favourites), ML models on price features (incl. a
+39k-feature ridge), trade-flow and "smart wallet" features, question-template effects, soccer
+draws/unders, soccer vs Pinnacle closing odds (Polymarket is as sharp), crypto fair value,
+weather forecasts, weather known-outcome, weather market making, date-ladder logic arbitrage,
+multi-option sum arbitrage, new-market liquidity, parking in favourites, wallet-skill copy or
+fade (losers persist, but the edge is thin after fees) - all either no edge, bot-dominated, or
+an artefact of selection bias.
