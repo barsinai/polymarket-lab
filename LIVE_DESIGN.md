@@ -60,6 +60,15 @@ before any order is sent._
 - Rebates received.
 - Trading P&L per market, with the same breakdowns as the paper reports.
 
+## Ledger (tax requirement, see TAX_ISRAEL.md)
+
+Every fill, reward payment, rebate, deposit, withdrawal and USDC/pUSD conversion goes into an
+append-only sqlite table with: UTC time, market, side, shares, price, USD value, counterparty
+type (fill / reward / rebate / transfer), the Bank of Israel USD-ILS rate of the day, and the
+on-chain tx hash where there is one. Exported monthly as CSV. This is what lets an accountant
+argue "business income" (net, with losses deductible) rather than "gambling winnings" (gross),
+and what the bank will ask for when money comes back.
+
 ## Open items before building
 
 - Confirm Israel legality/tax (user).
