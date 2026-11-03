@@ -36,10 +36,13 @@ PARK = VARIANT == "park"
 # "2cv": 2c offers with size scaled by calmness (replay: net/hour doubled vs plain 2c)
 if VARIANT in ("2cv", "2cl"):
     os.environ.setdefault("MM_SIZE_BY_VOL", "1")
-# "2cl": 2cv plus a one-tick lean toward the heavier side of the book (replay: net/hour +10% vs 2cv)
+# "2cl": the replay frontier as of 11-03 evening: 2c offers, vol from the 14-day history, size by calmness
+# with a wide clamp (0.25-3x), size capped at 1x the competing depth. Replay: net +13.6/h on $3.7k vs
+# +9.0/h on $6.7k for 2cv. (The one-tick lean it started with no longer helped on top of these; dropped.)
 if VARIANT == "2cl":
-    os.environ.setdefault("MM_LEAN", "1")
-    os.environ.setdefault("MM_VOL14", "1")   # 11-03: vol from 14-day history (replay: net per $ +50% vs 48h vol)
+    os.environ.setdefault("MM_VOL14", "1")
+    os.environ.setdefault("MM_SV_LO", "0.25"); os.environ.setdefault("MM_SV_HI", "3")
+    os.environ.setdefault("MM_SIZE_BY_COMP", "1")
 D = "data/paper_mm2" if VARIANT == "1c" else f"data/paper_mm2_{VARIANT}"
 N = 200 if VARIANT == "wide" else 40
 SIZE = 0 if VARIANT == "wide" else 200          # max(min_size, SIZE); wide -> min_size only

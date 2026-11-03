@@ -274,3 +274,6 @@ Price drift in the trade's direction (what a market maker on the other side lose
   2.5x the plain 2c+sizevol baseline. Insight: in thin reward markets our share saturates, so
   size beyond the competing depth adds exposure without reward -> testing size-by-competition.
   ref 0.003: +11.1; lean on top of vol14: +10.3 (no longer helps - within noise).
+- Size capped at 1x competing depth (comp1): +13.6/h on $3.7k; 2x: +13.4 on $3.9k. Marginal on
+  top of the vol clamp (rarely binds). Live "2cl" redefined to the frontier: vol14 + clamp
+  0.25-3x + comp1 (lean dropped). 2cv stays the control.
