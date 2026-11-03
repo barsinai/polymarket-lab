@@ -60,7 +60,8 @@ TAG = os.environ.get("MM_TAG", "").lower()                        # only markets
 OFF = float(os.environ["MM_OFF"]) if os.environ.get("MM_OFF") else OFF   # offset override, dollars
 LEAN = os.environ.get("MM_LEAN") == "1"                           # shift quotes one tick toward the heavier side of the book
 SV_LO, SV_HI = float(os.environ.get("MM_SV_LO", "0.5")), float(os.environ.get("MM_SV_HI", "2.0"))  # size-by-calmness clamp
-SV_REF = float(os.environ.get("MM_SV_REF", "0.005"))              # size-by-calmness: size *= SV_REF / vol (clamped)
+SV_REF = float(os.environ.get("MM_SV_REF", "0.005"))
+SIZE_BY_COMP = float(os.environ.get("MM_SIZE_BY_COMP", "0"))     # >0: size = this x the competing depth (in our-score units), capped at SIZE              # size-by-calmness: size *= SV_REF / vol (clamped)
 VOL_W = float(os.environ.get("MM_VOL_W", "20"))                   # ranking: reward / (size * (1 + VOL_W * hourly vol))
 VOL14 = os.environ.get("MM_VOL14") == "1"                         # vol from 14-day hourly history instead of the last 48h
 JUMP14 = os.environ.get("MM_JUMP14") == "1"                       # ...and apply MAX_JUMP to the 14-day max move too
@@ -352,7 +353,7 @@ def tick(now=None):
         fam[g] = fam.get(g, 0) + abs(pos["yes"]) * pos.get("mid", 0.5)
 
     # 4. requote: best N by reward vs recent movement, plus exit-only quotes where we hold inventory
-    ranked = []
+    ranked = []; compq = {}
     for cid in watch:
         r = rw.get(cid); bk = books.get(r["token"]) if r else None
         if not bk:
@@ -369,6 +370,7 @@ def tick(now=None):
         comp = min(cb, ca) if min(cb, ca) > 0 else max(cb, ca) / 3
         size = max(r["minsize"], SIZE, 20)
         ours = ((r["v"] - 100 * off) / r["v"]) ** 2 * size
+        compq[cid] = comp / max(((r["v"] - 100 * off) / r["v"]) ** 2, 1e-9)   # competitors' score, in shares-at-our-offset
         rpd = 0.0 if wide else r["rate"] * ours / (ours + comp)
         # tape filter: recent taker trades big and all one way -> informed flow, stand aside
         tape = sorted(tr.get(cid, []), key=lambda t: float(t["timestamp"]))[-TAPE_N:]
@@ -399,6 +401,8 @@ def tick(now=None):
         tpl = template(rw[cid]["q"])
         exit_only = cid not in chosen
         off = offset(rw[cid]["v"], rw[cid]["tick"])
+        if SIZE_BY_COMP and not exit_only and not PARK and cid in compq:
+            size = max(rw[cid]["minsize"], 20, min(size, round(SIZE_BY_COMP * compq[cid])))
         if SIZE_BY_VOL and cid in JT and not PARK:
             size = max(rw[cid]["minsize"], 20, round(size * min(SV_HI, max(SV_LO, SV_REF / max(JT[cid][1], 0.001)))))
         centre = mid - SKEW * (inv / size)

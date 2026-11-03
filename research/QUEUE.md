@@ -270,3 +270,7 @@ Price drift in the trade's direction (what a market maker on the other side lose
   2025): Polymarket pre-kickoff prices are as sharp as Pinnacle closing (Brier 0.1939 vs
   0.1947 at 1h); mean |difference| ~1c; betting toward Pinnacle LOSES after fees (-7.6c/share at
   2c threshold, 1h). Polymarket soccer is efficient. Dead. (Pipeline kept; daily job disabled.)
+- 14d vol + clamp 0.25-3x: net +13.2/h on $4.0k (rewards 18.5 unchanged, trading -6.1): net per $
+  2.5x the plain 2c+sizevol baseline. Insight: in thin reward markets our share saturates, so
+  size beyond the competing depth adds exposure without reward -> testing size-by-competition.
+  ref 0.003: +11.1; lean on top of vol14: +10.3 (no longer helps - within noise).
