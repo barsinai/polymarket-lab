@@ -97,7 +97,7 @@ def offset(v, tick=0.01):
         return max(0.01, (v - 0.5) / 100)
     if VARIANT == "tight" and tick <= 0.001:
         return 0.004
-    return OFF
+    return round(math.ceil(OFF / tick - 1e-9) * tick, 4)   # never finer than the market's tick (1.5c -> 2c in 1c-tick markets)
 DATA_API = "https://data-api.polymarket.com"
 SKIP = re.compile(r"\b(cpi|ppi|pmi|gdp|payroll|jobless|unemployment|inflation|nonfarm|retail sales|ism|jobs report|fed funds"
                   r"|sentiment|claims|interest rate|cash rate|policy rate|repo rate|rate cut|rate hike|bps|fed|fomc|ecb|boe|boj)\b"
