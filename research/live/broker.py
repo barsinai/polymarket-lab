@@ -64,10 +64,10 @@ class Broker:
             if self.sample_position is None:
                 self.sample_position = repr(p)[:500]
             cid = str(getattr(p, "condition_id", "") or "")
-            size = float(getattr(p, "size", 0) or 0)
+            size = float(getattr(p, "current_size", None) or getattr(p, "size", 0) or 0)
             outcome = str(getattr(p, "outcome", "") or "")
             idx = getattr(p, "outcome_index", None)
-            tok = str(getattr(p, "asset", "") or getattr(p, "asset_id", "") or getattr(p, "token_id", "") or "")
+            tok = str(getattr(p, "asset_id", "") or "")
             is_yes = (idx == 0) if idx is not None else (outcome.lower() == "yes")
             o = out.setdefault(cid, {"yes": 0.0, "tokens": {}, "value": 0.0, "q": str(getattr(p, "title", "") or "")[:80]})
             o["yes"] += size if is_yes else -size
@@ -154,5 +154,5 @@ class Broker:
                     self.client.redeem_positions(condition_id=cid)
                 except Exception as e:  # noqa: BLE001
                     done.append({"cid": cid, "error": str(e)[:120]}); continue
-            done.append({"cid": cid, "redeemed": float(getattr(p, "size", 0) or 0), "dry": not self.send})
+            done.append({"cid": cid, "redeemed": float(getattr(p, "current_size", None) or getattr(p, "size", 0) or 0), "dry": not self.send})
         return done
