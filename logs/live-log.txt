@@ -358,3 +358,73 @@ mids_48h: 13814 markets
 2026-11-04T15:02:01.581696+00:00: 10329 markets, 20645/20658 books, list 168s, books 17s, open interest 2000 (48s), saved 1.93 MB
 paper: 1085 signals this hour; 1002/5356 signalled markets resolved; {"model": {"signals": 4382, "resolved": 598, "stake": 5980.0, "pnl": -3270.2496291138696, "wins": 122, "fees": 218.34622000000002, "profit_per_$": -0.5469}, "fade_week": {"signals": 139, "resolved": 41, "stake": 410.0, "pnl": -275.90900221272574, "wins": 6, "fees": 15.28214, "profit_per_$": -0.6729}, "fade_jump": {"signals": 1341, "resolved": 147, "stake": 1470.0, "pnl": -98.55923261916692, "wins": 49, "fees": 48.10189, "profit_per_$": -0.067}, "longshot": {"signals": 72, "resolved": 4, "stake": 40.0, "pnl": -41.7458, "wins": 0, "fees": 1.7458, "profit_per_$": -1.0436}, "multi_no": {"signals": 198, "resolved": 19, "stake": 190.0, "pnl": -18.1457437429397, "wins": 14, "fees": 2.3360000000000003, "profit_per_$": -0.0955}, "soccer_low": {"signals": 52, "resolved": 11, "stake": 110.0, "pnl": -45.435180952380954, "wins": 2, "fees": 4.4828, "profit_per_$": -0.413}}
 paper_mm: {"updated": "2026-11-04T15:02:01.581696+00:00", "hours": 78, "fills": 1459, "rewards_earned": 6740.53, "trading_cash": 114.21, "inventory_value_at_mid": -1165.53, "total_pnl": 5689.22, "markets_quoted_now": 40, "capital_in_quotes_now": 7840.0, "open_positions": 166}
+  ! 422 {'closed': 'false', 'active': 'true', 'volume_num_min': 5000, 'end_date_min': '2026-07-07T16:02:01.357097Z', 'end_date_max': '2030-11-03T16:02:01.357097Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2026-07-07..2030-11-03: 2100
+  ! 422 {'closed': 'false', 'active': 'true', 'volume_num_min': 5000, 'end_date_min': '2026-07-07T16:02:01.357097Z', 'end_date_max': '2028-09-04T16:02:01.357097Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2026-07-07..2028-09-04: 2100
+  ! 422 {'closed': 'false', 'active': 'true', 'volume_num_min': 5000, 'end_date_min': '2026-07-07T16:02:01.357097Z', 'end_date_max': '2027-08-06T16:02:01.357097Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2026-07-07..2027-08-06: 2100
+  ! 422 {'closed': 'false', 'active': 'true', 'volume_num_min': 5000, 'end_date_min': '2026-07-07T16:02:01.357097Z', 'end_date_max': '2027-01-21T04:02:01.357097Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2026-07-07..2027-01-21: 2100
+markets 2026-07-07..2026-10-14: 128
+  ! 422 {'closed': 'false', 'active': 'true', 'volume_num_min': 5000, 'end_date_min': '2026-10-14T10:02:01.357097Z', 'end_date_max': '2027-01-21T04:02:01.357097Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2026-10-14..2027-01-21: 2100
+  ! 422 {'closed': 'false', 'active': 'true', 'volume_num_min': 5000, 'end_date_min': '2026-10-14T10:02:01.357097Z', 'end_date_max': '2026-12-02T19:02:01.357097Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2026-10-14..2026-12-02: 2100
+  ! 422 {'closed': 'false', 'active': 'true', 'volume_num_min': 5000, 'end_date_min': '2026-10-14T10:02:01.357097Z', 'end_date_max': '2026-11-08T02:32:01.357097Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2026-10-14..2026-11-08: 2100
+markets 2026-10-14..2026-10-26: 32
+  ! 422 {'closed': 'false', 'active': 'true', 'volume_num_min': 5000, 'end_date_min': '2026-10-26T18:17:01.357097Z', 'end_date_max': '2026-11-08T02:32:01.357097Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2026-10-26..2026-11-08: 2100
+markets 2026-10-26..2026-11-01: 82
+  ! 422 {'closed': 'false', 'active': 'true', 'volume_num_min': 5000, 'end_date_min': '2026-11-01T22:24:31.357097Z', 'end_date_max': '2026-11-08T02:32:01.357097Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2026-11-01..2026-11-08: 2100
+markets 2026-11-01..2026-11-05: 1811
+markets 2026-11-05..2026-11-08: 420
+markets 2026-11-08..2026-12-02: 841
+  ! 422 {'closed': 'false', 'active': 'true', 'volume_num_min': 5000, 'end_date_min': '2026-12-02T19:02:01.357097Z', 'end_date_max': '2027-01-21T04:02:01.357097Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2026-12-02..2027-01-21: 2100
+markets 2026-12-02..2026-12-27: 171
+  ! 422 {'closed': 'false', 'active': 'true', 'volume_num_min': 5000, 'end_date_min': '2026-12-27T11:32:01.357097Z', 'end_date_max': '2027-01-21T04:02:01.357097Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2026-12-27..2027-01-21: 2100
+  ! 422 {'closed': 'false', 'active': 'true', 'volume_num_min': 5000, 'end_date_min': '2026-12-27T11:32:01.357097Z', 'end_date_max': '2027-01-08T19:47:01.357097Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2026-12-27..2027-01-08: 2100
+  ! 422 {'closed': 'false', 'active': 'true', 'volume_num_min': 5000, 'end_date_min': '2026-12-27T11:32:01.357097Z', 'end_date_max': '2027-01-02T15:39:31.357097Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2026-12-27..2027-01-02: 2100
+markets 2026-12-27..2026-12-30: 5
+  ! 422 {'closed': 'false', 'active': 'true', 'volume_num_min': 5000, 'end_date_min': '2026-12-30T13:35:46.357097Z', 'end_date_max': '2027-01-02T15:39:31.357097Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2026-12-30..2027-01-02: 2100
+markets 2026-12-30..2027-01-01: 381
+markets 2027-01-01..2027-01-02: 2077
+markets 2027-01-01..2027-01-01: 2016
+markets 2027-01-01..2027-01-01: 1995
+markets 2027-01-01..2027-01-01: 21
+markets 2027-01-01..2027-01-02: 61
+markets 2027-01-02..2027-01-08: 149
+markets 2027-01-08..2027-01-21: 168
+markets 2027-01-21..2027-08-06: 1905
+markets 2027-08-06..2028-09-04: 533
+markets 2028-09-04..2030-11-03: 202
+  ! 422 {'closed': 'false', 'active': 'true', 'volume_num_min': 500, 'end_date_min': '2026-11-04T16:02:01.357097Z', 'end_date_max': '2026-11-08T16:02:01.357097Z', 'limit': 100, 'offset': 2100}: {"type":"validation error","error":"offset too large, use /markets/keyset for deeper pagination"}
+
+markets 2026-11-04..2026-11-08: 2100
+markets 2026-11-04..2026-11-06: 1375
+markets 2026-11-06..2026-11-08: 732
+mids_48h: 13862 markets
+2026-11-04T16:02:01.357092+00:00: 10350 markets, 20700/20700 books, list 162s, books 19s, open interest 2000 (50s), saved 1.94 MB
+paper: 1091 signals this hour; 1032/5386 signalled markets resolved; {"model": {"signals": 4408, "resolved": 620, "stake": 6200.0, "pnl": -3412.2316640301888, "wins": 126, "fees": 226.05537999999996, "profit_per_$": -0.5504}, "fade_week": {"signals": 139, "resolved": 41, "stake": 410.0, "pnl": -275.90900221272574, "wins": 6, "fees": 15.28214, "profit_per_$": -0.6729}, "fade_jump": {"signals": 1357, "resolved": 163, "stake": 1630.0, "pnl": 135.60699326181606, "wins": 58, "fees": 53.65322000000001, "profit_per_$": 0.0832}, "longshot": {"signals": 72, "resolved": 4, "stake": 40.0, "pnl": -41.7458, "wins": 0, "fees": 1.7458, "profit_per_$": -1.0436}, "multi_no": {"signals": 198, "resolved": 19, "stake": 190.0, "pnl": -18.1457437429397, "wins": 14, "fees": 2.3360000000000003, "profit_per_$": -0.0955}, "soccer_low": {"signals": 52, "resolved": 11, "stake": 110.0, "pnl": -45.435180952380954, "wins": 2, "fees": 4.4828, "profit_per_$": -0.413}}
+paper_mm: {"updated": "2026-11-04T16:02:01.357092+00:00", "hours": 79, "fills": 1504, "rewards_earned": 6826.24, "trading_cash": 332.47, "inventory_value_at_mid": -1307.54, "total_pnl": 5851.18, "markets_quoted_now": 40, "capital_in_quotes_now": 7840.0, "open_positions": 170}
