@@ -295,3 +295,7 @@ Price drift in the trade's direction (what a market maker on the other side lose
   $9.1k; 2c +3.9; wide +4.1; 1c -20.9; tight -23.2; v1 +48 (optimistic accounting). Order holds.
   Scheduled volfeat run did not fire (GitHub cron) - dispatched by hand, second cron added.
   PILOT: SDK broker + live tick + pilot workflow built (dry mode); waiting for the user's secrets.
+- 11-04 19:40 OUT-OF-SAMPLE DAY (replay of 11-03 23:00 -> 11-04 17:00, cold start, rules frozen
+  before this data existed): frontier +19.7/h on $4.1k (rewards 23.9, trading -5.8) vs baseline
+  2c+sizevol +6.0/h on $6.9k (rewards 24.6, trading -19.9). Same rewards, a third of the loss.
+  Live 2cl over the same day: +19.8/h on $3.8k. Replay and live agree.
