@@ -1,0 +1,641 @@
+polymarket 0.16.0 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/__init__.py
+MODULE polymarket._frames_bridge
+MODULE polymarket._internal
+MODULE polymarket._internal.actions
+MODULE polymarket._internal.actions._cursor
+MODULE polymarket._internal.actions.account
+MODULE polymarket._internal.actions.auth
+MODULE polymarket._internal.actions.builders
+MODULE polymarket._internal.actions.clob
+MODULE polymarket._internal.actions.combo_rfq
+MODULE polymarket._internal.actions.combos
+MODULE polymarket._internal.actions.data
+MODULE polymarket._internal.actions.exchange_asset
+MODULE polymarket._internal.actions.gamma
+MODULE polymarket._internal.actions.order_heartbeats
+MODULE polymarket._internal.actions.orders
+MODULE polymarket._internal.actions.orders._numeric
+MODULE polymarket._internal.actions.orders.allowance
+MODULE polymarket._internal.actions.orders.cache
+MODULE polymarket._internal.actions.orders.cancel
+MODULE polymarket._internal.actions.orders.context
+MODULE polymarket._internal.actions.orders.estimate
+MODULE polymarket._internal.actions.orders.limit
+MODULE polymarket._internal.actions.orders.market
+MODULE polymarket._internal.actions.orders.market_data
+MODULE polymarket._internal.actions.orders.math
+MODULE polymarket._internal.actions.orders.orders
+MODULE polymarket._internal.actions.orders.place
+MODULE polymarket._internal.actions.orders.post
+MODULE polymarket._internal.actions.orders.settlement
+MODULE polymarket._internal.actions.orders.typed_data
+MODULE polymarket._internal.actions.orders.types
+MODULE polymarket._internal.actions.perps
+MODULE polymarket._internal.actions.perps.account
+MODULE polymarket._internal.actions.perps.builders
+MODULE polymarket._internal.actions.perps.chases
+MODULE polymarket._internal.actions.perps.credentials
+MODULE polymarket._internal.actions.perps.funds
+MODULE polymarket._internal.actions.perps.paging
+MODULE polymarket._internal.actions.perps.position_snapshots
+MODULE polymarket._internal.actions.perps.public
+MODULE polymarket._internal.actions.perps.signing
+MODULE polymarket._internal.actions.perps.trading
+MODULE polymarket._internal.actions.perps.twaps
+MODULE polymarket._internal.actions.relayer
+MODULE polymarket._internal.actions.relayer.approvals
+MODULE polymarket._internal.actions.relayer.auth
+MODULE polymarket._internal.actions.relayer.calls
+MODULE polymarket._internal.actions.relayer.deployed
+MODULE polymarket._internal.actions.relayer.gasless
+MODULE polymarket._internal.actions.relayer.nonce
+MODULE polymarket._internal.actions.relayer.poll
+MODULE polymarket._internal.actions.relayer.positions
+MODULE polymarket._internal.actions.relayer.signing
+MODULE polymarket._internal.actions.relayer.signing.deposit_wallet
+MODULE polymarket._internal.actions.relayer.signing.proxy
+MODULE polymarket._internal.actions.relayer.signing.safe
+MODULE polymarket._internal.actions.relayer.submit
+MODULE polymarket._internal.actions.rewards
+MODULE polymarket._internal.actions.rfq
+MODULE polymarket._internal.actions.session_keys
+MODULE polymarket._internal.context
+MODULE polymarket._internal.data_envelope
+MODULE polymarket._internal.data_params
+MODULE polymarket._internal.dispatch
+MODULE polymarket._internal.environment
+MODULE polymarket._internal.eoa
+MODULE polymarket._internal.eoa.broadcast
+MODULE polymarket._internal.eoa.rpc
+MODULE polymarket._internal.gamma_paths
+MODULE polymarket._internal.hmac
+MODULE polymarket._internal.l1_auth
+MODULE polymarket._internal.pagination
+MODULE polymarket._internal.perps_session
+MODULE polymarket._internal.protocol
+MODULE polymarket._internal.request
+MODULE polymarket._internal.retry
+MODULE polymarket._internal.rfq
+MODULE polymarket._internal.streams
+MODULE polymarket._internal.streams.clob
+MODULE polymarket._internal.streams.clob.heartbeat
+MODULE polymarket._internal.streams.clob.market
+MODULE polymarket._internal.streams.clob.market_protocol
+MODULE polymarket._internal.streams.clob.user
+MODULE polymarket._internal.streams.clob.user_protocol
+MODULE polymarket._internal.streams.handle
+MODULE polymarket._internal.streams.merged_handle
+MODULE polymarket._internal.streams.perps
+MODULE polymarket._internal.streams.perps.heartbeat
+MODULE polymarket._internal.streams.perps.market
+MODULE polymarket._internal.streams.perps.market_protocol
+MODULE polymarket._internal.streams.realtime
+MODULE polymarket._internal.streams.realtime.heartbeat
+MODULE polymarket._internal.streams.realtime.manager
+MODULE polymarket._internal.streams.realtime.protocol
+MODULE polymarket._internal.streams.realtime.session
+MODULE polymarket._internal.streams.realtime.socket
+MODULE polymarket._internal.streams.reconnect
+MODULE polymarket._internal.streams.registry
+MODULE polymarket._internal.streams.rtds
+MODULE polymarket._internal.streams.rtds.heartbeat
+MODULE polymarket._internal.streams.rtds.manager
+MODULE polymarket._internal.streams.rtds.protocol
+MODULE polymarket._internal.streams.sports
+MODULE polymarket._internal.streams.sports.heartbeat
+MODULE polymarket._internal.streams.sports.manager
+MODULE polymarket._internal.validation
+MODULE polymarket._internal.wallet
+MODULE polymarket._internal.ws
+MODULE polymarket._internal.ws.backoff
+MODULE polymarket._internal.ws.connection
+MODULE polymarket._internal.ws.heartbeat
+MODULE polymarket._jupyter
+MODULE polymarket.auth
+MODULE polymarket.calls
+MODULE polymarket.clients
+MODULE polymarket.clients._transport
+MODULE polymarket.clients.async_public
+MODULE polymarket.clients.async_secure
+MODULE polymarket.clients.public
+MODULE polymarket.clients.secure
+MODULE polymarket.environments
+MODULE polymarket.errors
+MODULE polymarket.frames
+MODULE polymarket.frames._arrow
+MODULE polymarket.frames._builtin_overrides
+MODULE polymarket.frames._errors
+MODULE polymarket.frames._overrides
+MODULE polymarket.frames._pandas
+MODULE polymarket.frames._polars
+MODULE polymarket.models
+MODULE polymarket.models._validators
+MODULE polymarket.models.base
+MODULE polymarket.models.clob
+MODULE polymarket.models.clob._validators
+MODULE polymarket.models.clob.account
+MODULE polymarket.models.clob.api_key
+MODULE polymarket.models.clob.builder
+MODULE polymarket.models.clob.cancel
+MODULE polymarket.models.clob.last_trade
+MODULE polymarket.models.clob.market_events
+MODULE polymarket.models.clob.notifications
+MODULE polymarket.models.clob.order_book
+MODULE polymarket.models.clob.order_heartbeats
+MODULE polymarket.models.clob.order_response
+MODULE polymarket.models.clob.orders
+MODULE polymarket.models.clob.relayer
+MODULE polymarket.models.clob.requests
+MODULE polymarket.models.clob.rewards
+MODULE polymarket.models.clob.user_events
+MODULE polymarket.models.collateral_return
+MODULE polymarket.models.data
+MODULE polymarket.models.data.activity
+MODULE polymarket.models.data.analytics
+MODULE polymarket.models.data.common
+MODULE polymarket.models.data.leaderboard
+MODULE polymarket.models.data.portfolio
+MODULE polymarket.models.data.resolutions
+MODULE polymarket.models.data.tokens
+MODULE polymarket.models.gamma
+MODULE polymarket.models.gamma.comment
+MODULE polymarket.models.gamma.common
+MODULE polymarket.models.gamma.event
+MODULE polymarket.models.gamma.market
+MODULE polymarket.models.gamma.profile
+MODULE polymarket.models.gamma.search
+MODULE polymarket.models.gamma.series
+MODULE polymarket.models.gamma.tag
+MODULE polymarket.models.perps
+MODULE polymarket.models.perps._validators
+MODULE polymarket.models.perps.account
+MODULE polymarket.models.perps.builder_events
+MODULE polymarket.models.perps.builders
+MODULE polymarket.models.perps.chases
+MODULE polymarket.models.perps.credentials
+MODULE polymarket.models.perps.events
+MODULE polymarket.models.perps.funds
+MODULE polymarket.models.perps.market
+MODULE polymarket.models.perps.notifications
+MODULE polymarket.models.perps.orders
+MODULE polymarket.models.perps.position_snapshots
+MODULE polymarket.models.perps.requests
+MODULE polymarket.models.perps.results
+MODULE polymarket.models.perps.twaps
+MODULE polymarket.models.perps.types
+MODULE polymarket.models.price_events
+MODULE polymarket.models.rfq
+MODULE polymarket.models.rtds_events
+MODULE polymarket.models.sports_events
+MODULE polymarket.models.trading
+MODULE polymarket.models.types
+MODULE polymarket.pagination
+MODULE polymarket.perps
+MODULE polymarket.rate_limit
+MODULE polymarket.rfq
+MODULE polymarket.session_keys
+MODULE polymarket.streams
+MODULE polymarket.streams._specs
+MODULE polymarket.transactions
+MODULE polymarket.types
+MODULE polymarket.version
+TOP-LEVEL: ['AcceptedOrder', 'Activity', 'ActivityType', 'ActivityTypeFilter', 'ApiKey', 'ApiKeyCreds', 'AssetType', 'AsyncPaginator', 'AsyncPublicClient', 'AsyncSecureClient', 'AuthorizeSessionKeyRequest', 'AuthorizeSessionKeyResult', 'AuthorizedSessionKey', 'AutoCancelDailyLimitError', 'BalanceAllowance', 'BiggestWinnerKind', 'BuilderApiKey', 'BuilderApiKeyInfo', 'BuilderFeeRates', 'BuilderStanding', 'BuilderTrade', 'BuilderVolumeInterval', 'BuilderVolumePoint', 'CancelOrdersResponse', 'CancelledSigningError', 'ClobAssetId', 'ClobTrade', 'CollateralReturnOperation', 'CollateralReturnOperationKind', 'CollateralReturnPlanResponse', 'CollateralReturnPositionAmount', 'CollateralReturnPositionSummary', 'CollateralReturnRouterCall', 'ComboAcceptFailureReason', 'ComboActivity', 'ComboActivityId', 'ComboActivityType', 'ComboBiggestWinner', 'ComboCompressActivity', 'ComboConditionId', 'ComboConvertActivity', 'ComboFillResult', 'ComboKnownStatus', 'ComboMarket', 'ComboMarketOutcome', 'ComboMarketOutcomes', 'ComboMergeActivity', 'ComboPosition', 'ComboPositionLeg', 'ComboPositionMarket', 'ComboPositionMarketEvent', 'ComboPositionSortBy', 'ComboPositionStatus', 'ComboPositionStatusFilter', 'ComboQuote', 'ComboQuoteAcceptance', 'ComboQuoteResult', 'ComboQuoteUnavailableReason', 'ComboRedeemActivity', 'ComboSplitActivity', 'ComboStatus', 'ComboTradeActivity', 'ComboUnwrapActivity', 'ComboWrapActivity', 'Comment', 'CommentId', 'ConditionId', 'ConnectionLostError', 'ConversionActivity', 'CtfConditionId', 'CurrentReward', 'CurrentRewardConfig', 'DepositActivity', 'EarningBreakdown', 'Environment', 'EoaTransactionHandle', 'Erc1155TradingApproval', 'Erc20TradingApproval', 'Event', 'EventId', 'EvmAddress', 'GaslessTransaction', 'GaslessTransactionHandle', 'HexString', 'Holder', 'InsufficientAllowanceError', 'InsufficientLiquidityError', 'LastTradePrice', 'LastTradePriceForAsset', 'LastTradePriceForToken', 'LeaderboardWindow', 'LiveVolume', 'MakerOrder', 'MakerRebateActivity', 'Market', 'MarketBiggestWinner', 'MarketId', 'MarketLiveVolume', 'MarketOrderType', 'MarketResolutionStatus', 'MarketReward', 'MarketRewardConfig', 'MarketRewardToken', 'MergeActivity', 'MergeComboPositionRequest', 'MergeMarketConditionRequest', 'MergeMarketIdRequest', 'MergeMarketPositionRequest', 'MergePositionRequest', 'MergeV2PositionRequest', 'MetaHolder', 'MigrationActivity', 'MissingTradingApprovals', 'Notification', 'NotificationType', 'OpenInterest', 'OpenOrder', 'OrderBook', 'OrderBookLevel', 'OrderHeartbeat', 'OrderHeartbeatMismatchError', 'OrderId', 'OrderPostStatus', 'OrderResponse', 'OrderResponseErrorCode', 'OrderSide', 'OrderType', 'PRODUCTION', 'Page', 'PaginationLimitError', 'Paginator', 'PerpsBalance', 'PerpsBatchLeverageResult', 'PerpsBook', 'PerpsBuilderApproval', 'PerpsBuilderAttribution', 'PerpsBuilderEarning', 'PerpsBuilderEarningsAsset', 'PerpsBuilderEarningsPage', 'PerpsBuilderEarningsPaginator', 'PerpsBuilderEarningsSnapshot', 'PerpsBuilderEarningsSummary', 'PerpsBuilderFillEvent', 'PerpsBuilderStatus', 'PerpsCancelOrderErrorCode', 'PerpsCancelOrderRejection', 'PerpsCancelOrderResult', 'PerpsCancelOrderSuccess', 'PerpsCancelRetryError', 'PerpsCancelRetryOptions', 'PerpsCandle', 'PerpsChase', 'PerpsChaseAccepted', 'PerpsChaseId', 'PerpsCredentials', 'PerpsDeposit', 'PerpsFeeOverride', 'PerpsFeeOverrideTier', 'PerpsFeeScheduleEntry', 'PerpsFill', 'PerpsFundingMultiplier', 'PerpsFundingPayment', 'PerpsFundingRate', 'PerpsInstrument', 'PerpsInstrumentCategory', 'PerpsInstrumentFeeSchedule', 'PerpsInstrumentFeeTier', 'PerpsInstrumentLogo', 'PerpsInstrumentSettlement', 'PerpsInternalTransfer', 'PerpsInternalTransferDirection', 'PerpsInternalTransferId', 'PerpsInternalTransferType', 'PerpsKnownInstrumentCategory', 'PerpsKnownInternalTransferType', 'PerpsLeverageUpdate', 'PerpsLeverageUpdateRejection', 'PerpsLiquidationDetails', 'PerpsLiquidationMethod', 'PerpsLiquidityRole', 'PerpsOrder', 'PerpsOrderPlacement', 'PerpsOrderRequest', 'PerpsPlacedTpSlOrder', 'PerpsPlacedTpSlOrders', 'PerpsPortfolio', 'PerpsPosition', 'PerpsPositionSnapshot', 'PerpsPositionSnapshotCandle', 'PerpsPositionSnapshotChart', 'PerpsPositionSnapshotFailure', 'PerpsPositionSnapshotFill', 'PerpsPositionSnapshotMarker', 'PerpsPositionSnapshotResult', 'PerpsPositionSnapshotSuccess', 'PerpsPositionSnapshots', 'PerpsPositionTpSlTrigger', 'PerpsPositionTrailingStop', 'PerpsTicker', 'PerpsTpSlTrigger', 'PerpsTrade', 'PerpsTrailingStop', 'PerpsTwap', 'PerpsTwapAccepted', 'PerpsTwapId', 'PerpsTwapStatus', 'PerpsWithdrawal', 'PolymarketError', 'PortfolioValue', 'Position', 'PositionFilterType', 'PositionId', 'PositionRowStatus', 'PositionSortBy', 'PositionStatus', 'PositionStatusFilter', 'PriceHistoryInterval', 'PriceHistoryPoint', 'PriceRequest', 'Profile', 'ProtocolVersion', 'PublicClient', 'PublicProfile', 'QuestionId', 'RateLimitError', 'RateLimitUpdate', 'RateLimitUpdateListener', 'RebatedFee', 'RedeemActivity', 'ReferralRewardActivity', 'RejectedOrder', 'RelatedTag', 'RelayerApiKey', 'RelayerTransactionState', 'RequestRejectedError', 'Resolution', 'ResolutionMarketType', 'ResolutionReporter', 'ResolutionRequestId', 'ResolutionSettlementTimeBasis', 'ResolutionSource', 'ResolutionStatus', 'RevokeSessionKeyRequest', 'RewardActivity', 'RewardMarket', 'RewardMarketSort', 'RewardsPercentages', 'RfqCancelQuoteAck', 'RfqCancelQuoteRejectedError', 'RfqConfirmationAck', 'RfqConfirmationDecision', 'RfqConfirmationRejectedError', 'RfqConfirmationRequestEvent', 'RfqDirection', 'RfqErrorCode', 'RfqErrorDetail', 'RfqEvent', 'RfqExecutionStatus', 'RfqExecutionUpdateEvent', 'RfqId', 'RfqQuoteId', 'RfqQuoteReference', 'RfqQuoteRejectedError', 'RfqQuoteRequestEvent', 'RfqQuoteSource', 'RfqRejectionCode', 'RfqRequestRejectedError', 'RfqRequestedSize', 'RfqRequestedSizeUnit', 'RfqRequestorPublicId', 'RfqSession', 'RfqSide', 'RfqStatus', 'RfqStatusResult', 'RfqTradeEvent', 'SearchResults', 'SearchTag', 'SecureClient', 'Series', 'SeriesId', 'SessionKeyKnownScope', 'SessionKeyScope', 'SignedOrder', 'SigningError', 'SortDirection', 'SplitActivity', 'SportsMarketTypes', 'SportsMetadata', 'SyncEoaTransactionHandle', 'SyncGaslessTransactionHandle', 'SyncTransactionHandle', 'Tag', 'TagId', 'TagReference', 'TakerRebateActivity', 'Team', 'TeamOrdering', 'TickSize', 'TimeoutError', 'TipActivity', 'TipSide', 'TokenId', 'TokenModule', 'TokenReference', 'TotalUserEarning', 'Trade', 'TradeActivity', 'TradeFilterType', 'TraderLeaderboardEntry', 'TraderLeaderboardSort', 'TraderLeaderboardStanding', 'TradingApprovalsState', 'TradingRestriction', 'TransactionCall', 'TransactionFailedError', 'TransactionHandle', 'TransactionHash', 'TransactionOutcome', 'TransportError', 'UnexpectedResponseError', 'UnknownActivity', 'UserEarning', 'UserInputError', 'UserPnlFidelity', 'UserPnlFidelityInput', 'UserPnlInterval', 'UserPnlIntervalInput', 'UserPnlPoint', 'UserPnlSeries', 'UserRewardsConfig', 'UserRewardsEarning', 'UserStats', 'UserVolume', 'WithdrawalActivity', 'YieldActivity', 'auth', 'calls', 'clients', 'environments', 'errors', 'frames', 'models', 'pagination', 'rate_limit', 'rfq', 'session_keys', 'streams', 'to_combo_condition_id', 'to_condition_id', 'to_ctf_condition_id', 'to_market_condition_id', 'transactions', 'types', 'version']
+
+=== SecureClient
+(*, private_key: str, wallet: str | None = None, environment: polymarket.environments.Environment = Environment(name='production'), credentials: polymarket.models.clob.api_key.ApiKeyCreds | None = None, api_key: polymarket.auth.BuilderApiKey | polymarket.auth.RelayerApiKey | None = None, nonce: int = 0, logger: logging.Logger | None = None, on_rate_limit_update: collections.abc.Callable[[polymarket.rate_limit.RateLimitUpdate], None] | None = None) -> Self
+  accept_combo_quote(self, quote: polymarket.rfq.ComboQuote | collections.abc.Mapping[str, object]) -> polymarket.rfq.ComboQuoteAcceptance  # Accept a self-contained combo quote and sign its order automatically.
+  approve_erc1155_for_all(self, *, token_address: str, operator_address: str, approved: bool = True, metadata: str | None = None) -> polymarket.transactions.SyncGaslessTransactionHandle  # Approve or revoke an ERC-1155 operator for all tokens.
+  approve_erc20(self, *, token_address: str, spender_address: str, amount: Union[int, Literal['max']], metadata: str | None = None) -> polymarket.transactions.SyncGaslessTrans  # Submit an ERC-20 approval transaction.
+  authorize_session_key(self, *, address: str, scopes: collections.abc.Sequence[polymarket.session_keys.SessionKeyKnownScope | str] = (<SessionKeyKnownScope.ALL: 'ALL'>,), idempotency  # Authorize an externally managed signer for selected venues.
+  cancel_all(self) -> polymarket.models.clob.cancel.CancelOrdersResponse  # Cancel all open orders for the authenticated account.
+  cancel_market_orders(self, *, market: str | None = None, asset_id: str | None = None, token_id: str | None = None) -> polymarket.models.clob.cancel.CancelOrdersResponse  # Cancel open orders matching a market or CLOB asset filter.
+  cancel_order(self, *, order_id: str) -> polymarket.models.clob.cancel.CancelOrdersResponse  # Cancel one open order for the authenticated account.
+  cancel_orders(self, *, order_ids: collections.abc.Sequence[str]) -> polymarket.models.clob.cancel.CancelOrdersResponse  # Cancel multiple open orders for the authenticated account.
+  close(self) -> None  # Close the underlying network transports.
+  create(*, private_key: str, wallet: str | None = None, environment: polymarket.environments.Environment = Environment(name='production'), credentials: polymarket.mode  # Create an authenticated synchronous client.
+  create_builder_api_key(self) -> polymarket.auth.BuilderApiKey  # Create a new builder API key for the authenticated account.
+  create_limit_order(self, *, asset_id: str | None = None, token_id: str | None = None, price: decimal.Decimal | int | float | str, size: decimal.Decimal | int | float | str, side:  # Create and sign a limit order without posting it.
+  create_market_order(self, *, asset_id: str | None = None, token_id: str | None = None, side: Literal['BUY', 'SELL'], amount: decimal.Decimal | int | float | str | None = None, sha  # Create and sign a market order without posting it.
+  delete_api_key(self) -> None  # Delete the API key currently used by this client.
+  drop_notifications(self, *, ids: collections.abc.Sequence[int | str]) -> None  # Delete notifications for the authenticated account.
+  end_authentication(self) -> 'PublicClient'  # Delete current credentials, close this client, and return a public client.
+  estimate_market_price(self, *, asset_id: str | None = None, token_id: str | None = None, side: Literal['BUY', 'SELL'], amount: decimal.Decimal | int | float | str | None = None, sha  # Estimate the limiting price level for a market order.
+  execute_collateral_return_plan(self, *, plan: polymarket.models.collateral_return.CollateralReturnPlanResponse) -> polymarket.transactions.SyncGaslessTransactionHandle  # Execute a collateral return plan.
+  execute_transaction(self, *, calls: collections.abc.Sequence[polymarket._internal.actions.relayer.calls.TransactionCall], metadata: str | None = None) -> polymarket.transactions.S  # Submit one or more transaction calls for the authenticated wallet.
+  fetch_api_keys(self) -> tuple[str, ...]  # Fetch API key identifiers for the authenticated account.
+  fetch_builder_api_keys(self) -> tuple[polymarket.models.clob.api_key.BuilderApiKeyInfo, ...]  # List the builder API keys for the authenticated account.
+  fetch_rfq_status(self, *, rfq_id: str) -> polymarket.rfq.RfqStatusResult  # Fetch the status of an accepted RFQ.
+  fetch_session_keys(self) -> tuple[polymarket.session_keys.AuthorizedSessionKey, ...]  # Fetch active session keys authorized for the Deposit Wallet.
+  get_balance_allowance(self, *, asset_type: Literal['COLLATERAL', 'CONDITIONAL', 'CONDITIONAL-V2'], asset_id: str | None = None, token_id: str | None = None) -> polymarket.models.clo  # Get balance and allowance information for an asset.
+  get_builder_fee_rates(self, builder_code: str) -> polymarket.models.clob.builder.BuilderFeeRates  # Get fee rates for a builder code.
+  get_builder_volumes(self, *, interval: Optional[Literal['day', 'week', 'month', 'all']] = None, bucket_limit: int | None = None) -> tuple[polymarket.models.data.leaderboard.Builde  # Get builder volume in shares by calendar bucket.
+  get_closed_only_mode(self) -> bool  # Return whether the authenticated account is in closed-only mode.
+  get_comment_thread(self, id: str, *, get_positions: bool | None = None) -> tuple[polymarket.models.gamma.comment.Comment, ...]  # Get a comment thread by comment ID.
+  get_current_rebates(self, *, date: str, maker_address: str) -> tuple[polymarket.models.clob.rewards.RebatedFee, ...]  # Get maker fee rebates for a YYYY-MM-DD calendar day without authentication.
+  get_event(self, *, id: str | None = None, slug: str | None = None, url: str | None = None, include_best_lines: bool | None = None, include_chat: bool | None = None, incl  # Get an event by id, slug, or Polymarket URL.
+  get_event_live_volume(self, *, event_ids: int | collections.abc.Sequence[int]) -> polymarket.models.data.analytics.LiveVolume  # Get combined event taker volume in shares with a market breakdown.
+  get_event_tags(self, id: str) -> tuple[polymarket.models.gamma.common.TagReference, ...]  # Get an event's tags.
+  get_last_trade_price(self, *, asset_id: str | None = None, token_id: str | None = None) -> polymarket.models.clob.last_trade.LastTradePrice | None  # Get the most recent trade price for a CLOB asset.
+  get_last_trade_prices(self, *, asset_ids: collections.abc.Sequence[str] | None = None, token_ids: collections.abc.Sequence[str] | None = None) -> tuple[polymarket.models.clob.last_t  # Get the most recent trade prices for multiple CLOB assets.
+  get_market(self, *, id: str | None = None, slug: str | None = None, url: str | None = None, include_tag: bool | None = None, locale: str | None = None) -> polymarket.mode  # Get a market by id, slug, or Polymarket URL.
+  get_market_tags(self, id: str) -> tuple[polymarket.models.gamma.common.TagReference, ...]  # Get a market's tags.
+  get_midpoint(self, *, asset_id: str | None = None, token_id: str | None = None) -> decimal.Decimal  # Get the midpoint price for a CLOB asset.
+  get_midpoints(self, *, asset_ids: collections.abc.Sequence[str] | None = None, token_ids: collections.abc.Sequence[str] | None = None) -> dict[typing.Union[polymarket.models  # Get midpoint prices for multiple CLOB assets.
+  get_notifications(self) -> tuple[typing.Annotated[polymarket.models.clob.notifications.OrderCancellationNotification | polymarket.models.clob.notifications.OrderFillNotification  # Get notifications for the authenticated account.
+  get_open_interests(self, *, condition_ids: str | collections.abc.Sequence[str] | None = None) -> tuple[polymarket.models.data.analytics.OpenInterest, ...]  # Get open interest in USDC. Omit conditions to request global interest.
+  get_order(self, *, order_id: str) -> polymarket.models.clob.account.OpenOrder  # Get one open order for the authenticated account.
+  get_order_book(self, *, asset_id: str | None = None, token_id: str | None = None) -> polymarket.models.clob.order_book.OrderBook  # Get the order book for a CLOB asset.
+  get_order_books(self, *, asset_ids: collections.abc.Sequence[str] | None = None, token_ids: collections.abc.Sequence[str] | None = None) -> tuple[polymarket.models.clob.order_  # Get order books for multiple CLOB assets.
+  get_order_scoring(self, *, order_id: str) -> bool  # Return whether an order is currently scoring rewards.
+  get_orders_scoring(self, *, order_ids: collections.abc.Sequence[str]) -> dict[str, bool]  # Return reward-scoring status for multiple orders.
+  get_portfolio_value(self, *, user: str | None = None, condition_ids: str | collections.abc.Sequence[str] | None = None) -> polymarket.models.data.portfolio.PortfolioValue  # Get current portfolio value in USDC.
+  get_price(self, *, asset_id: str | None = None, token_id: str | None = None, side: Literal['BUY', 'SELL']) -> decimal.Decimal  # Get the executable price for a CLOB asset side.
+  get_prices(self, *, requests: collections.abc.Sequence[polymarket.models.clob.requests.PriceRequest]) -> dict[typing.Union[polymarket.models.types.TokenId, polymarket.mod  # Get executable prices for multiple CLOB asset-side requests.
+  get_public_profile(self, address: str) -> polymarket.models.gamma.profile.PublicProfile | None  # Get a public profile by wallet address. Returns None if no profile exists.
+  get_related_tag_resources(self, *, id: str | None = None, slug: str | None = None, locale: str | None = None, omit_empty: bool | None = None, status: str | None = None) -> tuple[polymar  # Get tag resources linked from related tag relationships.
+  get_related_tags(self, *, id: str | None = None, slug: str | None = None, omit_empty: bool | None = None, status: str | None = None) -> tuple[polymarket.models.gamma.tag.Relate  # Get related tag relationships.
+  get_resolutions(self, *, question_id: str | None = None, condition_ids: str | collections.abc.Sequence[str] | None = None, event_ids: int | collections.abc.Sequence[int] | Non  # Get resolutions by question, conditions, or events. Missing rows are omitted.
+  get_reward_percentages(self) -> dict[polymarket.models.types.ConditionId, float]  # Get current reward percentage allocations for the authenticated account.
+  get_series(self, id: str, *, locale: str | None = None) -> polymarket.models.gamma.series.Series  # Get a series.
+  get_sports(self) -> tuple[polymarket.models.gamma.common.SportsMetadata, ...]  # Get available sports metadata.
+  get_sports_market_types(self) -> polymarket.models.gamma.common.SportsMarketTypes  # Get available sports market types.
+  get_spread(self, *, asset_id: str | None = None, token_id: str | None = None) -> decimal.Decimal  # Get the bid-ask spread for a CLOB asset.
+  get_spreads(self, *, asset_ids: collections.abc.Sequence[str] | None = None, token_ids: collections.abc.Sequence[str] | None = None) -> dict[typing.Union[polymarket.models  # Get bid-ask spreads for multiple CLOB assets.
+  get_tag(self, *, id: str | None = None, slug: str | None = None, include_template: bool | None = None, locale: str | None = None) -> polymarket.models.gamma.tag.Tag  # Get a tag by id or slug.
+  get_token_references(self, *, asset_ids: str | collections.abc.Sequence[str] | None = None, condition_ids: str | collections.abc.Sequence[str] | None = None) -> tuple[polymarket.mo  # Get outcome asset reference and settlement metadata as a direct tuple.
+  get_total_earnings_for_user_for_day(self, *, date: str, sponsored: bool | None = None) -> tuple[polymarket.models.clob.rewards.TotalUserEarning, ...]  # Get total reward earnings for the authenticated user on a date.
+  get_trader_leaderboard_standing(self, *, user: str | None = None, category: str | None = None, window: Optional[Literal['day', 'week', 'month', 'all']] = None) -> polymarket.models.data.leade  # Get wallet leaderboard standings, or ``None`` when unavailable.
+  get_trading_approvals_state(self, *, wallet: str | None = None) -> polymarket.models.trading.TradingApprovalsState  # Get missing trading approvals for a wallet or the authenticated wallet.
+  get_user_pnl(self, *, user: str | None = None, interval: Union[Literal['max', 'all', '1m', '1w', '1d', '12h', '6h'], polymarket.models.data.common.UserPnlInterval, NoneType  # Get cumulative wallet PnL in USDC and volume in shares.
+  get_user_stats(self, *, user: str | None = None) -> polymarket.models.data.portfolio.UserStats | None  # Get wallet statistics, or ``None`` when the wallet has no statistics.
+  get_user_volume(self, *, user: str | None = None, start: int | datetime.datetime | None = None, end: int | datetime.datetime | None = None, full_history: bool = False) -> poly  # Get trading volume in shares and USDC. Time bounds are floored to UTC days.
+  is_gasless_ready(self) -> bool  # Return True.
+  list_account_trades(self, *, asset_id: str | None = None, token_id: str | None = None, id: str | None = None, market: str | None = None, maker_address: str | None = None, after: s  # List trades for the authenticated account.
+  list_activity(self, *, user: str | None = None, condition_id: str | collections.abc.Sequence[str] | None = None, event_id: int | collections.abc.Sequence[int] | None = None,  # List wallet activity, including deposits and withdrawals.
+  list_biggest_winners(self, *, category: str | None = None, window: Optional[Literal['day', 'week', 'month', 'all']] = None, page_size: int = 100) -> polymarket.pagination.Paginator  # List winning market and combo positions, ordered by USDC PnL.
+  list_builder_leaderboard(self, *, window: Optional[Literal['day', 'week', 'month', 'all']] = None, page_size: int = 100) -> polymarket.pagination.Paginator[polymarket.models.data.leade  # List ranked builders and their trading volume in shares.
+  list_builder_trades(self, *, builder_code: str, market: str | None = None, asset_id: str | None = None, token_id: str | None = None, id: str | None = None, after: str | None = Non  # List builder-attributed trades.
+  list_combo_activity(self, *, user: str | None = None, condition_id: str | collections.abc.Sequence[str] | None = None, page_size: int = 100) -> polymarket.pagination.Paginator[pol  # List combo lifecycle activity. Amounts and payouts are USDC.
+  list_combo_markets(self, *, exclude: str | collections.abc.Sequence[str] | None = None, page_size: int = 20) -> polymarket.pagination.Paginator[polymarket.models.rfq.ComboMarket]  # List markets available for Combos.
+  list_combo_positions(self, *, user: str | None = None, condition_id: str | collections.abc.Sequence[str] | None = None, status: Union[Literal['OPEN', 'REDEEMABLE', 'PARTIAL', 'RESO  # List combo positions, optionally filtering by multiple statuses.
+  list_comments(self, *, parent_entity_id: str, parent_entity_type: Literal['Event', 'Series'], ascending: bool | None = None, get_positions: bool | None = None, holders_only:  # List comments for an event or series.
+  list_comments_by_user_address(self, *, address: str, ascending: bool | None = None, order: str | None = None, page_size: int = 20) -> polymarket.pagination.Paginator[polymarket.models.gamma  # List comments authored by a user address.
+  list_current_rewards(self, *, sponsored: bool | None = None) -> polymarket.pagination.Paginator[polymarket.models.clob.rewards.CurrentReward]  # List current rewards.
+  list_events(self, *, ascending: bool | None = None, closed: bool = False, cyom: bool | None = None, end_date_max: str | datetime.datetime | None = None, end_date_min: str   # List events.
+  list_market_holders(self, *, condition_ids: str | collections.abc.Sequence[str], min_balance: float | None = None, include_pnl: bool | None = None, page_size: int = 100) -> polyma  # List holders grouped by outcome asset. Amounts are shares; PnL is USDC.
+  list_market_rewards(self, *, condition_id: str, sponsored: bool | None = None) -> polymarket.pagination.Paginator[polymarket.models.clob.rewards.MarketReward]  # List rewards for a market condition.
+  list_markets(self, *, ascending: bool | None = None, closed: bool | None = None, clob_token_ids: str | collections.abc.Sequence[str] | None = None, condition_ids: str | col  # List markets.
+  list_open_orders(self, *, asset_id: str | None = None, token_id: str | None = None, id: str | None = None, market: str | None = None) -> polymarket.pagination.Paginator[polymar  # List open orders for the authenticated account.
+  list_positions(self, *, user: str | None = None, condition_id: str | collections.abc.Sequence[str] | None = None, status: Union[Literal['OPEN', 'REDEEMABLE', 'REDEEMABLE_LOST  # List positions for a wallet or a single market.
+  list_price_history(self, *, asset_id: str, interval: Optional[Literal['max', 'all', '1m', '1w', '1d', '6h', '1h']] = None, start: int | datetime.datetime | None = None, end: int   # List historical prices in USDC per share, oldest first.
+  list_reward_markets(self, *, query: str | None = None, tag_slugs: collections.abc.Sequence[str] | None = None, market_id: int | None = None, event_ids: collections.abc.Sequence[in  # List active markets and their reward configurations, which may be empty.
+  list_series(self, *, ascending: bool | None = None, closed: bool | None = None, exclude_events: bool | None = None, locale: str | None = None, order: str | None = None, re  # List series.
+  list_tags(self, *, ascending: bool | None = None, include_template: bool | None = None, is_carousel: bool | None = None, locale: str | None = None, order: str | None = N  # List tags.
+  list_teams(self, *, abbreviation: str | collections.abc.Sequence[str] | None = None, ascending: bool | None = None, league: str | collections.abc.Sequence[str] | None = N  # List teams.
+  list_trader_leaderboard(self, *, category: str | None = None, window: Optional[Literal['day', 'week', 'month', 'all']] = None, sort_by: Optional[Literal['PNL', 'VOLUME']] = None, page  # List ranked traders. PnL is USDC and volume is shares; ranks can tie and skip.
+  list_trades(self, *, user: str | None = None, condition_id: str | collections.abc.Sequence[str] | None = None, event_id: int | collections.abc.Sequence[int] | None = None,  # List trades. Size is shares and price is USDC per share.
+  list_user_earnings_and_markets_config(self, *, date: str, no_competition: bool | None = None, order_by: str | None = None, position: str | None = None, page_size: int | None = None) -> polymarket.p  # List reward earnings with market configuration for the authenticated user.
+  list_user_earnings_for_day(self, *, date: str) -> polymarket.pagination.Paginator[polymarket.models.clob.rewards.UserEarning]  # List reward earnings for the authenticated user on a date.
+  merge_multiple_positions(self, *, positions: collections.abc.Sequence[polymarket.transactions.MergeV2PositionRequest | polymarket.transactions.MergeMarketConditionRequest | polymarket.  # Merge multiple market positions or Polymarket V2 positions into collateral.
+  merge_positions(self, *, condition_id: str | None = None, legs: collections.abc.Sequence[str] | None = None, amount: Union[int, Literal['max']], metadata: str | None = None) -  # Merge market or combo positions back into collateral.
+  place_limit_order(self, *, asset_id: str | None = None, token_id: str | None = None, price: decimal.Decimal | int | float | str, size: decimal.Decimal | int | float | str, side:  # Create, sign, and post a limit order.
+  place_market_order(self, *, asset_id: str | None = None, token_id: str | None = None, side: Literal['BUY', 'SELL'], amount: decimal.Decimal | int | float | str | None = None, sha  # Create, sign, and post a market order.
+  plan_collateral_return(self) -> polymarket.models.collateral_return.CollateralReturnPlanResponse  # Plan a collateral return for the authenticated wallet.
+  post_order(self, signed_order: polymarket.models.clob.orders.SignedOrder) -> polymarket.models.clob.order_response.AcceptedOrder | polymarket.models.clob.order_response.R  # Post a signed order for the authenticated account.
+  post_orders(self, signed_orders: collections.abc.Sequence[polymarket.models.clob.orders.SignedOrder]) -> tuple[polymarket.models.clob.order_response.AcceptedOrder | polyma  # Post multiple signed orders for the authenticated account.
+  redeem_positions(self, *, condition_id: str | None = None, market_id: str | None = None, position_id: str | None = None, metadata: str | None = None) -> polymarket.transactions  # Redeem resolved market positions or a Polymarket V2 position.
+  request_combo_quote(self, *, leg_position_ids: list[str] | tuple[str, ...], direction: polymarket.rfq.RfqDirection | str, amount: decimal.Decimal | int | float | str | None = None  # Request a quote for a combo of positions.
+  revoke_builder_api_key(self) -> None  # Revoke the builder API key this client is configured with.
+  revoke_session_key(self, *, address: str, idempotency_key: str | None = None) -> None  # Revoke a session key authorized for the Deposit Wallet.
+  search(self, *, q: str, ascending: bool | None = None, cache: bool | None = None, events_status: str | None = None, events_tag: str | collections.abc.Sequence[str] |   # Search Polymarket content.
+  send_order_heartbeat(self, *, heartbeat_id: str = '') -> polymarket.models.clob.order_heartbeats.OrderHeartbeat  # Send one authenticated order heartbeat and retain the returned ID.
+  setup_gasless_wallet(self) -> Self  # Return this client.
+  setup_trading_approvals(self) -> polymarket.transactions.SyncDeprecatedTransactionHandle  # Approve the standard set of trading allowances for the wallet.
+  split_position(self, *, condition_id: str | None = None, legs: collections.abc.Sequence[str] | None = None, amount: int, metadata: str | None = None) -> polymarket.transactio  # Split collateral into market or combo positions.
+  transfer_erc20(self, *, token_address: str, recipient_address: str, amount: int, metadata: str | None = None) -> polymarket.transactions.SyncGaslessTransactionHandle | polyma  # Submit an ERC-20 transfer transaction.
+  wait_for_combo_fill(self, *, rfq_id: str, timeout: float = 30.0, polling_interval: float = 1.0) -> polymarket.rfq.ComboFillResult  # Wait for an accepted RFQ to reach a terminal state.
+  wait_for_order_fill_settlement(self, order: polymarket.models.clob.order_response.AcceptedOrder, *, timeout_s: float = 30.0) -> tuple[polymarket.types.TransactionHash, ...]  # Wait until every fill listed in an order response settles.
+
+=== AsyncSecureClient
+(*, private_key: str, wallet: str | None = None, environment: polymarket.environments.Environment = Environment(name='production'), credentials: polymarket.models.clob.api_key.ApiKeyCreds | None = None, api_key: polymarket.auth.BuilderApiKey | polymarket.auth.RelayerApiKey | None = None, nonce: int = 0, logger: logging.Logger | None = None, on_rate_limit_update: collections.abc.Callable[[polymarket.rate_limit.RateLimitUpdate], None] | None = None) -> Self
+  accept_combo_quote(self, quote: polymarket.rfq.ComboQuote | collections.abc.Mapping[str, object]) -> polymarket.rfq.ComboQuoteAcceptance  # Accept a self-contained combo quote and sign its order automatically.
+  approve_erc1155_for_all(self, *, token_address: str, operator_address: str, approved: bool = True, metadata: str | None = None) -> polymarket.transactions.GaslessTransactionHandle | p  # Approve or revoke an ERC-1155 operator for all tokens.
+  approve_erc20(self, *, token_address: str, spender_address: str, amount: Union[int, Literal['max']], metadata: str | None = None) -> polymarket.transactions.GaslessTransacti  # Submit an ERC-20 approval transaction.
+  authorize_session_key(self, *, address: str, scopes: collections.abc.Sequence[polymarket.session_keys.SessionKeyKnownScope | str] = (<SessionKeyKnownScope.ALL: 'ALL'>,), idempotency  # Authorize an externally managed signer for selected venues.
+  cancel_all(self) -> polymarket.models.clob.cancel.CancelOrdersResponse  # Cancel all open orders for the authenticated account.
+  cancel_market_orders(self, *, market: str | None = None, asset_id: str | None = None, token_id: str | None = None) -> polymarket.models.clob.cancel.CancelOrdersResponse  # Cancel open orders matching a market or CLOB asset filter.
+  cancel_order(self, *, order_id: str) -> polymarket.models.clob.cancel.CancelOrdersResponse  # Cancel one open order for the authenticated account.
+  cancel_orders(self, *, order_ids: collections.abc.Sequence[str]) -> polymarket.models.clob.cancel.CancelOrdersResponse  # Cancel multiple open orders for the authenticated account.
+  close(self) -> None  # Close the underlying network transports and any open streams.
+  create(*, private_key: str, wallet: str | None = None, environment: polymarket.environments.Environment = Environment(name='production'), credentials: polymarket.mode  # Create an authenticated async client.
+  create_builder_api_key(self) -> polymarket.auth.BuilderApiKey  # Create a new builder API key for the authenticated account.
+  create_limit_order(self, *, asset_id: str | None = None, token_id: str | None = None, price: decimal.Decimal | int | float | str, size: decimal.Decimal | int | float | str, side:  # Create and sign a limit order without posting it.
+  create_market_order(self, *, asset_id: str | None = None, token_id: str | None = None, side: Literal['BUY', 'SELL'], amount: decimal.Decimal | int | float | str | None = None, sha  # Create and sign a market order without posting it.
+  delete_api_key(self) -> None  # Delete the API key currently used by this client.
+  deposit_to_perps(self, *, amount: int, metadata: str | None = None) -> polymarket.transactions.GaslessTransactionHandle | polymarket.transactions.EoaTransactionHandle  # Experimental: This API may change in a breaking way in any release,
+  drop_notifications(self, *, ids: collections.abc.Sequence[int | str]) -> None  # Delete notifications for the authenticated account.
+  end_authentication(self) -> 'AsyncPublicClient'  # Delete current credentials, close this client, and return an async public client.
+  estimate_market_price(self, *, asset_id: str | None = None, token_id: str | None = None, side: Literal['BUY', 'SELL'], amount: decimal.Decimal | int | float | str | None = None, sha  # Estimate the limiting price level for a market order.
+  execute_collateral_return_plan(self, *, plan: polymarket.models.collateral_return.CollateralReturnPlanResponse) -> polymarket.transactions.GaslessTransactionHandle  # Execute a collateral return plan.
+  execute_transaction(self, *, calls: collections.abc.Sequence[polymarket._internal.actions.relayer.calls.TransactionCall], metadata: str | None = None) -> polymarket.transactions.G  # Submit one or more transaction calls for the authenticated wallet.
+  fetch_api_keys(self) -> tuple[str, ...]  # Fetch API key identifiers for the authenticated account.
+  fetch_builder_api_keys(self) -> tuple[polymarket.models.clob.api_key.BuilderApiKeyInfo, ...]  # List the builder API keys for the authenticated account.
+  fetch_perps_book(self, *, instrument_id: int, depth: Literal[10, 100, 500, 1000] = 100) -> polymarket.models.perps.market.PerpsBook  # Experimental: This API may change in a breaking way in any release,
+  fetch_perps_builder_status(self, *, address: str) -> polymarket.models.perps.builders.PerpsBuilderStatus  # Experimental: read builder registration, availability, and fee cap.
+  fetch_perps_fees(self, *, instrument_id: int | None = None) -> tuple[polymarket.models.perps.market.PerpsFeeScheduleEntry, ...] | tuple[polymarket.models.perps.market.PerpsInst  # Experimental: This API may change in a breaking way in any release,
+  fetch_perps_instruments(self, *, instrument_id: int | None = None, category: polymarket.models.perps.types.PerpsKnownInstrumentCategory | str | None = None) -> tuple[polymarket.models  # Experimental: This API may change in a breaking way in any release,
+  fetch_perps_position_snapshots(self, *, address: str, active_instrument_ids: collections.abc.Sequence[int] = (), history_fills: collections.abc.Sequence[polymarket.models.perps.position_snap  # Fetch ordered snapshots anonymously, including on secure clients.
+  fetch_perps_registration(self, *, address: str) -> bool  # Fetch whether an address has a Perps account without authentication.
+  fetch_perps_ticker(self, *, instrument_id: int) -> polymarket.models.perps.market.PerpsTicker  # Experimental: This API may change in a breaking way in any release,
+  fetch_perps_tickers(self, *, instrument_id: int | None = None) -> tuple[polymarket.models.perps.market.PerpsTicker, ...]  # Experimental: This API may change in a breaking way in any release,
+  fetch_rfq_status(self, *, rfq_id: str) -> polymarket.rfq.RfqStatusResult  # Fetch the status of an accepted RFQ.
+  fetch_session_keys(self) -> tuple[polymarket.session_keys.AuthorizedSessionKey, ...]  # Fetch active session keys authorized for the Deposit Wallet.
+  get_balance_allowance(self, *, asset_type: Literal['COLLATERAL', 'CONDITIONAL', 'CONDITIONAL-V2'], asset_id: str | None = None, token_id: str | None = None) -> polymarket.models.clo  # Get balance and allowance information for an asset.
+  get_builder_fee_rates(self, builder_code: str) -> polymarket.models.clob.builder.BuilderFeeRates  # Get fee rates for a builder code.
+  get_builder_volumes(self, *, interval: Optional[Literal['day', 'week', 'month', 'all']] = None, bucket_limit: int | None = None) -> tuple[polymarket.models.data.leaderboard.Builde  # Get builder volume in shares by calendar bucket.
+  get_closed_only_mode(self) -> bool  # Return whether the authenticated account is in closed-only mode.
+  get_comment_thread(self, id: str, *, get_positions: bool | None = None) -> tuple[polymarket.models.gamma.comment.Comment, ...]  # Get a comment thread by comment ID.
+  get_current_rebates(self, *, date: str, maker_address: str) -> tuple[polymarket.models.clob.rewards.RebatedFee, ...]  # Get maker fee rebates for a YYYY-MM-DD calendar day without authentication.
+  get_event(self, *, id: str | None = None, slug: str | None = None, url: str | None = None, include_best_lines: bool | None = None, include_chat: bool | None = None, incl  # Get an event by id, slug, or Polymarket URL.
+  get_event_live_volume(self, *, event_ids: int | collections.abc.Sequence[int]) -> polymarket.models.data.analytics.LiveVolume  # Get combined event taker volume in shares with a market breakdown.
+  get_event_tags(self, id: str) -> tuple[polymarket.models.gamma.common.TagReference, ...]  # Get an event's tags.
+  get_last_trade_price(self, *, asset_id: str | None = None, token_id: str | None = None) -> polymarket.models.clob.last_trade.LastTradePrice | None  # Get the most recent trade price for a CLOB asset.
+  get_last_trade_prices(self, *, asset_ids: collections.abc.Sequence[str] | None = None, token_ids: collections.abc.Sequence[str] | None = None) -> tuple[polymarket.models.clob.last_t  # Get the most recent trade prices for multiple CLOB assets.
+  get_market(self, *, id: str | None = None, slug: str | None = None, url: str | None = None, include_tag: bool | None = None, locale: str | None = None) -> polymarket.mode  # Get a market by id, slug, or Polymarket URL.
+  get_market_tags(self, id: str) -> tuple[polymarket.models.gamma.common.TagReference, ...]  # Get a market's tags.
+  get_midpoint(self, *, asset_id: str | None = None, token_id: str | None = None) -> decimal.Decimal  # Get the midpoint price for a CLOB asset.
+  get_midpoints(self, *, asset_ids: collections.abc.Sequence[str] | None = None, token_ids: collections.abc.Sequence[str] | None = None) -> dict[typing.Union[polymarket.models  # Get midpoint prices for multiple CLOB assets.
+  get_notifications(self) -> tuple[typing.Annotated[polymarket.models.clob.notifications.OrderCancellationNotification | polymarket.models.clob.notifications.OrderFillNotification  # Get notifications for the authenticated account.
+  get_open_interests(self, *, condition_ids: str | collections.abc.Sequence[str] | None = None) -> tuple[polymarket.models.data.analytics.OpenInterest, ...]  # Get open interest in USDC. Omit conditions to request global interest.
+  get_order(self, *, order_id: str) -> polymarket.models.clob.account.OpenOrder  # Get one open order for the authenticated account.
+  get_order_book(self, *, asset_id: str | None = None, token_id: str | None = None) -> polymarket.models.clob.order_book.OrderBook  # Get the order book for a CLOB asset.
+  get_order_books(self, *, asset_ids: collections.abc.Sequence[str] | None = None, token_ids: collections.abc.Sequence[str] | None = None) -> tuple[polymarket.models.clob.order_  # Get order books for multiple CLOB assets.
+  get_order_scoring(self, *, order_id: str) -> bool  # Return whether an order is currently scoring rewards.
+  get_orders_scoring(self, *, order_ids: collections.abc.Sequence[str]) -> dict[str, bool]  # Return reward-scoring status for multiple orders.
+  get_portfolio_value(self, *, user: str | None = None, condition_ids: str | collections.abc.Sequence[str] | None = None) -> polymarket.models.data.portfolio.PortfolioValue  # Get current portfolio value in USDC.
+  get_price(self, *, asset_id: str | None = None, token_id: str | None = None, side: Literal['BUY', 'SELL']) -> decimal.Decimal  # Get the executable price for a CLOB asset side.
+  get_prices(self, *, requests: collections.abc.Sequence[polymarket.models.clob.requests.PriceRequest]) -> dict[typing.Union[polymarket.models.types.TokenId, polymarket.mod  # Get executable prices for multiple CLOB asset-side requests.
+  get_public_profile(self, address: str) -> polymarket.models.gamma.profile.PublicProfile | None  # Get a public profile by wallet address. Returns None if no profile exists.
+  get_related_tag_resources(self, *, id: str | None = None, slug: str | None = None, locale: str | None = None, omit_empty: bool | None = None, status: str | None = None) -> tuple[polymar  # Get tag resources linked from related tag relationships.
+  get_related_tags(self, *, id: str | None = None, slug: str | None = None, omit_empty: bool | None = None, status: str | None = None) -> tuple[polymarket.models.gamma.tag.Relate  # Get related tag relationships.
+  get_resolutions(self, *, question_id: str | None = None, condition_ids: str | collections.abc.Sequence[str] | None = None, event_ids: int | collections.abc.Sequence[int] | Non  # Get resolutions by question, conditions, or events. Missing rows are omitted.
+  get_reward_percentages(self) -> dict[polymarket.models.types.ConditionId, float]  # Get current reward percentage allocations for the authenticated account.
+  get_series(self, id: str, *, locale: str | None = None) -> polymarket.models.gamma.series.Series  # Get a series.
+  get_sports(self) -> tuple[polymarket.models.gamma.common.SportsMetadata, ...]  # Get available sports metadata.
+  get_sports_market_types(self) -> polymarket.models.gamma.common.SportsMarketTypes  # Get available sports market types.
+  get_spread(self, *, asset_id: str | None = None, token_id: str | None = None) -> decimal.Decimal  # Get the bid-ask spread for a CLOB asset.
+  get_spreads(self, *, asset_ids: collections.abc.Sequence[str] | None = None, token_ids: collections.abc.Sequence[str] | None = None) -> dict[typing.Union[polymarket.models  # Get bid-ask spreads for multiple CLOB assets.
+  get_tag(self, *, id: str | None = None, slug: str | None = None, include_template: bool | None = None, locale: str | None = None) -> polymarket.models.gamma.tag.Tag  # Get a tag by id or slug.
+  get_token_references(self, *, asset_ids: str | collections.abc.Sequence[str] | None = None, condition_ids: str | collections.abc.Sequence[str] | None = None) -> tuple[polymarket.mo  # Get outcome asset reference and settlement metadata as a direct tuple.
+  get_total_earnings_for_user_for_day(self, *, date: str, sponsored: bool | None = None) -> tuple[polymarket.models.clob.rewards.TotalUserEarning, ...]  # Get total reward earnings for the authenticated user on a date.
+  get_trader_leaderboard_standing(self, *, user: str | None = None, category: str | None = None, window: Optional[Literal['day', 'week', 'month', 'all']] = None) -> polymarket.models.data.leade  # Get wallet leaderboard standings, or ``None`` when unavailable.
+  get_trading_approvals_state(self, *, wallet: str | None = None) -> polymarket.models.trading.TradingApprovalsState  # Get missing trading approvals for a wallet or the authenticated wallet.
+  get_user_pnl(self, *, user: str | None = None, interval: Union[Literal['max', 'all', '1m', '1w', '1d', '12h', '6h'], polymarket.models.data.common.UserPnlInterval, NoneType  # Get cumulative wallet PnL in USDC and volume in shares.
+  get_user_stats(self, *, user: str | None = None) -> polymarket.models.data.portfolio.UserStats | None  # Get wallet statistics, or ``None`` when the wallet has no statistics.
+  get_user_volume(self, *, user: str | None = None, start: int | datetime.datetime | None = None, end: int | datetime.datetime | None = None, full_history: bool = False) -> poly  # Get trading volume in shares and USDC. Time bounds are floored to UTC days.
+  is_gasless_ready(self) -> bool  # Return True.
+  list_account_trades(self, *, asset_id: str | None = None, token_id: str | None = None, id: str | None = None, market: str | None = None, maker_address: str | None = None, after: s  # List trades for the authenticated account.
+  list_activity(self, *, user: str | None = None, condition_id: str | collections.abc.Sequence[str] | None = None, event_id: int | collections.abc.Sequence[int] | None = None,  # List wallet activity, including deposits and withdrawals.
+  list_biggest_winners(self, *, category: str | None = None, window: Optional[Literal['day', 'week', 'month', 'all']] = None, page_size: int = 100) -> polymarket.pagination.AsyncPagi  # List winning market and combo positions, ordered by USDC PnL.
+  list_builder_leaderboard(self, *, window: Optional[Literal['day', 'week', 'month', 'all']] = None, page_size: int = 100) -> polymarket.pagination.AsyncPaginator[polymarket.models.data.  # List ranked builders and their trading volume in shares.
+  list_builder_trades(self, *, builder_code: str, market: str | None = None, asset_id: str | None = None, token_id: str | None = None, id: str | None = None, after: str | None = Non  # List builder-attributed trades.
+  list_combo_activity(self, *, user: str | None = None, condition_id: str | collections.abc.Sequence[str] | None = None, page_size: int = 100) -> polymarket.pagination.AsyncPaginato  # List combo lifecycle activity. Amounts and payouts are USDC.
+  list_combo_markets(self, *, exclude: str | collections.abc.Sequence[str] | None = None, page_size: int = 20) -> polymarket.pagination.AsyncPaginator[polymarket.models.rfq.ComboMa  # List markets available for Combos.
+  list_combo_positions(self, *, user: str | None = None, condition_id: str | collections.abc.Sequence[str] | None = None, status: Union[Literal['OPEN', 'REDEEMABLE', 'PARTIAL', 'RESO  # List combo positions, optionally filtering by multiple statuses.
+  list_comments(self, *, parent_entity_id: str, parent_entity_type: Literal['Event', 'Series'], ascending: bool | None = None, get_positions: bool | None = None, holders_only:  # List comments for an event or series.
+  list_comments_by_user_address(self, *, address: str, ascending: bool | None = None, order: str | None = None, page_size: int = 20) -> polymarket.pagination.AsyncPaginator[polymarket.models.  # List comments authored by a user address.
+  list_current_rewards(self, *, sponsored: bool | None = None) -> polymarket.pagination.AsyncPaginator[polymarket.models.clob.rewards.CurrentReward]  # List current rewards.
+  list_events(self, *, ascending: bool | None = None, closed: bool = False, cyom: bool | None = None, end_date_max: str | datetime.datetime | None = None, end_date_min: str   # List events.
+  list_market_holders(self, *, condition_ids: str | collections.abc.Sequence[str], min_balance: float | None = None, include_pnl: bool | None = None, page_size: int = 100) -> polyma  # List holders grouped by outcome asset. Amounts are shares; PnL is USDC.
+  list_market_rewards(self, *, condition_id: str, sponsored: bool | None = None) -> polymarket.pagination.AsyncPaginator[polymarket.models.clob.rewards.MarketReward]  # List rewards for a market condition.
+  list_markets(self, *, ascending: bool | None = None, closed: bool | None = None, clob_token_ids: str | collections.abc.Sequence[str] | None = None, condition_ids: str | col  # List markets.
+  list_open_orders(self, *, asset_id: str | None = None, token_id: str | None = None, id: str | None = None, market: str | None = None) -> polymarket.pagination.AsyncPaginator[po  # List open orders for the authenticated account.
+  list_perps_candles(self, *, instrument_id: int, interval: Literal['1s', '1m', '5m', '15m', '1h', '4h', '1d', '1w'], start: 'datetime | int | None' = None, end: 'datetime | int |   # Experimental: This API may change in a breaking way in any release,
+  list_perps_funding_history(self, *, instrument_id: int, start: 'datetime | int | None' = None, end: 'datetime | int | None' = None) -> polymarket.pagination.AsyncPaginator[polymarket.mod  # Experimental: This API may change in a breaking way in any release,
+  list_perps_trades(self, *, instrument_id: int, start: 'datetime | int | None' = None, end: 'datetime | int | None' = None) -> polymarket.pagination.AsyncPaginator[polymarket.mod  # Experimental: This API may change in a breaking way in any release,
+  list_positions(self, *, user: str | None = None, condition_id: str | collections.abc.Sequence[str] | None = None, status: Union[Literal['OPEN', 'REDEEMABLE', 'REDEEMABLE_LOST  # List positions for a wallet or a single market.
+  list_price_history(self, *, asset_id: str, interval: Optional[Literal['max', 'all', '1m', '1w', '1d', '6h', '1h']] = None, start: int | datetime.datetime | None = None, end: int   # List historical prices in USDC per share, oldest first.
+  list_reward_markets(self, *, query: str | None = None, tag_slugs: collections.abc.Sequence[str] | None = None, market_id: int | None = None, event_ids: collections.abc.Sequence[in  # List active markets and their reward configurations, which may be empty.
+  list_series(self, *, ascending: bool | None = None, closed: bool | None = None, exclude_events: bool | None = None, locale: str | None = None, order: str | None = None, re  # List series.
+  list_tags(self, *, ascending: bool | None = None, include_template: bool | None = None, is_carousel: bool | None = None, locale: str | None = None, order: str | None = N  # List tags.
+  list_teams(self, *, abbreviation: str | collections.abc.Sequence[str] | None = None, ascending: bool | None = None, league: str | collections.abc.Sequence[str] | None = N  # List teams.
+  list_trader_leaderboard(self, *, category: str | None = None, window: Optional[Literal['day', 'week', 'month', 'all']] = None, sort_by: Optional[Literal['PNL', 'VOLUME']] = None, page  # List ranked traders. PnL is USDC and volume is shares; ranks can tie and skip.
+  list_trades(self, *, user: str | None = None, condition_id: str | collections.abc.Sequence[str] | None = None, event_id: int | collections.abc.Sequence[int] | None = None,  # List trades. Size is shares and price is USDC per share.
+  list_user_earnings_and_markets_config(self, *, date: str, no_competition: bool | None = None, order_by: str | None = None, position: str | None = None, page_size: int | None = None) -> polymarket.p  # List reward earnings with market configuration for the authenticated user.
+  list_user_earnings_for_day(self, *, date: str) -> polymarket.pagination.AsyncPaginator[polymarket.models.clob.rewards.UserEarning]  # List reward earnings for the authenticated user on a date.
+  merge_multiple_positions(self, *, positions: collections.abc.Sequence[polymarket.transactions.MergeV2PositionRequest | polymarket.transactions.MergeMarketConditionRequest | polymarket.  # Merge multiple market positions or Polymarket V2 positions into collateral.
+  merge_positions(self, *, condition_id: str | None = None, legs: collections.abc.Sequence[str] | None = None, amount: Union[int, Literal['max']], metadata: str | None = None) -  # Merge market or combo positions back into collateral.
+  open_perps_session(self, *, builder_attribution: str | None = None, include_builder_fills: bool = False, credentials: polymarket.models.perps.credentials.PerpsCredentials | None   # Experimental: This API may change in a breaking way in any release,
+  open_rfq_session(self) -> 'RfqSession'  # Open an RFQ event session.
+  place_limit_order(self, *, asset_id: str | None = None, token_id: str | None = None, price: decimal.Decimal | int | float | str, size: decimal.Decimal | int | float | str, side:  # Create, sign, and post a limit order.
+  place_market_order(self, *, asset_id: str | None = None, token_id: str | None = None, side: Literal['BUY', 'SELL'], amount: decimal.Decimal | int | float | str | None = None, sha  # Create, sign, and post a market order.
+  plan_collateral_return(self) -> polymarket.models.collateral_return.CollateralReturnPlanResponse  # Plan a collateral return for the authenticated wallet.
+  post_order(self, signed_order: polymarket.models.clob.orders.SignedOrder) -> polymarket.models.clob.order_response.AcceptedOrder | polymarket.models.clob.order_response.R  # Post a signed order for the authenticated account.
+  post_orders(self, signed_orders: collections.abc.Sequence[polymarket.models.clob.orders.SignedOrder]) -> tuple[polymarket.models.clob.order_response.AcceptedOrder | polyma  # Post multiple signed orders for the authenticated account.
+  redeem_positions(self, *, condition_id: str | None = None, market_id: str | None = None, position_id: str | None = None, metadata: str | None = None) -> polymarket.transactions  # Redeem resolved market positions or a Polymarket V2 position.
+  request_combo_quote(self, *, leg_position_ids: list[str] | tuple[str, ...], direction: polymarket.rfq.RfqDirection | str, amount: decimal.Decimal | int | float | str | None = None  # Request a quote for a combo of positions.
+  revoke_builder_api_key(self) -> None  # Revoke the builder API key this client is configured with.
+  revoke_perps_credentials(self, *, proxy: str) -> None  # Experimental: This API may change in a breaking way in any release,
+  revoke_session_key(self, *, address: str, idempotency_key: str | None = None) -> None  # Revoke a session key authorized for the Deposit Wallet.
+  search(self, *, q: str, ascending: bool | None = None, cache: bool | None = None, events_status: str | None = None, events_tag: str | collections.abc.Sequence[str] |   # Search Polymarket content.
+  send_order_heartbeat(self, *, heartbeat_id: str = '') -> polymarket.models.clob.order_heartbeats.OrderHeartbeat  # Send one authenticated order heartbeat and retain the returned ID.
+  setup_gasless_wallet(self) -> Self  # Return this client.
+  setup_trading_approvals(self) -> polymarket.transactions.DeprecatedTransactionHandle  # Approve the standard set of trading allowances for the wallet.
+  split_position(self, *, condition_id: str | None = None, legs: collections.abc.Sequence[str] | None = None, amount: int, metadata: str | None = None) -> polymarket.transactio  # Split collateral into market or combo positions.
+  subscribe(self, specs: polymarket.streams._specs.MarketSpec | polymarket.streams._specs.SportsSpec | polymarket.streams._specs.CommentsSpec | polymarket.streams._specs.C  # Subscribe to one or more public or authenticated realtime streams.
+  transfer_erc20(self, *, token_address: str, recipient_address: str, amount: int, metadata: str | None = None) -> polymarket.transactions.GaslessTransactionHandle | polymarket  # Submit an ERC-20 transfer transaction.
+  wait_for_combo_fill(self, *, rfq_id: str, timeout: float = 30.0, polling_interval: float = 1.0) -> polymarket.rfq.ComboFillResult  # Wait for an accepted RFQ to reach a terminal state.
+  wait_for_order_fill_settlement(self, order: polymarket.models.clob.order_response.AcceptedOrder, *, timeout_s: float = 30.0) -> tuple[polymarket.types.TransactionHash, ...]  # Wait until every fill listed in an order response settles.
+  withdraw_from_perps(self, *, amount: int) -> polymarket.models.perps.types.PerpsWithdrawalId  # Experimental: This API may change in a breaking way in any release,
+
+=== PublicClient
+(environment: polymarket.environments.Environment = Environment(name='production'), *, logger: logging.Logger | None = None) -> None
+  close(self) -> None  # Close the underlying network transports.
+  estimate_market_price(self, *, asset_id: str | None = None, token_id: str | None = None, side: Literal['BUY', 'SELL'], amount: decimal.Decimal | int | float | str | None = None, sha  # Estimate the limiting price level for a market order.
+  get_builder_volumes(self, *, interval: Optional[Literal['day', 'week', 'month', 'all']] = None, bucket_limit: int | None = None) -> tuple[polymarket.models.data.leaderboard.Builde  # Get builder volume in shares by calendar bucket.
+  get_comment_thread(self, id: str, *, get_positions: bool | None = None) -> tuple[polymarket.models.gamma.comment.Comment, ...]  # Get a comment thread by comment ID.
+  get_current_rebates(self, *, date: str, maker_address: str) -> tuple[polymarket.models.clob.rewards.RebatedFee, ...]  # Get maker fee rebates for a YYYY-MM-DD calendar day without authentication.
+  get_event(self, *, id: str | None = None, slug: str | None = None, url: str | None = None, include_best_lines: bool | None = None, include_chat: bool | None = None, incl  # Get an event.
+  get_event_live_volume(self, *, event_ids: int | collections.abc.Sequence[int]) -> polymarket.models.data.analytics.LiveVolume  # Get combined event taker volume in shares with a market breakdown.
+  get_event_tags(self, id: str) -> tuple[polymarket.models.gamma.common.TagReference, ...]  # Get an event's tags.
+  get_last_trade_price(self, *, asset_id: str | None = None, token_id: str | None = None) -> polymarket.models.clob.last_trade.LastTradePrice | None  # Get the most recent trade price for a CLOB asset.
+  get_last_trade_prices(self, *, asset_ids: collections.abc.Sequence[str] | None = None, token_ids: collections.abc.Sequence[str] | None = None) -> tuple[polymarket.models.clob.last_t  # Get the most recent trade prices for multiple CLOB assets.
+  get_market(self, *, id: str | None = None, slug: str | None = None, url: str | None = None, include_tag: bool | None = None, locale: str | None = None) -> polymarket.mode  # Get a market.
+  get_market_tags(self, id: str) -> tuple[polymarket.models.gamma.common.TagReference, ...]  # Get a market's tags.
+  get_midpoint(self, *, asset_id: str | None = None, token_id: str | None = None) -> decimal.Decimal  # Get the midpoint price for a CLOB asset.
+  get_midpoints(self, *, asset_ids: collections.abc.Sequence[str] | None = None, token_ids: collections.abc.Sequence[str] | None = None) -> dict[typing.Union[polymarket.models  # Get midpoint prices for multiple CLOB assets.
+  get_open_interests(self, *, condition_ids: str | collections.abc.Sequence[str] | None = None) -> tuple[polymarket.models.data.analytics.OpenInterest, ...]  # Get open interest in USDC. Omit conditions to request global interest.
+  get_order_book(self, *, asset_id: str | None = None, token_id: str | None = None) -> polymarket.models.clob.order_book.OrderBook  # Get the order book for a CLOB asset.
+  get_order_books(self, *, asset_ids: collections.abc.Sequence[str] | None = None, token_ids: collections.abc.Sequence[str] | None = None) -> tuple[polymarket.models.clob.order_  # Get order books for multiple CLOB assets.
+  get_portfolio_value(self, *, user: str, condition_ids: str | collections.abc.Sequence[str] | None = None) -> polymarket.models.data.portfolio.PortfolioValue  # Get current portfolio value in USDC.
+  get_price(self, *, asset_id: str | None = None, token_id: str | None = None, side: Literal['BUY', 'SELL']) -> decimal.Decimal  # Get the executable price for a CLOB asset side.
+  get_prices(self, *, requests: collections.abc.Sequence[polymarket.models.clob.requests.PriceRequest]) -> dict[typing.Union[polymarket.models.types.TokenId, polymarket.mod  # Get executable prices for multiple CLOB asset-side requests.
+  get_public_profile(self, address: str) -> polymarket.models.gamma.profile.PublicProfile | None  # Get a public profile by wallet address. Returns None if no profile exists.
+  get_related_tag_resources(self, *, id: str | None = None, slug: str | None = None, locale: str | None = None, omit_empty: bool | None = None, status: str | None = None) -> tuple[polymar  # Get tag resources linked from related tag relationships.
+  get_related_tags(self, *, id: str | None = None, slug: str | None = None, omit_empty: bool | None = None, status: str | None = None) -> tuple[polymarket.models.gamma.tag.Relate  # Get related tag relationships.
+  get_resolutions(self, *, question_id: str | None = None, condition_ids: str | collections.abc.Sequence[str] | None = None, event_ids: int | collections.abc.Sequence[int] | Non  # Get resolutions by question, conditions, or events. Missing rows are omitted.
+  get_series(self, id: str, *, locale: str | None = None) -> polymarket.models.gamma.series.Series  # Get a series.
+  get_sports(self) -> tuple[polymarket.models.gamma.common.SportsMetadata, ...]  # Get available sports metadata.
+  get_sports_market_types(self) -> polymarket.models.gamma.common.SportsMarketTypes  # Get available sports market types.
+  get_spread(self, *, asset_id: str | None = None, token_id: str | None = None) -> decimal.Decimal  # Get the bid-ask spread for a CLOB asset.
+  get_spreads(self, *, asset_ids: collections.abc.Sequence[str] | None = None, token_ids: collections.abc.Sequence[str] | None = None) -> dict[typing.Union[polymarket.models  # Get bid-ask spreads for multiple CLOB assets.
+  get_tag(self, *, id: str | None = None, slug: str | None = None, include_template: bool | None = None, locale: str | None = None) -> polymarket.models.gamma.tag.Tag  # Get a tag.
+  get_token_references(self, *, asset_ids: str | collections.abc.Sequence[str] | None = None, condition_ids: str | collections.abc.Sequence[str] | None = None) -> tuple[polymarket.mo  # Get outcome asset reference and settlement metadata as a direct tuple.
+  get_trader_leaderboard_standing(self, *, user: str, category: str | None = None, window: Optional[Literal['day', 'week', 'month', 'all']] = None) -> polymarket.models.data.leaderboard.TraderL  # Get wallet leaderboard standings, or ``None`` when unavailable.
+  get_trading_approvals_state(self, *, wallet: str) -> polymarket.models.trading.TradingApprovalsState  # Get the trading approvals that a wallet still needs to grant.
+  get_user_pnl(self, *, user: str, interval: Union[Literal['max', 'all', '1m', '1w', '1d', '12h', '6h'], polymarket.models.data.common.UserPnlInterval, NoneType] = None, fide  # Get cumulative wallet PnL in USDC and volume in shares.
+  get_user_stats(self, *, user: str) -> polymarket.models.data.portfolio.UserStats | None  # Get wallet statistics, or ``None`` when the wallet has no statistics.
+  get_user_volume(self, *, user: str, start: int | datetime.datetime | None = None, end: int | datetime.datetime | None = None, full_history: bool = False) -> polymarket.models.  # Get trading volume in shares and USDC. Time bounds are floored to UTC days.
+  list_activity(self, *, user: str, condition_id: str | collections.abc.Sequence[str] | None = None, event_id: int | collections.abc.Sequence[int] | None = None, activity_type  # List wallet activity, including deposits and withdrawals.
+  list_biggest_winners(self, *, category: str | None = None, window: Optional[Literal['day', 'week', 'month', 'all']] = None, page_size: int = 100) -> polymarket.pagination.Paginator  # List winning market and combo positions, ordered by USDC PnL.
+  list_builder_leaderboard(self, *, window: Optional[Literal['day', 'week', 'month', 'all']] = None, page_size: int = 100) -> polymarket.pagination.Paginator[polymarket.models.data.leade  # List ranked builders and their trading volume in shares.
+  list_builder_trades(self, *, builder_code: str, market: str | None = None, asset_id: str | None = None, token_id: str | None = None, id: str | None = None, after: str | None = Non  # List builder-attributed trades.
+  list_combo_activity(self, *, user: str, condition_id: str | collections.abc.Sequence[str] | None = None, page_size: int = 100) -> polymarket.pagination.Paginator[polymarket.models  # List combo lifecycle activity. Amounts and payouts are USDC.
+  list_combo_markets(self, *, exclude: str | collections.abc.Sequence[str] | None = None, page_size: int = 20) -> polymarket.pagination.Paginator[polymarket.models.rfq.ComboMarket]  # List markets available for Combos.
+  list_combo_positions(self, *, user: str, condition_id: str | collections.abc.Sequence[str] | None = None, status: Union[Literal['OPEN', 'REDEEMABLE', 'PARTIAL', 'RESOLVED_PARTIAL',  # List combo positions, optionally filtering by multiple statuses.
+  list_comments(self, *, parent_entity_id: str, parent_entity_type: Literal['Event', 'Series'], ascending: bool | None = None, get_positions: bool | None = None, holders_only:  # List comments for an event or series.
+  list_comments_by_user_address(self, *, address: str, ascending: bool | None = None, order: str | None = None, page_size: int = 20) -> polymarket.pagination.Paginator[polymarket.models.gamma  # List comments authored by a user address.
+  list_current_rewards(self, *, sponsored: bool | None = None) -> polymarket.pagination.Paginator[polymarket.models.clob.rewards.CurrentReward]  # List current rewards.
+  list_events(self, *, ascending: bool | None = None, closed: bool = False, cyom: bool | None = None, end_date_max: str | datetime.datetime | None = None, end_date_min: str   # List events.
+  list_market_holders(self, *, condition_ids: str | collections.abc.Sequence[str], min_balance: float | None = None, include_pnl: bool | None = None, page_size: int = 100) -> polyma  # List holders grouped by outcome asset. Amounts are shares; PnL is USDC.
+  list_market_rewards(self, *, condition_id: str, sponsored: bool | None = None) -> polymarket.pagination.Paginator[polymarket.models.clob.rewards.MarketReward]  # List rewards for a market condition.
+  list_markets(self, *, ascending: bool | None = None, closed: bool | None = None, clob_token_ids: str | collections.abc.Sequence[str] | None = None, condition_ids: str | col  # List markets.
+  list_positions(self, *, user: str | None = None, condition_id: str | collections.abc.Sequence[str] | None = None, status: Union[Literal['OPEN', 'REDEEMABLE', 'REDEEMABLE_LOST  # List positions for a wallet or a single market.
+  list_price_history(self, *, asset_id: str, interval: Optional[Literal['max', 'all', '1m', '1w', '1d', '6h', '1h']] = None, start: int | datetime.datetime | None = None, end: int   # List historical prices in USDC per share, oldest first.
+  list_reward_markets(self, *, query: str | None = None, tag_slugs: collections.abc.Sequence[str] | None = None, market_id: int | None = None, event_ids: collections.abc.Sequence[in  # List active markets and their reward configurations, which may be empty.
+  list_series(self, *, ascending: bool | None = None, closed: bool | None = None, exclude_events: bool | None = None, locale: str | None = None, order: str | None = None, re  # List series.
+  list_tags(self, *, ascending: bool | None = None, include_template: bool | None = None, is_carousel: bool | None = None, locale: str | None = None, order: str | None = N  # List tags.
+  list_teams(self, *, abbreviation: str | collections.abc.Sequence[str] | None = None, ascending: bool | None = None, league: str | collections.abc.Sequence[str] | None = N  # List teams.
+  list_trader_leaderboard(self, *, category: str | None = None, window: Optional[Literal['day', 'week', 'month', 'all']] = None, sort_by: Optional[Literal['PNL', 'VOLUME']] = None, page  # List ranked traders. PnL is USDC and volume is shares; ranks can tie and skip.
+  list_trades(self, *, user: str | None = None, condition_id: str | collections.abc.Sequence[str] | None = None, event_id: int | collections.abc.Sequence[int] | None = None,  # List trades. Size is shares and price is USDC per share.
+  search(self, *, q: str, ascending: bool | None = None, cache: bool | None = None, events_status: str | None = None, events_tag: str | collections.abc.Sequence[str] |   # Search Polymarket content.
+
+=== RelayerApiKey
+(*, key: 'str', address: 'str') -> 'None'
+
+=== BuilderApiKey
+(key: 'str', secret: 'str', passphrase: 'str') -> None
+
+=== polymarket.types: ['EvmAddress', 'HexString', 'NewType', 'TransactionHash']
+
+=== polymarket.models: ['AcceptedOrder', 'Activity', 'ActivityType', 'ActivityTypeFilter', 'ApiKey', 'ApiKeyCreds', 'AssetType', 'AutoRedeemedNotification', 'AutoRedeemedNotificationPayload', 'BalanceAllowance', 'BiggestWinnerKind', 'BuilderApiKeyInfo', 'BuilderFeeRates', 'BuilderStanding', 'BuilderTrade', 'BuilderVolumeInterval', 'BuilderVolumePoint', 'CancelOrdersResponse', 'ChildCommentCreatedNotification', 'ChildCommentNotificationPayload', 'ClobAssetId', 'ClobTrade', 'CollateralReturnOperation', 'CollateralReturnOperationKind', 'CollateralReturnPlanResponse', 'CollateralReturnPositionAmount', 'CollateralReturnPositionSummary', 'CollateralReturnRouterCall', 'ComboActivity', 'ComboActivityId', 'ComboActivityType', 'ComboAutoRedeemedNotification', 'ComboAutoRedeemedNotificationPayload', 'ComboBiggestWinner', 'ComboCompressActivity', 'ComboConditionId', 'ComboConvertActivity', 'ComboKnownStatus', 'ComboMarket', 'ComboMarketOutcome', 'ComboMarketOutcomes', 'ComboMergeActivity', 'ComboPosition', 'ComboPositionLeg', 'ComboPositionMarket', 'ComboPositionMarketEvent', 'ComboPositionSortBy', 'ComboPositionStatus', 'ComboPositionStatusFilter', 'ComboRedeemActivity', 'ComboSplitActivity', 'ComboStatus', 'ComboTradeActivity', 'ComboUnwrapActivity', 'ComboWrapActivity', 'Comment', 'CommentId', 'ConditionId', 'ConversionActivity', 'CtfConditionId', 'CurrentReward', 'CurrentRewardConfig', 'DepositActivity', 'EarningBreakdown', 'Erc1155TradingApproval', 'Erc20TradingApproval', 'Event', 'EventId', 'GaslessTransaction', 'Holder', 'LastTradePrice', 'LastTradePriceForAsset', 'LastTradePriceForToken', 'LeaderboardWindow', 'LiveVolume', 'MakerOrder', 'MakerRebateActivity', 'Market', 'MarketBiggestWinner', 'MarketId', 'MarketLiveVolume', 'MarketNotificationPayload', 'MarketNotificationRewards', 'MarketNotificationRewardsRate', 'MarketNotificationToken', 'MarketOrderType', 'MarketRegisteredNotification', 'MarketResolutionStatus', 'MarketResolvedNotification', 'MarketReward', 'MarketRewardConfig', 'MarketRewardToken', 'MergeActivity', 'MetaHolder', 'MigrationActivity', 'MissingTradingApprovals', 'Notification', 'NotificationType', 'OpenInterest', 'OpenOrder', 'OrderBook', 'OrderBookLevel', 'OrderCancellationNotification', 'OrderFillFailedNotification', 'OrderFillNotification', 'OrderHeartbeat', 'OrderId', 'OrderNotificationPayload', 'OrderPostStatus', 'OrderResponse', 'OrderResponseErrorCode', 'OrderSide', 'OrderType', 'PerpsAccountConfig', 'PerpsAccountStats', 'PerpsAutoCancelStatus', 'PerpsBalance', 'PerpsBatchLeverageResult', 'PerpsBbo', 'PerpsBook', 'PerpsBookDepth', 'PerpsBookLevel', 'PerpsBookUpdate', 'PerpsBuilderApproval', 'PerpsBuilderAttribution', 'PerpsBuilderEarning', 'PerpsBuilderEarningsAsset', 'PerpsBuilderEarningsPage', 'PerpsBuilderEarningsPaginator', 'PerpsBuilderEarningsSnapshot', 'PerpsBuilderEarningsSummary', 'PerpsBuilderFillEvent', 'PerpsBuilderStatus', 'PerpsCancelOrderErrorCode', 'PerpsCancelOrderRejection', 'PerpsCancelOrderResult', 'PerpsCancelOrderSuccess', 'PerpsCancelRetryOptions', 'PerpsCandle', 'PerpsCandleBatch', 'PerpsChase', 'PerpsChaseAccepted', 'PerpsChaseId', 'PerpsClientOrderId', 'PerpsCredentials', 'PerpsCredentialsInfo', 'PerpsDeposit', 'PerpsDepositStatus', 'PerpsDepositUpdate', 'PerpsEntityId', 'PerpsEquityPoint', 'PerpsFeeOverride', 'PerpsFeeOverrideTier', 'PerpsFeeScheduleEntry', 'PerpsFeeTier', 'PerpsFill', 'PerpsFundingMultiplier', 'PerpsFundingPayment', 'PerpsFundingPaymentId', 'PerpsFundingRate', 'PerpsInstrument', 'PerpsInstrumentCategory', 'PerpsInstrumentFeeSchedule', 'PerpsInstrumentFeeTier', 'PerpsInstrumentId', 'PerpsInstrumentLogo', 'PerpsInstrumentSettlement', 'PerpsInternalTransfer', 'PerpsInternalTransferDirection', 'PerpsInternalTransferId', 'PerpsInternalTransferType', 'PerpsKlineInterval', 'PerpsKnownInstrumentCategory', 'PerpsKnownInternalTransferType', 'PerpsKnownWithdrawalStatus', 'PerpsLeverageUpdate', 'PerpsLeverageUpdateRejection', 'PerpsLiquidationDetails', 'PerpsLiquidationMethod', 'PerpsLiquidityRole', 'PerpsMarginSummary', 'PerpsOrder', 'PerpsOrderId', 'PerpsOrderPlacement', 'PerpsOrderRequest', 'PerpsOrderStatus', 'PerpsPlacedTpSlOrder', 'PerpsPlacedTpSlOrders', 'PerpsPnlInterval', 'PerpsPnlPoint', 'PerpsPortfolio', 'PerpsPosition', 'PerpsPositionSnapshot', 'PerpsPositionSnapshotCandle', 'PerpsPositionSnapshotChart', 'PerpsPositionSnapshotFailure', 'PerpsPositionSnapshotFill', 'PerpsPositionSnapshotMarker', 'PerpsPositionSnapshotResult', 'PerpsPositionSnapshotSuccess']
+  class AcceptedOrder(*, ok: Literal[True] = True, order_id: polymarket.models.types.OrderId, status: Literal['live', 'matched', 'delayed'], making_amount: decimal.Decimal, taking_amount: decimal.Decimal, trade_ids: tuple[str, ...], transactions_hashes: tuple[polymarket.types.TransactionHash, ...]) 
+  class BalanceAllowance(*, balance: int, allowances: dict[str, int]) -> None
+  class BuilderTrade(*, id: str, tradeType: str, takerOrderHash: str, builder: str, market: polymarket.models.types.ConditionId, asset_id: Union[polymarket.models.types.TokenId, polymarket.models.types.PositionId], side: Literal['BUY', 'SELL'], size: decimal.Decimal, sizeUsdc: decimal.Decimal, price
+  class CancelOrdersResponse(*, canceled: tuple[polymarket.models.types.OrderId, ...], not_canceled: dict[polymarket.models.types.OrderId, str] = <factory>) -> None
+  class ClobTrade(*, id: str, market: polymarket.models.types.ConditionId, asset_id: Union[polymarket.models.types.TokenId, polymarket.models.types.PositionId], owner: str, maker_address: str, taker_order_id: str, side: Literal['BUY', 'SELL'], trader_side: Literal['TAKER', 'MAKER'], price: decimal.D
+  class ComboTradeActivity(*, proxy_wallet: polymarket.types.EvmAddress, timestamp: datetime.datetime, transaction_hash: polymarket.types.TransactionHash, name: str | None = None, pseudonym: str | None = None, bio: str | None = None, profile_image: str | None = None, profile_image_optimized: str | N
+  class LastTradePrice(*, price: decimal.Decimal, side: Literal['BUY', 'SELL']) -> None
+  class LastTradePriceForAsset(*, asset_id: Union[polymarket.models.types.TokenId, polymarket.models.types.PositionId], price: decimal.Decimal, side: Literal['BUY', 'SELL']) -> None
+  class LastTradePriceForToken(*, asset_id: Union[polymarket.models.types.TokenId, polymarket.models.types.PositionId], price: decimal.Decimal, side: Literal['BUY', 'SELL']) -> None
+  class MakerOrder(*, order_id: str, asset_id: Union[polymarket.models.types.TokenId, polymarket.models.types.PositionId], maker_address: str, owner: str, side: Literal['BUY', 'SELL'], price: decimal.Decimal, matched_amount: decimal.Decimal, outcome: str, fee_rate_bps: decimal.Decimal | None = None)
+  class OpenOrder(*, id: str, market: polymarket.models.types.ConditionId, asset_id: Union[polymarket.models.types.TokenId, polymarket.models.types.PositionId], owner: str, maker_address: str, side: Literal['BUY', 'SELL'], price: decimal.Decimal, original_size: decimal.Decimal, size_matched: decimal
+  class OrderBook(*, market: polymarket.models.types.ConditionId, asset_id: Union[polymarket.models.types.TokenId, polymarket.models.types.PositionId], timestamp: datetime.datetime | None = None, bids: tuple[polymarket.models.clob.order_book.OrderBookLevel, ...], asks: tuple[polymarket.models.clob.o
+  class OrderBookLevel(*, price: decimal.Decimal, size: decimal.Decimal) -> None
+  class OrderCancellationNotification(*, id: int, owner: polymarket.models.types.ApiKey, timestamp: datetime.datetime, type: Literal[<NotificationType.ORDER_CANCELLATION: 1>], payload: polymarket.models.clob.notifications.OrderNotificationPayload) -> None
+  class OrderFillFailedNotification(*, id: int, owner: polymarket.models.types.ApiKey, timestamp: datetime.datetime, type: Literal[<NotificationType.ORDER_FILL_FAILED: 8>], payload: polymarket.models.clob.notifications.OrderNotificationPayload) -> None
+  class OrderFillNotification(*, id: int, owner: polymarket.models.types.ApiKey, timestamp: datetime.datetime, type: Literal[<NotificationType.ORDER_FILL: 2>], payload: polymarket.models.clob.notifications.OrderNotificationPayload) -> None
+  class OrderHeartbeat(*, heartbeat_id: Annotated[str, Strict(strict=True), MinLen(min_length=1)]) -> None
+  class OrderNotificationPayload(*, asset_id: Union[polymarket.models.types.TokenId, polymarket.models.types.PositionId], market: polymarket.models.types.ConditionId, order_id: polymarket.models.types.OrderId, side: Literal['BUY', 'SELL'], type: Optional[Literal['GTC', 'GTD', 'FAK', 'FOK']] = None, 
+  class PerpsBalance(*, asset: str, balance: decimal.Decimal, value: decimal.Decimal) -> None
+  class PerpsCancelOrderErrorCode(*values)
+  class PerpsCancelOrderRejection(*, status: Literal['err'], error: polymarket.models.perps.orders.PerpsCancelOrderErrorCode | str, oid: Annotated[Optional[polymarket.models.perps.types.PerpsOrderId], Strict(strict=True), Ge(ge=0)] = None, coid: Annotated[str | None, _PydanticGeneralMetadata(pattern
+  class PerpsCancelOrderSuccess(*, status: Literal['ok'], oid: Annotated[Optional[polymarket.models.perps.types.PerpsOrderId], Strict(strict=True), Ge(ge=0)] = None, coid: Annotated[str | None, _PydanticGeneralMetadata(pattern='^[0-9a-f]{32}$')] = None) -> None
+  class PerpsOrder(*, id: polymarket.models.perps.types.PerpsOrderId, instrument_id: polymarket.models.perps.types.PerpsInstrumentId, buy: Literal['BUY', 'SELL'], price: decimal.Decimal, quantity: decimal.Decimal, tif: Literal['gtc', 'ioc', 'fok', 'gtd'], post_only: bool, ro: bool, status: Literal['
+  class PerpsOrderPlacement(*, order: polymarket.models.perps.orders.PerpsOrder, tp_sl: polymarket.models.perps.results.PerpsPlacedTpSlOrders | None = None) -> None
+  class PerpsOrderRequest(*, instrument_id: int, side: Literal['BUY', 'SELL'], quantity: decimal.Decimal | int | float | str, time_in_force: Literal['gtc', 'ioc', 'fok', 'gtd'], gtd_expiry: datetime.datetime | int | None = None, price: decimal.Decimal | int | float | str | None = None, post_only: bo
+  class PerpsPlacedTpSlOrder(*, order_id: polymarket.models.perps.types.PerpsOrderId) -> None
+  class PerpsPlacedTpSlOrders(*, take_profit: polymarket.models.perps.results.PerpsPlacedTpSlOrder | None = None, stop_loss: polymarket.models.perps.results.PerpsPlacedTpSlOrder | None = None) -> None
+  class PerpsPostOrderAck(*, status: Literal['ok', 'err'], oid: Optional[polymarket.models.perps.types.PerpsOrderId] = None, coid: str | None = None, error: str | None = None, builder: polymarket.models.perps.builders.PerpsBuilderAttribution | None = None) -> None
+  class PerpsTicker(*, instrument_id: polymarket.models.perps.types.PerpsInstrumentId, symbol: str, index_price: decimal.Decimal, mark_price: decimal.Decimal, last_price: decimal.Decimal, mid_price: decimal.Decimal, open_interest: decimal.Decimal, funding_rate: decimal.Decimal, next_funding: datetim
+  class PerpsTickerUpdate(*, iid: polymarket.models.perps.types.PerpsInstrumentId, idx: decimal.Decimal, mark: decimal.Decimal, last: decimal.Decimal, mid: decimal.Decimal, oi: decimal.Decimal, fr: decimal.Decimal, nxf: datetime.datetime) -> None
+  class PerpsTpSlOrderFields(*, kind: Literal['tp', 'sl'], scope: Literal['order', 'position'], trp: decimal.Decimal, parent_oid: Optional[polymarket.models.perps.types.PerpsOrderId] = None, armed_qty: decimal.Decimal | None = None, slip_bps: int | None = None, trail_bps: int | None = None, act: dec
+  class PerpsTrade(*, trade_id: polymarket.models.perps.types.PerpsTradeId, instrument_id: polymarket.models.perps.types.PerpsInstrumentId, side: Literal['long', 'short'], settlement: bool = False, price: decimal.Decimal, quantity: decimal.Decimal, timestamp: datetime.datetime, hash: str | None = No
+  class RejectedOrder(*, ok: Literal[False] = False, code: Literal['unmatched', 'market_not_ready', 'not_enough_balance', 'invalid_nonce', 'invalid_expiration', 'post_only_would_cross', 'post_only_mode', 'fok_not_filled', 'fak_not_filled', 'unknown'], message: str) -> None
+  class SignedOrder(*, builder: polymarket.types.HexString, expiration: int, maker: polymarket.types.EvmAddress, maker_amount: int, metadata: polymarket.types.HexString, order_type: Literal['GTC', 'GTD', 'FAK', 'FOK'], salt: int, side: Literal['BUY', 'SELL'], signature: polymarket.types.HexString, s
+  class TeamOrdering(*values)
+  class TipSide(*values)
+  class Trade(*, proxy_wallet: polymarket.types.EvmAddress, token_id: Union[polymarket.models.types.TokenId, polymarket.models.types.PositionId], condition_id: polymarket.models.types.ConditionId, side: Literal['BUY', 'SELL'], size: decimal.Decimal, price: decimal.Decimal, timestamp: datetime.dateti
+  class TradeActivity(*, proxy_wallet: polymarket.types.EvmAddress, timestamp: datetime.datetime, transaction_hash: polymarket.types.TransactionHash, name: str | None = None, pseudonym: str | None = None, bio: str | None = None, profile_image: str | None = None, profile_image_optimized: str | None =
+  class TraderLeaderboardEntry(*, rank: int, user_id: polymarket.types.EvmAddress, pnl: decimal.Decimal, volume: decimal.Decimal, user_name: str | None = None, profile_image: str | None = None, x_username: str | None = None, verified: bool) -> None
+  class TraderLeaderboardStanding(*, user_id: polymarket.types.EvmAddress, pnl: decimal.Decimal, volume: decimal.Decimal, user_name: str | None = None, profile_image: str | None = None, x_username: str | None = None, verified: bool, rank_pnl: int | None = None, rank_volume: int | None = None) -> Non
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/rfq.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/streams/_specs.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/streams/__init__.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/pagination.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/transactions.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/auth.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/rfq.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/_cursor.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/exchange_asset.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/auth.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/orders/orders.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/orders/cancel.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/orders/post.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/orders/cache.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/orders/_numeric.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/orders/types.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/orders/market_data.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/orders/math.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/orders/settlement.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/orders/__init__.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/orders/limit.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/orders/allowance.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/orders/market.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/orders/context.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/orders/estimate.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/orders/typed_data.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/orders/place.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/order_heartbeats.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/combo_rfq.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/gamma.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/builders.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/relayer/poll.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/relayer/nonce.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/relayer/approvals.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/relayer/deployed.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/relayer/auth.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/relayer/positions.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/relayer/calls.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/relayer/gasless.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/relayer/__init__.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/relayer/signing/deposit_wallet.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/relayer/signing/__init__.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/relayer/signing/proxy.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/relayer/signing/safe.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/relayer/submit.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/account.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/__init__.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/data.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/rewards.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/perps/position_snapshots.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/perps/public.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/perps/paging.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/perps/chases.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/perps/credentials.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/perps/funds.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/perps/signing.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/perps/builders.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/perps/account.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/perps/__init__.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/perps/trading.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/perps/twaps.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/session_keys.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/clob.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/actions/combos.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/rfq.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/streams/handle.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/streams/sports/heartbeat.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/streams/sports/manager.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/streams/sports/__init__.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/streams/merged_handle.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/streams/__init__.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/streams/perps/heartbeat.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/streams/perps/__init__.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/streams/perps/market.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/streams/perps/market_protocol.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/streams/reconnect.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/streams/registry.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/streams/realtime/heartbeat.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/streams/realtime/session.py
+/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/_internal/streams/realtime/manager.py
