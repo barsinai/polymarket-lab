@@ -7,7 +7,8 @@ Order mapping (makers only hold pUSD): our Yes BID at p  -> BUY Yes-token at p, 
                                        our Yes ASK at p  -> BUY No-token at (1 - p), size shares
 Safety rules enforced here, before any order could exist:
   - STOP file in the working dir -> cancel-all, exit
-  - daily trading loss (paper report, UTC day) below -LOSS_LIMIT -> cancel-all, stop
+  - daily NET loss (trading + estimated rewards, paper report, UTC day) below -LOSS_LIMIT -> cancel-all, stop
+    (trading alone loses ~$200/day against ~$400/day of rewards: a trading-only limit would trip daily)
   - a book older than STALE_S -> cancel that market's orders
   - every order: price on the tick grid, 0 < price < 1, size >= max(5, rewards min size), post-only
 Usage: MM_VARIANT=2cl python research/live/quoter.py          (one pass, after the paper tick)
@@ -17,7 +18,7 @@ from datetime import datetime, timezone
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import paper_mm2 as P  # noqa: E402
 
-LOSS_LIMIT = float(os.environ.get("MM_LOSS_LIMIT", "100"))   # $ per UTC day, trading P&L
+LOSS_LIMIT = float(os.environ.get("MM_LOSS_LIMIT", "150"))   # $ per UTC day, NET of estimated rewards (trading alone loses ~$200/day by design)
 STALE_S = 120
 LOG = f"{P.D}/orders"
 os.makedirs(LOG, exist_ok=True)
@@ -92,7 +93,7 @@ def main():
     # daily loss limit from the paper accounting (trading cash + inventory at mid, since the UTC day start)
     day = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     ref_p = f"{LOG}/day_{day}.json"
-    pnl_now = rep["trading_cash"] + rep["inventory_value_at_mid"]
+    pnl_now = rep["trading_cash"] + rep["inventory_value_at_mid"] + rep.get("rewards_earned", 0) + rep.get("maker_rebates", 0)
     if not os.path.exists(ref_p):
         json.dump({"pnl_at_day_start": pnl_now}, open(ref_p, "w"))
     ref = json.load(open(ref_p))["pnl_at_day_start"]
