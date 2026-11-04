@@ -559,6 +559,568 @@ TOP-LEVEL: ['AcceptedOrder', 'Activity', 'ActivityType', 'ActivityTypeFilter', '
   class TradeActivity(*, proxy_wallet: polymarket.types.EvmAddress, timestamp: datetime.datetime, transaction_hash: polymarket.types.TransactionHash, name: str | None = None, pseudonym: str | None = None, bio: str | None = None, profile_image: str | None = None, profile_image_optimized: str | None =
   class TraderLeaderboardEntry(*, rank: int, user_id: polymarket.types.EvmAddress, pnl: decimal.Decimal, volume: decimal.Decimal, user_name: str | None = None, profile_image: str | None = None, x_username: str | None = None, verified: bool) -> None
   class TraderLeaderboardStanding(*, user_id: polymarket.types.EvmAddress, pnl: decimal.Decimal, volume: decimal.Decimal, user_name: str | None = None, profile_image: str | None = None, x_username: str | None = None, verified: bool, rank_pnl: int | None = None, rank_volume: int | None = None) -> Non
+
+
+######## DETAIL
+
+--- create(*, private_key: str, wallet: str | None = None, environment: polymarket.environments.Environment = Environment(name='production'), credentials: polymarket.models.clob.api_key.ApiKeyCreds | None = None, api_key: polymarket.auth.BuilderApiKey | polymarket.auth.RelayerApiKey | None = None, nonce: int = 0, logger: logging.Logger | None = None, on_rate_limit_update: collections.abc.Callable[[polymarket.rate_limit.RateLimitUpdate], None] | None = None) -> Self
+Create an authenticated synchronous client.
+
+Args:
+    private_key: EVM private key used for signing.
+    wallet: Wallet address to act for. Defaults to the signer's Deposit Wallet.
+    credentials: Existing API credentials. When omitted, credentials are
+        derived during client creation.
+    api_key: Optional key for gasless wallet and relayed transaction workflows.
+    nonce: Credential derivation nonce. Cannot be combined with ``credentials``.
+    on_rate_limit_update: Listener invoked whenever a response reports
+        per-signer rate-limit state, as order and cancellation responses
+        do. Errors raised by the listener are ignored.
+
+Raises:
+    UserInputError: If key material, wallet, nonce, or credentials are invalid.
+    RequestRejectedError: If credential derivation or validation is rejected.
+
+--- place_limit_order(self, *, asset_id: str | None = None, token_id: str | None = None, price: decimal.Decimal | int | float | str, size: decimal.Decimal | int | float | str, side: Literal['BUY', 'SELL'], post_only: bool = False, expiration: int | None = None, builder_code: str | None = None) -> polymarket.models.clob.order_response.AcceptedOrder | polymarket.models.clob.order_response.RejectedOrder
+Create, sign, and post a limit order.
+
+When ``expiration`` is provided, it must be a Unix timestamp at least
+3 minutes in the future. Use extra buffer for immediate submissions to
+account for latency and clock skew.
+
+Raises:
+    UserInputError: If order parameters are invalid.
+    InsufficientAllowanceError: If required allowance cannot be recovered.
+    SigningError: If the order cannot be signed.
+    RequestRejectedError: If posting the order is rejected.
+
+--- create_limit_order(self, *, asset_id: str | None = None, token_id: str | None = None, price: decimal.Decimal | int | float | str, size: decimal.Decimal | int | float | str, side: Literal['BUY', 'SELL'], post_only: bool = False, expiration: int | None = None, builder_code: str | None = None) -> polymarket.models.clob.orders.SignedOrder
+Create and sign a limit order without posting it.
+
+Use :meth:`post_order` to submit the returned signed order, or
+:meth:`place_limit_order` to create and post in one call.
+
+When ``expiration`` is provided, it must be a Unix timestamp at least
+3 minutes in the future. Use extra buffer for immediate submissions to
+account for latency and clock skew.
+
+Raises:
+    UserInputError: If order parameters are invalid.
+    SigningError: If the order cannot be signed.
+
+--- post_order(self, signed_order: polymarket.models.clob.orders.SignedOrder) -> polymarket.models.clob.order_response.AcceptedOrder | polymarket.models.clob.order_response.RejectedOrder
+Post a signed order for the authenticated account.
+
+--- post_orders(self, signed_orders: collections.abc.Sequence[polymarket.models.clob.orders.SignedOrder]) -> tuple[polymarket.models.clob.order_response.AcceptedOrder | polymarket.models.clob.order_response.RejectedOrder, ...]
+Post multiple signed orders for the authenticated account.
+
+--- cancel_order(self, *, order_id: str) -> polymarket.models.clob.cancel.CancelOrdersResponse
+Cancel one open order for the authenticated account.
+
+--- cancel_orders(self, *, order_ids: collections.abc.Sequence[str]) -> polymarket.models.clob.cancel.CancelOrdersResponse
+Cancel multiple open orders for the authenticated account.
+
+--- cancel_all(self) -> polymarket.models.clob.cancel.CancelOrdersResponse
+Cancel all open orders for the authenticated account.
+
+--- list_open_orders(self, *, asset_id: str | None = None, token_id: str | None = None, id: str | None = None, market: str | None = None) -> polymarket.pagination.Paginator[polymarket.models.clob.account.OpenOrder]
+List open orders for the authenticated account.
+
+Returns:
+    A paginator over matching open orders.
+
+--- get_balance_allowance(self, *, asset_type: Literal['COLLATERAL', 'CONDITIONAL', 'CONDITIONAL-V2'], asset_id: str | None = None, token_id: str | None = None) -> polymarket.models.clob.account.BalanceAllowance
+Get balance and allowance information for an asset.
+
+Use ``COLLATERAL`` for collateral, ``CONDITIONAL`` for a CTF token ID,
+or ``CONDITIONAL-V2`` for a Polymarket V2 position ID.
+MISSING update_balance_allowance
+
+--- setup_trading_approvals(self) -> polymarket.transactions.SyncDeprecatedTransactionHandle
+Approve the standard set of trading allowances for the wallet.
+
+EOA wallets submit approvals directly. Gasless wallets submit a relayed
+transaction. Already-approved allowances are skipped, and the method waits
+internally for any submitted transactions.
+
+Returns:
+    A deprecated compatibility handle whose ``wait()`` returns immediately.
+
+--- get_trading_approvals_state(self, *, wallet: str | None = None) -> polymarket.models.trading.TradingApprovalsState
+Get missing trading approvals for a wallet or the authenticated wallet.
+
+Recent grants or revocations can take time to appear. Reads use indexed
+state from the configured environment, not the RPC endpoint.
+setup_trading_approvals checks RPC directly.
+
+--- list_account_trades(self, *, asset_id: str | None = None, token_id: str | None = None, id: str | None = None, market: str | None = None, maker_address: str | None = None, after: str | None = None, before: str | None = None) -> polymarket.pagination.Paginator[polymarket.models.clob.account.ClobTrade]
+List trades for the authenticated account.
+
+Returns:
+    A paginator over matching trades.
+
+--- list_user_earnings_for_day(self, *, date: str) -> polymarket.pagination.Paginator[polymarket.models.clob.rewards.UserEarning]
+List reward earnings for the authenticated user on a date.
+
+Returns:
+    A paginator over matching earning entries.
+
+--- get_total_earnings_for_user_for_day(self, *, date: str, sponsored: bool | None = None) -> tuple[polymarket.models.clob.rewards.TotalUserEarning, ...]
+Get total reward earnings for the authenticated user on a date.
+
+Set ``sponsored=True`` to include sponsored rewards and the native/sponsored
+breakdown. Omitted or false returns native rewards only. Absent breakdown
+fields remain ``None``.
+
+--- get_current_rebates(self, *, date: str, maker_address: str) -> tuple[polymarket.models.clob.rewards.RebatedFee, ...]
+Get maker fee rebates for a YYYY-MM-DD calendar day without authentication.
+
+Amounts retain exact precision as Decimal values in USDC units.
+Returns an empty tuple when the maker has no rebates for the date.
+
+--- list_positions(self, *, user: str | None = None, condition_id: str | collections.abc.Sequence[str] | None = None, status: Union[Literal['OPEN', 'REDEEMABLE', 'REDEEMABLE_LOST', 'MERGEABLE', 'CLOSED'], polymarket.models.data.common.PositionStatus, NoneType] = None, event_id: int | collections.abc.Sequence[int] | None = None, title: str | None = None, filter_type: Optional[Literal['CASH', 'TOKENS']] = None, filter_amount: float | None = None, include_archived: bool | None = None, sort_by: Optional[Literal['CURRENT_VALUE', 'PRICE', 'TOKENS', 'UNREALIZED_PNL', 'REALIZED_PNL', 'TOTAL_PNL', 'TIMESTAMP']] = None, sort_direction: Optional[Literal['ASC', 'DESC']] = None, start: int | datetime.datetime | None = None, end: int | datetime.datetime | None = None, full_history: bool = False, page_size: int = 100) -> polymarket.pagination.Paginator[polymarket.models.data.portfolio.Position]
+List positions for a wallet or a single market.
+
+Use ``status="CLOSED"`` for closed positions. Sizes are shares and values are USDC.
+
+``status="REDEEMABLE_LOST"`` lists the wallet's still-held positions that resolved
+to a zero payout. ``status="MERGEABLE"`` lists its live complementary pairs. Both
+are filters only: a lost position still reports ``REDEEMABLE`` and a mergeable
+one ``OPEN``. ``sort_by`` defaults to ``TOKENS`` for ``MERGEABLE``,
+``REALIZED_PNL`` for ``CLOSED``, and ``CURRENT_VALUE`` for every other status.
+
+For wallet-anchored ``CLOSED`` listings, ``TOKENS``, ``CURRENT_VALUE``, ``PRICE``
+and ``UNREALIZED_PNL`` sort by realized PnL in the requested direction. Keep
+the original filters and requested sort when resuming a cursor. If an older
+cursor is rejected with HTTP 400 because the ordering changed, discard it
+and explicitly fetch a new first page; the paginator does not restart.
+
+``title`` filters by case-insensitive substring (max 200 Unicode characters).
+``%`` and ``_`` remain wildcards. Blank input is ignored; other patterns are
+preserved unchanged on every page, including cursor replay.
+
+Positions have no time bounds by default. ``full_history=True`` also includes
+holdings without activity and cannot be combined with ``start`` or ``end``.
+
+Omit ``user`` to use the authenticated wallet.
+
+Resuming a cursor uses the page size stored by that cursor.
+
+--- merge_positions(self, *, condition_id: str | None = None, legs: collections.abc.Sequence[str] | None = None, amount: Union[int, Literal['max']], metadata: str | None = None) -> polymarket.transactions.SyncGaslessTransactionHandle | polymarket.transactions.SyncEoaTransactionHandle
+Merge market or combo positions back into collateral.
+
+Provide exactly one of ``condition_id`` for market positions or ``legs``
+for combo positions.
+
+Args:
+    amount: Base-units position amount to merge, or ``"max"`` to merge
+        the largest available balanced amount.
+
+Returns:
+    A transaction handle. Call ``wait()`` to wait for a terminal outcome.
+
+--- redeem_positions(self, *, condition_id: str | None = None, market_id: str | None = None, position_id: str | None = None, metadata: str | None = None) -> polymarket.transactions.SyncGaslessTransactionHandle | polymarket.transactions.SyncEoaTransactionHandle
+Redeem resolved market positions or a Polymarket V2 position.
+
+Provide exactly one of ``condition_id``, ``market_id``, or ``position_id``.
+A ``position_id`` identifies a specific Polymarket V2 YES/NO position.
+
+Returns:
+    A transaction handle. Call ``wait()`` to wait for a terminal outcome.
+
+Raises:
+    UserInputError: If both identifiers or neither identifier is provided.
+
+--- get_order(self, *, order_id: str) -> polymarket.models.clob.account.OpenOrder
+Get one open order for the authenticated account.
+
+--- get_orders_scoring(self, *, order_ids: collections.abc.Sequence[str]) -> dict[str, bool]
+Return reward-scoring status for multiple orders.
+
+--- SOURCE place_limit_order
+    def place_limit_order(
+        self,
+        *,
+        asset_id: str | None = None,
+        token_id: str | None = None,
+        price: Decimal | int | float | str,
+        size: Decimal | int | float | str,
+        side: OrderSide,
+        post_only: bool = False,
+        expiration: int | None = None,
+        builder_code: str | None = None,
+    ) -> OrderResponse:
+        """Create, sign, and post a limit order.
+
+        When ``expiration`` is provided, it must be a Unix timestamp at least
+        3 minutes in the future. Use extra buffer for immediate submissions to
+        account for latency and clock skew.
+
+        Raises:
+            UserInputError: If order parameters are invalid.
+            InsufficientAllowanceError: If required allowance cannot be recovered.
+            SigningError: If the order cannot be signed.
+            RequestRejectedError: If posting the order is rejected.
+        """
+        signed = self._prepare_and_sign_limit_order(
+            asset_id=asset_id,
+            token_id=token_id,
+            price=price,
+            size=size,
+            side=side,
+            post_only=post_only,
+            expiration=expiration,
+            builder_code=builder_code,
+        )
+        return post_order_with_allowance_recovery_sync(self, signed)
+
+
+--- SOURCE polymarket._internal.actions.orders.limit (6146 chars)
+import time
+from dataclasses import dataclass
+from decimal import Decimal
+
+from polymarket._internal.actions.exchange_asset import resolve_asset_id
+from polymarket._internal.actions.orders._numeric import coerce_positive_decimal
+from polymarket._internal.actions.orders.context import (
+    resolve_order_exchange_address,
+    resolve_rounding_config,
+    validate_price_on_tick_grid,
+)
+from polymarket._internal.actions.orders.market_data import MarketInfo
+from polymarket._internal.actions.orders.math import (
+    decimal_places,
+    parse_amount,
+    round_down,
+    round_up,
+)
+from polymarket._internal.actions.orders.types import OrderDraft
+from polymarket._internal.context import AsyncSecureClientContext, SyncSecureClientContext
+from polymarket._internal.validation import validate_builder_code
+from polymarket.errors import UserInputError
+from polymarket.models.types import ClobAssetId, OrderSide
+from polymarket.types import EvmAddress, HexString
+
+_MIN_EXPIRATION_BUFFER_S = 180
+
+
+@dataclass(frozen=True, slots=True, kw_only=True)
+class PrepareLimitOrderParams:
+    asset_id: ClobAssetId
+    price: Decimal
+    size: Decimal
+    side: OrderSide
+    post_only: bool = False
+    expiration: int | None = None
+    builder_code: HexString | None = None
+
+    @property
+    def token_id(self) -> ClobAssetId:
+        """Deprecated alias for :attr:`asset_id`."""
+
+        return self.asset_id
+
+
+def validate_limit_order_params(
+    *,
+    asset_id: str | None = None,
+    token_id: str | None = None,
+    price: Decimal | int | float | str,
+    size: Decimal | int | float | str,
+    side: OrderSide,
+    post_only: bool = False,
+    expiration: int | None = None,
+    builder_code: str | None = None,
+) -> PrepareLimitOrderParams:
+    validated_asset = resolve_asset_id(asset_id=asset_id, token_id=token_id)
+    validated_price = coerce_positive_decimal("price", price)
+    validated_size = coerce_positive_decimal("size", size)
+    if side not in ("BUY", "SELL"):
+        raise UserInputError(f"side must be 'BUY' or 'SELL', got {side!r}.")
+    if type(post_only) is not bool:
+        raise UserInputError("post_only must be a bool.")
+    if expiration is not None:
+        if type(expiration) is not int:
+            raise UserInputError("expiration must be a non-negative integer.")
+        if expiration < 0:
+            raise UserInputError("expiration must be a non-negative integer.")
+        minimum = int(time.time()) + _MIN_EXPIRATION_BUFFER_S
+        if expiration < minimum:
+            raise UserInputError(
+                f"expiration must be at least {_MIN_EXPIRATION_BUFFER_S} seconds in the future."
+            )
+    validated_builder = validate_builder_code(builder_code) if builder_code is not None else None
+    return PrepareLimitOrderParams(
+        asset_id=validated_asset,
+        price=validated_price,
+        size=validated_size,
+        side=side,
+        post_only=post_only,
+        expiration=expiration,
+        builder_code=validated_builder,
+    )
+
+
+async def prepare_limit_order_draft(
+    ctx: AsyncSecureClientContext, params: PrepareLimitOrderParams
+) -> OrderDraft:
+    metadata = await ctx.order_metadata.resolve_market(ctx, token_id=params.asset_id)
+    try:
+        price = validate_price_on_tick_grid(params.price, metadata.tick_size, "price")
+    except UserInputError:
+        metadata = await ctx.order_metadata.fetch_current_market(ctx, token_id=params.asset_id)
+        price = validate_price_on_tick_grid(params.price, metadata.tick_size, "price")
+    return _build_limit_order_draft(ctx, params, price=price, metadata=metadata)
+
+
+def prepare_limit_order_draft_sync(
+    ctx: SyncSecureClientContext, params: PrepareLimitOrderParams
+) -> OrderDraft:
+    metadata = ctx.order_metadata.resolve_market(ctx, token_id=params.asset_id)
+    try:
+        price = validate_price_on_tick_grid(params.price, metadata.tick_size, "price")
+    except UserInputError:
+        metadata = ctx.order_metadata.fetch_current_market(ctx, token_id=params.asset_id)
+        price = validate_price_on_tick_grid(params.price, metadata.tick_size, "price")
+    return _build_limit_order_draft(ctx, params, price=price, metadata=metadata)
+
+
+def _build_limit_order_draft(
+    ctx: AsyncSecureClientContext | SyncSecureClientContext,
+    params: PrepareLimitOrderParams,
+    *,
+    price: Decimal,
+    metadata: MarketInfo,
+) -> OrderDraft:
+    offered, requested = _compute_limit_order_amounts(
+        price=price,
+        size=params.size,
+        side=params.side,
+        tick_size=metadata.tick_size,
+    )
+    return OrderDraft(
+        chain_id=ctx.environment_config.chain_id,
+        exchange_address=resolve_order_exchange_address(
+            ctx.environment_config, asset_id=params.asset_id, neg_risk=metadata.neg_risk
+        ),
+        expiration=params.expiration if params.expiration is not None else 0,
+        funder_address=ctx.wallet,
+        offered_amount=offered,
+        order_type="GTC" if params.expiration is None else "GTD",
+        side=params.side,
+        signer=EvmAddress(ctx.signer.address),
+        requested_amount=requested,
+        asset_id=params.asset_id,
+        builder_code=params.builder_code,
+    )
+
+
+def _compute_limit_order_amounts(
+    *, price: Decimal, size: Decimal, side: OrderSide, tick_size: Decimal
+) -> tuple[int, int]:
+    config = resolve_rounding_config(tick_size)
+    if side == "BUY":
+        taker = round_down(size, config.size)
+        maker = _round_amount(taker * price, config.amount)
+        return parse_amount(maker), parse_amount(taker)
+    maker = round_down(size, config.size)
+    taker = _round_amount(maker * price, config.amount)
+    return parse_amount(maker), parse_amount(taker)
+
+
+def _round_amount(value: Decimal, amount_decimals: int) -> Decimal:
+    if decimal_places(value) <= amount_decimals:
+        return value
+    value = round_up(value, amount_decimals + 4)
+    if decimal_places(value) > amount_decimals:
+        value = round_down(value, amount_decimals)
+    return value
+
+
+__all
+
+--- SOURCE polymarket._internal.actions.orders.post (3073 chars)
+from collections.abc import Sequence
+from typing import Any
+
+from pydantic import TypeAdapter, ValidationError
+
+from polymarket.errors import UnexpectedResponseError, UserInputError
+from polymarket.models.clob.order_response import (
+    OrderResponse,
+    RawOrderResponse,
+    normalize_order_response,
+)
+from polymarket.models.clob.orders import SignedOrder
+
+_MAX_BATCH = 15
+
+_RawOrderResponsesAdapter = TypeAdapter(tuple[RawOrderResponse, ...])
+
+
+def build_post_order_request(
+    signed_order: SignedOrder, *, owner_api_key: str
+) -> tuple[str, dict[str, Any]]:
+    return "/order", _build_send_order_payload(signed_order, owner_api_key=owner_api_key)
+
+
+def build_post_orders_request(
+    signed_orders: Sequence[SignedOrder], *, owner_api_key: str
+) -> tuple[str, list[dict[str, Any]]]:
+    if isinstance(signed_orders, str | bytes):
+        raise UserInputError("signed_orders must be a sequence of SignedOrder values.")
+    items = list(signed_orders)
+    if not items:
+        raise UserInputError("signed_orders must be a non-empty sequence.")
+    if len(items) > _MAX_BATCH:
+        raise UserInputError(f"signed_orders cannot exceed {_MAX_BATCH} entries.")
+    payload = [_build_send_order_payload(order, owner_api_key=owner_api_key) for order in items]
+    return "/orders", payload
+
+
+def parse_order_response(data: object) -> OrderResponse:
+    try:
+        raw = RawOrderResponse.parse_response(data)
+    except UnexpectedResponseError:
+        raise
+    return normalize_order_response(raw)
+
+
+def parse_order_responses(data: object) -> tuple[OrderResponse, ...]:
+    try:
+        raw_items = _RawOrderResponsesAdapter.validate_python(data)
+    except ValidationError as error:
+        raise UnexpectedResponseError(
+            "post-orders response did not match expected shape"
+        ) from error
+    return tuple(normalize_order_response(item) for item in raw_items)
+
+
+def _build_send_order_payload(order: SignedOrder, *, owner_api_key: str) -> dict[str, Any]:
+    if order.post_only and order.order_type not in ("GTC", "GTD"):
+        raise UserInputError("post-only orders are only supported for GTC and GTD order types.")
+    payload: dict[str, Any] = {
+        "deferExec": False,
+        "order": {
+            "builder": order.builder,
+            "expiration": str(order.expiration),
+            "maker": order.maker,
+            "makerAmount": str(order.maker_amount),
+            "metadata": order.metadata,
+            "salt": order.salt,
+            "side": order.side,
+            "signature": order.signature,
+            "signatureType": order.signature_type,
+            "signer": order.signer,
+            "takerAmount": str(order.taker_amount),
+            "timestamp": str(order.timestamp),
+            "tokenId": order.token_id,
+        },
+        "orderType": order.order_type,
+        "owner": owner_api_key,
+    }
+    if order.post_only:
+        payload["postOnly"] = True
+    return payload
+
+
+__all__ = [
+    "build_post_order_request",
+    "build_post_orders_request",
+    "parse_order_response",
+    "parse_order_responses",
+]
+
+
+--- SOURCE polymarket._internal.actions.orders.types (1478 chars)
+from dataclasses import dataclass
+from typing import Literal
+
+from polymarket.models.clob.orders import MarketOrderType, OrderType, SignedOrder, TickSize
+from polymarket.models.types import ClobAssetId, OrderSide
+from polymarket.types import EvmAddress, HexString
+
+BYTES32_ZERO: HexString = HexString(
+    "0x0000000000000000000000000000000000000000000000000000000000000000"
+)
+
+
+@dataclass(frozen=True, slots=True, kw_only=True)
+class OrderDraft:
+    chain_id: int
+    exchange_address: EvmAddress
+    expiration: int
+    funder_address: EvmAddress
+    offered_amount: int
+    order_type: OrderType
+    side: OrderSide
+    signer: EvmAddress
+    requested_amount: int
+    asset_id: ClobAssetId
+    builder_code: HexString | None = None
+
+    @property
+    def token_id(self) -> ClobAssetId:
+        """Deprecated alias for :attr:`asset_id`."""
+
+        return self.asset_id
+
+
+@dataclass(frozen=True, slots=True, kw_only=True)
+class UnsignedOrder:
+    chain_id: int
+    builder: HexString
+    exchange_address: EvmAddress
+    expiration: int
+    maker: EvmAddress
+    maker_amount: int
+    metadata: HexString
+    order_type: OrderType
+    salt: int
+    side: OrderSide
+    signature_type: int
+    signer: EvmAddress
+    taker_amount: int
+    timestamp: int
+    token_id: ClobAssetId
+    protocol_version: Literal["2", "3"] = "2"
+
+
+__all__ = [
+    "BYTES32_ZERO",
+    "MarketOrderType",
+    "OrderDraft",
+    "OrderType",
+    "SignedOrder",
+    "TickSize",
+    "UnsignedOrder",
+]
+
+polymarket.models.clob.account.BalanceAllowance: ['balance', 'allowances']
+polymarket.models.clob.account.ClobTrade: ['id', 'market', 'condition_id', 'asset_id', 'owner', 'maker_address', 'taker_order_id', 'side', 'trader_side', 'price', 'size', 'outcome', 'status', 'fee_rate_bps', 'bucket_index', 'transaction_hash', 'maker_orders', 'matched_at', 'updated_at']
+polymarket.models.clob.account.MakerOrder: ['order_id', 'asset_id', 'maker_address', 'owner', 'side', 'price', 'matched_amount', 'outcome', 'fee_rate_bps']
+polymarket.models.clob.account.OpenOrder: ['id', 'market', 'condition_id', 'asset_id', 'owner', 'maker_address', 'side', 'price', 'original_size', 'size_matched', 'outcome', 'order_type', 'status', 'associate_trades', 'created_at', 'expires_at']
+polymarket.models.clob.orders.SignedOrder: ['builder', 'expiration', 'maker', 'maker_amount', 'metadata', 'order_type', 'salt', 'side', 'signature', 'signature_type', 'signer', 'taker_amount', 'timestamp', 'token_id', 'post_only']
+polymarket.models.clob.order_response.AcceptedOrder: ['ok', 'order_id', 'status', 'making_amount', 'taking_amount', 'trade_ids', 'transactions_hashes']
+polymarket.models.clob.order_response.RawOrderResponse: ['error_msg', 'making_amount', 'order_id', 'status', 'success', 'taking_amount', 'trade_ids', 'transactions_hashes']
+polymarket.models.clob.order_response.RejectedOrder: ['ok', 'code', 'message']
+polymarket.models.clob.balance_allowance ? No module named 'polymarket.models.clob.balance_allowance'
+polymarket.models.clob.rewards.CurrentReward: ['condition_id', 'rewards_max_spread', 'rewards_min_size', 'rewards_config', 'sponsored_daily_rate', 'sponsors_count', 'native_daily_rate', 'total_daily_rate']
+polymarket.models.clob.rewards.CurrentRewardConfig: ['id', 'asset_address', 'start_date', 'end_date', 'rate_per_day', 'total_rewards']
+polymarket.models.clob.rewards.EarningBreakdown: ['asset_address', 'asset_rate', 'earnings']
+polymarket.models.clob.rewards.MarketReward: ['condition_id', 'question', 'market_slug', 'event_slug', 'image', 'rewards_max_spread', 'rewards_min_size', 'market_competitiveness', 'tokens', 'rewards_config']
+polymarket.models.clob.rewards.MarketRewardConfig: ['asset_address', 'start_date', 'end_date', 'rate_per_day', 'total_rewards']
+polymarket.models.clob.rewards.MarketRewardToken: ['asset_id', 'outcome', 'price']
+polymarket.models.clob.rewards.RebatedFee: ['date', 'condition_id', 'asset_address', 'maker_address', 'rebated_fees_usdc']
+polymarket.models.clob.rewards.RewardMarket: ['condition_id', 'market_id', 'market_slug', 'question', 'image', 'market_competitiveness', 'rewards_config', 'rewards_max_spread', 'rewards_min_size', 'spread', 'tokens', 'group_item_title', 'volume_24hr', 'event_id', 'event_slug', 'created_at', 'one_day_price_change', 'end_date']
+polymarket.models.clob.rewards.TotalUserEarning: ['asset_address', 'asset_rate', 'date', 'earnings', 'maker_address', 'native_earnings', 'sponsored_earnings']
+polymarket.models.clob.rewards.UserEarning: ['asset_address', 'asset_rate', 'condition_id', 'date', 'earnings', 'maker_address']
+polymarket.models.clob.rewards.UserRewardsConfig: ['asset_address', 'end_date', 'rate_per_day', 'start_date', 'total_rewards']
+polymarket.models.clob.rewards.UserRewardsEarning: ['condition_id', 'earning_percentage', 'earnings', 'event_slug', 'image', 'maker_address', 'market_competitiveness', 'market_slug', 'question', 'rewards_config', 'rewards_max_spread', 'rewards_min_size', 'tokens']
+polymarket.models.trading.Erc1155TradingApproval: ['token_address', 'operator']
+polymarket.models.trading.Erc20TradingApproval: ['token_address', 'spender', 'amount']
+polymarket.models.trading.MissingTradingApprovals: ['erc20', 'erc1155']
+polymarket.models.trading.TradingApprovalsState: ['missing', 'is_fully_approved']
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/rfq.py
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/streams/_specs.py
 /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/polymarket/streams/__init__.py
