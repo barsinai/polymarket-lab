@@ -71,7 +71,8 @@ for mod in ("polymarket._internal.actions.orders.limit", "polymarket._internal.a
     except Exception as e:  # noqa: BLE001
         print(mod, "?", e)
 for mod, names in (("polymarket.models.clob.account", None), ("polymarket.models.clob.orders", None), ("polymarket.models.clob.order_response", None),
-                   ("polymarket.models.clob.balance_allowance", None), ("polymarket.models.clob.rewards", None), ("polymarket.models.trading", None)):
+                   ("polymarket.models.clob.balance_allowance", None), ("polymarket.models.clob.rewards", None), ("polymarket.models.trading", None),
+                   ("polymarket.models.data.portfolio", None), ("polymarket.models.clob.cancel", None), ("polymarket.models.clob.api_key", None)):
     try:
         m = importlib.import_module(mod)
     except ImportError as e:
