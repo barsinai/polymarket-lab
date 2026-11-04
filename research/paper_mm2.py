@@ -52,7 +52,8 @@ LIVE = os.environ.get("MM_LIVE") == "1"
 D = "data/paper_mm2" if VARIANT == "1c" else f"data/paper_mm2_{VARIANT}"
 N = int(os.environ.get("MM_N", "200" if VARIANT == "wide" else "40"))
 SIZE = int(os.environ.get("MM_SIZE", "0" if VARIANT == "wide" else "200"))
-SKEW, EVENT_CAP, MAX_BOOK_SPREAD = 0.01, 150.0, 0.04
+SKEW, EVENT_CAP, MAX_BOOK_SPREAD = float(os.environ.get("MM_SKEW", "0.01")), float(os.environ.get("MM_EVENT_CAP", "150")), 0.04
+EXIT_OFF = float(os.environ.get("MM_EXIT_OFF", "0.005"))          # exit-only quotes sit this far from mid
 # "tight": 0.4c from mid in markets with 0.1c ticks (the quadratic reward score roughly doubles
 # vs 1c), 1c elsewhere. More reward share, more fills: the trade-off to measure.
 OFF = {"1c": 0.01, "2c": 0.02, "2cv": 0.02, "2cl": 0.02, "live": 0.02, "wide": 0.01, "park": 0.005, "tight": 0.01}.get(VARIANT, 0.01)
@@ -449,7 +450,7 @@ def tick(now=None):
         elif exit_only and HOLD:  # keep both quotes up at the normal offset (prices revert ~1/3 within a day); no reward counted
             want_bid, want_ask = inv < size, inv > -size
         elif exit_only:  # only work the position off, at the mid, no reward expected
-            bid, ask = (round(mid - 0.005, 3), None) if inv < 0 else (None, round(mid + 0.005, 3))
+            bid, ask = (round(mid - EXIT_OFF, 3), None) if inv < 0 else (None, round(mid + EXIT_OFF, 3))
             want_bid, want_ask = inv < 0, inv > 0
         st["quotes"][cid] = {"ts": int(now), "q": rw[cid]["q"], "tpl": tpl, "token": rw[cid]["token"], "off": off, "size": size if (not exit_only or HOLD) else abs(inv),
                              "bid": bid if want_bid and 0 < bid < 1 else None, "ask": ask if want_ask and ask and 0 < ask < 1 else None,
