@@ -75,3 +75,17 @@ and what the bank will ask for when money comes back.
 - Confirm the SDK's limit-order and post-only calls and the user-stream message format in
   dry-run mode (no account needed for public streams; account needed for user stream).
 - Decide the pilot variant from the paper comparison (end of this week).
+
+## Pilot implementation (11-04)
+
+- `research/live/broker.py`: wrapper over the official SDK (`polymarket-client`, `SecureClient.create(private_key,
+  wallet, api_key=RelayerApiKey)`); balance, approvals, positions, open orders, post-only limit orders,
+  cancel, account trades, daily reward earnings, rebates, merge/redeem. Dry run signs orders but posts nothing.
+- `research/live/live_tick.py`: one tick every 10 minutes (`.github/workflows/pilot.yml`, chained runs).
+  Mode from `research/live/PILOT_MODE` (off / dry / live), kill switch = file `STOP` in the repo root.
+  Positions from the exchange feed the quoting rules (paper_mm2 variant "live" = 2cl rules, 8 markets,
+  minimum size); fills and rewards are read from the exchange. Hard limits: resting buys <= 95% of balance,
+  <= $150 per market, net equity loss > $30 in a UTC day -> cancel all and stop for the day.
+- Secrets only in GitHub Actions secrets (POLYMARKET_PRIVATE_KEY, POLYMARKET_WALLET_ADDRESS,
+  POLYMARKET_RELAYER_API_KEY, POLYMARKET_SIGNER_ADDRESS). Tracebacks are scrubbed before logging.
+- Ledger: `data/live_pilot/ledger.jsonl` (fills, daily rewards); report `data/live_pilot/report.json`.

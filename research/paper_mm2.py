@@ -39,17 +39,23 @@ if VARIANT in ("2cv", "2cl"):
 # "2cl": the replay frontier as of 11-03 evening: 2c offers, vol from the 14-day history, size by calmness
 # with a wide clamp (0.25-3x), size capped at 1x the competing depth. Replay: net +13.6/h on $3.7k vs
 # +9.0/h on $6.7k for 2cv. (The one-tick lean it started with no longer helped on top of these; dropped.)
-if VARIANT == "2cl":
+if VARIANT in ("2cl", "live"):
     os.environ.setdefault("MM_VOL14", "1")
     os.environ.setdefault("MM_SV_LO", "0.25"); os.environ.setdefault("MM_SV_HI", "3")
     os.environ.setdefault("MM_SIZE_BY_COMP", "1")
+# "live": the pilot. Same rules as 2cl, few markets, minimum size; positions come from the exchange
+# (research/live/live_tick.py writes positions_live.json before each tick) and fills/rewards are NOT
+# simulated - the exchange is the truth. Never sends orders itself.
+if VARIANT == "live":
+    os.environ.setdefault("MM_N", "8"); os.environ.setdefault("MM_SIZE", "0"); os.environ.setdefault("MM_LIVE", "1")
+LIVE = os.environ.get("MM_LIVE") == "1"
 D = "data/paper_mm2" if VARIANT == "1c" else f"data/paper_mm2_{VARIANT}"
 N = int(os.environ.get("MM_N", "200" if VARIANT == "wide" else "40"))
-SIZE = 0 if VARIANT == "wide" else 200          # max(min_size, SIZE); wide -> min_size only
+SIZE = int(os.environ.get("MM_SIZE", "0" if VARIANT == "wide" else "200"))
 SKEW, EVENT_CAP, MAX_BOOK_SPREAD = 0.01, 150.0, 0.04
 # "tight": 0.4c from mid in markets with 0.1c ticks (the quadratic reward score roughly doubles
 # vs 1c), 1c elsewhere. More reward share, more fills: the trade-off to measure.
-OFF = {"1c": 0.01, "2c": 0.02, "2cv": 0.02, "2cl": 0.02, "wide": 0.01, "park": 0.005, "tight": 0.01}.get(VARIANT, 0.01)
+OFF = {"1c": 0.01, "2c": 0.02, "2cv": 0.02, "2cl": 0.02, "live": 0.02, "wide": 0.01, "park": 0.005, "tight": 0.01}.get(VARIANT, 0.01)
 # trade-tape filter: pull quotes for a tick when the last trades were big and one-directional
 TAPE_USD, TAPE_N = 500.0, 3
 # experimental switches (env), so the same code runs live and in replay:
@@ -273,6 +279,18 @@ def tick(now=None):
         st["universe_ts"] = now
         print(f"universe refreshed: {len(st['universe'])} candidates from {len(ok)} eligible reward markets", flush=True)
 
+    if LIVE:  # positions from the exchange, no simulated fills or reward credit
+        try:
+            live_pos = json.load(open(f"{D}/positions_live.json"))
+        except (OSError, ValueError):
+            live_pos = {}
+        for p in st["positions"].values():
+            p["yes"] = 0.0
+        for cid, v in live_pos.items():
+            r = rw.get(cid, {})
+            p = st["positions"].setdefault(cid, {"yes": 0.0, "q": r.get("q", v.get("q", "")), "tpl": template(r.get("q", "")), "token": r.get("token") or v.get("token")})
+            p["yes"] = float(v["yes"])
+        st["quotes"] = {}
     watch = list(dict.fromkeys(st["universe"] + [c for c, p in st["positions"].items() if abs(p["yes"]) > 1e-9 and c not in st["settled"]]))
     tok_of = {c: (rw[c]["token"] if c in rw else st["positions"].get(c, {}).get("token")) for c in watch}
     books = books_for([t for t in tok_of.values() if t])
