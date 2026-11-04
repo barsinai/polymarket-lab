@@ -291,3 +291,7 @@ Price drift in the trade's direction (what a market maker on the other side lose
   +22.5 on $9.3k (0.24%/h). More capital deployable with diminishing per-$ return. Pilot sizing
   note: a few hundred dollars covers only 3-5 markets (~$10-25/day of rewards) - enough to
   verify payouts, not to earn.
+- 11-04 12:30 midday: live 17.5h since the 2cl redefinition: 2cl +19.9/h on $5.1k; 2cv +10.1 on
+  $9.1k; 2c +3.9; wide +4.1; 1c -20.9; tight -23.2; v1 +48 (optimistic accounting). Order holds.
+  Scheduled volfeat run did not fire (GitHub cron) - dispatched by hand, second cron added.
+  PILOT: SDK broker + live tick + pilot workflow built (dry mode); waiting for the user's secrets.
