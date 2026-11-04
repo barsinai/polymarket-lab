@@ -277,3 +277,17 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - Size capped at 1x competing depth (comp1): +13.6/h on $3.7k; 2x: +13.4 on $3.9k. Marginal on
   top of the vol clamp (rarely binds). Live "2cl" redefined to the frontier: vol14 + clamp
   0.25-3x + comp1 (lean dropped). 2cv stays the control.
+
+## 11-04 06:50 morning check
+- First out-of-sample night for the frontier config (live 2cl, 12h): +19.7/h net on $5.3k
+  (rewards 35.3, trading -16.6). Control 2cv +11.1 on $8.6k; 2c +5.2; wide +1.8; 1c -28; tight
+  -33 (most fills -> most losses); v1 +42.5 (optimistic accounting). Jobs chaining, data fresh.
+- Replay over all 73h: frontier +16.5/h on $4.1k vs baseline +11.3 on $7.1k. Central-bank
+  exclusion (fed/fomc/ecb/boe/boj): identical result - kept on principle.
+- Dry-run quoter: ~37 cancel+post per 10-min tick for ~100 open orders (fine for rate limits);
+  daily loss limit redefined on NET P&L incl. estimated rewards (trading alone loses ~$200/day
+  by design, rewards ~$400/day).
+- Scaling the frontier: N=40 +16.5/h on $4.1k (0.40%/h); N=60 +19.5 on $6.4k (0.31%/h); N=100
+  +22.5 on $9.3k (0.24%/h). More capital deployable with diminishing per-$ return. Pilot sizing
+  note: a few hundred dollars covers only 3-5 markets (~$10-25/day of rewards) - enough to
+  verify payouts, not to earn.

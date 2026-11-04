@@ -44,7 +44,7 @@ if VARIANT == "2cl":
     os.environ.setdefault("MM_SV_LO", "0.25"); os.environ.setdefault("MM_SV_HI", "3")
     os.environ.setdefault("MM_SIZE_BY_COMP", "1")
 D = "data/paper_mm2" if VARIANT == "1c" else f"data/paper_mm2_{VARIANT}"
-N = 200 if VARIANT == "wide" else 40
+N = int(os.environ.get("MM_N", "200" if VARIANT == "wide" else "40"))
 SIZE = 0 if VARIANT == "wide" else 200          # max(min_size, SIZE); wide -> min_size only
 SKEW, EVENT_CAP, MAX_BOOK_SPREAD = 0.01, 150.0, 0.04
 # "tight": 0.4c from mid in markets with 0.1c ticks (the quadratic reward score roughly doubles
