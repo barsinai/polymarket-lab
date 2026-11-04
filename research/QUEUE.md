@@ -299,3 +299,13 @@ Price drift in the trade's direction (what a market maker on the other side lose
   before this data existed): frontier +19.7/h on $4.1k (rewards 23.9, trading -5.8) vs baseline
   2c+sizevol +6.0/h on $6.9k (rewards 24.6, trading -19.9). Same rewards, a third of the loss.
   Live 2cl over the same day: +19.8/h on $3.8k. Replay and live agree.
+
+## 11-04 night batch (93h record, frontier = vol14 + clamp 0.25-3 + comp1: +16.5/h on $5.25k = 3.14/$k/h)
+- 1.5c offers (rounded UP to the market tick; the unrounded version was an artefact): +17.2 on $5.1k (3.35/$k)
+- size ref 0.004 (harder cut in jumpy markets): +16.9 on $4.6k (3.68/$k); ref 0.007 worse; clamp low 0.1: 3.24/$k
+- event cap $75: +16.4 on $4.7k (3.51/$k); skew 2c: same; exit at mid: same; exit at 1c: worse
+- N=20: +12.4 on $2.4k (5.1/$k); N=8: +9.0 on $0.8k (11.1/$k) - diminishing returns per market, as before
+- COMBO (1.5c + ref 0.004 + cap 75): +17.35/h on $4.48k = 3.88/$k/h (+24% per $). ADOPTED for 2cl and
+  the pilot "live" variant. Plateau reached in this family: every tweak moves net by a few %.
+- PILOT config replay (8 markets, minimum size): +2.8/h on ~$430 (~$65/day). Treat as an upper bound:
+  tiny orders in thin markets get the full modelled share; whether Polymarket pays it is the pilot's question.

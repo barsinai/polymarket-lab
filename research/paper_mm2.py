@@ -43,6 +43,9 @@ if VARIANT in ("2cl", "live"):
     os.environ.setdefault("MM_VOL14", "1")
     os.environ.setdefault("MM_SV_LO", "0.25"); os.environ.setdefault("MM_SV_HI", "3")
     os.environ.setdefault("MM_SIZE_BY_COMP", "1")
+    # 11-04 night batch (93h): 1.5c offers where the tick allows, harder size cut (ref 0.004), event cap $75
+    # -> net per $ +24% vs the 11-03 frontier (17.4/h on $4.5k vs 16.5/h on $5.3k)
+    os.environ.setdefault("MM_OFF", "0.015"); os.environ.setdefault("MM_SV_REF", "0.004"); os.environ.setdefault("MM_EVENT_CAP", "75")
 # "live": the pilot. Same rules as 2cl, few markets, minimum size; positions come from the exchange
 # (research/live/live_tick.py writes positions_live.json before each tick) and fills/rewards are NOT
 # simulated - the exchange is the truth. Never sends orders itself.
