@@ -20,7 +20,11 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install polymarket-client 2>&1 | tail -3
-      - run: python -u research/live/sdk_probe.py 2>&1 | tee /tmp/sdk.txt
+      - run: |
+          echo "== geoblock as seen from this runner" | tee /tmp/sdk.txt
+          curl -sS https://polymarket.com/api/geoblock | tee -a /tmp/sdk.txt; echo | tee -a /tmp/sdk.txt
+          curl -sS -o /dev/null -w "clob /time HTTP %{http_code}\n" https://clob.polymarket.com/time | tee -a /tmp/sdk.txt
+      - run: python -u research/live/sdk_probe.py 2>&1 | tail -5 | tee -a /tmp/sdk.txt
       - run: pip show -f polymarket-client | head -5; python -c "import polymarket,os; d=os.path.dirname(polymarket.__file__); print(d)"; find $(python -c "import polymarket,os; print(os.path.dirname(polymarket.__file__))") -name "*.py" | head -80 | tee -a /tmp/sdk.txt
       - name: Save
         if: always()
