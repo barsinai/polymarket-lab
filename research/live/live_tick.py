@@ -15,6 +15,7 @@ from datetime import datetime, timezone, timedelta
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.dirname(HERE)); sys.path.insert(0, HERE)
 os.environ["MM_VARIANT"] = "live"
+import netprefs  # noqa: E402  (IPv6 pin for *.polymarket.com - must come before any HTTP)
 import paper_mm2 as P  # noqa: E402
 from broker import Broker  # noqa: E402
 
@@ -50,6 +51,9 @@ def main():
     if m == "off":
         print("PILOT_MODE off"); return
     send = m == "live"
+    geo = netprefs.geoblock_check()
+    if geo.get("blocked"):
+        jlog({"ts": int(now), "mode": m, "geoblocked": geo, "note": "this machine is in a blocked region for Polymarket: not running"}); return
     b = Broker(send=send)
     if os.path.exists("STOP"):
         r = b.cancel_all(); jlog({"ts": int(now), "mode": m, "STOP": True, "cancel_all": r}); return
@@ -153,7 +157,7 @@ def main():
             json.dump(earned, open(earn_p, "w")); ledger([{"kind": "rewards", **earned}])
         except Exception as e:  # noqa: BLE001
             earned = {"error": str(e)[:200]}
-    report = {"updated": datetime.now(timezone.utc).isoformat(), "mode": m, "wallet_type": b.wallet_type, "balance_usd": round(bal["balance_usd"], 2),
+    report = {"updated": datetime.now(timezone.utc).isoformat(), "mode": m, "geo": {k: geo.get(k) for k in ("country", "region", "blocked")}, "wallet_type": b.wallet_type, "balance_usd": round(bal["balance_usd"], 2),
               "positions": len(pos), "positions_value": round(pos_value, 2), "equity": round(equity, 2), "day_pnl": round(day_pnl, 2),
               "approvals": appr, "open_orders_before": len(open_), "kept": len(keep), "cancelled": len(cancel_ids), "posted": len(posts),
               "post_results": results[:40], "rejected": rejected[:20], "resting_notional": round(spent, 2), "capital_cap": round(cap, 2),
