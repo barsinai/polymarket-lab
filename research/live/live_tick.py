@@ -56,7 +56,18 @@ def main():
         jlog({"ts": int(now), "mode": m, "geoblocked": geo, "note": "this machine is in a blocked region for Polymarket: not running"}); return
     b = Broker(send=send)
     if os.path.exists("STOP"):
-        r = b.cancel_all(); jlog({"ts": int(now), "mode": m, "STOP": True, "cancel_all": r}); return
+        r = b.cancel_all()
+        # still read yesterday's actual reward payout and rebates while paused (the pilot's key number)
+        yday = (datetime.now(timezone.utc) - timedelta(days=1)).strftime("%Y-%m-%d")
+        earn_p = f"{OUT}/earnings_{yday}.json"; earned = None
+        if not os.path.exists(earn_p):
+            try:
+                earned = b.earnings(yday); earned["rebates"] = b.rebates(yday)
+                json.dump(earned, open(earn_p, "w")); ledger([{"kind": "rewards", **earned}])
+            except Exception as e:  # noqa: BLE001
+                earned = {"error": str(e)[:200]}
+        bal = b.balance()
+        jlog({"ts": int(now), "mode": m, "STOP": True, "cancel_all": r, "balance_usd": bal["balance_usd"], "earnings": earned}); return
     bal = b.balance()
     appr = None
     for attempt in range(3):   # the approvals check goes through a public Polygon RPC that sometimes refuses requests
