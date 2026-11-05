@@ -35,7 +35,14 @@ jobs:
             data/live/meta
             data/live/rewards
             data/live/volfeat
-      - run: python3 -m pip install -q --user requests polymarket-client 2>&1 | tail -1; python3 --version
+      - name: Python 3.12 environment (uv; the server's system Python is 3.14 and externally managed)
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+          command -v uv >/dev/null || curl -LsSf https://astral.sh/uv/install.sh | sh
+          [ -x "$HOME/.venv-pilot/bin/python" ] || uv venv --python 3.12 "$HOME/.venv-pilot"
+          uv pip install --python "$HOME/.venv-pilot/bin/python" -q requests polymarket-client
+          "$HOME/.venv-pilot/bin/python" --version
+          "$HOME/.venv-pilot/bin/python" -c "import polymarket; print('polymarket-client', polymarket.__version__)"
       - name: Secrets present?
         run: |
           if [ -z "$POLYMARKET_PRIVATE_KEY" ]; then echo "no secrets yet - nothing to do"; echo "NOSECRETS=1" >> $GITHUB_ENV; fi
@@ -50,7 +57,7 @@ jobs:
             git fetch -q origin main
             git checkout -q origin/main -- research/live/PILOT_MODE data/live/rewards data/live/meta data/live/mids_48h.json.gz data/live/volfeat 2>/dev/null
             git ls-tree --name-only origin/main STOP >/dev/null 2>&1 && git checkout -q origin/main -- STOP 2>/dev/null
-            python3 -u research/live/live_tick.py 2>&1 | tee -a /tmp/pilot-log.txt
+            "$HOME/.venv-pilot/bin/python" -u research/live/live_tick.py 2>&1 | tee -a /tmp/pilot-log.txt
             if [ $(( $(date +%s) - last )) -ge 3300 ]; then
               mkdir -p logs data/live_pilot data/paper_mm2_live && cp /tmp/pilot-log.txt logs/pilot-log.txt
               git add --sparse data/live_pilot data/paper_mm2_live logs/pilot-log.txt
