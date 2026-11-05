@@ -57,7 +57,14 @@ def main():
     b = Broker(send=send)
     if os.path.exists("STOP"):
         r = b.cancel_all(); jlog({"ts": int(now), "mode": m, "STOP": True, "cancel_all": r}); return
-    bal = b.balance(); appr = b.ensure_approvals()
+    bal = b.balance()
+    appr = None
+    for attempt in range(3):   # the approvals check goes through a public Polygon RPC that sometimes refuses requests
+        try:
+            appr = b.ensure_approvals(); break
+        except Exception as e:  # noqa: BLE001
+            appr = {"error": str(e)[:160], "attempt": attempt + 1}; time.sleep(5)
+    # if the check itself fails we still proceed: posting an order triggers the SDK's own allowance recovery
     pos = b.positions()
     red = b.redeem_resolved(); mrg = b.merge_complementary(pos)
     if red or mrg:
