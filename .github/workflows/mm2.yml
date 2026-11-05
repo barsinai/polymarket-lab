@@ -69,4 +69,7 @@ jobs:
         if: always()
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh workflow run mm2.yml --ref main -R ${{ github.repository }}
+        run: |
+          gh workflow run mm2.yml --ref main -R ${{ github.repository }}
+          # GitHub's cron skips runs now and then: make sure today's vol features exist
+          git ls-tree --name-only origin/main data/live/volfeat/$(date -u +%F).json.gz | grep -q . || gh workflow run volfeat.yml --ref main -R ${{ github.repository }}
