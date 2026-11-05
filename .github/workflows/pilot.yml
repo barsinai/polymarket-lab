@@ -58,7 +58,7 @@ jobs:
             git checkout -q origin/main -- research data/live/rewards data/live/meta data/live/mids_48h.json.gz data/live/volfeat 2>/dev/null   # code + mode + data refresh every tick
             git ls-tree --name-only origin/main STOP >/dev/null 2>&1 && git checkout -q origin/main -- STOP 2>/dev/null
             "$HOME/.venv-pilot/bin/python" -u research/live/live_tick.py 2>&1 | tee -a /tmp/pilot-log.txt
-            if [ $(( $(date +%s) - last )) -ge 3300 ]; then
+            if [ $(( $(date +%s) - last )) -ge 0 ]; then   # pilot: save every tick
               mkdir -p logs data/live_pilot data/paper_mm2_live && cp /tmp/pilot-log.txt logs/pilot-log.txt
               git add --sparse data/live_pilot data/paper_mm2_live logs/pilot-log.txt
               if git commit -qm "Pilot $(date -u +%FT%H:%M) [skip ci]"; then
