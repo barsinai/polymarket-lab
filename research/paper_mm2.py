@@ -390,6 +390,8 @@ def tick(now=None):
         mid = (bids[0][0] + asks[0][0]) / 2
         if not (0.05 < mid < 0.95) if not PARK else not (0.80 <= mid <= 0.96 or 0.04 <= mid <= 0.20):
             continue
+        if not PARK and SKIP.search(r["q"]) and abs(st["positions"].get(cid, {}).get("yes", 0.0)) < 1e-9:
+            continue  # exclusion list applies immediately, not only at the hourly universe refresh
         off = offset(r["v"], r["tick"])
         wide = asks[0][0] - bids[0][0] > MAX_BOOK_SPREAD
         cb, ca = score(bids, mid, r["v"], r["minsize"], True), score(asks, mid, r["v"], r["minsize"], False)
