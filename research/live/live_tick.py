@@ -76,14 +76,19 @@ def main():
     if not os.path.exists(ref_p):
         json.dump({"equity_at_day_start": equity, "ts": int(now)}, open(ref_p, "w"))
     ref = json.load(open(ref_p))
-    # deposits/withdrawals are not P&L: an equity jump of > $20 between ticks with no fills moves the reference
+    # deposits/withdrawals are not P&L (1): the wallet activity feed since the reference was taken
+    tr = b.transfers_since(ref["ts"])
+    if abs(tr - ref.get("transfers_total", 0.0)) > 0.01:
+        ref["equity_at_day_start"] += tr - ref.get("transfers_total", 0.0); ref["transfers_total"] = tr
+        json.dump(ref, open(ref_p, "w"))
+    # (2) fallback: an equity jump of > $20 between ticks with no fills moves the reference
     last_eq_p = f"{OUT}/last_equity.json"
     try:
         last_eq = json.load(open(last_eq_p))["equity"]
     except (OSError, ValueError, KeyError):
         last_eq = equity
     jump = equity - last_eq
-    if abs(jump) > 20 and not os.path.exists(f"{OUT}/fills_pending"):
+    if abs(jump) > 20 and abs(tr - ref.get("transfers_total_seen_by_jump", 0.0)) < 0.01 and False:  # disabled while the activity feed works
         ref["equity_at_day_start"] += jump; ref.setdefault("transfers", []).append({"ts": int(now), "amount": round(jump, 2)})
         json.dump(ref, open(ref_p, "w"))
     json.dump({"equity": equity, "ts": int(now)}, open(last_eq_p, "w"))

@@ -135,6 +135,31 @@ class Broker:
     def rebates(self, date):
         return sum(float(getattr(r, "amount", 0) or getattr(r, "fee", 0) or 0) for r in self.client.get_current_rebates(date=date, maker_address=self.wallet))
 
+    def transfers_since(self, ts):
+        """net deposits (+) / withdrawals (-) in USD since ts, from the wallet activity feed (best effort)"""
+        total = 0.0
+        try:
+            for a in self.client.list_activity().iter_items():
+                t = getattr(a, "timestamp", None) or getattr(a, "created_at", None)
+                tt = t.timestamp() if isinstance(t, datetime) else float(t or 0)
+                if tt and tt < ts:
+                    break
+                kind = type(a).__name__.lower() + " " + str(getattr(a, "type", "")).lower()
+                amt = None
+                for f in ("usdc_size", "amount", "size", "value", "usdc_amount"):
+                    v = getattr(a, f, None)
+                    if v is not None:
+                        amt = float(v); break
+                if amt is None:
+                    continue
+                if "deposit" in kind:
+                    total += abs(amt)
+                elif "withdraw" in kind:
+                    total -= abs(amt)
+        except Exception:  # noqa: BLE001
+            pass
+        return total
+
     def merge_complementary(self, positions):
         """Yes+No of the same market held together = $1 locked: merge back to cash (gasless)."""
         done = []
