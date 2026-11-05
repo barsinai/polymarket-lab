@@ -1,6 +1,6 @@
 {
- "updated": "2026-11-05T14:35:02.527968+00:00",
- "mode": "dry",
+ "updated": "2026-11-05T14:51:07.193207+00:00",
+ "mode": "live",
  "geo": {
   "country": "FI",
   "region": "18",
@@ -13,8 +13,8 @@
  "equity": 238.79,
  "day_pnl": 199.32,
  "approvals": {
-  "fully_approved": false,
-  "missing": "MissingTradingApprovals(erc20=(Erc20TradingApproval(token_address='0xC011a7E12a19f7B1f670d46F03B03f3342E82DFB', spender='0xDCa4af75705dbB50f62437045afF9921947917d2', amount=115792089237316195423570985008687907853269984665640564039457584007913129639935),), erc1155=())"
+  "error": "Request to https://polygon.drpc.org was blocked by Cloudflare with status 400",
+  "attempt": 3
  },
  "open_orders_before": 0,
  "kept": 0,
@@ -27,7 +27,8 @@
    "size": 50.0,
    "q": "Will Helen Zille be the next mayor of Johannesburg",
    "ok": true,
-   "dry": true
+   "order_id": "0x2cb40898ae8a38b9a92f2be5a744d04a927c4aa7c40f09137f8832f7480b71cc",
+   "status": "live"
   },
   {
    "side": "BUY",
@@ -35,7 +36,8 @@
    "size": 50.0,
    "q": "Will Helen Zille be the next mayor of Johannesburg",
    "ok": true,
-   "dry": true
+   "order_id": "0xf91262f7d68ac903cf580a53303a18da634bd7cfb2d0e2e6c00db48e76cfcd2f",
+   "status": "live"
   },
   {
    "side": "BUY",
@@ -43,7 +45,8 @@
    "size": 20.0,
    "q": "Will Home Depot (HD) beat quarterly earnings?",
    "ok": true,
-   "dry": true
+   "order_id": "0xbdc6db68dcb2b0a74e6af9d131e4f74dfb3f887961b56855d90553becf4c5360",
+   "status": "live"
   },
   {
    "side": "BUY",
@@ -51,23 +54,8 @@
    "size": 20.0,
    "q": "Will Home Depot (HD) beat quarterly earnings?",
    "ok": true,
-   "dry": true
-  },
-  {
-   "side": "BUY",
-   "price": 0.29,
-   "size": 20.0,
-   "q": "Will Google be the #2 AI lab at the end of Decembe",
-   "ok": true,
-   "dry": true
-  },
-  {
-   "side": "BUY",
-   "price": 0.66,
-   "size": 20.0,
-   "q": "Will Google be the #2 AI lab at the end of Decembe",
-   "ok": true,
-   "dry": true
+   "order_id": "0xd347bb9556a8842c7e63f77fca17bf65c2a77823e28b7c18aeff563818d59b7b",
+   "status": "live"
   },
   {
    "side": "BUY",
@@ -75,7 +63,8 @@
    "size": 20.0,
    "q": "Will Cristiano Ronaldo join the Saudi Pro League n",
    "ok": true,
-   "dry": true
+   "order_id": "0x6a7af81895ea2818f78d6656733b5a34ecd40f04283545c2816698195c731354",
+   "status": "live"
   },
   {
    "side": "BUY",
@@ -83,7 +72,26 @@
    "size": 20.0,
    "q": "Will Cristiano Ronaldo join the Saudi Pro League n",
    "ok": true,
-   "dry": true
+   "order_id": "0x4ab50c15d6389b8b051cdf9cb450607dbbd6a1e808ef9038d94aed172d7fe5c4",
+   "status": "live"
+  },
+  {
+   "side": "BUY",
+   "price": 0.72,
+   "size": 50.0,
+   "q": "Will Avengers: Doomsday have the best domestic ope",
+   "ok": true,
+   "order_id": "0x6fbbdc337b2c07ce819ad7075a9765954678ab4b74b7d3928321667ad4a41722",
+   "status": "live"
+  },
+  {
+   "side": "BUY",
+   "price": 0.24,
+   "size": 50.0,
+   "q": "Will Avengers: Doomsday have the best domestic ope",
+   "ok": true,
+   "order_id": "0xd6199cbb1712dbd6580ec6fb2648b59a3004e36da10d3baa28b64ed41981866e",
+   "status": "live"
   },
   {
    "side": "BUY",
@@ -91,7 +99,8 @@
    "size": 20.0,
    "q": "Will South Korea win the public vote for Eurovisio",
    "ok": true,
-   "dry": true
+   "order_id": "0x3342685c02062d937e3890d9fcb2b5856170449470fd555a670ef3c5e34882a8",
+   "status": "live"
   },
   {
    "side": "BUY",
@@ -99,23 +108,26 @@
    "size": 20.0,
    "q": "Will South Korea win the public vote for Eurovisio",
    "ok": true,
-   "dry": true
+   "order_id": "0x20dbaee215497404adb88e68db8f5fe0307f37cccb69c8d98624eb4c8bc6a775",
+   "status": "live"
   },
   {
    "side": "BUY",
-   "price": 0.12,
+   "price": 0.26,
    "size": 20.0,
-   "q": "Any member-elect blocked from being sworn in?",
+   "q": "Will Tyreek Hill sign with the Kansas City Chiefs ",
    "ok": true,
-   "dry": true
+   "order_id": "0x2a64a6102ccb47450eee60537a2187964d29bc3036ff102cec327ddd8a42dc45",
+   "status": "live"
   },
   {
    "side": "BUY",
-   "price": 0.84,
+   "price": 0.7,
    "size": 20.0,
-   "q": "Any member-elect blocked from being sworn in?",
+   "q": "Will Tyreek Hill sign with the Kansas City Chiefs ",
    "ok": true,
-   "dry": true
+   "order_id": "0xd736af7579432fe47889062c17bd2e4a31264e0af32eedf9a123674c4de5932a",
+   "status": "live"
   },
   {
    "side": "BUY",
@@ -123,7 +135,8 @@
    "size": 20.0,
    "q": "Will Thailand come in 3rd place at Eurovision Asia",
    "ok": true,
-   "dry": true
+   "order_id": "0x2c50009d534add769d102daff90c8d1b568aa23badd70256a76eb7324666c51b",
+   "status": "live"
   },
   {
    "side": "BUY",
@@ -131,7 +144,8 @@
    "size": 20.0,
    "q": "Will Thailand come in 3rd place at Eurovision Asia",
    "ok": true,
-   "dry": true
+   "order_id": "0xd00a4b7b8c25a46e1899bb86418224741f1fdd135d7a803092f7124b1866a943",
+   "status": "live"
   },
   {
    "side": "BUY",
@@ -139,7 +153,8 @@
    "size": 20.0,
    "q": "Will the Ornn H200 Index be at least $7.50 on Dece",
    "ok": true,
-   "dry": true
+   "order_id": "0x3e0f861b328c1ce5189aa502821e5239f5aaaafac88734ad3179f299902f99de",
+   "status": "live"
   },
   {
    "side": "BUY",
@@ -147,16 +162,17 @@
    "size": 20.0,
    "q": "Will the Ornn H200 Index be at least $7.50 on Dece",
    "ok": true,
-   "dry": true
+   "order_id": "0x1761a166964ccbcba5097d38d27e09c02959fb71c18fd981a128002f57f61b9c",
+   "status": "live"
   }
  ],
  "rejected": [],
- "resting_notional": 182.38,
+ "resting_notional": 211.38,
  "capital_cap": 226.85,
  "fills_since_last": 0,
  "paper_estimate": {
   "quoting": 8,
-  "capital_in_use": 182.58
+  "capital_in_use": 211.38
  },
  "redeemed": [],
  "merged": [],
