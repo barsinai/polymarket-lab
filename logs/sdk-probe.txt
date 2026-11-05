@@ -1,6 +1,12 @@
 == geoblock as seen from this runner
-{"blocked":true,"ip":"4.242.195.146","country":"US","region":"AZ"}
+{"blocked":true,"ip":"172.184.209.176","country":"US","region":"CA"}
 clob /time HTTP 200
+== positions (data-api)
+{"error":"Data API v1 has been retired","migration":"https://data-api.polymarket.com/v2/","docs":"https://docs.polymarket.com/api-reference/data-api/overview"}
+== value
+{"error":"Data API v1 has been retired","migration":"https://data-api.polymarket.com/v2/","docs":"https://docs.polymarket.com/api-reference/data-api/overview"}
+== recent activity
+{"error":"Data API v1 has been retired","migration":"https://data-api.polymarket.com/v2/","docs":"https://docs.polymarket.com/api-reference/data-api/overview"}
 polymarket.models.data.portfolio.UserStats: ['wallet', 'traded_market_count', 'biggest_win', 'views', 'join_date', 'all_time_pnl']
 polymarket.models.data.portfolio.UserVolume: ['volume', 'volume_usdc', 'trade_count']
 polymarket.models.clob.cancel.CancelOrdersResponse: ['canceled', 'not_canceled']
