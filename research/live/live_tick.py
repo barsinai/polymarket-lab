@@ -104,6 +104,11 @@ def main():
     json.dump({cid: {"yes": p["yes"], "token": next(iter(p["tokens"]), None), "q": p["q"]} for cid, p in pos.items()}, open(f"{P.D}/positions_live.json", "w"))
     rep = P.tick(now) or {}
     st = P.load(); rw = P.rewards_table()
+    # our own estimate of today's reward, for comparison with what Polymarket actually pays: pool share per
+    # quoted market, pro-rated to a 10-minute tick (the same formula the paper trader uses)
+    est_tick = sum((q.get("rpd") or 0.0) for q in st["quotes"].values() if q.get("bid") and q.get("ask")) / 144.0
+    ref["reward_estimate_today"] = round(ref.get("reward_estimate_today", 0.0) + est_tick, 3)
+    json.dump(ref, open(ref_p, "w"))
 
     # desired orders
     cap = min(float(os.environ.get("MM_CAPITAL", "1e9")), bal["balance_usd"] * 0.95)
@@ -190,7 +195,7 @@ def main():
               "approvals": appr, "open_orders_before": len(open_), "kept": len(keep), "cancelled": len(cancel_ids), "posted": len(posts),
               "post_results": results[:40], "rejected": rejected[:20], "resting_notional": round(spent, 2), "capital_cap": round(cap, 2),
               "fills_since_last": len(fills), "paper_estimate": {k: rep.get(k) for k in ("quoting", "capital_in_use")}, "redeemed": red, "merged": mrg,
-              "earnings_yesterday": earned, "sample_position": getattr(b, "sample_position", None), "sample_open_order": (open_ or [None])[0]}
+              "earnings_yesterday": earned, "reward_estimate_today": ref["reward_estimate_today"], "sample_position": getattr(b, "sample_position", None), "sample_open_order": (open_ or [None])[0]}
     json.dump(report, open(f"{OUT}/report.json", "w"), indent=1, default=str)
     jlog({"ts": int(now), **{k: v for k, v in report.items() if k not in ("post_results", "rejected")}, "posts": len(results), "cancel": c})
 
