@@ -55,7 +55,7 @@ jobs:
           end=$(( $(date +%s) + 325*60 )); last=0
           while [ "$(date +%s)" -lt "$end" ]; do
             git fetch -q origin main
-            git checkout -q origin/main -- research/live/PILOT_MODE data/live/rewards data/live/meta data/live/mids_48h.json.gz data/live/volfeat 2>/dev/null
+            git checkout -q origin/main -- research data/live/rewards data/live/meta data/live/mids_48h.json.gz data/live/volfeat 2>/dev/null   # code + mode + data refresh every tick
             git ls-tree --name-only origin/main STOP >/dev/null 2>&1 && git checkout -q origin/main -- STOP 2>/dev/null
             "$HOME/.venv-pilot/bin/python" -u research/live/live_tick.py 2>&1 | tee -a /tmp/pilot-log.txt
             if [ $(( $(date +%s) - last )) -ge 3300 ]; then
