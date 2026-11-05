@@ -66,10 +66,57 @@ def main():
             appr = {"error": str(e)[:160], "attempt": attempt + 1}; time.sleep(5)
     # if the check itself fails we still proceed: posting an order triggers the SDK's own allowance recovery
     pos = b.positions()
-    red = b.redeem_resolved(); mrg = b.merge_complementary(pos)
+    red = b.redeem_resolved(); mrg = []
     if red or mrg:
         pos = b.positions()
-    pos_value = sum(p["value"] for p in pos.values())
+    # The positions feed lags or drops positions (seen 11-05: 5 held, 1 listed), which made equity and the
+    # daily-loss check swing by $10+. Value holdings from the exchange's own token balances instead, for every
+    # token we have ever traded (ledger) plus anything the feed lists, marked at the current book mid.
+    toks = {}
+    try:
+        for l in open(f"{OUT}/ledger.jsonl"):
+            f_ = json.loads(l)
+            if f_.get("kind") == "fill" and f_.get("token"):
+                toks[f_["token"]] = f_.get("cid", "")
+    except OSError:
+        pass
+    for cid, p in pos.items():
+        for tk in p["tokens"]:
+            toks.setdefault(tk, cid)
+    held = {}
+    for tk, cid in toks.items():
+        try:
+            n = b.token_balance(tk)
+        except Exception:  # noqa: BLE001
+            continue
+        if n > 0.01:
+            held[tk] = (cid, n)
+    bk = P.books_for(list(held)) if held else {}
+    pos_value = 0.0
+    for tk, (cid, n) in held.items():
+        bb = bk.get(tk) or {}
+        bids = sorted((float(x["price"]) for x in bb.get("bids", [])), reverse=True)
+        asks = sorted(float(x["price"]) for x in bb.get("asks", []))
+        mid = (bids[0] + asks[0]) / 2 if bids and asks else (bids[0] if bids else 0.0)
+        pos_value += n * mid
+    # rebuild signed Yes inventory per market from the token balances (feeds the quoting rules)
+    if held:
+        rwt = P.rewards_table()
+        tok2 = {}
+        for c_, r_ in rwt.items():
+            for j, tk in enumerate(r_.get("tokens") or []):
+                tok2[tk] = (c_, j)
+        newpos = {}
+        for tk, (cid, n) in held.items():
+            c_, j = tok2.get(tk, (cid, None))
+            o = newpos.setdefault(c_, {"yes": 0.0, "tokens": {}, "value": 0.0, "q": pos.get(c_, {}).get("q", "")})
+            o["tokens"][tk] = n
+            if j is not None:
+                o["yes"] += n if j == 0 else -n
+            elif c_ in pos:
+                o["yes"] = pos[c_]["yes"]
+        pos = newpos
+        mrg = b.merge_complementary(pos)   # Yes+No pairs back to cash (valued equally either way)
     equity = bal["balance_usd"] + pos_value
     # daily loss limit on real equity
     ref_p = f"{OUT}/day_{day}.json"

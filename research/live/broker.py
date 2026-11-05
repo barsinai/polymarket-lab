@@ -40,6 +40,11 @@ class Broker:
         b = self.client.get_balance_allowance(asset_type="COLLATERAL")
         return {"balance_usd": _usd(getattr(b, "balance", 0)), "raw": str(getattr(b, "balance", ""))[:40]}
 
+    def token_balance(self, token):
+        """shares of one outcome token held, straight from the exchange's balance endpoint (authoritative)"""
+        r = self.client.get_balance_allowance(asset_type="CONDITIONAL", token_id=str(token))
+        return float(_dec(getattr(r, "balance", 0)) / Decimal(10 ** 6))
+
     def approvals(self):
         s = self.client.get_trading_approvals_state()
         return {"fully_approved": bool(getattr(s, "is_fully_approved", False)), "missing": str(getattr(s, "missing", ""))[:300]}
