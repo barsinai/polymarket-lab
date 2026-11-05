@@ -103,6 +103,11 @@ def main():
                 orders.append((toks[0], "SELL", q["ask"], abs(inv)))
             elif inv < 0 and q.get("bid") and toks[1]:
                 orders.append((toks[1], "SELL", round(1 - q["bid"], 4), abs(inv)))
+        # all-or-nothing per market: a lone one-sided quote earns 1/3 of the reward and carries full risk
+        if q.get("rpd") and len(orders) == 2:
+            need = sum(round(round(p_ / tick) * tick, 4) * round(float(s_), 2) for _, sd_, p_, s_ in orders if sd_ == "BUY")
+            if spent + need > cap or need > MAX_MARKET:
+                rejected.append({"cid": cid[:10], "q": q["q"][:40], "why": ["both sides do not fit the capital cap"], "need": round(need, 2)}); continue
         mkt_notional = 0.0
         for tok, side, price, size in orders:
             price = round(round(price / tick) * tick, 4); size = round(float(size), 2)

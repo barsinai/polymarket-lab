@@ -104,7 +104,8 @@ def offset(v, tick=0.01):
 DATA_API = "https://data-api.polymarket.com"
 SKIP = re.compile(r"\b(cpi|ppi|pmi|gdp|payroll|jobless|unemployment|inflation|nonfarm|retail sales|ism|jobs report|fed funds"
                   r"|sentiment|claims|interest rate|cash rate|policy rate|repo rate|rate cut|rate hike|bps|fed|fomc|ecb|boe|boj)\b"
-                  r"|be between -?[\d.,]+ and -?[\d.,]+"
+                  r"|be between -?[\d.,]+[kmbt%]? and -?[\d.,]+"
+                  r"|\b(jolts|pce|job openings|core pce|initial claims|consumer confidence|fomc|ecb)\b"
                   # 11-03: news-deadline and crypto-threshold questions jump without warning (overnight
                   # Iran-ceasefire / US-Cuba losses; historically 22% vs 17% of days with a >15c move,
                   # crypto thresholds ~50%): out of the universe for every v2 variant
