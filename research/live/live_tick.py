@@ -76,6 +76,17 @@ def main():
     if not os.path.exists(ref_p):
         json.dump({"equity_at_day_start": equity, "ts": int(now)}, open(ref_p, "w"))
     ref = json.load(open(ref_p))
+    # deposits/withdrawals are not P&L: an equity jump of > $20 between ticks with no fills moves the reference
+    last_eq_p = f"{OUT}/last_equity.json"
+    try:
+        last_eq = json.load(open(last_eq_p))["equity"]
+    except (OSError, ValueError, KeyError):
+        last_eq = equity
+    jump = equity - last_eq
+    if abs(jump) > 20 and not os.path.exists(f"{OUT}/fills_pending"):
+        ref["equity_at_day_start"] += jump; ref.setdefault("transfers", []).append({"ts": int(now), "amount": round(jump, 2)})
+        json.dump(ref, open(ref_p, "w"))
+    json.dump({"equity": equity, "ts": int(now)}, open(last_eq_p, "w"))
     day_pnl = equity - ref["equity_at_day_start"]
     if ref.get("stopped") or day_pnl < -LOSS_LIMIT:
         if not ref.get("stopped"):
