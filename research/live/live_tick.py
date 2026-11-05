@@ -122,7 +122,8 @@ def main():
     for o in open_:
         by_key.setdefault(f"{o['token']}:{o['side']}", []).append(o)
     for k, w in want.items():
-        matched = [o for o in by_key.get(k, []) if abs(o["price"] - w["price"]) < 1e-9 and o["remaining"] >= 0.8 * w["size"]]
+        matched = [o for o in by_key.get(k, []) if abs(o["price"] - w["price"]) < 1e-9 and o["remaining"] >= 0.8 * w["size"]
+                   and (o.get("expires_at") is None or o["expires_at"] - now > 720)]   # < 12 min left: replace before it lapses
         if matched:
             keep.add(matched[0]["id"])
         else:

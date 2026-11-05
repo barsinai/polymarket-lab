@@ -15,7 +15,9 @@ concurrency:
 
 jobs:
   run:
-    runs-on: ubuntu-latest
+    # GitHub's hosted runners are in the US, which Polymarket blocks (also on the API): the pilot runs on
+    # our own small server in an allowed country, registered as a self-hosted runner with the label "pilot".
+    runs-on: [self-hosted, pilot]
     timeout-minutes: 350
     env:
       POLYMARKET_PRIVATE_KEY: ${{ secrets.POLYMARKET_PRIVATE_KEY }}
@@ -33,10 +35,7 @@ jobs:
             data/live/meta
             data/live/rewards
             data/live/volfeat
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      - run: pip install -q requests polymarket-client
+      - run: python3 -m pip install -q --user requests polymarket-client 2>&1 | tail -1; python3 --version
       - name: Secrets present?
         run: |
           if [ -z "$POLYMARKET_PRIVATE_KEY" ]; then echo "no secrets yet - nothing to do"; echo "NOSECRETS=1" >> $GITHUB_ENV; fi
@@ -51,7 +50,7 @@ jobs:
             git fetch -q origin main
             git checkout -q origin/main -- research/live/PILOT_MODE data/live/rewards data/live/meta data/live/mids_48h.json.gz data/live/volfeat 2>/dev/null
             git ls-tree --name-only origin/main STOP >/dev/null 2>&1 && git checkout -q origin/main -- STOP 2>/dev/null
-            python -u research/live/live_tick.py 2>&1 | tee -a /tmp/pilot-log.txt
+            python3 -u research/live/live_tick.py 2>&1 | tee -a /tmp/pilot-log.txt
             if [ $(( $(date +%s) - last )) -ge 3300 ]; then
               mkdir -p logs data/live_pilot data/paper_mm2_live && cp /tmp/pilot-log.txt logs/pilot-log.txt
               git add --sparse data/live_pilot data/paper_mm2_live logs/pilot-log.txt

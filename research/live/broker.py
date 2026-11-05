@@ -81,16 +81,20 @@ class Broker:
         out = []
         for o in self.client.list_open_orders().iter_items():
             rem = float(getattr(o, "original_size", 0) or 0) - float(getattr(o, "size_matched", 0) or 0)
+            ex = getattr(o, "expires_at", None)
+            ex_ts = ex.timestamp() if isinstance(ex, datetime) else (float(ex) if ex else None)
             out.append({"id": str(o.id), "token": str(getattr(o, "asset_id", "")), "side": str(getattr(o, "side", "")).upper(),
-                        "price": float(getattr(o, "price", 0) or 0), "remaining": rem, "cid": str(getattr(o, "condition_id", "") or "")})
+                        "price": float(getattr(o, "price", 0) or 0), "remaining": rem, "cid": str(getattr(o, "condition_id", "") or ""), "expires_at": ex_ts})
         return out
 
-    def post(self, token, side, price, size):
-        """post-only GTC limit order. Dry run: sign only (validates tick/size/allowance paths)."""
+    def post(self, token, side, price, size, ttl_s=1500):
+        """post-only limit order that expires on its own after ttl_s (default 25 min): if the bot dies,
+        nothing stays resting. Dry run: sign only (validates tick/size/allowance paths)."""
+        exp = int(time.time()) + int(ttl_s)
         if not self.send:
-            self.client.create_limit_order(asset_id=token, price=str(price), size=str(size), side=side, post_only=True)
+            self.client.create_limit_order(asset_id=token, price=str(price), size=str(size), side=side, post_only=True, expiration=exp)
             return {"ok": True, "dry": True}
-        r = self.client.place_limit_order(asset_id=token, price=str(price), size=str(size), side=side, post_only=True)
+        r = self.client.place_limit_order(asset_id=token, price=str(price), size=str(size), side=side, post_only=True, expiration=exp)
         if getattr(r, "ok", False):
             return {"ok": True, "order_id": str(getattr(r, "order_id", "")), "status": str(getattr(r, "status", ""))}
         return {"ok": False, "code": str(getattr(r, "code", "")), "message": str(getattr(r, "message", ""))[:200]}
