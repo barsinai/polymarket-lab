@@ -1,0 +1,42 @@
+name: Fast Up/Down paper bot (Finnish server, no orders)
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: write
+concurrency:
+  group: pilot-server
+  cancel-in-progress: false
+jobs:
+  run:
+    runs-on: [self-hosted, pilot]
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout: |
+            research
+            data/fast
+      - name: Python env
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+          uv pip install --python "$HOME/.venv-pilot/bin/python" -q requests
+      - name: Run ~5.2 h in hourly parts
+        run: |
+          git config user.name "polymarket-lab-bot"
+          git config user.email "actions@users.noreply.github.com"
+          for part in 1 2 3 4 5; do
+            git fetch -q origin main && git checkout -q origin/main -- research 2>/dev/null
+            RUN_MIN=60 "$HOME/.venv-pilot/bin/python" -u research/fast/updown_paper.py 2>&1 | tee -a /tmp/fast.txt | grep -v "^$"
+            mkdir -p logs data/fast && cp /tmp/fast.txt logs/fast-log.txt
+            git add --sparse data/fast logs/fast-log.txt
+            git commit -qm "Fast paper $(date -u +%FT%H:%M) [skip ci]" && for i in 1 2 3 4 5; do git pull -q --rebase -X theirs origin main && git push -q && break; sleep 5; done
+          done
+      - name: Hand over
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          curl -sS -X POST -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/${{ github.repository }}/actions/workflows/fast_paper.yml/dispatches -d '{"ref":"main"}'
