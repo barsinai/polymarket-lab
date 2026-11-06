@@ -25,7 +25,10 @@ os.makedirs(f"{D}/changes", exist_ok=True); os.makedirs(f"{D}/books", exist_ok=T
 
 def load_state():
     try:
-        return json.load(open(f"{D}/state.json"))
+        st = json.load(open(f"{D}/state.json"))
+        if len(st.get("watch", {})) > 2000:   # 11-06 bug: first pass flagged every market as boosted
+            st["watch"] = {}
+        return st
     except (OSError, ValueError):
         return {"cfg": {}, "watch": {}}
 
@@ -75,12 +78,12 @@ def main():
         cur = sampling()
         if not cur:
             time.sleep(60); continue
-        ch = []
+        ch = []; first = not st["cfg"]
         for cid, m in cur.items():
             old = st["cfg"].get(cid)
             if old != m["cfg"]:
                 ch.append({"ts": now, "cid": cid, "q": m["q"], "old": old, "new": m["cfg"]})
-                if st["cfg"] and m["cfg"][0] > 0 and (old is None or m["cfg"][0] > (old[0] or 0) * 1.2 + 1):
+                if not first and m["cfg"][0] > 0 and (old is None or m["cfg"][0] > (old[0] or 0) * 1.2 + 1):
                     st["watch"][cid] = {"since": now, "tok": m["tok"]}
                 st["cfg"][cid] = m["cfg"]
         for cid in [c for c in st["cfg"] if c not in cur]:
