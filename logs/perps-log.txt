@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/home/runner/work/polymarket-lab/polymarket-lab/research/perps/collect_funding.py", line 27, in <module>
+    inst = [dump(i) for i in pc.fetch_perps_instruments()]
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'PublicClient' object has no attribute 'fetch_perps_instruments'
