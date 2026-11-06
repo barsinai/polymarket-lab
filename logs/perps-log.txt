@@ -1,5 +1,110 @@
-Traceback (most recent call last):
-  File "/home/runner/work/polymarket-lab/polymarket-lab/research/perps/collect_funding.py", line 27, in <module>
-    inst = [dump(i) for i in pc.fetch_perps_instruments()]
-                             ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'PublicClient' object has no attribute 'fetch_perps_instruments'
+"""Perps public market data reads."""
+
+import asyncio
+import time
+from datetime import datetime
+from typing import Any, cast, overload
+
+from polymarket._internal.actions.perps.builders import validate_address
+from polymarket._internal.actions.perps.paging import (
+    ONE_DAY_MS,
+    as_json_dict,
+    decode_perps_candles_cursor,
+    decode_perps_funding_cursor,
+    decode_perps_trades_cursor,
+    encode_perps_cursor,
+    interval_ms,
+    parse_data_envelope,
+    to_epoch_ms,
+)
+from polymarket.clients._transport import AsyncTransport
+from polymarket.errors import UnexpectedResponseError, UserInputError
+from polymarket.models.perps.market import (
+    PerpsBook,
+    PerpsCandle,
+    PerpsFeeScheduleEntry,
+    PerpsFundingRate,
+    PerpsInstrument,
+    PerpsInstrumentFeeSchedule,
+    PerpsStatistic,
+    PerpsTicker,
+    PerpsTrade,
+)
+from polymarket.models.perps.types import (
+    PerpsBookDepth,
+    PerpsInstrumentCategory,
+    PerpsKlineInterval,
+)
+from polymarket.pagination import AsyncPaginator, Page
+
+_BOOK_DEPTHS = (10, 100, 500, 1000)
+_KLINE_INTERVALS = ("1s", "1m", "5m", "15m", "1h", "4h", "1d", "1w")
+
+
+async def fetch_registration(perps: AsyncTransport, *, address: str) -> bool:
+    address = validate_address("address", address)
+    payload = as_json_dict(await perps.get_json("/v1/info/registered", params={"address": address}))
+    if payload is None or not isinstance(payload.get("registered"), bool):
+        raise UnexpectedResponseError("Perps registration response did not match expected shape")
+    return payload["registered"]
+
+
+def _validate_instrument_id(instrument_id: object, *, optional: bool = False) -> int | None:
+    if instrument_id is None and optional:
+        return None
+    if isinstance(instrument_id, bool) or not isinstance(instrument_id, int):
+        raise UserInputError("instrument_id must be an int")
+    if instrument_id < 0:
+        raise UserInputError("instrument_id must be non-negative")
+    return instrument_id
+
+
+async def fetch_instruments(
+    perps: AsyncTransport,
+    *,
+    instrument_id: int | None = None,
+    category: PerpsInstrumentCategory | None = None,
+) -> tuple[PerpsInstrument, ...]:
+    _validate_instrument_id(instrument_id, optional=True)
+    if category is not None and (not isinstance(cast(object, category), str) or not category):
+        raise UserInputError("category must be a non-empty string")
+    payload = await perps.get_json(
+        "/v1/info/instruments",
+        params={"instrument_id": instrument_id, "category": category},
+    )
+    return PerpsInstrument.parse_response_list(payload)
+
+
+async def fetch_tickers(
+    perps: AsyncTransport, *, instrument_id: int | None = None
+) -> tuple[PerpsTicker, ...]:
+    _validate_instrument_id(instrument_id, optional=True)
+    params = {"instrument_id": instrument_id}
+    tickers_payload, statistics_payload = await asyncio.gather(
+        perps.get_json("/v1/info/tickers", params=params),
+        perps.get_json("/v1/info/statistics", params=params),
+    )
+    statistics = PerpsStatistic.parse_response_list(statistics_payload)
+    by_instrument = {statistic.instrument_id: statistic for statistic in statistics}
+    if not isinstance(tickers_payload, list):
+        raise UnexpectedResponseError("PerpsTicker response did not match expected shape")
+    tickers: list[PerpsTicker] = []
+    for item in cast("list[object]", tickers_payload):
+        ticker = PerpsTicker.parse_response(item)
+        statistic = by_instrument.get(ticker.instrument_id)
+        if statistic is not None:
+            ticker = ticker.model_copy(
+                update={"open_price": statistic.open_price, "volume_24h": statistic.volume}
+            )
+        tickers.append(ticker)
+    return tuple(tickers)
+
+
+async def fetch_ticker(perps: AsyncTransport, *, instrument_id: int) -> PerpsTicker:
+    _validate_instrument_id(instrument_id)
+    tickers = await fetch_tickers(perps, instrument_id=instrument_id)
+    if not tickers:
+        raise UnexpectedResponseError(f"Perp
+perps methods live on AsyncSecureClient
+perps methods live on AsyncPublicClient
+URLS []
