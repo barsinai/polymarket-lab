@@ -74,6 +74,27 @@ def main():
                 json.dump(earned, open(earn_p, "w")); ledger([{"kind": "rewards", **earned}])
             except Exception as e:  # noqa: BLE001
                 earned = {"error": str(e)[:200]}
+        # complete sets (Yes + No of the same market, worth exactly $1 each) go back to cash
+        merged = []
+        try:
+            net = {}
+            for fn in (rb, f"{OUT}/ledger.jsonl"):
+                for l in open(fn):
+                    f_ = json.loads(l)
+                    if f_.get("kind") == "fill" and "role" not in f_:
+                        continue  # old-format ledger rows (whole trades) are not ours
+                    if f_.get("cid") and f_.get("outcome") and f_.get("size"):
+                        k = (f_["cid"], f_["outcome"].lower())
+                        net[k] = net.get(k, 0.0) + (f_["size"] if f_["side"] == "BUY" else -f_["size"])
+            for cid in {c for c, _ in net}:
+                pair = min(net.get((cid, "yes"), 0.0), net.get((cid, "no"), 0.0))
+                if pair >= 1 and b.send:
+                    try:
+                        b.client.merge_positions(condition_id=cid, amount="max"); merged.append({"cid": cid, "pairs": round(pair, 2)})
+                    except Exception as e:  # noqa: BLE001
+                        merged.append({"cid": cid, "error": str(e)[:150]})
+        except Exception as e:  # noqa: BLE001
+            merged = [{"error": str(e)[:150]}]
         bal = b.balance()
         held = {}
         try:
@@ -99,7 +120,7 @@ def main():
             held = {"error": str(e)[:200]}
         pv = sum(v[1] * v[2] for v in held.values() if isinstance(v, list) and len(v) == 3) if isinstance(held, dict) else None
         jlog({"ts": int(now), "mode": m, "STOP": True, "cancel_all": r, "balance_usd": bal["balance_usd"], "positions_value": round(pv, 2) if pv is not None else None,
-              "equity": round(bal["balance_usd"] + pv, 2) if pv is not None else None, "held": held, "earnings": earned}); return
+              "equity": round(bal["balance_usd"] + pv, 2) if pv is not None else None, "held": held, "merged": merged, "earnings": earned}); return
     bal = b.balance()
     appr = None
     for attempt in range(3):   # the approvals check goes through a public Polygon RPC that sometimes refuses requests
