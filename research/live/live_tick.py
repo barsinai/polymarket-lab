@@ -67,7 +67,31 @@ def main():
             except Exception as e:  # noqa: BLE001
                 earned = {"error": str(e)[:200]}
         bal = b.balance()
-        jlog({"ts": int(now), "mode": m, "STOP": True, "cancel_all": r, "balance_usd": bal["balance_usd"], "earnings": earned}); return
+        held = {}
+        try:
+            toks = {}
+            for l in open(f"{OUT}/ledger.jsonl"):
+                f_ = json.loads(l)
+                if f_.get("kind") == "fill" and f_.get("token"):
+                    toks[f_["token"]] = f_.get("cid", "")
+            for tk, cid in toks.items():
+                try:
+                    n = b.token_balance(tk)
+                except Exception:  # noqa: BLE001
+                    continue
+                if n > 0.01:
+                    held[tk] = [cid, n]
+            bk = P.books_for(list(held)) if held else {}
+            for tk, v in held.items():
+                bb = bk.get(tk) or {}
+                bids = sorted((float(x["price"]) for x in bb.get("bids", [])), reverse=True)
+                asks = sorted(float(x["price"]) for x in bb.get("asks", []))
+                v.append(round((bids[0] + asks[0]) / 2 if bids and asks else (bids[0] if bids else 0.0), 4))
+        except Exception as e:  # noqa: BLE001
+            held = {"error": str(e)[:200]}
+        pv = sum(v[1] * v[2] for v in held.values() if isinstance(v, list) and len(v) == 3) if isinstance(held, dict) else None
+        jlog({"ts": int(now), "mode": m, "STOP": True, "cancel_all": r, "balance_usd": bal["balance_usd"], "positions_value": round(pv, 2) if pv is not None else None,
+              "equity": round(bal["balance_usd"] + pv, 2) if pv is not None else None, "held": held, "earnings": earned}); return
     bal = b.balance()
     appr = None
     for attempt in range(3):   # the approvals check goes through a public Polygon RPC that sometimes refuses requests
