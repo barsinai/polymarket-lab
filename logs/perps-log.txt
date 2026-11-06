@@ -1,110 +1,80 @@
-"""Perps public market data reads."""
-
-import asyncio
-import time
-from datetime import datetime
-from typing import Any, cast, overload
-
-from polymarket._internal.actions.perps.builders import validate_address
-from polymarket._internal.actions.perps.paging import (
-    ONE_DAY_MS,
-    as_json_dict,
-    decode_perps_candles_cursor,
-    decode_perps_funding_cursor,
-    decode_perps_trades_cursor,
-    encode_perps_cursor,
-    interval_ms,
-    parse_data_envelope,
-    to_epoch_ms,
-)
-from polymarket.clients._transport import AsyncTransport
-from polymarket.errors import UnexpectedResponseError, UserInputError
-from polymarket.models.perps.market import (
-    PerpsBook,
-    PerpsCandle,
-    PerpsFeeScheduleEntry,
-    PerpsFundingRate,
-    PerpsInstrument,
-    PerpsInstrumentFeeSchedule,
-    PerpsStatistic,
-    PerpsTicker,
-    PerpsTrade,
-)
-from polymarket.models.perps.types import (
-    PerpsBookDepth,
-    PerpsInstrumentCategory,
-    PerpsKlineInterval,
-)
-from polymarket.pagination import AsyncPaginator, Page
-
-_BOOK_DEPTHS = (10, 100, 500, 1000)
-_KLINE_INTERVALS = ("1s", "1m", "5m", "15m", "1h", "4h", "1d", "1w")
-
-
-async def fetch_registration(perps: AsyncTransport, *, address: str) -> bool:
-    address = validate_address("address", address)
-    payload = as_json_dict(await perps.get_json("/v1/info/registered", params={"address": address}))
-    if payload is None or not isinstance(payload.get("registered"), bool):
-        raise UnexpectedResponseError("Perps registration response did not match expected shape")
-    return payload["registered"]
-
-
-def _validate_instrument_id(instrument_id: object, *, optional: bool = False) -> int | None:
-    if instrument_id is None and optional:
-        return None
-    if isinstance(instrument_id, bool) or not isinstance(instrument_id, int):
-        raise UserInputError("instrument_id must be an int")
-    if instrument_id < 0:
-        raise UserInputError("instrument_id must be non-negative")
-    return instrument_id
-
-
-async def fetch_instruments(
-    perps: AsyncTransport,
-    *,
-    instrument_id: int | None = None,
-    category: PerpsInstrumentCategory | None = None,
-) -> tuple[PerpsInstrument, ...]:
-    _validate_instrument_id(instrument_id, optional=True)
-    if category is not None and (not isinstance(cast(object, category), str) or not category):
-        raise UserInputError("category must be a non-empty string")
-    payload = await perps.get_json(
-        "/v1/info/instruments",
-        params={"instrument_id": instrument_id, "category": category},
-    )
-    return PerpsInstrument.parse_response_list(payload)
-
-
-async def fetch_tickers(
-    perps: AsyncTransport, *, instrument_id: int | None = None
-) -> tuple[PerpsTicker, ...]:
-    _validate_instrument_id(instrument_id, optional=True)
-    params = {"instrument_id": instrument_id}
-    tickers_payload, statistics_payload = await asyncio.gather(
-        perps.get_json("/v1/info/tickers", params=params),
-        perps.get_json("/v1/info/statistics", params=params),
-    )
-    statistics = PerpsStatistic.parse_response_list(statistics_payload)
-    by_instrument = {statistic.instrument_id: statistic for statistic in statistics}
-    if not isinstance(tickers_payload, list):
-        raise UnexpectedResponseError("PerpsTicker response did not match expected shape")
-    tickers: list[PerpsTicker] = []
-    for item in cast("list[object]", tickers_payload):
-        ticker = PerpsTicker.parse_response(item)
-        statistic = by_instrument.get(ticker.instrument_id)
-        if statistic is not None:
-            ticker = ticker.model_copy(
-                update={"open_price": statistic.open_price, "volume_24h": statistic.volume}
-            )
-        tickers.append(ticker)
-    return tuple(tickers)
-
-
-async def fetch_ticker(perps: AsyncTransport, *, instrument_id: int) -> PerpsTicker:
-    _validate_instrument_id(instrument_id)
-    tickers = await fetch_tickers(perps, instrument_id=instrument_id)
-    if not tickers:
-        raise UnexpectedResponseError(f"Perp
-perps methods live on AsyncSecureClient
-perps methods live on AsyncPublicClient
-URLS []
+funding failed 2 GOLD-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=2&start_timestamp=1788765539435&end_timestamp=1793232000089 was rate limited
+funding failed 4 NAS100-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=4&start_timestamp=1788765539435&end_timestamp=1793592000035 was rate limited
+funding failed 5 SILVER-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=5&start_timestamp=1788765539435&end_timestamp=1792512000020 was rate limited
+funding failed 6 BTC-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=6&start_timestamp=1788765539435&end_timestamp=1789272000043 was rate limited
+funding failed 7 ETH-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=7&start_timestamp=1788765539435&end_timestamp=1792872000027 was rate limited
+funding failed 9 SPCX-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=9&start_timestamp=1788765539435&end_timestamp=1793232000105 was rate limited
+funding failed 10 HYPE-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=10&start_timestamp=1788765539435&end_timestamp=1792512000027 was rate limited
+funding failed 14 SKHYNIX-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=14&start_timestamp=1788765539435&end_timestamp=1791072000042 was rate limited
+funding failed 15 AAPL-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=15&start_timestamp=1788765539435&end_timestamp=1791792000032 was rate limited
+funding failed 16 MSFT-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=16&start_timestamp=1788765539435&end_timestamp=1789272000044 was rate limited
+funding failed 19 NVDA-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=19&start_timestamp=1788765539435&end_timestamp=1790712000047 was rate limited
+funding failed 20 META-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=20&start_timestamp=1788765539435&end_timestamp=1791792000033 was rate limited
+funding failed 21 TSLA-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=21&start_timestamp=1788765539435&end_timestamp=1792152000028 was rate limited
+funding failed 22 AMD-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=22&start_timestamp=1788765539435&end_timestamp=1789632000063 was rate limited
+funding failed 23 INTC-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=23&start_timestamp=1788765539435&end_timestamp=1793232000107 was rate limited
+funding failed 24 AVGO-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=24&start_timestamp=1788765539435&end_timestamp=1792152000028 was rate limited
+funding failed 25 QCOM-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=25&start_timestamp=1788765539435&end_timestamp=1792872000031 was rate limited
+funding failed 26 ARM-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=26&start_timestamp=1788765539435&end_timestamp=1793949582360 was rate limited
+funding failed 27 TSM-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=27&start_timestamp=1788765539435&end_timestamp=1792872000031 was rate limited
+funding failed 28 ASML-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=28&start_timestamp=1788765539435&end_timestamp=1791072000044 was rate limited
+funding failed 29 SNDK-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=29&start_timestamp=1788765539435&end_timestamp=1793949584904 was rate limited
+funding failed 30 DRAM-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=30&start_timestamp=1788765539435&end_timestamp=1790352000077 was rate limited
+funding failed 31 PUMP-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=31&start_timestamp=1788765539435&end_timestamp=1791432000034 was rate limited
+funding failed 32 ZEC-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=32&start_timestamp=1788765539435&end_timestamp=1791432000034 was rate limited
+funding failed 33 XRP-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=33&start_timestamp=1788765539435&end_timestamp=1792872000031 was rate limited
+funding failed 34 LIT-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=34&start_timestamp=1788765539435&end_timestamp=1792872000031 was rate limited
+funding failed 35 KPEPE-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=35&start_timestamp=1788765539435&end_timestamp=1793949591503 was rate limited
+funding failed 36 HOOD-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=36&start_timestamp=1788765539435&end_timestamp=1792872000031 was rate limited
+funding failed 37 MSTR-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=37&start_timestamp=1788765539435&end_timestamp=1792152000031 was rate limited
+funding failed 38 STRC-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=38&start_timestamp=1788765539435&end_timestamp=1793232000109 was rate limited
+funding failed 39 CRCL-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=39&start_timestamp=1788765539435&end_timestamp=1793949594057 was rate limited
+funding failed 40 COIN-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=40&start_timestamp=1788765539435&end_timestamp=1792872000032 was rate limited
+funding failed 41 RKLB-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=41&start_timestamp=1788765539435&end_timestamp=1793592000043 was rate limited
+funding failed 43 NBIS-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=43&start_timestamp=1788765539435&end_timestamp=1789992000106 was rate limited
+funding failed 44 ORCL-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=44&start_timestamp=1788765539435&end_timestamp=1793592000043 was rate limited
+funding failed 45 PLTR-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=45&start_timestamp=1788765539435&end_timestamp=1790712000053 was rate limited
+funding failed 46 BRENTOIL-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=46&start_timestamp=1788765539435&end_timestamp=1793592000043 was rate limited
+funding failed 47 BABA-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=47&start_timestamp=1788765539435&end_timestamp=1793949602929 was rate limited
+funding failed 48 ZM-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=48&start_timestamp=1788765539435&end_timestamp=1793232000110 was rate limited
+funding failed 49 DELL-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=49&start_timestamp=1788765539435&end_timestamp=1792872000063 was rate limited
+funding failed 50 CXMT-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=50&start_timestamp=1788765539435&end_timestamp=1792872000063 was rate limited
+funding failed 52 SAMSUNG-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=52&start_timestamp=1788765539435&end_timestamp=1790352000078 was rate limited
+funding failed 54 AAVE-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=54&start_timestamp=1788765539435&end_timestamp=1788912000076 was rate limited
+funding failed 55 UNI-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=55&start_timestamp=1788765539435&end_timestamp=1789272000044 was rate limited
+funding failed 56 WLD-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=56&start_timestamp=1788765539435&end_timestamp=1793949615105 was rate limited
+funding failed 57 NEAR-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=57&start_timestamp=1788765539435&end_timestamp=1791792000039 was rate limited
+funding failed 58 KSHIB-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=58&start_timestamp=1788765539435&end_timestamp=1793949616546 was rate limited
+funding failed 59 FARTCOIN-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=59&start_timestamp=1788765539435&end_timestamp=1791792000039 was rate limited
+funding failed 60 DOGE-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=60&start_timestamp=1788765539435&end_timestamp=1793949617957 was rate limited
+funding failed 61 ENA-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=61&start_timestamp=1788765539435&end_timestamp=1790712000055 was rate limited
+funding failed 64 VVV-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=64&start_timestamp=1788765539435&end_timestamp=1793232000113 was rate limited
+funding failed 65 TAO-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=65&start_timestamp=1788765539435&end_timestamp=1793949626027 was rate limited
+funding failed 66 ADA-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=66&start_timestamp=1788765539435&end_timestamp=1790712000055 was rate limited
+funding failed 68 BNB-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=68&start_timestamp=1788765539435&end_timestamp=1791072000047 was rate limited
+funding failed 69 PONS-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=69&start_timestamp=1788765539435&end_timestamp=1793949632765 was rate limited
+funding failed 70 CASHCAT-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=70&start_timestamp=1788765539435&end_timestamp=1791792000066 was rate limited
+funding failed 72 KAITO-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=72&start_timestamp=1788765539435&end_timestamp=1793949636737 was rate limited
+funding failed 73 ARB-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=73&start_timestamp=1788765539435&end_timestamp=1791072000047 was rate limited
+funding failed 74 LDO-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=74&start_timestamp=1788765539435&end_timestamp=1793592000045 was rate limited
+funding failed 75 AVAX-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=75&start_timestamp=1788765539435&end_timestamp=1792152000035 was rate limited
+funding failed 76 LTC-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=76&start_timestamp=1788765539435&end_timestamp=1792152000035 was rate limited
+funding failed 77 XPL-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=77&start_timestamp=1788765539435&end_timestamp=1793949641048 was rate limited
+funding failed 78 XMR-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=78&start_timestamp=1788765539435&end_timestamp=1791792000067 was rate limited
+funding failed 79 LINK-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=79&start_timestamp=1788765539435&end_timestamp=1790352000096 was rate limited
+funding failed 80 VIRTUAL-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=80&start_timestamp=1788765539435&end_timestamp=1793949644468 was rate limited
+funding failed 81 JUP-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=81&start_timestamp=1788765539435&end_timestamp=1792512000071 was rate limited
+funding failed 82 ETHFI-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=82&start_timestamp=1788765539435&end_timestamp=1792152000036 was rate limited
+funding failed 83 PENDLE-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=83&start_timestamp=1788765539435&end_timestamp=1793592000045 was rate limited
+funding failed 84 MORPHO-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=84&start_timestamp=1788765539435&end_timestamp=1791432000065 was rate limited
+funding failed 85 CBRS-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=85&start_timestamp=1788765539435&end_timestamp=1791792000067 was rate limited
+funding failed 86 MRVL-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=86&start_timestamp=1788765539435&end_timestamp=1790352000096 was rate limited
+funding failed 87 EWY-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=87&start_timestamp=1788765539435&end_timestamp=1791432000065 was rate limited
+funding failed 88 NCLD-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=88&start_timestamp=1788765539435&end_timestamp=1792872000065 was rate limited
+funding failed 89 SOXL-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=89&start_timestamp=1788765539435&end_timestamp=1792872000065 was rate limited
+funding failed 90 UNITREE-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=90&start_timestamp=1788765539435&end_timestamp=1791432000065 was rate limited
+funding failed 96 PRL-USD Request to https://api.perpetuals.polymarket.com/v1/info/funding?instrument_id=96&start_timestamp=1788765539435&end_timestamp=1793232000114 was rate limited
+90 instruments; sample: {"id": 1, "category": "index", "symbol": "SP500-USD", "display_symbol": "USA500-USD", "close_only": false, "settlement": null, "base_asset": "SP500", "quote_asset": "pUSD", "funding_interval": "1h", "quantity_decimals": 5, "price_decimals": 1, "price_bounds": "0.02", "liquidation_fee": "0.005", "max_order_count": 200, "min_notional": "10", "max_market_notional": "1000000", "max_limit_notional": "5000000", "max_leverage": 50, "isolated_only": false, "risk_tiers": [{"lower_bound": "0", "max_leverage": 50}, {"lower_bound": "500000", "max_leverage": 25}, {"lower_bound": "1000000", "max_leverage": 20}, {"lower_bound": "5000000", "max_leverage": 15}, {"lower_bound": "10000000", "max_leverage": 10}
+ticker sample: {"instrument_id": 1, "symbol": "SP500-USD", "index_price": "7345.6", "mark_price": "7351.8", "last_price": "7351.5", "mid_price": "7351.8", "open_interest": "4342.60647", "funding_rate": "0.00002846", "next_funding": "2026-11-06T08:00:00Z", "timestamp": "2026-11-06T07:18:58.431000Z", "open_price": "7681.9", "volume_24h": "24608468.485824"}
+54422 Polymarket funding rows; sample [{"funding_rate": "0.00002199", "timestamp": "2026-11-06T07:00:00.020000Z", "_iid": 1, "_sym": "SP500-USD"}, {"funding_rate": "0.00002215", "timestamp": "2026-11-06T06:00:00.018000Z", "_iid": 1, "_sym": "SP500-USD"}]
+31860 Hyperliquid funding rows for ['AAPL', 'AAVE', 'ADA', 'AMD', 'AMZN', 'ANT', 'ARB', 'ARM', 'ASML', 'AVAX', 'AVGO', 'BABA', 'BNB', 'BRENTOIL', 'BTC', 'CASHCAT', 'CBRS', 'COIN', 'CRCL', 'CRWV', 'CXMT', 'DELL', 'DOGE', 'DRAM', 'ENA', 'ETH', 'ETHFI', 'EWY', 'FARTCOIN', 'GOLD', 'GOOG', 'HOOD', 'HYPE', 'INTC', 'JUP', 'KAITO', 'KPEPE', 'KSHIB', 'LDO', 'LINK', 'LIT', 'LITE', 'LTC', 'META', 'MORPHO', 'MRVL', 'MSFT', 'MSTR', 'MU', 'NAS100', 'NBIS', 'NCLD', 'NEAR', 'NVDA', 'ONDO', 'ORCL', 'PENDLE', 'PLTR', 'PONS', 'PRL', 'PUMP', 'QCOM', 'RKLB', 'SAMSUNG', 'SILVER', 'SKHY', 'SKHYNIX', 'SNDK', 'SOL', 'SOXL', 'SP500', 'SPCX', 'STRC', 'SUI', 'TAO', 'TSLA', 'TSM', 'UNI', 'UNITREE', 'USELESS', 'VIRTUAL', 'VVV', 'WLD', 'WTIOIL', 'XMR', 'XPL', 'XRP', 'ZEC', 'ZM', 'ZRO']
