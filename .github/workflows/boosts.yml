@@ -1,0 +1,41 @@
+name: Reward boost tracker (every 5 min, chained)
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "23 */6 * * *"
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: boosts
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout: |
+            research
+            data/boosts
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q requests
+      - name: Track for ~5.3 h, saving hourly
+        run: |
+          git config user.name "polymarket-lab-bot"
+          git config user.email "actions@users.noreply.github.com"
+          save() { mkdir -p logs && cp /tmp/boosts.txt logs/boosts-log.txt 2>/dev/null; git add --sparse data/boosts logs/boosts-log.txt; git commit -qm "Boosts $(date -u +%FT%H:%M) [skip ci]" && for i in 1 2 3 4 5; do git pull -q --rebase -X theirs origin main && git push -q && break; sleep $((RANDOM % 10 + 3)); done; }
+          for part in 1 2 3 4 5; do RUN_MIN=62 python -u research/track_boosts.py 2>&1 | tee -a /tmp/boosts.txt; save; done
+      - name: Hand over
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run boosts.yml --ref main -R ${{ github.repository }}
