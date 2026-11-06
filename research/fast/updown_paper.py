@@ -183,7 +183,25 @@ def main():
             with open(f"{D}/trades.jsonl", "w") as fh:
                 for x in trades:
                     fh.write(json.dumps(x) + "\n")
-        starts = {k: v for k, v in starts.items() if k[2] + k[1] > now - 60}
+        # window summaries for calibrating the resolution rule: written once, ~70 s after each window ends
+        for (a_, w_, st_), acc_ in list(starts.items()):
+            end_ = st_ + w_
+            if acc_.get("logged") or now < end_ + 70:
+                continue
+            ser = [(t, p) for t, p in px[a_] if st_ - 120 <= t <= end_ + 60]
+            def mean_(lo, hi):
+                v = [p for t, p in ser if lo <= t < hi]
+                return round(sum(v) / len(v), 4) if v else None
+            def at_(x):
+                v = [p for t, p in ser if t >= x]
+                return v[0] if v else None
+            rec = {"slug": f"{a_}-updown-{w_ // 60}m-{st_}", "asset": a_, "window": w_, "start": st_,
+                   "spot_start": at_(st_), "spot_end": at_(end_), "mean_window": mean_(st_, end_),
+                   "mean_last60": mean_(end_ - 60, end_), "mean_pre60": mean_(st_ - 60, st_), "mean_first60": mean_(st_, st_ + 60), "result": None}
+            with open(f"{D}/windows.jsonl", "a") as fh:
+                fh.write(json.dumps(rec) + "\n")
+            acc_["logged"] = True
+        starts = {k: v for k, v in starts.items() if k[2] + k[1] > now - 200}
         time.sleep(3)
     stop.set()
     settle(trades)
