@@ -22,40 +22,36 @@ def dump(o):
     return repr(o)
 
 
-import inspect  # noqa: E402
-import polymarket  # noqa: E402
-from polymarket._internal.actions.perps import public as _pp  # noqa: E402
-print(inspect.getsource(_pp)[:4000], flush=True)
-pc = None
-for cname in ("AsyncSecureClient", "SecureClient", "PublicClient", "AsyncPublicClient"):
-    c = getattr(polymarket, cname, None)
-    if c is not None and hasattr(c, "fetch_perps_instruments"):
-        print("perps methods live on", cname, flush=True)
-import re  # noqa: E402
-urls = sorted(set(re.findall(r"https://[a-zA-Z0-9./_-]+", inspect.getsource(_pp))))
-print("URLS", urls, flush=True)
-raise SystemExit(0)
-inst = [dump(i) for i in pc.fetch_perps_instruments()]
-json.dump(inst, open(f"{OUT}/pm_instruments.json", "w"), indent=1, default=str)
-print(len(inst), "instruments; sample:", json.dumps(inst[0], default=str)[:600], flush=True)
-try:
-    tick = [dump(t) for t in pc.fetch_perps_tickers()]
-    json.dump(tick, open(f"{OUT}/pm_tickers.json", "w"), indent=1, default=str)
-    print("ticker sample:", json.dumps(tick[0], default=str)[:600], flush=True)
-except Exception as e:  # noqa: BLE001
-    print("tickers failed", e)
-n = 0
-with gzip.open(f"{OUT}/pm_funding.jsonl.gz", "wt") as fh:
+import asyncio  # noqa: E402
+from polymarket import AsyncPublicClient  # noqa: E402
+
+
+async def pm():
+    pc = AsyncPublicClient()
+    if hasattr(pc, "__aenter__"):
+        pc = await pc.__aenter__()
+    inst = [dump(i) for i in await pc.fetch_perps_instruments()]
+    tick = [dump(t) for t in await pc.fetch_perps_tickers()]
+    rows = []
     for i in inst:
         iid = i.get("instrument_id") or i.get("id")
-        sym = i.get("symbol") or i.get("name") or i.get("base_asset")
+        sym = i.get("symbol") or i.get("name")
         try:
-            for f in pc.list_perps_funding_history(instrument_id=int(iid), start=start).iter_items():
-                d = dump(f); d["_iid"] = iid; d["_sym"] = sym
-                fh.write(json.dumps(d, default=str) + "\n"); n += 1
+            async for f in pc.list_perps_funding_history(instrument_id=int(iid), start=start).iter_items():
+                d = dump(f); d["_iid"] = iid; d["_sym"] = sym; rows.append(d)
         except Exception as e:  # noqa: BLE001
             print("funding failed", iid, sym, str(e)[:200], flush=True)
-print(n, "Polymarket funding rows", flush=True)
+    return inst, tick, rows
+
+inst, tick, rows = asyncio.run(pm())
+json.dump(inst, open(f"{OUT}/pm_instruments.json", "w"), indent=1, default=str)
+json.dump(tick, open(f"{OUT}/pm_tickers.json", "w"), indent=1, default=str)
+print(len(inst), "instruments; sample:", json.dumps(inst[0], default=str)[:700], flush=True)
+print("ticker sample:", json.dumps(tick[0], default=str)[:700], flush=True)
+with gzip.open(f"{OUT}/pm_funding.jsonl.gz", "wt") as fh:
+    for d in rows:
+        fh.write(json.dumps(d, default=str) + "\n")
+print(len(rows), "Polymarket funding rows; sample", json.dumps(rows[:2], default=str)[:600], flush=True)
 # Hyperliquid: same coins
 coins = set()
 for i in inst:
