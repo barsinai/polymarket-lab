@@ -22,8 +22,19 @@ def dump(o):
     return repr(o)
 
 
-from polymarket import PublicClient  # noqa: E402
-pc = PublicClient()
+import inspect  # noqa: E402
+import polymarket  # noqa: E402
+from polymarket._internal.actions.perps import public as _pp  # noqa: E402
+print(inspect.getsource(_pp)[:4000], flush=True)
+pc = None
+for cname in ("AsyncSecureClient", "SecureClient", "PublicClient", "AsyncPublicClient"):
+    c = getattr(polymarket, cname, None)
+    if c is not None and hasattr(c, "fetch_perps_instruments"):
+        print("perps methods live on", cname, flush=True)
+import re  # noqa: E402
+urls = sorted(set(re.findall(r"https://[a-zA-Z0-9./_-]+", inspect.getsource(_pp))))
+print("URLS", urls, flush=True)
+raise SystemExit(0)
 inst = [dump(i) for i in pc.fetch_perps_instruments()]
 json.dump(inst, open(f"{OUT}/pm_instruments.json", "w"), indent=1, default=str)
 print(len(inst), "instruments; sample:", json.dumps(inst[0], default=str)[:600], flush=True)
