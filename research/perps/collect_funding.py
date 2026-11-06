@@ -26,6 +26,9 @@ import asyncio  # noqa: E402
 from polymarket import AsyncPublicClient  # noqa: E402
 
 
+CANDLES = []
+
+
 async def pm():
     pc = AsyncPublicClient()
     if hasattr(pc, "__aenter__"):
@@ -36,11 +39,26 @@ async def pm():
     for i in inst:
         iid = i.get("instrument_id") or i.get("id")
         sym = i.get("symbol") or i.get("name")
-        try:
-            async for f in pc.list_perps_funding_history(instrument_id=int(iid), start=start).iter_items():
-                d = dump(f); d["_iid"] = iid; d["_sym"] = sym; rows.append(d)
-        except Exception as e:  # noqa: BLE001
-            print("funding failed", iid, sym, str(e)[:200], flush=True)
+        for attempt in range(6):
+            got = []
+            try:
+                async for f in pc.list_perps_funding_history(instrument_id=int(iid), start=start).iter_items():
+                    d = dump(f); d["_iid"] = iid; d["_sym"] = sym; got.append(d)
+                rows.extend(got); break
+            except Exception as e:  # noqa: BLE001
+                print("funding retry", iid, sym, attempt, str(e)[:80], flush=True)
+                await asyncio.sleep(10 * (attempt + 1))
+        # hourly candles (mark/last) for the basis between venues
+        for attempt in range(6):
+            try:
+                cs = []
+                async for c in pc.list_perps_candles(instrument_id=int(iid), interval="1h", start=start).iter_items():
+                    d = dump(c); d["_sym"] = sym; cs.append(d)
+                CANDLES.extend(cs); break
+            except Exception as e:  # noqa: BLE001
+                print("candles retry", iid, sym, attempt, str(e)[:80], flush=True)
+                await asyncio.sleep(10 * (attempt + 1))
+        await asyncio.sleep(1.5)
     return inst, tick, rows
 
 inst, tick, rows = asyncio.run(pm())
@@ -51,6 +69,10 @@ print("ticker sample:", json.dumps(tick[0], default=str)[:700], flush=True)
 with gzip.open(f"{OUT}/pm_funding.jsonl.gz", "wt") as fh:
     for d in rows:
         fh.write(json.dumps(d, default=str) + "\n")
+with gzip.open(f"{OUT}/pm_candles_1h.jsonl.gz", "wt") as fh:
+    for d in CANDLES:
+        fh.write(json.dumps(d, default=str) + "\n")
+print(len(CANDLES), "Polymarket candles; sample", json.dumps(CANDLES[:1], default=str)[:300], flush=True)
 print(len(rows), "Polymarket funding rows; sample", json.dumps(rows[:2], default=str)[:600], flush=True)
 # Hyperliquid: same coins
 coins = set()
@@ -79,3 +101,15 @@ with gzip.open(f"{OUT}/hl_funding.jsonl.gz", "wt") as fh:
                 break
             time.sleep(0.3)
 print(m, "Hyperliquid funding rows for", sorted(coins))
+k = 0
+with gzip.open(f"{OUT}/hl_candles_1h.jsonl.gz", "wt") as fh:
+    for c in sorted(coins):
+        t = int(start.timestamp() * 1000)
+        try:
+            r = requests.post("https://api.hyperliquid.xyz/info", json={"type": "candleSnapshot", "req": {"coin": c, "interval": "1h", "startTime": t, "endTime": int(time.time() * 1000)}}, timeout=60)
+            for x in (r.json() if r.ok else []) or []:
+                x["coin"] = c; fh.write(json.dumps(x) + "\n"); k += 1
+        except Exception:  # noqa: BLE001
+            pass
+        time.sleep(0.3)
+print(k, "Hyperliquid candles")
