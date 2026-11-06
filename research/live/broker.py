@@ -118,15 +118,29 @@ class Broker:
 
     # ---- fills, rewards, housekeeping
     def trades_since(self, ts):
+        """OUR fills since ts. A trade record describes the whole match; when we were the maker, our share is
+        the entry in maker_orders with our wallet (side/price/size there are ours, not the taker's)."""
+        me = self.wallet.lower()
         out = []
         for t in self.client.list_account_trades().iter_items():
             m = getattr(t, "matched_at", None)
             mt = m.timestamp() if isinstance(m, datetime) else float(m or 0)
             if mt and mt < ts:
                 break
-            out.append({"id": str(t.id), "cid": str(getattr(t, "condition_id", "")), "token": str(getattr(t, "asset_id", "")), "side": str(getattr(t, "side", "")),
-                        "trader_side": str(getattr(t, "trader_side", "")), "price": float(getattr(t, "price", 0) or 0), "size": float(getattr(t, "size", 0) or 0),
-                        "outcome": str(getattr(t, "outcome", "")), "fee_bps": getattr(t, "fee_rate_bps", None), "status": str(getattr(t, "status", "")), "ts": mt})
+            cid = str(getattr(t, "condition_id", "") or getattr(t, "market", ""))
+            if str(getattr(t, "trader_side", "")).upper() == "MAKER":
+                for mo in getattr(t, "maker_orders", None) or []:
+                    if str(getattr(mo, "maker_address", "")).lower() != me:
+                        continue
+                    out.append({"id": f"{t.id}:{getattr(mo, 'order_id', '')}", "cid": cid, "token": str(getattr(mo, "asset_id", "")),
+                                "side": str(getattr(mo, "side", "")), "role": "MAKER", "price": float(getattr(mo, "price", 0) or 0),
+                                "size": float(getattr(mo, "matched_amount", 0) or 0), "outcome": str(getattr(mo, "outcome", "")),
+                                "taker_side": str(getattr(t, "side", "")), "taker_price": float(getattr(t, "price", 0) or 0),
+                                "status": str(getattr(t, "status", "")), "ts": mt, "tx": str(getattr(t, "transaction_hash", ""))})
+            else:
+                out.append({"id": str(t.id), "cid": cid, "token": str(getattr(t, "asset_id", "")), "side": str(getattr(t, "side", "")), "role": "TAKER",
+                            "price": float(getattr(t, "price", 0) or 0), "size": float(getattr(t, "size", 0) or 0), "outcome": str(getattr(t, "outcome", "")),
+                            "status": str(getattr(t, "status", "")), "ts": mt, "tx": str(getattr(t, "transaction_hash", ""))})
         return out
 
     def earnings(self, date):

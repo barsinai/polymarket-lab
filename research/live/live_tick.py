@@ -55,6 +55,14 @@ def main():
     if geo.get("blocked"):
         jlog({"ts": int(now), "mode": m, "geoblocked": geo, "note": "this machine is in a blocked region for Polymarket: not running"}); return
     b = Broker(send=send)
+    rb = f"{OUT}/fills_rebuilt.jsonl"
+    if not os.path.exists(rb):  # one-off: the 11-05 ledger recorded whole trades; rebuild our own fills
+        try:
+            with open(rb, "w") as fh:
+                for f_ in b.trades_since(1793880000):
+                    fh.write(json.dumps(f_) + "\n")
+        except Exception as e:  # noqa: BLE001
+            open(rb, "w").write(json.dumps({"error": str(e)[:300]}) + "\n")
     if os.path.exists("STOP"):
         r = b.cancel_all()
         # still read yesterday's actual reward payout and rebates while paused (the pilot's key number)
