@@ -6,7 +6,7 @@ permissions:
 jobs:
   run:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 240
     steps:
       - uses: actions/checkout@v4
         with:
@@ -18,7 +18,7 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -q requests polymarket-client
-      - run: python -u research/perps/collect_funding.py 2>&1 | tee /tmp/perps.txt
+      - run: python -u research/perps/refetch.py 2>&1 | tee /tmp/perps.txt
       - name: Save
         if: always()
         run: |
