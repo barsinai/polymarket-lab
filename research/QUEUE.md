@@ -309,3 +309,18 @@ Price drift in the trade's direction (what a market maker on the other side lose
   the pilot "live" variant. Plateau reached in this family: every tweak moves net by a few %.
 - PILOT config replay (8 markets, minimum size): +2.8/h on ~$430 (~$65/day). Treat as an upper bound:
   tiny orders in thin markets get the full modelled share; whether Polymarket pays it is the pilot's question.
+
+## 11-06 NEW-STRATEGY ROUND (pilot paused; user: keep account, find a winning strategy, no live trading)
+- Pilot post-mortem: reward pools change every few hours (10-15% of 13k markets per snapshot; e.g. a
+  Eurovision pool 101 -> 88 -> 75 -> 2 $/day within a day; min size 20 -> 50). Stale configs = main
+  reason for the 9x reward overestimate. Started track_boosts.py (boosts.yml): reward configs every
+  5 min + book competition after each boost.
+- PERPS FUNDING (Polymarket Perps vs Hyperliquid, 60 days, hourly): persistent gaps on alt-coins:
+  ARB -36% APR mean gap, ETHFI -33, LINK -19, ENA -14, AAVE -13 (Polymarket funding below
+  Hyperliquid). Simple rule (hold the hedged pair when the trailing-24h gap > 0.002%/h): 25-47% APR
+  while held, BTC/ETH/SOL ~0. Not yet costed (fees both venues, mark-price basis, depth); needs a
+  Hyperliquid account. Data rate-limited for ~15 coins: refetch slower.
+- Holding rewards: 3.25% APR on listed long-dated markets, valued Yes+No at mid; complete sets not
+  explicitly addressed in the docs. Small.
+- Combos: RFQ-only (no order book), makers quote with own models; SDK has open_rfq_session (maker
+  side) and request_combo_quote. Needs authenticated quote requests to study (no trades).
