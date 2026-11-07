@@ -75,17 +75,36 @@ async def _run(stop):
                     hour = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H")
                     if hour != out_hour:
                         if out:
-                            out.close()
-                        out = gzip.open(f"{D}/{hour}.jsonl.gz", "at"); out_hour = hour
+                            out.close(); compress(out_hour)
+                        out = open(f"{D}/{hour}.jsonl", "a"); out_hour = hour
                     out.write(json.dumps({"rx": round(time.time(), 3), "m": m}) + "\n")
         except Exception as e:  # noqa: BLE001
             stats["errors"] += 1; stats["last_error"] = str(e)[:160]
             await asyncio.sleep(3)
     if out:
-        out.close()
+        out.close(); compress(out_hour)
+
+
+def compress(hour=None):
+    """plain .jsonl while recording (a crash cannot corrupt it); finished hours become .jsonl.gz members"""
+    import glob
+    cur = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H")
+    for f in sorted(glob.glob(f"{D}/*.jsonl")):
+        h = os.path.basename(f)[:-6]
+        if h == cur and hour != cur:
+            continue
+        try:
+            with open(f) as src, gzip.open(f"{D}/{h}.jsonl.gz", "at") as dst:
+                for line in src:
+                    if line.endswith("\n") and line.startswith("{"):
+                        dst.write(line)
+            os.remove(f)
+        except OSError:
+            pass
 
 
 def start():
+    compress()
     stop = threading.Event()
 
     def runner():
