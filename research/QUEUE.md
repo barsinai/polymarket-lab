@@ -328,3 +328,11 @@ Price drift in the trade's direction (what a market maker on the other side lose
   the 60 s before the start (536/546 agree with our Binance proxy; the "window mean vs start spot" model
   v1 agreed 456/546). v1 paper: 600 trades, -$41 on $10.4k staked (+$340 day 1, -$382 day 2) = noise
   around zero with a wrong model. v2 model built on the calibrated rule; logs every book observation.
+
+## 11-07 fast bot v2: first 2 hours
+- v2 (calibrated rule, model vs book): 32 settled paper trades, 56% wins at avg price 0.64, -$107 on $540 staked.
+- Offline check on 800 book observations: the market's mid beats our model at every horizon (log loss 0.55 vs 0.75
+  at 2-2.5 min left; 0.19 vs 0.70 in the last minute). Our model picks direction 51% of the time, the market 75%.
+  The "edge" we see is where the market knows better. v2 alone is not a strategy.
+- Now running three paper strategies side by side: v2, fav (buy the market favourite at 0.60-0.95 with <= 90 s left),
+  fav_agree (fav only when our model agrees). Every observation is logged with spot and K for offline testing.

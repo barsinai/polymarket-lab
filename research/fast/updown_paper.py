@@ -29,6 +29,7 @@ RUN_MIN = float(os.environ.get("RUN_MIN", "60"))
 LAST_S = int(os.environ.get("LAST_S", "150"))
 EDGE = float(os.environ.get("EDGE", "0.03"))
 SIZE_USD = float(os.environ.get("SIZE_USD", "20"))
+FAV_REM, FAV_LO, FAV_HI = int(os.environ.get("FAV_REM", "90")), float(os.environ.get("FAV_LO", "0.60")), float(os.environ.get("FAV_HI", "0.95"))
 ASSETS = {"btc": ("BTCUSDT", "BTC-USD"), "eth": ("ETHUSDT", "ETH-USD")}
 WINDOWS = (300, 900)
 GAMMA, CLOB = "https://gamma-api.polymarket.com", "https://clob.polymarket.com"
@@ -123,7 +124,9 @@ def main():
         trades = [t for t in (json.loads(l) for l in open(f"{D}/trades.jsonl")) if t.get("model") == "v2"]
     except OSError:
         trades = []
-    done = {(t["slug"], t["side"]) for t in trades}
+    for t in trades:
+        t.setdefault("strat", "v2")
+    done = {(t["strat"], t["slug"], t["side"]) for t in trades}
     starts = {}   # (asset, w, start) -> [K, sum, n]
     end_at = time.time() + RUN_MIN * 60
     time.sleep(130)  # warm up sigma
@@ -171,30 +174,43 @@ def main():
                 m = market(a, w, st)
                 if not m:
                     continue
-                for side, tok, p_side in (("Up", m["tokens"][0], p_up), ("Down", m["tokens"][1], 1 - p_up)):
-                    if (m["slug"], side) in done:
-                        continue
-                    ask, bid = best_ask(tok)
+                books = {}
+                for side, tok in (("Up", m["tokens"][0]), ("Down", m["tokens"][1])):
+                    books[side] = best_ask(tok)
+                for side, p_side in (("Up", p_up), ("Down", 1 - p_up)):
+                    ask, bid = books[side]
                     if not ask:
                         continue
                     with open(f"{D}/obs.jsonl", "a") as fh:
                         fh.write(json.dumps({"ts": int(now), "slug": m["slug"], "side": side, "ask": ask[0], "ask_sz": ask[1],
-                                             "bid": bid[0] if bid else None, "p_model": round(p_side, 4), "rem": int(rem)}) + "\n")
+                                             "bid": bid[0] if bid else None, "p_model": round(p_side, 4), "rem": int(rem),
+                                             "spot": s_now, "K": round(K, 4), "v": 3}) + "\n")
                     a_px, a_sz = ask
                     fee = 0.07 * a_px * (1 - a_px)
                     edge = p_side - a_px - fee
+                    # three paper strategies side by side (11-07): v2 = our model vs the book;
+                    # fav = buy the market's favourite late; fav_agree = favourite only when our model agrees
+                    picks = []
                     if edge >= EDGE and 0.02 <= a_px <= 0.98:
+                        picks.append("v2")
+                    if rem <= FAV_REM and FAV_LO <= a_px <= FAV_HI:
+                        picks.append("fav")
+                        if p_side > 0.5:
+                            picks.append("fav_agree")
+                    for strat in picks:
+                        if (strat, m["slug"], side) in done or any((strat, m["slug"], o) in done for o in ("Up", "Down") if strat != "v2"):
+                            continue
                         shares = round(min(a_sz, SIZE_USD / a_px), 2)
                         if shares < 5:
                             continue
                         tr = {"ts": int(now), "slug": m["slug"], "asset": a, "window": w, "side": side, "price": a_px, "shares": shares,
                               "fee": round(fee * shares, 4), "p_model": round(p_side, 4), "edge": round(edge, 4), "rem_s": int(rem),
-                              "K": round(K, 4), "spot": s_now, "model": "v2", "end": end, "result": None}
-                        trades.append(tr); done.add((m["slug"], side))
+                              "K": round(K, 4), "spot": s_now, "model": "v2", "strat": strat, "end": end, "result": None}
+                        trades.append(tr); done.add((strat, m["slug"], side))
                         with open(f"{D}/trades.jsonl", "w") as fh:
                             for x in trades:
                                 fh.write(json.dumps(x) + "\n")
-                        print(f"{datetime.now(timezone.utc):%H:%M:%S} PAPER BUY {side} {m['slug']} @ {a_px} x {shares} model {p_side:.3f} edge {edge:.3f} rem {int(rem)}s", flush=True)
+                        print(f"{datetime.now(timezone.utc):%H:%M:%S} PAPER[{strat}] BUY {side} {m['slug']} @ {a_px} x {shares} model {p_side:.3f} rem {int(rem)}s", flush=True)
         if settle(trades):
             with open(f"{D}/trades.jsonl", "w") as fh:
                 for x in trades:
@@ -225,15 +241,21 @@ def main():
         for x in trades:
             fh.write(json.dumps(x) + "\n")
     done_t = [t for t in trades if t.get("result") is not None]
+    by_strat = {}
+    for t in done_t:
+        b = by_strat.setdefault(t.get("strat", "v2"), {"trades": 0, "won": 0, "staked": 0.0, "pnl": 0.0})
+        b["trades"] += 1; b["won"] += t["result"]; b["staked"] += t["price"] * t["shares"]; b["pnl"] += t["pnl"]
     by_day = {}
     for t in done_t:
         d = datetime.fromtimestamp(t["ts"], timezone.utc).strftime("%Y-%m-%d")
+        d += " " + t.get("strat", "v2")
         b = by_day.setdefault(d, {"trades": 0, "won": 0, "staked": 0.0, "pnl": 0.0})
         b["trades"] += 1; b["won"] += t["result"]; b["staked"] += t["price"] * t["shares"]; b["pnl"] += t["pnl"]
     rep = {"updated": datetime.now(timezone.utc).isoformat(), "trades": len(trades), "settled": len(done_t),
            "win_rate": round(sum(t["result"] for t in done_t) / len(done_t), 3) if done_t else None,
            "avg_price": round(sum(t["price"] for t in done_t) / len(done_t), 3) if done_t else None,
            "pnl_usd": round(sum(t["pnl"] for t in done_t), 2), "staked_usd": round(sum(t["price"] * t["shares"] for t in done_t), 2),
+           "by_strat": {k: {kk: round(vv, 2) if isinstance(vv, float) else vv for kk, vv in b.items()} for k, b in sorted(by_strat.items())},
            "by_day": {d: {k: round(v, 2) if isinstance(v, float) else v for k, v in b.items()} for d, b in sorted(by_day.items())}}
     json.dump(rep, open(f"{D}/report.json", "w"), indent=1)
     print(json.dumps(rep), flush=True)
