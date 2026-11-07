@@ -21,13 +21,14 @@ jobs:
       - name: Python env
         run: |
           export PATH="$HOME/.local/bin:$PATH"
-          uv pip install --python "$HOME/.venv-pilot/bin/python" -q requests
+          uv pip install --python "$HOME/.venv-pilot/bin/python" -q requests websockets
       - name: Run ~5.2 h in hourly parts
         run: |
           git config user.name "polymarket-lab-bot"
           git config user.email "actions@users.noreply.github.com"
           for part in 1 2 3 4 5; do
             git fetch -q origin main && git checkout -q origin/main -- research 2>/dev/null
+            PATH="$HOME/.local/bin:$PATH" uv pip install --python "$HOME/.venv-pilot/bin/python" -q requests websockets || true
             RUN_MIN=60 "$HOME/.venv-pilot/bin/python" -u research/fast/updown_paper.py 2>&1 | tee -a /tmp/fast.txt | grep -v "^$"
             mkdir -p logs data/fast && cp /tmp/fast.txt logs/fast-log.txt
             git add --sparse data/fast logs/fast-log.txt
