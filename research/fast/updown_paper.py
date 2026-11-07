@@ -43,7 +43,12 @@ DOG_LO, DOG_HI, DOG_RMIN, DOG_RMAX = float(os.environ.get("DOG_LO", "0.05")), fl
 FAV_REM, FAV_LO, FAV_HI = int(os.environ.get("FAV_REM", "90")), float(os.environ.get("FAV_LO", "0.60")), float(os.environ.get("FAV_HI", "0.95"))
 ASSETS = {"btc": "BTCUSDT", "eth": "ETHUSDT", "sol": "SOLUSDT", "xrp": "XRPUSDT", "doge": "DOGEUSDT", "bnb": "BNBUSDT",
           "hype": "HYPEUSDT", "zec": "ZECUSDT"}
-WINDOWS = (300, 900)
+WINDOWS = (300, 900, 14400)          # 5 m, 15 m, 4 h (4 h windows start at 01:00, 05:00, ... UTC)
+OFFSET = {14400: 3600}
+
+
+def wname(w):
+    return "4h" if w == 14400 else f"{w // 60}m"
 GAMMA, CLOB = "https://gamma-api.polymarket.com", "https://clob.polymarket.com"
 S = requests.Session(); S.headers["User-Agent"] = "polymarket-lab-research/0.1"
 px = {a: deque(maxlen=1500) for a in ASSETS}          # Binance proxy (ts, price), last ~25 min
@@ -95,7 +100,7 @@ meta = {}
 
 def market(a, w, start):
     """tokens + the official price to beat (Gamma eventMetadata.priceToBeat, re-read once if missing)"""
-    slug = f"{a}-updown-{w // 60}m-{start}"
+    slug = f"{a}-updown-{wname(w)}-{start}"
     cur = meta.get(slug)
     if cur is not None and (cur.get("ptb") is not None or cur.get("tries", 0) >= 2):
         return cur
@@ -154,7 +159,33 @@ def write_trades(trades):
             fh.write(json.dumps(x) + "\n")
 
 
+def rotate():
+    """keep today's observation files small: yesterday's lines go to <name>-<day>.jsonl.gz"""
+    import gzip
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    for name in ("obs", "pairs", "model"):
+        path = f"{D}/{name}.jsonl"
+        try:
+            lines = open(path).read().splitlines()
+        except OSError:
+            continue
+        keep, old = [], {}
+        for l in lines:
+            try:
+                day = datetime.fromtimestamp(json.loads(l)["ts"], timezone.utc).strftime("%Y-%m-%d")
+            except (ValueError, KeyError):
+                continue
+            (keep if day == today else old.setdefault(day, [])).append(l)
+        if old:
+            for day, ls in old.items():
+                with gzip.open(f"{D}/{name}-{day}.jsonl.gz", "at") as fh:
+                    fh.write("\n".join(ls) + "\n")
+            with open(path, "w") as fh:
+                fh.write("\n".join(keep) + ("\n" if keep else ""))
+
+
 def main():
+    rotate()
     stop = threading.Event()
     threading.Thread(target=sampler, args=(stop,), daemon=True).start()
     rt_stop = rtds.start()
@@ -182,7 +213,8 @@ def main():
             s_now = ser[-1][1]
             sg = sigma_of(ser)
             for w in WINDOWS:
-                st = int(now // w * w); end = st + w
+                off = OFFSET.get(w, 0)
+                st = int((now - off) // w * w + off); end = st + w
                 key = (a, w, st)
                 acc = starts.get(key)
                 if acc is None:
@@ -267,45 +299,46 @@ def main():
                           "end": end, "result": None}
                     trades.append(tr); done.add((strat, m["slug"], side)); new_trades = True
                     print(f"{datetime.now(timezone.utc):%H:%M:%S} PAPER[{strat}] BUY {side} {m['slug']} @ {a_px} x {shares} p {p_side:.3f} z {zs:.1f} rem {int(rem)}s", flush=True)
-        # PAIR: a 15-minute window and the 5-minute window that ends at the same second resolve off the SAME
-        # final TWAP, compared with two different prices to beat. One share of each of the right sides pays
-        # at least $1 and $2 when the final lands between the two references (0 violations in 132 pairs).
-        seen = {}
+        # PAIR: windows of one asset that END at the same second (4 h / 15 m / 5 m) resolve off the SAME final
+        # TWAP, compared with different prices to beat. One share of each of the right sides pays at least $1
+        # and $2 when the final lands between the two references (0 violations in 132 15m/5m pairs).
+        ending = {}
         for j, bk in zip(jobs, books):
-            seen[(j[0], j[1])] = (j, bk)
-        for a in ASSETS:
-            if (a, 900) not in seen or (a, 300) not in seen:
-                continue
-            (j15, (u15, d15)), (j5, (u5, d5)) = seen[(a, 900)], seen[(a, 300)]
-            if j15[3] != j5[3] or not all((u15, d15, u5, d5)):
-                continue  # must end at the same second, both books present
-            k15, k5, p15, p5 = j15[11], j5[11], j15[6], j5[6]
-            if k15 < k5:
-                legs = (("Up", j15, u15[0]), ("Down", j5, d5[0])); p_mid = p15 - p5
-            elif k15 > k5:
-                legs = (("Down", j15, d15[0]), ("Up", j5, u5[0])); p_mid = p5 - p15
-            else:
-                continue
-            a1, a2 = legs[0][2][0], legs[1][2][0]
-            fees = 0.07 * a1 * (1 - a1) + 0.07 * a2 * (1 - a2)
-            ev = 1 + max(p_mid, 0.0) - (a1 + a2) - fees
-            with open(f"{D}/pairs.jsonl", "a") as fh:
-                fh.write(json.dumps({"ts": round(now, 1), "asset": a, "end": j15[3], "rem": int(j15[4]), "k15": k15, "k5": k5,
-                                     "legs": [(s_, jj[5]["slug"], ask_[0], ask_[1]) for s_, jj, ask_ in legs], "sum": round(a1 + a2, 3),
-                                     "p_mid": round(p_mid, 4), "ev": round(ev, 4)}) + "\n")
-            key = ("pair", j15[5]["slug"], "both")
-            if ev >= PAIR_EDGE and a1 + a2 <= PAIR_MAX and key not in done:
-                shares = round(min(legs[0][2][1], legs[1][2][1], SIZE_USD / (a1 + a2)), 2)
-                if shares < 5:
-                    continue
-                done.add(key); new_trades = True
-                for s_, jj, ask_ in legs:
-                    fee = 0.07 * ask_[0] * (1 - ask_[0])
-                    trades.append({"ts": int(now), "slug": jj[5]["slug"], "asset": a, "window": jj[1], "side": s_, "price": ask_[0], "shares": shares,
-                                   "fee": round(fee * shares, 4), "p_model": round(jj[6] if s_ == "Up" else 1 - jj[6], 4), "edge": round(ev, 4),
-                                   "rem_s": int(jj[4]), "K": jj[11], "k_src": jj[12], "src": jj[14], "spot": jj[10], "model": "v4", "strat": "pair",
-                                   "pair": j15[5]["slug"], "p_mid": round(p_mid, 4), "end": jj[3], "result": None})
-                print(f"{datetime.now(timezone.utc):%H:%M:%S} PAPER[pair] {a} {legs[0][0]}15m@{a1} + {legs[1][0]}5m@{a2} x {shares} sum {a1 + a2:.2f} p_mid {p_mid:.2f} ev {ev:+.3f} rem {int(j15[4])}s", flush=True)
+            ending.setdefault((j[0], j[3]), []).append((j, bk))
+        for (a, end_), lst in ending.items():
+            lst.sort(key=lambda x: -x[0][1])   # longest window first
+            for i in range(len(lst)):
+                for k in range(i + 1, len(lst)):
+                    (jl, (ul, dl)), (js, (us, ds)) = lst[i], lst[k]
+                    if not all((ul, dl, us, ds)) or not all((ul[0], dl[0], us[0], ds[0])):
+                        continue
+                    kl, ks, pl, ps = jl[11], js[11], jl[6], js[6]
+                    if kl < ks:
+                        legs = (("Up", jl, ul[0]), ("Down", js, ds[0])); p_mid = pl - ps
+                    elif kl > ks:
+                        legs = (("Down", jl, dl[0]), ("Up", js, us[0])); p_mid = ps - pl
+                    else:
+                        continue
+                    a1, a2 = legs[0][2][0], legs[1][2][0]
+                    fees = 0.07 * a1 * (1 - a1) + 0.07 * a2 * (1 - a2)
+                    ev = 1 + max(p_mid, 0.0) - (a1 + a2) - fees
+                    with open(f"{D}/pairs.jsonl", "a") as fh:
+                        fh.write(json.dumps({"ts": round(now, 1), "asset": a, "end": end_, "rem": int(jl[4]), "k_long": kl, "k_short": ks,
+                                             "legs": [(s_, jj[5]["slug"], ask_[0], ask_[1]) for s_, jj, ask_ in legs], "sum": round(a1 + a2, 3),
+                                             "p_mid": round(p_mid, 4), "ev": round(ev, 4)}) + "\n")
+                    key = ("pair", jl[5]["slug"], js[5]["slug"])
+                    if ev >= PAIR_EDGE and a1 + a2 <= PAIR_MAX and key not in done:
+                        shares = round(min(legs[0][2][1], legs[1][2][1], SIZE_USD / (a1 + a2)), 2)
+                        if shares < 5:
+                            continue
+                        done.add(key); new_trades = True
+                        for s_, jj, ask_ in legs:
+                            fee = 0.07 * ask_[0] * (1 - ask_[0])
+                            trades.append({"ts": int(now), "slug": jj[5]["slug"], "asset": a, "window": jj[1], "side": s_, "price": ask_[0], "shares": shares,
+                                           "fee": round(fee * shares, 4), "p_model": round(jj[6] if s_ == "Up" else 1 - jj[6], 4), "edge": round(ev, 4),
+                                           "rem_s": int(jj[4]), "K": jj[11], "k_src": jj[12], "src": jj[14], "spot": jj[10], "model": "v4", "strat": "pair",
+                                           "pair": f"{jl[5]['slug']}+{js[5]['slug']}", "p_mid": round(p_mid, 4), "end": jj[3], "result": None})
+                        print(f"{datetime.now(timezone.utc):%H:%M:%S} PAPER[pair] {a} {legs[0][0]} {wname(jl[1])}@{a1} + {legs[1][0]} {wname(js[1])}@{a2} x {shares} sum {a1 + a2:.2f} p_mid {p_mid:.2f} ev {ev:+.3f} rem {int(jl[4])}s", flush=True)
         if new_trades or settle(trades):
             write_trades(trades)
         # window summaries, ~70 s after each window ends
@@ -321,7 +354,7 @@ def main():
                 v = [p for t, p in ser_ if t >= x]
                 return v[0] if v else None
             te = twap_at(a_, end_)
-            rec = {"slug": f"{a_}-updown-{w_ // 60}m-{st_}", "asset": a_, "window": w_, "start": st_, "src": src_,
+            rec = {"slug": f"{a_}-updown-{wname(w_)}-{st_}", "asset": a_, "window": w_, "start": st_, "src": src_,
                    "K": acc_.get("K"), "K_src": acc_.get("K_src"), "K_twap": acc_.get("K_twap"), "K_proxy": acc_.get("K_proxy"), "twap_end": te,
                    "spot_start": acc_.get("spot_start"), "spot_end": at_(end_), "mean_window": mean_(st_, end_),
                    "mean_last60": mean_(end_ - 60, end_), "mean_pre60": mean_(st_ - 60, st_), "mean_first60": mean_(st_, st_ + 60),
