@@ -1,6 +1,34 @@
-mean_last60 >= mean_pre60        agrees 536/546
-mean_last60 >= spot_start        agrees 505/546
-spot_end >= spot_start           agrees 491/546
-mean_last60 >= mean_first60      agrees 486/546
-mean_window >= mean_pre60        agrees 463/546
-mean_window >= spot_start        agrees 456/546
+windows 598 with result 598
+mean_last60 >= mean_pre60        agrees 584/598
+mean_last60 >= spot_start        agrees 554/598
+spot_end >= spot_start           agrees 537/598
+mean_window >= mean_pre60        agrees 506/598
+mean_window >= spot_start        agrees 503/598
+pairs 132 violations 0 middle(pays $2) 35 references within 0.01% 14
+btc-updown-1h-1794038400 -> none
+btc-updown-60m-1794038400 -> none
+bitcoin-up-or-down-november-7-3am-et -> Bitcoin Up or Down - November 7, 3AM ET
+This market will resolve to "Up" if the close price is greater than or equal to the open price for the BTC/USDT 1 hour candle that begins on the time and date specified in the title. Otherwise, this market will resolve to "Down".
+
+The resolution source for this market is information from Binance, specifically the BTC/USDT pair (https://www.binance.com/en/trade/BTC_USDT). The close « C » and open « O » displayed at the top of the graph for the relevant "1H" candle will be used once the data for that candle is finalized.
+
+Please note that this market is about the price according to Binance BTC/U
+pattern eth-updown-5m-1794130800 | Ethereum Up or Down - November 8, 4:40AM-4:45AM ET
+pattern xrp-updown-5m-1794130800 | XRP Up or Down - November 8, 4:40AM-4:45AM ET
+pattern sol-updown-5m-1794130800 | Solana Up or Down - November 8, 4:40AM-4:45AM ET
+pattern doge-updown-5m-1794130800 | Dogecoin Up or Down - November 8, 4:40AM-4:45AM ET
+pattern hype-updown-5m-1794130800 | Hyperliquid Up or Down - November 8, 4:40AM-4:45AM ET
+pattern zec-updown-5m-1794130800 | ZCash Up or Down - November 8, 4:40AM-4:45AM ET
+pattern btc-updown-5m-1794130800 | Bitcoin Up or Down - November 8, 4:40AM-4:45AM ET
+pattern bnb-updown-5m-1794130800 | BNB Up or Down - November 8, 4:40AM-4:45AM ET
+pattern xrp-updown-15m-1794130200 | XRP Up or Down - November 8, 4:30AM-4:45AM ET
+pattern zec-updown-15m-1794130200 | ZCash Up or Down - November 8, 4:30AM-4:45AM ET
+pattern btc-updown-15m-1794130200 | Bitcoin Up or Down - November 8, 4:30AM-4:45AM ET
+pattern sol-updown-15m-1794130200 | Solana Up or Down - November 8, 4:30AM-4:45AM ET
+pattern doge-updown-15m-1794130200 | Dogecoin Up or Down - November 8, 4:30AM-4:45AM ET
+pattern bnb-updown-15m-1794130200 | BNB Up or Down - November 8, 4:30AM-4:45AM ET
+pattern hype-updown-15m-1794130200 | Hyperliquid Up or Down - November 8, 4:30AM-4:45AM ET
+pattern eth-updown-15m-1794130200 | Ethereum Up or Down - November 8, 4:30AM-4:45AM ET
+pattern btc-updown-4h-1794128400 | Bitcoin Up or Down - November 8, 4:00AM-8:00AM ET
+pattern sol-updown-4h-1794128400 | Solana Up or Down - November 8, 4:00AM-8:00AM ET
+pattern bnb-updown-4h-1794128400 | BNB Up or Down - November 8, 4:00AM-8:00AM ET
