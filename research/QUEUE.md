@@ -336,3 +336,28 @@ Price drift in the trade's direction (what a market maker on the other side lose
   The "edge" we see is where the market knows better. v2 alone is not a strategy.
 - Now running three paper strategies side by side: v2, fav (buy the market favourite at 0.60-0.95 with <= 90 s left),
   fav_agree (fav only when our model agrees). Every observation is logged with spot and K for offline testing.
+
+## 11-07 midday (Fable): exact feed, linkage, trade tape
+- RESOLUTION, EXACT: "Up iff Chainlink 60 s TWAP at the end >= price to beat (same TWAP at the start)". Official
+  priceToBeat/finalPrice live in Gamma eventMetadata; final>=ptb reproduces 598/598 results. Polymarket's public
+  RTDS websocket (wss://ws-live-data.polymarket.com, topics crypto_prices_chainlink / crypto_prices_twap_sixty)
+  carries the exact feed for btc, eth, sol, xrp, doge, bnb, hype, zec. Binance sits ~14 bp ABOVE Chainlink
+  (median -13.9 bp, 10-90% -15..-13) - the wobble in that gap decided the close windows v2 lost. Margin
+  |final-ptb|: median 4.8 bp, 10% of windows < 0.85 bp.
+- LINKAGE: the 15 m window and the 5 m window that ends with it have IDENTICAL finalPrice (132/132). With
+  K15 != K5 one of the four outcome combinations is impossible -> one share of each right side pays >= $1,
+  $2 in 35/132 pairs (26%). Asks summed to 1.03-1.22 in 40 paired obs (consistent, no free money seen yet).
+- v4 bot (research/fast/updown_paper.py + rtds.py): 8 assets, K = official price to beat, Chainlink spot,
+  strategies exact / lock / fav / dog / pair, obs every 2 s in the last 120 s, model track every 5 s.
+- TRADE TAPE (data/fast/tape.jsonl.gz: 1.49M fills, $15.5M, 9,163 wallets, 598 windows; Data API v2):
+  * 1,349 regular wallets (>=30 windows, >=$500): 464 profitable after full taker fees, 885 losing; net -$286k.
+    Big losers: directional gamblers betting Up 70-76% of the time (win 32-35%).
+  * Winner types: sweeper (0.97-0.99 in the last minute, 324 windows, 100%, +0.9%/$ on $194k); set-seller
+    (sells both sides, never buys, 231 windows, +4.2%/$ on $133k, no fees); late knowers (buy 30-120 s
+    before the end, 90% of windows won, exact-feed users); last-seconds set arbitrage (loser at 0.03 + winner
+    at 0.96 < $1, 0x855e..., 181/221 windows). Our obs: ask_up+ask_down never < 1.00 in 361 paired reads
+    (median 1.01) -> the taker arb is swept in < 3 s. Not for us.
+  * "Dog" (cheap side 30-120 s before the end): +22..+32%/$ on $220k of fills BUT 5 windows = $90k of the
+    $100k, median window -$74, ETH and 15 m negative. Informed late flips, not a resting mispricing. Control only.
+  * Naive set-seller replay from the tape (asks = last print + spread): -3..-8% of capital per window; fills
+    adversely selected because tape prices lag. A maker needs the exact feed; replay tomorrow from model.jsonl.
