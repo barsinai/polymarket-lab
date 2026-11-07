@@ -39,7 +39,7 @@ EDGE = float(os.environ.get("EDGE", "0.03"))
 EXACT_RMAX = int(os.environ.get("EXACT_RMAX", "60"))   # 'exact' only this close to the end (model beats the market there)
 SIZE_USD = float(os.environ.get("SIZE_USD", "20"))
 LOCK_Z, LOCK_ASK = float(os.environ.get("LOCK_Z", "2.5")), float(os.environ.get("LOCK_ASK", "0.97"))
-PAIR_EDGE, PAIR_MAX = float(os.environ.get("PAIR_EDGE", "0.03")), float(os.environ.get("PAIR_MAX", "1.15"))
+PAIR_EV, PAIR_MAX = float(os.environ.get("PAIR_EV", "0.08")), float(os.environ.get("PAIR_MAX", "1.10"))   # model-based pairs (pair_ev); riskless pairs need no model
 DOG_LO, DOG_HI, DOG_RMIN, DOG_RMAX = float(os.environ.get("DOG_LO", "0.05")), float(os.environ.get("DOG_HI", "0.35")), int(os.environ.get("DOG_RMIN", "30")), int(os.environ.get("DOG_RMAX", "120"))
 FAV_REM, FAV_LO, FAV_HI = int(os.environ.get("FAV_REM", "90")), float(os.environ.get("FAV_LO", "0.60")), float(os.environ.get("FAV_HI", "0.95"))
 ASSETS = {"btc": "BTCUSDT", "eth": "ETHUSDT", "sol": "SOLUSDT", "xrp": "XRPUSDT", "doge": "DOGEUSDT", "bnb": "BNBUSDT",
@@ -336,8 +336,10 @@ def main():
                             fh.write(json.dumps({"ts": round(now, 1), "asset": a, "end": end_, "rem": int(jl[4]), "k_long": kl, "k_short": ks,
                                                  "legs": [(s_, jj[5]["slug"], ask_[0], ask_[1]) for s_, jj, ask_ in legs], "sum": round(a1 + a2, 3),
                                                  "p_mid": round(p_mid, 4), "ev": round(ev, 4)}) + "\n")
-                        key = ("pair", jl[5]["slug"], js[5]["slug"])
-                        if ev >= PAIR_EDGE and a1 + a2 <= PAIR_MAX and key not in done:
+                        riskless = a1 + a2 + fees <= 0.995          # pays >= $1 whatever happens, after fees
+                        strat_p = "pair" if riskless else "pair_ev"
+                        key = (strat_p, jl[5]["slug"], js[5]["slug"])
+                        if (riskless or (ev >= PAIR_EV and a1 + a2 <= PAIR_MAX)) and key not in done:
                             shares = round(min(legs[0][2][1], legs[1][2][1], SIZE_USD / (a1 + a2)), 2)
                             if shares < 5:
                                 continue
@@ -346,9 +348,9 @@ def main():
                                 fee = 0.07 * ask_[0] * (1 - ask_[0])
                                 trades.append({"ts": int(now), "slug": jj[5]["slug"], "asset": a, "window": jj[1], "side": s_, "price": ask_[0], "shares": shares,
                                                "fee": round(fee * shares, 4), "p_model": round(jj[6] if s_ == "Up" else 1 - jj[6], 4), "edge": round(ev, 4),
-                                               "rem_s": int(jj[4]), "K": jj[11], "k_src": jj[12], "src": jj[14], "spot": jj[10], "model": "v4", "strat": "pair",
+                                               "rem_s": int(jj[4]), "K": jj[11], "k_src": jj[12], "src": jj[14], "spot": jj[10], "model": "v4", "strat": strat_p,
                                                "pair": f"{jl[5]['slug']}+{js[5]['slug']}", "p_mid": round(p_mid, 4), "end": jj[3], "result": None})
-                            print(f"{datetime.now(timezone.utc):%H:%M:%S} PAPER[pair] {a} {legs[0][0]} {wname(jl[1])}@{a1} + {legs[1][0]} {wname(js[1])}@{a2} x {shares} sum {a1 + a2:.2f} p_mid {p_mid:.2f} ev {ev:+.3f} rem {int(jl[4])}s", flush=True)
+                            print(f"{datetime.now(timezone.utc):%H:%M:%S} PAPER[{strat_p}] {a} {legs[0][0]} {wname(jl[1])}@{a1} + {legs[1][0]} {wname(js[1])}@{a2} x {shares} sum {a1 + a2:.2f} p_mid {p_mid:.2f} ev {ev:+.3f} rem {int(jl[4])}s", flush=True)
             if new_trades or settle(trades):
                 write_trades(trades)
             # window summaries, ~70 s after each window ends
