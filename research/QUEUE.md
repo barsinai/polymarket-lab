@@ -361,3 +361,15 @@ Price drift in the trade's direction (what a market maker on the other side lose
     $100k, median window -$74, ETH and 15 m negative. Informed late flips, not a resting mispricing. Control only.
   * Naive set-seller replay from the tape (asks = last print + spread): -3..-8% of capital per window; fills
     adversely selected because tape prices lag. A maker needs the exact feed; replay tomorrow from model.jsonl.
+- 11-07 16:40 Bugs found in the v4 data: (1) the RTDS websocket goes silent after ~40 min and the recorder did not
+  reconnect -> Binance fallback for the rest of each hour (76k msgs/h = 40 min x 32 streams); fixed (reconnect on
+  20 s silence). (2) priceToBeat is fetched before Polymarket fills it in; now re-read at +45 s, +90 s, and before
+  the last 2 min. Verified vs official numbers: feed TWAP at start == priceToBeat exactly (70/70), our mean of the
+  last 60 s of Chainlink prices within 0.14 bp (97% < 0.3 bp); Binance pre-mean 10% of the time > 12 bp off.
+  Chainlink feed is smoothed: sigma from 30 s returns is 1.43x the 1 s sigma (adopted 30 s sigma at 11:06).
+- 11-07 16:45 With 200 clean windows the market beats the model at ALL horizons (log loss 0.21 vs 0.26 at 30-60 s;
+  the 27-window "model wins in the last minute" was noise). z is honest (z 1-2: 98% realized; z 2-3: 97.5%).
+  LOCK (z>=2, ask<=0.97, last 60 s): 20 chances / 288 windows, 18 won, +3.5%/$ after fees (early). PAIRS: with
+  clean data sum<1 is rare (one XRP window at 0.97 where K15~K5); the SOL 0.75 "arb" was the wrong Binance K.
+  exact -$139 on 224 (now restricted to z>=1, ask>=0.30); dog -$397 on 186 (dead, control); fav -$16.
+  Report page corrected (section 7).
