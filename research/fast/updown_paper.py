@@ -36,6 +36,7 @@ D = os.environ.get("FAST_DIR", "data/fast"); os.makedirs(D, exist_ok=True)
 RUN_MIN = float(os.environ.get("RUN_MIN", "60"))
 LAST_S = int(os.environ.get("LAST_S", "120"))
 EDGE = float(os.environ.get("EDGE", "0.03"))
+EXACT_RMAX = int(os.environ.get("EXACT_RMAX", "60"))   # 'exact' only this close to the end (model beats the market there)
 SIZE_USD = float(os.environ.get("SIZE_USD", "20"))
 LOCK_Z, LOCK_ASK = float(os.environ.get("LOCK_Z", "2.5")), float(os.environ.get("LOCK_ASK", "0.97"))
 PAIR_EDGE, PAIR_MAX = float(os.environ.get("PAIR_EDGE", "0.03")), float(os.environ.get("PAIR_MAX", "1.15"))
@@ -81,14 +82,22 @@ def feed(a):
     return "binance", [(t, p) for t, p in px[a] if t >= now - 1200]
 
 
-def sigma_of(ser):
-    v = [p for _, p in ser]
-    if len(v) < 120:
+def sigma_of(ser, h=30.0):
+    """per-second volatility from overlapping h-second log returns (the Chainlink stream is smoothed, so 1 s
+    returns understate the variance over the 30-90 s that matter here)"""
+    if len(ser) < 120 or ser[-1][0] - ser[0][0] < 3 * h:
         return None
-    r = [math.log(b / x) for x, b in zip(v, v[1:]) if x > 0 and b > 0]
-    dt = (ser[-1][0] - ser[0][0]) / max(len(r), 1)
+    r = []; j = 0
+    for i in range(len(ser)):
+        t, p = ser[i]
+        while j < len(ser) and ser[j][0] < t - h:
+            j += 1
+        if j < i and ser[j][1] > 0 and p > 0 and t - ser[j][0] >= 0.8 * h:
+            r.append(math.log(p / ser[j][1]) / math.sqrt(t - ser[j][0]))
+    if len(r) < 60:
+        return None
     m = sum(r) / len(r)
-    return math.sqrt(sum((x - m) ** 2 for x in r) / (len(r) - 1)) / math.sqrt(max(dt, 0.2))  # per 1 s
+    return math.sqrt(sum((x - m) ** 2 for x in r) / (len(r) - 1))
 
 
 def phi(x):
