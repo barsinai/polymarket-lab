@@ -120,7 +120,7 @@ def main():
     stop = threading.Event()
     threading.Thread(target=sampler, args=(stop,), daemon=True).start()
     try:
-        trades = [json.loads(l) for l in open(f"{D}/trades.jsonl")]
+        trades = [t for t in (json.loads(l) for l in open(f"{D}/trades.jsonl")) if t.get("model") == "v2"]
     except OSError:
         trades = []
     done = {(t["slug"], t["side"]) for t in trades}
