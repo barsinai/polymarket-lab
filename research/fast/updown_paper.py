@@ -36,6 +36,7 @@ LAST_S = int(os.environ.get("LAST_S", "120"))
 EDGE = float(os.environ.get("EDGE", "0.03"))
 SIZE_USD = float(os.environ.get("SIZE_USD", "20"))
 LOCK_Z, LOCK_ASK = float(os.environ.get("LOCK_Z", "2.5")), float(os.environ.get("LOCK_ASK", "0.97"))
+PAIR_EDGE, PAIR_MAX = float(os.environ.get("PAIR_EDGE", "0.03")), float(os.environ.get("PAIR_MAX", "1.15"))
 FAV_REM, FAV_LO, FAV_HI = int(os.environ.get("FAV_REM", "90")), float(os.environ.get("FAV_LO", "0.60")), float(os.environ.get("FAV_HI", "0.95"))
 ASSETS = {"btc": "BTCUSDT", "eth": "ETHUSDT", "sol": "SOLUSDT", "xrp": "XRPUSDT", "doge": "DOGEUSDT", "bnb": "BNBUSDT",
           "hype": "HYPEUSDT", "zec": "ZECUSDT"}
@@ -182,15 +183,17 @@ def main():
                 key = (a, w, st)
                 acc = starts.get(key)
                 if acc is None:
-                    if now - st > 6:
-                        continue  # did not see the start
+                    m = market(a, w, st)
+                    if not m:
+                        continue
                     kt = twap_at(a, st)
                     pre = [p for t, p in ser if st - 60 <= t < st]
                     kp = sum(pre) / len(pre) if len(pre) >= 20 else None
-                    if kt is None and kp is None:
-                        continue
-                    acc = starts[key] = {"K": kt if kt is not None else kp, "K_src": "twap" if kt is not None else src,
-                                         "K_twap": kt, "K_proxy": kp, "spot_start": s_now}
+                    K0 = m.get("ptb") or kt or kp
+                    if K0 is None:
+                        continue  # no reference yet (market() re-reads the price to beat once more)
+                    acc = starts[key] = {"K": K0, "K_src": "ptb" if m.get("ptb") else "twap" if kt is not None else src,
+                                         "K_twap": kt, "K_proxy": kp, "spot_start": s_now if now - st < 6 else None}
                 rem = end - now
                 if rem > LAST_S or rem < 2 or not sg:
                     continue
@@ -212,8 +215,7 @@ def main():
                     z = (g * A + (1 - g) * s_now - K) / sd
                 p_up = min(max(phi(z), 0.001), 0.999)
                 jobs.append((a, w, st, end, rem, m, p_up, z, g, A, s_now, K, acc["K_src"], sg, src))
-        if jobs:
-            books = list(pool.map(lambda j: (book(j[5]["tokens"][0]), book(j[5]["tokens"][1])), jobs))
+        books = list(pool.map(lambda j: (book(j[5]["tokens"][0]), book(j[5]["tokens"][1])), jobs)) if jobs else []
         new_trades = False
         for j, (b_up, b_dn) in zip(jobs, books):
             a, w, st, end, rem, m, p_up, z, g, A, s_now, K, k_src, sg, src = j
@@ -251,6 +253,45 @@ def main():
                           "end": end, "result": None}
                     trades.append(tr); done.add((strat, m["slug"], side)); new_trades = True
                     print(f"{datetime.now(timezone.utc):%H:%M:%S} PAPER[{strat}] BUY {side} {m['slug']} @ {a_px} x {shares} p {p_side:.3f} z {zs:.1f} rem {int(rem)}s", flush=True)
+        # PAIR: a 15-minute window and the 5-minute window that ends at the same second resolve off the SAME
+        # final TWAP, compared with two different prices to beat. One share of each of the right sides pays
+        # at least $1 and $2 when the final lands between the two references (0 violations in 132 pairs).
+        seen = {}
+        for j, bk in zip(jobs, books):
+            seen[(j[0], j[1])] = (j, bk)
+        for a in ASSETS:
+            if (a, 900) not in seen or (a, 300) not in seen:
+                continue
+            (j15, (u15, d15)), (j5, (u5, d5)) = seen[(a, 900)], seen[(a, 300)]
+            if j15[3] != j5[3] or not all((u15, d15, u5, d5)):
+                continue  # must end at the same second, both books present
+            k15, k5, p15, p5 = j15[11], j5[11], j15[6], j5[6]
+            if k15 < k5:
+                legs = (("Up", j15, u15[0]), ("Down", j5, d5[0])); p_mid = p15 - p5
+            elif k15 > k5:
+                legs = (("Down", j15, d15[0]), ("Up", j5, u5[0])); p_mid = p5 - p15
+            else:
+                continue
+            a1, a2 = legs[0][2][0], legs[1][2][0]
+            fees = 0.07 * a1 * (1 - a1) + 0.07 * a2 * (1 - a2)
+            ev = 1 + max(p_mid, 0.0) - (a1 + a2) - fees
+            with open(f"{D}/pairs.jsonl", "a") as fh:
+                fh.write(json.dumps({"ts": round(now, 1), "asset": a, "end": j15[3], "rem": int(j15[4]), "k15": k15, "k5": k5,
+                                     "legs": [(s_, jj[5]["slug"], ask_[0], ask_[1]) for s_, jj, ask_ in legs], "sum": round(a1 + a2, 3),
+                                     "p_mid": round(p_mid, 4), "ev": round(ev, 4)}) + "\n")
+            key = ("pair", j15[5]["slug"], "both")
+            if ev >= PAIR_EDGE and a1 + a2 <= PAIR_MAX and key not in done:
+                shares = round(min(legs[0][2][1], legs[1][2][1], SIZE_USD / (a1 + a2)), 2)
+                if shares < 5:
+                    continue
+                done.add(key); new_trades = True
+                for s_, jj, ask_ in legs:
+                    fee = 0.07 * ask_[0] * (1 - ask_[0])
+                    trades.append({"ts": int(now), "slug": jj[5]["slug"], "asset": a, "window": jj[1], "side": s_, "price": ask_[0], "shares": shares,
+                                   "fee": round(fee * shares, 4), "p_model": round(jj[6] if s_ == "Up" else 1 - jj[6], 4), "edge": round(ev, 4),
+                                   "rem_s": int(jj[4]), "K": jj[11], "k_src": jj[12], "src": jj[14], "spot": jj[10], "model": "v4", "strat": "pair",
+                                   "pair": j15[5]["slug"], "p_mid": round(p_mid, 4), "end": jj[3], "result": None})
+                print(f"{datetime.now(timezone.utc):%H:%M:%S} PAPER[pair] {a} {legs[0][0]}15m@{a1} + {legs[1][0]}5m@{a2} x {shares} sum {a1 + a2:.2f} p_mid {p_mid:.2f} ev {ev:+.3f} rem {int(j15[4])}s", flush=True)
         if new_trades or settle(trades):
             write_trades(trades)
         # window summaries, ~70 s after each window ends
