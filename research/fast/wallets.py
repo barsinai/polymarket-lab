@@ -46,21 +46,32 @@ def fetch_meta(slug):
                   "window": 900 if "-15m-" in slug else 300, "volume": float(m.get("volumeNum") or 0)}
 
 
-def fetch_tape(slug, cid):
-    out, offset = [], 0
-    while offset <= 3000:
-        b = get(f"{DATA}/trades", {"market": cid, "limit": 500, "offset": offset, "takerOnly": "false"})
-        if b is None:
+def fetch_tape(slug, cid, probe=False):
+    """Data API v2: GET /v2/trades?condition_id=..&limit=500 (+cursor), both sides when taker_only=false works"""
+    out, cursor = [], None
+    for _ in range(40):
+        params = {"condition_id": cid, "limit": 500, "taker_only": "false"}
+        if cursor:
+            params["cursor"] = cursor
+        d = get(f"{DATA}/v2/trades", params)
+        rows = (d or {}).get("data") if isinstance(d, dict) else None
+        if probe:
+            print("probe", slug, "status", type(d).__name__, "rows", len(rows or []), "sample", json.dumps((rows or [None])[0])[:400])
+            probe = False
+        if not rows:
             break
-        out += b
-        if len(b) < 500:
+        out += rows
+        pg = d.get("pagination") or {}
+        if not pg.get("has_more") or not pg.get("next_cursor"):
             break
-        offset += 500
+        cursor = pg["next_cursor"]
     rows = []
     for t in out:
         try:
-            rows.append({"slug": slug, "w": t.get("proxyWallet"), "side": t.get("side"), "o": t.get("outcome"),
-                         "p": float(t.get("price")), "s": float(t.get("size")), "ts": int(t.get("timestamp")), "tx": (t.get("transactionHash") or "")[:12]})
+            oi = t.get("outcome_index"); o = t.get("outcome") or ("Up" if oi == 0 else "Down" if oi == 1 else None)
+            rows.append({"slug": slug, "w": t.get("proxy_wallet") or t.get("proxyWallet"), "side": t.get("side"), "o": o,
+                         "p": float(t.get("price")), "s": float(t.get("size")), "ts": int(float(t.get("timestamp"))),
+                         "tx": (t.get("transaction_hash") or t.get("transactionHash") or "")[:12], "role": t.get("trader_side") or t.get("role")})
         except (TypeError, ValueError):
             pass
     return rows
@@ -84,6 +95,8 @@ except OSError:
     pass
 todo = [s for s in slugs if s in meta and meta[s]["cid"] and s not in have]
 print("tape to fetch", len(todo))
+if todo:
+    fetch_tape(todo[0], meta[todo[0]]["cid"], probe=True)
 with gzip.open(f"{D}/tape.jsonl.gz", "at") as fh, ThreadPoolExecutor(4) as ex:
     n = 0
     for rows in ex.map(lambda s: fetch_tape(s, meta[s]["cid"]), todo):
