@@ -21,7 +21,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install -q requests
+      - run: pip install -q requests websockets
       - run: mkdir -p logs && python -u research/${{ inputs.script }} 2>&1 | tee logs/script-log.txt
       - name: Save
         if: always()
