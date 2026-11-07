@@ -10,7 +10,7 @@ from datetime import datetime, timezone
 
 URL = "wss://ws-live-data.polymarket.com"
 TOPICS = ("crypto_prices_chainlink", "crypto_prices_twap_sixty", "crypto_prices_twap_thirty", "crypto_prices")
-D = "data/fast/rtds"
+D = os.environ.get("FAST_DIR", "data/fast") + "/rtds"
 os.makedirs(D, exist_ok=True)
 
 latest = {}                       # (topic, symbol) -> (ts_ms, value)

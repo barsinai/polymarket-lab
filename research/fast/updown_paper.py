@@ -1,93 +1,115 @@
-"""Paper bot for Polymarket's short "Up or Down" crypto markets (BTC/ETH, 5 and 15 minutes). NO ORDERS.
+"""Paper bot v4 for Polymarket's short "Up or Down" crypto markets (5 and 15 minutes, 8 assets). NO ORDERS.
 
-Resolution: Up if the Chainlink TWAP of the window >= the price at the window's start. Late in a window most
-of the average is already fixed, so the outcome becomes predictable from the exchange price.
+Resolution (market description + 598 calibrated windows): Up iff the Chainlink 60-second TWAP at the END of the
+window >= the "price to beat" (the same TWAP at the START). Polymarket broadcasts both the Chainlink price and
+that TWAP on its public feed (research/fast/rtds.py), so the quantity the market resolves on is known exactly,
+and in the last minute most of the final TWAP is already fixed.
 
-Every second: BTC/ETH price (Binance, Coinbase fallback). Per active window: start price K (first price we
-saw at/after the start), running mean A of our 1-second prices, elapsed fraction f.
-Model: final avg = f*A + (1-f)*M, M ~ Normal(S, sigma^2 * T_rem / 3)   (mean of Brownian motion over T_rem)
-       P(Up) = Phi((f*A + (1-f)*S - K) / ((1-f) * sigma * sqrt(T_rem / 3)))      sigma from the last 15 min.
-Every 3 s in the last LAST_S seconds: read both order books; a paper trade when the model's probability
-beats the best ask by EDGE after the taker fee (crypto: 0.07 * p * (1 - p) per share), up to SIZE_USD per
-window and side, at the displayed size. Settled on the market's actual result (Gamma), so model errors
-(our price vs Chainlink's) show up as losses. Output: data/fast/trades.jsonl, data/fast/report.json.
+Every ~2 s in the last LAST_S seconds of each window: read both order books; log an observation; paper-trade
+under three rules, each settled on the market's real result (Gamma):
+  exact  model probability (exact feed) beats the ask by EDGE after the taker fee (0.07*p*(1-p) per share)
+  lock   last 60 s only: the outcome is locked beyond LOCK_Z standard deviations and the ask is <= LOCK_ASK
+  fav    control: buy the market's favourite at FAV_LO..FAV_HI with <= FAV_REM s left (no model)
+Model: final TWAP = g*A + (1-g)*M, A = mean of Chainlink prices in [end-60, now], g = share of the last minute
+elapsed, M ~ Normal(S, sigma^2 * r/3) (mean of a Brownian path over the remaining r seconds); before the last
+minute: S ~ Normal(S_now, sigma^2 * (time until end-60 + 20)). sigma = 1 s Chainlink log-return std (15 min).
+Falls back to Binance (1 s REST) for assets without a Chainlink feed.
+Output: data/fast/obs.jsonl, trades.jsonl, windows.jsonl, report.json; feed in data/fast/rtds/.
 """
 import json, math, os, sys, time, threading
 from collections import deque
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 import requests
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, os.path.join(os.path.dirname(HERE), "live"))
+sys.path.insert(0, HERE); sys.path.insert(0, os.path.join(os.path.dirname(HERE), "live"))
 try:
     import netprefs  # noqa: F401  (IPv6 for *.polymarket.com on the Finnish server)
 except Exception:  # noqa: BLE001
     pass
+import rtds  # noqa: E402
 
-D = "data/fast"; os.makedirs(D, exist_ok=True)
+D = os.environ.get("FAST_DIR", "data/fast"); os.makedirs(D, exist_ok=True)
 RUN_MIN = float(os.environ.get("RUN_MIN", "60"))
-LAST_S = int(os.environ.get("LAST_S", "150"))
+LAST_S = int(os.environ.get("LAST_S", "120"))
 EDGE = float(os.environ.get("EDGE", "0.03"))
 SIZE_USD = float(os.environ.get("SIZE_USD", "20"))
+LOCK_Z, LOCK_ASK = float(os.environ.get("LOCK_Z", "2.5")), float(os.environ.get("LOCK_ASK", "0.97"))
 FAV_REM, FAV_LO, FAV_HI = int(os.environ.get("FAV_REM", "90")), float(os.environ.get("FAV_LO", "0.60")), float(os.environ.get("FAV_HI", "0.95"))
-ASSETS = {"btc": ("BTCUSDT", "BTC-USD"), "eth": ("ETHUSDT", "ETH-USD")}
+ASSETS = {"btc": "BTCUSDT", "eth": "ETHUSDT", "sol": "SOLUSDT", "xrp": "XRPUSDT", "doge": "DOGEUSDT", "bnb": "BNBUSDT",
+          "hype": "HYPEUSDT", "zec": "ZECUSDT"}
 WINDOWS = (300, 900)
 GAMMA, CLOB = "https://gamma-api.polymarket.com", "https://clob.polymarket.com"
 S = requests.Session(); S.headers["User-Agent"] = "polymarket-lab-research/0.1"
-px = {a: deque(maxlen=1200) for a in ASSETS}          # (ts, price) last 20 min
+px = {a: deque(maxlen=1500) for a in ASSETS}          # Binance proxy (ts, price), last ~25 min
+CL, TW = "crypto_prices_chainlink", "crypto_prices_twap_sixty"
 
 
-def price(a):
-    bsym, csym = ASSETS[a]
+def binance_price(a):
     try:
-        return float(S.get("https://api.binance.com/api/v3/ticker/price", params={"symbol": bsym}, timeout=3).json()["price"])
+        return float(S.get("https://api.binance.com/api/v3/ticker/price", params={"symbol": ASSETS[a]}, timeout=3).json()["price"])
     except Exception:  # noqa: BLE001
-        try:
-            return float(S.get(f"https://api.exchange.coinbase.com/products/{csym}/ticker", timeout=3).json()["price"])
-        except Exception:  # noqa: BLE001
-            return None
+        return None
 
 
 def sampler(stop):
     while not stop.is_set():
         t = time.time()
         for a in ASSETS:
-            p = price(a)
+            p = binance_price(a)
             if p:
                 px[a].append((t, p))
         time.sleep(max(0.0, 1.0 - (time.time() - t)))
 
 
-def sigma(a):
-    v = [p for _, p in px[a]]
+def feed(a):
+    """(source, [(ts, price)]) for the last 20 minutes: Chainlink when the feed has it, else Binance"""
+    now = time.time()
+    cl = rtds.series(CL, f"{a}/usd", now - 1200, now + 5)
+    if len(cl) >= 120 and now - cl[-1][0] < 10:
+        return "chainlink", cl
+    return "binance", [(t, p) for t, p in px[a] if t >= now - 1200]
+
+
+def sigma_of(ser):
+    v = [p for _, p in ser]
     if len(v) < 120:
         return None
-    r = [math.log(b / x) for x, b in zip(v, v[1:])]
+    r = [math.log(b / x) for x, b in zip(v, v[1:]) if x > 0 and b > 0]
+    dt = (ser[-1][0] - ser[0][0]) / max(len(r), 1)
     m = sum(r) / len(r)
-    return math.sqrt(sum((x - m) ** 2 for x in r) / (len(r) - 1))  # per ~1 s
+    return math.sqrt(sum((x - m) ** 2 for x in r) / (len(r) - 1)) / math.sqrt(max(dt, 0.2))  # per 1 s
 
 
 def phi(x):
     return 0.5 * (1 + math.erf(x / math.sqrt(2)))
 
 
-meta = {}  # slug -> {tokens:[up,down], cid}
+meta = {}
 
 
 def market(a, w, start):
+    """tokens + the official price to beat (Gamma eventMetadata.priceToBeat, re-read once if missing)"""
     slug = f"{a}-updown-{w // 60}m-{start}"
-    if slug in meta:
-        return meta[slug]
+    cur = meta.get(slug)
+    if cur is not None and (cur.get("ptb") is not None or cur.get("tries", 0) >= 2):
+        return cur
+    if slug in meta and cur is None:
+        return None
     try:
         ev = S.get(f"{GAMMA}/events", params={"slug": slug}, timeout=10).json()
         m = ev[0]["markets"][0]
-        meta[slug] = {"tokens": json.loads(m["clobTokenIds"]), "cid": m["conditionId"], "slug": slug}
+        ptb = (ev[0].get("eventMetadata") or {}).get("priceToBeat")
+        meta[slug] = {"tokens": json.loads(m["clobTokenIds"]), "cid": m["conditionId"], "slug": slug,
+                      "ptb": float(ptb) if ptb else None, "tries": (cur or {}).get("tries", 0) + 1}
     except Exception:  # noqa: BLE001
-        meta[slug] = None
+        if cur is None:
+            meta[slug] = None
     return meta[slug]
 
 
-def best_ask(tok):
+def book(tok):
     try:
         b = S.get(f"{CLOB}/book", params={"token_id": tok}, timeout=4).json()
         asks = sorted((float(x["price"]), float(x["size"])) for x in b.get("asks") or [])
@@ -98,7 +120,6 @@ def best_ask(tok):
 
 
 def settle(trades):
-    """fill in outcome for trades whose window has ended (Gamma outcomePrices once closed)"""
     changed = False
     for t in trades:
         if t.get("result") is not None or time.time() < t["end"] + 90:
@@ -117,146 +138,156 @@ def settle(trades):
     return changed
 
 
+def twap_at(a, ts, tol=4.0):
+    """feed TWAP value at the first message with timestamp >= ts (within tol seconds), else None"""
+    pts = rtds.series(TW, f"{a}/usd", ts, ts + tol)
+    return pts[0][1] if pts else None
+
+
+def write_trades(trades):
+    with open(f"{D}/trades.jsonl", "w") as fh:
+        for x in trades:
+            fh.write(json.dumps(x) + "\n")
+
+
 def main():
     stop = threading.Event()
     threading.Thread(target=sampler, args=(stop,), daemon=True).start()
+    rt_stop = rtds.start()
     try:
-        trades = [t for t in (json.loads(l) for l in open(f"{D}/trades.jsonl")) if t.get("model") == "v2"]
+        trades = [t for t in (json.loads(l) for l in open(f"{D}/trades.jsonl")) if t.get("model") in ("v2", "v4")]
     except OSError:
         trades = []
     for t in trades:
         t.setdefault("strat", "v2")
     done = {(t["strat"], t["slug"], t["side"]) for t in trades}
-    starts = {}   # (asset, w, start) -> [K, sum, n]
+    starts = {}   # (asset, w, start) -> {K, K_src, ...}
+    pool = ThreadPoolExecutor(max_workers=8)
     end_at = time.time() + RUN_MIN * 60
-    time.sleep(130)  # warm up sigma
+    time.sleep(130)  # warm up sigma / feed
+    print("feed", json.dumps(rtds.stats)[:300], flush=True)
+    n_obs = 0
     while time.time() < end_at:
+        loop_t = time.time()
         now = time.time()
+        jobs = []
         for a in ASSETS:
-            if not px[a]:
+            src, ser = feed(a)
+            if len(ser) < 60:
                 continue
-            t_last, s_now = px[a][-1]
+            s_now = ser[-1][1]
+            sg = sigma_of(ser)
             for w in WINDOWS:
                 st = int(now // w * w); end = st + w
                 key = (a, w, st)
                 acc = starts.get(key)
                 if acc is None:
-                    first = [p for t, p in px[a] if t >= st]
-                    if not first or first and [t for t, _ in px[a] if t >= st][0] - st > 3:
-                        continue  # we did not see the start: no reliable K
-                    acc = starts[key] = {"K": first[0], "sum": 0.0, "n": 0, "last": st}
-                for t, p in px[a]:
-                    if t > acc["last"]:
-                        acc["sum"] += p; acc["n"] += 1; acc["last"] = t
+                    if now - st > 6:
+                        continue  # did not see the start
+                    kt = twap_at(a, st)
+                    pre = [p for t, p in ser if st - 60 <= t < st]
+                    kp = sum(pre) / len(pre) if len(pre) >= 20 else None
+                    if kt is None and kp is None:
+                        continue
+                    acc = starts[key] = {"K": kt if kt is not None else kp, "K_src": "twap" if kt is not None else src,
+                                         "K_twap": kt, "K_proxy": kp, "spot_start": s_now}
                 rem = end - now
-                if rem > LAST_S or rem < 3:
+                if rem > LAST_S or rem < 2 or not sg:
                     continue
-                sg = sigma(a)
-                if not sg:
-                    continue
-                # Calibrated rule (11-07, 536/546 windows): Up iff mean price of the LAST 60 s of the window
-                # >= mean price of the 60 s BEFORE the window starts.
-                pre = [p for t, p in px[a] if st - 60 <= t < st]
-                if len(pre) < 40:
-                    continue
-                K = sum(pre) / len(pre)
-                if now < end - 60:
-                    sd = s_now * sg * math.sqrt((end - 60 - now) + 20.0)
-                    z = (s_now - K) / max(sd, 1e-9)
-                else:
-                    last = [p for t, p in px[a] if end - 60 <= t <= now]
-                    g = min(max((now - (end - 60)) / 60.0, 0.0), 1.0)
-                    A = sum(last) / len(last) if last else s_now
-                    r = max(end - now, 1.0)
-                    sd = (1 - g) * s_now * sg * math.sqrt(r / 3)
-                    z = (g * A + (1 - g) * s_now - K) / max(sd, 1e-9)
-                p_up = min(max(phi(z), 0.002), 0.998)
                 m = market(a, w, st)
                 if not m:
                     continue
-                books = {}
-                for side, tok in (("Up", m["tokens"][0]), ("Down", m["tokens"][1])):
-                    books[side] = best_ask(tok)
-                for side, p_side in (("Up", p_up), ("Down", 1 - p_up)):
-                    ask, bid = books[side]
-                    if not ask:
+                if m.get("ptb") and acc["K_src"] != "ptb":
+                    acc["K"], acc["K_src"] = m["ptb"], "ptb"
+                K = acc["K"]
+                if now < end - 60:
+                    sd = s_now * sg * math.sqrt((end - 60 - now) + 20.0)
+                    z = (s_now - K) / max(sd, 1e-9); g = 0.0; A = None
+                else:
+                    lastm = [p for t, p in ser if end - 60 <= t <= now]
+                    g = min(max((now - (end - 60)) / 60.0, 0.0), 1.0)
+                    A = sum(lastm) / len(lastm) if lastm else s_now
+                    r = max(end - now, 1.0)
+                    sd = max((1 - g) * s_now * sg * math.sqrt(r / 3), 1e-9)
+                    z = (g * A + (1 - g) * s_now - K) / sd
+                p_up = min(max(phi(z), 0.001), 0.999)
+                jobs.append((a, w, st, end, rem, m, p_up, z, g, A, s_now, K, acc["K_src"], sg, src))
+        if jobs:
+            books = list(pool.map(lambda j: (book(j[5]["tokens"][0]), book(j[5]["tokens"][1])), jobs))
+        new_trades = False
+        for j, (b_up, b_dn) in zip(jobs, books):
+            a, w, st, end, rem, m, p_up, z, g, A, s_now, K, k_src, sg, src = j
+            for side, (ask, bid), p_side in (("Up", b_up, p_up), ("Down", b_dn, 1 - p_up)):
+                if not ask:
+                    continue
+                zs = z if side == "Up" else -z
+                with open(f"{D}/obs.jsonl", "a") as fh:
+                    fh.write(json.dumps({"ts": round(now, 1), "slug": m["slug"], "side": side, "ask": ask[0], "ask_sz": ask[1],
+                                         "bid": bid[0] if bid else None, "bid_sz": bid[1] if bid else None, "p_model": round(p_side, 4),
+                                         "z": round(zs, 2), "rem": int(rem), "spot": s_now, "K": K, "k_src": k_src, "src": src,
+                                         "g": round(g, 3), "A": A, "sigma": round(sg, 7), "v": 4}) + "\n")
+                n_obs += 1
+                a_px, a_sz = ask
+                fee = 0.07 * a_px * (1 - a_px)
+                edge = p_side - a_px - fee
+                picks = []
+                if edge >= EDGE and 0.02 <= a_px <= 0.98:
+                    picks.append("exact")
+                if rem <= 60 and zs >= LOCK_Z and a_px <= LOCK_ASK and k_src in ("ptb", "twap") and src == "chainlink":
+                    picks.append("lock")
+                if rem <= FAV_REM and FAV_LO <= a_px <= FAV_HI:
+                    picks.append("fav")
+                for strat in picks:
+                    if (strat, m["slug"], side) in done:
                         continue
-                    with open(f"{D}/obs.jsonl", "a") as fh:
-                        fh.write(json.dumps({"ts": int(now), "slug": m["slug"], "side": side, "ask": ask[0], "ask_sz": ask[1],
-                                             "bid": bid[0] if bid else None, "p_model": round(p_side, 4), "rem": int(rem),
-                                             "spot": s_now, "K": round(K, 4), "v": 3}) + "\n")
-                    a_px, a_sz = ask
-                    fee = 0.07 * a_px * (1 - a_px)
-                    edge = p_side - a_px - fee
-                    # three paper strategies side by side (11-07): v2 = our model vs the book;
-                    # fav = buy the market's favourite late; fav_agree = favourite only when our model agrees
-                    picks = []
-                    if edge >= EDGE and 0.02 <= a_px <= 0.98:
-                        picks.append("v2")
-                    if rem <= FAV_REM and FAV_LO <= a_px <= FAV_HI:
-                        picks.append("fav")
-                        if p_side > 0.5:
-                            picks.append("fav_agree")
-                    for strat in picks:
-                        if (strat, m["slug"], side) in done or any((strat, m["slug"], o) in done for o in ("Up", "Down") if strat != "v2"):
-                            continue
-                        shares = round(min(a_sz, SIZE_USD / a_px), 2)
-                        if shares < 5:
-                            continue
-                        tr = {"ts": int(now), "slug": m["slug"], "asset": a, "window": w, "side": side, "price": a_px, "shares": shares,
-                              "fee": round(fee * shares, 4), "p_model": round(p_side, 4), "edge": round(edge, 4), "rem_s": int(rem),
-                              "K": round(K, 4), "spot": s_now, "model": "v2", "strat": strat, "end": end, "result": None}
-                        trades.append(tr); done.add((strat, m["slug"], side))
-                        with open(f"{D}/trades.jsonl", "w") as fh:
-                            for x in trades:
-                                fh.write(json.dumps(x) + "\n")
-                        print(f"{datetime.now(timezone.utc):%H:%M:%S} PAPER[{strat}] BUY {side} {m['slug']} @ {a_px} x {shares} model {p_side:.3f} rem {int(rem)}s", flush=True)
-        if settle(trades):
-            with open(f"{D}/trades.jsonl", "w") as fh:
-                for x in trades:
-                    fh.write(json.dumps(x) + "\n")
-        # window summaries for calibrating the resolution rule: written once, ~70 s after each window ends
+                    if strat != "exact" and any((strat, m["slug"], o) in done for o in ("Up", "Down")):
+                        continue  # one side per window for lock/fav
+                    shares = round(min(a_sz, SIZE_USD / a_px), 2)
+                    if shares < 5:
+                        continue
+                    tr = {"ts": int(now), "slug": m["slug"], "asset": a, "window": w, "side": side, "price": a_px, "shares": shares,
+                          "fee": round(fee * shares, 4), "p_model": round(p_side, 4), "z": round(zs, 2), "edge": round(edge, 4),
+                          "rem_s": int(rem), "K": K, "k_src": k_src, "src": src, "spot": s_now, "model": "v4", "strat": strat,
+                          "end": end, "result": None}
+                    trades.append(tr); done.add((strat, m["slug"], side)); new_trades = True
+                    print(f"{datetime.now(timezone.utc):%H:%M:%S} PAPER[{strat}] BUY {side} {m['slug']} @ {a_px} x {shares} p {p_side:.3f} z {zs:.1f} rem {int(rem)}s", flush=True)
+        if new_trades or settle(trades):
+            write_trades(trades)
+        # window summaries, ~70 s after each window ends
         for (a_, w_, st_), acc_ in list(starts.items()):
             end_ = st_ + w_
             if acc_.get("logged") or now < end_ + 70:
                 continue
-            ser = [(t, p) for t, p in px[a_] if st_ - 120 <= t <= end_ + 60]
+            src_, ser_ = feed(a_)
             def mean_(lo, hi):
-                v = [p for t, p in ser if lo <= t < hi]
-                return round(sum(v) / len(v), 4) if v else None
+                v = [p for t, p in ser_ if lo <= t < hi]
+                return round(sum(v) / len(v), 6) if v else None
             def at_(x):
-                v = [p for t, p in ser if t >= x]
+                v = [p for t, p in ser_ if t >= x]
                 return v[0] if v else None
-            rec = {"slug": f"{a_}-updown-{w_ // 60}m-{st_}", "asset": a_, "window": w_, "start": st_,
-                   "spot_start": at_(st_), "spot_end": at_(end_), "mean_window": mean_(st_, end_),
-                   "mean_last60": mean_(end_ - 60, end_), "mean_pre60": mean_(st_ - 60, st_), "mean_first60": mean_(st_, st_ + 60), "result": None}
+            te = twap_at(a_, end_)
+            rec = {"slug": f"{a_}-updown-{w_ // 60}m-{st_}", "asset": a_, "window": w_, "start": st_, "src": src_,
+                   "K": acc_.get("K"), "K_src": acc_.get("K_src"), "K_twap": acc_.get("K_twap"), "K_proxy": acc_.get("K_proxy"), "twap_end": te,
+                   "spot_start": acc_.get("spot_start"), "spot_end": at_(end_), "mean_window": mean_(st_, end_),
+                   "mean_last60": mean_(end_ - 60, end_), "mean_pre60": mean_(st_ - 60, st_), "mean_first60": mean_(st_, st_ + 60),
+                   "rule_twap": (te >= acc_["K_twap"]) if (te is not None and acc_.get("K_twap") is not None) else None, "v": 4}
             with open(f"{D}/windows.jsonl", "a") as fh:
                 fh.write(json.dumps(rec) + "\n")
             acc_["logged"] = True
         starts = {k: v for k, v in starts.items() if k[2] + k[1] > now - 200}
-        time.sleep(3)
-    stop.set()
-    settle(trades)
-    with open(f"{D}/trades.jsonl", "w") as fh:
-        for x in trades:
-            fh.write(json.dumps(x) + "\n")
+        time.sleep(max(0.2, 2.0 - (time.time() - loop_t)))
+    stop.set(); rt_stop.set()
+    settle(trades); write_trades(trades)
     done_t = [t for t in trades if t.get("result") is not None]
-    by_strat = {}
+    by_strat, by_day = {}, {}
     for t in done_t:
-        b = by_strat.setdefault(t.get("strat", "v2"), {"trades": 0, "won": 0, "staked": 0.0, "pnl": 0.0})
-        b["trades"] += 1; b["won"] += t["result"]; b["staked"] += t["price"] * t["shares"]; b["pnl"] += t["pnl"]
-    by_day = {}
-    for t in done_t:
-        d = datetime.fromtimestamp(t["ts"], timezone.utc).strftime("%Y-%m-%d")
-        d += " " + t.get("strat", "v2")
-        b = by_day.setdefault(d, {"trades": 0, "won": 0, "staked": 0.0, "pnl": 0.0})
-        b["trades"] += 1; b["won"] += t["result"]; b["staked"] += t["price"] * t["shares"]; b["pnl"] += t["pnl"]
-    rep = {"updated": datetime.now(timezone.utc).isoformat(), "trades": len(trades), "settled": len(done_t),
-           "win_rate": round(sum(t["result"] for t in done_t) / len(done_t), 3) if done_t else None,
-           "avg_price": round(sum(t["price"] for t in done_t) / len(done_t), 3) if done_t else None,
-           "pnl_usd": round(sum(t["pnl"] for t in done_t), 2), "staked_usd": round(sum(t["price"] * t["shares"] for t in done_t), 2),
-           "by_strat": {k: {kk: round(vv, 2) if isinstance(vv, float) else vv for kk, vv in b.items()} for k, b in sorted(by_strat.items())},
-           "by_day": {d: {k: round(v, 2) if isinstance(v, float) else v for k, v in b.items()} for d, b in sorted(by_day.items())}}
+        for key, dct in ((t.get("strat", "v2"), by_strat), (datetime.fromtimestamp(t["ts"], timezone.utc).strftime("%Y-%m-%d") + " " + t.get("strat", "v2"), by_day)):
+            b = dct.setdefault(key, {"trades": 0, "won": 0, "staked": 0.0, "pnl": 0.0})
+            b["trades"] += 1; b["won"] += t["result"]; b["staked"] += t["price"] * t["shares"]; b["pnl"] += t["pnl"]
+    rnd = lambda b: {k: round(v, 2) if isinstance(v, float) else v for k, v in b.items()}
+    rep = {"updated": datetime.now(timezone.utc).isoformat(), "trades": len(trades), "settled": len(done_t), "obs_this_run": n_obs,
+           "feed": {k: v for k, v in rtds.stats.items() if k != "topics"}, "feed_topics": rtds.stats.get("topics"),
+           "by_strat": {k: rnd(b) for k, b in sorted(by_strat.items())}, "by_day": {d: rnd(b) for d, b in sorted(by_day.items())}}
     json.dump(rep, open(f"{D}/report.json", "w"), indent=1)
     print(json.dumps(rep), flush=True)
 
