@@ -22,11 +22,11 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -q requests websockets
-      - run: mkdir -p logs && python -u research/${{ inputs.script }} 2>&1 | tee logs/script-log.txt
+      - run: mkdir -p logs && python -u research/${{ inputs.script }} 2>&1 | tee "logs/script-$(basename ${{ inputs.script }} .py).txt"
       - name: Save
         if: always()
         run: |
           git config user.name "polymarket-lab-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add --sparse logs/script-log.txt data/fast && git commit -qm "Script output [skip ci]" || true
+          git add --sparse logs data/fast && git commit -qm "Script output [skip ci]" || true
           for i in 1 2 3; do git pull -q --rebase -X theirs origin main && git push -q && break; sleep 5; done
