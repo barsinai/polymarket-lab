@@ -1,22 +1,73 @@
 windows 598 meta 598
 tape to fetch 598
-fills fetched 0
-fills with result 0 wallets 0
-all wallets: fills 0 volume $0 net pnl $0 (should be ~0 before fees)
+probe btc-updown-5m-1793963400 status dict rows 500 sample {"proxy_wallet": "0x36b6c50b7c4fd1df3c18fd812696504d8aa68cc6", "side": "SELL", "token_id": "104578785991711495098541484217708246756920586866782135918045003836264915265773", "condition_id": "0xc0b53787a1040c4be3c3afc0e8f50bcb918eb81ca3aa41b94e14462f4ac6cc34", "size": 5.56, "price": 0.999, "timestamp": 1793963727, "title": "Bitcoin Up or Down - November 6, 6:10AM-6:15AM ET", "slug": "btc-updown-5m-1
+fills fetched 1485358
+fills with result 1485358 wallets 9163
+all wallets: fills 1485358 volume $15,453,124 net pnl $-53 (should be ~0 before fees)
 
 TOP 25 by P&L
+{"wallet": "0x7d211801a13f12357505c90b88f2b46e61598e39", "fills": 105, "windows": 7, "volume": 28724.4, "pnl": 30469.1, "pnl_per_$": 1.061, "buys": 105, "sells": 0, "buy_win_rate": 0.895, "median_rem_s": 177, "share_last60": 0.13, "median_price": 0.4033337448}
+{"wallet": "0x3f56eeae91471737f45fe04a7ac253be9fc55860", "fills": 155, "windows": 6, "volume": 12857.5, "pnl": 26805.0, "pnl_per_$": 2.085, "buys": 155, "sells": 0, "buy_win_rate": 0.413, "median_rem_s": 36, "share_last60": 0.69, "median_price": 0.02}
+{"wallet": "0xf0afe8f44d0e37c3ca79dc6b0f673be64b6160d8", "fills": 734, "windows": 13, "volume": 76195.5, "pnl": 24584.3, "pnl_per_$": 0.323, "buys": 734, "sells": 0, "buy_win_rate": 0.544, "median_rem_s": 144, "share_last60": 0.09, "median_price": 0.6}
+{"wallet": "0xd7c9cd48f86cdfecccef1eb91f63e843ebd3b2a6", "fills": 162, "windows": 6, "volume": 44202.2, "pnl": 10968.1, "pnl_per_$": 0.248, "buys": 162, "sells": 0, "buy_win_rate": 0.531, "median_rem_s": 201, "share_last60": 0.07, "median_price": 0.5}
+{"wallet": "0x7cd156802a8c9f4c9c8a1fa6270529c8b43e8d05", "fills": 1581, "windows": 36, "volume": 22172.3, "pnl": 5527.2, "pnl_per_$": 0.249, "buys": 1581, "sells": 0, "buy_win_rate": 0.573, "median_rem_s": 132, "share_last60": 0.08, "median_price": 0.47}
+{"wallet": "0x56f609c609975454bf851f0d91079fbc4a5fe251", "fills": 10079, "windows": 231, "volume": 132593.1, "pnl": 5519.8, "pnl_per_$": 0.042, "buys": 0, "sells": 10079, "buy_win_rate": null, "median_rem_s": null, "share_last60": null, "median_price": null}
+{"wallet": "0xeebde7a0e019a63e6b476eb425505b7b3e6eba30", "fills": 6801, "windows": 220, "volume": 213212.3, "pnl": 4991.2, "pnl_per_$": 0.023, "buys": 6801, "sells": 0, "buy_win_rate": 0.601, "median_rem_s": 183, "share_last60": 0.11, "median_price": 0.5543204785}
+{"wallet": "0x82ebb00dd88cdc1faced07d693900a490c24f2b4", "fills": 399, "windows": 117, "volume": 42325.5, "pnl": 4571.7, "pnl_per_$": 0.108, "buys": 399, "sells": 0, "buy_win_rate": 0.476, "median_rem_s": 156, "share_last60": 0.11, "median_price": 0.3596403591}
+{"wallet": "0x00257ddfe6c9b0b220a994221bedec5db655b128", "fills": 1258, "windows": 118, "volume": 60358.1, "pnl": 4471.8, "pnl_per_$": 0.074, "buys": 1020, "sells": 238, "buy_win_rate": 0.441, "median_rem_s": 159, "share_last60": 0.04, "median_price": 0.3499999997}
+{"wallet": "0x5a06acbaee263540a16a0109d584f6672101ffa2", "fills": 6231, "windows": 527, "volume": 101078.1, "pnl": 3900.9, "pnl_per_$": 0.039, "buys": 6231, "sells": 0, "buy_win_rate": 0.523, "median_rem_s": 146, "share_last60": 0.13, "median_price": 0.52}
+{"wallet": "0x42678c9e36f83f72ea1aba22b89fb5a56a834cce", "fills": 366, "windows": 52, "volume": 52466.0, "pnl": 3435.6, "pnl_per_$": 0.065, "buys": 343, "sells": 23, "buy_win_rate": 0.513, "median_rem_s": 282, "share_last60": 0.03, "median_price": 0.4899999992}
+{"wallet": "0x954b91dd68eca3aa4ea603ecea83c01e8539c0e0", "fills": 760, "windows": 46, "volume": 16432.4, "pnl": 3361.1, "pnl_per_$": 0.205, "buys": 760, "sells": 0, "buy_win_rate": 0.505, "median_rem_s": 278, "share_last60": 0.02, "median_price": 0.41}
+{"wallet": "0x0dbd0e1d5999a401263dc26cbf1597f2be0cfcd5", "fills": 1558, "windows": 215, "volume": 38396.8, "pnl": 3349.0, "pnl_per_$": 0.087, "buys": 1435, "sells": 123, "buy_win_rate": 0.403, "median_rem_s": 225, "share_last60": 0.0, "median_price": 0.3100000414}
+{"wallet": "0x6630185dc7e4fb63865d980cd503c901587358b9", "fills": 182, "windows": 14, "volume": 9158.0, "pnl": 3204.5, "pnl_per_$": 0.35, "buys": 182, "sells": 0, "buy_win_rate": 0.907, "median_rem_s": 126, "share_last60": 0.03, "median_price": 0.6200000023}
+{"wallet": "0x84413583462b68f0a379f533bcbdcd089acfbc73", "fills": 1576, "windows": 279, "volume": 15031.5, "pnl": 3150.7, "pnl_per_$": 0.21, "buys": 1576, "sells": 0, "buy_win_rate": 0.577, "median_rem_s": 158, "share_last60": 0.17, "median_price": 0.5300000178}
+{"wallet": "0x3761d5b043813862d8378c8f321a11e92fb0c482", "fills": 437, "windows": 69, "volume": 14204.0, "pnl": 3015.6, "pnl_per_$": 0.212, "buys": 268, "sells": 169, "buy_win_rate": 0.601, "median_rem_s": 173, "share_last60": 0.04, "median_price": 0.5299999607}
+{"wallet": "0x28b976aa1ca37a46bb5be373bac7677d3dda531f", "fills": 297, "windows": 69, "volume": 26363.4, "pnl": 2969.0, "pnl_per_$": 0.113, "buys": 297, "sells": 0, "buy_win_rate": 0.855, "median_rem_s": 66, "share_last60": 0.4, "median_price": 0.57}
+{"wallet": "0xdd100e3ead3401d0b21a5f165776197d7f812383", "fills": 337, "windows": 30, "volume": 43161.6, "pnl": 2875.0, "pnl_per_$": 0.067, "buys": 242, "sells": 95, "buy_win_rate": 0.591, "median_rem_s": 245, "share_last60": 0.05, "median_price": 0.6796601696}
+{"wallet": "0xd3585c644d44aeb450d9e31f0e470ac114376bfb", "fills": 201, "windows": 16, "volume": 5821.4, "pnl": 2768.7, "pnl_per_$": 0.476, "buys": 201, "sells": 0, "buy_win_rate": 0.786, "median_rem_s": 80, "share_last60": 0.23, "median_price": 0.6600000098}
+{"wallet": "0x502b532f55778c0985846dc53a9bc71eb4f33b15", "fills": 1352, "windows": 106, "volume": 21311.5, "pnl": 2732.7, "pnl_per_$": 0.128, "buys": 1352, "sells": 0, "buy_win_rate": 0.717, "median_rem_s": 278, "share_last60": 0.02, "median_price": 0.59}
+{"wallet": "0x6c158caf6430a91a846ac4ea9652dcb23dd87d2d", "fills": 809, "windows": 101, "volume": 75026.2, "pnl": 2709.8, "pnl_per_$": 0.036, "buys": 809, "sells": 0, "buy_win_rate": 0.654, "median_rem_s": 314, "share_last60": 0.0, "median_price": 0.76}
+{"wallet": "0x855e484854d1411b959ddffdda11a698566c5189", "fills": 2466, "windows": 221, "volume": 37461.5, "pnl": 2703.2, "pnl_per_$": 0.072, "buys": 2466, "sells": 0, "buy_win_rate": 0.531, "median_rem_s": 144, "share_last60": 0.24, "median_price": 0.48}
+{"wallet": "0x94f471f68396ff4a3cab8cb5c47c86274b8b77a2", "fills": 748, "windows": 28, "volume": 14245.3, "pnl": 2627.6, "pnl_per_$": 0.184, "buys": 748, "sells": 0, "buy_win_rate": 0.563, "median_rem_s": 176, "share_last60": 0.08, "median_price": 0.5}
+{"wallet": "0x7766f132639279bd2c4ead3c70a1596a20fa61d4", "fills": 135, "windows": 8, "volume": 6784.6, "pnl": 2610.0, "pnl_per_$": 0.385, "buys": 135, "sells": 0, "buy_win_rate": 0.444, "median_rem_s": 101, "share_last60": 0.09, "median_price": 0.22}
+{"wallet": "0x58d29d4d3e9a7b504aa359ab1960def12fced2df", "fills": 112, "windows": 67, "volume": 4340.4, "pnl": 2580.7, "pnl_per_$": 0.595, "buys": 112, "sells": 0, "buy_win_rate": 0.759, "median_rem_s": 110, "share_last60": 0.21, "median_price": 0.5499999995}
 
 BOTTOM 10 by P&L
+{"wallet": "0x10d57bd3327bcdf43bf0656e717aa56f9dbd5388", "fills": 845, "windows": 39, "volume": 42684.6, "pnl": -6648.4, "pnl_per_$": -0.156, "buys": 845, "sells": 0, "buy_win_rate": 0.458, "median_rem_s": 129, "share_last60": 0.03, "median_price": 0.7000000071}
+{"wallet": "0x765e6a480ae3f05c3f2e6c50f4575f17f9cd36dd", "fills": 1011, "windows": 268, "volume": 117350.2, "pnl": -7505.2, "pnl_per_$": -0.064, "buys": 810, "sells": 201, "buy_win_rate": 0.442, "median_rem_s": 245, "share_last60": 0.05, "median_price": 0.5}
+{"wallet": "0x7bad34dd5392945d7551c50e6516ec7020aacc39", "fills": 1446, "windows": 39, "volume": 12442.4, "pnl": -7647.0, "pnl_per_$": -0.615, "buys": 1446, "sells": 0, "buy_win_rate": 0.354, "median_rem_s": 144, "share_last60": 0.02, "median_price": 0.5}
+{"wallet": "0x764fd57b0b885cbeada5a119cdf0a113ee4ec347", "fills": 12557, "windows": 203, "volume": 137753.9, "pnl": -8042.8, "pnl_per_$": -0.058, "buys": 12557, "sells": 0, "buy_win_rate": 0.455, "median_rem_s": 135, "share_last60": 0.21, "median_price": 0.41}
+{"wallet": "0xcf0c70317fd5e4e4429758b3d80a7b7f3762f2bb", "fills": 1500, "windows": 25, "volume": 46772.7, "pnl": -9608.3, "pnl_per_$": -0.205, "buys": 1500, "sells": 0, "buy_win_rate": 0.555, "median_rem_s": 159, "share_last60": 0.23, "median_price": 0.63}
+{"wallet": "0x9cee61b9ea11775812d57b12f16105c0fd91b339", "fills": 75, "windows": 4, "volume": 18894.6, "pnl": -13872.2, "pnl_per_$": -0.734, "buys": 75, "sells": 0, "buy_win_rate": 0.147, "median_rem_s": 222, "share_last60": 0.0, "median_price": 0.52}
+{"wallet": "0x7894991b387feef283138229220418ede71b455f", "fills": 213, "windows": 35, "volume": 19395.3, "pnl": -15095.3, "pnl_per_$": -0.778, "buys": 212, "sells": 1, "buy_win_rate": 0.061, "median_rem_s": 113, "share_last60": 0.37, "median_price": 0.1}
+{"wallet": "0x90e33303022844d772e3f67df0f9d3b2de4034ad", "fills": 2027, "windows": 36, "volume": 41640.1, "pnl": -19274.4, "pnl_per_$": -0.463, "buys": 2027, "sells": 0, "buy_win_rate": 0.316, "median_rem_s": 158, "share_last60": 0.02, "median_price": 0.5175}
+{"wallet": "0x01e86bfe80426f25579b0f647b8563c51295e002", "fills": 2175, "windows": 47, "volume": 50851.7, "pnl": -22882.5, "pnl_per_$": -0.45, "buys": 2175, "sells": 0, "buy_win_rate": 0.33, "median_rem_s": 162, "share_last60": 0.02, "median_price": 0.5263636364}
+{"wallet": "0x1aa656241ef3ae7d73aeb277a0d877fd8f57b0c3", "fills": 47, "windows": 9, "volume": 32670.8, "pnl": -23118.5, "pnl_per_$": -0.708, "buys": 42, "sells": 5, "buy_win_rate": 0.071, "median_rem_s": 279, "share_last60": 0.0, "median_price": 0.5366019831}
 
-wallets active in >= 30 windows: 0; top 15 by P&L per $
+wallets active in >= 30 windows: 2170; top 15 by P&L per $
+{"wallet": "0x712bba3577617f904e4b2c001f5cfb4c8cb46c57", "fills": 119, "windows": 34, "volume": 12.7, "pnl": 52.1, "pnl_per_$": 4.101, "buys": 119, "sells": 0, "buy_win_rate": 0.067, "median_rem_s": 57, "share_last60": 0.55, "median_price": 0.01}
+{"wallet": "0x8094bbb1298f92e9ea38debd23dde95a09302a34", "fills": 105, "windows": 30, "volume": 10.9, "pnl": 31.1, "pnl_per_$": 2.837, "buys": 105, "sells": 0, "buy_win_rate": 0.01, "median_rem_s": 87, "share_last60": 0.32, "median_price": 0.01}
+{"wallet": "0x457d01b49d5e398ae102e1f492d4be843dfa1555", "fills": 416, "windows": 96, "volume": 291.9, "pnl": 708.1, "pnl_per_$": 2.425, "buys": 416, "sells": 0, "buy_win_rate": 0.019, "median_rem_s": 59, "share_last60": 0.52, "median_price": 0.01}
+{"wallet": "0x5971cb3e4612364fbe49c09d964b21e0e6fbbec3", "fills": 302, "windows": 100, "volume": 198.7, "pnl": 341.3, "pnl_per_$": 1.718, "buys": 302, "sells": 0, "buy_win_rate": 0.036, "median_rem_s": 81, "share_last60": 0.27, "median_price": 0.02}
+{"wallet": "0x8d3d46ba54c43b680508efa0019e5cdba2cfdb44", "fills": 209, "windows": 87, "volume": 163.1, "pnl": 236.9, "pnl_per_$": 1.452, "buys": 209, "sells": 0, "buy_win_rate": 0.024, "median_rem_s": 57, "share_last60": 0.56, "median_price": 0.01}
+{"wallet": "0x1744e7a4555d7f0bfa717ad565fa5222677305a4", "fills": 161, "windows": 46, "volume": 17.7, "pnl": 24.3, "pnl_per_$": 1.373, "buys": 161, "sells": 0, "buy_win_rate": 0.025, "median_rem_s": 93, "share_last60": 0.26, "median_price": 0.01}
+{"wallet": "0x5a654615ed2866f63bb5fc1bed7249329fb087f5", "fills": 45, "windows": 45, "volume": 2.2, "pnl": 2.8, "pnl_per_$": 1.263, "buys": 45, "sells": 0, "buy_win_rate": 0.022, "median_rem_s": 87, "share_last60": 0.16, "median_price": 0.01}
+{"wallet": "0x4f5ba67f90020a6f9d619b371365fbbe0cb05455", "fills": 132, "windows": 106, "volume": 18.2, "pnl": 21.8, "pnl_per_$": 1.203, "buys": 132, "sells": 0, "buy_win_rate": 0.03, "median_rem_s": 66, "share_last60": 0.48, "median_price": 0.02}
+{"wallet": "0x540da2c75ebfbc9387e71aca475384742e26da82", "fills": 111, "windows": 37, "volume": 14.2, "pnl": 16.7, "pnl_per_$": 1.177, "buys": 111, "sells": 0, "buy_win_rate": 0.045, "median_rem_s": 93, "share_last60": 0.37, "median_price": 0.01}
+{"wallet": "0x56b7977c0027f5e49a90671bec19923d1364205c", "fills": 86, "windows": 60, "volume": 288.5, "pnl": 311.5, "pnl_per_$": 1.08, "buys": 86, "sells": 0, "buy_win_rate": 0.07, "median_rem_s": 86, "share_last60": 0.21, "median_price": 0.05}
+{"wallet": "0x1a1ea39eed3313841b1eb01a4252079d1f3da80a", "fills": 423, "windows": 60, "volume": 151.0, "pnl": 157.0, "pnl_per_$": 1.04, "buys": 423, "sells": 0, "buy_win_rate": 0.125, "median_rem_s": 84, "share_last60": 0.18, "median_price": 0.04}
+{"wallet": "0x391b802c4310eb367de5d0255abac045d4cb6d21", "fills": 1099, "windows": 128, "volume": 446.7, "pnl": 417.7, "pnl_per_$": 0.935, "buys": 1099, "sells": 0, "buy_win_rate": 0.097, "median_rem_s": 77, "share_last60": 0.34, "median_price": 0.04}
+{"wallet": "0x18d3216068a4181a66b24ee32845ecc64726f321", "fills": 56, "windows": 42, "volume": 846.5, "pnl": 660.8, "pnl_per_$": 0.781, "buys": 56, "sells": 0, "buy_win_rate": 0.536, "median_rem_s": 174, "share_last60": 0.04, "median_price": 0.5078715365}
+{"wallet": "0xdf0d2ccfe3d7c2ef120395534e43afe283509f79", "fills": 452, "windows": 38, "volume": 960.4, "pnl": 747.3, "pnl_per_$": 0.778, "buys": 452, "sells": 0, "buy_win_rate": 0.301, "median_rem_s": 165, "share_last60": 0.0, "median_price": 0.2200000073}
+{"wallet": "0x395bb865260a352a6f099b6e13dd96d0dff2ca76", "fills": 33, "windows": 33, "volume": 145.6, "pnl": 110.2, "pnl_per_$": 0.757, "buys": 33, "sells": 0, "buy_win_rate": 0.515, "median_rem_s": 219, "share_last60": 0.03, "median_price": 0.4}
 
-TOP-20 wallets: by time left  
-TOP-20 wallets: by price      
+TOP-20 wallets: by time left  earlier: n=1867 $67,331 pnl/$ +0.215  last120: n=5184 $199,264 pnl/$ +0.249  last30: n=568 $22,636 pnl/$ +0.001  last300: n=14337 $425,124 pnl/$ +0.144  last60: n=1888 $77,022 pnl/$ +0.283
+TOP-20 wallets: by price      <0.3: n=5332 $69,063 pnl/$ +0.671  <0.6: n=9159 $284,519 pnl/$ +0.302  <0.85: n=6238 $187,368 pnl/$ +0.069  <0.95: n=1722 $67,675 pnl/$ -0.009  >=0.95: n=1393 $182,753 pnl/$ +0.013
 
-BOTTOM-20 wallets: by time left  
-BOTTOM-20 wallets: by price      
+BOTTOM-20 wallets: by time left  earlier: n=3028 $130,823 pnl/$ -0.385  last120: n=7248 $170,347 pnl/$ -0.269  last30: n=943 $15,139 pnl/$ -0.481  last300: n=13984 $396,839 pnl/$ -0.177  last60: n=2758 $66,985 pnl/$ -0.302
+BOTTOM-20 wallets: by price      <0.3: n=6173 $59,861 pnl/$ -0.337  <0.6: n=11481 $301,758 pnl/$ -0.368  <0.85: n=7862 $279,227 pnl/$ -0.180  <0.95: n=1477 $87,395 pnl/$ -0.139  >=0.95: n=968 $51,891 pnl/$ -0.006
 
-ALL wallets: by time left  
-ALL wallets: by price      
+ALL wallets: by time left  earlier: n=164099 $1,849,819 pnl/$ -0.003  last120: n=254868 $2,642,299 pnl/$ +0.002  last30: n=41729 $1,457,503 pnl/$ +0.003  last300: n=655767 $5,622,208 pnl/$ -0.000  last60: n=119471 $1,697,880 pnl/$ +0.005
+ALL wallets: by price      <0.3: n=305580 $829,503 pnl/$ +0.065  <0.6: n=439585 $3,509,107 pnl/$ +0.008  <0.85: n=302729 $3,577,569 pnl/$ -0.011  <0.95: n=99147 $1,598,736 pnl/$ -0.028  >=0.95: n=88893 $3,754,794 pnl/$ +0.004
 
 official priceToBeat vs Binance pre-60 mean: median -13.9 bp, 10-90%: -15.0..-13.0 bp (n=598)
