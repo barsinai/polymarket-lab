@@ -27,12 +27,21 @@ jobs:
           git config user.name "polymarket-lab-bot"
           git config user.email "actions@users.noreply.github.com"
           for part in 1 2 3 4 5; do
-            git fetch -q origin main && git checkout -q origin/main -- research 2>/dev/null
+            git rebase --abort 2>/dev/null || true
+            git fetch -q origin main && git reset -q --hard origin/main
             PATH="$HOME/.local/bin:$PATH" uv pip install --python "$HOME/.venv-pilot/bin/python" -q requests websockets || true
             RUN_MIN=60 "$HOME/.venv-pilot/bin/python" -u research/fast/updown_paper.py 2>&1 | tee -a /tmp/fast.txt | grep -v "^$"
-            mkdir -p logs data/fast && cp /tmp/fast.txt logs/fast-log.txt
-            git add --sparse data/fast logs/fast-log.txt
-            git commit -qm "Fast paper $(date -u +%FT%H:%M) [skip ci]" && for i in 1 2 3 4 5; do git pull -q --rebase -X theirs origin main && git push -q && break; sleep 5; done
+            mkdir -p logs && cp /tmp/fast.txt logs/fast-log.txt
+            # publish the bot's own files on top of whatever is upstream (only the server writes these)
+            rm -rf /tmp/fastout && mkdir -p /tmp/fastout/rtds
+            for f in obs.jsonl trades.jsonl windows.jsonl model.jsonl pairs.jsonl report.json; do [ -f "data/fast/$f" ] && cp "data/fast/$f" /tmp/fastout/; done
+            cp data/fast/obs-*.jsonl.gz data/fast/model-*.jsonl.gz data/fast/pairs-*.jsonl.gz /tmp/fastout/ 2>/dev/null || true
+            cp -r data/fast/rtds/. /tmp/fastout/rtds/ 2>/dev/null || true
+            for i in 1 2 3; do
+              git fetch -q origin main && git reset -q --hard origin/main && mkdir -p data/fast/rtds && cp -r /tmp/fastout/. data/fast/ && cp /tmp/fast.txt logs/fast-log.txt
+              git add --sparse data/fast logs/fast-log.txt && git commit -qm "Fast paper $(date -u +%FT%H:%M) [skip ci]" && git push -q && break
+              sleep 5
+            done
           done
       - name: Hand over
         if: always()
