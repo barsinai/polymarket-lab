@@ -10,6 +10,8 @@ under three rules, each settled on the market's real result (Gamma):
   exact  model probability (exact feed) beats the ask by EDGE after the taker fee (0.07*p*(1-p) per share)
   lock   last 60 s only: the outcome is locked beyond LOCK_Z standard deviations and the ask is <= LOCK_ASK
   fav    control: buy the market's favourite at FAV_LO..FAV_HI with <= FAV_REM s left (no model)
+  dog    tape finding: buy the cheap side at DOG_LO..DOG_HI with DOG_RMIN..DOG_RMAX s left (no model)
+  pair   15-minute + 5-minute windows ending together: one share of each right side pays >= $1 (see below)
 Model: final TWAP = g*A + (1-g)*M, A = mean of Chainlink prices in [end-60, now], g = share of the last minute
 elapsed, M ~ Normal(S, sigma^2 * r/3) (mean of a Brownian path over the remaining r seconds); before the last
 minute: S ~ Normal(S_now, sigma^2 * (time until end-60 + 20)). sigma = 1 s Chainlink log-return std (15 min).
@@ -37,6 +39,7 @@ EDGE = float(os.environ.get("EDGE", "0.03"))
 SIZE_USD = float(os.environ.get("SIZE_USD", "20"))
 LOCK_Z, LOCK_ASK = float(os.environ.get("LOCK_Z", "2.5")), float(os.environ.get("LOCK_ASK", "0.97"))
 PAIR_EDGE, PAIR_MAX = float(os.environ.get("PAIR_EDGE", "0.03")), float(os.environ.get("PAIR_MAX", "1.15"))
+DOG_LO, DOG_HI, DOG_RMIN, DOG_RMAX = float(os.environ.get("DOG_LO", "0.05")), float(os.environ.get("DOG_HI", "0.35")), int(os.environ.get("DOG_RMIN", "30")), int(os.environ.get("DOG_RMAX", "120"))
 FAV_REM, FAV_LO, FAV_HI = int(os.environ.get("FAV_REM", "90")), float(os.environ.get("FAV_LO", "0.60")), float(os.environ.get("FAV_HI", "0.95"))
 ASSETS = {"btc": "BTCUSDT", "eth": "ETHUSDT", "sol": "SOLUSDT", "xrp": "XRPUSDT", "doge": "DOGEUSDT", "bnb": "BNBUSDT",
           "hype": "HYPEUSDT", "zec": "ZECUSDT"}
@@ -239,6 +242,8 @@ def main():
                     picks.append("lock")
                 if rem <= FAV_REM and FAV_LO <= a_px <= FAV_HI:
                     picks.append("fav")
+                if DOG_RMIN <= rem <= DOG_RMAX and DOG_LO <= a_px <= DOG_HI:
+                    picks.append("dog")   # tape finding (598 windows): the cheap side 30-120 s before the end is underpriced
                 for strat in picks:
                     if (strat, m["slug"], side) in done:
                         continue
