@@ -48,7 +48,7 @@ for Z in (2.0, 2.5, 3.0, 4.0):
         seen = set(); n = w = 0; stake = pnl = 0.0; prices = []
         for o in sorted(O, key=lambda o: o["ts"]):
             k = (o["slug"], o["side"])
-            if k in seen or o["rem"] > 60 or o["z"] < Z or o["ask"] > A or o["src"] != "chainlink" or o.get("k_src") not in ("ptb", "twap"):
+            if k in seen or o["rem"] > 60 or o["z"] < Z or o["ask"] > A or o["src"] != "chainlink" or o.get("k_src") not in ("ptb", "twap", "chainlink"):
                 continue
             seen.add(k); y = 1 if (res[o["slug"]] == (o["side"] == "Up")) else 0
             a = o["ask"]; fee = 0.07 * a * (1 - a)

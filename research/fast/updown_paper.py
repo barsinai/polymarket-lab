@@ -298,7 +298,7 @@ def main():
                     picks = []
                     if edge >= EDGE and 0.02 <= a_px <= 0.98:
                         picks.append("exact")
-                    if rem <= 60 and zs >= LOCK_Z and a_px <= LOCK_ASK and k_src in ("ptb", "twap") and src == "chainlink":
+                    if rem <= 60 and zs >= LOCK_Z and a_px <= LOCK_ASK and k_src in ("ptb", "twap", "chainlink") and src == "chainlink":   # chainlink pre-60 mean = feed TWAP within 0.06 bp
                         picks.append("lock")
                     if rem <= FAV_REM and FAV_LO <= a_px <= FAV_HI:
                         picks.append("fav")
