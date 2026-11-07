@@ -1,0 +1,355 @@
+<title>Up/Down Evidence Report</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one reading column (~68ch) of claim -> chart -> meaning; charts are full column width, numbers in mono. */
+:root {
+  --bg: #f5f6f8; --surface: #fcfcfb; --ink: #0f1115; --ink-2: #4c5160; --muted: #858a97;
+  --grid: #e1e3e8; --axis: #c3c6cf; --ring: rgba(15,17,21,.10);
+  --blue: #2a78d6; --blue-soft: #cde2fb; --gray-series: #9a9ea8; --red: #e34948; --red-soft: #f8d2d1; --mid: #ebecef;
+  --good: #0ca30c; --warn: #c98500; --chip-bg: #e9edf3;
+  --display: "Barlow Semi Condensed", "Arial Narrow", system-ui, sans-serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121417; --surface: #1a1c21; --ink: #eef0f3; --ink-2: #c0c4cd; --muted: #8b909c;
+    --grid: #2a2d34; --axis: #3a3e47; --ring: rgba(255,255,255,.10);
+    --blue: #3987e5; --blue-soft: #1c3b63; --gray-series: #6b7079; --red: #e66767; --red-soft: #5a2a2a; --mid: #2a2d34;
+    --good: #2ebd2e; --warn: #e0a030; --chip-bg: #262a31; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121417; --surface: #1a1c21; --ink: #eef0f3; --ink-2: #c0c4cd; --muted: #8b909c;
+  --grid: #2a2d34; --axis: #3a3e47; --ring: rgba(255,255,255,.10);
+  --blue: #3987e5; --blue-soft: #1c3b63; --gray-series: #6b7079; --red: #e66767; --red-soft: #5a2a2a; --mid: #2a2d34;
+  --good: #2ebd2e; --warn: #e0a030; --chip-bg: #262a31; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 32px 64px; }
+main { max-width: 760px; margin: 0 auto; display: grid; gap: 40px; }
+h1, h2 { font-family: var(--display); text-wrap: balance; letter-spacing: .005em; margin: 0; }
+h1 { font-size: clamp(34px, 6vw, 48px); line-height: 1.05; font-weight: 700; }
+h2 { font-size: 26px; line-height: 1.15; font-weight: 600; }
+p { margin: 0; max-width: 68ch; }
+.lede { color: var(--ink-2); font-size: 17px; }
+header { display: grid; gap: 14px; }
+.kicker { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+section { display: grid; gap: 14px; border-top: 1px solid var(--grid); padding-top: 28px; }
+.claim { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: baseline; }
+.chip { font-family: var(--mono); font-size: 11.5px; letter-spacing: .04em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; background: var(--chip-bg); color: var(--ink-2); white-space: nowrap; }
+.chip.strong { border: 1px solid var(--good); }
+.chip.early { border: 1px solid var(--warn); }
+.chip.dead { border: 1px solid var(--red); }
+figure { margin: 0; background: var(--surface); border: 1px solid var(--ring); border-radius: 10px; padding: 16px 16px 12px; display: grid; gap: 8px; min-width: 0; }
+figcaption { font-size: 13.5px; color: var(--ink-2); }
+.fig-title { font-weight: 600; color: var(--ink); font-size: 15px; }
+svg { width: 100%; height: auto; display: block; font-family: var(--body); }
+svg text { fill: var(--ink-2); font-size: 12px; }
+svg .tick { fill: var(--muted); font-size: 11.5px; font-variant-numeric: tabular-nums; }
+svg .val { fill: var(--ink); font-size: 12px; font-variant-numeric: tabular-nums; font-family: var(--mono); }
+svg .inlabel { font-size: 12px; font-family: var(--mono); }
+svg line.grid { stroke: var(--grid); stroke-width: 1; }
+svg line.axis { stroke: var(--axis); stroke-width: 1; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13px; color: var(--ink-2); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.sw { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.tile { background: var(--surface); border: 1px solid var(--ring); border-radius: 10px; padding: 12px 14px; display: grid; gap: 2px; }
+.tile .lab { font-size: 12.5px; color: var(--muted); }
+.tile .num { font-family: var(--display); font-size: 30px; font-weight: 600; line-height: 1.1; }
+.tile .sub { font-size: 12.5px; color: var(--ink-2); font-family: var(--mono); }
+.meaning { background: var(--chip-bg); border-radius: 8px; padding: 12px 14px; font-size: 15px; }
+.meaning strong { font-weight: 600; }
+details { font-size: 13px; color: var(--ink-2); }
+summary { cursor: pointer; color: var(--muted); font-family: var(--mono); font-size: 12px; }
+table { border-collapse: collapse; margin-top: 8px; font-variant-numeric: tabular-nums; width: 100%; }
+td, th { text-align: right; padding: 4px 8px; border-bottom: 1px solid var(--grid); font-family: var(--mono); font-size: 12px; }
+td:first-child, th:first-child { text-align: left; font-family: var(--body); }
+.tablewrap { overflow-x: auto; }
+#tip { position: fixed; pointer-events: none; background: var(--ink); color: var(--bg); font-family: var(--mono); font-size: 12px; padding: 6px 9px; border-radius: 6px; max-width: 260px; z-index: 20; line-height: 1.4; }
+#tip[hidden] { display: none; }
+.hit { fill: transparent; cursor: default; }
+.hit:hover + .mark, .mark:hover { opacity: .85; }
+footer { color: var(--muted); font-size: 13px; border-top: 1px solid var(--grid); padding-top: 20px; }
+@media (prefers-reduced-motion: no-preference) { .mark { transition: opacity .12s; } }
+a { color: var(--blue); }
+</style>
+
+<main>
+<header>
+  <div class="kicker">polymarket-lab · 5-minute crypto markets · evidence as of 7 Nov 2026, 14:00 Israel time</div>
+  <h1>Up/Down Evidence Report</h1>
+  <p class="lede">Every claim from today's research, with the chart and the numbers behind it. All figures come from the repo's own data files (598 finished windows, 1.49 million public fills, and our bot's own order-book readings). Nothing here involves real money.</p>
+  <div class="legend"><span><span class="chip strong">strong</span> many windows, robust to checks</span><span><span class="chip early">early</span> first hours of data</span><span><span class="chip dead">dead</span> did not survive a check</span></div>
+</header>
+
+<section id="rule">
+  <div class="claim"><h2>1. The markets resolve on a Chainlink 60-second average, and Binance only approximates it</h2><span class="chip strong">strong</span></div>
+  <p>Polymarket publishes an official "price to beat" and final price for every window. "Final ≥ price to beat" reproduces all 598 results. Rules built on Binance prices get it wrong in 2% to 16% of windows, which is exactly where a bot built on Binance loses.</p>
+  <figure id="f-rules"><div class="fig-title">How often each rule matches the official result (598 windows)</div><div class="svgwrap"></div><figcaption>Share of windows where the rule's call equals the market's actual resolution.</figcaption><details><summary>numbers</summary><div class="tablewrap"></div></details></figure>
+  <figure id="f-gap"><div class="fig-title">Binance sits a steady 0.14% above Chainlink's price to beat</div><div class="svgwrap"></div><figcaption>Official price to beat minus our Binance 60-second mean at the window start, in basis points (1 bp = 0.01%), 598 windows. The offset is stable; the wobble around it (about ±1 bp) is what decided the close windows.</figcaption><details><summary>numbers</summary><div class="tablewrap"></div></details></figure>
+  <figure id="f-margin"><div class="fig-title">How close the windows are: final price vs price to beat</div><div class="svgwrap"></div><figcaption>Absolute margin in basis points, 598 windows. Half of all windows are decided by less than 5 bp; one in ten by less than 1 bp, where a 1 bp feed error flips the answer.</figcaption><details><summary>numbers</summary><div class="tablewrap"></div></details></figure>
+  <div class="meaning"><strong>What it means:</strong> the old bot (v1/v2) used Binance and lost <span id="oldbots"></span>. The new bot reads the exact Chainlink feed and the official price to beat, so its view of the outcome is the same as the market's.</div>
+</section>
+
+<section id="pairs">
+  <div class="claim"><h2>2. A 15-minute window and the 5-minute window that ends with it share the same final price</h2><span class="chip strong">strong</span></div>
+  <p>Both compare the same final average against different starting prices. One share of the right side of each therefore pays at least $1, and $2 when the final lands between the two starting prices. Checked on every finished pair with official numbers.</p>
+  <figure id="f-pairs"><div class="fig-title">132 finished 15m/5m pairs, by what the $1-floor combination paid</div><div class="svgwrap"></div><figcaption>Identical final prices in 132 of 132 pairs. The "impossible" combination (which would break the floor) never happened.</figcaption><details><summary>numbers</summary><div class="tablewrap"></div></details></figure>
+  <div class="meaning"><strong>What it means:</strong> this is a structural fact, not a prediction. Whether it makes money depends on the two markets pricing the pair inconsistently; the bot now logs every such pair and only paper-trades it when the asks add up to less than it is worth.</div>
+</section>
+
+<section id="tape">
+  <div class="claim"><h2>3. In the last two minutes the crowd overpays for favourites and underpays underdogs</h2><span class="chip strong">strong</span></div>
+  <p>Every buy in 598 windows, grouped by the price paid and the time left, scored against the real result and charged the full taker fee. Blue cells made money, red cells lost.</p>
+  <figure id="f-heat"><div class="fig-title">Return per dollar of all buy fills, after fees (1.24M buys, $15.5M)</div><div class="svgwrap"></div><figcaption>Rows: price paid. Columns: seconds before the window ended. Cell label is the return per dollar; hover for the dollar volume. Cells under $50 of volume are left blank.</figcaption><details><summary>numbers</summary><div class="tablewrap"></div></details></figure>
+  <div class="meaning"><strong>What it means:</strong> buying the favourite at 50-90¢ with 30-120 s left lost 6-9% per dollar; buying the underdog at 10-30¢ in the same minutes returned +22% to +32%. But see the next section before reading that as a strategy.</div>
+</section>
+
+<section id="dog">
+  <div class="claim"><h2>4. The underdog profit is a handful of windows, not a repeatable edge</h2><span class="chip dead">dead</span></div>
+  <p>Same fills (cheap side, 30-120 s left), now summed per window and sorted. The total is positive only because of a few windows where informed traders caught a late reversal in size.</p>
+  <figure id="f-dog"><div class="fig-title">Profit per window from buying the cheap side late (439 windows, sorted)</div><div class="svgwrap"></div><figcaption>Each bar is one window. 90 windows were positive, 349 negative; the median window lost $74. The top five alone account for $90k of the $100k total.</figcaption><details><summary>numbers</summary><div class="tablewrap"></div></details></figure>
+  <div class="meaning"><strong>What it means:</strong> a rule that buys every cheap underdog late collects the many small losses and rarely the rare big win, which went to whoever was fastest. Kept running as a control only.</div>
+</section>
+
+<section id="wallets">
+  <div class="claim"><h2>5. Almost every regular player loses; the winners are a few specific machines</h2><span class="chip strong">strong</span></div>
+  <p>1,349 wallets active in 30 or more windows with at least $500 traded, profit measured to resolution with the full taker fee charged on every fill (the harshest case).</p>
+  <div class="tiles">
+    <div class="tile"><div class="lab">Regular wallets</div><div class="num" id="w-reg"></div><div class="sub">30+ windows, $500+</div></div>
+    <div class="tile"><div class="lab">Profitable after fees</div><div class="num" id="w-prof"></div><div class="sub" id="w-prof-sub"></div></div>
+    <div class="tile"><div class="lab">Their combined result</div><div class="num" id="w-net"></div><div class="sub">lost to fees and to the few winners</div></div>
+    <div class="tile"><div class="lab">Median return per $</div><div class="num" id="w-med"></div><div class="sub">after fees</div></div>
+  </div>
+  <figure id="f-wal"><div class="fig-title">Return per dollar traded, 1,349 regular wallets</div><div class="svgwrap"></div><figcaption>Percent return after fees, 5-point bins. The mass sits just below zero; a thin right tail holds the sweeper, the set-seller, and a few exact-feed traders.</figcaption><details><summary>numbers</summary><div class="tablewrap"></div></details></figure>
+  <div class="meaning"><strong>What it means:</strong> the repeatable winners do not predict prices. One buys sure things at 97-99¢ in size (+0.9% per dollar, 324 windows, no losses). One never buys and sells both sides above 50¢ as a fee-free market maker (+4.2% per dollar, 231 windows). A few buy 1-2 minutes before the end on the exact feed and win about 90% of their windows. The largest losers bet "Up" 70-76% of the time and win a third of their bets.</div>
+</section>
+
+<section id="arb">
+  <div class="claim"><h2>6. The riskless "buy both sides under $1" trade is swept before we can see it</h2><span class="chip strong">strong</span></div>
+  <p>Our bot reads both order books every 2-3 seconds in the last minutes. If Up and Down could ever be bought for less than $1 together, that reading would show it.</p>
+  <figure id="f-sum"><div class="fig-title">Best ask for Up plus best ask for Down, 1,284 paired readings</div><div class="svgwrap"></div><figcaption>Sum of the two best asks in cents. Never below $1.00; the median is $1.01. Wallets in the tape do capture sub-$1 sets in the final seconds, so the gaps exist for well under 3 seconds.</figcaption><details><summary>numbers</summary><div class="tablewrap"></div></details></figure>
+  <div class="meaning"><strong>What it means:</strong> taking riskless gaps from the book is a speed game we cannot win from a polling script. The maker side of the same trade (selling both sides for more than $1) is the one worth replaying with our pricing.</div>
+</section>
+
+<section id="model">
+  <div class="claim"><h2>7. On the exact feed, our model beats the market in the last minute, and not before</h2><span class="chip early">early</span></div>
+  <p>First hours of the new bot (27 windows so far). Lower prediction error is better. The market's price is a strong forecaster at 60-120 s; inside 60 s most of the final average is already fixed and the arithmetic wins.</p>
+  <figure id="f-cal"><div class="fig-title">Prediction error of the market's price vs our model, by seconds left</div><div class="svgwrap"></div><div class="legend"><span><i class="sw" style="background:var(--gray-series)"></i>market mid-price</span><span><i class="sw" style="background:var(--blue)"></i>our model (exact feed)</span></div><figcaption>Log loss on the Up outcome per order-book reading; 867 readings in 27 windows. Small sample; the shape is what matters.</figcaption><details><summary>numbers</summary><div class="tablewrap"></div></details></figure>
+  <figure id="f-z"><div class="fig-title">When the model is confident in the last 60 s, is it right?</div><div class="svgwrap"></div><div class="legend"><span><i class="sw" style="background:var(--gray-series)"></i>model's stated minimum</span><span><i class="sw" style="background:var(--blue)"></i>realized</span></div><figcaption>Grouped by the model's confidence (z, standard deviations of margin). Above z = 1 it was right 70 out of 70 times. Sample is small; this is the first sign of an honest edge, not proof.</figcaption><details><summary>numbers</summary><div class="tablewrap"></div></details></figure>
+  <div class="meaning"><strong>What it means:</strong> the market rarely leaves a locked outcome on sale below 97¢ (one case in 27 windows). The model-based trades at 60-120 s lost, so that strategy is now restricted to the last 60 s. Paper results so far: <span id="v4res"></span>.</div>
+</section>
+
+<footer>Sources: Polymarket Gamma API (event metadata: priceToBeat, finalPrice, results), Polymarket Data API v2 (public trade tape), Polymarket RTDS feed (Chainlink prices and 60 s TWAP), Binance REST (1-second proxy), and the bot's own order-book readings. Code: research/fast/ in the polymarket-lab repository (report_data.py builds every number on this page).</footer>
+</main>
+<div id="tip" hidden></div>
+
+<script id="data" type="application/json">__DATA__</script>
+<script>
+(function () {
+  const D = JSON.parse(document.getElementById('data').textContent);
+  const NS = 'http://www.w3.org/2000/svg';
+  const tip = document.getElementById('tip');
+  const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+  const fmt$ = (x) => (x < 0 ? '-$' : '$') + Math.abs(Math.round(x)).toLocaleString();
+  const pct = (x, d = 0) => (x * 100).toFixed(d) + '%';
+
+  function el(tag, attrs, parent) {
+    const e = document.createElementNS(NS, tag);
+    for (const k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  function text(parent, x, y, s, cls, anchor) {
+    const t = el('text', { x, y, class: cls || '', 'text-anchor': anchor || 'start', 'dominant-baseline': 'middle' }, parent);
+    t.textContent = s; return t;
+  }
+  function hover(target, html) {
+    target.addEventListener('mousemove', (ev) => { tip.innerHTML = html; tip.hidden = false; tip.style.left = Math.min(ev.clientX + 12, window.innerWidth - 270) + 'px'; tip.style.top = (ev.clientY + 14) + 'px'; });
+    target.addEventListener('mouseleave', () => { tip.hidden = true; });
+  }
+  function svgIn(figId, w, h) {
+    const wrap = document.querySelector('#' + figId + ' .svgwrap');
+    const s = el('svg', { viewBox: `0 0 ${w} ${h}`, role: 'img' }, wrap);
+    return s;
+  }
+  function table(figId, head, rows) {
+    const wrap = document.querySelector('#' + figId + ' .tablewrap');
+    const t = document.createElement('table');
+    t.innerHTML = '<thead><tr>' + head.map(h => '<th>' + h + '</th>').join('') + '</tr></thead><tbody>' +
+      rows.map(r => '<tr>' + r.map(c => '<td>' + c + '</td>').join('') + '</tr>').join('') + '</tbody>';
+    wrap.appendChild(t);
+  }
+  function roundTop(x, y, w, h, r) {  // bar growing up from baseline: rounded top corners only
+    if (h <= 0) return '';
+    r = Math.min(r, w / 2, h);
+    return `M${x},${y + h} V${y + r} Q${x},${y} ${x + r},${y} H${x + w - r} Q${x + w},${y} ${x + w},${y + r} V${y + h} Z`;
+  }
+  function roundRight(x, y, w, h, r) { // horizontal bar from a left baseline
+    if (w <= 0) return '';
+    r = Math.min(r, h / 2, w);
+    return `M${x},${y} H${x + w - r} Q${x + w},${y} ${x + w},${y + r} V${y + h - r} Q${x + w},${y + h} ${x + w - r},${y + h} H${x} Z`;
+  }
+
+  // ---- 1a rules: ranked horizontal bars
+  (function () {
+    const rows = D.rules.slice().sort((a, b) => b.ok / b.n - a.ok / a.n);
+    const W = 720, rowH = 34, left = 330, right = 60, H = rows.length * rowH + 30;
+    const s = svgIn('f-rules', W, H);
+    const x0 = left, xw = W - left - right;
+    [0.8, 0.9, 1.0].forEach(v => { const x = x0 + (v - 0.8) / 0.2 * xw; el('line', { x1: x, x2: x, y1: 8, y2: H - 22, class: 'grid' }, s); text(s, x, H - 10, pct(v), 'tick', 'middle'); });
+    rows.forEach((r, i) => {
+      const y = 12 + i * rowH, v = r.ok / r.n, bw = Math.max(0, (v - 0.8) / 0.2 * xw);
+      text(s, x0 - 10, y + 11, r.rule, '', 'end');
+      const official = r.rule.indexOf('official') >= 0;
+      const p = el('path', { d: roundRight(x0, y, bw, 22, 4), fill: official ? css('--blue') : css('--gray-series'), class: 'mark' }, s);
+      text(s, x0 + bw + 8, y + 11, `${r.ok}/${r.n}`, 'val');
+      hover(p, `${r.rule}<br>${r.ok} of ${r.n} windows (${pct(v, 1)})`);
+    });
+    table('f-rules', ['rule', 'agrees', 'windows', 'share'], rows.map(r => [r.rule, r.ok, r.n, pct(r.ok / r.n, 1)]));
+  })();
+
+  // generic histogram (columns)
+  function histogram(figId, h, opts) {
+    const W = 720, H = 240, left = 44, right = 12, top = 14, bottom = 36;
+    const s = svgIn(figId, W, H);
+    const edges = h.edges, counts = h.counts, n = counts.length;
+    const max = Math.max(...counts);
+    const xw = W - left - right, slot = xw / n, bw = Math.min(24, slot - 2);
+    const yTicks = niceTicks(max, 4);
+    yTicks.forEach(v => { const y = top + (1 - v / yTicks[yTicks.length - 1]) * (H - top - bottom); el('line', { x1: left, x2: W - right, y1: y, y2: y, class: 'grid' }, s); text(s, left - 6, y, v.toLocaleString(), 'tick', 'end'); });
+    const ymax = yTicks[yTicks.length - 1];
+    counts.forEach((c, i) => {
+      const x = left + i * slot + (slot - bw) / 2, hh = c / ymax * (H - top - bottom), y = top + (H - top - bottom) - hh;
+      const col = opts.color ? opts.color(edges[i], edges[i + 1]) : css('--blue');
+      const p = el('path', { d: roundTop(x, y, bw, hh, 4), fill: col, class: 'mark' }, s);
+      el('rect', { x: left + i * slot, y: top, width: slot, height: H - top - bottom, class: 'hit' }, s).addEventListener('mousemove', (ev) => { tip.innerHTML = `${opts.label(edges[i], edges[i + 1])}<br>${c.toLocaleString()} ${opts.unit}`; tip.hidden = false; tip.style.left = Math.min(ev.clientX + 12, window.innerWidth - 270) + 'px'; tip.style.top = (ev.clientY + 14) + 'px'; });
+    });
+    s.addEventListener('mouseleave', () => { tip.hidden = true; });
+    el('line', { x1: left, x2: W - right, y1: H - bottom, y2: H - bottom, class: 'axis' }, s);
+    (opts.xticks || []).forEach(v => { const x = left + (v - edges[0]) / (edges[n] - edges[0]) * xw; text(s, x, H - bottom + 14, opts.xfmt(v), 'tick', 'middle'); });
+    if (opts.marker !== undefined) { const x = left + (opts.marker - edges[0]) / (edges[n] - edges[0]) * xw; el('line', { x1: x, x2: x, y1: top, y2: H - bottom, stroke: css('--ink'), 'stroke-width': 1.5, 'stroke-dasharray': '3 3' }, s); text(s, x + 5, top + 8, opts.markerLabel || '', 'tick'); }
+    text(s, W / 2, H - 4, opts.xlabel, 'tick', 'middle');
+    table(figId, ['bin', opts.unit], counts.map((c, i) => [opts.label(edges[i], edges[i + 1]), c]));
+  }
+  function niceTicks(max, k) {
+    const raw = max / k, pow = Math.pow(10, Math.floor(Math.log10(raw))), m = raw / pow;
+    const step = (m <= 1 ? 1 : m <= 2 ? 2 : m <= 5 ? 5 : 10) * pow;
+    const out = []; for (let v = 0; v <= max + step; v += step) out.push(v); return out;
+  }
+  histogram('f-gap', D.gap.hist, { unit: 'windows', xlabel: 'price to beat minus Binance mean, basis points', xticks: [-18, -16, -14, -12, -10], xfmt: v => v + ' bp', label: (a, b) => `${a} to ${b} bp`, marker: D.gap.median, markerLabel: 'median ' + D.gap.median.toFixed(1) + ' bp' });
+  histogram('f-margin', D.margin.hist, { unit: 'windows', xlabel: '|final − price to beat|, basis points (12 windows above 40 bp not shown)', xticks: [0, 10, 20, 30, 40], xfmt: v => v + ' bp', label: (a, b) => `${a} to ${b} bp`, marker: D.margin.median, markerLabel: 'median ' + D.margin.median.toFixed(1) + ' bp' });
+
+  // ---- 2 pairs: tall segmented bar
+  (function () {
+    const P = D.pairs, total = P.one_dollar + P.two_dollar + P.impossible;
+    const W = 720, H = 70, s = svgIn('f-pairs', W, H);
+    const parts = [['paid $1 (one side won)', P.one_dollar, css('--blue-soft'), css('--ink')], ['paid $2 (final landed between the two starts)', P.two_dollar, css('--blue'), '#ffffff'], ['impossible combination', P.impossible, css('--red'), '#ffffff']];
+    let x = 0; const gap = 2;
+    parts.forEach(([name, v, fill, ink]) => {
+      const w = v / total * (W - gap * 2);
+      if (w > 0) {
+        const r = el('rect', { x, y: 8, width: w, height: 28, rx: 4, fill, class: 'mark' }, s);
+        if (w > 60) { const t = text(s, x + 10, 22, `${v} · ${pct(v / total)}`, 'inlabel'); t.style.fill = ink; }
+        hover(r, `${name}<br>${v} of ${total} pairs (${pct(v / total)})`);
+        x += w + gap;
+      }
+    });
+    text(s, 0, 56, `${parts[0][0]}  ·  ${parts[1][0]}  ·  impossible: ${P.impossible}`, 'tick');
+    table('f-pairs', ['outcome', 'pairs', 'share'], parts.map(p => [p[0], p[1], pct(p[1] / total)]));
+  })();
+
+  // ---- 3 heatmap
+  (function () {
+    const T = D.tape, rows = T.price_labels, cols = T.time_labels;
+    const W = 720, left = 70, top = 28, cw = (W - left - 8) / cols.length, ch = 34, H = top + rows.length * ch + 8;
+    const s = svgIn('f-heat', W, H);
+    cols.forEach((c, j) => text(s, left + j * cw + cw / 2, 14, c, 'tick', 'middle'));
+    rows.forEach((r, i) => text(s, left - 8, top + i * ch + ch / 2, r, 'tick', 'end'));
+    const byKey = {}; T.cells.forEach(c => byKey[c.t + ',' + c.p] = c);
+    const blue = css('--blue'), red = css('--red'), mid = css('--mid');
+    function mix(a, b, t) { const pa = a.match(/\w\w/g).map(h => parseInt(h, 16)), pb = b.match(/\w\w/g).map(h => parseInt(h, 16)); return 'rgb(' + pa.map((v, i) => Math.round(v + (pb[i] - v) * t)).join(',') + ')'; }
+    rows.forEach((r, i) => cols.forEach((c, j) => {
+      const cell = byKey[j + ',' + i]; const x = left + j * cw + 1, y = top + i * ch + 1;
+      if (!cell) { el('rect', { x, y, width: cw - 2, height: ch - 2, rx: 4, fill: 'none', stroke: css('--grid') }, s); return; }
+      const v = Math.max(-0.4, Math.min(0.4, cell.ret)), t = Math.abs(v) / 0.4;
+      const fill = v >= 0 ? mix(mid, blue, t) : mix(mid, red, t);
+      const rc = el('rect', { x, y, width: cw - 2, height: ch - 2, rx: 4, fill, class: 'mark' }, s);
+      const lab = text(s, x + (cw - 2) / 2, y + (ch - 2) / 2, (cell.ret > 0 ? '+' : '') + Math.round(cell.ret * 100) + '%', 'inlabel', 'middle');
+      lab.style.fill = t > 0.45 ? '#ffffff' : css('--ink');
+      hover(rc, `${r} bought with ${c} left<br>return ${(cell.ret * 100).toFixed(1)}% per $ after fees<br>${fmt$(cell.usd)} in ${cell.n.toLocaleString()} fills`);
+    }));
+    table('f-heat', ['price', ...cols], rows.map((r, i) => [r, ...cols.map((c, j) => { const cell = byKey[j + ',' + i]; return cell ? `${(cell.ret * 100).toFixed(1)}% (${fmt$(cell.usd)})` : ''; })]));
+  })();
+
+  // ---- 4 dog: sorted bars
+  (function () {
+    const v = D.dog.sorted, W = 720, H = 260, left = 56, right = 12, top = 16, bottom = 30;
+    const s = svgIn('f-dog', W, H);
+    const max = Math.max(...v), min = Math.min(...v), range = max - min;
+    const y0 = top + max / range * (H - top - bottom);
+    const xw = W - left - right, slot = xw / v.length;
+    [40000, 30000, 20000, 10000, 0, -10000].forEach(t => { if (t > max || t < min) return; const y = y0 - t / range * (H - top - bottom); el('line', { x1: left, x2: W - right, y1: y, y2: y, class: t === 0 ? 'axis' : 'grid' }, s); text(s, left - 6, y, (t / 1000) + 'k', 'tick', 'end'); });
+    v.forEach((val, i) => {
+      const x = left + i * slot, h = Math.abs(val) / range * (H - top - bottom);
+      const y = val >= 0 ? y0 - h : y0;
+      const r = el('rect', { x, y, width: Math.max(slot - 0.4, 0.8), height: Math.max(h, 0.5), fill: val >= 0 ? css('--blue') : css('--red'), class: 'mark' }, s);
+      hover(r, `window #${i + 1} of ${v.length}<br>${fmt$(val)} from cheap-side buys (after fees)`);
+    });
+    text(s, left + 70, top + 4, `top 5 windows: ${fmt$(D.dog.top5)} of the ${fmt$(D.dog.total)} total`, 'val');
+    text(s, W - right, y0 + 40, `${D.dog.positive} positive · ${v.length - D.dog.positive} negative · median ${fmt$(D.dog.median)}`, 'val', 'end');
+    text(s, W / 2, H - 6, 'windows, sorted by profit', 'tick', 'middle');
+    table('f-dog', ['rank', 'profit'], v.slice(0, 10).map((x, i) => [i + 1, fmt$(x)]).concat([['…', ''], ['median', fmt$(D.dog.median)], ['total', fmt$(D.dog.total)]]));
+  })();
+
+  // ---- 5 wallets
+  (function () {
+    const Wd = D.wallets;
+    document.getElementById('w-reg').textContent = Wd.regulars.toLocaleString();
+    document.getElementById('w-prof').textContent = Wd.profitable.toLocaleString();
+    document.getElementById('w-prof-sub').textContent = `${Wd.regulars - Wd.profitable} losing`;
+    document.getElementById('w-net').textContent = fmt$(Wd.net);
+    document.getElementById('w-med').textContent = Wd.median_ret.toFixed(1) + '%';
+    histogram('f-wal', Wd.ret_hist, { unit: 'wallets', xlabel: 'return per dollar traded, after fees (2 wallets below −60%, 5 above +40% not shown)', xticks: [-60, -40, -20, 0, 20, 40], xfmt: v => v + '%', label: (a, b) => `${a}% to ${b}%`, color: (a, b) => (b <= 0 ? css('--red') : css('--blue')), marker: 0, markerLabel: 'break-even' });
+  })();
+
+  // ---- 6 ask sums (1-cent bins from the 0.5-cent data)
+  (function () {
+    const h = D.asksum.hist, e = [], c = [];
+    for (let i = 0; i < h.counts.length; i += 2) { e.push(Math.round(h.edges[i] * 1000) / 1000); c.push(h.counts[i] + (h.counts[i + 1] || 0)); }
+    e.push(Math.round(h.edges[h.edges.length - 1] * 1000) / 1000);
+    histogram('f-sum', { edges: e, counts: c }, { unit: 'readings', xlabel: 'best ask Up + best ask Down (130 readings above $1.10 not shown)', xticks: [0.98, 1.0, 1.02, 1.04, 1.06, 1.08, 1.10], xfmt: v => '$' + v.toFixed(2), label: (a, b) => `$${a.toFixed(3)} to $${b.toFixed(3)}`, marker: 1.0, markerLabel: 'riskless below $1.00 → 0 readings' });
+  })();
+
+  // ---- 7 calibration grouped bars
+  function grouped(figId, rows, keyA, keyB, labA, labB, ymax, fmt, ylabel) {
+    const W = 720, H = 240, left = 48, right = 12, top = 16, bottom = 36;
+    const s = svgIn(figId, W, H);
+    const xw = W - left - right, slot = xw / rows.length, bw = Math.min(22, slot / 2 - 10);
+    niceTicks(ymax, 4).forEach(v => { if (v > ymax * 1.05) return; const y = top + (1 - v / ymax) * (H - top - bottom); el('line', { x1: left, x2: W - right, y1: y, y2: y, class: 'grid' }, s); text(s, left - 6, y, fmt(v), 'tick', 'end'); });
+    rows.forEach((r, i) => {
+      const cx = left + i * slot + slot / 2;
+      [[keyA, css('--gray-series'), labA, -bw - 7], [keyB, css('--blue'), labB, 7]].forEach(([k, col, lab, off]) => {
+        const h = r[k] / ymax * (H - top - bottom), y = top + (H - top - bottom) - h;
+        const p = el('path', { d: roundTop(cx + off, y, bw, h, 4), fill: col, class: 'mark' }, s);
+        text(s, cx + off + bw / 2, y - 9, fmt(r[k]), 'val', 'middle');
+        hover(p, `${lab}<br>${r.bucket || r.z}: ${fmt(r[k])} (n = ${r.n})`);
+      });
+      text(s, cx, H - bottom + 14, r.bucket || ('z ' + r.z), 'tick', 'middle');
+    });
+    el('line', { x1: left, x2: W - right, y1: H - bottom, y2: H - bottom, class: 'axis' }, s);
+    text(s, W / 2, H - 4, ylabel, 'tick', 'middle');
+  }
+  grouped('f-cal', D.calibration.rows, 'market', 'model', 'market mid-price', 'our model', 1.0, v => v.toFixed(2), 'seconds left in the window · log loss, lower is better');
+  table('f-cal', ['seconds left', 'readings', 'market log loss', 'model log loss'], D.calibration.rows.map(r => [r.bucket, r.n, r.market.toFixed(3), r.model.toFixed(3)]));
+  grouped('f-z', D.zcal, 'model_min', 'realized', "model's stated minimum", 'realized', 1.0, v => pct(v), "model confidence (z) · share of outcomes that went the model's way");
+  table('f-z', ['z', 'readings', 'model says at least', 'realized'], D.zcal.map(r => [r.z, r.n, pct(r.model_min, 1), pct(r.realized, 1)]));
+
+  document.getElementById('oldbots').textContent = `${fmt$(D.old_bots.pnl)} on ${fmt$(D.old_bots.staked)} staked over ${D.old_bots.n} paper trades (noise around zero, with a wrong model)`;
+  document.getElementById('v4res').textContent = D.v4.map(r => `${r.strat}: ${r.n} trades, ${r.pnl >= 0 ? '+' : ''}${fmt$(r.pnl)} on $${r.staked}`).join('; ');
+})();
+</script>
