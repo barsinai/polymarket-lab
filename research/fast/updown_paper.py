@@ -198,8 +198,11 @@ def main():
                     acc = starts[key] = {"K": K0, "K_src": "ptb" if m.get("ptb") else "twap" if kt is not None else src,
                                          "K_twap": kt, "K_proxy": kp, "spot_start": s_now if now - st < 6 else None}
                 rem = end - now
-                if rem > LAST_S or rem < 2 or not sg:
+                if rem < 2 or not sg:
                     continue
+                late = rem <= LAST_S
+                if not late and now - acc.get("model_ts", 0) < 5:
+                    continue  # outside the last LAST_S: model line every 5 s, no books
                 m = market(a, w, st)
                 if not m:
                     continue
@@ -217,6 +220,12 @@ def main():
                     sd = max((1 - g) * s_now * sg * math.sqrt(r / 3), 1e-9)
                     z = (g * A + (1 - g) * s_now - K) / sd
                 p_up = min(max(phi(z), 0.001), 0.999)
+                if not late:
+                    acc["model_ts"] = now
+                    with open(f"{D}/model.jsonl", "a") as fh:   # whole-window model track (for maker replays against the tape)
+                        fh.write(json.dumps({"ts": round(now, 1), "slug": m["slug"], "p_up": round(p_up, 4), "z": round(z, 2), "rem": int(rem),
+                                             "spot": s_now, "K": K, "k_src": acc["K_src"], "src": src, "sigma": round(sg, 7)}) + "\n")
+                    continue
                 jobs.append((a, w, st, end, rem, m, p_up, z, g, A, s_now, K, acc["K_src"], sg, src))
         books = list(pool.map(lambda j: (book(j[5]["tokens"][0]), book(j[5]["tokens"][1])), jobs)) if jobs else []
         new_trades = False
