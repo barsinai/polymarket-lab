@@ -77,8 +77,18 @@ def fetch_tape(slug, cid, probe=False):
     return rows
 
 
-slugs = [s for s in res]
-todo = [s for s in slugs if s not in meta]
+slugs = set(res)
+for f in ("windows.jsonl", "trades.jsonl", "model.jsonl", "obs.jsonl"):
+    try:
+        for line in open(f"{D}/{f}"):
+            try:
+                slugs.add(json.loads(line)["slug"])
+            except (ValueError, KeyError):
+                pass
+    except OSError:
+        pass
+slugs = sorted(slugs)
+todo = [s for s in slugs if s not in meta or meta[s].get("up") is None]
 with ThreadPoolExecutor(6) as ex:
     for slug, md in ex.map(fetch_meta, todo):
         if md:
@@ -93,7 +103,7 @@ try:
             have.add(json.loads(line)["slug"])
 except OSError:
     pass
-todo = [s for s in slugs if s in meta and meta[s]["cid"] and s not in have]
+todo = [s for s in slugs if s in meta and meta[s]["cid"] and meta[s].get("up") is not None and s not in have]
 print("tape to fetch", len(todo))
 if todo:
     fetch_tape(todo[0], meta[todo[0]]["cid"], probe=True)
@@ -110,7 +120,7 @@ tape = []
 with gzip.open(f"{D}/tape.jsonl.gz", "rt") as fh:
     for line in fh:
         tape.append(json.loads(line))
-tape = [t for t in tape if t["slug"] in meta and meta[t["slug"]]["up"] is not None and t["w"]]
+tape = [t for t in tape if t["slug"] in meta and meta[t["slug"]].get("up") is not None and t["w"]]
 print("fills with result", len(tape), "wallets", len({t["w"] for t in tape}))
 
 W = defaultdict(lambda: {"n": 0, "vol": 0.0, "pnl": 0.0, "wins": 0, "buys": 0, "late": 0, "rem": [], "px": [], "win_side": 0, "windows": set(), "sells": 0})
