@@ -47,15 +47,22 @@ async def _run(stop):
             async with websockets.connect(URL, ping_interval=None, max_size=2 ** 22) as ws:
                 stats["connects"] += 1
                 await ws.send(json.dumps({"action": "subscribe", "subscriptions": [{"topic": t, "type": "*"} for t in TOPICS]}))
-                last_ping = time.time()
+                last_ping = time.time(); last_rx = time.time()
                 while not stop.is_set():
                     if time.time() - last_ping > 5:
                         await ws.send("PING"); last_ping = time.time()
+                        try:
+                            await asyncio.wait_for(ws.ping(), timeout=5)
+                        except Exception:  # noqa: BLE001
+                            break   # protocol ping failed: reconnect
+                    if time.time() - last_rx > 20:
+                        stats["silent_reconnects"] = stats.get("silent_reconnects", 0) + 1
+                        break       # the feed went quiet (seen after ~40 min): reconnect and re-subscribe
                     try:
                         raw = await asyncio.wait_for(ws.recv(), timeout=5)
                     except asyncio.TimeoutError:
                         continue
-                    stats["msgs"] += 1; stats["last_msg"] = time.time()
+                    stats["msgs"] += 1; stats["last_msg"] = time.time(); last_rx = time.time()
                     if not isinstance(raw, str) or not raw.startswith("{"):
                         continue
                     try:

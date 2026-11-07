@@ -108,13 +108,20 @@ meta = {}
 
 
 def market(a, w, start):
-    """tokens + the official price to beat (Gamma eventMetadata.priceToBeat, re-read once if missing)"""
+    """tokens + the official price to beat (Gamma eventMetadata.priceToBeat). Polymarket fills it in some time
+    after the window opens, so re-read it on a schedule until it is there: at most 5 Gamma calls per market."""
     slug = f"{a}-updown-{wname(w)}-{start}"
     cur = meta.get(slug)
-    if cur is not None and (cur.get("ptb") is not None or cur.get("tries", 0) >= 2):
-        return cur
     if slug in meta and cur is None:
         return None
+    if cur is not None and cur.get("ptb") is not None:
+        return cur
+    now = time.time()
+    if cur is not None:
+        since = now - start
+        due = [10, 45, 90, max(w - LAST_S - 5, 100), max(w - 70, 120)]
+        if cur.get("tries", 0) >= len(due) or since < due[min(cur.get("tries", 0), len(due) - 1)]:
+            return cur
     try:
         ev = S.get(f"{GAMMA}/events", params={"slug": slug}, timeout=10).json()
         m = ev[0]["markets"][0]
@@ -124,6 +131,8 @@ def market(a, w, start):
     except Exception:  # noqa: BLE001
         if cur is None:
             meta[slug] = None
+        else:
+            cur["tries"] = cur.get("tries", 0) + 1
     return meta[slug]
 
 
