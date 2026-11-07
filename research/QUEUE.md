@@ -324,3 +324,7 @@ Price drift in the trade's direction (what a market maker on the other side lose
   explicitly addressed in the docs. Small.
 - Combos: RFQ-only (no order book), makers quote with own models; SDK has open_rfq_session (maker
   side) and request_combo_quote. Needs authenticated quote requests to study (no trades).
+- 11-07 FAST UP/DOWN: resolution rule calibrated on 546 windows: Up iff mean of the last 60 s >= mean of
+  the 60 s before the start (536/546 agree with our Binance proxy; the "window mean vs start spot" model
+  v1 agreed 456/546). v1 paper: 600 trades, -$41 on $10.4k staked (+$340 day 1, -$382 day 2) = noise
+  around zero with a wrong model. v2 model built on the calibrated rule; logs every book observation.

@@ -146,15 +146,28 @@ def main():
                     if t > acc["last"]:
                         acc["sum"] += p; acc["n"] += 1; acc["last"] = t
                 rem = end - now
-                if rem > LAST_S or rem < 5 or acc["n"] < 10:
+                if rem > LAST_S or rem < 3:
                     continue
                 sg = sigma(a)
                 if not sg:
                     continue
-                f = (now - st) / w; A = acc["sum"] / acc["n"]
-                sd = (1 - f) * s_now * sg * math.sqrt(max(rem, 1) / 3)
-                z = (f * A + (1 - f) * s_now - acc["K"]) / max(sd, 1e-9)
-                p_up = min(max(phi(z), 0.001), 0.999)
+                # Calibrated rule (11-07, 536/546 windows): Up iff mean price of the LAST 60 s of the window
+                # >= mean price of the 60 s BEFORE the window starts.
+                pre = [p for t, p in px[a] if st - 60 <= t < st]
+                if len(pre) < 40:
+                    continue
+                K = sum(pre) / len(pre)
+                if now < end - 60:
+                    sd = s_now * sg * math.sqrt((end - 60 - now) + 20.0)
+                    z = (s_now - K) / max(sd, 1e-9)
+                else:
+                    last = [p for t, p in px[a] if end - 60 <= t <= now]
+                    g = min(max((now - (end - 60)) / 60.0, 0.0), 1.0)
+                    A = sum(last) / len(last) if last else s_now
+                    r = max(end - now, 1.0)
+                    sd = (1 - g) * s_now * sg * math.sqrt(r / 3)
+                    z = (g * A + (1 - g) * s_now - K) / max(sd, 1e-9)
+                p_up = min(max(phi(z), 0.002), 0.998)
                 m = market(a, w, st)
                 if not m:
                     continue
@@ -164,6 +177,9 @@ def main():
                     ask, bid = best_ask(tok)
                     if not ask:
                         continue
+                    with open(f"{D}/obs.jsonl", "a") as fh:
+                        fh.write(json.dumps({"ts": int(now), "slug": m["slug"], "side": side, "ask": ask[0], "ask_sz": ask[1],
+                                             "bid": bid[0] if bid else None, "p_model": round(p_side, 4), "rem": int(rem)}) + "\n")
                     a_px, a_sz = ask
                     fee = 0.07 * a_px * (1 - a_px)
                     edge = p_side - a_px - fee
@@ -173,7 +189,7 @@ def main():
                             continue
                         tr = {"ts": int(now), "slug": m["slug"], "asset": a, "window": w, "side": side, "price": a_px, "shares": shares,
                               "fee": round(fee * shares, 4), "p_model": round(p_side, 4), "edge": round(edge, 4), "rem_s": int(rem),
-                              "K": acc["K"], "avg": round(A, 2), "spot": s_now, "end": end, "result": None}
+                              "K": round(K, 4), "spot": s_now, "model": "v2", "end": end, "result": None}
                         trades.append(tr); done.add((m["slug"], side))
                         with open(f"{D}/trades.jsonl", "w") as fh:
                             for x in trades:
