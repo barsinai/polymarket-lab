@@ -79,7 +79,7 @@ def feed(a):
     cl = rtds.series(CL, f"{a}/usd", now - 1200, now + 5)
     if len(cl) >= 120 and now - cl[-1][0] < 10:
         return "chainlink", cl
-    return "binance", [(t, p) for t, p in px[a] if t >= now - 1200]
+    return "binance", [(t, p) for t, p in list(px[a]) if t >= now - 1200]   # copy: the sampler thread appends
 
 
 def sigma_of(ser, h=30.0):
