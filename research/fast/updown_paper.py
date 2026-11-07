@@ -203,166 +203,169 @@ def main():
     print("feed", json.dumps(rtds.stats)[:300], flush=True)
     n_obs = 0
     while time.time() < end_at:
-        loop_t = time.time()
-        now = time.time()
-        jobs = []
-        for a in ASSETS:
-            src, ser = feed(a)
-            if len(ser) < 60:
-                continue
-            s_now = ser[-1][1]
-            sg = sigma_of(ser)
-            for w in WINDOWS:
-                off = OFFSET.get(w, 0)
-                st = int((now - off) // w * w + off); end = st + w
-                key = (a, w, st)
-                acc = starts.get(key)
-                if acc is None:
+        try:
+            loop_t = time.time()
+            now = time.time()
+            jobs = []
+            for a in ASSETS:
+                src, ser = feed(a)
+                if len(ser) < 60:
+                    continue
+                s_now = ser[-1][1]
+                sg = sigma_of(ser)
+                for w in WINDOWS:
+                    off = OFFSET.get(w, 0)
+                    st = int((now - off) // w * w + off); end = st + w
+                    key = (a, w, st)
+                    acc = starts.get(key)
+                    if acc is None:
+                        m = market(a, w, st)
+                        if not m:
+                            continue
+                        kt = twap_at(a, st)
+                        pre = [p for t, p in ser if st - 60 <= t < st]
+                        kp = sum(pre) / len(pre) if len(pre) >= 20 else None
+                        K0 = m.get("ptb") or kt or kp
+                        if K0 is None:
+                            continue  # no reference yet (market() re-reads the price to beat once more)
+                        acc = starts[key] = {"K": K0, "K_src": "ptb" if m.get("ptb") else "twap" if kt is not None else src,
+                                             "K_twap": kt, "K_proxy": kp, "spot_start": s_now if now - st < 6 else None}
+                    rem = end - now
+                    if rem < 2 or not sg:
+                        continue
+                    late = rem <= LAST_S
+                    if not late and now - acc.get("model_ts", 0) < 5:
+                        continue  # outside the last LAST_S: model line every 5 s, no books
                     m = market(a, w, st)
                     if not m:
                         continue
-                    kt = twap_at(a, st)
-                    pre = [p for t, p in ser if st - 60 <= t < st]
-                    kp = sum(pre) / len(pre) if len(pre) >= 20 else None
-                    K0 = m.get("ptb") or kt or kp
-                    if K0 is None:
-                        continue  # no reference yet (market() re-reads the price to beat once more)
-                    acc = starts[key] = {"K": K0, "K_src": "ptb" if m.get("ptb") else "twap" if kt is not None else src,
-                                         "K_twap": kt, "K_proxy": kp, "spot_start": s_now if now - st < 6 else None}
-                rem = end - now
-                if rem < 2 or not sg:
-                    continue
-                late = rem <= LAST_S
-                if not late and now - acc.get("model_ts", 0) < 5:
-                    continue  # outside the last LAST_S: model line every 5 s, no books
-                m = market(a, w, st)
-                if not m:
-                    continue
-                if m.get("ptb") and acc["K_src"] != "ptb":
-                    acc["K"], acc["K_src"] = m["ptb"], "ptb"
-                K = acc["K"]
-                if now < end - 60:
-                    sd = s_now * sg * math.sqrt((end - 60 - now) + 20.0)
-                    z = (s_now - K) / max(sd, 1e-9); g = 0.0; A = None
-                else:
-                    lastm = [p for t, p in ser if end - 60 <= t <= now]
-                    g = min(max((now - (end - 60)) / 60.0, 0.0), 1.0)
-                    A = sum(lastm) / len(lastm) if lastm else s_now
-                    r = max(end - now, 1.0)
-                    sd = max((1 - g) * s_now * sg * math.sqrt(r / 3), 1e-9)
-                    z = (g * A + (1 - g) * s_now - K) / sd
-                p_up = min(max(phi(z), 0.001), 0.999)
-                if not late:
-                    acc["model_ts"] = now
-                    with open(f"{D}/model.jsonl", "a") as fh:   # whole-window model track (for maker replays against the tape)
-                        fh.write(json.dumps({"ts": round(now, 1), "slug": m["slug"], "p_up": round(p_up, 4), "z": round(z, 2), "rem": int(rem),
-                                             "spot": s_now, "K": K, "k_src": acc["K_src"], "src": src, "sigma": round(sg, 7)}) + "\n")
-                    continue
-                jobs.append((a, w, st, end, rem, m, p_up, z, g, A, s_now, K, acc["K_src"], sg, src))
-        books = list(pool.map(lambda j: (book(j[5]["tokens"][0]), book(j[5]["tokens"][1])), jobs)) if jobs else []
-        new_trades = False
-        for j, (b_up, b_dn) in zip(jobs, books):
-            a, w, st, end, rem, m, p_up, z, g, A, s_now, K, k_src, sg, src = j
-            for side, (ask, bid), p_side in (("Up", b_up, p_up), ("Down", b_dn, 1 - p_up)):
-                if not ask:
-                    continue
-                zs = z if side == "Up" else -z
-                with open(f"{D}/obs.jsonl", "a") as fh:
-                    fh.write(json.dumps({"ts": round(now, 1), "slug": m["slug"], "side": side, "ask": ask[0], "ask_sz": ask[1],
-                                         "bid": bid[0] if bid else None, "bid_sz": bid[1] if bid else None, "p_model": round(p_side, 4),
-                                         "z": round(zs, 2), "rem": int(rem), "spot": s_now, "K": K, "k_src": k_src, "src": src,
-                                         "g": round(g, 3), "A": A, "sigma": round(sg, 7), "v": 4}) + "\n")
-                n_obs += 1
-                a_px, a_sz = ask
-                fee = 0.07 * a_px * (1 - a_px)
-                edge = p_side - a_px - fee
-                picks = []
-                if edge >= EDGE and 0.02 <= a_px <= 0.98:
-                    picks.append("exact")
-                if rem <= 60 and zs >= LOCK_Z and a_px <= LOCK_ASK and k_src in ("ptb", "twap") and src == "chainlink":
-                    picks.append("lock")
-                if rem <= FAV_REM and FAV_LO <= a_px <= FAV_HI:
-                    picks.append("fav")
-                if DOG_RMIN <= rem <= DOG_RMAX and DOG_LO <= a_px <= DOG_HI:
-                    picks.append("dog")   # tape finding (598 windows): the cheap side 30-120 s before the end is underpriced
-                for strat in picks:
-                    if (strat, m["slug"], side) in done:
-                        continue
-                    if strat != "exact" and any((strat, m["slug"], o) in done for o in ("Up", "Down")):
-                        continue  # one side per window for lock/fav
-                    shares = round(min(a_sz, SIZE_USD / a_px), 2)
-                    if shares < 5:
-                        continue
-                    tr = {"ts": int(now), "slug": m["slug"], "asset": a, "window": w, "side": side, "price": a_px, "shares": shares,
-                          "fee": round(fee * shares, 4), "p_model": round(p_side, 4), "z": round(zs, 2), "edge": round(edge, 4),
-                          "rem_s": int(rem), "K": K, "k_src": k_src, "src": src, "spot": s_now, "model": "v4", "strat": strat,
-                          "end": end, "result": None}
-                    trades.append(tr); done.add((strat, m["slug"], side)); new_trades = True
-                    print(f"{datetime.now(timezone.utc):%H:%M:%S} PAPER[{strat}] BUY {side} {m['slug']} @ {a_px} x {shares} p {p_side:.3f} z {zs:.1f} rem {int(rem)}s", flush=True)
-        # PAIR: windows of one asset that END at the same second (4 h / 15 m / 5 m) resolve off the SAME final
-        # TWAP, compared with different prices to beat. One share of each of the right sides pays at least $1
-        # and $2 when the final lands between the two references (0 violations in 132 15m/5m pairs).
-        ending = {}
-        for j, bk in zip(jobs, books):
-            ending.setdefault((j[0], j[3]), []).append((j, bk))
-        for (a, end_), lst in ending.items():
-            lst.sort(key=lambda x: -x[0][1])   # longest window first
-            for i in range(len(lst)):
-                for k in range(i + 1, len(lst)):
-                    (jl, (ul, dl)), (js, (us, ds)) = lst[i], lst[k]
-                    if not all((ul, dl, us, ds)) or not all((ul[0], dl[0], us[0], ds[0])):
-                        continue
-                    kl, ks, pl, ps = jl[11], js[11], jl[6], js[6]
-                    if kl < ks:
-                        legs = (("Up", jl, ul[0]), ("Down", js, ds[0])); p_mid = pl - ps
-                    elif kl > ks:
-                        legs = (("Down", jl, dl[0]), ("Up", js, us[0])); p_mid = ps - pl
+                    if m.get("ptb") and acc["K_src"] != "ptb":
+                        acc["K"], acc["K_src"] = m["ptb"], "ptb"
+                    K = acc["K"]
+                    if now < end - 60:
+                        sd = s_now * sg * math.sqrt((end - 60 - now) + 20.0)
+                        z = (s_now - K) / max(sd, 1e-9); g = 0.0; A = None
                     else:
+                        lastm = [p for t, p in ser if end - 60 <= t <= now]
+                        g = min(max((now - (end - 60)) / 60.0, 0.0), 1.0)
+                        A = sum(lastm) / len(lastm) if lastm else s_now
+                        r = max(end - now, 1.0)
+                        sd = max((1 - g) * s_now * sg * math.sqrt(r / 3), 1e-9)
+                        z = (g * A + (1 - g) * s_now - K) / sd
+                    p_up = min(max(phi(z), 0.001), 0.999)
+                    if not late:
+                        acc["model_ts"] = now
+                        with open(f"{D}/model.jsonl", "a") as fh:   # whole-window model track (for maker replays against the tape)
+                            fh.write(json.dumps({"ts": round(now, 1), "slug": m["slug"], "p_up": round(p_up, 4), "z": round(z, 2), "rem": int(rem),
+                                                 "spot": s_now, "K": K, "k_src": acc["K_src"], "src": src, "sigma": round(sg, 7)}) + "\n")
                         continue
-                    a1, a2 = legs[0][2][0], legs[1][2][0]
-                    fees = 0.07 * a1 * (1 - a1) + 0.07 * a2 * (1 - a2)
-                    ev = 1 + max(p_mid, 0.0) - (a1 + a2) - fees
-                    with open(f"{D}/pairs.jsonl", "a") as fh:
-                        fh.write(json.dumps({"ts": round(now, 1), "asset": a, "end": end_, "rem": int(jl[4]), "k_long": kl, "k_short": ks,
-                                             "legs": [(s_, jj[5]["slug"], ask_[0], ask_[1]) for s_, jj, ask_ in legs], "sum": round(a1 + a2, 3),
-                                             "p_mid": round(p_mid, 4), "ev": round(ev, 4)}) + "\n")
-                    key = ("pair", jl[5]["slug"], js[5]["slug"])
-                    if ev >= PAIR_EDGE and a1 + a2 <= PAIR_MAX and key not in done:
-                        shares = round(min(legs[0][2][1], legs[1][2][1], SIZE_USD / (a1 + a2)), 2)
+                    jobs.append((a, w, st, end, rem, m, p_up, z, g, A, s_now, K, acc["K_src"], sg, src))
+            books = list(pool.map(lambda j: (book(j[5]["tokens"][0]), book(j[5]["tokens"][1])), jobs)) if jobs else []
+            new_trades = False
+            for j, (b_up, b_dn) in zip(jobs, books):
+                a, w, st, end, rem, m, p_up, z, g, A, s_now, K, k_src, sg, src = j
+                for side, (ask, bid), p_side in (("Up", b_up, p_up), ("Down", b_dn, 1 - p_up)):
+                    if not ask:
+                        continue
+                    zs = z if side == "Up" else -z
+                    with open(f"{D}/obs.jsonl", "a") as fh:
+                        fh.write(json.dumps({"ts": round(now, 1), "slug": m["slug"], "side": side, "ask": ask[0], "ask_sz": ask[1],
+                                             "bid": bid[0] if bid else None, "bid_sz": bid[1] if bid else None, "p_model": round(p_side, 4),
+                                             "z": round(zs, 2), "rem": int(rem), "spot": s_now, "K": K, "k_src": k_src, "src": src,
+                                             "g": round(g, 3), "A": A, "sigma": round(sg, 7), "v": 4}) + "\n")
+                    n_obs += 1
+                    a_px, a_sz = ask
+                    fee = 0.07 * a_px * (1 - a_px)
+                    edge = p_side - a_px - fee
+                    picks = []
+                    if edge >= EDGE and 0.02 <= a_px <= 0.98:
+                        picks.append("exact")
+                    if rem <= 60 and zs >= LOCK_Z and a_px <= LOCK_ASK and k_src in ("ptb", "twap") and src == "chainlink":
+                        picks.append("lock")
+                    if rem <= FAV_REM and FAV_LO <= a_px <= FAV_HI:
+                        picks.append("fav")
+                    if DOG_RMIN <= rem <= DOG_RMAX and DOG_LO <= a_px <= DOG_HI:
+                        picks.append("dog")   # tape finding (598 windows): the cheap side 30-120 s before the end is underpriced
+                    for strat in picks:
+                        if (strat, m["slug"], side) in done:
+                            continue
+                        if strat != "exact" and any((strat, m["slug"], o) in done for o in ("Up", "Down")):
+                            continue  # one side per window for lock/fav
+                        shares = round(min(a_sz, SIZE_USD / a_px), 2)
                         if shares < 5:
                             continue
-                        done.add(key); new_trades = True
-                        for s_, jj, ask_ in legs:
-                            fee = 0.07 * ask_[0] * (1 - ask_[0])
-                            trades.append({"ts": int(now), "slug": jj[5]["slug"], "asset": a, "window": jj[1], "side": s_, "price": ask_[0], "shares": shares,
-                                           "fee": round(fee * shares, 4), "p_model": round(jj[6] if s_ == "Up" else 1 - jj[6], 4), "edge": round(ev, 4),
-                                           "rem_s": int(jj[4]), "K": jj[11], "k_src": jj[12], "src": jj[14], "spot": jj[10], "model": "v4", "strat": "pair",
-                                           "pair": f"{jl[5]['slug']}+{js[5]['slug']}", "p_mid": round(p_mid, 4), "end": jj[3], "result": None})
-                        print(f"{datetime.now(timezone.utc):%H:%M:%S} PAPER[pair] {a} {legs[0][0]} {wname(jl[1])}@{a1} + {legs[1][0]} {wname(js[1])}@{a2} x {shares} sum {a1 + a2:.2f} p_mid {p_mid:.2f} ev {ev:+.3f} rem {int(jl[4])}s", flush=True)
-        if new_trades or settle(trades):
-            write_trades(trades)
-        # window summaries, ~70 s after each window ends
-        for (a_, w_, st_), acc_ in list(starts.items()):
-            end_ = st_ + w_
-            if acc_.get("logged") or now < end_ + 70:
-                continue
-            src_, ser_ = feed(a_)
-            def mean_(lo, hi):
-                v = [p for t, p in ser_ if lo <= t < hi]
-                return round(sum(v) / len(v), 6) if v else None
-            def at_(x):
-                v = [p for t, p in ser_ if t >= x]
-                return v[0] if v else None
-            te = twap_at(a_, end_)
-            rec = {"slug": f"{a_}-updown-{wname(w_)}-{st_}", "asset": a_, "window": w_, "start": st_, "src": src_,
-                   "K": acc_.get("K"), "K_src": acc_.get("K_src"), "K_twap": acc_.get("K_twap"), "K_proxy": acc_.get("K_proxy"), "twap_end": te,
-                   "spot_start": acc_.get("spot_start"), "spot_end": at_(end_), "mean_window": mean_(st_, end_),
-                   "mean_last60": mean_(end_ - 60, end_), "mean_pre60": mean_(st_ - 60, st_), "mean_first60": mean_(st_, st_ + 60),
-                   "rule_twap": (te >= acc_["K_twap"]) if (te is not None and acc_.get("K_twap") is not None) else None, "v": 4}
-            with open(f"{D}/windows.jsonl", "a") as fh:
-                fh.write(json.dumps(rec) + "\n")
-            acc_["logged"] = True
-        starts = {k: v for k, v in starts.items() if k[2] + k[1] > now - 200}
+                        tr = {"ts": int(now), "slug": m["slug"], "asset": a, "window": w, "side": side, "price": a_px, "shares": shares,
+                              "fee": round(fee * shares, 4), "p_model": round(p_side, 4), "z": round(zs, 2), "edge": round(edge, 4),
+                              "rem_s": int(rem), "K": K, "k_src": k_src, "src": src, "spot": s_now, "model": "v4", "strat": strat,
+                              "end": end, "result": None}
+                        trades.append(tr); done.add((strat, m["slug"], side)); new_trades = True
+                        print(f"{datetime.now(timezone.utc):%H:%M:%S} PAPER[{strat}] BUY {side} {m['slug']} @ {a_px} x {shares} p {p_side:.3f} z {zs:.1f} rem {int(rem)}s", flush=True)
+            # PAIR: windows of one asset that END at the same second (4 h / 15 m / 5 m) resolve off the SAME final
+            # TWAP, compared with different prices to beat. One share of each of the right sides pays at least $1
+            # and $2 when the final lands between the two references (0 violations in 132 15m/5m pairs).
+            ending = {}
+            for j, bk in zip(jobs, books):
+                ending.setdefault((j[0], j[3]), []).append((j, bk))
+            for (a, end_), lst in ending.items():
+                lst.sort(key=lambda x: -x[0][1])   # longest window first
+                for i in range(len(lst)):
+                    for k in range(i + 1, len(lst)):
+                        (jl, (ul, dl)), (js, (us, ds)) = lst[i], lst[k]
+                        if not all((ul, dl, us, ds)) or not all((ul[0], dl[0], us[0], ds[0])):
+                            continue
+                        kl, ks, pl, ps = jl[11], js[11], jl[6], js[6]
+                        if kl < ks:
+                            legs = (("Up", jl, ul[0]), ("Down", js, ds[0])); p_mid = pl - ps
+                        elif kl > ks:
+                            legs = (("Down", jl, dl[0]), ("Up", js, us[0])); p_mid = ps - pl
+                        else:
+                            continue
+                        a1, a2 = legs[0][2][0], legs[1][2][0]
+                        fees = 0.07 * a1 * (1 - a1) + 0.07 * a2 * (1 - a2)
+                        ev = 1 + max(p_mid, 0.0) - (a1 + a2) - fees
+                        with open(f"{D}/pairs.jsonl", "a") as fh:
+                            fh.write(json.dumps({"ts": round(now, 1), "asset": a, "end": end_, "rem": int(jl[4]), "k_long": kl, "k_short": ks,
+                                                 "legs": [(s_, jj[5]["slug"], ask_[0], ask_[1]) for s_, jj, ask_ in legs], "sum": round(a1 + a2, 3),
+                                                 "p_mid": round(p_mid, 4), "ev": round(ev, 4)}) + "\n")
+                        key = ("pair", jl[5]["slug"], js[5]["slug"])
+                        if ev >= PAIR_EDGE and a1 + a2 <= PAIR_MAX and key not in done:
+                            shares = round(min(legs[0][2][1], legs[1][2][1], SIZE_USD / (a1 + a2)), 2)
+                            if shares < 5:
+                                continue
+                            done.add(key); new_trades = True
+                            for s_, jj, ask_ in legs:
+                                fee = 0.07 * ask_[0] * (1 - ask_[0])
+                                trades.append({"ts": int(now), "slug": jj[5]["slug"], "asset": a, "window": jj[1], "side": s_, "price": ask_[0], "shares": shares,
+                                               "fee": round(fee * shares, 4), "p_model": round(jj[6] if s_ == "Up" else 1 - jj[6], 4), "edge": round(ev, 4),
+                                               "rem_s": int(jj[4]), "K": jj[11], "k_src": jj[12], "src": jj[14], "spot": jj[10], "model": "v4", "strat": "pair",
+                                               "pair": f"{jl[5]['slug']}+{js[5]['slug']}", "p_mid": round(p_mid, 4), "end": jj[3], "result": None})
+                            print(f"{datetime.now(timezone.utc):%H:%M:%S} PAPER[pair] {a} {legs[0][0]} {wname(jl[1])}@{a1} + {legs[1][0]} {wname(js[1])}@{a2} x {shares} sum {a1 + a2:.2f} p_mid {p_mid:.2f} ev {ev:+.3f} rem {int(jl[4])}s", flush=True)
+            if new_trades or settle(trades):
+                write_trades(trades)
+            # window summaries, ~70 s after each window ends
+            for (a_, w_, st_), acc_ in list(starts.items()):
+                end_ = st_ + w_
+                if acc_.get("logged") or now < end_ + 70:
+                    continue
+                src_, ser_ = feed(a_)
+                def mean_(lo, hi):
+                    v = [p for t, p in ser_ if lo <= t < hi]
+                    return round(sum(v) / len(v), 6) if v else None
+                def at_(x):
+                    v = [p for t, p in ser_ if t >= x]
+                    return v[0] if v else None
+                te = twap_at(a_, end_)
+                rec = {"slug": f"{a_}-updown-{wname(w_)}-{st_}", "asset": a_, "window": w_, "start": st_, "src": src_,
+                       "K": acc_.get("K"), "K_src": acc_.get("K_src"), "K_twap": acc_.get("K_twap"), "K_proxy": acc_.get("K_proxy"), "twap_end": te,
+                       "spot_start": acc_.get("spot_start"), "spot_end": at_(end_), "mean_window": mean_(st_, end_),
+                       "mean_last60": mean_(end_ - 60, end_), "mean_pre60": mean_(st_ - 60, st_), "mean_first60": mean_(st_, st_ + 60),
+                       "rule_twap": (te >= acc_["K_twap"]) if (te is not None and acc_.get("K_twap") is not None) else None, "v": 4}
+                with open(f"{D}/windows.jsonl", "a") as fh:
+                    fh.write(json.dumps(rec) + "\n")
+                acc_["logged"] = True
+            starts = {k: v for k, v in starts.items() if k[2] + k[1] > now - 200}
+        except Exception:  # noqa: BLE001  (one bad cycle must not end the hour)
+            import traceback; traceback.print_exc(); time.sleep(2); continue
         time.sleep(max(0.2, 2.0 - (time.time() - loop_t)))
     stop.set(); rt_stop.set()
     settle(trades); write_trades(trades)
