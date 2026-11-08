@@ -144,9 +144,16 @@ def market(a, w, start):
     return meta[slug]
 
 
+LAT = []   # REST round-trip times of book reads (ms), for the latency study
+
+
 def book(tok):
     try:
+        t0 = time.perf_counter()
         b = S.get(f"{CLOB}/book", params={"token_id": tok}, timeout=4).json()
+        LAT.append((time.perf_counter() - t0) * 1000)
+        if len(LAT) > 20000:
+            del LAT[:10000]
         asks = sorted((float(x["price"]), float(x["size"])) for x in b.get("asks") or [])
         bids = sorted(((float(x["price"]), float(x["size"])) for x in b.get("bids") or []), reverse=True)
         return (asks[0] if asks else None), (bids[0] if bids else None)
@@ -432,6 +439,7 @@ def main():
             b["trades"] += 1; b["won"] += t["result"]; b["staked"] += t["price"] * t["shares"]; b["pnl"] += t["pnl"]
     rnd = lambda b: {k: round(v, 2) if isinstance(v, float) else v for k, v in b.items()}
     rep = {"updated": datetime.now(timezone.utc).isoformat(), "trades": len(trades), "settled": len(done_t), "obs_this_run": n_obs,
+           "rest_ms": {"n": len(LAT), "min": round(min(LAT), 1) if LAT else None, "p50": round(sorted(LAT)[len(LAT) // 2], 1) if LAT else None, "p90": round(sorted(LAT)[9 * len(LAT) // 10], 1) if LAT else None},
            "feed": {k: v for k, v in rtds.stats.items() if k != "topics"}, "feed_topics": rtds.stats.get("topics"), "bookws": {"alive": bw_proc.poll() is None},
            "by_strat": {k: rnd(b) for k, b in sorted(by_strat.items())}, "by_day": {d: rnd(b) for d, b in sorted(by_day.items())}}
     json.dump(rep, open(f"{D}/report.json", "w"), indent=1)
