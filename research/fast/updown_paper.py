@@ -235,6 +235,8 @@ def main():
                     continue
                 s_now = ser[-1][1]
                 sg = sigma_of(ser)
+                if sg:
+                    sg = max(sg, SIGMA_FLOOR.get(a, 0.0))
                 for w in WINDOWS:
                     off = OFFSET.get(w, 0)
                     st = int((now - off) // w * w + off); end = st + w
