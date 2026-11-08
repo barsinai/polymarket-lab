@@ -78,7 +78,7 @@ def fetch_tape(slug, cid, probe=False):
 
 
 slugs = set(res)
-for f in ("windows.jsonl", "trades.jsonl", "model.jsonl", "obs.jsonl"):
+for f in ("windows.jsonl", "trades.jsonl", "model.jsonl", "obs.jsonl", "tokens.jsonl"):
     try:
         for line in open(f"{D}/{f}"):
             try:
