@@ -19,12 +19,18 @@ def lines(pattern):
         op = gzip.open if f.endswith(".gz") else open
         try:
             with op(f, "rt") as fh:
-                for line in fh:
+                while True:
+                    try:
+                        line = fh.readline()
+                    except Exception:  # noqa: BLE001  (a corrupt gzip member ends the file)
+                        break
+                    if not line:
+                        break
                     try:
                         yield json.loads(line)
                     except ValueError:
                         pass
-        except (OSError, EOFError):
+        except Exception:  # noqa: BLE001
             pass
 
 

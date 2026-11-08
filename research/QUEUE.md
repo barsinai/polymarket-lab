@@ -389,3 +389,18 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - Verdict: no exploitable edge for a REST-polling participant in these markets. Next: measure quote lifetimes with
   the CLOB websocket (decides whether a sub-second bot could catch the lock asks), and move research effort to
   slow-market making with flow-quality filters (80M-trade tape).
+- 11-08 09:50 WEBSOCKET HOUR 1 (06:21-07:23 UTC, 240 token-windows, 330k top-of-book records): only 10 "locked
+  and <= 0.97" episodes; 3 lasted < 0.15 s, 7 lasted 38-60 s (persistent = the marginal/losing kind: 8 won 2 lost,
+  -$16 on $121 at any reaction time). REST poll vs websocket at the same instant: identical 95.3% of reads
+  (99th pct |diff| 3c): our polling is not what we were missing; the market simply does not leave cheap locked
+  asks around. Decision: do not build the fast bot; keep recording one more day for the final lifetime numbers.
+  Recorder now runs as its own process (the in-thread version was dropped by the server as a slow consumer,
+  22 reconnects/hour: GIL contention with the bot).
+- 11-08 09:50 "exact" ran all night with the OLD unrestricted rule (an edit missed after re-indentation): -$1,072
+  on $17.5k. Under the intended rule (rem<=60, z>=1, ask>=0.30) the same night: -$67 on $941 (83 trades). Only
+  z>=2 & ask>=0.5 (= lock) is positive (+3% on 39). Dead either way; rule now applied as a control.
+- 11-08 PATIENT BIDS backtest (53k random closed markets, 80M trades): deep dislocations revert on average
+  (X=0.15: resting bid +7.9%/$ to resolution, +3.2% sold 24h later, 8,051 fills; taker 5-30 min after the print
+  +9.1%/+14.9%, 4,352). Direction: buy No after a Yes spike works (+9%/+22%), buy Yes after a dump loses.
+  BUT median ~0, 50% positive, top-20 fills = 79-100% of P&L; the money is cheap No (<= 20c) paying off big.
+  Positive expectation, lottery-shaped; capital-inefficient for resting bids (0.04-0.06 fills per market-day).
