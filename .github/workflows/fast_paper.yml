@@ -35,10 +35,11 @@ jobs:
             RUN_MIN=60 "$HOME/.venv-pilot/bin/python" -u research/fast/updown_paper.py 2>&1 | tee -a /tmp/fast.txt | grep -v "^$"
             mkdir -p logs && cp /tmp/fast.txt logs/fast-log.txt
             # publish the bot's own files on top of whatever is upstream (only the server writes these)
-            mkdir -p /tmp/fastout/rtds
+            mkdir -p /tmp/fastout/rtds /tmp/fastout/bookws
             for f in obs.jsonl trades.jsonl windows.jsonl model.jsonl pairs.jsonl report.json; do [ -f "data/fast/$f" ] && cp "data/fast/$f" /tmp/fastout/; done
             cp data/fast/obs-*.jsonl.gz data/fast/model-*.jsonl.gz data/fast/pairs-*.jsonl.gz /tmp/fastout/ 2>/dev/null || true
             cp -r data/fast/rtds/. /tmp/fastout/rtds/ 2>/dev/null || true
+            cp -r data/fast/bookws/. /tmp/fastout/bookws/ 2>/dev/null || true
             for i in 1 2 3; do
               git fetch -q origin main && git reset -q --hard origin/main && mkdir -p data/fast/rtds logs && cp -r /tmp/fastout/. data/fast/ && cp /tmp/fast.txt logs/fast-log.txt
               if git add --sparse data/fast logs/fast-log.txt && git commit -qm "Fast paper $(date -u +%FT%H:%M) [skip ci]" && git push -q; then rm -rf /tmp/fastout; break; fi

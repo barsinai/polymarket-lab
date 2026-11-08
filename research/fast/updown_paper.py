@@ -31,6 +31,7 @@ try:
 except Exception:  # noqa: BLE001
     pass
 import rtds  # noqa: E402
+import book_ws  # noqa: E402
 
 D = os.environ.get("FAST_DIR", "data/fast"); os.makedirs(D, exist_ok=True)
 RUN_MIN = float(os.environ.get("RUN_MIN", "60"))
@@ -219,6 +220,18 @@ def main():
         t.setdefault("strat", "v2")
     done = {(t["strat"], t["slug"], t["side"]) for t in trades}
     starts = {}   # (asset, w, start) -> {K, K_src, ...}
+
+    def active_tokens():
+        """outcome tokens of windows inside their last LAST_S (+20 s before, 15 s after): the websocket follows these"""
+        now_ = time.time(); toks = []
+        for (a_, w_, st_) in list(starts):
+            end_ = st_ + w_
+            if end_ - now_ <= LAST_S + 20 and now_ - end_ < 15:
+                mm = meta.get(f"{a_}-updown-{wname(w_)}-{st_}")
+                if mm:
+                    toks += mm["tokens"]
+        return toks
+    bw_stop = book_ws.start(active_tokens)
     pool = ThreadPoolExecutor(max_workers=8)
     end_at = time.time() + RUN_MIN * 60
     time.sleep(130)  # warm up sigma / feed
@@ -292,8 +305,10 @@ def main():
                     if not ask:
                         continue
                     zs = z if side == "Up" else -z
+                    ws_ask, ws_bid = book_ws.best(m["tokens"][0 if side == "Up" else 1])
                     with open(f"{D}/obs.jsonl", "a") as fh:
                         fh.write(json.dumps({"ts": round(now, 1), "slug": m["slug"], "side": side, "ask": ask[0], "ask_sz": ask[1],
+                                             "ws_ask": ws_ask[0] if ws_ask else None, "ws_ask_sz": ws_ask[1] if ws_ask else None, "ws_bid": ws_bid[0] if ws_bid else None,
                                              "bid": bid[0] if bid else None, "bid_sz": bid[1] if bid else None, "p_model": round(p_side, 4),
                                              "z": round(zs, 2), "rem": int(rem), "spot": s_now, "K": K, "k_src": k_src, "src": src,
                                              "g": round(g, 3), "A": A, "sigma": round(sg, 7), "v": 4}) + "\n")
@@ -393,7 +408,7 @@ def main():
         except Exception:  # noqa: BLE001  (one bad cycle must not end the hour)
             import traceback; traceback.print_exc(); time.sleep(2); continue
         time.sleep(max(0.2, 2.0 - (time.time() - loop_t)))
-    stop.set(); rt_stop.set()
+    stop.set(); rt_stop.set(); bw_stop.set()
     settle(trades); write_trades(trades)
     done_t = [t for t in trades if t.get("result") is not None]
     by_strat, by_day = {}, {}
@@ -403,7 +418,7 @@ def main():
             b["trades"] += 1; b["won"] += t["result"]; b["staked"] += t["price"] * t["shares"]; b["pnl"] += t["pnl"]
     rnd = lambda b: {k: round(v, 2) if isinstance(v, float) else v for k, v in b.items()}
     rep = {"updated": datetime.now(timezone.utc).isoformat(), "trades": len(trades), "settled": len(done_t), "obs_this_run": n_obs,
-           "feed": {k: v for k, v in rtds.stats.items() if k != "topics"}, "feed_topics": rtds.stats.get("topics"),
+           "feed": {k: v for k, v in rtds.stats.items() if k != "topics"}, "feed_topics": rtds.stats.get("topics"), "bookws": dict(book_ws.stats),
            "by_strat": {k: rnd(b) for k, b in sorted(by_strat.items())}, "by_day": {d: rnd(b) for d, b in sorted(by_day.items())}}
     json.dump(rep, open(f"{D}/report.json", "w"), indent=1)
     print(json.dumps(rep), flush=True)
