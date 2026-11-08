@@ -404,3 +404,9 @@ Price drift in the trade's direction (what a market maker on the other side lose
   +9.1%/+14.9%, 4,352). Direction: buy No after a Yes spike works (+9%/+22%), buy Yes after a dump loses.
   BUT median ~0, 50% positive, top-20 fills = 79-100% of P&L; the money is cheap No (<= 20c) paying off big.
   Positive expectation, lottery-shaped; capital-inefficient for resting bids (0.04-0.06 fills per market-day).
+- 11-08 11:30 COPY-TRADING (t-stat-selected wallets, 25k train / 28k test markets): skilled wallets (2,488) earn
+  +2.4-2.6%/$ themselves, but the price move after their trades happens within the first hour (small trades:
+  +2.0% at 1 h, +2.0% at 24 h, i.e. nothing after 1 h). Copying 1 h later with 1c in/out: -5%/$ at 24 h, -2.5%
+  to resolution, same as copying random wallets. Weak wallets (5,814): -1.7..-3.8%/$, drift against them
+  -0.4..-1.2%; fading them after 1 h nets < spread. Net skilled-minus-weak flow per market-day: no predictive
+  power for the next day. Dead as a slow strategy: their edge is speed on news.

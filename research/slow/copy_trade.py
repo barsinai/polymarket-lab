@@ -123,7 +123,7 @@ for mid, ts, yes, d, usd, pnl, wi, wl in records():
                 entry = np.where(d[s4] > 0, mk1[s4] + 0.01, 1 - mk1[s4] + 0.01)
                 exit_ = np.where(d[s4] > 0, mk24[s4] - 0.01, 1 - mk24[s4] - 0.01)
                 val = np.where(d[s4] > 0, Y, 1 - Y)
-                okp = (entry > 0.02) & (entry < 0.98)
+                okp = (entry >= 0.10) & (entry <= 0.90)     # 1c in + 1c out is ruinous on 2c lottery tokens; copy mid-priced trades only
                 stake = np.minimum(usd[s4], 20.0)[okp]; sh = stake / entry[okp]
                 add(key, copy_stake=stake.sum(), copy_pnl24=(sh * (exit_[okp] - entry[okp])).sum(), copy_pnlres=(sh * (val[okp] - entry[okp])).sum(), copy_n=float(okp.sum()))
     # market-day flow
