@@ -410,3 +410,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
   to resolution, same as copying random wallets. Weak wallets (5,814): -1.7..-3.8%/$, drift against them
   -0.4..-1.2%; fading them after 1 h nets < spread. Net skilled-minus-weak flow per market-day: no predictive
   power for the next day. Dead as a slow strategy: their edge is speed on news.
+- 11-08 17:40 SLOW MAKER REPLAY (quotes at last print +-S, $20/side, 23k test markets, fills from real prints,
+  marked at resolution): S=2c -5.1%/$ filled (67k fills), S=5c -6.1%, S=10c -3.7%. By counterparty: skilled
+  wallets -8..-24%, "other" -4..-6%, weak wallets -1.2% (2c), -2.1% (5c), +6.8% (10c, 574 fills). Market flow
+  score (trailing-7-day weak-minus-skilled share) does NOT separate: every bucket negative. Adverse selection is
+  general, not confined to known-skilled wallets; and the counterparty cannot be chosen. #3 closed.

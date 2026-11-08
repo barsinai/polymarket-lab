@@ -80,7 +80,7 @@ a { color: var(--blue); }
 
 <main>
 <header>
-  <div class="kicker">polymarket-lab · 5-minute crypto markets · evidence as of 8 Nov 2026, 07:30 Israel time</div>
+  <div class="kicker">polymarket-lab · 5-minute crypto markets · evidence as of 8 Nov 2026, 18:00 Israel time</div>
   <h1>Up/Down Evidence Report</h1>
   <p class="lede">Every claim from today's research, with the chart and the numbers behind it. All figures come from the repo's own data files (598 finished windows, 1.49 million public fills, and our bot's own order-book readings). Nothing here involves real money.</p>
   <div class="legend"><span><span class="chip strong">strong</span> many windows, robust to checks</span><span><span class="chip early">early</span> first hours of data</span><span><span class="chip dead">dead</span> did not survive a check</span></div>
@@ -151,6 +151,28 @@ a { color: var(--blue); }
   <figure id="f-persist"><div class="fig-title">Lock-in: the ask we "bought" vs the ask two seconds later</div><div class="svgwrap"></div><div class="legend"><span><i class="sw" style="background:var(--blue)"></i>outcome won</span><span><i class="sw" style="background:var(--red)"></i>outcome lost</span></div><figcaption>One dot per lock trade (79). Dots above the diagonal are asks that had already risen by our next reading; every one of those was a winner, and every loser sat still. Filling two seconds late at the new price turns +$40.62 into +$23.93 on about $930 staked; waiting for a quote that persisted turns it negative.</figcaption><details><summary>numbers</summary><div class="tablewrap"></div></details></figure>
   <figure id="f-maker"><div class="fig-title">Market-maker replay with our exact-feed pricing: profit vs the spread we charge</div><div class="svgwrap"></div><figcaption>1,669 windows replayed against the real trade tape: mint $20 of Up+Down sets, offer both sides at fair value plus the spread, stop 2 minutes before the end. Narrow spreads lose 5-6% of capital per window to informed takers; only a 20¢ spread breaks even.</figcaption><details><summary>numbers</summary><div class="tablewrap"></div></details></figure>
   <div class="meaning"><strong>What it means:</strong> in these markets the only money is in speed. The sweeper's trade (buy the sure side at 98-99¢) returns about zero for us even when our model agrees (<span id="sweep"></span>), because the price already carries the jump risk. Lock-in survives as a thin edge of perhaps +2-4% per trade on 1-4 trades an hour, half of which depends on reaching a quote inside two seconds; the 15m/5m pairs are riskless but worth cents. Nothing here justifies real money yet; the next test is measuring how long those quotes actually live, with a live order-book feed instead of polling.</div>
+</section>
+
+<section id="spike">
+  <div class="claim"><h2>9. Slow idea A: fading a sudden spike pays on average, as a lottery</h2><span class="chip early">early</span></div>
+  <p>Random sample of 53,394 closed long-dated markets (80 million trades). When a market suddenly trades X cents away from its own trailing-day average, we buy the opposite side 5-30 minutes later at the then price plus 1¢, and sell a day later minus 1¢ (or hold to resolution). No speed involved.</p>
+  <figure id="f-spike"><div class="fig-title">Buying "No" after a Yes spike: mean vs median return per trade, by spike size</div><div class="svgwrap"></div><div class="legend"><span><i class="sw" style="background:var(--blue)"></i>mean return (sold 24 h later)</span><span><i class="sw" style="background:var(--gray-series)"></i>median return</span></div><figcaption>The mean rises with the size of the spike; the median stays at zero. Buying "Yes" after a dump (not shown) is negative or flat at every size: dumps carry real news, spikes carry excitement.</figcaption><details><summary>numbers</summary><div class="tablewrap"></div></details></figure>
+  <figure id="f-spikehist"><div class="fig-title">Where the money comes from: distribution of per-trade returns (15¢ spikes, 2,318 trades)</div><div class="svgwrap"></div><figcaption>Half the trades lose, most of the rest make little, and a tail of trades returns 2x to 10x: cheap "No" bought at 5-20¢ when a 90¢ "Yes" collapsed. Positive expectation, lottery-shaped.</figcaption><details><summary>numbers</summary><div class="tablewrap"></div></details></figure>
+  <div class="meaning"><strong>What it means:</strong> a real statistical effect, consistent across 2024-2026, but on a $224 account it would look like weeks of nothing and then one hit. Reasonable as a small, long-running component; not a source of daily gains.</div>
+</section>
+
+<section id="copy">
+  <div class="claim"><h2>10. Slow idea B: following the strong traders cannot be done slowly</h2><span class="chip dead">dead</span></div>
+  <p>Wallets were graded on 25,044 markets that closed before May 2026 (at least 15 markets each, consistency measured by a t-statistic), then watched on 22,964 later markets. "Skilled" wallets (2,488) really do keep winning. The question is whether anything is left for someone who sees their trade and acts an hour later.</p>
+  <figure id="f-copy"><div class="fig-title">Price drift after a wallet's trade, in its favour, by wallet class ($50-500 trades)</div><div class="svgwrap"></div><div class="legend"><span><i class="sw" style="background:var(--gray-series)"></i>after 1 hour</span><span><i class="sw" style="background:var(--blue)"></i>after 24 hours</span></div><figcaption>Whatever edge a skilled wallet has is in the price within the hour; from hour 1 to hour 24 the price barely moves. Copying one hour later with 1¢ in and 1¢ out returns about −5% per dollar, the same as copying a random wallet.</figcaption><details><summary>numbers</summary><div class="tablewrap"></div></details></figure>
+  <div class="meaning"><strong>What it means:</strong> on Polymarket, information becomes price within minutes. The strong traders are strong because they are fast on news, not because they hold knowledge the market takes days to absorb.</div>
+</section>
+
+<section id="slowmaker">
+  <div class="claim"><h2>11. Slow idea C: market-making in long-dated markets loses to everyone, not only to the sharp</h2><span class="chip dead">dead</span></div>
+  <p>Replay on the same 22,964 markets: quote both sides around the last trade, $20 a side, get filled by the real prints that crossed the quote, mark at resolution. Split by who hit the quote.</p>
+  <figure id="f-smaker"><div class="fig-title">Maker's edge per dollar filled, by counterparty class and spread</div><div class="svgwrap"></div><div class="legend"><span><i class="sw" style="background:var(--blue)"></i>skilled wallets</span><span><i class="sw" style="background:var(--gray-series)"></i>other wallets (93% of fills)</span><span><i class="sw" style="background:var(--blue-soft);border:1px solid var(--blue)"></i>weak wallets</span></div><figcaption>Negative in every cell but one: fills from habitual losers at a 10¢ spread (+6.8% on 574 fills). A quote cannot choose who hits it, and 93% of fills come from the anonymous middle, which is still informed enough to beat a 2-10¢ spread. A market-level "who trades here" score did not separate good from bad markets either.</figcaption><details><summary>numbers</summary><div class="tablewrap"></div></details></figure>
+  <div class="meaning"><strong>What it means:</strong> together with the fast-market replay and the live pilot's loss, this is the third time market-making has failed for us, now across spreads, horizons and counterparties. Closed.</div>
 </section>
 
 <footer>Sources: Polymarket Gamma API (event metadata: priceToBeat, finalPrice, results), Polymarket Data API v2 (public trade tape), Polymarket RTDS feed (Chainlink prices and 60 s TWAP), Binance REST (1-second proxy), and the bot's own order-book readings. Code: research/fast/ in the polymarket-lab repository (report_data.py builds every number on this page).</footer>
@@ -360,6 +382,69 @@ a { color: var(--blue); }
 
   document.getElementById('oldbots').textContent = `${fmt$(D.old_bots.pnl)} on ${fmt$(D.old_bots.staked)} staked over ${D.old_bots.n} paper trades (noise around zero, with a wrong model)`;
   document.getElementById('v4res').textContent = D.v4.map(r => `${r.strat}: ${r.n} trades, ${r.pnl >= 0 ? '+' : ''}${fmt$(r.pnl)} on $${r.staked.toLocaleString()}`).join('; ');
+  // ---- 9 spike-fade: mean vs median by X
+  if (D.patient) (function () {
+    const rows = D.patient.rows.filter(r => r.dir === 'buy No after a spike');
+    const W = 720, H = 240, left = 56, right = 12, top = 16, bottom = 36, s = svgIn('f-spike', W, H);
+    const ymax = 0.2, ymin = -0.05, xw = W - left - right, slot = xw / rows.length, bw = 22;
+    const sy = v => top + (1 - (v - ymin) / (ymax - ymin)) * (H - top - bottom);
+    [-0.05, 0, 0.05, 0.1, 0.15, 0.2].forEach(v => { el('line', { x1: left, x2: W - right, y1: sy(v), y2: sy(v), class: v === 0 ? 'axis' : 'grid' }, s); text(s, left - 6, sy(v), (v * 100).toFixed(0) + '%', 'tick', 'end'); });
+    rows.forEach((r, i) => {
+      const cx = left + i * slot + slot / 2;
+      [[r.mean24, css('--blue'), 'mean', -bw - 7], [r.median24, css('--gray-series'), 'median', 7]].forEach(([v, col, lab, off]) => {
+        const y0 = sy(0), y1 = sy(v), p = el('rect', { x: cx + off, y: Math.min(y0, y1), width: bw, height: Math.max(Math.abs(y1 - y0), 1), rx: 3, fill: col, class: 'mark' }, s);
+        text(s, cx + off + bw / 2, (v >= 0 ? y1 - 9 : y1 + 10), (v * 100).toFixed(1) + '%', 'val', 'middle');
+        hover(p, `${lab} return, ${(r.X * 100).toFixed(0)}¢ spike<br>${r.n.toLocaleString()} trades, ${pct(r.pos)} positive<br>held to resolution: mean ${(r.meanres * 100).toFixed(1)}%`);
+      });
+      text(s, cx, H - bottom + 14, `${(r.X * 100).toFixed(0)}¢ spike`, 'tick', 'middle');
+    });
+    text(s, W / 2, H - 4, 'size of the spike vs the trailing-day average · return per trade, sold 24 h later', 'tick', 'middle');
+    table('f-spike', ['spike', 'trades', 'mean 24h', 'median 24h', 'positive', 'mean to resolution', 'top-20 trades share of profit'], rows.map(r => [(r.X * 100).toFixed(0) + '¢', r.n, pct(r.mean24, 1), pct(r.median24, 1), pct(r.pos), pct(r.meanres, 1), r.top20share === null ? '' : pct(r.top20share)]));
+    const h = D.patient.hist, W2 = 720, H2 = 220, l2 = 48, s2 = svgIn('f-spikehist', W2, H2), n = h.counts.length, slot2 = (W2 - l2 - 12) / n, bw2 = Math.min(40, slot2 - 4);
+    const max = Math.max(...h.counts), yt = niceTicks(max, 4), ym = yt[yt.length - 1];
+    yt.forEach(v => { const y = 14 + (1 - v / ym) * (H2 - 14 - 44); el('line', { x1: l2, x2: W2 - 12, y1: y, y2: y, class: 'grid' }, s2); text(s2, l2 - 6, y, v, 'tick', 'end'); });
+    const lab = (a, b) => `${a <= -1 ? '−100%' : (a * 100).toFixed(0) + '%'} to ${b >= 100 ? '10x+' : (b * 100).toFixed(0) + '%'}`;
+    h.counts.forEach((c, i) => { const x = l2 + i * slot2 + (slot2 - bw2) / 2, hh = c / ym * (H2 - 14 - 44), y = 14 + (H2 - 14 - 44) - hh; const r = el('path', { d: roundTop(x, y, bw2, hh, 4), fill: h.edges[i] >= 0.02 ? css('--blue') : h.edges[i + 1] <= -0.02 ? css('--red') : css('--gray-series'), class: 'mark' }, s2); hover(r, `${lab(h.edges[i], h.edges[i + 1])}<br>${c} trades`); const e0 = h.edges[i]; text(s2, x + bw2 / 2, H2 - 30, e0 <= -1 ? '−100%' : (e0 > 0 ? '+' : '') + (e0 * 100).toFixed(0) + '%', 'tick', 'middle'); });
+    text(s2, W2 / 2, H2 - 6, 'return per trade, sold 24 h later (each bar starts at the label shown); 2,318 trades after a 15¢ Yes spike', 'tick', 'middle');
+    table('f-spikehist', ['return bucket', 'trades'], h.counts.map((c, i) => [lab(h.edges[i], h.edges[i + 1]), c]));
+  })();
+  // ---- 10 copy: drift by class
+  if (D.copy) (function () {
+    const rows = ['skilled', 'weak', 'other'].map(g => D.copy.find(r => r.group === g && r.size === '50-500')).filter(Boolean);
+    const W = 720, H = 220, left = 56, right = 12, top = 16, bottom = 36, s = svgIn('f-copy', W, H);
+    const ymax = 0.012, ymin = -0.008, xw = W - left - right, slot = xw / rows.length, bw = 26;
+    const sy = v => top + (1 - (v - ymin) / (ymax - ymin)) * (H - top - bottom);
+    [-0.005, 0, 0.005, 0.01].forEach(v => { el('line', { x1: left, x2: W - right, y1: sy(v), y2: sy(v), class: v === 0 ? 'axis' : 'grid' }, s); text(s, left - 6, sy(v), (v * 100).toFixed(1) + '%', 'tick', 'end'); });
+    rows.forEach((r, i) => {
+      const cx = left + i * slot + slot / 2;
+      [[r.d1h, css('--gray-series'), '1 h', -bw - 7], [r.d24h, css('--blue'), '24 h', 7]].forEach(([v, col, lab, off]) => {
+        const y0 = sy(0), y1 = sy(v), p = el('rect', { x: cx + off, y: Math.min(y0, y1), width: bw, height: Math.max(Math.abs(y1 - y0), 1), rx: 3, fill: col, class: 'mark' }, s);
+        text(s, cx + off + bw / 2, (v >= 0 ? y1 - 9 : y1 + 10), (v * 100).toFixed(2) + '%', 'val', 'middle');
+        hover(p, `${r.group} wallets, drift after ${lab}: ${(v * 100).toFixed(2)}% per $<br>${r.n.toLocaleString()} trades · own profit ${(r.own * 100).toFixed(1)}%/$<br>copy 1 h later: ${(r.copy24 * 100).toFixed(1)}% (24 h), ${(r.copyres * 100).toFixed(1)}% (resolution)`);
+      });
+      text(s, cx, H - bottom + 14, r.group + ' wallets', 'tick', 'middle');
+    });
+    text(s, W / 2, H - 4, 'price move in the wallet\'s direction after its trade, per $ traded', 'tick', 'middle');
+    table('f-copy', ['group', 'size', 'trades', 'own profit/$', 'drift 1 h', 'drift 24 h', 'copy 24 h/$', 'copy to resolution/$'], D.copy.map(r => [r.group, r.size, r.n, pct(r.own, 1), pct(r.d1h, 2), pct(r.d24h, 2), pct(r.copy24, 1), pct(r.copyres, 1)]));
+  })();
+  // ---- 11 slow maker: grouped by spread
+  if (D.maker_slow) (function () {
+    const R = D.maker_slow, W = 720, H = 240, left = 56, right = 12, top = 16, bottom = 36, s = svgIn('f-smaker', W, H);
+    const ymax = 0.1, ymin = -0.25, xw = W - left - right, slot = xw / R.length, bw = 22;
+    const sy = v => top + (1 - (v - ymin) / (ymax - ymin)) * (H - top - bottom);
+    [-0.2, -0.1, 0, 0.1].forEach(v => { el('line', { x1: left, x2: W - right, y1: sy(v), y2: sy(v), class: v === 0 ? 'axis' : 'grid' }, s); text(s, left - 6, sy(v), (v * 100).toFixed(0) + '%', 'tick', 'end'); });
+    R.forEach((r, i) => {
+      const cx = left + i * slot + slot / 2;
+      [['skilled', css('--blue'), -bw * 1.5 - 8], ['other', css('--gray-series'), -bw / 2], ['weak', css('--blue-soft'), bw / 2 + 8]].forEach(([k, col, off]) => {
+        const v = r[k].edge, y0 = sy(0), y1 = sy(v), p = el('rect', { x: cx + off, y: Math.min(y0, y1), width: bw, height: Math.max(Math.abs(y1 - y0), 1), rx: 3, fill: col, stroke: k === 'weak' ? css('--blue') : 'none', class: 'mark' }, s);
+        text(s, cx + off + bw / 2, Math.min(v >= 0 ? y1 - 9 : y1 + 10, H - bottom - 6), (v * 100).toFixed(1) + '%', 'val', 'middle');
+        hover(p, `${k} wallets hitting our quote, spread ${(r.S * 100).toFixed(0)}¢<br>${r[k].n.toLocaleString()} fills, $${r[k].usd.toLocaleString()}<br>edge vs resolution ${(v * 100).toFixed(1)}% per $`);
+      });
+      text(s, cx, H - bottom + 14, `${(r.S * 100).toFixed(0)}¢ spread · all fills ${r.total_pct.toFixed(1)}%`, 'tick', 'middle');
+    });
+    text(s, W / 2, H - 4, 'maker edge vs resolution per $ filled', 'tick', 'middle');
+    table('f-smaker', ['spread', 'all fills', 'skilled: n / edge', 'other: n / edge', 'weak: n / edge'], R.map(r => [(r.S * 100).toFixed(0) + '¢', r.total_pct.toFixed(1) + '%', `${r.skilled.n} / ${(r.skilled.edge * 100).toFixed(1)}%`, `${r.other.n} / ${(r.other.edge * 100).toFixed(1)}%`, `${r.weak.n} / ${(r.weak.edge * 100).toFixed(1)}%`]));
+  })();
   if (D.sweeper) document.getElementById('sweep').textContent = D.sweeper.map(r => `${r.price}: ${r.n} chances, ${pct(r.win, 1)} won, ${(r.ret * 100).toFixed(1)}% per $`).join('; ');
 
   // ---- 8a strategy bars (return per $)
