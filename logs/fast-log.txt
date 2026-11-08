@@ -7884,3 +7884,281 @@ bookws 18:09:05 {"msgs": 1027976, "connects": 4, "errors": 3, "subscribed": 16, 
 bookws 18:09:35 {"msgs": 1032184, "connects": 4, "errors": 3, "subscribed": 16, "last_msg": 1794161375.3601632, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
 bookws 18:10:05 {"msgs": 1036641, "connects": 4, "errors": 3, "subscribed": 16, "last_msg": 1794161405.240257, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
 {"updated": "2026-11-08T18:10:34.910178+00:00", "trades": 6201, "settled": 6192, "obs_this_run": 9755, "rest_ms": {"n": 13198, "min": 40.1, "p50": 50.2, "p90": 59.4}, "feed": {"msgs": 106817, "connects": 1, "errors": 0, "last_msg": 1794161434.6829772}, "feed_topics": {"crypto_prices_twap_thirty": 28419, "crypto_prices_chainlink": 28406, "crypto_prices_twap_sixty": 28409, "crypto_prices": 21581, "null": 1}, "bookws": {"alive": false}, "by_strat": {"dog": {"trades": 2328, "won": 322, "staked": 13508.17, "pnl": -4963.91}, "exact": {"trades": 2111, "won": 954, "staked": 19031.37, "pnl": -1287.28}, "fav": {"trades": 1471, "won": 1162, "staked": 19045.04, "pnl": -736.34}, "lock": {"trades": 104, "won": 91, "staked": 1430.11, "pnl": 81.85}, "pair": {"trades": 30, "won": 15, "staked": 209.23, "pnl": 22.71}, "pair_ev": {"trades": 82, "won": 49, "staked": 656.82, "pnl": 65.55}, "v2": {"trades": 66, "won": 36, "staked": 1096.57, "pnl": -112.22}}, "by_day": {"2026-11-07 dog": {"trades": 1111, "won": 167, "staked": 6332.15, "pnl": -1579.56}, "2026-11-07 exact": {"trades": 1263, "won": 586, "staked": 11222.56, "pnl": -83.36}, "2026-11-07 fav": {"trades": 713, "won": 557, "staked": 9249.61, "pnl": -457.53}, "2026-11-07 lock": {"trades": 52, "won": 43, "staked": 710.23, "pnl": -7.98}, "2026-11-07 pair": {"trades": 28, "won": 14, "staked": 197.59, "pnl": 22.48}, "2026-11-07 pair_ev": {"trades": 38, "won": 21, "staked": 290.23, "pnl": -0.87}, "2026-11-07 v2": {"trades": 66, "won": 36, "staked": 1096.57, "pnl": -112.22}, "2026-11-08 dog": {"trades": 1217, "won": 155, "staked": 7176.02, "pnl": -3384.35}, "2026-11-08 exact": {"trades": 848, "won": 368, "staked": 7808.8, "pnl": -1203.92}, "2026-11-08 fav": {"trades": 758, "won": 605, "staked": 9795.43, "pnl": -278.81}, "2026-11-08 lock": {"trades": 52, "won": 48, "staked": 719.88, "pnl": 89.83}, "2026-11-08 pair": {"trades": 2, "won": 1, "staked": 11.64, "pnl": 0.23}, "2026-11-08 pair_ev": {"trades": 44, "won": 28, "staked": 366.59, "pnl": 66.42}}}
+bookws 18:11:57 {"msgs": 3, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794161508.2676444}
+bookws 18:12:27 {"msgs": 6, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794161538.409775}
+bookws 18:12:57 {"msgs": 9, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794161568.5524719}
+bookws 18:13:27 {"msgs": 12, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794161598.6988711}
+feed {"msgs": 3778, "connects": 1, "errors": 0, "last_msg": 1794161616.3200617, "topics": {"crypto_prices": 777, "crypto_prices_twap_thirty": 1000, "crypto_prices_chainlink": 1000, "crypto_prices_twap_sixty": 1000}}
+bookws 18:13:57 {"msgs": 15, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794161628.8415084}
+bookws 18:14:27 {"msgs": 18, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794161658.9844882}
+bookws 18:14:57 {"msgs": 21, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794161689.1282308}
+bookws 18:15:27 {"msgs": 24, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794161719.269086}
+bookws 18:15:57 {"msgs": 27, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794161749.4116256}
+bookws 18:16:27 {"msgs": 30, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794161779.5544252}
+bookws 18:16:57 {"msgs": 33, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794161809.694403}
+bookws 18:17:27 {"msgs": 36, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794161839.8375952}
+bookws 18:17:57 {"msgs": 13182, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794161877.9411433}
+18:18:00 PAPER[dog] BUY Down btc-updown-5m-1794161700 @ 0.12 x 10.62 p 0.078 z -1.4 rem 119s
+18:18:00 PAPER[dog] BUY Down eth-updown-5m-1794161700 @ 0.23 x 50.0 p 0.191 z -0.9 rem 119s
+18:18:00 PAPER[dog] BUY Down sol-updown-5m-1794161700 @ 0.08 x 15.0 p 0.030 z -1.9 rem 119s
+18:18:00 PAPER[dog] BUY Down xrp-updown-5m-1794161700 @ 0.07 x 31.0 p 0.014 z -2.2 rem 119s
+18:18:00 PAPER[dog] BUY Down doge-updown-5m-1794161700 @ 0.29 x 10.0 p 0.154 z -1.0 rem 119s
+18:18:00 PAPER[dog] BUY Down hype-updown-5m-1794161700 @ 0.07 x 27.0 p 0.018 z -2.1 rem 119s
+18:18:00 PAPER[dog] BUY Down zec-updown-5m-1794161700 @ 0.18 x 19.0 p 0.006 z -2.5 rem 119s
+bookws 18:18:27 {"msgs": 39892, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794161907.9421403}
+18:18:30 PAPER[fav] BUY Up btc-updown-5m-1794161700 @ 0.92 x 21.74 p 0.889 z 1.2 rem 89s
+18:18:30 PAPER[fav] BUY Up eth-updown-5m-1794161700 @ 0.81 x 24.69 p 0.799 z 0.8 rem 89s
+18:18:34 PAPER[fav] BUY Up doge-updown-5m-1794161700 @ 0.92 x 21.74 p 0.905 z 1.3 rem 85s
+bookws 18:18:57 {"msgs": 61789, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794161937.9440272}
+bookws 18:19:27 {"msgs": 75919, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794161967.6924677}
+bookws 18:19:57 {"msgs": 80309, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794161997.9441864}
+bookws 18:20:27 {"msgs": 82235, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794162021.6182709}
+bookws 18:20:57 {"msgs": 82238, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794162051.7646563}
+bookws 18:21:27 {"msgs": 82241, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794162081.9055734}
+bookws 18:21:57 {"msgs": 82244, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794162112.049102}
+bookws 18:22:27 {"msgs": 82247, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794162142.1891837}
+bookws 18:22:57 {"msgs": 97473, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794162177.9502833}
+18:23:00 PAPER[dog] BUY Up btc-updown-5m-1794162000 @ 0.12 x 166.67 p 0.148 z -1.0 rem 119s
+18:23:00 PAPER[dog] BUY Up eth-updown-5m-1794162000 @ 0.08 x 32.88 p 0.141 z -1.1 rem 119s
+18:23:00 PAPER[dog] BUY Up xrp-updown-5m-1794162000 @ 0.05 x 30.0 p 0.115 z -1.2 rem 119s
+18:23:00 PAPER[dog] BUY Up doge-updown-5m-1794162000 @ 0.06 x 10.0 p 0.148 z -1.0 rem 119s
+18:23:00 PAPER[dog] BUY Up bnb-updown-5m-1794162000 @ 0.05 x 5.0 p 0.139 z -1.1 rem 119s
+18:23:00 PAPER[dog] BUY Up hype-updown-5m-1794162000 @ 0.22 x 10.0 p 0.190 z -0.9 rem 119s
+18:23:00 PAPER[dog] BUY Up zec-updown-5m-1794162000 @ 0.21 x 20.0 p 0.176 z -0.9 rem 119s
+bookws 18:23:27 {"msgs": 114273, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794162207.9496465}
+18:23:30 PAPER[dog] BUY Down sol-updown-5m-1794162000 @ 0.05 x 15.0 p 0.117 z -1.2 rem 89s
+18:23:30 PAPER[fav] BUY Down hype-updown-5m-1794162000 @ 0.93 x 5.0 p 0.853 z 1.1 rem 89s
+18:23:32 PAPER[fav] BUY Down btc-updown-5m-1794162000 @ 0.95 x 21.05 p 0.913 z 1.4 rem 87s
+18:23:44 PAPER[fav] BUY Down eth-updown-5m-1794162000 @ 0.89 x 22.47 p 0.947 z 1.6 rem 75s
+18:23:56 PAPER[fav] BUY Down bnb-updown-5m-1794162000 @ 0.95 x 21.05 p 0.880 z 1.2 rem 63s
+bookws 18:23:57 {"msgs": 131615, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794162237.945772}
+bookws 18:24:27 {"msgs": 153656, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794162267.950325}
+bookws 18:24:57 {"msgs": 159654, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794162297.9481902}
+bookws 18:25:27 {"msgs": 161437, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794162324.3804283}
+bookws 18:25:57 {"msgs": 161440, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794162354.5209343}
+bookws 18:26:27 {"msgs": 161443, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794162384.665603}
+bookws 18:26:57 {"msgs": 161446, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794162414.8081727}
+bookws 18:27:27 {"msgs": 161449, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794162444.9506495}
+bookws 18:27:57 {"msgs": 184581, "connects": 1, "errors": 0, "subscribed": 32, "last_msg": 1794162477.9521663}
+18:28:00 PAPER[dog] BUY Down btc-updown-5m-1794162300 @ 0.17 x 117.65 p 0.264 z -0.6 rem 119s
+18:28:00 PAPER[dog] BUY Up eth-updown-5m-1794162300 @ 0.3 x 66.67 p 0.368 z -0.3 rem 119s
+18:28:00 PAPER[dog] BUY Up xrp-updown-15m-1794161700 @ 0.16 x 25.0 p 0.173 z -0.9 rem 119s
+18:28:00 PAPER[dog] BUY Down doge-updown-5m-1794162300 @ 0.17 x 15.0 p 0.269 z -0.6 rem 119s
+18:28:00 PAPER[dog] BUY Down doge-updown-15m-1794161700 @ 0.11 x 35.0 p 0.161 z -1.0 rem 119s
+18:28:00 PAPER[dog] BUY Down zec-updown-5m-1794162300 @ 0.25 x 10.0 p 0.226 z -0.8 rem 119s
+18:28:00 PAPER[dog] BUY Down zec-updown-15m-1794161700 @ 0.18 x 33.0 p 0.001 z -3.2 rem 119s
+18:28:02 PAPER[dog] BUY Down bnb-updown-5m-1794162300 @ 0.31 x 5.0 p 0.505 z 0.0 rem 117s
+18:28:14 PAPER[dog] BUY Down hype-updown-5m-1794162300 @ 0.29 x 30.0 p 0.417 z -0.2 rem 105s
+bookws 18:28:27 {"msgs": 225911, "connects": 1, "errors": 0, "subscribed": 32, "last_msg": 1794162507.953051}
+18:28:30 PAPER[fav] BUY Down xrp-updown-15m-1794161700 @ 0.94 x 21.28 p 0.909 z 1.3 rem 89s
+18:28:30 PAPER[fav] BUY Up doge-updown-5m-1794162300 @ 0.93 x 10.2 p 0.846 z 1.0 rem 89s
+18:28:30 PAPER[fav] BUY Up bnb-updown-5m-1794162300 @ 0.72 x 27.0 p 0.594 z 0.2 rem 89s
+18:28:30 PAPER[fav] BUY Up hype-updown-5m-1794162300 @ 0.72 x 17.0 p 0.679 z 0.5 rem 89s
+18:28:30 PAPER[fav] BUY Up zec-updown-5m-1794162300 @ 0.73 x 7.0 p 0.613 z 0.3 rem 89s
+18:28:32 PAPER[fav] BUY Up btc-updown-5m-1794162300 @ 0.95 x 21.05 p 0.866 z 1.1 rem 87s
+18:28:32 PAPER[fav] BUY Up sol-updown-5m-1794162300 @ 0.62 x 15.0 p 0.541 z 0.1 rem 87s
+18:28:34 PAPER[fav] BUY Down eth-updown-5m-1794162300 @ 0.68 x 5.0 p 0.572 z 0.2 rem 85s
+18:28:40 PAPER[dog] BUY Down eth-updown-15m-1794161700 @ 0.33 x 60.0 p 0.512 z 0.0 rem 79s
+18:28:40 PAPER[dog] BUY Down sol-updown-5m-1794162300 @ 0.25 x 30.66 p 0.440 z -0.2 rem 79s
+18:28:42 PAPER[fav] BUY Up eth-updown-15m-1794161700 @ 0.69 x 28.99 p 0.536 z 0.1 rem 77s
+bookws 18:28:57 {"msgs": 267116, "connects": 1, "errors": 0, "subscribed": 32, "last_msg": 1794162537.953297}
+18:29:14 PAPER[fav] BUY Up doge-updown-15m-1794161700 @ 0.95 x 10.0 p 0.853 z 1.0 rem 45s
+bookws 18:29:27 {"msgs": 288858, "connects": 1, "errors": 0, "subscribed": 32, "last_msg": 1794162567.9538848}
+bookws 18:29:57 {"msgs": 297052, "connects": 1, "errors": 0, "subscribed": 32, "last_msg": 1794162597.9467475}
+bookws 18:30:27 {"msgs": 299404, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794162627.1256769}
+bookws 18:30:57 {"msgs": 299407, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794162657.2683363}
+bookws 18:31:27 {"msgs": 299410, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794162687.4136097}
+bookws 18:31:57 {"msgs": 299413, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794162717.5537224}
+bookws 18:32:27 {"msgs": 299416, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794162747.6980736}
+bookws 18:32:57 {"msgs": 307419, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794162777.9512272}
+18:33:00 PAPER[dog] BUY Down sol-updown-5m-1794162600 @ 0.16 x 5.0 p 0.263 z -0.6 rem 119s
+18:33:00 PAPER[dog] BUY Up xrp-updown-5m-1794162600 @ 0.13 x 15.31 p 0.167 z -1.0 rem 119s
+18:33:00 PAPER[dog] BUY Down doge-updown-5m-1794162600 @ 0.19 x 5.0 p 0.212 z -0.8 rem 119s
+18:33:00 PAPER[dog] BUY Down bnb-updown-5m-1794162600 @ 0.06 x 5.0 p 0.037 z -1.8 rem 119s
+18:33:00 PAPER[dog] BUY Down zec-updown-5m-1794162600 @ 0.18 x 19.0 p 0.184 z -0.9 rem 119s
+18:33:02 PAPER[dog] BUY Down hype-updown-5m-1794162600 @ 0.35 x 25.0 p 0.279 z -0.6 rem 117s
+bookws 18:33:27 {"msgs": 319946, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794162807.9484842}
+18:33:34 PAPER[fav] BUY Down xrp-updown-5m-1794162600 @ 0.95 x 5.0 p 0.941 z 1.6 rem 85s
+bookws 18:33:57 {"msgs": 329237, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794162837.9470382}
+bookws 18:34:27 {"msgs": 335378, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794162867.9398112}
+bookws 18:34:57 {"msgs": 339261, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794162897.9448035}
+bookws 18:35:27 {"msgs": 340577, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794162920.1229396}
+bookws 18:35:57 {"msgs": 340580, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794162950.2664905}
+bookws 18:36:27 {"msgs": 340583, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794162980.4081922}
+bookws 18:36:57 {"msgs": 340586, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794163010.547059}
+bookws 18:37:27 {"msgs": 340589, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794163040.6888924}
+bookws 18:37:57 {"msgs": 356320, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794163077.9594178}
+18:38:00 PAPER[dog] BUY Up btc-updown-5m-1794162900 @ 0.26 x 76.92 p 0.402 z -0.2 rem 119s
+18:38:00 PAPER[dog] BUY Up eth-updown-5m-1794162900 @ 0.19 x 16.0 p 0.321 z -0.5 rem 119s
+18:38:00 PAPER[dog] BUY Down xrp-updown-5m-1794162900 @ 0.06 x 313.5 p 0.019 z -2.1 rem 119s
+18:38:00 PAPER[dog] BUY Down doge-updown-5m-1794162900 @ 0.05 x 5.0 p 0.041 z -1.7 rem 119s
+18:38:00 PAPER[dog] BUY Down bnb-updown-5m-1794162900 @ 0.26 x 15.15 p 0.263 z -0.6 rem 119s
+18:38:02 PAPER[dog] BUY Up zec-updown-5m-1794162900 @ 0.32 x 62.5 p 0.323 z -0.5 rem 117s
+18:38:10 PAPER[dog] BUY Down sol-updown-5m-1794162900 @ 0.31 x 64.52 p 0.456 z -0.1 rem 109s
+18:38:16 PAPER[dog] BUY Down hype-updown-5m-1794162900 @ 0.29 x 5.0 p 0.415 z -0.2 rem 103s
+bookws 18:38:27 {"msgs": 379903, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794163107.8859656}
+18:38:30 PAPER[fav] BUY Down btc-updown-5m-1794162900 @ 0.77 x 25.97 p 0.628 z 0.3 rem 89s
+18:38:30 PAPER[fav] BUY Down eth-updown-5m-1794162900 @ 0.75 x 11.7 p 0.535 z 0.1 rem 89s
+18:38:30 PAPER[fav] BUY Up sol-updown-5m-1794162900 @ 0.71 x 28.17 p 0.699 z 0.5 rem 89s
+18:38:30 PAPER[fav] BUY Up hype-updown-5m-1794162900 @ 0.74 x 19.0 p 0.674 z 0.5 rem 89s
+18:38:30 PAPER[fav] BUY Up zec-updown-5m-1794162900 @ 0.91 x 21.98 p 0.867 z 1.1 rem 89s
+bookws 18:38:57 {"msgs": 404073, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794163137.952643}
+bookws 18:39:27 {"msgs": 419210, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794163167.9595993}
+18:39:44 PAPER[exact] BUY Up eth-updown-5m-1794162900 @ 0.85 x 18.0 p 0.891 z 1.2 rem 15s
+18:39:52 PAPER[lock] BUY Up eth-updown-5m-1794162900 @ 0.73 x 6.0 p 0.999 z 3.6 rem 7s
+bookws 18:39:57 {"msgs": 429915, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794163197.9573252}
+bookws 18:40:27 {"msgs": 431358, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794163222.8090432}
+bookws 18:40:57 {"msgs": 431361, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794163252.9506137}
+bookws 18:41:27 {"msgs": 431364, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794163283.0928686}
+bookws 18:41:57 {"msgs": 431367, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794163313.2358725}
+bookws 18:42:27 {"msgs": 431370, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794163343.3821313}
+bookws 18:42:57 {"msgs": 447318, "connects": 1, "errors": 0, "subscribed": 32, "last_msg": 1794163377.9617372}
+18:43:00 PAPER[dog] BUY Up eth-updown-5m-1794163200 @ 0.21 x 76.0 p 0.292 z -0.5 rem 119s
+18:43:00 PAPER[dog] BUY Up sol-updown-5m-1794163200 @ 0.11 x 80.0 p 0.146 z -1.1 rem 119s
+18:43:00 PAPER[dog] BUY Up xrp-updown-5m-1794163200 @ 0.09 x 20.0 p 0.229 z -0.7 rem 119s
+18:43:00 PAPER[dog] BUY Down doge-updown-15m-1794162600 @ 0.05 x 52.0 p 0.001 z -3.0 rem 119s
+18:43:00 PAPER[dog] BUY Up hype-updown-5m-1794163200 @ 0.09 x 35.0 p 0.052 z -1.6 rem 119s
+18:43:02 PAPER[dog] BUY Up bnb-updown-5m-1794163200 @ 0.29 x 5.0 p 0.423 z -0.2 rem 117s
+18:43:04 PAPER[dog] BUY Up hype-updown-15m-1794162600 @ 0.26 x 10.0 p 0.331 z -0.4 rem 115s
+18:43:06 PAPER[dog] BUY Up doge-updown-5m-1794163200 @ 0.35 x 5.0 p 0.474 z -0.1 rem 113s
+18:43:08 PAPER[dog] BUY Down zec-updown-5m-1794163200 @ 0.35 x 15.0 p 0.298 z -0.5 rem 111s
+18:43:10 PAPER[dog] BUY Down sol-updown-15m-1794162600 @ 0.34 x 10.0 p 0.363 z -0.3 rem 109s
+18:43:10 PAPER[dog] BUY Down xrp-updown-15m-1794162600 @ 0.29 x 10.0 p 0.452 z -0.1 rem 109s
+18:43:20 PAPER[dog] BUY Down zec-updown-15m-1794162600 @ 0.104 x 30.0 p 0.001 z -3.3 rem 99s
+bookws 18:43:27 {"msgs": 478467, "connects": 1, "errors": 0, "subscribed": 32, "last_msg": 1794163407.9047947}
+18:43:30 PAPER[fav] BUY Down btc-updown-5m-1794163200 @ 0.62 x 30.0 p 0.515 z 0.0 rem 89s
+18:43:30 PAPER[fav] BUY Down eth-updown-5m-1794163200 @ 0.88 x 16.68 p 0.829 z 0.9 rem 89s
+18:43:30 PAPER[fav] BUY Up sol-updown-15m-1794162600 @ 0.74 x 10.0 p 0.669 z 0.4 rem 89s
+18:43:30 PAPER[fav] BUY Down xrp-updown-5m-1794163200 @ 0.78 x 10.0 p 0.763 z 0.7 rem 89s
+18:43:30 PAPER[fav] BUY Up xrp-updown-15m-1794162600 @ 0.93 x 21.51 p 0.843 z 1.0 rem 89s
+18:43:30 PAPER[fav] BUY Down bnb-updown-5m-1794163200 @ 0.74 x 5.0 p 0.628 z 0.3 rem 89s
+18:43:30 PAPER[fav] BUY Down hype-updown-15m-1794162600 @ 0.8 x 5.0 p 0.764 z 0.7 rem 89s
+18:43:30 PAPER[fav] BUY Up zec-updown-5m-1794163200 @ 0.92 x 10.0 p 0.860 z 1.1 rem 89s
+18:43:52 PAPER[fav] BUY Up doge-updown-5m-1794163200 @ 0.75 x 5.0 p 0.571 z 0.2 rem 67s
+bookws 18:43:57 {"msgs": 506479, "connects": 1, "errors": 0, "subscribed": 32, "last_msg": 1794163437.9588997}
+18:43:58 PAPER[dog] BUY Up btc-updown-5m-1794163200 @ 0.35 x 5.0 p 0.507 z 0.0 rem 61s
+18:44:06 PAPER[exact] BUY Up zec-updown-5m-1794163200 @ 0.91 x 10.0 p 0.947 z 1.6 rem 53s
+bookws 18:44:27 {"msgs": 524752, "connects": 1, "errors": 0, "subscribed": 32, "last_msg": 1794163467.9605567}
+bookws 18:44:57 {"msgs": 531590, "connects": 1, "errors": 0, "subscribed": 32, "last_msg": 1794163497.9597082}
+bookws 18:45:27 {"msgs": 534235, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794163524.417523}
+bookws 18:45:57 {"msgs": 534238, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794163554.5626144}
+bookws 18:46:27 {"msgs": 534241, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794163584.7065248}
+bookws 18:46:57 {"msgs": 534244, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794163614.8520665}
+bookws 18:47:27 {"msgs": 534247, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794163644.9975002}
+bookws 18:47:57 {"msgs": 550221, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794163677.9655335}
+18:48:00 PAPER[dog] BUY Down eth-updown-5m-1794163500 @ 0.12 x 20.0 p 0.160 z -1.0 rem 119s
+18:48:00 PAPER[dog] BUY Down xrp-updown-5m-1794163500 @ 0.24 x 42.94 p 0.284 z -0.6 rem 119s
+18:48:00 PAPER[dog] BUY Down doge-updown-5m-1794163500 @ 0.1 x 25.0 p 0.115 z -1.2 rem 119s
+18:48:00 PAPER[dog] BUY Down bnb-updown-5m-1794163500 @ 0.05 x 15.0 p 0.022 z -2.0 rem 119s
+18:48:00 PAPER[dog] BUY Down hype-updown-5m-1794163500 @ 0.32 x 5.0 p 0.322 z -0.5 rem 119s
+18:48:12 PAPER[dog] BUY Down sol-updown-5m-1794163500 @ 0.34 x 58.82 p 0.381 z -0.3 rem 107s
+18:48:14 PAPER[dog] BUY Down btc-updown-5m-1794163500 @ 0.31 x 24.0 p 0.514 z 0.0 rem 105s
+bookws 18:48:27 {"msgs": 574708, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794163707.9233284}
+18:48:30 PAPER[fav] BUY Up btc-updown-5m-1794163500 @ 0.92 x 21.74 p 0.853 z 1.0 rem 89s
+18:48:30 PAPER[fav] BUY Up sol-updown-5m-1794163500 @ 0.9 x 22.22 p 0.883 z 1.2 rem 89s
+18:48:30 PAPER[fav] BUY Up zec-updown-5m-1794163500 @ 0.79 x 10.0 p 0.680 z 0.5 rem 89s
+18:48:34 PAPER[dog] BUY Down zec-updown-5m-1794163500 @ 0.32 x 23.0 p 0.323 z -0.5 rem 85s
+bookws 18:48:57 {"msgs": 591135, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794163737.960428}
+bookws 18:49:27 {"msgs": 598418, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794163767.964683}
+bookws 18:49:57 {"msgs": 602137, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794163797.943114}
+bookws 18:50:27 {"msgs": 604005, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794163827.3437958}
+bookws 18:50:57 {"msgs": 604008, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794163857.487374}
+bookws 18:51:27 {"msgs": 604011, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794163887.6285827}
+bookws 18:51:57 {"msgs": 604014, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794163917.7739289}
+bookws 18:52:27 {"msgs": 604017, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794163947.9174335}
+bookws 18:52:57 {"msgs": 618328, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794163977.9678314}
+18:53:00 PAPER[dog] BUY Up btc-updown-5m-1794163800 @ 0.3 x 66.67 p 0.228 z -0.7 rem 119s
+18:53:00 PAPER[dog] BUY Up eth-updown-5m-1794163800 @ 0.16 x 41.0 p 0.197 z -0.9 rem 119s
+18:53:00 PAPER[dog] BUY Up sol-updown-5m-1794163800 @ 0.09 x 72.58 p 0.076 z -1.4 rem 119s
+18:53:00 PAPER[dog] BUY Up xrp-updown-5m-1794163800 @ 0.08 x 51.0 p 0.099 z -1.3 rem 119s
+18:53:00 PAPER[dog] BUY Up doge-updown-5m-1794163800 @ 0.05 x 11.0 p 0.009 z -2.4 rem 119s
+18:53:00 PAPER[dog] BUY Up hype-updown-5m-1794163800 @ 0.21 x 5.0 p 0.152 z -1.0 rem 119s
+bookws 18:53:27 {"msgs": 637396, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794164007.968725}
+18:53:30 PAPER[fav] BUY Down eth-updown-5m-1794163800 @ 0.6 x 5.0 p 0.799 z 0.8 rem 89s
+18:53:30 PAPER[fav] BUY Down sol-updown-5m-1794163800 @ 0.86 x 7.15 p 0.936 z 1.5 rem 89s
+18:53:30 PAPER[fav] BUY Down xrp-updown-5m-1794163800 @ 0.86 x 5.0 p 0.853 z 1.0 rem 89s
+18:53:30 PAPER[fav] BUY Down hype-updown-5m-1794163800 @ 0.74 x 20.0 p 0.828 z 0.9 rem 89s
+18:53:30 PAPER[fav] BUY Up zec-updown-5m-1794163800 @ 0.75 x 7.0 p 0.676 z 0.5 rem 89s
+18:53:32 PAPER[fav] BUY Up btc-updown-5m-1794163800 @ 0.61 x 13.49 p 0.297 z -0.5 rem 87s
+bookws 18:53:57 {"msgs": 670103, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794164037.968484}
+18:54:16 PAPER[dog] BUY Down zec-updown-5m-1794163800 @ 0.29 x 32.0 p 0.297 z -0.5 rem 43s
+bookws 18:54:27 {"msgs": 692247, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794164067.9667273}
+bookws 18:54:57 {"msgs": 697426, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794164097.8211243}
+bookws 18:55:27 {"msgs": 698661, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794164119.02333}
+bookws 18:55:57 {"msgs": 698664, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794164149.1680746}
+bookws 18:56:27 {"msgs": 698667, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794164179.3094435}
+bookws 18:56:57 {"msgs": 698670, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794164209.4516969}
+bookws 18:57:27 {"msgs": 698673, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794164239.5946882}
+bookws 18:57:57 {"msgs": 716200, "connects": 1, "errors": 0, "subscribed": 32, "last_msg": 1794164277.9713376}
+18:58:00 PAPER[dog] BUY Up btc-updown-5m-1794164100 @ 0.18 x 111.11 p 0.175 z -0.9 rem 119s
+18:58:00 PAPER[dog] BUY Up eth-updown-5m-1794164100 @ 0.21 x 92.51 p 0.157 z -1.0 rem 119s
+18:58:00 PAPER[dog] BUY Up sol-updown-5m-1794164100 @ 0.08 x 15.0 p 0.052 z -1.6 rem 119s
+18:58:00 PAPER[dog] BUY Up sol-updown-15m-1794163500 @ 0.24 x 34.0 p 0.215 z -0.8 rem 119s
+18:58:00 PAPER[dog] BUY Up xrp-updown-5m-1794164100 @ 0.1 x 25.27 p 0.093 z -1.3 rem 119s
+18:58:00 PAPER[dog] BUY Down xrp-updown-15m-1794163500 @ 0.15 x 14.0 p 0.223 z -0.8 rem 119s
+18:58:00 PAPER[dog] BUY Up doge-updown-5m-1794164100 @ 0.34 x 25.0 p 0.298 z -0.5 rem 119s
+18:58:00 PAPER[dog] BUY Down doge-updown-15m-1794163500 @ 0.33 x 13.63 p 0.351 z -0.4 rem 119s
+18:58:00 PAPER[dog] BUY Up bnb-updown-5m-1794164100 @ 0.12 x 45.0 p 0.110 z -1.2 rem 119s
+18:58:00 PAPER[dog] BUY Down zec-updown-15m-1794163500 @ 0.27 x 7.0 p 0.194 z -0.9 rem 119s
+18:58:02 PAPER[dog] BUY Down btc-updown-15m-1794163500 @ 0.35 x 57.14 p 0.215 z -0.8 rem 117s
+18:58:06 PAPER[dog] BUY Down eth-updown-15m-1794163500 @ 0.05 x 140.0 p 0.010 z -2.3 rem 113s
+18:58:14 PAPER[dog] BUY Down hype-updown-15m-1794163500 @ 0.06 x 54.0 p 0.019 z -2.1 rem 105s
+18:58:16 PAPER[dog] BUY Up hype-updown-5m-1794164100 @ 0.25 x 25.0 p 0.287 z -0.6 rem 103s
+bookws 18:58:27 {"msgs": 752724, "connects": 1, "errors": 0, "subscribed": 32, "last_msg": 1794164307.9712534}
+18:58:30 PAPER[fav] BUY Down btc-updown-5m-1794164100 @ 0.84 x 23.81 p 0.858 z 1.1 rem 89s
+18:58:30 PAPER[fav] BUY Up btc-updown-15m-1794163500 @ 0.74 x 27.03 p 0.870 z 1.1 rem 89s
+18:58:30 PAPER[fav] BUY Down eth-updown-5m-1794164100 @ 0.84 x 5.0 p 0.877 z 1.2 rem 89s
+18:58:30 PAPER[fav] BUY Down sol-updown-15m-1794163500 @ 0.78 x 7.0 p 0.771 z 0.7 rem 89s
+18:58:30 PAPER[fav] BUY Down xrp-updown-5m-1794164100 @ 0.95 x 5.0 p 0.944 z 1.6 rem 89s
+18:58:30 PAPER[fav] BUY Up xrp-updown-15m-1794163500 @ 0.934 x 20.0 p 0.848 z 1.0 rem 89s
+18:58:30 PAPER[fav] BUY Down doge-updown-5m-1794164100 @ 0.75 x 5.0 p 0.752 z 0.7 rem 89s
+18:58:30 PAPER[fav] BUY Up doge-updown-15m-1794163500 @ 0.83 x 24.1 p 0.684 z 0.5 rem 89s
+18:58:30 PAPER[fav] BUY Down bnb-updown-5m-1794164100 @ 0.77 x 25.97 p 0.883 z 1.2 rem 89s
+18:58:30 PAPER[fav] BUY Down hype-updown-5m-1794164100 @ 0.74 x 5.0 p 0.727 z 0.6 rem 89s
+18:58:30 PAPER[fav] BUY Down zec-updown-5m-1794164100 @ 0.66 x 6.0 p 0.590 z 0.2 rem 89s
+18:58:30 PAPER[fav] BUY Up zec-updown-15m-1794163500 @ 0.9 x 5.0 p 0.863 z 1.1 rem 89s
+18:58:50 PAPER[dog] BUY Up zec-updown-5m-1794164100 @ 0.33 x 34.0 p 0.196 z -0.9 rem 69s
+18:58:54 PAPER[pair_ev] bnb Up 15m@0.56 + Down 5m@0.46 x 19.61 sum 1.02 p_mid 0.41 ev +0.358 rem 65s
+18:58:56 PAPER[fav] BUY Up bnb-updown-15m-1794163500 @ 0.76 x 26.32 p 0.963 z 1.8 rem 63s
+bookws 18:58:57 {"msgs": 793163, "connects": 1, "errors": 0, "subscribed": 32, "last_msg": 1794164337.9695287}
+18:58:58 PAPER[dog] BUY Down bnb-updown-15m-1794163500 @ 0.24 x 35.0 p 0.008 z -2.4 rem 61s
+18:59:00 PAPER[exact] BUY Up btc-updown-15m-1794163500 @ 0.82 x 24.39 p 0.970 z 1.9 rem 59s
+18:59:08 PAPER[exact] BUY Down btc-updown-5m-1794164100 @ 0.95 x 21.05 p 0.986 z 2.2 rem 51s
+18:59:08 PAPER[exact] BUY Down zec-updown-5m-1794164100 @ 0.9 x 10.0 p 0.944 z 1.6 rem 51s
+18:59:14 PAPER[lock] BUY Down btc-updown-5m-1794164100 @ 0.97 x 20.62 p 0.995 z 2.6 rem 45s
+18:59:14 PAPER[lock] BUY Up btc-updown-15m-1794163500 @ 0.96 x 20.83 p 0.997 z 2.7 rem 45s
+bookws 18:59:27 {"msgs": 819187, "connects": 1, "errors": 0, "subscribed": 32, "last_msg": 1794164367.9660306}
+bookws 18:59:57 {"msgs": 825553, "connects": 1, "errors": 0, "subscribed": 32, "last_msg": 1794164397.955786}
+bookws 19:00:27 {"msgs": 828396, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794164422.065717}
+bookws 19:00:57 {"msgs": 828399, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794164452.2072506}
+bookws 19:01:27 {"msgs": 828402, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794164482.3498766}
+bookws 19:01:57 {"msgs": 828405, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794164512.494064}
+bookws 19:02:27 {"msgs": 828408, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794164542.6377869}
+bookws 19:02:57 {"msgs": 836976, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794164577.974507}
+19:03:00 PAPER[dog] BUY Up btc-updown-5m-1794164400 @ 0.07 x 285.71 p 0.019 z -2.1 rem 119s
+19:03:00 PAPER[dog] BUY Up doge-updown-5m-1794164400 @ 0.06 x 16.0 p 0.011 z -2.3 rem 119s
+19:03:00 PAPER[dog] BUY Up hype-updown-5m-1794164400 @ 0.09 x 23.0 p 0.048 z -1.7 rem 119s
+19:03:00 PAPER[dog] BUY Up zec-updown-5m-1794164400 @ 0.21 x 80.0 p 0.054 z -1.6 rem 119s
+19:03:04 PAPER[dog] BUY Up bnb-updown-5m-1794164400 @ 0.3 x 5.0 p 0.447 z -0.1 rem 115s
+bookws 19:03:27 {"msgs": 848848, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794164607.9739807}
+19:03:30 PAPER[fav] BUY Down bnb-updown-5m-1794164400 @ 0.91 x 21.98 p 0.898 z 1.3 rem 89s
+bookws 19:03:57 {"msgs": 857439, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794164637.9718401}
+bookws 19:04:27 {"msgs": 862988, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794164667.9674058}
+bookws 19:04:57 {"msgs": 867243, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794164697.9469395}
+bookws 19:05:27 {"msgs": 868674, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794164724.8743305}
+bookws 19:05:57 {"msgs": 868677, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794164755.016168}
+bookws 19:06:27 {"msgs": 868680, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794164785.159776}
+bookws 19:06:57 {"msgs": 868683, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794164815.2995074}
+bookws 19:07:27 {"msgs": 868686, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794164845.4412346}
+bookws 19:07:57 {"msgs": 874190, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794164877.9737468}
+19:08:00 PAPER[dog] BUY Up doge-updown-5m-1794164700 @ 0.06 x 5.0 p 0.036 z -1.8 rem 119s
+19:08:00 PAPER[dog] BUY Up bnb-updown-5m-1794164700 @ 0.08 x 5.0 p 0.081 z -1.4 rem 119s
+19:08:00 PAPER[dog] BUY Up hype-updown-5m-1794164700 @ 0.08 x 5.0 p 0.104 z -1.3 rem 119s
+19:08:06 PAPER[dog] BUY Up zec-updown-5m-1794164700 @ 0.35 x 18.0 p 0.260 z -0.6 rem 113s
+bookws 19:08:27 {"msgs": 884179, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794164907.97398}
+bookws 19:08:57 {"msgs": 889293, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794164937.9662085}
+bookws 19:09:27 {"msgs": 892960, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794164967.9637792}
+bookws 19:09:57 {"msgs": 896641, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794164997.9787078}
+bookws 19:10:27 {"msgs": 898056, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794165018.3264906}
+bookws 19:10:57 {"msgs": 898059, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794165048.4695582}
+{"updated": "2026-11-08T19:11:26.726285+00:00", "trades": 6359, "settled": 6355, "obs_this_run": 9634, "rest_ms": {"n": 13216, "min": 39.6, "p50": 49.7, "p90": 59.2}, "feed": {"msgs": 106415, "connects": 2, "errors": 0, "last_msg": 1794165086.6289897, "silent_reconnects": 1}, "feed_topics": {"crypto_prices": 21466, "crypto_prices_twap_thirty": 28330, "crypto_prices_chainlink": 28306, "crypto_prices_twap_sixty": 28311}, "bookws": {"alive": false}, "by_strat": {"dog": {"trades": 2423, "won": 333, "staked": 14108.72, "pnl": -4956.82}, "exact": {"trades": 2117, "won": 959, "staked": 19124.76, "pnl": -1291.41}, "fav": {"trades": 1528, "won": 1209, "staked": 19773.51, "pnl": -736.91}, "lock": {"trades": 107, "won": 93, "staked": 1474.49, "pnl": 78.74}, "pair": {"trades": 30, "won": 15, "staked": 209.23, "pnl": 22.71}, "pair_ev": {"trades": 84, "won": 50, "staked": 676.82, "pnl": 64.48}, "v2": {"trades": 66, "won": 36, "staked": 1096.57, "pnl": -112.22}}, "by_day": {"2026-11-07 dog": {"trades": 1111, "won": 167, "staked": 6332.15, "pnl": -1579.56}, "2026-11-07 exact": {"trades": 1263, "won": 586, "staked": 11222.56, "pnl": -83.36}, "2026-11-07 fav": {"trades": 713, "won": 557, "staked": 9249.61, "pnl": -457.53}, "2026-11-07 lock": {"trades": 52, "won": 43, "staked": 710.23, "pnl": -7.98}, "2026-11-07 pair": {"trades": 28, "won": 14, "staked": 197.59, "pnl": 22.48}, "2026-11-07 pair_ev": {"trades": 38, "won": 21, "staked": 290.23, "pnl": -0.87}, "2026-11-07 v2": {"trades": 66, "won": 36, "staked": 1096.57, "pnl": -112.22}, "2026-11-08 dog": {"trades": 1312, "won": 166, "staked": 7776.57, "pnl": -3377.27}, "2026-11-08 exact": {"trades": 854, "won": 373, "staked": 7902.2, "pnl": -1208.05}, "2026-11-08 fav": {"trades": 815, "won": 652, "staked": 10523.91, "pnl": -279.37}, "2026-11-08 lock": {"trades": 55, "won": 50, "staked": 764.26, "pnl": 86.72}, "2026-11-08 pair": {"trades": 2, "won": 1, "staked": 11.64, "pnl": 0.23}, "2026-11-08 pair_ev": {"trades": 46, "won": 29, "staked": 386.59, "pnl": 65.35}}}
