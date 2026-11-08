@@ -26,6 +26,7 @@ jobs:
         run: |
           git config user.name "polymarket-lab-bot"
           git config user.email "actions@users.noreply.github.com"
+          git config pack.threads 1 && git config pack.windowMemory 64m && git config core.bigFileThreshold 1m && git config pack.deltaCacheSize 32m
           for part in 1 2 3 4 5; do
             git rebase --abort 2>/dev/null || true
             git fetch -q origin main && git reset -q --hard origin/main
@@ -38,8 +39,8 @@ jobs:
             mkdir -p /tmp/fastout/rtds /tmp/fastout/bookws
             for f in obs.jsonl trades.jsonl windows.jsonl model.jsonl pairs.jsonl report.json tokens.jsonl; do [ -f "data/fast/$f" ] && cp "data/fast/$f" /tmp/fastout/; done
             cp data/fast/obs-*.jsonl.gz data/fast/model-*.jsonl.gz data/fast/pairs-*.jsonl.gz /tmp/fastout/ 2>/dev/null || true
-            cp -r data/fast/rtds/. /tmp/fastout/rtds/ 2>/dev/null || true
-            cp -r data/fast/bookws/. /tmp/fastout/bookws/ 2>/dev/null || true
+            cp data/fast/rtds/*.jsonl.gz /tmp/fastout/rtds/ 2>/dev/null || true       # finished hours only (compressed)
+            cp data/fast/bookws/*.jsonl.gz /tmp/fastout/bookws/ 2>/dev/null || true
             for i in 1 2 3; do
               git fetch -q origin main && git reset -q --hard origin/main && mkdir -p data/fast/rtds logs && cp -r /tmp/fastout/. data/fast/ && cp /tmp/fast.txt logs/fast-log.txt
               if git add --sparse data/fast logs/fast-log.txt && git commit -qm "Fast paper $(date -u +%FT%H:%M) [skip ci]" && git push -q; then rm -rf /tmp/fastout; break; fi
