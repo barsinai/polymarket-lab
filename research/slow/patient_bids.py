@@ -68,6 +68,11 @@ for f in sorted(glob.glob("data/trades/parts/*.jsonl.gz")):
             ref = (cum_pu[np.arange(len(ts))] - cum_pu[i0]) / usd_ref
         ok = (n_ref >= 5) & (usd_ref >= 200) & (ref >= 0.10) & (ref <= 0.90)
         j0 = np.searchsorted(ts, ts + T_EXIT0, side="left"); j1 = np.searchsorted(ts, ts + T_EXIT1, side="right")
+        k0 = np.searchsorted(ts, ts + 300, side="left"); k1 = np.searchsorted(ts, ts + 1800, side="right")
+        with np.errstate(invalid="ignore", divide="ignore"):
+            late_vwap = (cum_pu[k1] - cum_pu[k0]) / (cum_usd[k1] - cum_usd[k0])   # price 5-30 min after the print (taker entry)
+        has_late = (cum_n[k1] - cum_n[k0]) >= 1
+        active_days = max((ts[-1] - ts[0]) / 86400.0, 1.0)
         with np.errstate(invalid="ignore", divide="ignore"):
             exit_vwap = (cum_pu[j1] - cum_pu[j0]) / (cum_usd[j1] - cum_usd[j0])
         has_exit = (cum_n[j1] - cum_n[j0]) >= 3
@@ -91,8 +96,12 @@ for f in sorted(glob.glob("data/trades/parts/*.jsonl.gz")):
                     if trunc and usd[i] < 100:
                         continue
                     last_day = ts[i]
-                    rows_out.append((mid, X, sgn, ts[i], float(ref[i]), float(b[i]), float(min(usd[i], 20.0)), float(exit_vwap[i]) if has_exit[i] else None, Y, float(dtc[i]), trunc))
+                    rows_out.append((mid, X, sgn, ts[i], float(ref[i]), float(b[i]), float(min(usd[i], 20.0)), float(exit_vwap[i]) if has_exit[i] else None, Y, float(dtc[i]), trunc,
+                                     float(yes[i]), float(late_vwap[i]) if has_late[i] else None, float(active_days)))
 print(f"markets scanned {n_mk}, fills {len(rows_out)}", flush=True)
+md_days = {}
+for r in rows_out:
+    md_days[r[0]] = r[13]
 json.dump(rows_out, open("data/slow/patient_bids.json", "w"))
 
 # ---- scoring
@@ -100,19 +109,24 @@ def score(sel, label):
     if not sel:
         return
     # P&L per $ staked: Yes buy at b -> value Y; No buy at (1-b) -> value (1-Y). Exit at 24h VWAP (minus 1c) when available.
-    st = pnl_res = pnl_exit = 0.0; n_exit = 0; st_exit = 0.0
-    for mid, X, sgn, t, ref, b, usd_, ev, Y, dtc, tr in sel:
+    st = pnl_res = pnl_exit = 0.0; n_exit = 0; st_exit = 0.0; st_tk = pnl_tk = pnl_tk_res = 0.0; n_tk = 0
+    for mid, X, sgn, t, ref, b, usd_, ev, Y, dtc, tr, p, lv, ad in sel:
         if sgn > 0:
             cost, val, ex = b, Y, (ev - 0.01) if ev is not None else None
+            tk_cost = (lv + 0.01) if lv is not None else None
         else:
             cost, val, ex = 1 - b, 1 - Y, (1 - ev - 0.01) if ev is not None else None
+            tk_cost = (1 - lv + 0.01) if lv is not None else None
         if cost <= 0.01:
             continue
         sh = usd_ / cost
         st += usd_; pnl_res += sh * (val - cost)
         if ex is not None:
             st_exit += usd_; pnl_exit += sh * (ex - cost); n_exit += 1
-    print(f"  {label:34} fills {len(sel):6}  hold-to-resolution {pnl_res / st:+.3f}/$   sell 24h later {pnl_exit / st_exit if st_exit else 0:+.3f}/$ (n={n_exit})")
+        if tk_cost is not None and 0.02 <= tk_cost <= 0.98 and ex is not None:
+            sh2 = usd_ / tk_cost; st_tk += usd_; pnl_tk += sh2 * (ex - tk_cost); pnl_tk_res += sh2 * (val - tk_cost); n_tk += 1
+    print(f"  {label:34} fills {len(sel):6}  resting bid: to resolution {pnl_res / st:+.3f}/$, sold 24h later {pnl_exit / st_exit if st_exit else 0:+.3f}/$ (n={n_exit})"
+          f"   | taker 5-30 min after: sold 24h later {pnl_tk / st_tk if st_tk else 0:+.3f}/$, to resolution {pnl_tk_res / st_tk if st_tk else 0:+.3f}/$ (n={n_tk})")
 
 print("\nPATIENT BIDS, by depth X below/above the trailing-day average (both directions)")
 for X in XS:
@@ -128,3 +142,14 @@ for lo, hi in ((0.10, 0.30), (0.30, 0.50), (0.50, 0.70), (0.70, 0.90)):
     score([r for r in rows_out if r[1] == 0.10 and lo <= r[4] < hi], f"ref {lo:.2f}-{hi:.2f}")
 print("\ncomplete tapes only (X = 0.10)")
 score([r for r in rows_out if r[1] == 0.10 and not r[10]], "not truncated")
+print("\nHow rare: fills per market-day of tape, by X")
+for X in XS:
+    sel = [r for r in rows_out if r[1] == X]
+    mk = {r[0] for r in sel}
+    days = sum(md_days[m] for m in mk)
+    print(f"  X = {X:.2f}: {len(sel)} fills in {len(mk)} markets ({len(sel) / max(days, 1):.4f} fills per market-day among markets that ever filled; "
+          f"{len(sel) / sum(md_days.values()) if md_days else 0:.5f} per market-day overall)")
+print("\nby year (X = 0.15)")
+from datetime import datetime as _dt
+for yr in (2023, 2024, 2025, 2026):
+    score([r for r in rows_out if r[1] == 0.15 and _dt.utcfromtimestamp(r[3]).year == yr], f"{yr}")
