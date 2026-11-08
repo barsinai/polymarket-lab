@@ -234,7 +234,8 @@ def main():
                 if mm:
                     toks += mm["tokens"]
         return toks
-    bw_stop = book_ws.start(active_tokens)
+    bw_proc = book_ws.start_process()      # separate process: the websocket must not share our GIL
+    last_tok_write = 0.0
     pool = ThreadPoolExecutor(max_workers=8)
     end_at = time.time() + RUN_MIN * 60
     time.sleep(130)  # warm up sigma / feed
@@ -244,6 +245,12 @@ def main():
         try:
             loop_t = time.time()
             now = time.time()
+            if now - last_tok_write > 2:
+                last_tok_write = now
+                try:
+                    json.dump(active_tokens(), open(f"{D}/active_tokens.json.tmp", "w")); os.replace(f"{D}/active_tokens.json.tmp", f"{D}/active_tokens.json")
+                except OSError:
+                    pass
             jobs = []
             for a in ASSETS:
                 src, ser = feed(a)
@@ -308,7 +315,7 @@ def main():
                     if not ask:
                         continue
                     zs = z if side == "Up" else -z
-                    ws_ask, ws_bid = book_ws.best(m["tokens"][0 if side == "Up" else 1])
+                    ws_ask, ws_bid = None, None   # the recorder runs in its own process; compare offline
                     with open(f"{D}/obs.jsonl", "a") as fh:
                         fh.write(json.dumps({"ts": round(now, 1), "slug": m["slug"], "side": side, "ask": ask[0], "ask_sz": ask[1],
                                              "ws_ask": ws_ask[0] if ws_ask else None, "ws_ask_sz": ws_ask[1] if ws_ask else None, "ws_bid": ws_bid[0] if ws_bid else None,
@@ -320,8 +327,8 @@ def main():
                     fee = 0.07 * a_px * (1 - a_px)
                     edge = p_side - a_px - fee
                     picks = []
-                    if edge >= EDGE and 0.02 <= a_px <= 0.98:
-                        picks.append("exact")
+                    if edge >= EDGE and 0.30 <= a_px <= 0.98 and rem <= EXACT_RMAX and zs >= 1.0:
+                        picks.append("exact")   # model-favoured side, last 60 s only (the unrestricted rule lost -$710 on 1,666 trades)
                     if rem <= 60 and zs >= LOCK_Z and LOCK_MIN_ASK <= a_px <= LOCK_ASK and k_src in ("ptb", "twap", "chainlink") and src == "chainlink":   # chainlink pre-60 mean = feed TWAP within 0.06 bp
                         picks.append("lock")
                     if rem <= FAV_REM and FAV_LO <= a_px <= FAV_HI:
@@ -411,7 +418,11 @@ def main():
         except Exception:  # noqa: BLE001  (one bad cycle must not end the hour)
             import traceback; traceback.print_exc(); time.sleep(2); continue
         time.sleep(max(0.2, 2.0 - (time.time() - loop_t)))
-    stop.set(); rt_stop.set(); bw_stop.set()
+    stop.set(); rt_stop.set()
+    try:
+        bw_proc.terminate(); bw_proc.wait(timeout=5)
+    except Exception:  # noqa: BLE001
+        pass
     settle(trades); write_trades(trades)
     done_t = [t for t in trades if t.get("result") is not None]
     by_strat, by_day = {}, {}
@@ -421,7 +432,7 @@ def main():
             b["trades"] += 1; b["won"] += t["result"]; b["staked"] += t["price"] * t["shares"]; b["pnl"] += t["pnl"]
     rnd = lambda b: {k: round(v, 2) if isinstance(v, float) else v for k, v in b.items()}
     rep = {"updated": datetime.now(timezone.utc).isoformat(), "trades": len(trades), "settled": len(done_t), "obs_this_run": n_obs,
-           "feed": {k: v for k, v in rtds.stats.items() if k != "topics"}, "feed_topics": rtds.stats.get("topics"), "bookws": dict(book_ws.stats),
+           "feed": {k: v for k, v in rtds.stats.items() if k != "topics"}, "feed_topics": rtds.stats.get("topics"), "bookws": {"alive": bw_proc.poll() is None},
            "by_strat": {k: rnd(b) for k, b in sorted(by_strat.items())}, "by_day": {d: rnd(b) for d, b in sorted(by_day.items())}}
     json.dump(rep, open(f"{D}/report.json", "w"), indent=1)
     print(json.dumps(rep), flush=True)

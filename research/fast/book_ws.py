@@ -69,14 +69,19 @@ def _apply(m, rx):
                     "asks5": sorted(((float(x["price"]), float(x["size"])) for x in m.get("asks") or []))[:5],
                     "bids5": sorted(((float(x["price"]), float(x["size"])) for x in m.get("bids") or []), reverse=True)[:5]})
     elif et == "price_change":
-        touched = set()
+        touched = {}
         with _lock:
             for c in m.get("price_changes") or []:
                 a = c.get("asset_id"); side = "bids" if str(c.get("side")).upper() == "BUY" else "asks"
                 b = books.setdefault(a, {"bids": {}, "asks": {}, "ts": None, "rx": rx})
-                b[side][c["price"]] = float(c["size"]); b["ts"] = m.get("timestamp"); b["rx"] = rx; touched.add(a)
-            for a in touched:
-                top = _top(a)
+                b[side][c["price"]] = float(c["size"]); b["ts"] = m.get("timestamp"); b["rx"] = rx
+                touched[a] = (c.get("best_ask"), c.get("best_bid"))
+            for a, (ba, bb) in touched.items():
+                b = books[a]
+                if ba is not None and bb is not None:   # the feed tells us the new best levels: no scan needed
+                    top = (float(ba), round(b["asks"].get(str(ba), b["asks"].get(ba, 0.0)), 2), float(bb), round(b["bids"].get(str(bb), b["bids"].get(bb, 0.0)), 2))
+                else:
+                    top = _top(a)
                 if top != _last_top.get(a):
                     _last_top[a] = top
                     out.append({"t": "top", "a": a, "ts": m.get("timestamp"), "top": top})
@@ -95,7 +100,7 @@ async def _run(stop, active):
                 want = set(active())
                 if want:
                     await ws.send(json.dumps({"assets_ids": sorted(want), "type": "market"})); subscribed = set(want)
-                last_ping = time.time(); last_rx = time.time(); last_sync = time.time()
+                last_ping = time.time(); last_rx = time.time(); last_sync = time.time(); last_flush = time.time()
                 while not stop.is_set():
                     now = time.time()
                     if now - last_ping > 10:
@@ -138,7 +143,8 @@ async def _run(stop, active):
                         for rec in _apply(m, rx):
                             rec["rx"] = round(rx, 4)
                             out.write(json.dumps(rec, separators=(",", ":")) + "\n")
-                    out.flush()
+                    if rx - last_flush > 1.0:
+                        out.flush(); last_flush = rx
         except Exception as e:  # noqa: BLE001
             stats["errors"] += 1; stats["last_error"] = str(e)[:160]
             await asyncio.sleep(3)
@@ -155,6 +161,29 @@ def start(active):
         asyncio.run(_run(stop, active))
     threading.Thread(target=runner, daemon=True).start()
     return stop
+
+
+def start_process():
+    """run the recorder as a separate process (its own GIL); the bot writes FAST_DIR/active_tokens.json"""
+    import subprocess, sys
+    return subprocess.Popen([sys.executable, os.path.abspath(__file__), "--follow-file"], env=dict(os.environ, FAST_DIR=os.environ.get("FAST_DIR", "data/fast")))
+
+
+if __name__ == "__main__" and "--follow-file" in os.sys.argv:
+    path = os.environ.get("FAST_DIR", "data/fast") + "/active_tokens.json"
+    def from_file():
+        try:
+            return json.load(open(path))
+        except (OSError, ValueError):
+            return []
+    stop = start(from_file)
+    try:
+        while True:
+            time.sleep(30)
+            print(f"bookws {datetime.now(timezone.utc):%H:%M:%S} {json.dumps(stats)}", flush=True)
+    except KeyboardInterrupt:
+        stop.set(); time.sleep(1)
+    raise SystemExit(0)
 
 
 if __name__ == "__main__":
