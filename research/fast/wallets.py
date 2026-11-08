@@ -41,7 +41,7 @@ def fetch_meta(slug):
         return slug, None
     e = ev[0]; m = e["markets"][0]; md = e.get("eventMetadata") or {}
     pr = [float(x) for x in json.loads(m["outcomePrices"])]
-    return slug, {"cid": m["conditionId"], "up": bool(pr[0] > pr[1]) if max(pr) >= 0.99 else None,
+    return slug, {"cid": m["conditionId"], "tokens": json.loads(m.get("clobTokenIds") or "[]"), "up": bool(pr[0] > pr[1]) if max(pr) >= 0.99 else None,
                   "ptb": md.get("priceToBeat"), "final": md.get("finalPrice"), "start": int(slug.rsplit("-", 1)[1]),
                   "window": 900 if "-15m-" in slug else 300, "volume": float(m.get("volumeNum") or 0)}
 

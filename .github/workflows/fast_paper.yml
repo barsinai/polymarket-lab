@@ -36,7 +36,7 @@ jobs:
             mkdir -p logs && cp /tmp/fast.txt logs/fast-log.txt
             # publish the bot's own files on top of whatever is upstream (only the server writes these)
             mkdir -p /tmp/fastout/rtds /tmp/fastout/bookws
-            for f in obs.jsonl trades.jsonl windows.jsonl model.jsonl pairs.jsonl report.json; do [ -f "data/fast/$f" ] && cp "data/fast/$f" /tmp/fastout/; done
+            for f in obs.jsonl trades.jsonl windows.jsonl model.jsonl pairs.jsonl report.json tokens.jsonl; do [ -f "data/fast/$f" ] && cp "data/fast/$f" /tmp/fastout/; done
             cp data/fast/obs-*.jsonl.gz data/fast/model-*.jsonl.gz data/fast/pairs-*.jsonl.gz /tmp/fastout/ 2>/dev/null || true
             cp -r data/fast/rtds/. /tmp/fastout/rtds/ 2>/dev/null || true
             cp -r data/fast/bookws/. /tmp/fastout/bookws/ 2>/dev/null || true

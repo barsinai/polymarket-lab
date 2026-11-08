@@ -133,6 +133,9 @@ def market(a, w, start):
         ptb = (ev[0].get("eventMetadata") or {}).get("priceToBeat")
         meta[slug] = {"tokens": json.loads(m["clobTokenIds"]), "cid": m["conditionId"], "slug": slug,
                       "ptb": float(ptb) if ptb else None, "tries": (cur or {}).get("tries", 0) + 1}
+        if cur is None:
+            with open(f"{D}/tokens.jsonl", "a") as fh:   # token ids per window, for joining the websocket records
+                fh.write(json.dumps({"slug": slug, "tokens": meta[slug]["tokens"], "cid": m["conditionId"]}) + "\n")
     except Exception:  # noqa: BLE001
         if cur is None:
             meta[slug] = None
