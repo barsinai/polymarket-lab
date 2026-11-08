@@ -415,3 +415,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
   wallets -8..-24%, "other" -4..-6%, weak wallets -1.2% (2c), -2.1% (5c), +6.8% (10c, 574 fills). Market flow
   score (trailing-7-day weak-minus-skilled share) does NOT separate: every bucket negative. Adverse selection is
   general, not confined to known-skilled wallets; and the counterparty cannot be chosen. #3 closed.
+- 11-08 19:10 SPEED, re-measured: CLOB websocket events reach Helsinki 15-18 ms after the server stamp (median
+  18 ms, 369k events) -> the matching engine is in Europe; my "220 ms RTT" assumption was wrong by 4-5x. US
+  runner (Arizona) sees 160 ms to clob /time. RTDS Chainlink prices arrive 0.8-1.9 s after their stamp; the
+  relay's Binance stream is synchronous with the Chainlink stream (+-1 s). User approved building the fast
+  bot (paper first): research/fast/FAST_DESIGN.md. Bot now logs REST book-read RTT (report.rest_ms).
