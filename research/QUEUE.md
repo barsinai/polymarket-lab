@@ -373,3 +373,19 @@ Price drift in the trade's direction (what a market maker on the other side lose
   clean data sum<1 is rare (one XRP window at 0.97 where K15~K5); the SOL 0.75 "arb" was the wrong Binance K.
   exact -$139 on 224 (now restricted to z>=1, ask>=0.30); dog -$397 on 186 (dead, control); fav -$16.
   Report page corrected (section 7).
+
+## 11-08 06:30 morning verdict (full night on the clean feed, ~1,750 windows, 8 coins)
+- Feed == oracle: feed TWAP at end == official finalPrice in 1,638/1,638 windows (0.000 bp); at start == priceToBeat
+  639/639. Our outcome view is exact. Hourly sigma swings 2-4x within a day -> added per-asset sigma floor.
+- Paper by rule (since v4 start): exact -$710 on $14.9k (1,666 trades), fav -$533 on $12.3k, dog -$2,822 on $8.6k
+  (all dead); lock +$41 on $1,037 (80 trades, 85%); pair (riskless) +$23 on $209 (3 real pairs post-fix, 1-3%
+  margins); pair_ev +$29 on $381 (26 clean pairs, noisy).
+- LOCK realism: of 79 lock asks, 23 had already risen at the next reading (2 s) - all 23 winners; all 12 losers
+  persisted. Fill 2 s late at the new ask (<=0.97): +$23.93 on $927 (+2.6%). Persisted-only: -$30. The edge is
+  mostly speed. 6/12 losers were asks < 0.50 (market disagreed) -> LOCK_MIN_ASK 0.50 (71 trades, 93%, +6.4% paper).
+- Sweeper trade (98-99c, last 15-60 s, z>=2): 98c n=189 98.9% +0.8%/$, 99c n=426 98.8% -0.3%/$: ~zero.
+- MAKER replay with exact-feed pricing vs the tape (1,669 windows): -6.2% of capital/window at 2-3c spread,
+  -3.2% at 10c, +0.4% at 20c. Informed takers lift us. The real set-seller must be faster/smarter.
+- Verdict: no exploitable edge for a REST-polling participant in these markets. Next: measure quote lifetimes with
+  the CLOB websocket (decides whether a sub-second bot could catch the lock asks), and move research effort to
+  slow-market making with flow-quality filters (80M-trade tape).

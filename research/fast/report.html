@@ -80,7 +80,7 @@ a { color: var(--blue); }
 
 <main>
 <header>
-  <div class="kicker">polymarket-lab · 5-minute crypto markets · evidence as of 7 Nov 2026, 14:00 Israel time</div>
+  <div class="kicker">polymarket-lab · 5-minute crypto markets · evidence as of 8 Nov 2026, 07:30 Israel time</div>
   <h1>Up/Down Evidence Report</h1>
   <p class="lede">Every claim from today's research, with the chart and the numbers behind it. All figures come from the repo's own data files (598 finished windows, 1.49 million public fills, and our bot's own order-book readings). Nothing here involves real money.</p>
   <div class="legend"><span><span class="chip strong">strong</span> many windows, robust to checks</span><span><span class="chip early">early</span> first hours of data</span><span><span class="chip dead">dead</span> did not survive a check</span></div>
@@ -141,7 +141,16 @@ a { color: var(--blue); }
   <p>First afternoon of the new bot (200 windows with Chainlink-fed readings). Lower prediction error is better. An earlier version of this page, built on 27 windows, said the model beat the market inside the last minute; with ten times the data that is no longer true at any horizon. The model's confidence levels do hold up (second chart), so it is not wrong, just coarser than a crowd that also watches order flow.</p>
   <figure id="f-cal"><div class="fig-title">Prediction error of the market's price vs our model, by seconds left</div><div class="svgwrap"></div><div class="legend"><span><i class="sw" style="background:var(--gray-series)"></i>market mid-price</span><span><i class="sw" style="background:var(--blue)"></i>our model (exact feed)</span></div><figcaption>Log loss on the Up outcome per order-book reading; 5,086 Chainlink-fed readings in 200 windows. Readings taken while the feed was down (Binance fallback) are excluded; on those the model was far worse, which is what broke the morning's bot.</figcaption><details><summary>numbers</summary><div class="tablewrap"></div></details></figure>
   <figure id="f-z"><div class="fig-title">When the model is confident in the last 60 s, is it right?</div><div class="svgwrap"></div><div class="legend"><span><i class="sw" style="background:var(--gray-series)"></i>model's stated minimum</span><span><i class="sw" style="background:var(--blue)"></i>realized</span></div><figcaption>Grouped by the model's confidence (z, standard deviations of margin), one reading per 10-second slice. Realized frequencies match or exceed what the model promises at every level, so a "locked" call can be trusted; the question is only how often the market still sells it cheaply.</figcaption><details><summary>numbers</summary><div class="tablewrap"></div></details></figure>
-  <div class="meaning"><strong>What it means:</strong> taking the market on with this model loses (the "exact" line below). The one place it pays is the narrow lock-in case: a locked outcome still on sale at or below 97¢ in the last minute happened 20 times in 288 windows (all feeds) and won 18 of them, about +3.5% per dollar after fees. Too few cases to call yet; tonight's run decides. Paper results so far, all strategies: <span id="v4res"></span>.</div>
+  <div class="meaning"><strong>What it means:</strong> the feed is now known to be the oracle itself: the feed's average at the window end equals the official final price exactly in 1,638 of 1,638 windows, and at the start equals the price to beat in 639 of 639. Our view of the outcome is therefore exact; what we lack is the crowd's speed and its read of order flow. Full-night paper results by strategy: <span id="v4res"></span>.</div>
+</section>
+
+<section id="night">
+  <div class="claim"><h2>8. Overnight verdict: three of five rules are dead, two are thin and speed-limited</h2><span class="chip strong">strong</span></div>
+  <p>A full night on the clean feed (about 1,750 windows, 8 coins, 147,000 Chainlink-fed book readings). Every figure is paper: the bot assumed it could buy the displayed ask at the displayed size the moment it saw it.</p>
+  <figure id="f-strat"><div class="fig-title">Paper profit by rule, after taker fees (since the exact-feed bot started)</div><div class="svgwrap"></div><figcaption>Return per dollar staked. Hover for trade counts and dollars. "exact" (take the market on with our model), "fav" (buy the favourite late) and "dog" (buy the underdog late) lose at scale; "lock" and the two pair rules are small positives on small samples.</figcaption><details><summary>numbers</summary><div class="tablewrap"></div></details></figure>
+  <figure id="f-persist"><div class="fig-title">Lock-in: the ask we "bought" vs the ask two seconds later</div><div class="svgwrap"></div><div class="legend"><span><i class="sw" style="background:var(--blue)"></i>outcome won</span><span><i class="sw" style="background:var(--red)"></i>outcome lost</span></div><figcaption>One dot per lock trade (79). Dots above the diagonal are asks that had already risen by our next reading; every one of those was a winner, and every loser sat still. Filling two seconds late at the new price turns +$40.62 into +$23.93 on about $930 staked; waiting for a quote that persisted turns it negative.</figcaption><details><summary>numbers</summary><div class="tablewrap"></div></details></figure>
+  <figure id="f-maker"><div class="fig-title">Market-maker replay with our exact-feed pricing: profit vs the spread we charge</div><div class="svgwrap"></div><figcaption>1,669 windows replayed against the real trade tape: mint $20 of Up+Down sets, offer both sides at fair value plus the spread, stop 2 minutes before the end. Narrow spreads lose 5-6% of capital per window to informed takers; only a 20¢ spread breaks even.</figcaption><details><summary>numbers</summary><div class="tablewrap"></div></details></figure>
+  <div class="meaning"><strong>What it means:</strong> in these markets the only money is in speed. The sweeper's trade (buy the sure side at 98-99¢) returns about zero for us even when our model agrees (<span id="sweep"></span>), because the price already carries the jump risk. Lock-in survives as a thin edge of perhaps +2-4% per trade on 1-4 trades an hour, half of which depends on reaching a quote inside two seconds; the 15m/5m pairs are riskless but worth cents. Nothing here justifies real money yet; the next test is measuring how long those quotes actually live, with a live order-book feed instead of polling.</div>
 </section>
 
 <footer>Sources: Polymarket Gamma API (event metadata: priceToBeat, finalPrice, results), Polymarket Data API v2 (public trade tape), Polymarket RTDS feed (Chainlink prices and 60 s TWAP), Binance REST (1-second proxy), and the bot's own order-book readings. Code: research/fast/ in the polymarket-lab repository (report_data.py builds every number on this page).</footer>
@@ -350,6 +359,58 @@ a { color: var(--blue); }
   table('f-z', ['z', 'readings', 'model says at least', 'realized'], D.zcal.map(r => [r.z, r.n, pct(r.model_min, 1), pct(r.realized, 1)]));
 
   document.getElementById('oldbots').textContent = `${fmt$(D.old_bots.pnl)} on ${fmt$(D.old_bots.staked)} staked over ${D.old_bots.n} paper trades (noise around zero, with a wrong model)`;
-  document.getElementById('v4res').textContent = D.v4.map(r => `${r.strat}: ${r.n} trades, ${r.pnl >= 0 ? '+' : ''}${fmt$(r.pnl)} on $${r.staked}`).join('; ');
+  document.getElementById('v4res').textContent = D.v4.map(r => `${r.strat}: ${r.n} trades, ${r.pnl >= 0 ? '+' : ''}${fmt$(r.pnl)} on $${r.staked.toLocaleString()}`).join('; ');
+  if (D.sweeper) document.getElementById('sweep').textContent = D.sweeper.map(r => `${r.price}: ${r.n} chances, ${pct(r.win, 1)} won, ${(r.ret * 100).toFixed(1)}% per $`).join('; ');
+
+  // ---- 8a strategy bars (return per $)
+  (function () {
+    const rows = D.v4.slice().sort((a, b) => b.ret - a.ret);
+    const W = 720, rowH = 34, left = 90, H = rows.length * rowH + 30, mid = left + (W - left - 20) * 0.5;
+    const s = svgIn('f-strat', W, H);
+    const lim = Math.max(...rows.map(r => Math.abs(r.ret))), xw = (W - left - 20) / 2;
+    [-0.3, -0.2, -0.1, 0, 0.1].forEach(v => { if (Math.abs(v) > lim * 1.1 && v !== 0) return; const x = mid + v / lim * xw; el('line', { x1: x, x2: x, y1: 8, y2: H - 22, class: v === 0 ? 'axis' : 'grid' }, s); text(s, x, H - 10, (v * 100).toFixed(0) + '%', 'tick', 'middle'); });
+    rows.forEach((r, i) => {
+      const y = 12 + i * rowH, w = Math.abs(r.ret) / lim * xw;
+      text(s, left - 10, y + 11, r.strat, '', 'end');
+      const p = el('path', { d: r.ret >= 0 ? roundRight(mid, y, w, 22, 4) : `M${mid},${y} H${mid - w + 4} Q${mid - w},${y} ${mid - w},${y + 4} V${y + 18} Q${mid - w},${y + 22} ${mid - w + 4},${y + 22} H${mid} Z`, fill: r.ret >= 0 ? css('--blue') : css('--red'), class: 'mark' }, s);
+      const lx = r.ret >= 0 ? mid + w + 8 : mid - w - 8, fits = r.ret >= 0 || lx > left + 150;
+      text(s, fits ? lx : mid + 8, y + 11, `${(r.ret * 100).toFixed(1)}% · ${r.n} trades`, 'val', fits && r.ret < 0 ? 'end' : 'start');
+      hover(p, `${r.strat}<br>${r.n} trades, win rate ${pct(r.win)}<br>${fmt$(r.pnl)} on $${r.staked.toLocaleString()} staked`);
+    });
+    table('f-strat', ['rule', 'trades', 'win rate', 'staked', 'profit', 'per $'], rows.map(r => [r.strat, r.n, pct(r.win, 1), '$' + r.staked.toLocaleString(), fmt$(r.pnl), (r.ret * 100).toFixed(1) + '%']));
+  })();
+
+  // ---- 8b lock persistence scatter
+  (function () {
+    const P = D.lock_persist.points, W = 720, H = 340, left = 56, right = 16, top = 16, bottom = 40;
+    const s = svgIn('f-persist', W, H);
+    const xw = W - left - right, yh = H - top - bottom;
+    const sx = v => left + v * xw, sy = v => top + (1 - v) * yh;
+    [0, 0.25, 0.5, 0.75, 1].forEach(v => { el('line', { x1: left, x2: W - right, y1: sy(v), y2: sy(v), class: 'grid' }, s); text(s, left - 6, sy(v), (v * 100).toFixed(0) + '¢', 'tick', 'end'); el('line', { x1: sx(v), x2: sx(v), y1: top, y2: H - bottom, class: 'grid' }, s); text(s, sx(v), H - bottom + 14, (v * 100).toFixed(0) + '¢', 'tick', 'middle'); });
+    el('line', { x1: sx(0), y1: sy(0), x2: sx(1), y2: sy(1), stroke: css('--axis'), 'stroke-dasharray': '4 4' }, s);
+    text(s, sx(0.62), sy(0.6) - 12, 'same price 2 s later', 'tick');
+    P.forEach(p => {
+      const c = el('circle', { cx: sx(p.ask), cy: sy(Math.min(p.next, 1)), r: 6, fill: p.won ? css('--blue') : css('--red'), stroke: css('--surface'), 'stroke-width': 2, class: 'mark' }, s);
+      hover(c, `bought at ${(p.ask * 100).toFixed(0)}¢, ${p.dt} s later the ask was ${(p.next * 100).toFixed(0)}¢<br>outcome ${p.won ? 'won' : 'lost'}`);
+    });
+    text(s, W / 2, H - 6, 'ask when we "bought"', 'tick', 'middle');
+    const t = el('text', { x: 14, y: top + yh / 2, class: 'tick', transform: `rotate(-90 14 ${top + yh / 2})`, 'text-anchor': 'middle' }, s); t.textContent = 'ask 2 s later';
+    table('f-persist', ['bought at', '2 s later', 'outcome'], P.map(p => [(p.ask * 100).toFixed(0) + '¢', (p.next * 100).toFixed(0) + '¢', p.won ? 'won' : 'lost']));
+  })();
+
+  // ---- 8c maker replay line
+  (function () {
+    const R = D.maker.rows, W = 720, H = 240, left = 56, right = 16, top = 16, bottom = 40;
+    const s = svgIn('f-maker', W, H);
+    const xs = R.map(r => r.spread), ys = R.map(r => r.pct);
+    const xmin = 0, xmax = 0.22, ymin = Math.min(...ys, 0) - 0.5, ymax = Math.max(...ys, 0) + 0.5;
+    const sx = v => left + (v - xmin) / (xmax - xmin) * (W - left - right), sy = v => top + (1 - (v - ymin) / (ymax - ymin)) * (H - top - bottom);
+    [-6, -4, -2, 0].forEach(v => { if (v < ymin || v > ymax) return; el('line', { x1: left, x2: W - right, y1: sy(v), y2: sy(v), class: v === 0 ? 'axis' : 'grid' }, s); text(s, left - 6, sy(v), v + '%', 'tick', 'end'); });
+    [0.02, 0.05, 0.1, 0.15, 0.2].forEach(v => text(s, sx(v), H - bottom + 14, (v * 100).toFixed(0) + '¢', 'tick', 'middle'));
+    el('path', { d: R.map((r, i) => (i ? 'L' : 'M') + sx(r.spread) + ',' + sy(r.pct)).join(' '), fill: 'none', stroke: css('--blue'), 'stroke-width': 2 }, s);
+    R.forEach(r => { const c = el('circle', { cx: sx(r.spread), cy: sy(r.pct), r: 5, fill: css('--blue'), stroke: css('--surface'), 'stroke-width': 2, class: 'mark' }, s); hover(c, `spread ${(r.spread * 100).toFixed(0)}¢<br>${r.pct > 0 ? '+' : ''}${r.pct}% of capital per window<br>${r.fills.toLocaleString()} fills in ${D.maker.windows.toLocaleString()} windows`); });
+    text(s, W / 2, H - 6, 'spread charged above fair value, per side', 'tick', 'middle');
+    table('f-maker', ['spread', 'P&L % of capital per window', 'fills'], R.map(r => [(r.spread * 100).toFixed(0) + '¢', (r.pct > 0 ? '+' : '') + r.pct + '%', r.fills]));
+  })();
 })();
 </script>
