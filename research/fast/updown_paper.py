@@ -39,6 +39,10 @@ EDGE = float(os.environ.get("EDGE", "0.03"))
 EXACT_RMAX = int(os.environ.get("EXACT_RMAX", "60"))   # 'exact' only this close to the end (model beats the market there)
 SIZE_USD = float(os.environ.get("SIZE_USD", "20"))
 LOCK_Z, LOCK_ASK = float(os.environ.get("LOCK_Z", "2.5")), float(os.environ.get("LOCK_ASK", "0.97"))
+LOCK_MIN_ASK = float(os.environ.get("LOCK_MIN_ASK", "0.50"))   # the market must at least agree on the direction (6 of 12 lock losses were asks < 0.5)
+# per-second volatility floor = 0.7 x the asset's full-day sigma (30 s returns, 11-07/08): a calm 20 minutes
+# understates jump risk (hourly sigma swings 2-4x within a day; 3 'sure' losses came in calm hours)
+SIGMA_FLOOR = {"btc": 1.5e-5, "eth": 2.4e-5, "bnb": 1.6e-5, "sol": 3.4e-5, "doge": 3.4e-5, "xrp": 4.3e-5, "hype": 4.2e-5, "zec": 8.6e-5}
 PAIR_EV, PAIR_MAX = float(os.environ.get("PAIR_EV", "0.08")), float(os.environ.get("PAIR_MAX", "1.10"))   # model-based pairs (pair_ev); riskless pairs need no model
 DOG_LO, DOG_HI, DOG_RMIN, DOG_RMAX = float(os.environ.get("DOG_LO", "0.05")), float(os.environ.get("DOG_HI", "0.35")), int(os.environ.get("DOG_RMIN", "30")), int(os.environ.get("DOG_RMAX", "120"))
 FAV_REM, FAV_LO, FAV_HI = int(os.environ.get("FAV_REM", "90")), float(os.environ.get("FAV_LO", "0.60")), float(os.environ.get("FAV_HI", "0.95"))
@@ -298,7 +302,7 @@ def main():
                     picks = []
                     if edge >= EDGE and 0.02 <= a_px <= 0.98:
                         picks.append("exact")
-                    if rem <= 60 and zs >= LOCK_Z and a_px <= LOCK_ASK and k_src in ("ptb", "twap", "chainlink") and src == "chainlink":   # chainlink pre-60 mean = feed TWAP within 0.06 bp
+                    if rem <= 60 and zs >= LOCK_Z and LOCK_MIN_ASK <= a_px <= LOCK_ASK and k_src in ("ptb", "twap", "chainlink") and src == "chainlink":   # chainlink pre-60 mean = feed TWAP within 0.06 bp
                         picks.append("lock")
                     if rem <= FAV_REM and FAV_LO <= a_px <= FAV_HI:
                         picks.append("fav")

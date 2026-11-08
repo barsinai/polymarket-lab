@@ -14,12 +14,23 @@ SPREAD = float(os.environ.get("SPREAD", "0.04"))
 N_SETS = float(os.environ.get("N_SETS", "20"))
 STOP_S = int(os.environ.get("STOP_S", "45"))
 M = json.load(open(f"{D}/results_meta.json"))
+import glob
 track = defaultdict(list)   # slug -> [(ts, p_up)]
-for line in open(f"{D}/model.jsonl"):
-    o = json.loads(line); track[o["slug"]].append((o["ts"], o["p_up"]))
-for line in open(f"{D}/obs.jsonl"):
-    o = json.loads(line)
-    if o.get("v") == 4 and o["side"] == "Up":
+src_of = {}
+def lines(pattern):
+    for f in sorted(glob.glob(f"{D}/{pattern}")):
+        op = gzip.open if f.endswith(".gz") else open
+        with op(f, "rt") as fh:
+            for line in fh:
+                try:
+                    yield json.loads(line)
+                except ValueError:
+                    pass
+for o in lines("model*.jsonl*"):
+    if o.get("src") == "chainlink":
+        track[o["slug"]].append((o["ts"], o["p_up"]))
+for o in lines("obs*.jsonl*"):
+    if o.get("v") == 4 and o["side"] == "Up" and o.get("src") == "chainlink":
         track[o["slug"]].append((o["ts"], o["p_model"]))
 tape = defaultdict(list)
 with gzip.open(f"{D}/tape.jsonl.gz", "rt") as fh:
