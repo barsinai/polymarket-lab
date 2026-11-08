@@ -13,6 +13,7 @@ URL = "wss://ws-subscriptions-clob.polymarket.com/ws/market"
 D = os.environ.get("FAST_DIR", "data/fast") + "/bookws"
 os.makedirs(D, exist_ok=True)
 books = {}          # asset_id -> {"bids": {price: size}, "asks": {price: size}, "ts": server_ms, "rx": float}
+_last_top = {}      # asset_id -> (best_ask, ask_size, best_bid, bid_size) last written (top-of-book changes only)
 stats = {"msgs": 0, "connects": 0, "errors": 0, "subscribed": 0, "last_msg": 0.0}
 _lock = threading.Lock()
 
@@ -45,27 +46,43 @@ def compress(hour=None):
             pass
 
 
+def _top(a):
+    b = books.get(a)
+    if not b:
+        return None
+    asks = [(float(p), s) for p, s in b["asks"].items() if s > 0]
+    bids = [(float(p), s) for p, s in b["bids"].items() if s > 0]
+    ba = min(asks) if asks else (None, None); bb = max(bids) if bids else (None, None)
+    return (ba[0], round(ba[1], 2) if ba[1] is not None else None, bb[0], round(bb[1], 2) if bb[1] is not None else None)
+
+
 def _apply(m, rx):
-    et = m.get("event_type")
+    """update the local book; return records to write (top-of-book changes and trades only, to keep files small)"""
+    et = m.get("event_type"); out = []
     if et == "book":
         a = m.get("asset_id")
         with _lock:
             books[a] = {"bids": {x["price"]: float(x["size"]) for x in m.get("bids") or []},
                         "asks": {x["price"]: float(x["size"]) for x in m.get("asks") or []}, "ts": m.get("timestamp"), "rx": rx}
-        return {"t": "book", "a": a, "ts": m.get("timestamp"), "bids": [[x["price"], x["size"]] for x in (m.get("bids") or [])[-12:]],
-                "asks": [[x["price"], x["size"]] for x in (m.get("asks") or [])[-12:]]}
-    if et == "price_change":
-        out = []
-        for c in m.get("price_changes") or []:
-            a = c.get("asset_id"); side = "bids" if str(c.get("side")).upper() == "BUY" else "asks"
-            with _lock:
+            top = _top(a); _last_top[a] = top
+        out.append({"t": "book", "a": a, "ts": m.get("timestamp"), "top": top,
+                    "asks5": sorted(((float(x["price"]), float(x["size"])) for x in m.get("asks") or []))[:5],
+                    "bids5": sorted(((float(x["price"]), float(x["size"])) for x in m.get("bids") or []), reverse=True)[:5]})
+    elif et == "price_change":
+        touched = set()
+        with _lock:
+            for c in m.get("price_changes") or []:
+                a = c.get("asset_id"); side = "bids" if str(c.get("side")).upper() == "BUY" else "asks"
                 b = books.setdefault(a, {"bids": {}, "asks": {}, "ts": None, "rx": rx})
-                b[side][c["price"]] = float(c["size"]); b["ts"] = m.get("timestamp"); b["rx"] = rx
-            out.append([a, c.get("price"), c.get("size"), side[0], c.get("best_bid"), c.get("best_ask")])
-        return {"t": "pc", "ts": m.get("timestamp"), "c": out}
-    if et == "last_trade_price":
-        return {"t": "ltp", "a": m.get("asset_id"), "ts": m.get("timestamp"), "p": m.get("price"), "s": m.get("size"), "side": m.get("side")}
-    return None
+                b[side][c["price"]] = float(c["size"]); b["ts"] = m.get("timestamp"); b["rx"] = rx; touched.add(a)
+            for a in touched:
+                top = _top(a)
+                if top != _last_top.get(a):
+                    _last_top[a] = top
+                    out.append({"t": "top", "a": a, "ts": m.get("timestamp"), "top": top})
+    elif et == "last_trade_price":
+        out.append({"t": "ltp", "a": m.get("asset_id"), "ts": m.get("timestamp"), "p": m.get("price"), "s": m.get("size"), "side": m.get("side")})
+    return out
 
 
 async def _run(stop, active):
@@ -118,8 +135,7 @@ async def _run(stop, active):
                     for m in msgs:
                         if not isinstance(m, dict):
                             continue
-                        rec = _apply(m, rx)
-                        if rec:
+                        for rec in _apply(m, rx):
                             rec["rx"] = round(rx, 4)
                             out.write(json.dumps(rec, separators=(",", ":")) + "\n")
                     out.flush()
