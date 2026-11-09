@@ -1,0 +1,32 @@
+name: spike paper (slow, hourly)
+on:
+  schedule:
+    - cron: "23 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: spike-paper
+  cancel-in-progress: false
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            research
+            data/slow
+          sparse-checkout-cone-mode: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q requests
+      - run: mkdir -p logs data/slow && python -u research/slow/spike_monitor.py 2>&1 | tee logs/spike-log.txt
+      - name: Save
+        run: |
+          git config user.name "lab-bot" && git config user.email "lab-bot@users.noreply.github.com"
+          git add --sparse data/slow/spike_positions.jsonl data/slow/spike_report.json logs/spike-log.txt 2>/dev/null || true
+          git commit -qm "Spike paper $(date -u +%FT%H:%M) [skip ci]" || exit 0
+          for i in 1 2 3; do git pull -q --rebase -X theirs origin main && git push -q && break; sleep 5; done
