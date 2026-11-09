@@ -11,6 +11,7 @@ import glob, gzip, json, math, os, sys
 from collections import defaultdict
 D = "data/fast"
 Z, ASK_MAX, ASK_MIN = float(os.environ.get("Z", "2.5")), float(os.environ.get("ASK_MAX", "0.97")), float(os.environ.get("ASK_MIN", "0.50"))
+R_LO, R_HI = float(os.environ.get("R_LO", "0")), float(os.environ.get("R_HI", "60"))   # seconds-before-end range to study
 SIGMA_FLOOR = {"btc": 1.5e-5, "eth": 2.4e-5, "bnb": 1.6e-5, "sol": 3.4e-5, "doge": 3.4e-5, "xrp": 4.3e-5, "hype": 4.2e-5, "zec": 8.6e-5}
 
 
@@ -81,13 +82,13 @@ def sigma30(ser):
 
 
 def z_series(asset, start, end, K):
-    """(t, z_up) every 0.5 s in the last 60 s"""
+    """(t, z_up) every 0.5 s for end-R_HI <= t <= end-R_LO (the bot's model: Brownian mean over what is left)"""
     ser = [x for x in feed.get(asset, []) if end - 1500 <= x[0] <= end]
     if len(ser) < 200:
         return []
     out = []
-    t = end - 60
-    while t <= end - 1:
+    t = end - R_HI
+    while t <= end - max(R_LO, 1):
         hist = [x for x in ser if x[0] <= t]
         if len(hist) < 120:
             t += 0.5; continue
@@ -96,11 +97,15 @@ def z_series(asset, start, end, K):
             t += 0.5; continue
         sg = max(sg, SIGMA_FLOOR.get(asset, 0))
         S = hist[-1][1]
-        last = [p for tt, p in hist if tt >= end - 60]
-        g = (t - (end - 60)) / 60.0; A = sum(last) / len(last) if last else S
-        r = max(end - t, 1.0)
-        sd = max((1 - g) * S * sg * math.sqrt(r / 3), 1e-9)
-        out.append((t, (g * A + (1 - g) * S - K) / sd))
+        if t < end - 60:
+            sd = max(S * sg * math.sqrt((end - 60 - t) + 20.0), 1e-9)
+            out.append((t, (S - K) / sd))
+        else:
+            last = [p for tt, p in hist if tt >= end - 60]
+            g = (t - (end - 60)) / 60.0; A = sum(last) / len(last) if last else S
+            r = max(end - t, 1.0)
+            sd = max((1 - g) * S * sg * math.sqrt(r / 3), 1e-9)
+            out.append((t, (g * A + (1 - g) * S - K) / sd))
         t += 0.5
     return out
 
@@ -153,6 +158,7 @@ def ask_at(path, dt):
 
 print(f"\nwindows with feed + book + result: {n_windows}; locked-and-cheap episodes: {len(life)} (won {sum(1 for x in life if x[3])}, lost {sum(1 for x in life if not x[3])})")
 if life:
+    print(f"(study range: {R_LO:.0f}-{R_HI:.0f} s before the end, z >= {Z}, ask {ASK_MIN}-{ASK_MAX})")
     for R in (0.05, 0.1, 0.2, 0.3, 0.5, 1.0, 2.0, 3.0, 5.0, 10.0):
         reach = [x for x in life if x[0] >= R]
         w = sum(1 for x in reach if x[3]); n = len(reach)
