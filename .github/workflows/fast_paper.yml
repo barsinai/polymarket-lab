@@ -27,6 +27,8 @@ jobs:
           git config user.name "polymarket-lab-bot"
           git config user.email "actions@users.noreply.github.com"
           git config pack.threads 1 && git config pack.windowMemory 64m && git config core.bigFileThreshold 1m && git config pack.deltaCacheSize 32m
+          : > /tmp/fast.txt; rm -rf /tmp/fastout.old; df -h / | tail -1; du -sh .git data 2>/dev/null | tr '\n' ' '; echo
+          git gc -q --prune=now 2>/dev/null || true
           for part in 1 2 3 4 5; do
             git rebase --abort 2>/dev/null || true
             git fetch -q origin main && git reset -q --hard origin/main

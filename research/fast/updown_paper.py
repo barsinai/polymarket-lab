@@ -194,9 +194,10 @@ def write_trades(trades):
 
 
 def rotate():
-    """keep today's observation files small: yesterday's lines go to <name>-<day>.jsonl.gz"""
+    """keep the live observation files small: lines from earlier HOURS go to <name>-<day>T<hour>.jsonl.gz (one
+    compressed chunk per hour, so each hourly commit adds ~3 MB instead of re-storing a growing file)"""
     import gzip
-    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    cur = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H")
     for name in ("obs", "pairs", "model"):
         path = f"{D}/{name}.jsonl"
         try:
@@ -206,14 +207,19 @@ def rotate():
         keep, old = [], {}
         for l in lines:
             try:
-                day = datetime.fromtimestamp(json.loads(l)["ts"], timezone.utc).strftime("%Y-%m-%d")
+                hour = datetime.fromtimestamp(json.loads(l)["ts"], timezone.utc).strftime("%Y-%m-%dT%H")
             except (ValueError, KeyError):
                 continue
-            (keep if day == today else old.setdefault(day, [])).append(l)
+            (keep if hour == cur else old.setdefault(hour, [])).append(l)
         if old:
-            for day, ls in old.items():
-                with gzip.open(f"{D}/{name}-{day}.jsonl.gz", "at") as fh:
-                    fh.write("\n".join(ls) + "\n")
+            for hour, ls in old.items():
+                tmp = f"{D}/{name}-{hour}.jsonl.gz.tmp"
+                try:
+                    with gzip.open(tmp, "wt") as fh:
+                        fh.write("\n".join(ls) + "\n")
+                    os.replace(tmp, f"{D}/{name}-{hour}.jsonl.gz")
+                except OSError:
+                    continue
             with open(path, "w") as fh:
                 fh.write("\n".join(keep) + ("\n" if keep else ""))
 
