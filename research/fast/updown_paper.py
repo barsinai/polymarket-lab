@@ -338,15 +338,38 @@ def main():
                     picks = []
                     if edge >= EDGE and 0.30 <= a_px <= 0.98 and rem <= EXACT_RMAX and zs >= 1.0:
                         picks.append("exact")   # model-favoured side, last 60 s only (the unrestricted rule lost -$710 on 1,666 trades)
-                    lock_ok = rem <= 60 and zs >= LOCK_Z and LOCK_MIN_ASK <= a_px <= LOCK_ASK and k_src in ("ptb", "twap", "chainlink") and src == "chainlink"
+                    # lock family: the outcome is locked by the maths, the market still sells it, the feed is exact
+                    lock_base = rem <= 60 and LOCK_MIN_ASK <= a_px <= LOCK_ASK and k_src in ("ptb", "twap", "chainlink") and src == "chainlink"
                     lk = (m["slug"], side)
+                    for zmin in (2.0, 2.5, 3.0):
+                        key = (lk, zmin)
+                        if lock_base and zs >= zmin:
+                            lock_since.setdefault(key, now)
+                        else:
+                            lock_since.pop(key, None)
+                    lock_ok = lock_base and zs >= LOCK_Z
                     if lock_ok:
                         picks.append("lock")
-                        lock_since.setdefault(lk, now)
-                        if now - lock_since[lk] >= LOCK_PERSIST:
-                            picks.append("lock_p")   # 11-09: the condition must have held for LOCK_PERSIST s (filters the flickers: +7-9%/$ vs +0.3% instant, websocket day)
-                    else:
-                        lock_since.pop(lk, None)
+                        held = now - lock_since[(lk, LOCK_Z)]
+                        if held >= LOCK_PERSIST:
+                            picks.append("lock_p")   # 11-09: condition held LOCK_PERSIST s (filters flickers: +7-9%/$ vs +0.3% instant, websocket day)
+                        # variants (paper, for the multi-day comparison): persistence 1/3/5 s, majors only, 15 m only, $50 cap
+                        if held >= 1.0:
+                            picks.append("lock_p1")
+                        if held >= 3.0:
+                            picks.append("lock_p3")
+                        if held >= 5.0:
+                            picks.append("lock_p5")
+                        if held >= LOCK_PERSIST and a in ("btc", "eth", "bnb"):
+                            picks.append("lock_p_majors")
+                        if held >= LOCK_PERSIST and w == 900:
+                            picks.append("lock_p_15m")
+                        if held >= LOCK_PERSIST:
+                            picks.append("lock_p_50")
+                    if lock_base and zs >= 2.0 and (lk, 2.0) in lock_since and now - lock_since[(lk, 2.0)] >= LOCK_PERSIST:
+                        picks.append("lock_p_z2")
+                    if lock_base and zs >= 3.0 and (lk, 3.0) in lock_since and now - lock_since[(lk, 3.0)] >= LOCK_PERSIST:
+                        picks.append("lock_p_z3")
                     if rem <= FAV_REM and FAV_LO <= a_px <= FAV_HI:
                         picks.append("fav")
                     if DOG_RMIN <= rem <= DOG_RMAX and DOG_LO <= a_px <= DOG_HI:
@@ -356,7 +379,8 @@ def main():
                             continue
                         if strat != "exact" and any((strat, m["slug"], o) in done for o in ("Up", "Down")):
                             continue  # one side per window for lock/fav
-                        shares = round(min(a_sz, SIZE_USD / a_px), 2)
+                        cap = 50.0 if strat == "lock_p_50" else SIZE_USD
+                        shares = round(min(a_sz, cap / a_px), 2)
                         if shares < 5:
                             continue
                         tr = {"ts": int(now), "slug": m["slug"], "asset": a, "window": w, "side": side, "price": a_px, "shares": shares,
