@@ -366,6 +366,14 @@ def main():
                             picks.append("lock_p_15m")
                         if held >= LOCK_PERSIST:
                             picks.append("lock_p_50")
+                    # early variant (60-140 s before the end): websocket day gave +6.6% at 2 s persistence on 29 episodes (z>=2.5, ask<=0.95)
+                    ek = (lk, "early")
+                    if 60 < rem <= 140 and zs >= 2.5 and 0.50 <= a_px <= 0.95 and k_src in ("ptb", "twap", "chainlink") and src == "chainlink":
+                        lock_since.setdefault(ek, now)
+                        if now - lock_since[ek] >= LOCK_PERSIST:
+                            picks.append("lock_early")
+                    else:
+                        lock_since.pop(ek, None)
                     if lock_base and zs >= 2.0 and (lk, 2.0) in lock_since and now - lock_since[(lk, 2.0)] >= LOCK_PERSIST:
                         picks.append("lock_p_z2")
                     if lock_base and zs >= 3.0 and (lk, 3.0) in lock_since and now - lock_since[(lk, 3.0)] >= LOCK_PERSIST:
