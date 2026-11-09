@@ -93,21 +93,28 @@ async def _run(stop):
 
 
 def compress(hour=None):
-    """plain .jsonl while recording (a crash cannot corrupt it); finished hours become .jsonl.gz members"""
-    import glob
+    """plain .jsonl while recording (a crash cannot corrupt it); finished hours become .jsonl.gz members,
+    written to a temp file first so a crash never leaves a half-written archive"""
+    import glob, shutil
     cur = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H")
     for f in sorted(glob.glob(f"{D}/*.jsonl")):
         h = os.path.basename(f)[:-6]
         if h == cur and hour != cur:
             continue
+        gz, tmp = f"{D}/{h}.jsonl.gz", f"{D}/{h}.jsonl.gz.tmp"
         try:
-            with open(f) as src, gzip.open(f"{D}/{h}.jsonl.gz", "at") as dst:
+            if os.path.exists(gz) and os.path.getsize(gz) > 0:
+                shutil.copyfile(gz, tmp)
+            with open(f) as src, gzip.open(tmp, "at") as dst:
                 for line in src:
                     if line.endswith("\n") and line.startswith("{"):
                         dst.write(line)
-            os.remove(f)
+            os.replace(tmp, gz); os.remove(f)
         except OSError:
-            pass
+            try:
+                os.remove(tmp)
+            except OSError:
+                pass
 
 
 def start():

@@ -21,7 +21,7 @@ jobs:
       - name: Python env
         run: |
           export PATH="$HOME/.local/bin:$PATH"
-          uv pip install --python "$HOME/.venv-pilot/bin/python" -q requests websockets
+          uv pip install --python "$HOME/.venv-pilot/bin/python" -q requests websockets orjson
       - name: Run ~5.2 h in hourly parts
         run: |
           git config user.name "polymarket-lab-bot"
@@ -32,7 +32,7 @@ jobs:
             git fetch -q origin main && git reset -q --hard origin/main
             # a previous publish that failed left its files in /tmp/fastout: restore them before running on
             if [ -d /tmp/fastout ]; then mkdir -p data/fast && cp -r /tmp/fastout/. data/fast/; fi
-            PATH="$HOME/.local/bin:$PATH" uv pip install --python "$HOME/.venv-pilot/bin/python" -q requests websockets || true
+            PATH="$HOME/.local/bin:$PATH" uv pip install --python "$HOME/.venv-pilot/bin/python" -q requests websockets orjson || true
             RUN_MIN=60 "$HOME/.venv-pilot/bin/python" -u research/fast/updown_paper.py 2>&1 | tee -a /tmp/fast.txt | grep -v "^$"
             mkdir -p logs && cp /tmp/fast.txt logs/fast-log.txt
             # publish the bot's own files on top of whatever is upstream (only the server writes these)
@@ -43,7 +43,8 @@ jobs:
             cp data/fast/bookws/*.jsonl.gz /tmp/fastout/bookws/ 2>/dev/null || true
             for i in 1 2 3; do
               git fetch -q origin main && git reset -q --hard origin/main && mkdir -p data/fast/rtds logs && cp -r /tmp/fastout/. data/fast/ && cp /tmp/fast.txt logs/fast-log.txt
-              if git add --sparse data/fast logs/fast-log.txt && git commit -qm "Fast paper $(date -u +%FT%H:%M) [skip ci]" && git push -q; then rm -rf /tmp/fastout; break; fi
+              rm -f data/fast/bookws/*.tmp data/fast/rtds/*.tmp
+              if git add --sparse logs/fast-log.txt data/fast ':!data/fast/bookws/*.jsonl' ':!data/fast/rtds/*.jsonl' && git commit -qm "Fast paper $(date -u +%FT%H:%M) [skip ci]" && git push -q; then rm -rf /tmp/fastout; break; fi
               sleep 5
             done
           done

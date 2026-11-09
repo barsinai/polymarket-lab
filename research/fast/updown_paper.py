@@ -426,6 +426,7 @@ def main():
             import traceback; traceback.print_exc(); time.sleep(2); continue
         time.sleep(max(0.2, 2.0 - (time.time() - loop_t)))
     stop.set(); rt_stop.set()
+    bw_alive_at_end = bw_proc.poll() is None
     try:
         bw_proc.terminate(); bw_proc.wait(timeout=5)
     except Exception:  # noqa: BLE001
@@ -440,7 +441,7 @@ def main():
     rnd = lambda b: {k: round(v, 2) if isinstance(v, float) else v for k, v in b.items()}
     rep = {"updated": datetime.now(timezone.utc).isoformat(), "trades": len(trades), "settled": len(done_t), "obs_this_run": n_obs,
            "rest_ms": {"n": len(LAT), "min": round(min(LAT), 1) if LAT else None, "p50": round(sorted(LAT)[len(LAT) // 2], 1) if LAT else None, "p90": round(sorted(LAT)[9 * len(LAT) // 10], 1) if LAT else None},
-           "feed": {k: v for k, v in rtds.stats.items() if k != "topics"}, "feed_topics": rtds.stats.get("topics"), "bookws": {"alive": bw_proc.poll() is None},
+           "feed": {k: v for k, v in rtds.stats.items() if k != "topics"}, "feed_topics": rtds.stats.get("topics"), "bookws": {"ran_to_end": bw_alive_at_end},
            "by_strat": {k: rnd(b) for k, b in sorted(by_strat.items())}, "by_day": {d: rnd(b) for d, b in sorted(by_day.items())}}
     json.dump(rep, open(f"{D}/report.json", "w"), indent=1)
     print(json.dumps(rep), flush=True)

@@ -6,8 +6,17 @@ timestamp to data/fast/bookws/<UTC hour>.jsonl (compressed when the hour is over
 Purpose: measure how long a cheap ask on a locked outcome survives (milliseconds), which decides whether a
 push-driven bot could ever reach it from here.
 """
-import asyncio, gzip, json, os, threading, time
+import asyncio, gzip, os, threading, time
 from datetime import datetime, timezone
+try:
+    import orjson as _oj
+    def loads(x): return _oj.loads(x)
+    def dumps(o): return _oj.dumps(o).decode()
+except ImportError:  # pragma: no cover
+    import json as _js
+    def loads(x): return _js.loads(x)
+    def dumps(o): return _js.dumps(o, separators=(",", ":"))
+import json
 
 URL = "wss://ws-subscriptions-clob.polymarket.com/ws/market"
 D = os.environ.get("FAST_DIR", "data/fast") + "/bookws"
@@ -30,20 +39,28 @@ def best(asset_id):
 
 
 def compress(hour=None):
-    import glob
+    """finished hours -> .jsonl.gz (appended as a new gzip member, written to a temp file first, so a crash
+    never leaves a half-written archive); the plain file is removed only after the archive is complete"""
+    import glob, shutil
     cur = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H")
     for f in sorted(glob.glob(f"{D}/*.jsonl")):
         h = os.path.basename(f)[:-6]
         if h == cur and hour != cur:
             continue
+        gz, tmp = f"{D}/{h}.jsonl.gz", f"{D}/{h}.jsonl.gz.tmp"
         try:
-            with open(f) as src, gzip.open(f"{D}/{h}.jsonl.gz", "at") as dst:
+            if os.path.exists(gz) and os.path.getsize(gz) > 0:
+                shutil.copyfile(gz, tmp)
+            with open(f) as src, gzip.open(tmp, "at") as dst:
                 for line in src:
                     if line.endswith("\n") and line.startswith("{"):
                         dst.write(line)
-            os.remove(f)
+            os.replace(tmp, gz); os.remove(f)
         except OSError:
-            pass
+            try:
+                os.remove(tmp)
+            except OSError:
+                pass
 
 
 def _top(a):
@@ -127,7 +144,7 @@ async def _run(stop, active):
                     if not isinstance(raw, str) or not raw or raw[0] not in "[{":
                         continue
                     try:
-                        msgs = json.loads(raw)
+                        msgs = loads(raw)
                     except ValueError:
                         continue
                     if isinstance(msgs, dict):
@@ -142,7 +159,7 @@ async def _run(stop, active):
                             continue
                         for rec in _apply(m, rx):
                             rec["rx"] = round(rx, 4)
-                            out.write(json.dumps(rec, separators=(",", ":")) + "\n")
+                            out.write(dumps(rec) + "\n")
                     if rx - last_flush > 1.0:
                         out.flush(); last_flush = rx
         except Exception as e:  # noqa: BLE001
