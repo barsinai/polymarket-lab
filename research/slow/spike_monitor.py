@@ -32,14 +32,16 @@ def get(url, params, tries=3):
 
 def universe():
     out, offset = [], 0
-    while offset < 20000:
-        d = get(f"{GAMMA}/markets", {"active": "true", "closed": "false", "limit": 500, "offset": offset, "order": "volume24hr", "ascending": "false"})
+    while offset < 15000:                       # Gamma serves at most 100 per page
+        d = get(f"{GAMMA}/markets", {"active": "true", "closed": "false", "limit": 100, "offset": offset, "order": "volume24hr", "ascending": "false"})
         if not d:
             break
         out += d
-        if len(d) < 500:
+        if len(d) < 100:
             break
-        offset += 500
+        offset += 100
+        if out and float(out[-1].get("volume24hr") or 0) < 200:
+            break                               # the rest is dead volume
     return out
 
 
