@@ -354,9 +354,17 @@ def main():
                         else:
                             lock_since.pop(key, None)
                     lock_ok = lock_base and zs >= LOCK_Z
+                    # margin of the predicted final TWAP over K, in basis points: our own K (k_src chainlink/twap) is off by
+                    # ~0.2 bp and the last seconds' prices may or may not make the official TWAP, so a lock with < 1 bp of
+                    # margin is not a lock (11-07..09 tape: lock at >= 1 bp 97% / +10%, at 0.3-1 bp 62-67%)
+                    margin_bp = abs((g * (A if A is not None else s_now) + (1 - g) * s_now) - K) / K * 1e4 if K else 0.0
                     if lock_ok:
                         picks.append("lock")
                         held = now - lock_since[(lk, LOCK_Z)]
+                        if margin_bp >= 1.0:
+                            picks.append("lock_m")
+                            if held >= LOCK_PERSIST:
+                                picks.append("lock_pm")
                         if held >= LOCK_PERSIST:
                             picks.append("lock_p")   # 11-09: condition held LOCK_PERSIST s (filters flickers: +7-9%/$ vs +0.3% instant, websocket day)
                         # variants (paper, for the multi-day comparison): persistence 1/3/5 s, majors only, 15 m only, $50 cap
@@ -399,7 +407,7 @@ def main():
                             continue
                         tr = {"ts": int(now), "slug": m["slug"], "asset": a, "window": w, "side": side, "price": a_px, "shares": shares,
                               "fee": round(fee * shares, 4), "p_model": round(p_side, 4), "z": round(zs, 2), "edge": round(edge, 4),
-                              "rem_s": int(rem), "K": K, "k_src": k_src, "src": src, "spot": s_now, "model": "v4", "strat": strat,
+                              "rem_s": int(rem), "K": K, "k_src": k_src, "src": src, "spot": s_now, "margin_bp": round(margin_bp, 2), "model": "v4", "strat": strat,
                               "end": end, "result": None}
                         trades.append(tr); done.add((strat, m["slug"], side)); new_trades = True
                         print(f"{datetime.now(timezone.utc):%H:%M:%S} PAPER[{strat}] BUY {side} {m['slug']} @ {a_px} x {shares} p {p_side:.3f} z {zs:.1f} rem {int(rem)}s", flush=True)

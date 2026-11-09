@@ -438,3 +438,25 @@ Price drift in the trade's direction (what a market maker on the other side lose
   (win 58-83% vs ~88% needed): the market is right before the last minute. Dead. (4) spike_monitor.py: hourly
   paper bot on GitHub Actions fading >=15c day-moves in long-dated markets (44 positions on the first run,
   2,100 markets scanned); report in data/slow/spike_report.json.
+
+## 11-10 00:10 SERVER INCIDENT + THE REAL REASON LOCKS LOSE
+- Incident: the server job materialised every recording ever published (4.5 GB tree + 6 GB .git), copied all of
+  it to /tmp each hour, and once the disk filled (04:23 and again 21:24) `cp` left 0-byte copies that the
+  restore step committed over good archives (bookws 11-08T22..11-09T03 lost in HEAD, others appended with
+  duplicate members: T10 held the same hour 13x). Plain hour files were still tracked, so every `reset --hard`
+  restored them and compress() appended them again. Fixed in fast_paper.yml: fresh small sparse checkout per
+  job (no bookws/rtds/history chunks), recordings in /home/runner/pilot-data (3-day retention), publish only
+  archives modified during the job, never 0-byte files, deletions of checkout copies only when skip-worktree.
+  Archives rebuilt deduplicated from git history + plain files (bookws 355 -> 67 MB, rtds 518 -> 48 MB, all
+  hours recovered except bookws 11-09T20). Readers dedupe lines. Old job cancelled 23:39, new one running.
+- Lock family backfilled from the 2-s obs tape (replay_lock_variants.py; reproduces the bot's lock counts
+  59/70 vs 52/67): lock 131 trades 91.6% +6.2%/$; lock_p (2 s) 54 90.7% +5.3%; lock_p_z2 137 93.4% +3.5%;
+  majors 40 95%; 15m 12/12; early 44 95.5% +3.7%. With REST sampling every 2 s the instant rule is already a
+  persistence filter, so lock_p adds nothing here.
+- The losers are not noise: 3 of 5 lock_p losses were knife-edge windows (official |final-ptb| 0.00-0.02 bp)
+  where our own K estimate (k_src chainlink, official ptb not yet published) was off by 0.13-0.17 bp, and one
+  (xrp) where the last 2-4 s of a sharp dip did not enter the official TWAP the way the model assumed. The
+  model's sd has no term for K error or timestamp misalignment, so z explodes near the end (z 10-22 and wrong).
+  By margin of the predicted TWAP over K: >= 1 bp 93 trades 97% +$140; 0.3-1 bp 62-67% win, -$35.
+- New paper rules lock_m (lock and margin >= 1 bp) and lock_pm (+2 s): on the tape 95 trades 96.8% +10.5%/$
+  (+$142 in ~2 days at $20) and 35/35 +12.7%. In-sample threshold: the paper run is the out-of-sample test.
