@@ -96,6 +96,14 @@ def compress(hour=None):
     """plain .jsonl while recording (a crash cannot corrupt it); finished hours become .jsonl.gz members,
     written to a temp file first so a crash never leaves a half-written archive"""
     import glob, shutil
+    with _compress_lock:   # two compress calls (hour change + shutdown) must never work on the same plain file
+        _compress_locked(hour, glob, shutil)
+
+
+_compress_lock = threading.Lock()
+
+
+def _compress_locked(hour, glob, shutil):
     cur = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H")
     for f in sorted(glob.glob(f"{D}/*.jsonl")):
         h = os.path.basename(f)[:-6]

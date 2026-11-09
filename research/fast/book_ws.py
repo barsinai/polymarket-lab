@@ -42,6 +42,14 @@ def compress(hour=None):
     """finished hours -> .jsonl.gz (appended as a new gzip member, written to a temp file first, so a crash
     never leaves a half-written archive); the plain file is removed only after the archive is complete"""
     import glob, shutil
+    with _compress_lock:   # two compress calls (hour change + shutdown) must never work on the same plain file
+        _compress_locked(hour, glob, shutil)
+
+
+_compress_lock = threading.Lock()
+
+
+def _compress_locked(hour, glob, shutil):
     cur = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H")
     for f in sorted(glob.glob(f"{D}/*.jsonl")):
         h = os.path.basename(f)[:-6]
