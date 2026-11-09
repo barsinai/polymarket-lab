@@ -56,8 +56,8 @@ print("feed assets:", {a: len(v) for a, v in feed.items()})
 # websocket top-of-book per token
 top = defaultdict(list)
 for o in lines(f"{D}/bookws/*.jsonl*"):
-    if o.get("t") in ("top", "book") and o.get("top"):
-        top[o["a"]].append((o["rx"], o["top"][0], o["top"][1]))
+    if o.get("t") in ("top", "book") and o.get("top") and o["top"][0] is not None:
+        top[o["a"]].append((o["rx"], o["top"][0], o["top"][1] or 0.0))
 print("tokens with book records:", len(top), "records:", sum(len(v) for v in top.values()))
 
 
@@ -120,11 +120,10 @@ for tok, recs in top.items():
     n_windows += 1
     sign = 1 if side == "Up" else -1
     won = (md["up"] == (side == "Up"))
-    recs = sorted(recs)
-    # state machine: opportunity open when z_side >= Z and ask in [ASK_MIN, ASK_MAX]
-    zi = 0; open_t = None; open_ask = None; open_sz = None
+    recs = sorted(recs, key=lambda x: x[0])
+    # state machine: opportunity open when z_side >= Z and ask in [ASK_MIN, ASK_MAX]; remember the ask path
     events = sorted([(t, "z", z) for t, z in zs] + [(rx, "b", (ask, sz)) for rx, ask, sz in recs])
-    cur_z = None; cur_ask = None; cur_sz = None
+    cur_z = None; cur_ask = None; cur_sz = None; open_t = None; path = []
     for t, kind, v in events:
         if kind == "z":
             cur_z = v * sign
@@ -132,20 +131,37 @@ for tok, recs in top.items():
             cur_ask, cur_sz = v
         locked = cur_z is not None and cur_z >= Z and cur_ask is not None and ASK_MIN <= cur_ask <= ASK_MAX
         if locked and open_t is None:
-            open_t, open_ask, open_sz = t, cur_ask, cur_sz
+            open_t = t; path = [(t, cur_ask, cur_sz)]
+        elif locked and open_t is not None and kind == "b":
+            path.append((t, cur_ask, cur_sz))
         elif not locked and open_t is not None:
-            life.append((t - open_t, open_ask, open_sz, won, slug, side)); open_t = None
+            life.append((t - open_t, path[0][1], path[0][2], won, slug, side, path)); open_t = None
     if open_t is not None:
-        life.append((end - open_t, open_ask, open_sz, won, slug, side))
+        life.append((end - open_t, path[0][1], path[0][2], won, slug, side, path))
+
+
+def ask_at(path, dt):
+    """ask and size prevailing dt seconds after the episode opened"""
+    t0 = path[0][0]; a, sz = path[0][1], path[0][2]
+    for t, ask, size in path:
+        if t - t0 <= dt:
+            a, sz = ask, size
+        else:
+            break
+    return a, sz
+
 
 print(f"\nwindows with feed + book + result: {n_windows}; locked-and-cheap episodes: {len(life)} (won {sum(1 for x in life if x[3])}, lost {sum(1 for x in life if not x[3])})")
 if life:
-    for R in (0.05, 0.1, 0.2, 0.3, 0.5, 1.0, 2.0, 5.0):
+    for R in (0.05, 0.1, 0.2, 0.3, 0.5, 1.0, 2.0, 3.0, 5.0, 10.0):
         reach = [x for x in life if x[0] >= R]
         w = sum(1 for x in reach if x[3]); n = len(reach)
-        usd = sum(min(x[1] * (x[2] or 0), 20) for x in reach)
-        pnl = sum(min(x[1] * (x[2] or 0), 20) / x[1] * ((1 if x[3] else 0) - x[1] - 0.07 * x[1] * (1 - x[1])) for x in reach)
-        print(f"  reaction {R:4.2f} s: reachable episodes {n:5} win {w / n if n else 0:.3f}  stake ${usd:,.0f}  pnl ${pnl:+,.1f} ({pnl / usd if usd else 0:+.1%})")
+        usd = pnl = 0.0; prices = []
+        for x in reach:
+            a, sz = ask_at(x[6], R); stake = min(a * (sz or 0), 20.0)
+            usd += stake; pnl += stake / a * ((1 if x[3] else 0) - a - 0.07 * a * (1 - a)); prices.append(a)
+        prices.sort()
+        print(f"  act after {R:5.2f} s of persistence: episodes {n:4} win {w / n if n else 0:.3f}  stake ${usd:,.0f}  pnl ${pnl:+,.1f} ({pnl / usd if usd else 0:+.1%})  ask paid median {prices[len(prices) // 2] if prices else 0:.2f}")
     ls = sorted(x[0] for x in life); print("  lifetime percentiles (s): 10%", round(ls[len(ls) // 10], 2), "median", round(ls[len(ls) // 2], 2), "90%", round(ls[9 * len(ls) // 10], 2))
     wl = sorted(x[0] for x in life if x[3]); ll = sorted(x[0] for x in life if not x[3])
     if wl: print("  winners' lifetime median", round(wl[len(wl) // 2], 2), "s;", "losers' median", round(ll[len(ll) // 2], 2) if ll else None, "s")

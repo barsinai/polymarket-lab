@@ -40,7 +40,8 @@ EDGE = float(os.environ.get("EDGE", "0.03"))
 EXACT_RMAX = int(os.environ.get("EXACT_RMAX", "60"))   # 'exact' only this close to the end (model beats the market there)
 SIZE_USD = float(os.environ.get("SIZE_USD", "20"))
 LOCK_Z, LOCK_ASK = float(os.environ.get("LOCK_Z", "2.5")), float(os.environ.get("LOCK_ASK", "0.97"))
-LOCK_MIN_ASK = float(os.environ.get("LOCK_MIN_ASK", "0.50"))   # the market must at least agree on the direction (6 of 12 lock losses were asks < 0.5)
+LOCK_MIN_ASK = float(os.environ.get("LOCK_MIN_ASK", "0.50"))
+LOCK_PERSIST = float(os.environ.get("LOCK_PERSIST", "2.0"))   # seconds the lock must persist before lock_p acts   # the market must at least agree on the direction (6 of 12 lock losses were asks < 0.5)
 # per-second volatility floor = 0.7 x the asset's full-day sigma (30 s returns, 11-07/08): a calm 20 minutes
 # understates jump risk (hourly sigma swings 2-4x within a day; 3 'sure' losses came in calm hours)
 SIGMA_FLOOR = {"btc": 1.5e-5, "eth": 2.4e-5, "bnb": 1.6e-5, "sol": 3.4e-5, "doge": 3.4e-5, "xrp": 4.3e-5, "hype": 4.2e-5, "zec": 8.6e-5}
@@ -229,6 +230,7 @@ def main():
     for t in trades:
         t.setdefault("strat", "v2")
     done = {(t["strat"], t["slug"], t["side"]) for t in trades}
+    lock_since = {}   # (slug, side) -> first time the lock condition held continuously
     starts = {}   # (asset, w, start) -> {K, K_src, ...}
 
     def active_tokens():
@@ -336,8 +338,15 @@ def main():
                     picks = []
                     if edge >= EDGE and 0.30 <= a_px <= 0.98 and rem <= EXACT_RMAX and zs >= 1.0:
                         picks.append("exact")   # model-favoured side, last 60 s only (the unrestricted rule lost -$710 on 1,666 trades)
-                    if rem <= 60 and zs >= LOCK_Z and LOCK_MIN_ASK <= a_px <= LOCK_ASK and k_src in ("ptb", "twap", "chainlink") and src == "chainlink":   # chainlink pre-60 mean = feed TWAP within 0.06 bp
+                    lock_ok = rem <= 60 and zs >= LOCK_Z and LOCK_MIN_ASK <= a_px <= LOCK_ASK and k_src in ("ptb", "twap", "chainlink") and src == "chainlink"
+                    lk = (m["slug"], side)
+                    if lock_ok:
                         picks.append("lock")
+                        lock_since.setdefault(lk, now)
+                        if now - lock_since[lk] >= LOCK_PERSIST:
+                            picks.append("lock_p")   # 11-09: the condition must have held for LOCK_PERSIST s (filters the flickers: +7-9%/$ vs +0.3% instant, websocket day)
+                    else:
+                        lock_since.pop(lk, None)
                     if rem <= FAV_REM and FAV_LO <= a_px <= FAV_HI:
                         picks.append("fav")
                     if DOG_RMIN <= rem <= DOG_RMAX and DOG_LO <= a_px <= DOG_HI:
