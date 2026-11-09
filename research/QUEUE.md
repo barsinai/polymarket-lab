@@ -431,3 +431,10 @@ Price drift in the trade's direction (what a market maker on the other side lose
   btc/eth/bnb 29/29, 15 m 10/10; losers in doge/hype/sol/xrp/zec. One day, 5 losers: not proof.
 - Decision: do NOT build the fast bot. New paper rule lock_p (lock must persist 2 s) running since 06:4x; keep
   recording; judge after several days. Report section 12 added. FAST_DESIGN.md kept for reference.
+- 11-09 10:50 Today's additions: (1) lock_p variants in paper (lock_p1/p3/p5, lock_p_z2/z3, lock_p_majors,
+  lock_p_15m, lock_p_50) for a multi-day comparison. (2) Maker variant of the persistent lock (bid one tick under
+  the ask, recordings): filled 10 of 32 episodes, +3.2% on $200 vs taker +0.1% on the same 32: no real gain,
+  dropped. (3) Early entry (60-140 s before the end, z>=2, persistence): negative at every persistence level
+  (win 58-83% vs ~88% needed): the market is right before the last minute. Dead. (4) spike_monitor.py: hourly
+  paper bot on GitHub Actions fading >=15c day-moves in long-dated markets (44 positions on the first run,
+  2,100 markets scanned); report in data/slow/spike_report.json.
