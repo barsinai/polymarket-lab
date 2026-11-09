@@ -420,3 +420,14 @@ Price drift in the trade's direction (what a market maker on the other side lose
   runner (Arizona) sees 160 ms to clob /time. RTDS Chainlink prices arrive 0.8-1.9 s after their stamp; the
   relay's Binance stream is synchronous with the Chainlink stream (+-1 s). User approved building the fast
   bot (paper first): research/fast/FAST_DESIGN.md. Bot now logs REST book-read RTT (report.rest_ms).
+
+## 11-09 06:50 WEBSOCKET DAY (2,926 windows, 11.8M top-of-book changes): PATIENCE BEATS SPEED
+- REST RTT Helsinki -> CLOB: min 39 ms, p50 49, p90 58 (13k book reads). WS events: 15-18 ms after the stamp.
+- 169 locked-and-cheap episodes (z>=2.5, ask 0.50-0.97, last 60 s): 151 won / 18 lost. P&L by acting only after the
+  condition persisted R seconds, paid at the ask prevailing then ($20 cap): 50 ms +0.3%, 100 ms +1.2%, 500 ms +0.4%,
+  1 s +4.7% (85 ep.), 2 s +6.8% (66), 3 s +9.0% (57), 5 s +9.1% (49), 10 s +10.0% (43). Fast-vanishing cases are
+  mostly flickering locks that reverse; persistent ones are the real ones AND still on sale.
+- Capacity: median $16 at the ask after 2 s (25-75%: $8-42). Day at $20/trade: +$62; at $50: +$118. Per asset:
+  btc/eth/bnb 29/29, 15 m 10/10; losers in doge/hype/sol/xrp/zec. One day, 5 losers: not proof.
+- Decision: do NOT build the fast bot. New paper rule lock_p (lock must persist 2 s) running since 06:4x; keep
+  recording; judge after several days. Report section 12 added. FAST_DESIGN.md kept for reference.

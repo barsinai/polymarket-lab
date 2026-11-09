@@ -165,3 +165,6 @@ if life:
     ls = sorted(x[0] for x in life); print("  lifetime percentiles (s): 10%", round(ls[len(ls) // 10], 2), "median", round(ls[len(ls) // 2], 2), "90%", round(ls[9 * len(ls) // 10], 2))
     wl = sorted(x[0] for x in life if x[3]); ll = sorted(x[0] for x in life if not x[3])
     if wl: print("  winners' lifetime median", round(wl[len(wl) // 2], 2), "s;", "losers' median", round(ll[len(ll) // 2], 2) if ll else None, "s")
+
+json.dump([{"life": round(x[0], 3), "ask0": x[1], "sz0": x[2], "won": bool(x[3]), "slug": x[4], "side": x[5],
+            "ask2": ask_at(x[6], 2.0)[0], "sz2": ask_at(x[6], 2.0)[1]} for x in life], open(f"{D}/episodes.json", "w"))

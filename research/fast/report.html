@@ -80,7 +80,7 @@ a { color: var(--blue); }
 
 <main>
 <header>
-  <div class="kicker">polymarket-lab · 5-minute crypto markets · evidence as of 8 Nov 2026, 18:00 Israel time</div>
+  <div class="kicker">polymarket-lab · 5-minute crypto markets · evidence as of 9 Nov 2026, 08:00 Israel time</div>
   <h1>Up/Down Evidence Report</h1>
   <p class="lede">Every claim from today's research, with the chart and the numbers behind it. All figures come from the repo's own data files (598 finished windows, 1.49 million public fills, and our bot's own order-book readings). Nothing here involves real money.</p>
   <div class="legend"><span><span class="chip strong">strong</span> many windows, robust to checks</span><span><span class="chip early">early</span> first hours of data</span><span><span class="chip dead">dead</span> did not survive a check</span></div>
@@ -173,6 +173,13 @@ a { color: var(--blue); }
   <p>Replay on the same 22,964 markets: quote both sides around the last trade, $20 a side, get filled by the real prints that crossed the quote, mark at resolution. Split by who hit the quote.</p>
   <figure id="f-smaker"><div class="fig-title">Maker's edge per dollar filled, by counterparty class and spread</div><div class="svgwrap"></div><div class="legend"><span><i class="sw" style="background:var(--blue)"></i>skilled wallets</span><span><i class="sw" style="background:var(--gray-series)"></i>other wallets (93% of fills)</span><span><i class="sw" style="background:var(--blue-soft);border:1px solid var(--blue)"></i>weak wallets</span></div><figcaption>Negative in every cell but one: fills from habitual losers at a 10¢ spread (+6.8% on 574 fills). A quote cannot choose who hits it, and 93% of fills come from the anonymous middle, which is still informed enough to beat a 2-10¢ spread. A market-level "who trades here" score did not separate good from bad markets either.</figcaption><details><summary>numbers</summary><div class="tablewrap"></div></details></figure>
   <div class="meaning"><strong>What it means:</strong> together with the fast-market replay and the live pilot's loss, this is the third time market-making has failed for us, now across spreads, horizons and counterparties. Closed.</div>
+</section>
+
+<section id="persist">
+  <div class="claim"><h2>12. Speed is not the lever. Patience is.</h2><span class="chip early">early</span></div>
+  <p>A full day of real-time order-book recording (2,926 windows, 11.8 million top-of-book changes) answers yesterday's question. First, our server is closer than assumed: book updates reach Helsinki 15-18 ms after Polymarket stamps them and a trading-API round trip is 39-58 ms, so the matching engine is in Europe. Second, and more important: for every moment the maths said "locked" and the winning side was still on sale at 50-97¢, we asked what a bot acting after a given delay would have paid and won.</p>
+  <figure id="f-persist2"><div class="fig-title">Return per dollar if the bot acts only after the opportunity has persisted N seconds</div><div class="svgwrap"></div><figcaption>169 episodes in the day. Acting within 50-500 ms earns about nothing (the fast-vanishing cases are mostly "locks" that flicker and reverse). Requiring 1-3 seconds of persistence filters those out and leaves +5% to +9% per dollar on 57-85 episodes a day, paid at a median ask of 90-91¢.</figcaption><details><summary>numbers</summary><div class="tablewrap"></div></details></figure>
+  <div class="meaning"><strong>What it means:</strong> the edge that exists in these markets is available to a patient, exact bot, not a fast one; our 2-second polling loop is close to the right speed already. The size on offer is modest (median $16 at the ask after 2 s, a quarter of cases above $42), so the day would have paid about +$60 at $20 a trade or +$118 at $50. One day and five losing trades is not proof: the rule now runs on paper as "lock_p" and needs several days before any real money.</div>
 </section>
 
 <footer>Sources: Polymarket Gamma API (event metadata: priceToBeat, finalPrice, results), Polymarket Data API v2 (public trade tape), Polymarket RTDS feed (Chainlink prices and 60 s TWAP), Binance REST (1-second proxy), and the bot's own order-book readings. Code: research/fast/ in the polymarket-lab repository (report_data.py builds every number on this page).</footer>
@@ -444,6 +451,18 @@ a { color: var(--blue); }
     });
     text(s, W / 2, H - 4, 'maker edge vs resolution per $ filled', 'tick', 'middle');
     table('f-smaker', ['spread', 'all fills', 'skilled: n / edge', 'other: n / edge', 'weak: n / edge'], R.map(r => [(r.S * 100).toFixed(0) + '¢', r.total_pct.toFixed(1) + '%', `${r.skilled.n} / ${(r.skilled.edge * 100).toFixed(1)}%`, `${r.other.n} / ${(r.other.edge * 100).toFixed(1)}%`, `${r.weak.n} / ${(r.weak.edge * 100).toFixed(1)}%`]));
+  })();
+  // ---- 12 persistence curve
+  if (D.persist) (function () {
+    const R = D.persist.rows, W = 720, H = 250, left = 56, right = 16, top = 16, bottom = 40, s = svgIn('f-persist2', W, H);
+    const xs = R.map(r => Math.log10(r.R)), xmin = Math.log10(0.04), xmax = Math.log10(12), ymin = -3, ymax = 12;
+    const sx = v => left + (Math.log10(v) - xmin) / (xmax - xmin) * (W - left - right), sy = v => top + (1 - (v - ymin) / (ymax - ymin)) * (H - top - bottom);
+    [0, 3, 6, 9, 12].forEach(v => { el('line', { x1: left, x2: W - right, y1: sy(v), y2: sy(v), class: v === 0 ? 'axis' : 'grid' }, s); text(s, left - 6, sy(v), v + '%', 'tick', 'end'); });
+    [0.05, 0.1, 0.3, 1, 3, 10].forEach(v => text(s, sx(v), H - bottom + 14, v < 1 ? (v * 1000) + ' ms' : v + ' s', 'tick', 'middle'));
+    el('path', { d: R.map((r, i) => (i ? 'L' : 'M') + sx(r.R) + ',' + sy(r.pct)).join(' '), fill: 'none', stroke: css('--blue'), 'stroke-width': 2 }, s);
+    R.forEach(r => { const c = el('circle', { cx: sx(r.R), cy: sy(r.pct), r: 5, fill: css('--blue'), stroke: css('--surface'), 'stroke-width': 2, class: 'mark' }, s); hover(c, `act after ${r.R < 1 ? (r.R * 1000) + ' ms' : r.R + ' s'} of persistence<br>${r.n} episodes, ${pct(r.win, 1)} won<br>${fmt$(r.pnl)} on $${r.stake.toLocaleString()} (${r.pct > 0 ? '+' : ''}${r.pct}%)<br>median ask paid ${(r.ask * 100).toFixed(0)}¢`); });
+    text(s, W / 2, H - 6, 'required persistence before acting (log scale)', 'tick', 'middle');
+    table('f-persist2', ['act after', 'episodes', 'won', 'stake', 'P&L', 'per $', 'median ask'], R.map(r => [r.R < 1 ? (r.R * 1000) + ' ms' : r.R + ' s', r.n, pct(r.win, 1), '$' + r.stake.toLocaleString(), fmt$(r.pnl), (r.pct > 0 ? '+' : '') + r.pct + '%', (r.ask * 100).toFixed(0) + '¢']));
   })();
   if (D.sweeper) document.getElementById('sweep').textContent = D.sweeper.map(r => `${r.price}: ${r.n} chances, ${pct(r.win, 1)} won, ${(r.ret * 100).toFixed(1)}% per $`).join('; ');
 
