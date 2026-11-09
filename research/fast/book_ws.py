@@ -19,7 +19,7 @@ except ImportError:  # pragma: no cover
 import json
 
 URL = "wss://ws-subscriptions-clob.polymarket.com/ws/market"
-D = os.environ.get("FAST_DIR", "data/fast") + "/bookws"
+D = os.environ.get("BOOKWS_DIR") or os.environ.get("FAST_DIR", "data/fast") + "/bookws"   # BOOKWS_DIR: keep the recordings outside the git checkout
 os.makedirs(D, exist_ok=True)
 books = {}          # asset_id -> {"bids": {price: size}, "asks": {price: size}, "ts": server_ms, "rx": float}
 _last_top = {}      # asset_id -> (best_ask, ask_size, best_bid, bid_size) last written (top-of-book changes only)
@@ -152,7 +152,7 @@ async def _run(stop, active):
                     hour = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H")
                     if hour != out_hour:
                         if out:
-                            out.close(); compress(out_hour)
+                            out.close(); threading.Thread(target=compress, args=(out_hour,), daemon=True).start()
                         out = open(f"{D}/{hour}.jsonl", "a"); out_hour = hour
                     for m in msgs:
                         if not isinstance(m, dict):

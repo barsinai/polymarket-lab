@@ -19,6 +19,7 @@ for s, md in M.items():
 ltp = defaultdict(list); tops = defaultdict(list)
 for f in sorted(glob.glob(f"{D}/bookws/*.jsonl*")):
     op = gzip.open if f.endswith(".gz") else open
+    seen = set()   # archives appended more than once hold duplicate lines
     try:
         with op(f, "rt") as fh:
             while True:
@@ -28,6 +29,10 @@ for f in sorted(glob.glob(f"{D}/bookws/*.jsonl*")):
                     break
                 if not line:
                     break
+                h = hash(line)
+                if h in seen:
+                    continue
+                seen.add(h)
                 try:
                     o = json.loads(line)
                 except ValueError:

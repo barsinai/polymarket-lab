@@ -11,13 +11,29 @@ jobs:
   run:
     runs-on: [self-hosted, pilot]
     timeout-minutes: 350
+    env:
+      STORE: /home/runner/pilot-data          # recordings live here, outside the git checkout (18 GB disk)
+      BOOKWS_DIR: /home/runner/pilot-data/bookws
+      RTDS_DIR: /home/runner/pilot-data/rtds
     steps:
+      - name: Fresh small checkout (drop the old .git, it held every recording ever published)
+        run: |
+          rm -rf "$GITHUB_WORKSPACE/.git" "$GITHUB_WORKSPACE/data" /tmp/fastout.old
+          df -h / | tail -1
       - uses: actions/checkout@v4
         with:
           filter: blob:none
+          sparse-checkout-cone-mode: false
           sparse-checkout: |
-            research
-            data/fast
+            /research/
+            /.github/
+            /.gitignore
+            /data/fast/*
+            !/data/fast/bookws/
+            !/data/fast/rtds/
+            !/data/fast/*-20*.jsonl.gz
+            !/data/fast/tape.jsonl.gz
+            !/data/fast/results_meta.json
       - name: Python env
         run: |
           export PATH="$HOME/.local/bin:$PATH"
@@ -27,26 +43,42 @@ jobs:
           git config user.name "polymarket-lab-bot"
           git config user.email "actions@users.noreply.github.com"
           git config pack.threads 1 && git config pack.windowMemory 64m && git config core.bigFileThreshold 1m && git config pack.deltaCacheSize 32m
-          : > /tmp/fast.txt; rm -rf /tmp/fastout.old; df -h / | tail -1; du -sh .git data 2>/dev/null | tr '\n' ' '; echo
-          git gc -q --prune=now 2>/dev/null || true
+          mkdir -p "$BOOKWS_DIR" "$RTDS_DIR"
+          : > /tmp/fast.txt; touch /tmp/fast.start      # marker: "modified during this job"
+          # recordings older than 3 days have long been published: free the disk
+          find "$STORE" -name '*.jsonl*' -mtime +3 -delete 2>/dev/null || true
+          find "$STORE" -name '*.tmp' -mmin +120 -delete 2>/dev/null || true
+          report() { echo "disk $(date -u +%FT%H:%M) $(df -h / | tail -1 | awk '{print $4" free of "$2}') checkout $(du -sh . 2>/dev/null | cut -f1) store $(du -sh "$STORE" 2>/dev/null | cut -f1)" | tee -a /tmp/fast.txt; }
+          report
           for part in 1 2 3 4 5; do
             git rebase --abort 2>/dev/null || true
             git fetch -q origin main && git reset -q --hard origin/main
-            # a previous publish that failed left its files in /tmp/fastout: restore them before running on
-            if [ -d /tmp/fastout ]; then mkdir -p data/fast && cp -r /tmp/fastout/. data/fast/; fi
+            mkdir -p data/fast
+            # a previous publish that failed left its (non-empty) files in /tmp/fastout: restore them before running on
+            if [ -d /tmp/fastout ]; then find /tmp/fastout -type f -size 0 -delete; cp -r /tmp/fastout/. data/fast/; fi
             PATH="$HOME/.local/bin:$PATH" uv pip install --python "$HOME/.venv-pilot/bin/python" -q requests websockets orjson || true
             RUN_MIN=60 "$HOME/.venv-pilot/bin/python" -u research/fast/updown_paper.py 2>&1 | tee -a /tmp/fast.txt | grep -v "^$"
+            report
             mkdir -p logs && cp /tmp/fast.txt logs/fast-log.txt
-            # publish the bot's own files on top of whatever is upstream (only the server writes these)
+            # publish the bot's own files on top of whatever is upstream (only the server writes these);
+            # recordings: only the archives finished or extended during THIS job, never stale copies
             mkdir -p /tmp/fastout/rtds /tmp/fastout/bookws
-            for f in obs.jsonl trades.jsonl windows.jsonl model.jsonl pairs.jsonl report.json tokens.jsonl; do [ -f "data/fast/$f" ] && cp "data/fast/$f" /tmp/fastout/; done
-            cp data/fast/obs-*.jsonl.gz data/fast/model-*.jsonl.gz data/fast/pairs-*.jsonl.gz /tmp/fastout/ 2>/dev/null || true
-            cp data/fast/rtds/*.jsonl.gz /tmp/fastout/rtds/ 2>/dev/null || true       # finished hours only (compressed)
-            cp data/fast/bookws/*.jsonl.gz /tmp/fastout/bookws/ 2>/dev/null || true
+            for f in obs.jsonl trades.jsonl windows.jsonl model.jsonl pairs.jsonl report.json tokens.jsonl; do [ -s "data/fast/$f" ] && cp "data/fast/$f" /tmp/fastout/; done
+            find data/fast -maxdepth 1 \( -name 'obs-*.jsonl.gz' -o -name 'model-*.jsonl.gz' -o -name 'pairs-*.jsonl.gz' \) -newer /tmp/fast.start -size +0 -exec cp {} /tmp/fastout/ \;
+            find "$RTDS_DIR" -maxdepth 1 -name '*.jsonl.gz' -newer /tmp/fast.start -size +0 -exec cp {} /tmp/fastout/rtds/ \;
+            find "$BOOKWS_DIR" -maxdepth 1 -name '*.jsonl.gz' -newer /tmp/fast.start -size +0 -exec cp {} /tmp/fastout/bookws/ \;
+            find /tmp/fastout -type f -size 0 -delete    # a full disk leaves empty copies: never publish those
             for i in 1 2 3; do
-              git fetch -q origin main && git reset -q --hard origin/main && mkdir -p data/fast/rtds logs && cp -r /tmp/fastout/. data/fast/ && cp /tmp/fast.txt logs/fast-log.txt
-              rm -f data/fast/bookws/*.tmp data/fast/rtds/*.tmp
-              if git add --sparse logs/fast-log.txt data/fast ':!data/fast/bookws/*.jsonl' ':!data/fast/rtds/*.jsonl' && git commit -qm "Fast paper $(date -u +%FT%H:%M) [skip ci]" && git push -q; then rm -rf /tmp/fastout; break; fi
+              git fetch -q origin main && git reset -q --hard origin/main && mkdir -p data/fast/rtds data/fast/bookws logs && cp -r /tmp/fastout/. data/fast/ && cp /tmp/fast.txt logs/fast-log.txt
+              find data/fast -type f \( -name '*.tmp' -o \( -name '*.gz' -size 0 \) \) -delete
+              if git add --sparse logs/fast-log.txt data/fast ':!data/fast/bookws/*.jsonl' ':!data/fast/rtds/*.jsonl' && git commit -qm "Fast paper $(date -u +%FT%H:%M) [skip ci]" && git push -q; then
+                # the archives are in git now and live on in $STORE: drop the checkout copies, but only if the
+                # sparse checkout really excludes them (S = skip-worktree), so a plain checkout never stages deletions
+                if git ls-files -t data/fast/bookws data/fast/rtds 2>/dev/null | grep -q '^S'; then
+                  (cd /tmp/fastout && find bookws rtds -type f 2>/dev/null) | while read -r f; do rm -f "data/fast/$f"; done
+                fi
+                rm -rf /tmp/fastout; break
+              fi
               sleep 5
             done
           done

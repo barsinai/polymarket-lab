@@ -16,8 +16,11 @@ SIGMA_FLOOR = {"btc": 1.5e-5, "eth": 2.4e-5, "bnb": 1.6e-5, "sol": 3.4e-5, "doge
 
 
 def lines(pattern):
+    """records of every file matching pattern; duplicate lines within a file are dropped (archives that were
+    appended more than once hold the same hour several times)"""
     for f in sorted(glob.glob(pattern)):
         op = gzip.open if f.endswith(".gz") else open
+        seen = set()
         try:
             with op(f, "rt") as fh:
                 while True:
@@ -27,6 +30,10 @@ def lines(pattern):
                         break
                     if not line:
                         break
+                    h = hash(line)
+                    if h in seen:
+                        continue
+                    seen.add(h)
                     try:
                         yield json.loads(line)
                     except ValueError:

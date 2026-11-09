@@ -10,7 +10,7 @@ from datetime import datetime, timezone
 
 URL = "wss://ws-live-data.polymarket.com"
 TOPICS = ("crypto_prices_chainlink", "crypto_prices_twap_sixty", "crypto_prices_twap_thirty", "crypto_prices")
-D = os.environ.get("FAST_DIR", "data/fast") + "/rtds"
+D = os.environ.get("RTDS_DIR") or os.environ.get("FAST_DIR", "data/fast") + "/rtds"   # RTDS_DIR: keep the recordings outside the git checkout
 os.makedirs(D, exist_ok=True)
 
 latest = {}                       # (topic, symbol) -> (ts_ms, value)
@@ -82,7 +82,7 @@ async def _run(stop):
                     hour = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H")
                     if hour != out_hour:
                         if out:
-                            out.close(); compress(out_hour)
+                            out.close(); threading.Thread(target=compress, args=(out_hour,), daemon=True).start()
                         out = open(f"{D}/{hour}.jsonl", "a"); out_hour = hour
                     out.write(json.dumps({"rx": round(time.time(), 3), "m": m}) + "\n")
         except Exception as e:  # noqa: BLE001
