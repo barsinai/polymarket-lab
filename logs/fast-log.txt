@@ -268,3 +268,304 @@ bookws 22:39:13 {"msgs": 1221787, "connects": 6, "errors": 5, "subscribed": 16, 
 bookws 22:39:43 {"msgs": 1227588, "connects": 6, "errors": 5, "subscribed": 16, "last_msg": 1794263983.9708712, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
 {"updated": "2026-11-09T22:39:45.126510+00:00", "trades": 7934, "settled": 7930, "obs_this_run": 9796, "rest_ms": {"n": 13977, "min": 38.9, "p50": 48.5, "p90": 56.8}, "feed": {"msgs": 106310, "connects": 2, "errors": 0, "last_msg": 1794263984.4673035, "silent_reconnects": 1}, "feed_topics": {"crypto_prices_chainlink": 28274, "crypto_prices_twap_sixty": 28273, "crypto_prices_twap_thirty": 28293, "crypto_prices": 21468}, "bookws": {"ran_to_end": true}, "by_strat": {"dog": {"trades": 3288, "won": 442, "staked": 19308.91, "pnl": -6550.94}, "exact": {"trades": 2232, "won": 1046, "staked": 20452.27, "pnl": -1363.81}, "fav": {"trades": 2056, "won": 1626, "staked": 26477.86, "pnl": -861.03}, "lock": {"trades": 123, "won": 106, "staked": 1686.54, "pnl": 70.44}, "lock_early": {"trades": 1, "won": 1, "staked": 20.0, "pnl": 0.98}, "pair": {"trades": 38, "won": 18, "staked": 242.17, "pnl": 23.75}, "pair_ev": {"trades": 126, "won": 71, "staked": 941.81, "pnl": 48.88}, "v2": {"trades": 66, "won": 36, "staked": 1096.57, "pnl": -112.22}}, "by_day": {"2026-11-07 dog": {"trades": 1111, "won": 167, "staked": 6332.15, "pnl": -1579.56}, "2026-11-07 exact": {"trades": 1263, "won": 586, "staked": 11222.56, "pnl": -83.36}, "2026-11-07 fav": {"trades": 713, "won": 557, "staked": 9249.61, "pnl": -457.53}, "2026-11-07 lock": {"trades": 52, "won": 43, "staked": 710.23, "pnl": -7.98}, "2026-11-07 pair": {"trades": 28, "won": 14, "staked": 197.59, "pnl": 22.48}, "2026-11-07 pair_ev": {"trades": 38, "won": 21, "staked": 290.23, "pnl": -0.87}, "2026-11-07 v2": {"trades": 66, "won": 36, "staked": 1096.57, "pnl": -112.22}, "2026-11-08 dog": {"trades": 1727, "won": 219, "staked": 10227.37, "pnl": -3955.72}, "2026-11-08 exact": {"trades": 921, "won": 419, "staked": 8649.82, "pnl": -1297.25}, "2026-11-08 fav": {"trades": 1044, "won": 826, "staked": 13391.08, "pnl": -399.68}, "2026-11-08 lock": {"trades": 67, "won": 60, "staked": 911.51, "pnl": 81.91}, "2026-11-08 pair": {"trades": 6, "won": 3, "staked": 25.88, "pnl": 7.46}, "2026-11-08 pair_ev": {"trades": 70, "won": 41, "staked": 544.17, "pnl": 57.46}, "2026-11-09 dog": {"trades": 450, "won": 56, "staked": 2749.39, "pnl": -1015.67}, "2026-11-09 exact": {"trades": 48, "won": 41, "staked": 579.89, "pnl": 16.8}, "2026-11-09 fav": {"trades": 299, "won": 243, "staked": 3837.17, "pnl": -3.82}, "2026-11-09 lock": {"trades": 4, "won": 3, "staked": 64.8, "pnl": -3.49}, "2026-11-09 lock_early": {"trades": 1, "won": 1, "staked": 20.0, "pnl": 0.98}, "2026-11-09 pair": {"trades": 4, "won": 1, "staked": 18.69, "pnl": -6.19}, "2026-11-09 pair_ev": {"trades": 18, "won": 9, "staked": 107.42, "pnl": -7.7}}}
 disk 2026-11-09T22:39 13G free of 19G checkout 23M store 69M
+bookws 22:40:24 {"msgs": 3, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794264014.9878185}
+bookws 22:40:54 {"msgs": 6, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794264045.118082}
+bookws 22:41:24 {"msgs": 9, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794264075.2468693}
+bookws 22:41:54 {"msgs": 12, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794264105.3775568}
+feed {"msgs": 3848, "connects": 1, "errors": 0, "last_msg": 1794264124.5746982, "topics": {"crypto_prices": 777, "crypto_prices_twap_thirty": 1024, "crypto_prices_chainlink": 1023, "crypto_prices_twap_sixty": 1023}}
+bookws 22:42:24 {"msgs": 15, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794264135.5076926}
+bookws 22:42:54 {"msgs": 12054, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794264174.6987698}
+22:43:00 PAPER[dog] BUY Up btc-updown-5m-1794264000 @ 0.21 x 95.24 p 0.125 z -1.2 rem 119s
+22:43:00 PAPER[dog] BUY Up eth-updown-5m-1794264000 @ 0.21 x 54.58 p 0.196 z -0.9 rem 119s
+22:43:00 PAPER[dog] BUY Up sol-updown-5m-1794264000 @ 0.28 x 71.43 p 0.211 z -0.8 rem 119s
+22:43:00 PAPER[dog] BUY Up xrp-updown-5m-1794264000 @ 0.14 x 35.39 p 0.134 z -1.1 rem 119s
+22:43:00 PAPER[dog] BUY Up doge-updown-5m-1794264000 @ 0.05 x 31.0 p 0.004 z -2.6 rem 119s
+22:43:00 PAPER[dog] BUY Up bnb-updown-5m-1794264000 @ 0.27 x 6.0 p 0.306 z -0.5 rem 119s
+22:43:00 PAPER[dog] BUY Up zec-updown-5m-1794264000 @ 0.25 x 10.0 p 0.133 z -1.1 rem 119s
+bookws 22:43:24 {"msgs": 53735, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794264204.6988735}
+22:43:30 PAPER[fav] BUY Down btc-updown-5m-1794264000 @ 0.9 x 22.22 p 0.977 z 2.0 rem 89s
+22:43:30 PAPER[fav] BUY Down eth-updown-5m-1794264000 @ 0.82 x 15.0 p 0.947 z 1.6 rem 89s
+22:43:30 PAPER[fav] BUY Down bnb-updown-5m-1794264000 @ 0.94 x 12.0 p 0.920 z 1.4 rem 89s
+22:43:32 PAPER[fav] BUY Up sol-updown-5m-1794264000 @ 0.68 x 29.41 p 0.550 z 0.1 rem 87s
+22:43:32 PAPER[fav] BUY Down doge-updown-5m-1794264000 @ 0.95 x 13.0 p 0.981 z 2.1 rem 87s
+22:43:36 PAPER[fav] BUY Up xrp-updown-5m-1794264000 @ 0.62 x 32.26 p 0.573 z 0.2 rem 83s
+22:43:48 PAPER[lock_early] BUY Down btc-updown-5m-1794264000 @ 0.94 x 21.28 p 0.998 z 2.8 rem 71s
+bookws 22:43:54 {"msgs": 89162, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794264234.700495}
+22:43:54 PAPER[dog] BUY Down hype-updown-5m-1794264000 @ 0.16 x 5.0 p 0.460 z -0.1 rem 65s
+22:43:56 PAPER[fav] BUY Up hype-updown-5m-1794264000 @ 0.94 x 20.0 p 0.891 z 1.2 rem 63s
+22:44:00 PAPER[exact] BUY Up xrp-updown-5m-1794264000 @ 0.72 x 10.0 p 0.882 z 1.2 rem 59s
+22:44:02 PAPER[exact] BUY Up hype-updown-5m-1794264000 @ 0.8 x 5.01 p 0.899 z 1.3 rem 57s
+22:44:06 PAPER[lock_p_z2] BUY Down eth-updown-5m-1794264000 @ 0.95 x 21.05 p 0.980 z 2.1 rem 53s
+22:44:08 PAPER[exact] BUY Down eth-updown-5m-1794264000 @ 0.95 x 21.05 p 0.988 z 2.3 rem 51s
+22:44:18 PAPER[lock] BUY Down eth-updown-5m-1794264000 @ 0.97 x 20.62 p 0.997 z 2.7 rem 41s
+22:44:18 PAPER[lock_m] BUY Down eth-updown-5m-1794264000 @ 0.97 x 20.62 p 0.997 z 2.7 rem 41s
+22:44:18 PAPER[exact] BUY Up sol-updown-5m-1794264000 @ 0.79 x 11.25 p 0.902 z 1.3 rem 41s
+bookws 22:44:24 {"msgs": 114667, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794264264.6974974}
+bookws 22:44:54 {"msgs": 123510, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794264294.6951501}
+bookws 22:45:24 {"msgs": 125814, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794264317.503461}
+bookws 22:45:54 {"msgs": 125817, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794264347.6321461}
+bookws 22:46:24 {"msgs": 125820, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794264377.763575}
+bookws 22:46:54 {"msgs": 125823, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794264407.8952198}
+bookws 22:47:24 {"msgs": 125826, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794264438.0247886}
+bookws 22:47:54 {"msgs": 136067, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794264474.7001486}
+22:48:00 PAPER[dog] BUY Up btc-updown-5m-1794264300 @ 0.08 x 250.0 p 0.014 z -2.2 rem 119s
+22:48:00 PAPER[dog] BUY Up sol-updown-5m-1794264300 @ 0.26 x 61.25 p 0.255 z -0.7 rem 119s
+22:48:00 PAPER[dog] BUY Down xrp-updown-5m-1794264300 @ 0.32 x 19.43 p 0.337 z -0.4 rem 119s
+22:48:00 PAPER[dog] BUY Up bnb-updown-5m-1794264300 @ 0.16 x 14.07 p 0.163 z -1.0 rem 119s
+22:48:00 PAPER[dog] BUY Down hype-updown-5m-1794264300 @ 0.05 x 20.0 p 0.019 z -2.1 rem 119s
+22:48:00 PAPER[dog] BUY Up zec-updown-5m-1794264300 @ 0.25 x 80.0 p 0.062 z -1.5 rem 119s
+22:48:02 PAPER[dog] BUY Up eth-updown-5m-1794264300 @ 0.23 x 40.0 p 0.328 z -0.4 rem 117s
+22:48:02 PAPER[dog] BUY Up doge-updown-5m-1794264300 @ 0.25 x 6.0 p 0.408 z -0.2 rem 117s
+bookws 22:48:24 {"msgs": 165989, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794264504.7018912}
+22:48:31 PAPER[fav] BUY Down btc-updown-5m-1794264300 @ 0.94 x 21.28 p 0.985 z 2.2 rem 88s
+22:48:31 PAPER[fav] BUY Down eth-updown-5m-1794264300 @ 0.65 x 30.77 p 0.672 z 0.4 rem 88s
+22:48:31 PAPER[fav] BUY Down sol-updown-5m-1794264300 @ 0.75 x 26.25 p 0.716 z 0.6 rem 88s
+22:48:31 PAPER[fav] BUY Up xrp-updown-5m-1794264300 @ 0.6 x 19.0 p 0.608 z 0.3 rem 88s
+22:48:31 PAPER[fav] BUY Down doge-updown-5m-1794264300 @ 0.62 x 12.0 p 0.594 z 0.2 rem 88s
+22:48:31 PAPER[fav] BUY Down bnb-updown-5m-1794264300 @ 0.86 x 12.15 p 0.896 z 1.3 rem 88s
+bookws 22:48:54 {"msgs": 203163, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794264534.703205}
+22:49:01 PAPER[exact] BUY Down btc-updown-5m-1794264300 @ 0.91 x 21.98 p 0.947 z 1.6 rem 58s
+22:49:11 PAPER[lock_p_z2] BUY Down btc-updown-5m-1794264300 @ 0.97 x 20.62 p 0.984 z 2.1 rem 48s
+22:49:11 PAPER[lock_p_z2] BUY Up eth-updown-5m-1794264300 @ 0.97 x 20.62 p 0.989 z 2.3 rem 48s
+bookws 22:49:24 {"msgs": 221477, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794264564.7032535}
+bookws 22:49:54 {"msgs": 228431, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794264594.6888602}
+bookws 22:50:24 {"msgs": 230337, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794264618.8519022}
+bookws 22:50:54 {"msgs": 230340, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794264648.9847088}
+bookws 22:51:24 {"msgs": 230343, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794264679.112671}
+bookws 22:51:54 {"msgs": 230346, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794264709.242046}
+bookws 22:52:24 {"msgs": 230349, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794264739.370979}
+bookws 22:52:54 {"msgs": 245729, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794264774.7051215}
+22:53:01 PAPER[dog] BUY Up btc-updown-5m-1794264600 @ 0.12 x 166.67 p 0.110 z -1.2 rem 118s
+22:53:01 PAPER[dog] BUY Up sol-updown-5m-1794264600 @ 0.13 x 11.25 p 0.133 z -1.1 rem 118s
+22:53:01 PAPER[dog] BUY Up doge-updown-5m-1794264600 @ 0.17 x 6.0 p 0.098 z -1.3 rem 118s
+22:53:01 PAPER[dog] BUY Up bnb-updown-5m-1794264600 @ 0.13 x 6.0 p 0.070 z -1.5 rem 118s
+22:53:01 PAPER[dog] BUY Up zec-updown-5m-1794264600 @ 0.27 x 74.07 p 0.121 z -1.2 rem 118s
+22:53:09 PAPER[dog] BUY Down eth-updown-5m-1794264600 @ 0.33 x 20.0 p 0.560 z 0.2 rem 110s
+bookws 22:53:24 {"msgs": 293761, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794264804.7047436}
+22:53:31 PAPER[fav] BUY Up btc-updown-5m-1794264600 @ 0.74 x 27.03 p 0.999 z 6.8 rem 88s
+22:53:31 PAPER[fav] BUY Up eth-updown-5m-1794264600 @ 0.91 x 21.98 p 0.999 z 7.2 rem 88s
+22:53:31 PAPER[fav] BUY Down doge-updown-5m-1794264600 @ 0.76 x 13.0 p 0.004 z -2.6 rem 88s
+22:53:31 PAPER[fav] BUY Down bnb-updown-5m-1794264600 @ 0.89 x 5.0 p 0.001 z -4.6 rem 88s
+22:53:31 PAPER[dog] BUY Up hype-updown-5m-1794264600 @ 0.071 x 5.0 p 0.667 z 0.4 rem 88s
+22:53:31 PAPER[fav] BUY Down hype-updown-5m-1794264600 @ 0.94 x 7.0 p 0.333 z -0.4 rem 88s
+22:53:31 PAPER[fav] BUY Down zec-updown-5m-1794264600 @ 0.85 x 10.0 p 0.130 z -1.1 rem 88s
+22:53:35 PAPER[fav] BUY Up sol-updown-5m-1794264600 @ 0.74 x 27.03 p 0.638 z 0.4 rem 84s
+bookws 22:53:54 {"msgs": 329262, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794264834.7060285}
+22:54:15 PAPER[exact] BUY Up btc-updown-5m-1794264600 @ 0.93 x 21.51 p 0.999 z 4.4 rem 44s
+22:54:15 PAPER[lock] BUY Up btc-updown-5m-1794264600 @ 0.93 x 21.51 p 0.999 z 4.4 rem 44s
+22:54:15 PAPER[lock_m] BUY Up btc-updown-5m-1794264600 @ 0.93 x 21.51 p 0.999 z 4.4 rem 44s
+22:54:15 PAPER[exact] BUY Up sol-updown-5m-1794264600 @ 0.87 x 10.0 p 0.999 z 4.3 rem 44s
+22:54:15 PAPER[lock] BUY Up sol-updown-5m-1794264600 @ 0.87 x 10.0 p 0.999 z 4.3 rem 44s
+22:54:15 PAPER[lock_m] BUY Up sol-updown-5m-1794264600 @ 0.87 x 10.0 p 0.999 z 4.3 rem 44s
+bookws 22:54:24 {"msgs": 350647, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794264864.7064621}
+22:54:27 PAPER[lock_p_z2] BUY Up sol-updown-5m-1794264600 @ 0.95 x 17.91 p 0.996 z 2.6 rem 32s
+22:54:31 PAPER[exact] BUY Down doge-updown-5m-1794264600 @ 0.92 x 14.0 p 0.995 z 2.6 rem 28s
+22:54:31 PAPER[lock] BUY Down doge-updown-5m-1794264600 @ 0.92 x 14.0 p 0.995 z 2.6 rem 28s
+22:54:31 PAPER[lock_m] BUY Down doge-updown-5m-1794264600 @ 0.92 x 14.0 p 0.995 z 2.6 rem 28s
+bookws 22:54:54 {"msgs": 358162, "connects": 1, "errors": 0, "subscribed": 16, "last_msg": 1794264894.507951}
+bookws 22:55:24 {"msgs": 360361, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794264920.1409655}
+bookws 22:55:54 {"msgs": 360364, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794264950.2738159}
+bookws 22:56:24 {"msgs": 360367, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794264980.4023998}
+bookws 22:56:54 {"msgs": 360370, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794265010.5343285}
+bookws 22:57:24 {"msgs": 360373, "connects": 1, "errors": 0, "subscribed": 0, "last_msg": 1794265040.6614916}
+bookws 22:57:54 {"msgs": 381129, "connects": 1, "errors": 0, "subscribed": 32, "last_msg": 1794265074.7086394}
+22:58:01 PAPER[dog] BUY Up eth-updown-5m-1794264900 @ 0.24 x 50.0 p 0.227 z -0.7 rem 118s
+22:58:01 PAPER[dog] BUY Down eth-updown-15m-1794264300 @ 0.09 x 76.1 p 0.030 z -1.9 rem 118s
+22:58:01 PAPER[dog] BUY Up sol-updown-5m-1794264900 @ 0.12 x 103.57 p 0.116 z -1.2 rem 118s
+22:58:01 PAPER[dog] BUY Up xrp-updown-5m-1794264900 @ 0.13 x 9.0 p 0.158 z -1.0 rem 118s
+22:58:01 PAPER[dog] BUY Up doge-updown-5m-1794264900 @ 0.05 x 10.0 p 0.018 z -2.1 rem 118s
+22:58:01 PAPER[dog] BUY Up doge-updown-15m-1794264300 @ 0.08 x 25.0 p 0.037 z -1.8 rem 118s
+22:58:01 PAPER[dog] BUY Up bnb-updown-5m-1794264900 @ 0.22 x 30.0 p 0.166 z -1.0 rem 118s
+22:58:01 PAPER[dog] BUY Up bnb-updown-15m-1794264300 @ 0.13 x 11.0 p 0.050 z -1.6 rem 118s
+22:58:01 PAPER[dog] BUY Up zec-updown-5m-1794264900 @ 0.25 x 10.0 p 0.002 z -3.0 rem 118s
+22:58:11 PAPER[dog] BUY Up sol-updown-15m-1794264300 @ 0.25 x 80.0 p 0.495 z -0.0 rem 108s
+bookws 22:58:24 {"msgs": 428508, "connects": 1, "errors": 0, "subscribed": 32, "last_msg": 1794265104.7086916}
+22:58:27 PAPER[dog] BUY Up btc-updown-5m-1794264900 @ 0.31 x 64.52 p 0.479 z -0.1 rem 92s
+22:58:31 PAPER[fav] BUY Down btc-updown-5m-1794264900 @ 0.69 x 7.39 p 0.593 z 0.2 rem 88s
+22:58:31 PAPER[fav] BUY Down eth-updown-5m-1794264900 @ 0.88 x 22.73 p 0.894 z 1.2 rem 88s
+22:58:31 PAPER[fav] BUY Down sol-updown-15m-1794264300 @ 0.88 x 22.73 p 0.853 z 1.1 rem 88s
+22:58:31 PAPER[fav] BUY Down bnb-updown-5m-1794264900 @ 0.85 x 6.67 p 0.849 z 1.0 rem 88s
+22:58:31 PAPER[fav] BUY Down bnb-updown-15m-1794264300 @ 0.92 x 5.0 p 0.972 z 1.9 rem 88s
+22:58:39 PAPER[fav] BUY Down xrp-updown-5m-1794264900 @ 0.89 x 5.0 p 0.956 z 1.7 rem 80s
+22:58:43 PAPER[fav] BUY Up btc-updown-15m-1794264300 @ 0.71 x 10.0 p 0.530 z 0.1 rem 76s
+22:58:43 PAPER[dog] BUY Down btc-updown-15m-1794264300 @ 0.3 x 66.67 p 0.470 z -0.1 rem 76s
+22:58:47 PAPER[dog] BUY Up hype-updown-15m-1794264300 @ 0.06 x 11.75 p 0.006 z -2.5 rem 72s
+bookws 22:58:54 {"msgs": 488368, "connects": 1, "errors": 0, "subscribed": 32, "last_msg": 1794265134.086945}
+22:58:55 PAPER[fav] BUY Down hype-updown-15m-1794264300 @ 0.91 x 20.0 p 0.961 z 1.8 rem 64s
+22:59:01 PAPER[exact] BUY Up btc-updown-15m-1794264300 @ 0.91 x 5.92 p 0.955 z 1.7 rem 58s
+22:59:05 PAPER[exact] BUY Down eth-updown-5m-1794264900 @ 0.95 x 21.05 p 0.990 z 2.3 rem 54s
+22:59:07 PAPER[lock_p_z2] BUY Down eth-updown-5m-1794264900 @ 0.96 x 20.83 p 0.992 z 2.4 rem 52s
+22:59:07 PAPER[lock_p_z2] BUY Down bnb-updown-5m-1794264900 @ 0.96 x 16.67 p 0.985 z 2.2 rem 52s
+bookws 22:59:24 {"msgs": 522099, "connects": 2, "errors": 1, "subscribed": 32, "last_msg": 1794265164.7053568, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+22:59:29 PAPER[exact] BUY Up btc-updown-5m-1794264900 @ 0.95 x 21.05 p 0.991 z 2.4 rem 30s
+22:59:31 PAPER[lock_p_z2] BUY Up btc-updown-5m-1794264900 @ 0.97 x 20.62 p 0.988 z 2.2 rem 28s
+22:59:35 PAPER[lock] BUY Up btc-updown-5m-1794264900 @ 0.93 x 21.51 p 0.998 z 2.9 rem 24s
+bookws 22:59:54 {"msgs": 537997, "connects": 2, "errors": 1, "subscribed": 32, "last_msg": 1794265194.7075884, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:00:24 {"msgs": 540946, "connects": 2, "errors": 1, "subscribed": 0, "last_msg": 1794265220.244159, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:00:54 {"msgs": 540949, "connects": 2, "errors": 1, "subscribed": 0, "last_msg": 1794265250.3813734, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:01:24 {"msgs": 540952, "connects": 2, "errors": 1, "subscribed": 0, "last_msg": 1794265280.5132792, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:01:54 {"msgs": 540955, "connects": 2, "errors": 1, "subscribed": 0, "last_msg": 1794265310.6498053, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:02:24 {"msgs": 540958, "connects": 2, "errors": 1, "subscribed": 0, "last_msg": 1794265340.7866096, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:02:54 {"msgs": 548874, "connects": 2, "errors": 1, "subscribed": 16, "last_msg": 1794265374.711314, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+23:03:01 PAPER[dog] BUY Up eth-updown-5m-1794265200 @ 0.05 x 138.82 p 0.009 z -2.4 rem 118s
+23:03:01 PAPER[dog] BUY Up doge-updown-5m-1794265200 @ 0.07 x 15.0 p 0.033 z -1.8 rem 118s
+23:03:01 PAPER[dog] BUY Up zec-updown-5m-1794265200 @ 0.24 x 30.0 p 0.001 z -3.4 rem 118s
+23:03:07 PAPER[dog] BUY Up hype-updown-5m-1794265200 @ 0.3 x 5.0 p 0.385 z -0.3 rem 112s
+bookws 23:03:24 {"msgs": 560748, "connects": 2, "errors": 1, "subscribed": 16, "last_msg": 1794265404.7106528, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:03:54 {"msgs": 566713, "connects": 2, "errors": 1, "subscribed": 16, "last_msg": 1794265434.7118754, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:04:24 {"msgs": 572226, "connects": 2, "errors": 1, "subscribed": 16, "last_msg": 1794265464.7064948, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:04:54 {"msgs": 576687, "connects": 2, "errors": 1, "subscribed": 16, "last_msg": 1794265494.695637, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:05:24 {"msgs": 578823, "connects": 2, "errors": 1, "subscribed": 0, "last_msg": 1794265523.4156234, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:05:54 {"msgs": 578826, "connects": 2, "errors": 1, "subscribed": 0, "last_msg": 1794265553.5516992, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:06:24 {"msgs": 578829, "connects": 2, "errors": 1, "subscribed": 0, "last_msg": 1794265583.6875188, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:06:54 {"msgs": 578832, "connects": 2, "errors": 1, "subscribed": 0, "last_msg": 1794265613.823041, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:07:24 {"msgs": 578835, "connects": 2, "errors": 1, "subscribed": 0, "last_msg": 1794265643.9602833, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:07:54 {"msgs": 603775, "connects": 2, "errors": 1, "subscribed": 16, "last_msg": 1794265674.715074, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+23:08:01 PAPER[dog] BUY Down eth-updown-5m-1794265500 @ 0.34 x 58.82 p 0.359 z -0.4 rem 118s
+23:08:01 PAPER[dog] BUY Down sol-updown-5m-1794265500 @ 0.28 x 10.0 p 0.331 z -0.4 rem 118s
+23:08:01 PAPER[dog] BUY Down doge-updown-5m-1794265500 @ 0.29 x 6.0 p 0.330 z -0.4 rem 118s
+23:08:01 PAPER[dog] BUY Down bnb-updown-5m-1794265500 @ 0.29 x 6.0 p 0.360 z -0.4 rem 118s
+23:08:01 PAPER[dog] BUY Up zec-updown-5m-1794265500 @ 0.25 x 50.0 p 0.112 z -1.2 rem 118s
+23:08:11 PAPER[dog] BUY Up hype-updown-5m-1794265500 @ 0.3 x 25.0 p 0.401 z -0.3 rem 108s
+23:08:21 PAPER[dog] BUY Up btc-updown-5m-1794265500 @ 0.32 x 62.5 p 0.485 z -0.0 rem 98s
+bookws 23:08:24 {"msgs": 658810, "connects": 2, "errors": 1, "subscribed": 16, "last_msg": 1794265704.7135732, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+23:08:31 PAPER[fav] BUY Down btc-updown-5m-1794265500 @ 0.74 x 27.03 p 0.690 z 0.5 rem 88s
+23:08:31 PAPER[fav] BUY Up sol-updown-5m-1794265500 @ 0.62 x 25.0 p 0.587 z 0.2 rem 88s
+23:08:31 PAPER[fav] BUY Down xrp-updown-5m-1794265500 @ 0.65 x 8.46 p 0.603 z 0.3 rem 88s
+23:08:31 PAPER[fav] BUY Up doge-updown-5m-1794265500 @ 0.7 x 17.0 p 0.612 z 0.3 rem 88s
+23:08:31 PAPER[fav] BUY Down hype-updown-5m-1794265500 @ 0.91 x 21.98 p 0.875 z 1.1 rem 88s
+23:08:33 PAPER[fav] BUY Down bnb-updown-5m-1794265500 @ 0.61 x 21.0 p 0.502 z 0.0 rem 86s
+23:08:35 PAPER[dog] BUY Up xrp-updown-5m-1794265500 @ 0.27 x 31.28 p 0.392 z -0.3 rem 84s
+23:08:37 PAPER[fav] BUY Down eth-updown-5m-1794265500 @ 0.65 x 14.46 p 0.504 z 0.0 rem 82s
+bookws 23:08:54 {"msgs": 711298, "connects": 2, "errors": 1, "subscribed": 16, "last_msg": 1794265734.7154481, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:09:24 {"msgs": 759345, "connects": 3, "errors": 2, "subscribed": 16, "last_msg": 1794265764.712436, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+23:09:35 PAPER[lock] BUY Up btc-updown-5m-1794265500 @ 0.97 x 20.62 p 0.999 z 3.3 rem 24s
+23:09:35 PAPER[lock_m] BUY Up btc-updown-5m-1794265500 @ 0.97 x 20.62 p 0.999 z 3.3 rem 24s
+23:09:37 PAPER[lock_p_z2] BUY Up btc-updown-5m-1794265500 @ 0.96 x 20.83 p 0.985 z 2.2 rem 22s
+23:09:39 PAPER[exact] BUY Up btc-updown-5m-1794265500 @ 0.83 x 24.1 p 0.995 z 2.5 rem 20s
+23:09:47 PAPER[exact] BUY Up hype-updown-5m-1794265500 @ 0.39 x 18.0 p 0.930 z 1.5 rem 12s
+bookws 23:09:54 {"msgs": 788777, "connects": 3, "errors": 2, "subscribed": 16, "last_msg": 1794265794.7158144, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:10:24 {"msgs": 793661, "connects": 3, "errors": 2, "subscribed": 0, "last_msg": 1794265816.730683, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:10:54 {"msgs": 793664, "connects": 3, "errors": 2, "subscribed": 0, "last_msg": 1794265846.8662984, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:11:24 {"msgs": 793667, "connects": 3, "errors": 2, "subscribed": 0, "last_msg": 1794265876.9993293, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:11:54 {"msgs": 793670, "connects": 3, "errors": 2, "subscribed": 0, "last_msg": 1794265907.1322324, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:12:24 {"msgs": 793673, "connects": 3, "errors": 2, "subscribed": 0, "last_msg": 1794265937.262886, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:12:54 {"msgs": 811070, "connects": 3, "errors": 2, "subscribed": 32, "last_msg": 1794265974.7182348, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+23:13:01 PAPER[dog] BUY Down btc-updown-5m-1794265800 @ 0.3 x 66.67 p 0.349 z -0.4 rem 118s
+23:13:01 PAPER[dog] BUY Down eth-updown-5m-1794265800 @ 0.26 x 5.0 p 0.311 z -0.5 rem 118s
+23:13:01 PAPER[dog] BUY Up sol-updown-5m-1794265800 @ 0.18 x 111.11 p 0.236 z -0.7 rem 118s
+23:13:01 PAPER[dog] BUY Up xrp-updown-5m-1794265800 @ 0.2 x 61.0 p 0.248 z -0.7 rem 118s
+23:13:01 PAPER[dog] BUY Down doge-updown-5m-1794265800 @ 0.18 x 11.0 p 0.250 z -0.7 rem 118s
+23:13:01 PAPER[dog] BUY Down bnb-updown-5m-1794265800 @ 0.29 x 6.0 p 0.381 z -0.3 rem 118s
+23:13:01 PAPER[dog] BUY Down zec-updown-5m-1794265800 @ 0.25 x 10.0 p 0.156 z -1.0 rem 118s
+bookws 23:13:24 {"msgs": 878293, "connects": 3, "errors": 2, "subscribed": 32, "last_msg": 1794266004.7184317, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+23:13:31 PAPER[fav] BUY Down btc-updown-5m-1794265800 @ 0.77 x 25.97 p 0.647 z 0.4 rem 88s
+23:13:31 PAPER[fav] BUY Down eth-updown-5m-1794265800 @ 0.74 x 27.03 p 0.656 z 0.4 rem 88s
+23:13:31 PAPER[fav] BUY Down doge-updown-5m-1794265800 @ 0.7 x 5.0 p 0.519 z 0.0 rem 88s
+23:13:31 PAPER[fav] BUY Down bnb-updown-5m-1794265800 @ 0.67 x 11.0 p 0.563 z 0.2 rem 88s
+bookws 23:13:54 {"msgs": 929816, "connects": 3, "errors": 2, "subscribed": 32, "last_msg": 1794266034.7118845, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:14:24 {"msgs": 974812, "connects": 3, "errors": 2, "subscribed": 32, "last_msg": 1794266064.718614, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:14:54 {"msgs": 996121, "connects": 3, "errors": 2, "subscribed": 32, "last_msg": 1794266094.7112803, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:15:24 {"msgs": 999409, "connects": 3, "errors": 2, "subscribed": 0, "last_msg": 1794266119.833747, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:15:54 {"msgs": 999412, "connects": 3, "errors": 2, "subscribed": 0, "last_msg": 1794266149.97959, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:16:24 {"msgs": 999415, "connects": 3, "errors": 2, "subscribed": 0, "last_msg": 1794266180.1206577, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:16:54 {"msgs": 999418, "connects": 3, "errors": 2, "subscribed": 0, "last_msg": 1794266210.2619567, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:17:24 {"msgs": 999421, "connects": 3, "errors": 2, "subscribed": 0, "last_msg": 1794266240.4019597, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:17:54 {"msgs": 1015511, "connects": 3, "errors": 2, "subscribed": 16, "last_msg": 1794266274.506758, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+23:18:01 PAPER[dog] BUY Down eth-updown-5m-1794266100 @ 0.09 x 222.22 p 0.162 z -1.0 rem 118s
+23:18:01 PAPER[dog] BUY Up xrp-updown-5m-1794266100 @ 0.29 x 29.0 p 0.291 z -0.5 rem 118s
+23:18:01 PAPER[dog] BUY Down bnb-updown-5m-1794266100 @ 0.24 x 11.0 p 0.368 z -0.3 rem 118s
+23:18:01 PAPER[dog] BUY Down zec-updown-5m-1794266100 @ 0.25 x 10.0 p 0.085 z -1.4 rem 118s
+bookws 23:18:24 {"msgs": 1037529, "connects": 3, "errors": 2, "subscribed": 16, "last_msg": 1794266304.7210095, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+23:18:31 PAPER[fav] BUY Up bnb-updown-5m-1794266100 @ 0.89 x 14.1 p 0.693 z 0.5 rem 88s
+23:18:33 PAPER[fav] BUY Down xrp-updown-5m-1794266100 @ 0.63 x 31.75 p 0.596 z 0.2 rem 86s
+bookws 23:18:54 {"msgs": 1057576, "connects": 3, "errors": 2, "subscribed": 16, "last_msg": 1794266334.7205932, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+23:18:55 PAPER[fav] BUY Up eth-updown-5m-1794266100 @ 0.95 x 21.05 p 0.967 z 1.8 rem 64s
+bookws 23:19:24 {"msgs": 1070645, "connects": 3, "errors": 2, "subscribed": 16, "last_msg": 1794266364.7045639, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:19:54 {"msgs": 1075849, "connects": 3, "errors": 2, "subscribed": 16, "last_msg": 1794266394.7084675, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:20:24 {"msgs": 1077893, "connects": 3, "errors": 2, "subscribed": 0, "last_msg": 1794266421.1592662, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:20:54 {"msgs": 1077896, "connects": 3, "errors": 2, "subscribed": 0, "last_msg": 1794266451.297714, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:21:24 {"msgs": 1077899, "connects": 3, "errors": 2, "subscribed": 0, "last_msg": 1794266481.4343896, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:21:54 {"msgs": 1077902, "connects": 3, "errors": 2, "subscribed": 0, "last_msg": 1794266511.5732987, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:22:24 {"msgs": 1077905, "connects": 3, "errors": 2, "subscribed": 0, "last_msg": 1794266541.7127557, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:22:54 {"msgs": 1093605, "connects": 3, "errors": 2, "subscribed": 16, "last_msg": 1794266574.726272, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+23:23:01 PAPER[dog] BUY Up eth-updown-5m-1794266400 @ 0.14 x 20.0 p 0.292 z -0.5 rem 118s
+23:23:01 PAPER[dog] BUY Up bnb-updown-5m-1794266400 @ 0.28 x 11.0 p 0.541 z 0.1 rem 118s
+23:23:01 PAPER[dog] BUY Up zec-updown-5m-1794266400 @ 0.24 x 30.0 p 0.038 z -1.8 rem 118s
+23:23:17 PAPER[dog] BUY Down btc-updown-5m-1794266400 @ 0.32 x 62.5 p 0.520 z 0.0 rem 102s
+23:23:17 PAPER[dog] BUY Up xrp-updown-5m-1794266400 @ 0.1 x 68.09 p 0.032 z -1.9 rem 102s
+bookws 23:23:24 {"msgs": 1146369, "connects": 3, "errors": 2, "subscribed": 16, "last_msg": 1794266604.7272604, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+23:23:31 PAPER[fav] BUY Up btc-updown-5m-1794266400 @ 0.68 x 14.0 p 0.598 z 0.2 rem 88s
+23:23:31 PAPER[fav] BUY Down eth-updown-5m-1794266400 @ 0.87 x 22.99 p 0.818 z 0.9 rem 88s
+23:23:31 PAPER[fav] BUY Up bnb-updown-5m-1794266400 @ 0.62 x 32.26 p 0.534 z 0.1 rem 88s
+bookws 23:23:54 {"msgs": 1185598, "connects": 3, "errors": 2, "subscribed": 16, "last_msg": 1794266634.6947715, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:24:24 {"msgs": 1224678, "connects": 3, "errors": 2, "subscribed": 16, "last_msg": 1794266664.727842, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:24:54 {"msgs": 1236270, "connects": 3, "errors": 2, "subscribed": 16, "last_msg": 1794266694.7247372, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:25:24 {"msgs": 1238257, "connects": 3, "errors": 2, "subscribed": 0, "last_msg": 1794266722.446261, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:25:54 {"msgs": 1238260, "connects": 3, "errors": 2, "subscribed": 0, "last_msg": 1794266752.5840147, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:26:24 {"msgs": 1238263, "connects": 3, "errors": 2, "subscribed": 0, "last_msg": 1794266782.7198803, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:26:54 {"msgs": 1238266, "connects": 3, "errors": 2, "subscribed": 0, "last_msg": 1794266812.8605144, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:27:24 {"msgs": 1238269, "connects": 3, "errors": 2, "subscribed": 0, "last_msg": 1794266843.0027392, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:27:54 {"msgs": 1251017, "connects": 3, "errors": 2, "subscribed": 32, "last_msg": 1794266874.7296965, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+23:28:02 PAPER[dog] BUY Down btc-updown-5m-1794266700 @ 0.09 x 222.22 p 0.052 z -1.6 rem 118s
+23:28:02 PAPER[dog] BUY Down sol-updown-5m-1794266700 @ 0.06 x 21.5 p 0.074 z -1.4 rem 118s
+23:28:02 PAPER[dog] BUY Down sol-updown-15m-1794266100 @ 0.09 x 17.44 p 0.126 z -1.1 rem 118s
+23:28:02 PAPER[dog] BUY Up xrp-updown-15m-1794266100 @ 0.28 x 14.0 p 0.463 z -0.1 rem 118s
+23:28:02 PAPER[dog] BUY Down doge-updown-5m-1794266700 @ 0.14 x 46.0 p 0.106 z -1.2 rem 118s
+23:28:02 PAPER[dog] BUY Down doge-updown-15m-1794266100 @ 0.22 x 30.0 p 0.190 z -0.9 rem 118s
+23:28:02 PAPER[dog] BUY Down bnb-updown-5m-1794266700 @ 0.32 x 6.0 p 0.270 z -0.6 rem 118s
+23:28:02 PAPER[dog] BUY Down bnb-updown-15m-1794266100 @ 0.19 x 5.0 p 0.136 z -1.1 rem 118s
+23:28:02 PAPER[dog] BUY Down hype-updown-5m-1794266700 @ 0.3 x 5.0 p 0.159 z -1.0 rem 118s
+23:28:02 PAPER[dog] BUY Down hype-updown-15m-1794266100 @ 0.16 x 5.0 p 0.106 z -1.3 rem 118s
+23:28:02 PAPER[dog] BUY Down zec-updown-5m-1794266700 @ 0.25 x 10.0 p 0.061 z -1.5 rem 118s
+bookws 23:28:24 {"msgs": 1298235, "connects": 3, "errors": 2, "subscribed": 32, "last_msg": 1794266904.727705, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+23:28:28 PAPER[pair_ev] bnb Up 15m@0.9 + Down 5m@0.15 x 10.0 sum 1.05 p_mid 0.15 ev +0.082 rem 92s
+23:28:32 PAPER[fav] BUY Down xrp-updown-15m-1794266100 @ 0.64 x 31.25 p 0.558 z 0.1 rem 88s
+23:28:32 PAPER[fav] BUY Up bnb-updown-5m-1794266700 @ 0.88 x 10.0 p 0.768 z 0.7 rem 88s
+23:28:32 PAPER[fav] BUY Up bnb-updown-15m-1794266100 @ 0.9 x 10.0 p 0.913 z 1.4 rem 88s
+23:28:32 PAPER[fav] BUY Up zec-updown-15m-1794266100 @ 0.79 x 5.0 p 0.717 z 0.6 rem 88s
+23:28:42 PAPER[fav] BUY Up hype-updown-5m-1794266700 @ 0.86 x 14.15 p 0.936 z 1.5 rem 78s
+23:28:42 PAPER[fav] BUY Up hype-updown-15m-1794266100 @ 0.93 x 5.0 p 0.970 z 1.9 rem 78s
+bookws 23:28:54 {"msgs": 1320844, "connects": 3, "errors": 2, "subscribed": 32, "last_msg": 1794266934.727372, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:29:24 {"msgs": 1335566, "connects": 3, "errors": 2, "subscribed": 32, "last_msg": 1794266964.725562, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:29:54 {"msgs": 1344098, "connects": 3, "errors": 2, "subscribed": 32, "last_msg": 1794266994.730196, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:30:24 {"msgs": 1347403, "connects": 3, "errors": 2, "subscribed": 0, "last_msg": 1794267024.2888496, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:30:54 {"msgs": 1347406, "connects": 3, "errors": 2, "subscribed": 0, "last_msg": 1794267054.4259057, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:31:24 {"msgs": 1347409, "connects": 3, "errors": 2, "subscribed": 0, "last_msg": 1794267084.5646777, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:31:54 {"msgs": 1347412, "connects": 3, "errors": 2, "subscribed": 0, "last_msg": 1794267114.703988, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:32:24 {"msgs": 1347414, "connects": 3, "errors": 2, "subscribed": 0, "last_msg": 1794267134.795923, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:32:54 {"msgs": 1357288, "connects": 3, "errors": 2, "subscribed": 16, "last_msg": 1794267174.6414943, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+23:33:01 PAPER[dog] BUY Up xrp-updown-5m-1794267000 @ 0.07 x 40.0 p 0.145 z -1.1 rem 118s
+23:33:01 PAPER[dog] BUY Up doge-updown-5m-1794267000 @ 0.14 x 10.0 p 0.179 z -0.9 rem 118s
+23:33:01 PAPER[dog] BUY Up zec-updown-5m-1794267000 @ 0.25 x 10.0 p 0.038 z -1.8 rem 118s
+bookws 23:33:24 {"msgs": 1377990, "connects": 3, "errors": 2, "subscribed": 16, "last_msg": 1794267204.7328837, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:33:54 {"msgs": 1386363, "connects": 3, "errors": 2, "subscribed": 16, "last_msg": 1794267234.7270892, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:34:24 {"msgs": 1393588, "connects": 3, "errors": 2, "subscribed": 16, "last_msg": 1794267264.7282445, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:34:54 {"msgs": 1398604, "connects": 3, "errors": 2, "subscribed": 16, "last_msg": 1794267294.7289455, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:35:24 {"msgs": 1400704, "connects": 3, "errors": 2, "subscribed": 0, "last_msg": 1794267316.4482214, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:35:54 {"msgs": 1400707, "connects": 3, "errors": 2, "subscribed": 0, "last_msg": 1794267346.585743, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:36:24 {"msgs": 1400710, "connects": 3, "errors": 2, "subscribed": 0, "last_msg": 1794267376.7242832, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:36:54 {"msgs": 1400713, "connects": 3, "errors": 2, "subscribed": 0, "last_msg": 1794267406.8646758, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:37:24 {"msgs": 1400716, "connects": 3, "errors": 2, "subscribed": 0, "last_msg": 1794267437.0036194, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:37:54 {"msgs": 1419322, "connects": 3, "errors": 2, "subscribed": 16, "last_msg": 1794267474.7330246, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+23:38:00 PAPER[dog] BUY Up btc-updown-5m-1794267300 @ 0.16 x 125.0 p 0.192 z -0.9 rem 119s
+23:38:00 PAPER[dog] BUY Up eth-updown-5m-1794267300 @ 0.24 x 35.0 p 0.274 z -0.6 rem 119s
+23:38:00 PAPER[dog] BUY Up sol-updown-5m-1794267300 @ 0.19 x 32.2 p 0.253 z -0.7 rem 119s
+23:38:00 PAPER[dog] BUY Down xrp-updown-5m-1794267300 @ 0.22 x 59.0 p 0.222 z -0.8 rem 119s
+23:38:00 PAPER[dog] BUY Up bnb-updown-5m-1794267300 @ 0.25 x 47.14 p 0.258 z -0.7 rem 119s
+23:38:00 PAPER[dog] BUY Up hype-updown-5m-1794267300 @ 0.21 x 5.0 p 0.202 z -0.8 rem 119s
+23:38:00 PAPER[dog] BUY Up zec-updown-5m-1794267300 @ 0.28 x 20.0 p 0.132 z -1.1 rem 119s
+23:38:04 PAPER[dog] BUY Up doge-updown-5m-1794267300 @ 0.35 x 11.0 p 0.358 z -0.4 rem 115s
+bookws 23:38:24 {"msgs": 1462543, "connects": 3, "errors": 2, "subscribed": 16, "last_msg": 1794267504.7380316, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+23:38:30 PAPER[fav] BUY Down btc-updown-5m-1794267300 @ 0.83 x 24.1 p 0.775 z 0.8 rem 89s
+23:38:30 PAPER[fav] BUY Down sol-updown-5m-1794267300 @ 0.8 x 7.0 p 0.755 z 0.7 rem 89s
+23:38:30 PAPER[fav] BUY Up xrp-updown-5m-1794267300 @ 0.86 x 10.0 p 0.743 z 0.7 rem 89s
+23:38:30 PAPER[fav] BUY Down doge-updown-5m-1794267300 @ 0.71 x 10.0 p 0.720 z 0.6 rem 89s
+23:38:30 PAPER[fav] BUY Down bnb-updown-5m-1794267300 @ 0.7 x 16.0 p 0.755 z 0.7 rem 89s
+23:38:32 PAPER[fav] BUY Up eth-updown-5m-1794267300 @ 0.71 x 20.91 p 0.497 z -0.0 rem 87s
+bookws 23:38:54 {"msgs": 1512907, "connects": 3, "errors": 2, "subscribed": 16, "last_msg": 1794267534.7378156, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+bookws 23:39:24 {"msgs": 1546485, "connects": 3, "errors": 2, "subscribed": 16, "last_msg": 1794267564.7390337, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+23:39:50 PAPER[exact] BUY Down bnb-updown-5m-1794267300 @ 0.48 x 10.91 p 0.972 z 1.9 rem 9s
+bookws 23:39:54 {"msgs": 1563968, "connects": 3, "errors": 2, "subscribed": 16, "last_msg": 1794267594.7345467, "last_error": "received 1013 (try again later) slow consumer: send buffer full; then sent 1013 (try again later) slow consumer: send buffer full"}
+{"updated": "2026-11-09T23:39:56.304715+00:00", "trades": 8113, "settled": 8098, "obs_this_run": 10309, "rest_ms": {"n": 14058, "min": 38.8, "p50": 48.5, "p90": 56.8}, "feed": {"msgs": 106071, "connects": 3, "errors": 0, "last_msg": 1794267596.197245, "silent_reconnects": 2}, "feed_topics": {"crypto_prices": 21349, "crypto_prices_twap_thirty": 28241, "crypto_prices_chainlink": 28242, "crypto_prices_twap_sixty": 28236}, "bookws": {"ran_to_end": true}, "by_strat": {"dog": {"trades": 3369, "won": 454, "staked": 19891.81, "pnl": -6586.14}, "exact": {"trades": 2245, "won": 1057, "staked": 20626.35, "pnl": -1376.56}, "fav": {"trades": 2108, "won": 1667, "staked": 27171.73, "pnl": -858.42}, "lock": {"trades": 129, "won": 111, "staked": 1788.13, "pnl": 56.06}, "lock_early": {"trades": 2, "won": 2, "staked": 40.0, "pnl": 2.18}, "lock_m": {"trades": 5, "won": 4, "staked": 81.59, "pnl": -15.79}, "lock_p_z2": {"trades": 8, "won": 7, "staked": 153.01, "pnl": -15.11}, "pair": {"trades": 38, "won": 18, "staked": 242.17, "pnl": 23.75}, "pair_ev": {"trades": 128, "won": 72, "staked": 952.31, "pnl": 48.23}, "v2": {"trades": 66, "won": 36, "staked": 1096.57, "pnl": -112.22}}, "by_day": {"2026-11-07 dog": {"trades": 1111, "won": 167, "staked": 6332.15, "pnl": -1579.56}, "2026-11-07 exact": {"trades": 1263, "won": 586, "staked": 11222.56, "pnl": -83.36}, "2026-11-07 fav": {"trades": 713, "won": 557, "staked": 9249.61, "pnl": -457.53}, "2026-11-07 lock": {"trades": 52, "won": 43, "staked": 710.23, "pnl": -7.98}, "2026-11-07 pair": {"trades": 28, "won": 14, "staked": 197.59, "pnl": 22.48}, "2026-11-07 pair_ev": {"trades": 38, "won": 21, "staked": 290.23, "pnl": -0.87}, "2026-11-07 v2": {"trades": 66, "won": 36, "staked": 1096.57, "pnl": -112.22}, "2026-11-08 dog": {"trades": 1727, "won": 219, "staked": 10227.37, "pnl": -3955.72}, "2026-11-08 exact": {"trades": 921, "won": 419, "staked": 8649.82, "pnl": -1297.25}, "2026-11-08 fav": {"trades": 1044, "won": 826, "staked": 13391.08, "pnl": -399.68}, "2026-11-08 lock": {"trades": 67, "won": 60, "staked": 911.51, "pnl": 81.91}, "2026-11-08 pair": {"trades": 6, "won": 3, "staked": 25.88, "pnl": 7.46}, "2026-11-08 pair_ev": {"trades": 70, "won": 41, "staked": 544.17, "pnl": 57.46}, "2026-11-09 dog": {"trades": 531, "won": 68, "staked": 3332.28, "pnl": -1050.86}, "2026-11-09 exact": {"trades": 61, "won": 52, "staked": 753.97, "pnl": 4.05}, "2026-11-09 fav": {"trades": 351, "won": 284, "staked": 4531.04, "pnl": -1.21}, "2026-11-09 lock": {"trades": 10, "won": 8, "staked": 166.39, "pnl": -17.87}, "2026-11-09 lock_early": {"trades": 2, "won": 2, "staked": 40.0, "pnl": 2.18}, "2026-11-09 lock_m": {"trades": 5, "won": 4, "staked": 81.59, "pnl": -15.79}, "2026-11-09 lock_p_z2": {"trades": 8, "won": 7, "staked": 153.01, "pnl": -15.11}, "2026-11-09 pair": {"trades": 4, "won": 1, "staked": 18.69, "pnl": -6.19}, "2026-11-09 pair_ev": {"trades": 20, "won": 10, "staked": 117.92, "pnl": -8.35}}}
+disk 2026-11-09T23:39 13G free of 19G checkout 30M store 87M
