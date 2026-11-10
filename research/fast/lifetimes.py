@@ -12,6 +12,7 @@ from collections import defaultdict
 D = "data/fast"
 Z, ASK_MAX, ASK_MIN = float(os.environ.get("Z", "2.5")), float(os.environ.get("ASK_MAX", "0.97")), float(os.environ.get("ASK_MIN", "0.50"))
 R_LO, R_HI = float(os.environ.get("R_LO", "0")), float(os.environ.get("R_HI", "60"))   # seconds-before-end range to study
+SINCE, UNTIL = os.environ.get("SINCE", ""), os.environ.get("UNTIL", "9")   # archive hours to use, e.g. SINCE=2026-11-09T21 (out-of-sample days)
 SIGMA_FLOOR = {"btc": 1.5e-5, "eth": 2.4e-5, "bnb": 1.6e-5, "sol": 3.4e-5, "doge": 3.4e-5, "xrp": 4.3e-5, "hype": 4.2e-5, "zec": 8.6e-5}
 
 
@@ -19,6 +20,8 @@ def lines(pattern):
     """records of every file matching pattern; duplicate lines within a file are dropped (archives that were
     appended more than once hold the same hour several times)"""
     for f in sorted(glob.glob(pattern)):
+        if not (SINCE <= os.path.basename(f)[:13] < UNTIL):
+            continue
         op = gzip.open if f.endswith(".gz") else open
         seen = set()
         try:
@@ -175,6 +178,18 @@ if life:
             usd += stake; pnl += stake / a * ((1 if x[3] else 0) - a - 0.07 * a * (1 - a)); prices.append(a)
         prices.sort()
         print(f"  act after {R:5.2f} s of persistence: episodes {n:4} win {w / n if n else 0:.3f}  stake ${usd:,.0f}  pnl ${pnl:+,.1f} ({pnl / usd if usd else 0:+.1%})  ask paid median {prices[len(prices) // 2] if prices else 0:.2f}")
+    # window level: one trade per (window, side), the first episode that lasts R seconds (what the bot does)
+    print("  window level (one trade per window-side, first episode that persisted R s):")
+    for R in (0.05, 0.5, 1.0, 2.0, 3.0, 5.0):
+        first = {}
+        for x in sorted(life, key=lambda x: x[6][0][0]):
+            if x[0] >= R and (x[4], x[5]) not in first:
+                first[(x[4], x[5])] = x
+        n = len(first); w = sum(1 for x in first.values() if x[3]); usd = pnl = 0.0
+        for x in first.values():
+            a, sz = ask_at(x[6], R); stake = min(a * (sz or 0), 20.0)
+            usd += stake; pnl += stake / a * ((1 if x[3] else 0) - a - 0.07 * a * (1 - a))
+        print(f"    R {R:4.2f} s: windows {n:4} win {w / n if n else 0:.3f}  stake ${usd:,.0f}  pnl ${pnl:+,.1f} ({pnl / usd if usd else 0:+.1%})")
     ls = sorted(x[0] for x in life); print("  lifetime percentiles (s): 10%", round(ls[len(ls) // 10], 2), "median", round(ls[len(ls) // 2], 2), "90%", round(ls[9 * len(ls) // 10], 2))
     wl = sorted(x[0] for x in life if x[3]); ll = sorted(x[0] for x in life if not x[3])
     if wl: print("  winners' lifetime median", round(wl[len(wl) // 2], 2), "s;", "losers' median", round(ll[len(ll) // 2], 2) if ll else None, "s")
