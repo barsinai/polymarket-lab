@@ -40,6 +40,8 @@ jobs:
           export PATH="$HOME/.local/bin:$PATH"
           uv pip install --python "$HOME/.venv-pilot/bin/python" -q requests websockets orjson
       - name: Run ~5.2 h in hourly parts
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           git config user.name "polymarket-lab-bot"
           git config user.email "actions@users.noreply.github.com"
@@ -62,6 +64,9 @@ jobs:
             report
             # hourly summaries of the recordings (repair, official results, websocket lifetime study), bot stopped
             PYTHON="$HOME/.venv-pilot/bin/python" timeout 700 bash research/fast/hourly.sh 2>&1 | tail -12 | tee -a /tmp/fast.txt || true
+            # GitHub's hourly cron for the slow-paper workflow fires only every few hours: kick it from here each hour
+            curl -sS -o /dev/null -X POST -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
+              https://api.github.com/repos/${{ github.repository }}/actions/workflows/spike_paper.yml/dispatches -d '{"ref":"main"}' || true
             mkdir -p logs && cp /tmp/fast.txt logs/fast-log.txt
             # publish the bot's own files on top of whatever is upstream (only the server writes these); no raw recordings
             mkdir -p /tmp/fastout/hourly
