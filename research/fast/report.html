@@ -182,6 +182,15 @@ a { color: var(--blue); }
   <div class="meaning"><strong>What it means:</strong> the edge that exists in these markets is available to a patient, exact bot, not a fast one; our 2-second polling loop is close to the right speed already. The size on offer is modest (median $16 at the ask after 2 s, a quarter of cases above $42), so the day would have paid about +$60 at $20 a trade or +$118 at $50. One day and five losing trades is not proof: the rule now runs on paper as "lock_p" and needs several days before any real money.</div>
 </section>
 
+<section id="band">
+  <div class="claim"><h2>13. The "lock" is not a lock. Its profit sits in one price band.</h2><span class="chip early">early</span></div>
+  <p>Replaying the exact lock rule on every 2-second book reading since 11-07 (146 paper trades, settled against the official results) and sorting the trades by the price we paid gives a picture the win rate hides. Two thirds of the capital went into asks of 93-97¢, where a win pays 3-7¢ a share and one loss costs 93¢: that band won 95% of the time and still lost money. Everything the rule earned came from the cases where the market still sold the "locked" side at 50-92¢.</p>
+  <figure id="f-band"><div class="fig-title">Lock rule, return per dollar by the ask we paid (4 days of tape)</div><div class="svgwrap"></div><figcaption>Bars are profit per dollar staked; the label gives the trades and the win rate. A 95% win rate at 95¢ is a coin that pays 5¢ when it lands right and takes 95¢ when it does not: break-even. The information we have (the TWAP arithmetic) is only worth money while the market has not yet priced it, which is the 70-92¢ band.</figcaption><details><summary>numbers</summary><div class="tablewrap"></div></details></figure>
+  <p>Why does a "locked" side lose at all? We checked our forecast of the final 60-second average against the official final price for 76,388 readings. The model's uncertainty is honest in the body of the distribution, but the tails are fat, and the real issue is selection: the model is wrong on 0.1-0.2% of all readings with z ≥ 2.5, yet on 8-10% of the readings where <em>the market disagrees with it</em>. When the crowd still quotes 60¢ for a side our maths calls certain, the crowd knows something a tenth of the time. A bigger safety margin does not cure this: requiring the forecast to lead by more than the asset's own 90th- or 99th-percentile error at that moment removes trades, not losses (90.6% vs 90.3% win rate).</p>
+  <figure id="f-calib"><div class="fig-title">How far the final average ends up from our forecast, by seconds remaining</div><div class="svgwrap"></div><figcaption>Median, 90th and 99th percentile of the forecast error in basis points, all eight coins pooled. With 25 seconds left, one reading in ten is off by more than 1.3 bp and one in a hundred by more than 5 bp; the 11-09 23:09 BTC loss (margin 1.75 bp at 25 s, ask 97¢, -$20) was an ordinary 4 bp move in 25 seconds, not a data error.</figcaption><details><summary>numbers</summary><div class="tablewrap"></div></details></figure>
+  <div class="meaning"><strong>What it means:</strong> the rule now on paper is the cheap band only: <em>lock_c</em> buys the locked side at ≤ 92¢, skips the last 20 seconds unless the forecast leads by a full basis point (with 20 s left a cheap ask means the market has caught up: 2 of 7 such trades won), and in the replay made +$139 on $628 staked (51 trades, 92% won) - the same profit as the whole lock rule on a third of the capital. Two honest caveats. The price band and the 20-second cut were both found on these same 150 windows, so the replay flatters them; the paper run from 02:41 UTC on 11-10 is the test. And the cheap ask is usually small - the median trade is $10, not $20 - so even if it holds, this is about +$35 a day at today's sizes, not a business.</div>
+</section>
+
 <footer>Sources: Polymarket Gamma API (event metadata: priceToBeat, finalPrice, results), Polymarket Data API v2 (public trade tape), Polymarket RTDS feed (Chainlink prices and 60 s TWAP), Binance REST (1-second proxy), and the bot's own order-book readings. Code: research/fast/ in the polymarket-lab repository (report_data.py builds every number on this page).</footer>
 </main>
 <div id="tip" hidden></div>
@@ -500,6 +509,40 @@ a { color: var(--blue); }
     text(s, W / 2, H - 6, 'ask when we "bought"', 'tick', 'middle');
     const t = el('text', { x: 14, y: top + yh / 2, class: 'tick', transform: `rotate(-90 14 ${top + yh / 2})`, 'text-anchor': 'middle' }, s); t.textContent = 'ask 2 s later';
     table('f-persist', ['bought at', '2 s later', 'outcome'], P.map(p => [(p.ask * 100).toFixed(0) + '¢', (p.next * 100).toFixed(0) + '¢', p.won ? 'won' : 'lost']));
+  })();
+
+  // ---- 13a lock return per $ by ask band
+  if (D.priceband) (function () {
+    const rows = D.priceband.rows, W = 720, rowH = 40, left = 80, H = rows.length * rowH + 34;
+    const s = svgIn('f-band', W, H);
+    const lim = Math.max(...rows.map(r => Math.abs(r.ret))) * 1.05, mid = left + 40, xw = (W - 210 - mid) / lim;   // 190 px kept for the label   // px per unit of return
+    [0, 0.1, 0.2, 0.3, 0.4].forEach(v => { if (v > lim) return; const x = mid + v * xw; el('line', { x1: x, x2: x, y1: 8, y2: H - 24, class: v === 0 ? 'axis' : 'grid' }, s); text(s, x, H - 10, (v * 100).toFixed(0) + '%', 'tick', 'middle'); });
+    rows.forEach((r, i) => {
+      const y = 14 + i * rowH, w = r.ret >= 0 ? r.ret * xw : Math.min(-r.ret * xw, mid - left - 4);
+      text(s, left - 10, y + 13, r.band, '', 'end');
+      const p = el('path', { d: r.ret >= 0 ? roundRight(mid, y, w, 26, 4) : `M${mid},${y} H${mid - w + 4} Q${mid - w},${y} ${mid - w},${y + 4} V${y + 22} Q${mid - w},${y + 26} ${mid - w + 4},${y + 26} H${mid} Z`, fill: r.ret >= 0 ? css('--blue') : css('--red'), class: 'mark' }, s);
+      text(s, r.ret >= 0 ? mid + w + 8 : mid + 8, y + 13, `${(r.ret * 100).toFixed(1)}% · ${r.n} trades · ${pct(r.win)} won`, 'val', 'start');
+      hover(p, `asks of ${r.band}<br>${r.n} trades, ${pct(r.win, 1)} won<br>${fmt$(r.pnl)} on $${r.staked.toLocaleString()} staked`);
+    });
+    table('f-band', ['ask paid', 'trades', 'won', 'staked', 'profit', 'per $'], rows.map(r => [r.band, r.n, pct(r.win, 1), '$' + r.staked.toLocaleString(), fmt$(r.pnl), (r.ret * 100).toFixed(1) + '%']));
+  })();
+
+  // ---- 13b forecast error percentiles by seconds remaining
+  if (D.priceband && D.priceband.calib) (function () {
+    const C = D.priceband.calib, W = 720, H = 260, left = 56, right = 118, top = 16, bottom = 40;
+    const s = svgIn('f-calib', W, H);
+    const xw = W - left - right, yh = H - top - bottom, ymax = 20;
+    const sx = i => left + (i + 0.5) / C.length * xw, sy = v => top + (1 - Math.min(v, ymax) / ymax) * yh;
+    [0, 5, 10, 15, 20].forEach(v => { el('line', { x1: left, x2: W - right, y1: sy(v), y2: sy(v), class: v === 0 ? 'axis' : 'grid' }, s); text(s, left - 6, sy(v), v + ' bp', 'tick', 'end'); });
+    C.forEach((c, i) => text(s, sx(i), H - bottom + 14, c.rem, 'tick', 'middle'));
+    const series = [['p50', 'median', css('--muted')], ['p90', '90th percentile', css('--blue')], ['p99', '99th percentile', css('--red')]];
+    series.forEach(([k, name, col]) => {
+      el('path', { d: C.map((c, i) => (i ? 'L' : 'M') + sx(i) + ',' + sy(c[k])).join(' '), fill: 'none', stroke: col, 'stroke-width': 2 }, s);
+      C.forEach((c, i) => { const d = el('circle', { cx: sx(i), cy: sy(c[k]), r: 5, fill: col, stroke: css('--surface'), 'stroke-width': 2, class: 'mark' }, s); hover(d, `${c.rem} before the end, ${name}<br>forecast error ${c[k]} bp<br>${c.n.toLocaleString()} readings`); });
+      text(s, sx(C.length - 1) + 10, sy(C[C.length - 1][k]) + 4, name, 'tick', 'start');
+    });
+    text(s, W / 2, H - 6, 'seconds remaining when the forecast was made', 'tick', 'middle');
+    table('f-calib', ['seconds left', 'readings', 'median error', '90th pct', '99th pct'], C.map(c => [c.rem, c.n.toLocaleString(), c.p50 + ' bp', c.p90 + ' bp', c.p99 + ' bp']));
   })();
 
   // ---- 8c maker replay line
