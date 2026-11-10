@@ -107,11 +107,13 @@ with open(POS, "w") as fh:
 done = [p for p in positions if p.get("resolved")]; openp = [p for p in positions if not p.get("resolved")]
 by_band = defaultdict(lambda: [0, 0, 0.0, 0.0])
 for p in done:
-    b = by_band["0.90-0.94" if p["ask"] < 0.94 else "0.94-0.97+"]; b[0] += 1; b[1] += p["won"]; b[2] += p["stake"]; b[3] += p["pnl"]
+    for k in ("0.90-0.94" if p["ask"] < 0.94 else "0.94-0.97+", "side " + p["side"]):   # the history says the edge is on the YES side
+        b = by_band[k]; b[0] += 1; b[1] += p["won"]; b[2] += p["stake"]; b[3] += p["pnl"]
 rep = {"updated": now.strftime("%Y-%m-%d %H:%M"), "open": len(openp), "new_this_run": n_new, "settled": len(done), "won": sum(p["won"] for p in done),
        "pnl": round(sum(p["pnl"] for p in done), 2), "staked_settled": round(sum(p["stake"] for p in done), 2),
        "by_band": {k: {"n": v[0], "won": v[1], "pnl": round(v[3], 2), "ret": round(v[3] / v[2], 4) if v[2] else None} for k, v in by_band.items()},
        "open_mark": round(sum(p["shares"] * ((p["now_p"] if p["side"] == "YES" else 1 - p["now_p"]) - p["ask"]) for p in openp if p.get("now_p") is not None), 2),
+       "open_by_side": {sd: sum(1 for p in openp if p["side"] == sd) for sd in ("YES", "NO")},
        "avg_ask": round(sum(p["ask"] for p in positions) / len(positions), 4) if positions else None, "avg_days": round(sum(p["days_left"] for p in positions) / len(positions), 1) if positions else None}
 json.dump(rep, open(f"{D}/converge_report.json", "w"), indent=1)
 print(json.dumps(rep))

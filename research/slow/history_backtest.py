@@ -31,23 +31,34 @@ def month(ts): return dt.datetime.fromtimestamp(ts, dt.timezone.utc).strftime("%
 RESULTS = []
 
 
-def run(name, pick):
-    """pick(price, days_left) -> side ('YES'/'NO') or None; first qualifying day per market"""
+def run(name, pick, exit_at=None, stable=None):
+    """pick(price, days_left) -> side ('YES'/'NO') or None; first qualifying day per market.
+    exit_at: sell when the side's price reaches this level (at exit_at - SPREAD/2) instead of holding to resolution.
+    stable: require that the side's price did not fall by more than this over the previous 3 daily points."""
     by = collections.defaultdict(lambda: [0, 0, 0.0, 0.0, 0.0]); rows = []
     for m in mk:
         h = P.get(m["id"])
         if not h: continue
         e = end_ts(m)
-        for t, p in h:
+        for i, (t, p) in enumerate(h):
             d = (e - t) / 86400
             if d < 0.5: break
             side = pick(p, d)
             if not side: continue
-            price = (p if side == "YES" else 1 - p) + SPREAD / 2
+            sp = p if side == "YES" else 1 - p
+            if stable is not None and i >= 3:
+                prev = [(q if side == "YES" else 1 - q) for _, q in h[i - 3:i]]
+                if sp < max(prev) - stable: continue
+            price = sp + SPREAD / 2
             if price <= 0.01 or price >= 0.99: break
             fee = 0.07 * price * (1 - price); sh = STAKE / price
-            win = (m["yes_won"] == 1) == (side == "YES"); pnl = sh * ((1 if win else 0) - price - fee)
-            b = by[month(t)]; b[0] += 1; b[1] += win; b[2] += STAKE; b[3] += pnl; b[4] += d
+            win = (m["yes_won"] == 1) == (side == "YES"); pnl = sh * ((1 if win else 0) - price - fee); hold = d
+            if exit_at is not None:
+                for t2, p2 in h[i + 1:]:
+                    sp2 = p2 if side == "YES" else 1 - p2
+                    if sp2 >= exit_at:
+                        px2 = exit_at - SPREAD / 2; pnl = sh * (px2 - price - fee - 0.07 * px2 * (1 - px2)); hold = (t2 - t) / 86400; break
+            b = by[month(t)]; b[0] += 1; b[1] += win; b[2] += STAKE; b[3] += pnl; b[4] += hold
             rows.append((m["id"], t, side, price, d, win, pnl)); break
     tot = [sum(v[i] for v in by.values()) for i in range(5)]
     if not tot[0]: return
@@ -68,6 +79,16 @@ print("\n--- buy the favourite: YES in the band ---")
 for lo, hi in ((0.75, 0.85), (0.85, 0.90), (0.90, 0.95), (0.95, 0.98)):
     for dlo, dhi in ((1, 3), (3, 7), (7, 14), (14, 30), (30, 90)):
         run(f"YES yes in [{lo:.2f},{hi:.2f}) {dlo:2}-{dhi:2}d left", lambda p, d, lo=lo, hi=hi, dlo=dlo, dhi=dhi: "YES" if lo <= p < hi and dlo <= d < dhi else None)
+print("\n--- favourite variants: stable price filter, early exit at 0.99 ---")
+for lo, hi in ((0.90, 0.95), (0.95, 0.98)):
+    run(f"YES [{lo:.2f},{hi:.2f}) 3-14d, stable (no 3c drop)", lambda p, d, lo=lo, hi=hi: "YES" if lo <= p < hi and 3 <= d < 14 else None, stable=0.03)
+    run(f"YES [{lo:.2f},{hi:.2f}) 3-14d, exit at 0.99", lambda p, d, lo=lo, hi=hi: "YES" if lo <= p < hi and 3 <= d < 14 else None, exit_at=0.99)
+    run(f"ANY [{lo:.2f},{hi:.2f}) 3-14d (either side)", lambda p, d, lo=lo, hi=hi: ("YES" if lo <= p < hi else "NO" if lo <= 1 - p < hi else None) if 3 <= d < 14 else None)
+    run(f"ANY [{lo:.2f},{hi:.2f}) 3-14d, exit 0.99", lambda p, d, lo=lo, hi=hi: ("YES" if lo <= p < hi else "NO" if lo <= 1 - p < hi else None) if 3 <= d < 14 else None, exit_at=0.99)
+print("\n--- buy the 15-25c side (the band where YES resolved more often than priced in the first sample) ---")
+for dlo, dhi in ((3, 7), (7, 14), (14, 30), (30, 90)):
+    run(f"YES yes in [0.15,0.25) {dlo:2}-{dhi:2}d left", lambda p, d, dlo=dlo, dhi=dhi: "YES" if 0.15 <= p < 0.25 and dlo <= d < dhi else None)
+    run(f"YES yes in [0.25,0.40) {dlo:2}-{dhi:2}d left", lambda p, d, dlo=dlo, dhi=dhi: "YES" if 0.25 <= p < 0.40 and dlo <= d < dhi else None)
 print("\n--- symmetric: buy whichever side is >= threshold with 1-3 days left (resolution approach) ---")
 for th in (0.80, 0.85, 0.90, 0.95):
     run(f"converge side >= {th:.2f}, 1-3d left", lambda p, d, th=th: ("YES" if p >= th else "NO" if p <= 1 - th else None) if 1 <= d < 3 else None)
