@@ -534,3 +534,18 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - Mechanics notes (track 3): the US-Iran 'effective ceasefire by date X' markets resolve ~14 days AFTER X (first day of a
   14-day clean period must start by X); Spain 'next PM' resolves whenever a PM is sworn in (by March 2028) despite the
   Nov 30 end date shown; the Hegseth 'by November 30' market keeps a slug saying October 31 (extended market).
+
+## 11-10 07:10 EXPERIMENT PROGRAM (user: "run many experiments until something works")
+- Exp 2 cross-asset consistency (cross_asset.py, 73k ticks, 2,904 alt windows): outcome correlation alt/btc 0.35; adding the
+  BTC market's logit to the alt's own: coefficient 0.02, test log loss 0.3750 vs 0.3736 -> nothing. Rule "buy the alt in BTC's
+  direction when the alt is cheap": 23-57% win, -11..-26%/$ (the alt is cheap because it is going the other way). Dead.
+- Exp 3 lock by session/weekday (replay, 4 days; coverage confounded: 129 weekend vs 17 weekday trades): lock_c weekend 45
+  trades 93% +27%/$ vs weekday 6 trades 83% -6%; by session 00-16 UTC 28 trades 100% +33%/$ vs US 16-24 UTC 23 trades 83%
+  +8%. Paper rules lock_cq (00-16 UTC) and lock_cw (weekend) added. Hypothesis: thin hours = stale books.
+- Exp 4 window length: lock_c 15m 7/7 +28% (replay) - too few; scoring by window type continues.
+- Exp 1 history: history_pull.py (6 months of resolved binaries + daily CLOB price paths) -> history_backtest.py (longshot /
+  favourite / convergence by band, horizon, month, category). Running.
+- Exp 5 Kalshi: kalshi_scan.py (events API, no parlays/sports, title match >= 0.25 to our candidates). Pending.
+- Exp 6 sports vs Pinnacle: no free odds feed; needs an odds-API key from the user. Parked.
+- Exp 7 window-start: the bot now reads the books for the whole 5-minute window (LAST_S=300 from the next job): does the market
+  in the first minute reflect spot-vs-K (which we know from the RTDS TWAP before priceToBeat is published)? Data from 11-11.
