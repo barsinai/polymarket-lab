@@ -499,3 +499,19 @@ Price drift in the trade's direction (what a market maker on the other side lose
   (research/fast/hourly.sh between parts: repair_gz, settle.py with RESULTS_META=$STORE/results_meta.json, lifetimes.py
   HOUR mode at caps 0.97/0.92). Repo stays public (user: fine as long as nothing is profitable). Existing archives in the
   tree (11-08..11-10) stay for analysis here; the 6 GB history is not rewritten.
+
+## 11-10 05:30 RIDGE / LOGISTIC-RIDGE MODEL (user request): the market mid is the best predictor we have
+- research/fast/ridge_model.py: 118,622 rows (2-s looks at Up tokens, rem <= 140 s, both books present), 4,038 windows,
+  ~45 features (our TWAP model: z, margin, sigma, sd, g, K source; books: both asks, mid, spread, sizes, market-minus-model;
+  price path 2..60 s returns, 60-s range, BTC 10/30-s return, market-wide co-movement count; time of day; asset/window
+  one-hots; interactions z*rem, mid*rem, margin/sd, market logit). Train 11-07+11-08 (90k rows), test 11-09+11-10 (28k).
+- Out-of-sample log loss: market mid 0.3248 | our phi(z) 0.3539 | ridge-logistic (any C) 0.3260. The model's heaviest
+  weight is the market's own logit (+1.76 standardized). It does not beat the market; nothing we add moves it.
+- Ridge on the forecast error (final - projection, bp): train R^2 +0.13, test R^2 -0.14 -> the error is unpredictable.
+- Trading on model-vs-market mispricing (edge 5c over ask+fee): phi(z) -8.2%/$, ridge -5.7%/$; "average" +6% = one lucky day.
+- Calibration (test days): favourites are slightly under-priced by the market (mid 0.944 -> realized 0.967; 0.816 -> 0.885),
+  i.e. 2-3% on favourites before the spread; consistent with 'fav ~0 after fees' (taker). A maker variant would face the
+  same adverse selection as the lock.
+- Binance relay vs Chainlink lead (rtds, 25k prints/asset): corr with the next 2-s Chainlink return 0.04 (btc) .. 0.19 (eth),
+  slope 0.05..0.27 bp/bp on a 1-bp lead -> fractions of a bp; not a feature worth having at our speed.
+- Lock by window length (replay): 5m n124 90% +6%/$; 15m n22 91% +3%/$ (lock_c 15m 7/7 +28%); 4h: 72 settled windows, too few.
