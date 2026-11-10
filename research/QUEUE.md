@@ -559,3 +559,10 @@ Price drift in the trade's direction (what a market maker on the other side lose
   (worst month 2026-06: -7..-10%). Longshot NO at 2-5%: 97-99% hit, ~0..+1.25%/$ (fairly priced). YES at 15-25% resolved YES
   29% (n 34, one month drives it). converge_paper.py now takes the favourite at the REAL best ask hourly (17 positions,
   avg ask 0.960, 7.6 d) inside spike_paper.yml (renamed 'slow paper': spike + convergence + journal scorer).
+- Exp 1 on 6,570 resolved markets (dense Sep 29-Nov 10 + sparse Feb-Sep; 1,813 YES wins): the robust edge is YES priced
+  0.95-0.98 bought 3-14 days before resolution: 407 positions 99.8% +2.2%/$ (3-7 d), 416 positions 99.0% +1.5% (7-14 d),
+  no losing month; 1-3 d: 300, 99.3%, +1.4%. YES 0.90-0.95: weaker (+0.3..+2.3%, 94-96%). NO side (YES at 2-10c): +0.75%
+  only in the last week, ~0 or negative beyond; 10-25c longshots resolved YES more than priced (selling them loses).
+  Early exit at 0.99 and the 'stable' filter do not add. The 15-40c YES anomaly of the first sample does not replicate.
+  Convergence (side >= 0.95, 1-3 d): 702, 98.9%, +1.0% per 2.2 d. converge_paper.py band widened to 0.98 (both sides
+  recorded; YES is the strategy, NO the control). Evidence report section 15 (heat grids).

@@ -9,7 +9,7 @@ from collections import defaultdict
 import requests
 
 GAMMA = "https://gamma-api.polymarket.com"; CLOB = "https://clob.polymarket.com"; D = "data/slow"; os.makedirs(D, exist_ok=True)
-LO, HI = float(os.environ.get("LO", "0.90")), float(os.environ.get("HI", "0.97")); DMIN, DMAX = float(os.environ.get("DMIN", "1")), float(os.environ.get("DMAX", "14"))
+LO, HI = float(os.environ.get("LO", "0.90")), float(os.environ.get("HI", "0.98")); DMIN, DMAX = float(os.environ.get("DMIN", "1")), float(os.environ.get("DMAX", "14"))
 STAKE = float(os.environ.get("STAKE", "20")); MAX_NEW = int(os.environ.get("MAX_NEW", "40"))
 S = requests.Session(); S.headers["User-Agent"] = "polymarket-lab-research/0.1"
 SKIP = re.compile(r"updown|up-or-down|-5m-|-15m-|-4h-", re.I)

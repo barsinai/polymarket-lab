@@ -198,6 +198,13 @@ a { color: var(--blue); }
   <div class="meaning"><strong>What it means:</strong> out of sample the market mid has log loss 0.325, our φ(z) 0.354, and the ridge-logistic model 0.326 for every penalty strength we tried: the model learns to copy the market and cannot add to it. A ridge regression on what our TWAP forecast misses (final minus projection) has R² +0.13 in training and −0.14 on the test days: the miss is not predictable from anything in these features. Trading on "model says more than the market" loses 6-8% per dollar. Checked separately, the Binance relay leads the Chainlink prints by only fractions of a basis point (correlation 0.04-0.19 with the next print), so the one feature that looked like real information is not worth having at our speed. At the two-second horizon the price already contains everything the public feeds know; the remaining places to look are slower markets and resolution mechanics, not better regression.</div>
 </section>
 
+<section id="slow">
+  <div class="claim"><h2>15. Slow markets: the one edge that survives 6,570 resolved markets is small and specific.</h2><span class="chip strong">strong</span></div>
+  <p>Away from the five-minute windows we pulled every resolved binary market of the last months with at least $2,000 of volume (crypto price windows excluded) and its daily price path, and asked three plain questions of the whole set: does selling longshots pay, does buying favourites pay, and does buying whatever is about to resolve pay? Each rule buys $20 on the first day a market qualifies, pays the taker fee and half a 2¢ spread, holds to resolution, and is reported by month so that one good month cannot carry it.</p>
+  <figure id="f-slow"><div class="fig-title">Return per dollar by price band and days to resolution: buying YES favourites (top) vs selling YES longshots (bottom)</div><div class="svgwrap"></div><figcaption>Each cell is one rule; the number is the return per dollar staked, the small print the count of positions and the hit rate (the fill darkens with the size of the return). Blue earns, red loses. The only block that is positive in every horizon and never had a losing month at 3-14 days is YES priced 95-98¢: about +1.5-2.2% per position over 5-11 days, 99% hit rate, on 800+ positions. Selling longshots at 2-5¢ earns +0.75% only in the last week before resolution and nothing before; the 10-25¢ longshots resolved YES more often than their price, so selling them lost.</figcaption><details><summary>numbers</summary><div class="tablewrap"></div></details></figure>
+  <div class="meaning"><strong>What it means:</strong> the market under-pays holders of near-certain outcomes for waiting: a YES at 96¢ two weeks before resolution is mostly a done deal whose owners want their money back now, and the discount is the yield. It is not a fast trade and it does not need a fast machine; it needs capital and patience. At +1.5-2% per position every ~10 days it compounds to roughly 50-80% a year before the rare reversal (about 1 in 100, which costs the stake), so at $20 a position and ten positions at a time it is a few dollars a week; at $10,000 deployed it would be a few hundred. A paper tracker now buys these at the real best ask every hour (17 positions on its first run, average ask 96¢) so the executable return, spread included, is measured rather than assumed. The NO side of the same bands (YES at 2-10¢) is fairly priced: things do happen.</div>
+</section>
+
 <footer>Sources: Polymarket Gamma API (event metadata: priceToBeat, finalPrice, results), Polymarket Data API v2 (public trade tape), Polymarket RTDS feed (Chainlink prices and 60 s TWAP), Binance REST (1-second proxy), and the bot's own order-book readings. Code: research/fast/ in the polymarket-lab repository (report_data.py builds every number on this page).</footer>
 </main>
 <div id="tip" hidden></div>
@@ -532,6 +539,34 @@ a { color: var(--blue); }
       hover(p, `asks of ${r.band}<br>${r.n} trades, ${pct(r.win, 1)} won<br>${fmt$(r.pnl)} on $${r.staked.toLocaleString()} staked`);
     });
     table('f-band', ['ask paid', 'trades', 'won', 'staked', 'profit', 'per $'], rows.map(r => [r.band, r.n, pct(r.win, 1), '$' + r.staked.toLocaleString(), fmt$(r.pnl), (r.ret * 100).toFixed(1) + '%']));
+  })();
+
+  // ---- 15 slow markets: two heat grids (favourite YES, longshot NO), return per $ by band x horizon
+  if (D.slow) (function () {
+    const W = 720, cellH = 44, left = 76, top = 36, panelH = top + 4 * cellH + 14, H = 2 * panelH + 18;
+    const s = svgIn('f-slow', W, H), hz = D.slow.horizons, cw = (W - left - 10) / hz.length;
+    const col = v => { if (v == null) return css('--surface'); const a = Math.min(1, Math.abs(v) / 0.03); return v >= 0 ? `rgba(60,110,200,${0.15 + 0.75 * a})` : `rgba(200,70,70,${0.15 + 0.75 * a})`; };
+    [['fav', 'buy YES at this price (the favourite)', 0], ['no', 'buy NO when YES is at this price (sell the longshot)', panelH]].forEach(([k, title, y0]) => {
+      text(s, left + (W - left - 10) / 2, y0 + 12, title, 'tick', 'middle');
+      hz.forEach((h, j) => text(s, left + (j + 0.5) * cw, y0 + top - 6, h.replace('d', ' days'), 'tick', 'middle'));
+      D.slow[k].forEach((row, i) => {
+        text(s, left - 8, y0 + top + i * cellH + cellH / 2 + 4, row.band, 'tick', 'end');
+        row.cells.forEach((c, j) => {
+          const x = left + j * cw, y = y0 + top + i * cellH;
+          const r = el('rect', { x: x + 1, y: y + 1, width: cw - 2, height: cellH - 2, rx: 4, fill: col(c ? c.ret : null), class: 'mark' }, s);
+          if (c) {
+            text(s, x + cw / 2, y + 18, (c.ret * 100).toFixed(1) + '%', 'val', 'middle');
+            text(s, x + cw / 2, y + 34, `${c.n} · ${(c.hit * 100).toFixed(0)}% hit`, 'tick', 'middle');
+            hover(r, `${title}<br>YES price ${row.band}, ${hz[j].replace('d', ' days')} to resolution<br>${c.n} positions, ${(c.hit * 100).toFixed(1)}% hit<br>${(c.ret * 100).toFixed(2)}% per $ over ${c.hold} days; worst month ${(c.worst * 100).toFixed(1)}%`);
+          }
+        });
+      });
+    });
+    text(s, W / 2, H - 4, 'days left when the position is opened (first day the market qualifies)', 'tick', 'middle');
+    const rows = [];
+    [['fav', 'buy YES'], ['no', 'buy NO']].forEach(([k, lab]) => D.slow[k].forEach(row => row.cells.forEach((c, j) => c && rows.push([lab, row.band, hz[j], c.n, (c.hit * 100).toFixed(1) + '%', (c.ret * 100).toFixed(2) + '%', c.hold + ' d', (c.worst * 100).toFixed(1) + '%']))));
+    D.slow.converge.forEach(c => rows.push(['converge', c.rule.replace('converge ', ''), '1-3d', c.n, (c.hit * 100).toFixed(1) + '%', (c.ret * 100).toFixed(2) + '%', c.hold_days + ' d', (c.worst_ret * 100).toFixed(1) + '%']));
+    table('f-slow', ['rule', 'YES price band', 'days left', 'positions', 'hit', 'return / $', 'avg hold', 'worst month'], rows);
   })();
 
   // ---- 14 ridge calibration: model / market / realized by bucket
