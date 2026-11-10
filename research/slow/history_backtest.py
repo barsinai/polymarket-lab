@@ -28,6 +28,9 @@ def end_ts(m): return dt.datetime.fromisoformat(m["end"]).replace(tzinfo=dt.time
 def month(ts): return dt.datetime.fromtimestamp(ts, dt.timezone.utc).strftime("%Y-%m")
 
 
+RESULTS = []
+
+
 def run(name, pick):
     """pick(price, days_left) -> side ('YES'/'NO') or None; first qualifying day per market"""
     by = collections.defaultdict(lambda: [0, 0, 0.0, 0.0, 0.0]); rows = []
@@ -50,6 +53,8 @@ def run(name, pick):
     if not tot[0]: return
     ann = (tot[3] / tot[2]) * 365 / (tot[4] / tot[0]) if tot[0] else 0
     worst = min((v[3] / v[2], k) for k, v in by.items() if v[2])
+    RESULTS.append({"rule": name.strip(), "n": tot[0], "hit": round(tot[1] / tot[0], 4), "ret": round(tot[3] / tot[2], 4), "hold_days": round(tot[4] / tot[0], 1),
+                    "ann": round(ann, 3), "worst_month": worst[1], "worst_ret": round(worst[0], 4), "months": {k: [v[0], round(v[3] / v[2], 4)] for k, v in sorted(by.items())}})
     print(f"{name:40} n {tot[0]:5} hit {tot[1] / tot[0]:6.1%} pnl/$ {tot[3] / tot[2]:+7.2%} hold {tot[4] / tot[0]:5.1f}d ann {ann:+7.1%}  worst month {worst[1]} {worst[0]:+.1%} | "
           + " ".join(f"{k}:{v[0]}/{v[3] / v[2]:+.0%}" for k, v in sorted(by.items())))
     return rows
@@ -76,3 +81,5 @@ for cat, ms in sorted(cats.items(), key=lambda x: -len(x[1]))[:14]:
     mk = ms
     run(f"  {cat[:30]:30} ({len(ms)})", lambda p, d: "NO" if 0.03 <= p < 0.12 and 3 <= d < 30 else None)
 mk = allm
+json.dump({"markets": len(mk), "with_prices": sum(1 for m in mk if m["n_prices"]), "yes_won": sum(m["yes_won"] for m in mk), "results": RESULTS,
+           "built": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d %H:%M UTC")}, open(f"{D}/backtest.json", "w"), indent=0)
