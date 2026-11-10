@@ -191,6 +191,13 @@ a { color: var(--blue); }
   <div class="meaning"><strong>What it means:</strong> the rule now on paper is the cheap band only: <em>lock_c</em> buys the locked side at ≤ 92¢, skips the last 20 seconds unless the forecast leads by a full basis point (with 20 s left a cheap ask means the market has caught up: 2 of 7 such trades won), and in the replay made +$139 on $628 staked (51 trades, 92% won) - the same profit as the whole lock rule on a third of the capital. Three honest caveats. The price band and the 20-second cut were both found on these same 150 windows, so the replay flatters them; the paper run from 02:41 UTC on 11-10 is the test. Checked against the real-time order-book recordings for the hours they cover (one trade per window, acting after 2 s of persistence), the cheap band won 82% of 27 windows for +0.6% per dollar: at an average ask of 80¢ the break-even win rate is 81%, so over those hours the edge was thin, and 11-07 and daytime 11-08 carried the replay. And the cheap ask is usually small - the median trade is $10, not $20 - so even if it holds, this is about +$35 a day at today's sizes, not a business.</div>
 </section>
 
+<section id="ridge">
+  <div class="claim"><h2>14. A ridge model with 45 features does not beat the market's own price.</h2><span class="chip strong">strong</span></div>
+  <p>Asked whether a regularised regression could forecast these outcomes better than our TWAP model, we built one: 118,622 two-second looks at 4,038 windows (≤ 140 s left, both order books present), each labelled with the official result. Features: our model (z, margin, volatility, uncertainty, source of the price to beat), both books (asks, mid, spread, sizes, market minus model), the asset's price path over 2-60 s, BTC's path at the same moment, how many assets were moving together, time of day, asset and window type, and interactions. Trained on 11-07 and 11-08, tested on 11-09 and 11-10; rows of one window are near-duplicates, so the split is by day, never by row.</p>
+  <figure id="f-ridge"><div class="fig-title">Test days: what each forecaster said vs what happened, by model-probability bucket</div><div class="svgwrap"></div><figcaption>Each bucket groups the test rows by the ridge model's probability of Up. The diagonal is perfect calibration. The market's mid and the ridge model sit on top of each other; realized frequencies run slightly above both for favourites (the market under-prices favourites by 2-3 points, which the spread and the taker fee eat). The ridge model's heaviest weight is the market's own logit.</figcaption><details><summary>numbers</summary><div class="tablewrap"></div></details></figure>
+  <div class="meaning"><strong>What it means:</strong> out of sample the market mid has log loss 0.325, our φ(z) 0.354, and the ridge-logistic model 0.326 for every penalty strength we tried: the model learns to copy the market and cannot add to it. A ridge regression on what our TWAP forecast misses (final minus projection) has R² +0.13 in training and −0.14 on the test days: the miss is not predictable from anything in these features. Trading on "model says more than the market" loses 6-8% per dollar. Checked separately, the Binance relay leads the Chainlink prints by only fractions of a basis point (correlation 0.04-0.19 with the next print), so the one feature that looked like real information is not worth having at our speed. At the two-second horizon the price already contains everything the public feeds know; the remaining places to look are slower markets and resolution mechanics, not better regression.</div>
+</section>
+
 <footer>Sources: Polymarket Gamma API (event metadata: priceToBeat, finalPrice, results), Polymarket Data API v2 (public trade tape), Polymarket RTDS feed (Chainlink prices and 60 s TWAP), Binance REST (1-second proxy), and the bot's own order-book readings. Code: research/fast/ in the polymarket-lab repository (report_data.py builds every number on this page).</footer>
 </main>
 <div id="tip" hidden></div>
@@ -525,6 +532,25 @@ a { color: var(--blue); }
       hover(p, `asks of ${r.band}<br>${r.n} trades, ${pct(r.win, 1)} won<br>${fmt$(r.pnl)} on $${r.staked.toLocaleString()} staked`);
     });
     table('f-band', ['ask paid', 'trades', 'won', 'staked', 'profit', 'per $'], rows.map(r => [r.band, r.n, pct(r.win, 1), '$' + r.staked.toLocaleString(), fmt$(r.pnl), (r.ret * 100).toFixed(1) + '%']));
+  })();
+
+  // ---- 14 ridge calibration: model / market / realized by bucket
+  if (D.ridge && D.ridge.calib) (function () {
+    const C = D.ridge.calib, W = 720, H = 300, left = 56, right = 150, top = 16, bottom = 44;
+    const s = svgIn('f-ridge', W, H), xw = W - left - right, yh = H - top - bottom;
+    const sx = v => left + v * xw, sy = v => top + (1 - v) * yh;
+    [0, 0.25, 0.5, 0.75, 1].forEach(v => { el('line', { x1: left, x2: W - right, y1: sy(v), y2: sy(v), class: v === 0 ? 'axis' : 'grid' }, s); text(s, left - 6, sy(v), (v * 100).toFixed(0) + '%', 'tick', 'end'); el('line', { x1: sx(v), x2: sx(v), y1: top, y2: H - bottom, class: v === 0 ? 'axis' : 'grid' }, s); text(s, sx(v), H - bottom + 14, (v * 100).toFixed(0) + '%', 'tick', 'middle'); });
+    el('line', { x1: sx(0), y1: sy(0), x2: sx(1), y2: sy(1), stroke: css('--muted'), 'stroke-dasharray': '4 4', 'stroke-width': 1 }, s);
+    const series = [['market', 'market mid', css('--blue')], ['realized', 'what happened', css('--red')], ['model', 'ridge model', css('--muted')]];
+    series.forEach(([k, name, col], si) => {
+      const pts = C.map(c => [sx(c.model), sy(c[k])]);
+      el('path', { d: pts.map((p, i) => (i ? 'L' : 'M') + p[0] + ',' + p[1]).join(' '), fill: 'none', stroke: col, 'stroke-width': 2 }, s);
+      C.forEach((c, i) => { const d = el('circle', { cx: pts[i][0], cy: pts[i][1], r: 5, fill: col, stroke: css('--surface'), 'stroke-width': 2, class: 'mark' }, s); hover(d, `bucket ${c.lo.toFixed(1)}-${c.hi.toFixed(1)} (${c.n.toLocaleString()} rows)<br>${name}: ${(c[k] * 100).toFixed(1)}%<br>market ${(c.market * 100).toFixed(1)}% · realized ${(c.realized * 100).toFixed(1)}%`); });
+      text(s, W - right + 10, top + 14 + si * 18, name, 'tick', 'start'); el('circle', { cx: W - right + 2, cy: top + 10 + si * 18, r: 4, fill: col }, s);
+    });
+    text(s, left + xw / 2, H - 6, 'ridge model probability of Up (bucket mean)', 'tick', 'middle');
+    const m = D.ridge.metrics, rows = Object.entries(m).map(([k, v]) => [k.replace('baseline: ', ''), v.logloss.toFixed(4), v.brier.toFixed(4)]);
+    table('f-ridge', ['forecaster (test days)', 'log loss', 'Brier'], rows.concat(C.map(c => [`bucket ${c.lo.toFixed(1)}-${c.hi.toFixed(1)}: n ${c.n.toLocaleString()}`, `model ${(c.model * 100).toFixed(1)}% · market ${(c.market * 100).toFixed(1)}%`, `realized ${(c.realized * 100).toFixed(1)}%`])));
   })();
 
   // ---- 13b forecast error percentiles by seconds remaining
