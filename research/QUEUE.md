@@ -566,3 +566,10 @@ Price drift in the trade's direction (what a market maker on the other side lose
   Early exit at 0.99 and the 'stable' filter do not add. The 15-40c YES anomaly of the first sample does not replicate.
   Convergence (side >= 0.95, 1-3 d): 702, 98.9%, +1.0% per 2.2 d. converge_paper.py band widened to 0.98 (both sides
   recorded; YES is the strategy, NO the control). Evidence report section 15 (heat grids).
+- 09:10 by category: the YES 0.95-0.98 edge is NON-sports only (3-7 d: 393 positions 100% +2.43%; 7-14 d: 410, 99.5%, +1.97%;
+  14-30 d: 419, 99.5%, +2.12%); sports favourites at 0.95-0.98 LOSE (-4..-32%, 67-93% hit: live games flip). Tracker now
+  skips sports, takes YES first (NO capped at 5/run as control), up to 30 days, ask <= 0.985. 37 paper positions open.
+- Spike fade first 24-h exits: no_after_spike 22 exits -10.8%, yes_after_dump 19 exits -11.5% (continuation, not reversal).
+  Resolution P&L still pending.
+- Server hook verified: repair 0, 3,400 windows settled on the server, lifetimes T07 (224 windows, 3-5 episodes, all won),
+  hourly/lifetimes.jsonl published; store 307M after LAST_S=300.

@@ -99,7 +99,7 @@ for m, side, tok, prices, end in cands[:MAX_NEW * 3]:
     if not asks:
         continue
     ask, size = asks[0]
-    if not (LO <= ask <= HI + 0.015) or size * ask < STAKE:
+    if not (LO <= ask <= HI + 0.005) or size * ask < STAKE:   # 0.985 max: above that the yield is below the fee + reversal risk
         continue
     shares = round(STAKE / ask, 2)
     positions.append({"id": m["id"], "slug": m.get("slug"), "question": m.get("question"), "side": side, "ask": ask, "ask_size": size, "mid_at_entry": prices[0],
