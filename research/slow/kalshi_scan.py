@@ -17,11 +17,16 @@ for i in range(60):
     d = r.json(); page = d.get("events", []); events += page; cursor = d.get("cursor")
     if not cursor or not page: break
 print("open events", len(events), "categories", collections.Counter(e.get("category") for e in events).most_common(12), flush=True)
+sample = next((m for e in events if not (e.get("series_ticker") or "").startswith("KXMVE") and e.get("category") not in SKIP_CAT for m in (e.get("markets") or [])), None)
+print("sample nested market:", json.dumps(sample)[:1500] if sample else None, flush=True)
 mk = []
 for e in events:
     if (e.get("series_ticker") or "").startswith("KXMVE") or e.get("category") in SKIP_CAT: continue
     for m in e.get("markets", []) or []:
-        vol = float(m.get("volume_24h") or 0); yb, ya = m.get("yes_bid"), m.get("yes_ask")
+        vol = float(m.get("volume_24h") or m.get("volume_24h_fp") or m.get("volume") or m.get("volume_fp") or 0)
+        yb, ya = m.get("yes_bid"), m.get("yes_ask")
+        if yb is None and m.get("yes_bid_dollars") is not None:
+            yb, ya = float(m["yes_bid_dollars"]) * 100, float(m.get("yes_ask_dollars") or 0) * 100
         if yb is None or ya is None or vol < 200: continue
         mk.append({"ticker": m.get("ticker"), "event": e.get("title"), "title": m.get("title") or m.get("yes_sub_title") or "", "sub": m.get("yes_sub_title"),
                    "category": e.get("category"), "yes_bid": yb / 100, "yes_ask": ya / 100, "vol24": vol, "volume": float(m.get("volume") or 0),
