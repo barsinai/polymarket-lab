@@ -523,3 +523,14 @@ Price drift in the trade's direction (what a market maker on the other side lose
   (sum <= 0.995 at some tick) 20 of 554. Dead.
 - Research track: research/slow/scan_markets.py -> data/slow/candidates.json (284 markets resolving in 0.5-28 days, liq >=
   $5k, vol24 >= $500, binary, 3-97c, crypto price windows excluded), resolution-rule tags for track 3.
+
+## 11-10 06:30 RESEARCH TRACK: first journal (27 forecasts, 5 paper positions)
+- research/slow/forecast_log.py (add/score; EDGE 8 pts for a 'conviction' position, 'longshot' NO when my p <= 4% and the
+  market is >= 2 pts above it; $20 paper stake), data/research/forecasts.jsonl, score_forecasts.py via run_script.
+- Clusters researched: Iran/Hormuz (blockade end, ceasefires, PortWatch traffic), Spain Nov 29 election (40dB/Sigma Dos),
+  Hegseth exit, WTI one-touch ladder (lognormal 55% vol reproduces the middle strikes; tails priced 4% vs model 0.5-1.3%).
+- Positions: NO Hormuz-normal (longshot), NO Hegseth-out by 14/21/30 (0.94/0.85/0.81), NO WTI-dips-to-80 (0.385, model-only).
+- Excluded on principle: markets about Anthropic / "best AI model" (I am an Anthropic model: conflict of interest, no edge).
+- Mechanics notes (track 3): the US-Iran 'effective ceasefire by date X' markets resolve ~14 days AFTER X (first day of a
+  14-day clean period must start by X); Spain 'next PM' resolves whenever a PM is sworn in (by March 2028) despite the
+  Nov 30 end date shown; the Hegseth 'by November 30' market keeps a slug saying October 31 (extended market).
