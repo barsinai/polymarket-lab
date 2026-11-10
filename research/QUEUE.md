@@ -549,3 +549,13 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - Exp 6 sports vs Pinnacle: no free odds feed; needs an odds-API key from the user. Parked.
 - Exp 7 window-start: the bot now reads the books for the whole 5-minute window (LAST_S=300 from the next job): does the market
   in the first minute reflect spot-vs-K (which we know from the RTDS TWAP before priceToBeat is published)? Data from 11-11.
+- Exp 5 Kalshi (kalshi_scan.py): events API works (12,000 open events; 1,354 liquid non-sports binaries with dollar-string
+  prices); naive title matching to our candidates is useless (40 'matches', all different questions). Automatic pairing
+  parked; the research track cross-checks Kalshi by hand for the events it forecasts.
+- Jump chaser (jump_react.py, 1,207 Chainlink jumps >= 4 bp in the last 120 s): the Up ask moves >= 5c within 30 s in only
+  ~22% of cases; buying Up after an upward jump wins 38% (-23%/$). A 2-s jump is noise, not information. Dead.
+- Exp 1 first pass (1,590 resolved markets, vol >= $2k, daily last-trade prices + 1c): favourite 0.90-0.97 with 1-14 d left:
+  ~150 positions, 100% hit, +2..+6.7%/position; convergence (side >= 0.85-0.90, 1-3 d): 85-98 positions, 98-99% hit, +2.4-2.6%
+  (worst month 2026-06: -7..-10%). Longshot NO at 2-5%: 97-99% hit, ~0..+1.25%/$ (fairly priced). YES at 15-25% resolved YES
+  29% (n 34, one month drives it). converge_paper.py now takes the favourite at the REAL best ask hourly (17 positions,
+  avg ask 0.960, 7.6 d) inside spike_paper.yml (renamed 'slow paper': spike + convergence + journal scorer).
