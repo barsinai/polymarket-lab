@@ -1,4 +1,4 @@
-name: spike paper (slow, hourly)
+name: slow paper (spike fade + favourite convergence + research journal, hourly)
 on:
   schedule:
     - cron: "23 * * * *"
@@ -18,15 +18,18 @@ jobs:
           sparse-checkout: |
             research
             data/slow
+            data/research
           sparse-checkout-cone-mode: true
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - run: pip install -q requests
-      - run: mkdir -p logs data/slow && python -u research/slow/spike_monitor.py 2>&1 | tee logs/spike-log.txt
+      - run: mkdir -p logs data/slow data/research && python -u research/slow/spike_monitor.py 2>&1 | tee logs/spike-log.txt
+      - run: python -u research/slow/converge_paper.py 2>&1 | tee logs/converge-log.txt
+      - run: python -u research/slow/score_forecasts.py 2>&1 | tail -5 | tee logs/forecast-log.txt || true
       - name: Save
         run: |
           git config user.name "lab-bot" && git config user.email "lab-bot@users.noreply.github.com"
-          git add --sparse data/slow/spike_positions.jsonl data/slow/spike_report.json logs/spike-log.txt 2>/dev/null || true
-          git commit -qm "Spike paper $(date -u +%FT%H:%M) [skip ci]" || exit 0
+          for p in data/slow/spike_positions.jsonl data/slow/spike_report.json data/slow/converge_positions.jsonl data/slow/converge_report.json data/research/scoreboard.json logs; do [ -e "$p" ] && git add --sparse "$p"; done
+          git commit -qm "Slow paper $(date -u +%FT%H:%M) [skip ci]" || exit 0
           for i in 1 2 3; do git pull -q --rebase -X theirs origin main && git push -q && break; sleep 5; done
