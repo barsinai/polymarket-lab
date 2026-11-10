@@ -1,4 +1,125 @@
 open events 12000 categories [('Elections', 8795), ('Sports', 1340), ('Politics', 542), ('Financials', 398), ('Economics', 346), ('Entertainment', 337), ('Science and Technology', 60), ('Climate and Weather', 57), ('Companies', 57), ('Mentions', 53), ('Health', 4), ('AI', 4)]
-liquid non-sports binary markets 0
+sample nested market: {"can_close_early": true, "close_time": "2099-08-01T04:59:00Z", "created_time": "2025-08-28T20:40:16.168768Z", "early_close_condition": "This market will close and expire early if the event occurs.", "event_ticker": "KXELONMARS-99", "exchange_index": 0, "expected_expiration_time": "2099-08-01T15:00:00Z", "expiration_time": "2099-08-08T15:00:00Z", "expiration_value": "", "last_price_dollars": "0.1100", "latest_expiration_time": "2099-08-08T15:00:00Z", "market_type": "binary", "no_ask_dollars": "0.9000", "no_bid_dollars": "0.8900", "no_sub_title": "Mars", "notional_value_dollars": "1.0000", "open_interest_fp": "40386.03", "open_time": "2025-08-28T20:45:00Z", "previous_price_dollars": "0.1100", "previous_yes_ask_dollars": "0.1100", "previous_yes_bid_dollars": "0.1000", "price_level_structure": "linear_cent", "price_ranges": [{"end": "1.0000", "start": "0.0000", "step": "0.0100"}], "result": "", "rules_primary": "If Elon Musk visits Mars before the earlier of his death or Aug 1, 2099, then the market resolves to Yes.", "rules_secondary": " ", "settlement_bounds_type": "default", "settlement_timer_seconds": 1800, "status": "active", "ticker": "KXELONMARS-99", "title": "Will Elon Musk visit Mars before Aug 1, 2099?", "updated_time": "2026-10-16T03:23:52.413222Z", "volume_24h_fp": "0.00", "volume_fp": "126564.51", "yes_ask_dollars": "0.1100", "yes_ask_size_fp": "15.00", "yes_bid_dollars": "0.1000", "yes_bid_size_fp": "22.39", "yes_sub_title": "Mars"}
+liquid non-sports binary markets 1354
 
-matches (title similarity >= 0.25): 0
+matches (title similarity >= 0.25): 40
+gap +0.93  poly 0.94 | kalshi 0.00-0.03 vol24 1409 sim 0.27
+     P: Spain General Election: PP + Vox Majority?
+     K: Spanish general election winner? | Who will win the next Spanish general election? Vox
+gap +0.92  poly 0.94 | kalshi 0.01-0.03 vol24 2612 sim 0.4
+     P: Will Anthropic IPO by November 30, 2026?
+     K: Will OpenAI or Anthropic IPO first? | Will OpenAI or Anthropic IPO first? OpenAI
+gap +0.90  poly 0.92 | kalshi 0.01-0.03 vol24 2612 sim 0.4
+     P: Will Anthropic IPO by November 25, 2026?
+     K: Will OpenAI or Anthropic IPO first? | Will OpenAI or Anthropic IPO first? OpenAI
+gap +0.86  poly 0.88 | kalshi 0.01-0.03 vol24 2612 sim 0.4
+     P: Will Anthropic IPO by November 24, 2026?
+     K: Will OpenAI or Anthropic IPO first? | Will OpenAI or Anthropic IPO first? OpenAI
+gap +0.83  poly 0.84 | kalshi 0.00-0.03 vol24 1409 sim 0.36
+     P: Will PP win the most seats in the 2026 Spanish general election?
+     K: Spanish general election winner? | Who will win the next Spanish general election? Vox
+gap -0.80  poly 0.06 | kalshi 0.85-0.86 vol24 553 sim 0.31
+     P: Pete Hegseth out as Secretary of Defense by November 14?
+     K: Who will leave office first: RFK Jr., Hegseth, or Patel? | Will Secretary of Defense be the first to leave office? Pete 
+gap +0.77  poly 0.79 | kalshi 0.01-0.03 vol24 2612 sim 0.4
+     P: Will Anthropic IPO by November 23, 2026?
+     K: Will OpenAI or Anthropic IPO first? | Will OpenAI or Anthropic IPO first? OpenAI
+gap +0.71  poly 0.73 | kalshi 0.01-0.03 vol24 2612 sim 0.4
+     P: Will Anthropic IPO by November 20, 2026?
+     K: Will OpenAI or Anthropic IPO first? | Will OpenAI or Anthropic IPO first? OpenAI
+gap -0.67  poly 0.18 | kalshi 0.85-0.86 vol24 553 sim 0.31
+     P: Pete Hegseth out as Secretary of Defense by November 30?
+     K: Who will leave office first: RFK Jr., Hegseth, or Patel? | Will Secretary of Defense be the first to leave office? Pete 
+gap -0.64  poly 0.14 | kalshi 0.77-0.79 vol24 46692 sim 0.38
+     P: Pete Hegseth out as Secretary of Defense by November 21?
+     K: Will Pete Hegseth be impeached? | Will Pete Hegseth be impeached before Nov 21, 2026? Before Nov 21, 2026
+gap -0.51  poly 0.07 | kalshi 0.54-0.62 vol24 408 sim 0.27
+     P: Will Huang Shih-chieh win the next Taoyuan Mayor election?
+     K: Mayor of Johannesburg after municipal elections? | Will Helen Zille win the next Johannesburg mayoral election following
+gap -0.45  poly 0.13 | kalshi 0.54-0.62 vol24 408 sim 0.27
+     P: Will Ko Chih-en win the next Kaohsiung Mayor election?
+     K: Mayor of Johannesburg after municipal elections? | Will Helen Zille win the next Johannesburg mayoral election following
+gap -0.44  poly 0.14 | kalshi 0.54-0.62 vol24 408 sim 0.25
+     P: Will Chang Chi-kai win the next Chiayi City Mayor election?
+     K: Mayor of Johannesburg after municipal elections? | Will Helen Zille win the next Johannesburg mayoral election following
+gap +0.37  poly 0.38 | kalshi 0.00-0.01 vol24 717392 sim 0.38
+     P: Next White House Press Secretary announced by November 30, 2026?
+     K: Who will be Trump's next Press Secretary? | Will Dana White be the next White House Press Secretary before Jan 20, 2029?
+gap -0.36  poly 0.34 | kalshi 0.69-0.70 vol24 1329 sim 0.31
+     P: Will the Democratic Progressive Party (DPP) win the most head of local government elections in the 2026 Taiwan local elections?
+     K: Taiwan Local Elections winner? | Will Kuomintang win the most mayoral and magistrate races in Taiwan’s 2026 local electi
+gap +0.35  poly 0.93 | kalshi 0.54-0.62 vol24 408 sim 0.27
+     P: Will Chang San-cheng win the next Taoyuan Mayor election?
+     K: Mayor of Johannesburg after municipal elections? | Will Helen Zille win the next Johannesburg mayoral election following
+gap +0.34  poly 0.36 | kalshi 0.01-0.03 vol24 2612 sim 0.4
+     P: Will Anthropic IPO by November 19, 2026?
+     K: Will OpenAI or Anthropic IPO first? | Will OpenAI or Anthropic IPO first? OpenAI
+gap -0.30  poly 0.36 | kalshi 0.65-0.66 vol24 1832 sim 0.3
+     P: Will the KMT win the Taipei and New Taipei mayoral elections?
+     K: Taipei mayoral election winner? | Will Chiang Wan-an win the 2026 Taipei mayoral election? Chiang Wan-an
+gap +0.29  poly 0.88 | kalshi 0.54-0.62 vol24 408 sim 0.27
+     P: Will Ann Kao win the next Hsinchu City Mayor election?
+     K: Mayor of Johannesburg after municipal elections? | Will Helen Zille win the next Johannesburg mayoral election following
+gap +0.29  poly 0.88 | kalshi 0.54-0.62 vol24 408 sim 0.27
+     P: Will Lai Jui-lung win the next Kaohsiung Mayor election?
+     K: Mayor of Johannesburg after municipal elections? | Will Helen Zille win the next Johannesburg mayoral election following
+gap +0.28  poly 0.30 | kalshi 0.01-0.03 vol24 2612 sim 0.4
+     P: Will Anthropic IPO on November 19, 2026?
+     K: Will OpenAI or Anthropic IPO first? | Will OpenAI or Anthropic IPO first? OpenAI
+gap -0.22  poly 0.36 | kalshi 0.54-0.62 vol24 408 sim 0.25
+     P: Will Lee Shu-chuan win the next New Taipei Mayor election?
+     K: Mayor of Johannesburg after municipal elections? | Will Helen Zille win the next Johannesburg mayoral election following
+gap +0.14  poly 0.15 | kalshi 0.00-0.03 vol24 1409 sim 0.36
+     P: Will PSOE win the most seats in the 2026 Spanish general election?
+     K: Spanish general election winner? | Who will win the next Spanish general election? Vox
+gap +0.07  poly 0.09 | kalshi 0.01-0.03 vol24 2612 sim 0.4
+     P: Will Anthropic IPO by November 18, 2026?
+     K: Will OpenAI or Anthropic IPO first? | Will OpenAI or Anthropic IPO first? OpenAI
+gap -0.06  poly 0.88 | kalshi 0.92-0.95 vol24 796 sim 0.38
+     P: Will Trump meet with Vladimir Putin by November 30, 2026?
+     K: Where will Trump and Putin next meet? | Where will Trump and Putin next meet? China
+gap +0.05  poly 0.93 | kalshi 0.86-0.90 vol24 341 sim 0.58
+     P: Will Alberto Núñez Feijóo be the next Prime Minister of Spain?
+     K: Prime Minister of Spain after the next election? | Will Alberto Núñez Feijóo become Prime Minister of Spain following th
+gap -0.04  poly 0.19 | kalshi 0.21-0.25 vol24 631 sim 0.6
+     P: Will Ho Hsin-chun win the next Taichung Mayor election?
+     K: Taichung mayoral election winner? | Will Ho Hsin-chun win the 2026 Taichung mayoral election? Ho Hsin-chun
+gap +0.04  poly 0.62 | kalshi 0.54-0.62 vol24 408 sim 0.25
+     P: Will Su Chiao-hui win the next New Taipei Mayor election?
+     K: Mayor of Johannesburg after municipal elections? | Will Helen Zille win the next Johannesburg mayoral election following
+gap +0.04  poly 0.95 | kalshi 0.90-0.92 vol24 2345 sim 0.3
+     P: Will Trump meet with Xi Jinping by November 30, 2026?
+     K: When will Trump, Xi and Putin meet together? | Will Trump, Xi and Putin meet together before Jan 1, 2027? Before Jan 1, 
+gap +0.04  poly 0.06 | kalshi 0.01-0.03 vol24 2612 sim 0.4
+     P: Will Anthropic IPO on November 18, 2026?
+     K: Will OpenAI or Anthropic IPO first? | Will OpenAI or Anthropic IPO first? OpenAI
+gap -0.03  poly 0.66 | kalshi 0.69-0.70 vol24 1329 sim 0.46
+     P: Will Kuomintang (KMT) win the most head of local government elections in the 2026 Taiwan local elections?
+     K: Taiwan Local Elections winner? | Will Kuomintang win the most mayoral and magistrate races in Taiwan’s 2026 local electi
+gap +0.03  poly 0.05 | kalshi 0.01-0.03 vol24 2612 sim 0.33
+     P: Will Anthropic not IPO by November 30, 2026?
+     K: Will OpenAI or Anthropic IPO first? | Will OpenAI or Anthropic IPO first? OpenAI
+gap -0.03  poly 0.07 | kalshi 0.09-0.11 vol24 2237 sim 0.55
+     P: Will Pedro Sánchez be the next Prime Minister of Spain?
+     K: Prime Minister of Spain after the next election? | Will Pedro Sánchez become Prime Minister of Spain following the next 
+gap -0.02  poly 0.33 | kalshi 0.35-0.36 vol24 7174 sim 0.36
+     P: Will Puma Shen win the next Taipei Mayor election?
+     K: Taipei mayoral election winner? | Will Shen Bo-yang win the 2026 Taipei mayoral election? Shen Bo-yang
+gap +0.02  poly 0.68 | kalshi 0.65-0.66 vol24 1832 sim 0.56
+     P: Will Chiang Wan-an win the next Taipei Mayor election?
+     K: Taipei mayoral election winner? | Will Chiang Wan-an win the 2026 Taipei mayoral election? Chiang Wan-an
+gap +0.02  poly 0.80 | kalshi 0.76-0.81 vol24 204 sim 0.36
+     P: Will Johnny Chiang win the next Taichung Mayor election?
+     K: Taichung mayoral election winner? | Will Chiang Chi-chen win the 2026 Taichung mayoral election? Chiang Chi-chen
+gap -0.01  poly 0.20 | kalshi 0.21-0.22 vol24 7538 sim 0.33
+     P: Next US-Iran senior diplomatic meeting by November 30, 2026?
+     K: When will the U.S. and Iran hold a diplomatic meeting? | Will the U.S. and Iran hold a senior-level meeting before Dec 1
+gap -0.01  poly 0.59 | kalshi 0.59-0.61 vol24 212 sim 0.86
+     P: Will Zoran Janković win the 2026 Ljubljana mayoral election?
+     K: Ljubljana mayoral election winner? | Will Zoran Janković win the 2026 Ljubljana mayoral election? Zoran Janković
+gap -0.01  poly 0.12 | kalshi 0.11-0.15 vol24 238 sim 0.36
+     P: JD Vance 2028 presidential odds leader on November 30?
+     K: 2028 Republican Presidential ticket | Will JD Vance and Marco Rubio be the 2028 Republican Presidential ticket? JD Vance
+gap -0.00  poly 0.58 | kalshi 0.54-0.62 vol24 408 sim 0.45
+     P: Will Helen Zille be the next mayor of Johannesburg?
+     K: Mayor of Johannesburg after municipal elections? | Will Helen Zille win the next Johannesburg mayoral election following
