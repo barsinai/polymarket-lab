@@ -13,6 +13,17 @@ D = "data/fast"
 Z, ASK_MAX, ASK_MIN = float(os.environ.get("Z", "2.5")), float(os.environ.get("ASK_MAX", "0.97")), float(os.environ.get("ASK_MIN", "0.50"))
 R_LO, R_HI = float(os.environ.get("R_LO", "0")), float(os.environ.get("R_HI", "60"))   # seconds-before-end range to study
 SINCE, UNTIL = os.environ.get("SINCE", ""), os.environ.get("UNTIL", "9")   # archive hours to use, e.g. SINCE=2026-11-09T21 (out-of-sample days)
+BOOKWS = os.environ.get("BOOKWS_DIR") or f"{D}/bookws"; RTDS = os.environ.get("RTDS_DIR") or f"{D}/rtds"
+META = os.environ.get("RESULTS_META", f"{D}/results_meta.json")
+HOUR = os.environ.get("HOUR")          # summarize one UTC hour (YYYY-MM-DDTHH): archives of that hour and the one before, windows ending in it
+OUT = os.environ.get("OUT")            # append a one-line JSON summary here (the server's hourly summary, the only thing that goes to git)
+if HOUR:
+    import datetime as _dt
+    _h0 = _dt.datetime.strptime(HOUR, "%Y-%m-%dT%H").replace(tzinfo=_dt.timezone.utc)
+    SINCE = (_h0 - _dt.timedelta(hours=1)).strftime("%Y-%m-%dT%H"); UNTIL = (_h0 + _dt.timedelta(hours=1)).strftime("%Y-%m-%dT%H")
+    WIN_LO, WIN_HI = _h0.timestamp(), _h0.timestamp() + 3600
+else:
+    WIN_LO, WIN_HI = 0, 1e12
 SIGMA_FLOOR = {"btc": 1.5e-5, "eth": 2.4e-5, "bnb": 1.6e-5, "sol": 3.4e-5, "doge": 3.4e-5, "xrp": 4.3e-5, "hype": 4.2e-5, "zec": 8.6e-5}
 
 
@@ -45,7 +56,7 @@ def lines(pattern):
             pass
 
 
-M = json.load(open(f"{D}/results_meta.json"))
+M = json.load(open(META))
 tok2 = {}
 for o in lines(f"{D}/tokens.jsonl"):
     tok2[o["tokens"][0]] = (o["slug"], "Up"); tok2[o["tokens"][1]] = (o["slug"], "Down")
@@ -56,7 +67,7 @@ print("tokens known:", len(tok2))
 
 # feed: chainlink prices per asset
 feed = defaultdict(list)
-for o in lines(f"{D}/rtds/*.jsonl*"):
+for o in lines(f"{RTDS}/*.jsonl*"):
     m = o.get("m") or {}; p = m.get("payload") or {}
     if m.get("topic") == "crypto_prices_chainlink" and p.get("symbol"):
         feed[p["symbol"].split("/")[0]].append((p["timestamp"] / 1000.0, float(p["value"])))
@@ -66,7 +77,7 @@ print("feed assets:", {a: len(v) for a, v in feed.items()})
 
 # websocket top-of-book per token
 top = defaultdict(list)
-for o in lines(f"{D}/bookws/*.jsonl*"):
+for o in lines(f"{BOOKWS}/*.jsonl*"):
     if o.get("t") in ("top", "book") and o.get("top") and o["top"][0] is not None:
         top[o["a"]].append((o["rx"], o["top"][0], o["top"][1] or 0.0))
 print("tokens with book records:", len(top), "records:", sum(len(v) for v in top.values()))
@@ -129,6 +140,8 @@ for tok, recs in top.items():
     if not md or md.get("up") is None or not md.get("ptb"):
         continue
     asset = slug.split("-")[0]; start = md["start"]; end = start + md["window"]
+    if not (WIN_LO <= end < WIN_HI):
+        continue
     zs = z_series(asset, start, end, md["ptb"])
     if not zs:
         continue
@@ -180,6 +193,8 @@ if life:
         print(f"  act after {R:5.2f} s of persistence: episodes {n:4} win {w / n if n else 0:.3f}  stake ${usd:,.0f}  pnl ${pnl:+,.1f} ({pnl / usd if usd else 0:+.1%})  ask paid median {prices[len(prices) // 2] if prices else 0:.2f}")
     # window level: one trade per (window, side), the first episode that lasts R seconds (what the bot does)
     print("  window level (one trade per window-side, first episode that persisted R s):")
+    summary = {"hour": HOUR, "since": SINCE, "until": UNTIL, "z": Z, "ask_max": ASK_MAX, "windows": n_windows, "episodes": len(life),
+               "episodes_won": sum(1 for x in life if x[3]), "window_level": {}}
     for R in (0.05, 0.5, 1.0, 2.0, 3.0, 5.0):
         first = {}
         for x in sorted(life, key=lambda x: x[6][0][0]):
@@ -190,9 +205,15 @@ if life:
             a, sz = ask_at(x[6], R); stake = min(a * (sz or 0), 20.0)
             usd += stake; pnl += stake / a * ((1 if x[3] else 0) - a - 0.07 * a * (1 - a))
         print(f"    R {R:4.2f} s: windows {n:4} win {w / n if n else 0:.3f}  stake ${usd:,.0f}  pnl ${pnl:+,.1f} ({pnl / usd if usd else 0:+.1%})")
+        summary["window_level"][str(R)] = {"n": n, "won": w, "stake": round(usd, 2), "pnl": round(pnl, 2),
+                                           "trades": [{"slug": x[4], "side": x[5], "ask": ask_at(x[6], R)[0], "won": bool(x[3])} for x in first.values()]}
+    if OUT:
+        with open(OUT, "a") as fh:
+            fh.write(json.dumps(summary) + "\n")
     ls = sorted(x[0] for x in life); print("  lifetime percentiles (s): 10%", round(ls[len(ls) // 10], 2), "median", round(ls[len(ls) // 2], 2), "90%", round(ls[9 * len(ls) // 10], 2))
     wl = sorted(x[0] for x in life if x[3]); ll = sorted(x[0] for x in life if not x[3])
     if wl: print("  winners' lifetime median", round(wl[len(wl) // 2], 2), "s;", "losers' median", round(ll[len(ll) // 2], 2) if ll else None, "s")
 
-json.dump([{"life": round(x[0], 3), "ask0": x[1], "sz0": x[2], "won": bool(x[3]), "slug": x[4], "side": x[5],
+if not OUT:
+  json.dump([{"life": round(x[0], 3), "ask0": x[1], "sz0": x[2], "won": bool(x[3]), "slug": x[4], "side": x[5],
             "ask2": ask_at(x[6], 2.0)[0], "sz2": ask_at(x[6], 2.0)[1]} for x in life], open(f"{D}/episodes.json", "w"))

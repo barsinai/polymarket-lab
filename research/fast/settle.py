@@ -4,15 +4,16 @@ bot has seen and store it in data/fast/results_meta.json. Read-only against Poly
 This is the results half of wallets.py without the trade tape, so it runs in a minute and adds nothing heavy to git.
 Windows that are not resolved yet (outcome prices not at 0.99+) stay unsettled and are retried next time.
 """
-import json, time
+import json, os, time
 from concurrent.futures import ThreadPoolExecutor
 import requests
 
 D = "data/fast"
+META = os.environ.get("RESULTS_META", f"{D}/results_meta.json")   # on the server: $STORE/results_meta.json (outside git)
 S = requests.Session(); S.headers["User-Agent"] = "polymarket-lab-research/0.1"
 GAMMA = "https://gamma-api.polymarket.com"
 try:
-    meta = json.load(open(f"{D}/results_meta.json"))
+    meta = json.load(open(META))
 except OSError:
     meta = {}
 
@@ -54,13 +55,24 @@ for f in ("windows.jsonl", "trades.jsonl", "tokens.jsonl"):
     except OSError:
         pass
 now = time.time()
+DAYS = float(os.environ.get("SETTLE_DAYS", "0"))   # only windows that started in the last DAYS days (0 = all)
+if DAYS:
+    slugs = {s for s in slugs if int(s.rsplit("-", 1)[1]) > now - DAYS * 86400}
 todo = sorted(s for s in slugs if (s not in meta or meta[s].get("up") is None)
               and int(s.rsplit("-", 1)[1]) + {"5m": 300, "15m": 900, "4h": 14400}.get(s.split("-")[2], 300) + 120 < now)
 print("slugs", len(slugs), "already settled", sum(1 for s in slugs if meta.get(s, {}).get("up") is not None), "to fetch", len(todo), flush=True)
 n_ok = 0
+
+
+def save():
+    json.dump(meta, open(META + ".tmp", "w")); os.replace(META + ".tmp", META)
+
+
 with ThreadPoolExecutor(6) as ex:
-    for slug, md in ex.map(fetch_meta, todo):
+    for i, (slug, md) in enumerate(ex.map(fetch_meta, todo), 1):
         if md:
             meta[slug] = md; n_ok += md["up"] is not None
-json.dump(meta, open(f"{D}/results_meta.json", "w"))
+        if i % 300 == 0:
+            save()      # checkpoint: a timeout loses at most 300 fetches
+save()
 print("fetched", len(todo), "newly settled", n_ok, "meta total", len(meta), "settled total", sum(1 for v in meta.values() if v.get("up") is not None))

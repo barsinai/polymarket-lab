@@ -59,6 +59,8 @@ def _compress_locked(hour, glob, shutil):
         try:
             if os.path.exists(gz) and os.path.getsize(gz) > 0:
                 shutil.copyfile(gz, tmp)
+            elif os.path.exists(tmp):
+                os.remove(tmp)          # a leftover of an interrupted compress: never append to it (11-10: 3 corrupt hours)
             with open(f) as src, gzip.open(tmp, "at") as dst:
                 for line in src:
                     if line.endswith("\n") and line.startswith("{"):

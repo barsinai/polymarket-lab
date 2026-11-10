@@ -486,3 +486,16 @@ Price drift in the trade's direction (what a market maker on the other side lose
   +9.7%/$. Break-even at an 80c average ask is 81% -> over those hours the cheap-band edge is thin; 11-07 and daytime 11-08
   (no websocket coverage) carried the 4-day replay. New 4 hours (11-09T21..11-10T00): 11 windows 82% +7%/$ at R=2 s.
   Status of lock_c: candidate, not proof. Needs 3-4 paper days.
+
+## 11-10 04:50 RECORDINGS: corrupt hours found, policy change (user OK)
+- 3 of the 6 new rtds archives (11-09T23, 11-10T00, T02) had a damaged first gzip member: at a part end the bot sets rt_stop,
+  the recorder thread starts its shutdown compress, the interpreter exits mid-write -> leftover .tmp -> the next compress
+  appended to it. Fix: rtds no longer compresses at shutdown (plain hour file just continues, like bookws), compress never
+  appends to a leftover .tmp; repair_gz.py keeps the good members (ran here; the hook runs it on the server hourly).
+- CORRECTION of the 04:00 note: the "new 4 hours: 11 windows 82% +7%/$ at R=2 s" websocket figure was computed on the corrupt
+  feed (stale prices from 23:00 on). Repaired, 11-09T21..11-10T02 (1198 windows): locked-and-cheap 13 windows at R=0.05 s,
+  77% win, -$36.5; at R=2 s 1 window (lost); ask<=0.92: 5 windows 60% -$15. Last night the lock family lost on both tapes.
+- Policy (user: "סבבה"): raw recordings stay on the server only (7-day retention); git gets data/fast/hourly/lifetimes.jsonl
+  (research/fast/hourly.sh between parts: repair_gz, settle.py with RESULTS_META=$STORE/results_meta.json, lifetimes.py
+  HOUR mode at caps 0.97/0.92). Repo stays public (user: fine as long as nothing is profitable). Existing archives in the
+  tree (11-08..11-10) stay for analysis here; the 6 GB history is not rewritten.
