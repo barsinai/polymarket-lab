@@ -372,6 +372,12 @@ def main():
                         # cheap ask on the 'locked' side means the market knows better (first-signal study 9/15 wins) unless margin >= 1 bp
                         if a_px <= 0.92 and (rem > 20 or margin_bp >= 1.0):
                             picks.append("lock_c")
+                            # 11-10: by session on the 4-day tape lock_c was 100% (28 trades, +33%/$) in 00-16 UTC and 83% (+8%)
+                            # in the US session 16-24 UTC; weekend 93% vs weekday 83%. Quiet-hours variant (in-sample pick: test)
+                            if time.gmtime(now).tm_hour < 16:
+                                picks.append("lock_cq")
+                            if time.gmtime(now).tm_wday >= 5:
+                                picks.append("lock_cw")
                         if a_px <= 0.92 and margin_bp >= 1.0:
                             picks.append("lock_cm")
                         if a_px <= 0.92 and rem > 20 and held >= LOCK_PERSIST:
