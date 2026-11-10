@@ -37,35 +37,41 @@ except OSError:
     pass
 since = dt.datetime.now(dt.timezone.utc) - dt.timedelta(days=30.5 * MONTHS)
 out = open(f"{D}/markets.jsonl", "a"); n_new = 0; offset = 0
-todo = []; n_seen = 0; n_skip = collections.Counter()
-now_iso = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-while offset < 60000 and len(todo) + len(have) < MAX_MARKETS:
-    page = get(f"{GAMMA}/markets", {"closed": "true", "limit": 100, "offset": offset, "end_date_min": since.strftime("%Y-%m-%dT%H:%M:%SZ"), "end_date_max": now_iso})
-    if not page:
-        print("empty page at offset", offset); break
-    if offset == 0:
-        print("first page sample:", [(m.get("slug"), m.get("endDate"), m.get("outcomePrices"), m.get("volumeNum")) for m in page[:3]], flush=True)
-    offset += 100; n_seen += len(page)
-    for m in page:
-        try:
-            end = dt.datetime.fromisoformat((m.get("endDate") or "").replace("Z", "+00:00"))
-        except ValueError:
-            n_skip["no_end"] += 1; continue
-        if m["id"] in have:
-            n_skip["have"] += 1; continue
-        if SKIP.search(m.get("slug") or ""):
-            n_skip["updown"] += 1; continue
-        if float(m.get("volumeNum") or 0) < MIN_VOL:
-            n_skip["volume"] += 1; continue
-        try:
-            prices = [float(x) for x in json.loads(m.get("outcomePrices") or "[]")]; toks = json.loads(m.get("clobTokenIds") or "[]")
-        except ValueError:
-            n_skip["parse"] += 1; continue
-        if len(prices) != 2 or max(prices) < 0.99 or len(toks) != 2:
-            n_skip["unresolved_or_multi"] += 1; continue
-        todo.append((m, end, prices, toks))
-    if len(page) < 100:
-        break
+todo = []; n_seen = 0; n_skip = collections.Counter(); seen_ids = set()
+# Gamma caps how deep an offset can go, so walk the period in 7-day end-date windows
+win_end = dt.datetime.now(dt.timezone.utc)
+while win_end > since and len(todo) + len(have) < MAX_MARKETS:
+    win_start = max(since, win_end - dt.timedelta(days=7)); offset = 0
+    while offset < 20000:
+        page = get(f"{GAMMA}/markets", {"closed": "true", "limit": 100, "offset": offset, "end_date_min": win_start.strftime("%Y-%m-%dT%H:%M:%SZ"), "end_date_max": win_end.strftime("%Y-%m-%dT%H:%M:%SZ")})
+        if not page:
+            break
+        offset += 100; n_seen += len(page)
+        for m in page:
+            if m["id"] in seen_ids:
+                continue
+            seen_ids.add(m["id"])
+            try:
+                end = dt.datetime.fromisoformat((m.get("endDate") or "").replace("Z", "+00:00"))
+            except ValueError:
+                n_skip["no_end"] += 1; continue
+            if m["id"] in have:
+                n_skip["have"] += 1; continue
+            if SKIP.search(m.get("slug") or ""):
+                n_skip["updown"] += 1; continue
+            if float(m.get("volumeNum") or 0) < MIN_VOL:
+                n_skip["volume"] += 1; continue
+            try:
+                prices = [float(x) for x in json.loads(m.get("outcomePrices") or "[]")]; toks = json.loads(m.get("clobTokenIds") or "[]")
+            except ValueError:
+                n_skip["parse"] += 1; continue
+            if len(prices) != 2 or max(prices) < 0.99 or len(toks) != 2:
+                n_skip["unresolved_or_multi"] += 1; continue
+            todo.append((m, end, prices, toks))
+        if len(page) < 100:
+            break
+    print(f"window {win_start:%m-%d}..{win_end:%m-%d}: pages {offset // 100}, todo so far {len(todo)}", flush=True)
+    win_end = win_start
 print("markets seen", n_seen, "skipped", dict(n_skip))
 print("resolved binary markets to fetch:", len(todo), "(already had", len(have), ")", flush=True)
 
