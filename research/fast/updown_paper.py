@@ -367,6 +367,15 @@ def main():
                                 picks.append("lock_pm")
                         if held >= LOCK_PERSIST:
                             picks.append("lock_p")   # 11-09: condition held LOCK_PERSIST s (filters flickers: +7-9%/$ vs +0.3% instant, websocket day)
+                        # cheap variants (11-10 replay, 4 days): asks 0.93-0.97 take 2/3 of the capital and earn ~0 (-0.2%/$: one K-error
+                        # loss at 0.97 wipes 30 wins); the edge is in asks <= 0.92 (lock_c 51 trades 92% +22%/$). With <= 20 s left a
+                        # cheap ask on the 'locked' side means the market knows better (first-signal study 9/15 wins) unless margin >= 1 bp
+                        if a_px <= 0.92 and (rem > 20 or margin_bp >= 1.0):
+                            picks.append("lock_c")
+                        if a_px <= 0.92 and margin_bp >= 1.0:
+                            picks.append("lock_cm")
+                        if a_px <= 0.92 and rem > 20 and held >= LOCK_PERSIST:
+                            picks.append("lock_cp")
                         # variants (paper, for the multi-day comparison): persistence 1/3/5 s, majors only, 15 m only, $50 cap
                         if held >= 1.0:
                             picks.append("lock_p1")

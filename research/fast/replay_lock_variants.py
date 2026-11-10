@@ -70,6 +70,11 @@ for ts in sorted(ticks):
                 picks.append("lock_m")
                 if held >= PERSIST: picks.append("lock_pm")
             if held >= PERSIST: picks.append("lock_p")
+            # cheap variants: the 0.93-0.97 asks (2/3 of the capital) earn ~0 (replay: -0.2%/$); the edge is in asks <= 0.92.
+            # With <= 20 s left a cheap ask means the market knows better (first-signal study: 9/15 wins), unless margin >= 1 bp
+            if a_px <= 0.92 and (rem > 20 or margin_bp >= 1.0): picks.append("lock_c")
+            if a_px <= 0.92 and margin_bp >= 1.0: picks.append("lock_cm")
+            if a_px <= 0.92 and rem > 20 and held >= PERSIST: picks.append("lock_cp")
             if held >= 1.0: picks.append("lock_p1")
             if held >= 3.0: picks.append("lock_p3")
             if held >= 5.0: picks.append("lock_p5")
@@ -106,7 +111,7 @@ by = defaultdict(lambda: [0, 0, 0.0, 0.0])
 for t in trades:
     for key in (t["strat"], f'{t["strat"]} {day(t["ts"])}'):
         b = by[key]; b[0] += 1; b[1] += t["won"]; b[2] += t["stake"]; b[3] += t["pnl"]
-order = ["lock", "lock_m", "lock_pm", "lock_p1", "lock_p", "lock_p3", "lock_p5", "lock_p_z2", "lock_p_z3", "lock_p_majors", "lock_p_15m", "lock_p_50", "lock_early"]
+order = ["lock", "lock_m", "lock_pm", "lock_c", "lock_cm", "lock_cp", "lock_p1", "lock_p", "lock_p3", "lock_p5", "lock_p_z2", "lock_p_z3", "lock_p_majors", "lock_p_15m", "lock_p_50", "lock_early"]
 print(f"\n{'rule':14} {'n':>5} {'win':>6} {'staked':>9} {'pnl':>9} {'pnl/$':>7}")
 for k in order:
     n, w_, st, pnl = by[k]
@@ -122,8 +127,8 @@ for t in trades:
         b = pa[t["asset"]]; b[0] += 1; b[1] += t["won"]; b[2] += t["pnl"]
         b = pa[f'{t["w"] // 60}m']; b[0] += 1; b[1] += t["won"]; b[2] += t["pnl"]
 print("\nlock_p by asset/window:", {k: f"n{v[0]} w{v[1]} {v[2]:+.1f}" for k, v in sorted(pa.items())})
-los = [t for t in trades if t["strat"] == "lock_p" and not t["won"]]
-print("\nlock_p losers:")
+los = [t for t in trades if t["strat"] in ("lock_p", "lock_c") and not t["won"]]
+print("\nlock_p / lock_c losers:")
 for t in los:
-    print(f"  {dt.datetime.fromtimestamp(t['ts'], dt.timezone.utc):%m-%d %H:%M:%S} {t['slug']:28} {t['side']:4} ask {t['price']:.2f} z {t['z']:4.1f} rem {t['rem']:3} {t['pnl']:+.1f}")
+    print(f"  {t['strat']:7} {dt.datetime.fromtimestamp(t['ts'], dt.timezone.utc):%m-%d %H:%M:%S} {t['slug']:28} {t['side']:4} ask {t['price']:.2f} z {t['z']:4.1f} rem {t['rem']:3} margin {t['margin_bp']:5.2f} {t['pnl']:+.1f}")
 json.dump(trades, open(f"{D}/lock_variants_replay.json", "w"))

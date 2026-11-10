@@ -460,3 +460,23 @@ Price drift in the trade's direction (what a market maker on the other side lose
   By margin of the predicted TWAP over K: >= 1 bp 93 trades 97% +$140; 0.3-1 bp 62-67% win, -$35.
 - New paper rules lock_m (lock and margin >= 1 bp) and lock_pm (+2 s): on the tape 95 trades 96.8% +10.5%/$
   (+$142 in ~2 days at $20) and 35/35 +12.7%. In-sample threshold: the paper run is the out-of-sample test.
+
+## 11-10 02:10 WHERE THE LOCK EDGE ACTUALLY IS (price band), and what the margin filter cannot fix
+- settle.py (results only, no tape) replaces wallets.py for refreshing results_meta.json; run via run_script.
+- Out of sample since the 21:39 restart (14 lock trades): lock 78.6% -$4.7; lock_m 8/9 -$1.9 (one loss at ask 0.97: btc 23:05 window,
+  our K == official ptb exactly, final-ptb = -0.00 bp, margin at rem 25 s was 1.75 bp -> the price moved 4 bp in 25 s). A single
+  0.97 loss (-$20) wipes 30 wins (+$0.6 each).
+- Replay by ask price (4 days, lock): asks 0.93-0.97 = 78 of 131 trades, 2/3 of the capital, P&L -0.2%/$. Asks < 0.93: +17%..+50%/$.
+  The market is right when it quotes 0.95+ on a "locked" side; our information is worth something only while it still quotes 0.70-0.92.
+- First-signal study (150 windows): with <= 20 s left a cheap ask (0.50-0.70) on the locked side wins 2/7 -> the market has caught up
+  and knows; rem 21-60 cheap asks 24/24.
+- Calibration (76k obs vs official finals): projection error |final-proj| p99 by rem decade: 1.1 / 2.1 / 5.1 / 7.0 / 10 / 18 bp
+  (pooled), per asset btc 0.4..9 bp, zec 2..28 bp. Model sd is calibrated in the body (ratio sd 1.0-1.2 for rem 10-60) but fat
+  tailed (3% beyond 2.5 sd vs 1.2% normal; rem < 10 s ratio sd 3.6 = K error + timestamp misalignment).
+  Obs-level loss rate at z >= 2.5 is 0.1-0.2%; trade-level loss is 8-10% because we trade exactly when the market disagrees -> the
+  market's disagreement carries information; a bigger margin (>= p90/p95/p99 of the asset's own error at that rem) does NOT raise
+  the win rate (90.6% vs 90.3%) - the filter removes trades, not losses.
+- New paper rules (in the bot from ~02:41 UTC): lock_c = lock & ask <= 0.92 & (rem > 20 or margin >= 1 bp) [replay 51 trades 92.2%
+  +$139 / +22%/$, 4 losers]; lock_cm (+ margin >= 1 bp) [40, 92.5%, +24%/$]; lock_cp (+ 2 s persistence, rem > 20) [19, 94.7%].
+  Capacity caveat: median stake $9-10 (the cheap ask is usually 5-15 shares), so ~+$35/day at $20 cap even if it holds.
+  Both selections (price band, last-20-s exclusion) were found in sample on 150 windows -> the paper run from here is the test.
