@@ -480,3 +480,9 @@ Price drift in the trade's direction (what a market maker on the other side lose
   +$139 / +22%/$, 4 losers]; lock_cm (+ margin >= 1 bp) [40, 92.5%, +24%/$]; lock_cp (+ 2 s persistence, rem > 20) [19, 94.7%].
   Capacity caveat: median stake $9-10 (the cheap ask is usually 5-15 shares), so ~+$35/day at $20 cap even if it holds.
   Both selections (price band, last-20-s exclusion) were found in sample on 150 windows -> the paper run from here is the test.
+- 02:10 cross-check on the websocket recordings (lifetimes.py, now window-level = one trade per window-side, first episode that
+  persisted R s): in-sample day ask<=0.97 R=2 s: 50 windows 90% +2.5%/$ (the earlier +6.8% was episode-level: a flickering window
+  counted many times); cheap band ask<=0.92 R=2 s: 27 windows 81.5% +0.6%/$. Same hours in the obs replay: lock_c 18 trades 83%
+  +9.7%/$. Break-even at an 80c average ask is 81% -> over those hours the cheap-band edge is thin; 11-07 and daytime 11-08
+  (no websocket coverage) carried the 4-day replay. New 4 hours (11-09T21..11-10T00): 11 windows 82% +7%/$ at R=2 s.
+  Status of lock_c: candidate, not proof. Needs 3-4 paper days.
