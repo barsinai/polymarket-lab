@@ -15,6 +15,7 @@ jobs:
       STORE: /home/runner/pilot-data          # recordings live here, outside the git checkout (18 GB disk)
       BOOKWS_DIR: /home/runner/pilot-data/bookws
       RTDS_DIR: /home/runner/pilot-data/rtds
+      LAST_S: "300"                           # 11-10: read the books for the whole 5-minute window (window-start study), not only the last 120 s
     steps:
       - name: Fresh small checkout (drop the old .git, it held every recording ever published)
         run: |
@@ -45,8 +46,8 @@ jobs:
           git config pack.threads 1 && git config pack.windowMemory 64m && git config core.bigFileThreshold 1m && git config pack.deltaCacheSize 32m
           mkdir -p "$BOOKWS_DIR" "$RTDS_DIR"
           : > /tmp/fast.txt; touch /tmp/fast.start      # marker: "modified during this job"
-          # raw recordings live only here (user decision 11-10): keep 7 days, git gets the hourly summaries
-          find "$STORE" -name '*.jsonl*' -mtime +7 -delete 2>/dev/null || true
+          # raw recordings live only here (user decision 11-10): keep 5 days (2x more recording with LAST_S=300), git gets the hourly summaries
+          find "$STORE" -name '*.jsonl*' -mtime +5 -delete 2>/dev/null || true
           find "$STORE" -name '*.tmp' -mmin +120 -delete 2>/dev/null || true
           report() { echo "disk $(date -u +%FT%H:%M) $(df -h / | tail -1 | awk '{print $4" free of "$2}') checkout $(du -sh . 2>/dev/null | cut -f1) store $(du -sh "$STORE" 2>/dev/null | cut -f1)" | tee -a /tmp/fast.txt; }
           report
