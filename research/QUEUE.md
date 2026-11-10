@@ -515,3 +515,11 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - Binance relay vs Chainlink lead (rtds, 25k prints/asset): corr with the next 2-s Chainlink return 0.04 (btc) .. 0.19 (eth),
   slope 0.05..0.27 bp/bp on a 1-bp lead -> fractions of a bp; not a feature worth having at our speed.
 - Lock by window length (replay): 5m n124 90% +6%/$; 15m n22 91% +3%/$ (lock_c 15m 7/7 +28%); 4h: 72 settled windows, too few.
+
+## 11-10 05:20 TRACK 4 (parity maker) DEAD ON THE TAPE; tracks 1-3 started (user: "continue with all of them")
+- parity_maker.py on 554 aligned 15m/5m pairs (pairs tape, 4 days): resting bids on both legs adding to 0.90/0.95/0.98,
+  posted at <= 100 s: both legs fill in 5-8% of pairs, ONE leg fills in 45% -> adverse selection (the leg that fills is
+  the one going wrong): P&L -$370..-$385 on ~$1.8k staked, of which one-leg positions -$440..-$450. Taker riskless
+  (sum <= 0.995 at some tick) 20 of 554. Dead.
+- Research track: research/slow/scan_markets.py -> data/slow/candidates.json (284 markets resolving in 0.5-28 days, liq >=
+  $5k, vol24 >= $500, binary, 3-97c, crypto price windows excluded), resolution-rule tags for track 3.
