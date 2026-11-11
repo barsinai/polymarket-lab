@@ -1,5 +1,5 @@
 {
-"scanned": "2026-11-11 13:29",
+"scanned": "2026-11-11 13:36",
 "events": 2100,
 "groups": 2037,
 "books": 17242,
@@ -37,6 +37,21 @@
 "edge_after_fee": 0.0015,
 "size_shares": 195.68,
 "usd_at_size": 194.9
+},
+{
+"kind": "ladder_num",
+"event": "How high will inflation get in 2026?",
+"slug": "how-high-will-inflation-get-in-2026",
+"easy": "Will inflation reach more than 6% in 2026?",
+"hard": "Will inflation reach more than 8% in 2026?",
+"easy_yes_ask": 0.016,
+"hard_no_ask": 0.981,
+"hard_yes_bid": 0.019,
+"cost": 0.997,
+"edge": 0.003,
+"edge_after_fee": 0.0006,
+"size_shares": 257.01,
+"usd_at_size": 256.24
 },
 {
 "kind": "ladder_num",
@@ -112,28 +127,6 @@
 "edge_after_fee": 0.0027,
 "size_shares": 49.99,
 "usd_at_size": 49.74
-},
-{
-"kind": "negrisk_all_yes",
-"event": "OpenAI IPO Closing Market Cap",
-"slug": "openai-ipo-closing-market-cap-554",
-"n": 7,
-"has_other": false,
-"outcomes": [
-"<500B",
-"500\u2013750B",
-"750B\u20131T",
-"1T\u20131.25T",
-"1.25T\u20131.5T",
-"1.5T+",
-"No IPO by December 31, 2027"
-],
-"cost": 0.959,
-"payoff": 1,
-"edge": 0.041,
-"edge_after_fee": -0.0129,
-"size_shares": 5.22,
-"usd_at_size": 5.01
 },
 {
 "kind": "ladder_date",
@@ -279,19 +272,41 @@
 "usd_at_size": 19.8
 },
 {
+"kind": "negrisk_all_yes",
+"event": "OpenAI IPO Closing Market Cap",
+"slug": "openai-ipo-closing-market-cap-554",
+"n": 7,
+"has_other": false,
+"outcomes": [
+"<500B",
+"500\u2013750B",
+"750B\u20131T",
+"1T\u20131.25T",
+"1.25T\u20131.5T",
+"1.5T+",
+"No IPO by December 31, 2027"
+],
+"cost": 0.991,
+"payoff": 1,
+"edge": 0.009,
+"edge_after_fee": -0.046,
+"size_shares": 5.22,
+"usd_at_size": 5.17
+},
+{
 "kind": "ladder_num",
 "event": "Printr FDV above ___ one day after launch?",
 "slug": "printr-fdv-above-one-day-after-launch",
 "easy": "Printr FDV above $500M one day after launch?",
 "hard": "Printr FDV above $1B one day after launch?",
 "easy_yes_ask": 0.049,
-"hard_no_ask": 0.924,
-"hard_yes_bid": 0.076,
-"cost": 0.973,
-"edge": 0.027,
-"edge_after_fee": 0.0188,
+"hard_no_ask": 0.932,
+"hard_yes_bid": 0.068,
+"cost": 0.981,
+"edge": 0.019,
+"edge_after_fee": 0.0113,
 "size_shares": 1.61,
-"usd_at_size": 1.57
+"usd_at_size": 1.58
 },
 {
 "kind": "ladder_num",
