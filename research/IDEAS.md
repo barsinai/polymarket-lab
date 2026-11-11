@@ -10,7 +10,7 @@ Status: TESTING (paper/backtest running) · READY (next up) · PARKED (needs som
 | Slow favourites: YES 0.95-0.98, non-sports, 3-30 d | holders sell near-certain outcomes early; the discount is a time premium | history 6,570 markets (+2%/position, 99.5%); converge_paper.py at real asks | 11-10 | first settlements 11-13 |
 | lock_x (5m/15m lock + 2 s persistence + margin >= 1 bp + rem >= 6 s) with the exact price to beat | the K bug made our 'locks' wrong in knife-edge windows; exact K + persistence + margin removes them | replay 48 trades 100% +11%/$; paper lock_x / lock_x50 / lock_xk | 11-11 | 11-13 |
 | lock_early (60-140 s, z >= 2.5, 2 s persistence) | before the last minute the market under-reacts to a large move | replay 65 trades 97% +4.9%; out of sample 17/17 | 11-09 | ongoing |
-| Weather W1: latest ensemble forecast vs temperature buckets (40 cities, 11 buckets, daily) | physics ensembles (ECMWF 51 + GFS 31 + ICON 40 members), fresh runs, hourly METAR max per the rules. PRIOR: 11-01 a 2-day-old deterministic forecast lost to the market (Brier .199 vs .164) - this is the stronger model, low prior | weather_paper.py: model probability for every bucket, paper buys at real asks, Brier vs market | 11-11 | 11-14 |
+| Weather W1: latest ensemble forecast vs temperature buckets (40 cities, 11 buckets, daily) | physics ensembles (ECMWF 51 + GFS 31 + ICON 40 members), fresh runs, hourly METAR max per the rules. PRIOR: 11-01 a 2-day-old deterministic forecast lost to the market (Brier .199 vs .164) - this is the stronger model, low prior | weather_paper.py v1 (per-station bias + residual sd from 60 days of METARs vs archived forecasts, weather_bias.py): probability for every bucket, paper buys at real asks, Brier vs market. First run: 80 events, model-vs-market distance 0.27, 26 positions | 11-11 | 11-13 (resolves daily) |
 | Young markets, NO side: stand-alone non-sports binaries < 72 h old, YES mid 0.30-0.50 | history: priced 0.425, resolved YES 0.237 (n 283) - but history prices may be mids of empty books | young_paper.py at real NO asks, $10 | 11-11 | as they resolve (1-60 d) |
 | Riskless structure (negRisk sums, ladders) at news time | dislocations appear when news hits and books are thin | arb_scan.py hourly, arb_log.jsonl | 11-11 | weekly |
 | Research journal (my forecasts with sources) | reading + cross-checking beats the crowd on slow political/econ questions | forecast_log.py, Brier vs market | 11-10 | weeks |
@@ -28,7 +28,9 @@ Status: TESTING (paper/backtest running) · READY (next up) · PARKED (needs som
 6. **Liquidity rewards on near-certain markets.** Reward programs pay resting orders near the mid; on near-certain slow
    markets adverse selection is small (the 11-05 pilot lost on crypto markets, where it is large). Test: CLOB rewards
    endpoint -> pools per $ of qualifying liquidity on the convergence set.
-7. **4-hour windows with the exact K.** Fewer, slower, maybe less contested than 5m; lock and lock_early per window type.
+7. **15-minute windows on their own.** Replay: lock_p 15/15 +10-12%/$, lock_early 15/15 +15%, lock_c 12 92% +21% (5m: +4-7%). Fewer
+   competitors on the slower window? A 15m-only rule set with its own sizing, once the paper sample is 30+.
+8. **4-hour windows with the exact K.** 48 windows a day; the bot only watches their last 140 s - widen it for 4h.
 
 ## PARKED
 - Sports vs sharp bookmaker odds (needs an odds-API key from the user).
