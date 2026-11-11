@@ -28,11 +28,12 @@ jobs:
       - run: mkdir -p logs data/slow data/research && python -u research/slow/spike_monitor.py 2>&1 | tee logs/spike-log.txt
       - run: python -u research/slow/converge_paper.py 2>&1 | tee logs/converge-log.txt
       - run: python -u research/slow/score_forecasts.py 2>&1 | tail -5 | tee logs/forecast-log.txt || true
+      - run: timeout 300 python -u research/slow/young_paper.py 2>&1 | tail -6 | tee logs/young-log.txt || true
       - run: timeout 900 python -u research/slow/weather_paper.py 2>&1 | tail -8 | tee logs/weather-log.txt || true
       - run: timeout 600 python -u research/slow/arb_scan.py 2>&1 | tail -15 | tee logs/arb-log.txt || true
       - name: Save
         run: |
           git config user.name "lab-bot" && git config user.email "lab-bot@users.noreply.github.com"
-          for p in data/slow/spike_positions.jsonl data/slow/spike_report.json data/slow/converge_positions.jsonl data/slow/converge_report.json data/slow/arb_scan.json data/slow/arb_log.jsonl data/research/scoreboard.json data/weather logs; do [ -e "$p" ] && git add --sparse "$p"; done
+          for p in data/slow/spike_positions.jsonl data/slow/spike_report.json data/slow/converge_positions.jsonl data/slow/converge_report.json data/slow/arb_scan.json data/slow/arb_log.jsonl data/slow/young_positions.jsonl data/slow/young_report.json data/research/scoreboard.json data/weather logs; do [ -e "$p" ] && git add --sparse "$p"; done
           git commit -qm "Slow paper $(date -u +%FT%H:%M) [skip ci]" || exit 0
           for i in 1 2 3; do git pull -q --rebase -X theirs origin main && git push -q && break; sleep 5; done

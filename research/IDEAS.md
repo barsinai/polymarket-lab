@@ -11,6 +11,7 @@ Status: TESTING (paper/backtest running) · READY (next up) · PARKED (needs som
 | lock_x (5m/15m lock + 2 s persistence + margin >= 1 bp + rem >= 6 s) with the exact price to beat | the K bug made our 'locks' wrong in knife-edge windows; exact K + persistence + margin removes them | replay 48 trades 100% +11%/$; paper lock_x / lock_x50 / lock_xk | 11-11 | 11-13 |
 | lock_early (60-140 s, z >= 2.5, 2 s persistence) | before the last minute the market under-reacts to a large move | replay 65 trades 97% +4.9%; out of sample 17/17 | 11-09 | ongoing |
 | Weather W1: latest ensemble forecast vs temperature buckets (40 cities, 11 buckets, daily) | physics ensembles (ECMWF 51 + GFS 31 + ICON 40 members), fresh runs, hourly METAR max per the rules. PRIOR: 11-01 a 2-day-old deterministic forecast lost to the market (Brier .199 vs .164) - this is the stronger model, low prior | weather_paper.py: model probability for every bucket, paper buys at real asks, Brier vs market | 11-11 | 11-14 |
+| Young markets, NO side: stand-alone non-sports binaries < 72 h old, YES mid 0.30-0.50 | history: priced 0.425, resolved YES 0.237 (n 283) - but history prices may be mids of empty books | young_paper.py at real NO asks, $10 | 11-11 | as they resolve (1-60 d) |
 | Riskless structure (negRisk sums, ladders) at news time | dislocations appear when news hits and books are thin | arb_scan.py hourly, arb_log.jsonl | 11-11 | weekly |
 | Research journal (my forecasts with sources) | reading + cross-checking beats the crowd on slow political/econ questions | forecast_log.py, Brier vs market | 11-10 | weeks |
 
@@ -20,9 +21,6 @@ Status: TESTING (paper/backtest running) · READY (next up) · PARKED (needs som
    each METAR in the afternoon. Test: minute price history vs METAR times (IEM ASOS archive).
 2. **Weather W0 skill backtest.** Open-Meteo historical forecasts (previous runs) vs IEM METAR outcomes for the 40
    stations: calibration of bucket probabilities, the station bias of each city, before trusting W1's trades.
-3. **Young markets, NO side.** History: markets in their first 10 days priced 0.30-0.50 resolved YES 24-29% (gap
-   -14..-19 pts, n 2,300) - but daily history prices can be mids of empty books. Needs a live tracker at real asks for
-   new non-negRisk binaries.
 4. **Scheduled data buckets (CPI, PPI, payrolls, Fed).** Bucket markets vs a distribution centred on consensus /
    nowcast (Cleveland Fed CPI nowcast) with the historical surprise sd; Kalshi prices on the same release as a cross-check.
 5. **Maker on slow favourites.** Rest a bid 1c under the ask on the YES 0.95-0.98 set: spread + time premium; risk:
