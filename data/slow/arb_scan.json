@@ -1,8 +1,8 @@
 {
-"scanned": "2026-11-11 22:06",
+"scanned": "2026-11-11 22:52",
 "events": 2100,
 "groups": 2037,
-"books": 17238,
+"books": 17242,
 "opps": [
 {
 "kind": "negrisk_all_yes",
@@ -24,19 +24,16 @@
 "usd_at_size": 169.83
 },
 {
-"kind": "ladder_num",
-"event": "How high will inflation get in 2026?",
-"slug": "how-high-will-inflation-get-in-2026",
-"easy": "Will inflation reach more than 6% in 2026?",
-"hard": "Will inflation reach more than 8% in 2026?",
-"easy_yes_ask": 0.015,
-"hard_no_ask": 0.981,
-"hard_yes_bid": 0.019,
-"cost": 0.996,
-"edge": 0.004,
-"edge_after_fee": 0.0017,
-"size_shares": 305.93,
-"usd_at_size": 304.71
+"kind": "negrisk_all_no",
+"event": "Anthropic IPO Closing Market Cap",
+"slug": "anthropic-ipo-closing-market-cap-higher-strikes",
+"n": 10,
+"cost": 8.994,
+"payoff": 9,
+"edge": 0.006,
+"edge_after_fee": -0.0464,
+"size_shares": 317.0,
+"usd_at_size": 2851.1
 },
 {
 "kind": "ladder_num",
@@ -50,8 +47,23 @@
 "cost": 0.996,
 "edge": 0.004,
 "edge_after_fee": 0.0015,
-"size_shares": 158.38,
-"usd_at_size": 157.75
+"size_shares": 195.7,
+"usd_at_size": 194.92
+},
+{
+"kind": "ladder_num",
+"event": "How high will inflation get in 2026?",
+"slug": "how-high-will-inflation-get-in-2026",
+"easy": "Will inflation reach more than 6% in 2026?",
+"hard": "Will inflation reach more than 8% in 2026?",
+"easy_yes_ask": 0.016,
+"hard_no_ask": 0.981,
+"hard_yes_bid": 0.019,
+"cost": 0.997,
+"edge": 0.003,
+"edge_after_fee": 0.0006,
+"size_shares": 257.01,
+"usd_at_size": 256.24
 },
 {
 "kind": "negrisk_all_yes",
@@ -69,12 +81,12 @@
 "$2.25T\u2013$2.5T",
 "$2.5T+"
 ],
-"cost": 0.983,
+"cost": 0.982,
 "payoff": 1,
-"edge": 0.017,
-"edge_after_fee": -0.0404,
+"edge": 0.018,
+"edge_after_fee": -0.0394,
 "size_shares": 27.68,
-"usd_at_size": 27.21
+"usd_at_size": 27.18
 },
 {
 "kind": "ladder_num",
@@ -123,6 +135,21 @@
 },
 {
 "kind": "ladder_num",
+"event": "Ostium FDV above ___ one day after launch?",
+"slug": "ostium-fdv-above-one-day-after-launch",
+"easy": "Ostium FDV above $50M one day after launch?",
+"hard": "Ostium FDV above $100M one day after launch?",
+"easy_yes_ask": 0.022,
+"hard_no_ask": 0.974,
+"hard_yes_bid": 0.026,
+"cost": 0.996,
+"edge": 0.004,
+"edge_after_fee": 0.0007,
+"size_shares": 70.71,
+"usd_at_size": 70.43
+},
+{
+"kind": "ladder_num",
 "event": "StandX FDV above ___ one day after launch?",
 "slug": "standx-fdv-above-one-day-after-launch",
 "easy": "StandX FDV above $50M one day after launch?",
@@ -152,10 +179,10 @@
 "20B+",
 "No IPO by December 31, 2027"
 ],
-"cost": 0.959,
+"cost": 0.958,
 "payoff": 1,
-"edge": 0.041,
-"edge_after_fee": 0.0285,
+"edge": 0.042,
+"edge_after_fee": 0.0296,
 "size_shares": 5.0,
 "usd_at_size": 4.79
 },
@@ -235,21 +262,6 @@
 "usd_at_size": 27.84
 },
 {
-"kind": "ladder_num",
-"event": "TownSquare FDV above ___ one day after launch?",
-"slug": "townsquare-fdv-above-one-day-after-launch-20260720191919468",
-"easy": "TownSquare FDV above $200M one day after launch?",
-"hard": "TownSquare FDV above $250M one day after launch?",
-"easy_yes_ask": 0.42,
-"hard_no_ask": 0.56,
-"hard_yes_bid": 0.44,
-"cost": 0.98,
-"edge": 0.02,
-"edge_after_fee": -0.0143,
-"size_shares": 5.0,
-"usd_at_size": 4.9
-},
-{
 "kind": "negrisk_all_yes",
 "event": "OpenAI IPO Closing Market Cap",
 "slug": "openai-ipo-closing-market-cap-554",
@@ -287,64 +299,26 @@
 "usd_at_size": 9.69
 },
 {
-"kind": "ladder_num",
-"event": "What will Fed Rate hit before 2027?",
-"slug": "what-will-fed-rate-hit-before-2027",
-"easy": "Will the Fed\u2019s lower bound reach 3.25% or lower before 2027?",
-"hard": "Will the Fed\u2019s lower bound reach 1.75% or lower before 2027?",
-"easy_yes_ask": 0.009,
-"hard_no_ask": 0.988,
-"hard_yes_bid": 0.012,
-"cost": 0.997,
-"edge": 0.003,
-"edge_after_fee": 0.0015,
-"size_shares": 13.1,
-"usd_at_size": 13.06
-},
-{
-"kind": "ladder_num",
-"event": "What will Fed Rate hit before 2027?",
-"slug": "what-will-fed-rate-hit-before-2027",
-"easy": "Will the Fed\u2019s lower bound reach 3.25% or lower before 2027?",
-"hard": "Will the Fed\u2019s lower bound reach 0% or lower before 2027?",
-"easy_yes_ask": 0.009,
-"hard_no_ask": 0.988,
-"hard_yes_bid": 0.012,
-"cost": 0.997,
-"edge": 0.003,
-"edge_after_fee": 0.0015,
-"size_shares": 13.1,
-"usd_at_size": 13.06
-},
-{
-"kind": "ladder_num",
-"event": "What will Fed Rate hit before 2027?",
-"slug": "what-will-fed-rate-hit-before-2027",
-"easy": "Will the Fed\u2019s lower bound reach 3.25% or lower before 2027?",
-"hard": "Will the Fed\u2019s lower bound reach 2.25% or lower before 2027?",
-"easy_yes_ask": 0.009,
-"hard_no_ask": 0.988,
-"hard_yes_bid": 0.012,
-"cost": 0.997,
-"edge": 0.003,
-"edge_after_fee": 0.0015,
-"size_shares": 13.1,
-"usd_at_size": 13.06
-},
-{
-"kind": "ladder_num",
-"event": "What will Fed Rate hit before 2027?",
-"slug": "what-will-fed-rate-hit-before-2027",
-"easy": "Will the Fed\u2019s lower bound reach 3.25% or lower before 2027?",
-"hard": "Will the Fed\u2019s lower bound reach 2.75% or lower before 2027?",
-"easy_yes_ask": 0.009,
-"hard_no_ask": 0.986,
-"hard_yes_bid": 0.014,
-"cost": 0.995,
-"edge": 0.005,
-"edge_after_fee": 0.0034,
-"size_shares": 7.36,
-"usd_at_size": 7.32
+"kind": "negrisk_all_yes",
+"event": "Argentina Annual Inflation 2026",
+"slug": "argentina-annual-inflation-2026",
+"n": 7,
+"has_other": false,
+"outcomes": [
+"<20%",
+"20-24.9%",
+"30.0-34.9%",
+"25-29.9%",
+"35\u201339.9%",
+"45%+",
+"40-44.9%"
+],
+"cost": 0.993,
+"payoff": 1,
+"edge": 0.007,
+"edge_after_fee": -0.0101,
+"size_shares": 7.5,
+"usd_at_size": 7.45
 },
 {
 "kind": "ladder_num",
@@ -365,7 +339,7 @@
 "kind": "ladder_num",
 "event": "Pacifica FDV above ___ one day after launch?",
 "slug": "pacifica-fdv-above-one-day-after-launch",
-"easy": "Pacifica FDV above $500M one day after launch?",
+"easy": "Pacifica FDV above $200M one day after launch?",
 "hard": "Pacifica FDV above $800M one day after launch?",
 "easy_yes_ask": 0.026,
 "hard_no_ask": 0.968,
@@ -380,16 +354,16 @@
 "kind": "ladder_num",
 "event": "Pacifica FDV above ___ one day after launch?",
 "slug": "pacifica-fdv-above-one-day-after-launch",
-"easy": "Pacifica FDV above $200M one day after launch?",
+"easy": "Pacifica FDV above $500M one day after launch?",
 "hard": "Pacifica FDV above $800M one day after launch?",
-"easy_yes_ask": 0.027,
+"easy_yes_ask": 0.026,
 "hard_no_ask": 0.968,
 "hard_yes_bid": 0.032,
-"cost": 0.995,
-"edge": 0.005,
-"edge_after_fee": 0.001,
+"cost": 0.994,
+"edge": 0.006,
+"edge_after_fee": 0.0021,
 "size_shares": 4.48,
-"usd_at_size": 4.46
+"usd_at_size": 4.45
 },
 {
 "kind": "ladder_num",
@@ -398,11 +372,11 @@
 "easy": "Printr FDV above $500M one day after launch?",
 "hard": "Printr FDV above $800M one day after launch?",
 "easy_yes_ask": 0.049,
-"hard_no_ask": 0.939,
-"hard_yes_bid": 0.061,
-"cost": 0.988,
-"edge": 0.012,
-"edge_after_fee": 0.0047,
+"hard_no_ask": 0.937,
+"hard_yes_bid": 0.063,
+"cost": 0.986,
+"edge": 0.014,
+"edge_after_fee": 0.0066,
 "size_shares": 1.61,
 "usd_at_size": 1.59
 },
@@ -420,6 +394,21 @@
 "edge_after_fee": -0.0001,
 "size_shares": 4.48,
 "usd_at_size": 4.46
+},
+{
+"kind": "ladder_num",
+"event": "Printr FDV above ___ one day after launch?",
+"slug": "printr-fdv-above-one-day-after-launch",
+"easy": "Printr FDV above $500M one day after launch?",
+"hard": "Printr FDV above $1B one day after launch?",
+"easy_yes_ask": 0.049,
+"hard_no_ask": 0.941,
+"hard_yes_bid": 0.059,
+"cost": 0.99,
+"edge": 0.01,
+"edge_after_fee": 0.0029,
+"size_shares": 1.61,
+"usd_at_size": 1.59
 },
 {
 "kind": "ladder_num",
