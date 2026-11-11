@@ -20,6 +20,7 @@ jobs:
             data/slow
             data/research
             data/weather
+            data/sharp
           sparse-checkout-cone-mode: true
       - uses: actions/setup-python@v5
         with:
@@ -29,11 +30,21 @@ jobs:
       - run: python -u research/slow/converge_paper.py 2>&1 | tee logs/converge-log.txt
       - run: python -u research/slow/score_forecasts.py 2>&1 | tail -5 | tee logs/forecast-log.txt || true
       - run: timeout 300 python -u research/slow/young_paper.py 2>&1 | tail -6 | tee logs/young-log.txt || true
+      - name: "Sharp-odds snapshot, 3 a day at 10, 16, 22 UTC (NBA + NHL keep the free odds plan under 500 credits a month)"
+        if: always()
+        env:
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+        run: |
+          H=$(date -u +%H); if [ "$H" = "10" ] || [ "$H" = "16" ] || [ "$H" = "22" ]; then
+            [ -f data/sharp/last_hour ] && [ "$(cat data/sharp/last_hour)" = "$(date -u +%F)T$H" ] && exit 0
+            mkdir -p data/sharp && echo "$(date -u +%F)T$H" > data/sharp/last_hour
+            SPORTS=icehockey_nhl,basketball_nba timeout 300 python -u research/slow/sharp_compare.py 2>&1 | tail -12 | tee logs/sharp-log.txt || true
+          fi
       - run: timeout 900 python -u research/slow/weather_paper.py 2>&1 | tail -8 | tee logs/weather-log.txt || true
       - run: timeout 600 python -u research/slow/arb_scan.py 2>&1 | tail -15 | tee logs/arb-log.txt || true
       - name: Save
         run: |
           git config user.name "lab-bot" && git config user.email "lab-bot@users.noreply.github.com"
-          for p in data/slow/spike_positions.jsonl data/slow/spike_report.json data/slow/converge_positions.jsonl data/slow/converge_report.json data/slow/arb_scan.json data/slow/arb_log.jsonl data/slow/young_positions.jsonl data/slow/young_report.json data/research/scoreboard.json data/weather logs; do [ -e "$p" ] && git add --sparse "$p"; done
+          for p in data/slow/spike_positions.jsonl data/slow/spike_report.json data/slow/converge_positions.jsonl data/slow/converge_report.json data/slow/arb_scan.json data/slow/arb_log.jsonl data/slow/young_positions.jsonl data/slow/young_report.json data/research/scoreboard.json data/weather data/sharp logs; do [ -e "$p" ] && git add --sparse "$p"; done
           git commit -qm "Slow paper $(date -u +%FT%H:%M) [skip ci]" || exit 0
           for i in 1 2 3; do git pull -q --rebase -X theirs origin main && git push -q && break; sleep 5; done

@@ -12,6 +12,7 @@ Status: TESTING (paper/backtest running) · READY (next up) · PARKED (needs som
 | lock_early (60-140 s, z >= 2.5, 2 s persistence) | before the last minute the market under-reacts to a large move | replay 65 trades 97% +4.9%; out of sample 17/17 | 11-09 | ongoing |
 | Weather W1: latest ensemble forecast vs temperature buckets (40 cities, 11 buckets, daily) | physics ensembles (ECMWF 51 + GFS 31 + ICON 40 members), fresh runs, hourly METAR max per the rules. PRIOR: 11-01 a 2-day-old deterministic forecast lost to the market (Brier .199 vs .164) - this is the stronger model, low prior | weather_paper.py v1 (per-station bias + residual sd from 60 days of METARs vs archived forecasts, weather_bias.py): probability for every bucket, paper buys at real asks, Brier vs market. First run: 80 events, model-vs-market distance 0.27, 26 positions | 11-11 | 11-13 (resolves daily) |
 | Young markets, NO side: stand-alone non-sports binaries < 72 h old, YES mid 0.30-0.50 | history: priced 0.425, resolved YES 0.237 (n 283) - but history prices may be mids of empty books | young_paper.py at real NO asks, $10 | 11-11 | as they resolve (1-60 d) |
+| Sports vs Pinnacle (no-vig fair vs Polymarket asks, NBA + NHL moneylines and totals, pre-game) | sharp books set the true price; Polymarket books may lag | sharp_compare.py 3 snapshots a day, paper buys at fair - ask >= 2c, closing-line value + results. First snapshot 11-11: 48 pairs, |mid - fair| median 0.6c, p90 of fair - ask +0.7c, max +2.8c (main lines are tight) | 11-11 | 11-18 |
 | Riskless structure (negRisk sums, ladders) at news time | dislocations appear when news hits and books are thin | arb_scan.py hourly, arb_log.jsonl | 11-11 | weekly |
 | Research journal (my forecasts with sources) | reading + cross-checking beats the crowd on slow political/econ questions | forecast_log.py, Brier vs market | 11-10 | weeks |
 
@@ -33,8 +34,7 @@ Status: TESTING (paper/backtest running) · READY (next up) · PARKED (needs som
 8. **4-hour windows with the exact K.** 48 windows a day; the bot only watches their last 140 s - widen it for 4h.
 
 ## PARKED
-- Sports vs sharp bookmaker odds: sharp_compare.py ready (Pinnacle no-vig fair vs Polymarket asks, moneylines + totals,
-  pre-game). Waiting for the user to add ODDS_API_KEY as a repository secret.
+
 - Kalshi vs Polymarket automatic pairing (titles do not match; manual for named series only).
 
 ## DEAD (number that killed it)

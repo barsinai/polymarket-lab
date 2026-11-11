@@ -124,3 +124,40 @@ if gaps:
         if x["edge"] < EDGE:
             break
         print(f"  +{x['edge']:.3f} {x['sport']:22} {x['game'][:40]:40} {x['market']:6} {x['selection']} {x['point'] or ''} fair {x['fair']:.3f} ask {x['pm_ask']:.3f} x {x['pm_ask_sz']:.0f} | {x['pm_question'][:50]}")
+
+# ---- paper positions (NO ORDERS): buy where Polymarket's ask is >= EDGE_TRADE below Pinnacle's fair price; track the
+# closing-line value (Pinnacle's fair at later snapshots, the last one before the start = the close) and settle on the result.
+EDGE_TRADE = float(os.environ.get("EDGE_TRADE", "0.02")); STAKE = 20.0; POS = f"{D}/positions.jsonl"
+pos = [json.loads(l) for l in open(POS)] if os.path.exists(POS) else []
+held = {p["pm_token"] for p in pos}
+by_tok = {s["pm_token"]: s for s in gaps}
+for p in pos:
+    s = by_tok.get(p["pm_token"])
+    if s and not p.get("resolved") and s["start"] > now.isoformat():
+        p["fair_last"] = s["fair"]; p["fair_last_ts"] = s["ts"]          # latest pre-game Pinnacle fair = closing line so far
+for s in gaps:
+    if s["edge"] >= EDGE_TRADE and s["pm_token"] not in held and 0.05 <= s["pm_ask"] <= 0.95 and (s["pm_ask_sz"] or 0) * s["pm_ask"] >= STAKE:
+        pos.append(dict({k: s[k] for k in ("ts", "sport", "game", "start", "market", "selection", "point", "fair", "pm_question", "pm_token", "pm_market_id", "event")},
+                        ask=s["pm_ask"], shares=round(STAKE / s["pm_ask"], 2), edge=s["edge"], fair_last=s["fair"], resolved=False))
+        held.add(s["pm_token"])
+for p in pos:
+    if p.get("resolved") or p["start"] > (now - dt.timedelta(hours=4)).isoformat():
+        continue
+    m = S.get(f"{GAMMA}/markets/{p['pm_market_id']}", timeout=20).json()
+    try:
+        names = json.loads(m.get("outcomes") or "[]"); pr = [float(x) for x in json.loads(m.get("outcomePrices") or "[]")]; tk = json.loads(m.get("clobTokenIds") or "[]")
+    except (ValueError, AttributeError):
+        continue
+    if m.get("closed") and pr and max(pr) >= 0.99 and p["pm_token"] in tk:
+        win = pr[tk.index(p["pm_token"])] >= 0.99
+        p.update(resolved=True, won=int(win), pnl=round(p["shares"] * ((1 if win else 0) - p["ask"]), 2))
+with open(POS, "w") as fh:
+    for p in pos:
+        fh.write(json.dumps(p) + "\n")
+done = [p for p in pos if p.get("resolved")]
+clv = [p["fair_last"] - p["ask"] for p in pos if p.get("fair_last") is not None]
+rep = {"updated": now.strftime("%Y-%m-%d %H:%M"), "positions": len(pos), "settled": len(done), "won": sum(p["won"] for p in done), "pnl": round(sum(p["pnl"] for p in done), 2),
+       "staked_settled": round(sum(p["shares"] * p["ask"] for p in done), 2), "mean_entry_edge": round(sum(p["edge"] for p in pos) / len(pos), 4) if pos else None,
+       "mean_clv_vs_last_fair": round(sum(clv) / len(clv), 4) if clv else None, "odds_credits_left": credits}
+json.dump(rep, open(f"{D}/report.json", "w"), indent=1)
+print(json.dumps(rep))
