@@ -1,5 +1,5 @@
 {
-"scanned": "2026-11-11 16:22",
+"scanned": "2026-11-11 16:47",
 "events": 2100,
 "groups": 2037,
 "books": 17242,
@@ -39,12 +39,12 @@
 "$2.25T\u2013$2.5T",
 "$2.5T+"
 ],
-"cost": 0.967,
+"cost": 0.971,
 "payoff": 1,
-"edge": 0.033,
-"edge_after_fee": -0.0238,
+"edge": 0.029,
+"edge_after_fee": -0.0279,
 "size_shares": 27.68,
-"usd_at_size": 26.77
+"usd_at_size": 26.88
 },
 {
 "kind": "ladder_num",
@@ -58,8 +58,8 @@
 "cost": 0.996,
 "edge": 0.004,
 "edge_after_fee": 0.0015,
-"size_shares": 165.68,
-"usd_at_size": 165.02
+"size_shares": 195.68,
+"usd_at_size": 194.9
 },
 {
 "kind": "ladder_num",
@@ -90,6 +90,21 @@
 "edge_after_fee": 0.0031,
 "size_shares": 46.73,
 "usd_at_size": 46.45
+},
+{
+"kind": "ladder_num",
+"event": "Reya FDV above ___ one day after launch?",
+"slug": "reya-fdv-above-one-day-after-launch",
+"easy": "Reya FDV above $300M one day after launch?",
+"hard": "Reya FDV above $400M one day after launch?",
+"easy_yes_ask": 0.048,
+"hard_no_ask": 0.949,
+"hard_yes_bid": 0.051,
+"cost": 0.997,
+"edge": 0.003,
+"edge_after_fee": -0.0036,
+"size_shares": 85.0,
+"usd_at_size": 84.75
 },
 {
 "kind": "ladder_num",
@@ -176,21 +191,6 @@
 },
 {
 "kind": "ladder_num",
-"event": "Reya FDV above ___ one day after launch?",
-"slug": "reya-fdv-above-one-day-after-launch",
-"easy": "Reya FDV above $300M one day after launch?",
-"hard": "Reya FDV above $400M one day after launch?",
-"easy_yes_ask": 0.048,
-"hard_no_ask": 0.949,
-"hard_yes_bid": 0.051,
-"cost": 0.997,
-"edge": 0.003,
-"edge_after_fee": -0.0036,
-"size_shares": 55.0,
-"usd_at_size": 54.84
-},
-{
-"kind": "ladder_num",
 "event": "How high will US unemployment go in 2026?",
 "slug": "how-high-will-us-unemployment-go-in-2026",
 "easy": "Will US unemployment reach at least 6.0% in 2026?",
@@ -250,19 +250,39 @@
 "usd_at_size": 29.91
 },
 {
-"kind": "ladder_num",
-"event": "Abstract FDV above ___ one day after launch?",
-"slug": "abstract-fdv-above-one-day-after-launch",
-"easy": "Abstract FDV above $200M one day after launch?",
-"hard": "Abstract FDV above $600M one day after launch?",
-"easy_yes_ask": 0.028,
-"hard_no_ask": 0.969,
-"hard_yes_bid": 0.031,
-"cost": 0.997,
-"edge": 0.003,
-"edge_after_fee": -0.001,
-"size_shares": 20.0,
-"usd_at_size": 19.94
+"kind": "negrisk_all_yes",
+"event": "Canada Annual Inflation 2026",
+"slug": "canada-annual-inflation-2026",
+"n": 8,
+"has_other": false,
+"outcomes": [
+"<1.0%",
+"1.0\u20131.4%",
+"1.5\u20131.9%",
+"2.0\u20132.4%",
+"2.5\u20132.9%",
+"4.0%+",
+"3.0-3.4%",
+"3.5-3.9%"
+],
+"cost": 0.987,
+"payoff": 1,
+"edge": 0.013,
+"edge_after_fee": -0.0369,
+"size_shares": 6.6,
+"usd_at_size": 6.51
+},
+{
+"kind": "negrisk_all_no",
+"event": "Anthropic IPO Closing Market Cap",
+"slug": "anthropic-ipo-closing-market-cap-higher-strikes",
+"n": 10,
+"cost": 8.994,
+"payoff": 9,
+"edge": 0.006,
+"edge_after_fee": -0.0462,
+"size_shares": 10.0,
+"usd_at_size": 89.94
 },
 {
 "kind": "ladder_num",
@@ -281,43 +301,6 @@
 },
 {
 "kind": "negrisk_all_yes",
-"event": "UK Annual GDP Growth 2026",
-"slug": "uk-annual-gdp-growth-2026",
-"n": 7,
-"has_other": false,
-"outcomes": [
-"<0",
-"0-1%",
-"1-2%",
-"2-3%",
-"3-4%",
-"4-5%",
-"5%+"
-],
-"cost": 0.992,
-"payoff": 1,
-"edge": 0.008,
-"edge_after_fee": -0.008,
-"size_shares": 6.24,
-"usd_at_size": 6.19
-},
-{
-"kind": "ladder_num",
-"event": "Abstract FDV above ___ one day after launch?",
-"slug": "abstract-fdv-above-one-day-after-launch",
-"easy": "Abstract FDV above $200M one day after launch?",
-"hard": "Abstract FDV above $400M one day after launch?",
-"easy_yes_ask": 0.028,
-"hard_no_ask": 0.968,
-"hard_yes_bid": 0.032,
-"cost": 0.996,
-"edge": 0.004,
-"edge_after_fee": -0.0001,
-"size_shares": 11.33,
-"usd_at_size": 11.28
-},
-{
-"kind": "negrisk_all_yes",
 "event": "South Korea Annual Inflation 2026",
 "slug": "south-korea-annual-inflation-2026",
 "n": 7,
@@ -331,12 +314,27 @@
 "2.7% to 2.9%",
 "3.0%+"
 ],
-"cost": 0.907,
+"cost": 0.925,
 "payoff": 1,
-"edge": 0.093,
-"edge_after_fee": 0.048,
+"edge": 0.075,
+"edge_after_fee": 0.0294,
 "size_shares": 0.48,
 "usd_at_size": 0.44
+},
+{
+"kind": "ladder_num",
+"event": "Abstract FDV above ___ one day after launch?",
+"slug": "abstract-fdv-above-one-day-after-launch",
+"easy": "Abstract FDV above $200M one day after launch?",
+"hard": "Abstract FDV above $400M one day after launch?",
+"easy_yes_ask": 0.029,
+"hard_no_ask": 0.968,
+"hard_yes_bid": 0.032,
+"cost": 0.997,
+"edge": 0.003,
+"edge_after_fee": -0.0011,
+"size_shares": 11.33,
+"usd_at_size": 11.3
 },
 {
 "kind": "ladder_num",
@@ -397,6 +395,21 @@
 "edge_after_fee": -0.0001,
 "size_shares": 4.48,
 "usd_at_size": 4.46
+},
+{
+"kind": "ladder_num",
+"event": "Printr FDV above ___ one day after launch?",
+"slug": "printr-fdv-above-one-day-after-launch",
+"easy": "Printr FDV above $500M one day after launch?",
+"hard": "Printr FDV above $1B one day after launch?",
+"easy_yes_ask": 0.049,
+"hard_no_ask": 0.941,
+"hard_yes_bid": 0.059,
+"cost": 0.99,
+"edge": 0.01,
+"edge_after_fee": 0.0029,
+"size_shares": 1.61,
+"usd_at_size": 1.59
 },
 {
 "kind": "ladder_num",
