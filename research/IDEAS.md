@@ -33,7 +33,8 @@ Status: TESTING (paper/backtest running) · READY (next up) · PARKED (needs som
 8. **4-hour windows with the exact K.** 48 windows a day; the bot only watches their last 140 s - widen it for 4h.
 
 ## PARKED
-- Sports vs sharp bookmaker odds (needs an odds-API key from the user).
+- Sports vs sharp bookmaker odds: sharp_compare.py ready (Pinnacle no-vig fair vs Polymarket asks, moneylines + totals,
+  pre-game). Waiting for the user to add ODDS_API_KEY as a repository secret.
 - Kalshi vs Polymarket automatic pairing (titles do not match; manual for named series only).
 
 ## DEAD (number that killed it)

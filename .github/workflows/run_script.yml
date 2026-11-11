@@ -22,15 +22,18 @@ jobs:
             data/research
             data/history
             data/weather
+            data/sharp
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - run: pip install -q requests websockets
       - run: mkdir -p logs && python -u research/${{ inputs.script }} 2>&1 | tee "logs/script-$(basename ${{ inputs.script }} .py).txt"
+        env:
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}     # read-only odds feed key (sharp_compare.py); empty until the user adds it
       - name: Save
         if: always()
         run: |
           git config user.name "polymarket-lab-bot"
           git config user.email "actions@users.noreply.github.com"
-          for p in logs data/fast data/slow data/research data/history data/weather; do [ -e "$p" ] && git add --sparse "$p"; done; git commit -qm "Script output [skip ci]" || true
+          for p in logs data/fast data/slow data/research data/history data/weather data/sharp; do [ -e "$p" ] && git add --sparse "$p"; done; git commit -qm "Script output [skip ci]" || true
           for i in 1 2 3; do git pull -q --rebase -X theirs origin main && git push -q && break; sleep 5; done
