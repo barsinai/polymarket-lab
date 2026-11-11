@@ -1,21 +1,9 @@
 {
-"scanned": "2026-11-11 17:51",
+"scanned": "2026-11-11 18:54",
 "events": 2100,
 "groups": 2037,
-"books": 17242,
+"books": 17240,
 "opps": [
-{
-"kind": "negrisk_all_no",
-"event": "Anthropic IPO Closing Market Cap",
-"slug": "anthropic-ipo-closing-market-cap-higher-strikes",
-"n": 10,
-"cost": 8.987,
-"payoff": 9,
-"edge": 0.013,
-"edge_after_fee": -0.0396,
-"size_shares": 200.56,
-"usd_at_size": 1802.43
-},
 {
 "kind": "negrisk_all_yes",
 "event": "Who will be the top-selling artist by total auction sales in 2026?",
@@ -51,29 +39,6 @@
 "usd_at_size": 194.9
 },
 {
-"kind": "negrisk_all_yes",
-"event": "What will OpenAI's IPO valuation be?",
-"slug": "what-will-openais-ipo-valuation-be",
-"n": 8,
-"has_other": false,
-"outcomes": [
-"<$1T",
-"$1.0T\u2013$1.25T",
-"$1.25T\u2013$1.5T",
-"$1.5T\u2013$1.75T",
-"$1.75T\u2013$2.0T",
-"$2.0T\u2013$2.25T",
-"$2.25T\u2013$2.5T",
-"$2.5T+"
-],
-"cost": 0.979,
-"payoff": 1,
-"edge": 0.021,
-"edge_after_fee": -0.0365,
-"size_shares": 27.68,
-"usd_at_size": 27.1
-},
-{
 "kind": "ladder_num",
 "event": "StandX FDV above ___ one day after launch?",
 "slug": "standx-fdv-above-one-day-after-launch",
@@ -89,6 +54,29 @@
 "usd_at_size": 49.59
 },
 {
+"kind": "negrisk_all_yes",
+"event": "What will OpenAI's IPO valuation be?",
+"slug": "what-will-openais-ipo-valuation-be",
+"n": 8,
+"has_other": false,
+"outcomes": [
+"<$1T",
+"$1.0T\u2013$1.25T",
+"$1.25T\u2013$1.5T",
+"$1.5T\u2013$1.75T",
+"$1.75T\u2013$2.0T",
+"$2.0T\u2013$2.25T",
+"$2.25T\u2013$2.5T",
+"$2.5T+"
+],
+"cost": 0.986,
+"payoff": 1,
+"edge": 0.014,
+"edge_after_fee": -0.0437,
+"size_shares": 27.68,
+"usd_at_size": 27.29
+},
+{
 "kind": "ladder_num",
 "event": "Reya FDV above ___ one day after launch?",
 "slug": "reya-fdv-above-one-day-after-launch",
@@ -100,8 +88,8 @@
 "cost": 0.997,
 "edge": 0.003,
 "edge_after_fee": -0.0036,
-"size_shares": 107.47,
-"usd_at_size": 107.15
+"size_shares": 85.0,
+"usd_at_size": 84.75
 },
 {
 "kind": "ladder_num",
@@ -124,14 +112,14 @@
 "slug": "will-israel-annex-any-territory-by-december-31",
 "easy": "Will Israel annex any territory by December 31?",
 "hard": "Will Israel annex any territory by June 30?",
-"easy_yes_ask": 0.02,
+"easy_yes_ask": 0.021,
 "hard_no_ask": 0.95,
 "hard_yes_bid": 0.05,
-"cost": 0.97,
-"edge": 0.03,
-"edge_after_fee": 0.0253,
-"size_shares": 7.01,
-"usd_at_size": 6.8
+"cost": 0.971,
+"edge": 0.029,
+"edge_after_fee": 0.0242,
+"size_shares": 8.25,
+"usd_at_size": 8.01
 },
 {
 "kind": "ladder_date",
@@ -139,14 +127,14 @@
 "slug": "will-israel-annex-any-territory-by-december-31",
 "easy": "Will Israel annex any territory by December 31?",
 "hard": "Will Israel annex any territory by March 31?",
-"easy_yes_ask": 0.02,
+"easy_yes_ask": 0.021,
 "hard_no_ask": 0.95,
 "hard_yes_bid": 0.05,
-"cost": 0.97,
-"edge": 0.03,
-"edge_after_fee": 0.0253,
-"size_shares": 7.01,
-"usd_at_size": 6.8
+"cost": 0.971,
+"edge": 0.029,
+"edge_after_fee": 0.0242,
+"size_shares": 8.25,
+"usd_at_size": 8.01
 },
 {
 "kind": "negrisk_all_yes",
@@ -170,6 +158,18 @@
 "edge_after_fee": 0.0285,
 "size_shares": 5.0,
 "usd_at_size": 4.79
+},
+{
+"kind": "negrisk_all_no",
+"event": "Anthropic IPO Closing Market Cap",
+"slug": "anthropic-ipo-closing-market-cap-higher-strikes",
+"n": 10,
+"cost": 8.99,
+"payoff": 9,
+"edge": 0.01,
+"edge_after_fee": -0.0426,
+"size_shares": 20.0,
+"usd_at_size": 179.8
 },
 {
 "kind": "ladder_num",
@@ -260,6 +260,28 @@
 "edge_after_fee": 0.0031,
 "size_shares": 9.75,
 "usd_at_size": 9.69
+},
+{
+"kind": "negrisk_all_yes",
+"event": "Japan 10Y Bond Yield: End of 2026",
+"slug": "japan-10y-bond-yield-end-of-2026",
+"n": 7,
+"has_other": false,
+"outcomes": [
+"<2.0%",
+"2.0-2.2%",
+"2.2-2.4%",
+"2.4-2.6%",
+"2.6-2.8%",
+"2.8-3.0%",
+"3.0%+"
+],
+"cost": 0.99,
+"payoff": 1,
+"edge": 0.01,
+"edge_after_fee": -0.0463,
+"size_shares": 5.0,
+"usd_at_size": 4.95
 },
 {
 "kind": "ladder_num",
