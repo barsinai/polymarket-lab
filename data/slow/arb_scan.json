@@ -1,9 +1,21 @@
 {
-"scanned": "2026-11-11 16:47",
+"scanned": "2026-11-11 17:51",
 "events": 2100,
 "groups": 2037,
 "books": 17242,
 "opps": [
+{
+"kind": "negrisk_all_no",
+"event": "Anthropic IPO Closing Market Cap",
+"slug": "anthropic-ipo-closing-market-cap-higher-strikes",
+"n": 10,
+"cost": 8.987,
+"payoff": 9,
+"edge": 0.013,
+"edge_after_fee": -0.0396,
+"size_shares": 200.56,
+"usd_at_size": 1802.43
+},
 {
 "kind": "negrisk_all_yes",
 "event": "Who will be the top-selling artist by total auction sales in 2026?",
@@ -24,6 +36,21 @@
 "usd_at_size": 120.55
 },
 {
+"kind": "ladder_num",
+"event": "Hyperbeat FDV above ___ one day after launch?",
+"slug": "hyperbeat-fdv-above-one-day-after-launch",
+"easy": "Hyperbeat FDV above $300M one day after launch?",
+"hard": "Hyperbeat FDV above $400M one day after launch?",
+"easy_yes_ask": 0.016,
+"hard_no_ask": 0.98,
+"hard_yes_bid": 0.02,
+"cost": 0.996,
+"edge": 0.004,
+"edge_after_fee": 0.0015,
+"size_shares": 195.68,
+"usd_at_size": 194.9
+},
+{
 "kind": "negrisk_all_yes",
 "event": "What will OpenAI's IPO valuation be?",
 "slug": "what-will-openais-ipo-valuation-be",
@@ -39,27 +66,12 @@
 "$2.25T\u2013$2.5T",
 "$2.5T+"
 ],
-"cost": 0.971,
+"cost": 0.979,
 "payoff": 1,
-"edge": 0.029,
-"edge_after_fee": -0.0279,
+"edge": 0.021,
+"edge_after_fee": -0.0365,
 "size_shares": 27.68,
-"usd_at_size": 26.88
-},
-{
-"kind": "ladder_num",
-"event": "Hyperbeat FDV above ___ one day after launch?",
-"slug": "hyperbeat-fdv-above-one-day-after-launch",
-"easy": "Hyperbeat FDV above $300M one day after launch?",
-"hard": "Hyperbeat FDV above $400M one day after launch?",
-"easy_yes_ask": 0.016,
-"hard_no_ask": 0.98,
-"hard_yes_bid": 0.02,
-"cost": 0.996,
-"edge": 0.004,
-"edge_after_fee": 0.0015,
-"size_shares": 195.68,
-"usd_at_size": 194.9
+"usd_at_size": 27.1
 },
 {
 "kind": "ladder_num",
@@ -78,21 +90,6 @@
 },
 {
 "kind": "ladder_num",
-"event": "Felix FDV above ___ one day after launch?",
-"slug": "felix-fdv-above-one-day-after-launch",
-"easy": "Felix Protocol FDV above $1B one day after launch?",
-"hard": "Felix Protocol FDV above $2B one day after launch?",
-"easy_yes_ask": 0.018,
-"hard_no_ask": 0.976,
-"hard_yes_bid": 0.024,
-"cost": 0.994,
-"edge": 0.006,
-"edge_after_fee": 0.0031,
-"size_shares": 46.73,
-"usd_at_size": 46.45
-},
-{
-"kind": "ladder_num",
 "event": "Reya FDV above ___ one day after launch?",
 "slug": "reya-fdv-above-one-day-after-launch",
 "easy": "Reya FDV above $300M one day after launch?",
@@ -103,8 +100,8 @@
 "cost": 0.997,
 "edge": 0.003,
 "edge_after_fee": -0.0036,
-"size_shares": 85.0,
-"usd_at_size": 84.75
+"size_shares": 107.47,
+"usd_at_size": 107.15
 },
 {
 "kind": "ladder_num",
@@ -206,21 +203,6 @@
 },
 {
 "kind": "ladder_num",
-"event": "Felix FDV above ___ one day after launch?",
-"slug": "felix-fdv-above-one-day-after-launch",
-"easy": "Felix Protocol FDV above $800M one day after launch?",
-"hard": "Felix Protocol FDV above $2B one day after launch?",
-"easy_yes_ask": 0.021,
-"hard_no_ask": 0.976,
-"hard_yes_bid": 0.024,
-"cost": 0.997,
-"edge": 0.003,
-"edge_after_fee": -0.0001,
-"size_shares": 46.73,
-"usd_at_size": 46.59
-},
-{
-"kind": "ladder_num",
 "event": "StandX FDV above ___ one day after launch?",
 "slug": "standx-fdv-above-one-day-after-launch",
 "easy": "StandX FDV above $100M one day after launch?",
@@ -250,41 +232,6 @@
 "usd_at_size": 29.91
 },
 {
-"kind": "negrisk_all_yes",
-"event": "Canada Annual Inflation 2026",
-"slug": "canada-annual-inflation-2026",
-"n": 8,
-"has_other": false,
-"outcomes": [
-"<1.0%",
-"1.0\u20131.4%",
-"1.5\u20131.9%",
-"2.0\u20132.4%",
-"2.5\u20132.9%",
-"4.0%+",
-"3.0-3.4%",
-"3.5-3.9%"
-],
-"cost": 0.987,
-"payoff": 1,
-"edge": 0.013,
-"edge_after_fee": -0.0369,
-"size_shares": 6.6,
-"usd_at_size": 6.51
-},
-{
-"kind": "negrisk_all_no",
-"event": "Anthropic IPO Closing Market Cap",
-"slug": "anthropic-ipo-closing-market-cap-higher-strikes",
-"n": 10,
-"cost": 8.994,
-"payoff": 9,
-"edge": 0.006,
-"edge_after_fee": -0.0462,
-"size_shares": 10.0,
-"usd_at_size": 89.94
-},
-{
 "kind": "ladder_num",
 "event": "Hurupay FDV above ___ one day after launch?",
 "slug": "hurupay-fdv-above-one-day-after-launch",
@@ -300,26 +247,19 @@
 "usd_at_size": 19.8
 },
 {
-"kind": "negrisk_all_yes",
-"event": "South Korea Annual Inflation 2026",
-"slug": "south-korea-annual-inflation-2026",
-"n": 7,
-"has_other": false,
-"outcomes": [
-"<1.5%",
-"1.5% to 1.7%",
-"1.8% to 2.0%",
-"2.1% to 2.3%",
-"2.4% to 2.6%",
-"2.7% to 2.9%",
-"3.0%+"
-],
-"cost": 0.925,
-"payoff": 1,
-"edge": 0.075,
-"edge_after_fee": 0.0294,
-"size_shares": 0.48,
-"usd_at_size": 0.44
+"kind": "ladder_num",
+"event": "Felix FDV above ___ one day after launch?",
+"slug": "felix-fdv-above-one-day-after-launch",
+"easy": "Felix Protocol FDV above $1B one day after launch?",
+"hard": "Felix Protocol FDV above $2B one day after launch?",
+"easy_yes_ask": 0.018,
+"hard_no_ask": 0.976,
+"hard_yes_bid": 0.024,
+"cost": 0.994,
+"edge": 0.006,
+"edge_after_fee": 0.0031,
+"size_shares": 9.75,
+"usd_at_size": 9.69
 },
 {
 "kind": "ladder_num",
@@ -335,6 +275,21 @@
 "edge_after_fee": -0.0011,
 "size_shares": 11.33,
 "usd_at_size": 11.3
+},
+{
+"kind": "ladder_num",
+"event": "Felix FDV above ___ one day after launch?",
+"slug": "felix-fdv-above-one-day-after-launch",
+"easy": "Felix Protocol FDV above $800M one day after launch?",
+"hard": "Felix Protocol FDV above $2B one day after launch?",
+"easy_yes_ask": 0.021,
+"hard_no_ask": 0.976,
+"hard_yes_bid": 0.024,
+"cost": 0.997,
+"edge": 0.003,
+"edge_after_fee": -0.0001,
+"size_shares": 9.75,
+"usd_at_size": 9.72
 },
 {
 "kind": "ladder_num",
@@ -395,21 +350,6 @@
 "edge_after_fee": -0.0001,
 "size_shares": 4.48,
 "usd_at_size": 4.46
-},
-{
-"kind": "ladder_num",
-"event": "Printr FDV above ___ one day after launch?",
-"slug": "printr-fdv-above-one-day-after-launch",
-"easy": "Printr FDV above $500M one day after launch?",
-"hard": "Printr FDV above $1B one day after launch?",
-"easy_yes_ask": 0.049,
-"hard_no_ask": 0.941,
-"hard_yes_bid": 0.059,
-"cost": 0.99,
-"edge": 0.01,
-"edge_after_fee": 0.0029,
-"size_shares": 1.61,
-"usd_at_size": 1.59
 },
 {
 "kind": "ladder_num",
