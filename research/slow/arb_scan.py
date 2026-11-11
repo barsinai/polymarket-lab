@@ -97,7 +97,8 @@ for g in groups:
     if all(ya):
         cost = sum(a[0] for a in ya); size = min(a[1] for a in ya); cost_fee = cost + sum(fee(a[0]) for a in ya)
         if 1 - cost >= MIN_EDGE:
-            opps.append({"kind": "negrisk_all_yes", "event": g["title"], "slug": g["slug"], "n": n, "cost": round(cost, 4), "payoff": 1, "edge": round(1 - cost, 4),
+            opps.append({"kind": "negrisk_all_yes", "event": g["title"], "slug": g["slug"], "n": n, "has_other": any(re.search(r"\b(other|none|no one|nobody|field)\b", (r["item"] + " " + r["q"]).lower()) for r in g["rows"]),
+                         "outcomes": [r["item"] or r["q"][:40] for r in g["rows"]], "cost": round(cost, 4), "payoff": 1, "edge": round(1 - cost, 4),
                          "edge_after_fee": round(1 - cost_fee, 4), "size_shares": round(size, 2), "usd_at_size": round(size * cost, 2)})
     if all(na):
         cost = sum(a[0] for a in na); size = min(a[1] for a in na); cost_fee = cost + sum(fee(a[0]) for a in na)
@@ -141,13 +142,18 @@ for g in groups:
         for tmpl, L in buckets.items():
             if len(L) < 2:
                 continue
-            low = tmpl.lower()
+            low = (tmpl + " " + (g["title"] or "")).lower()
             if kind == "date":
-                easier = lambda a, b: a[0] > b[0]                    # later date is easier (cumulative 'by' markets)
-            elif re.search(r"\b(dip|fall|drop|below|under|less than|lower)\b", low):
-                easier = lambda a, b: a[0] > b[0]                    # higher threshold is easier for a downward touch / 'below'
-            elif re.search(r"\b(reach|hit|above|over|more than|at least|exceed|higher|or more|\+)\b", low):
-                easier = lambda a, b: a[0] < b[0]                    # lower threshold is easier for 'reach / above'
+                if re.search(r"\b(through|until|continues?|remain|still|stays?|last|survive|hold)\b", low):
+                    easier = lambda a, b: a[0] < b[0]                # survival ('continues through'): the EARLIER date is easier
+                elif re.search(r"\b(by|before|on or before)\b", low):
+                    easier = lambda a, b: a[0] > b[0]                # cumulative ('by'): the later date is easier
+                else:
+                    continue
+            elif re.search(r"\(low\)|how low|\b(dip|fall|drop|below|under|less than|lower|bottom|low)\b", low):
+                easier = lambda a, b: a[0] > b[0]                    # downward touch / 'below': the higher threshold is easier
+            elif re.search(r"\(high\)|how high|\b(reach|hit|above|over|more than|at least|exceed|higher|or more|top|peak)\b|\+", low):
+                easier = lambda a, b: a[0] < b[0]                    # upward touch / 'above': the lower threshold is easier
             else:
                 continue                                              # 'between' buckets etc.: no ordering
             for a, b in combinations(L, 2):
@@ -172,5 +178,5 @@ with open(f"{D}/arb_log.jsonl", "a") as fh:
         fh.write(json.dumps(dict(o, scanned=stamp), ensure_ascii=False) + "\n")
 print(f"\nopportunities with edge >= {MIN_EDGE}: {len(opps)}")
 for o in opps[:40]:
-    extra = f"| easy: {o['easy'][:60]} | hard: {o['hard'][:60]}" if o["kind"].startswith("ladder") else f"| n {o['n']}"
+    extra = f"| easy: {o['easy'][:60]} | hard: {o['hard'][:60]}" if o["kind"].startswith("ladder") else f"| n {o['n']} other={o.get('has_other')} {o.get('outcomes', [])[:8]}"
     print(f"  {o['kind']:16} edge {o['edge']:+.4f} (after fee {o['edge_after_fee']:+.4f}) size {o['size_shares']:8.1f} sh ${o['usd_at_size']:8.1f}  {o['event'][:50]} {extra}")
