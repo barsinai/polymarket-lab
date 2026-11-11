@@ -187,6 +187,16 @@ def twap_at(a, ts, tol=4.0):
     return pts[0][1] if pts else None
 
 
+def twap_exact(a, ts):
+    """the 60-s TWAP message stamped exactly at second ts: it IS the official price to beat (11-11: 2,796 of 2,796 windows
+    with that message matched ptb to < 1e-4 bp; the message stamped 1 s later differs in 89% of cases). It arrives
+    ~1.5 s after ts (p99 2.6 s), so the window start has to wait for it."""
+    for t, v in rtds.series(TW, f"{a}/usd", ts - 0.5, ts + 0.5):
+        if abs(t - ts) < 0.001:
+            return v
+    return None
+
+
 def write_trades(trades):
     with open(f"{D}/trades.jsonl", "w") as fh:
         for x in trades:
@@ -284,13 +294,18 @@ def main():
                         m = market(a, w, st)
                         if not m:
                             continue
-                        kt = twap_at(a, st)
+                        kt = twap_exact(a, st)
+                        if kt is None and not m.get("ptb") and now - st < 8:
+                            continue      # the exact-second TWAP message is ~1.5 s behind: wait for it instead of guessing K
+                        if kt is None:
+                            kt = twap_at(a, st)
                         pre = [p for t, p in ser if st - 60 <= t < st]
                         kp = sum(pre) / len(pre) if len(pre) >= 20 else None
                         K0 = m.get("ptb") or kt or kp
                         if K0 is None:
                             continue  # no reference yet (market() re-reads the price to beat once more)
-                        acc = starts[key] = {"K": K0, "K_src": "ptb" if m.get("ptb") else "twap" if kt is not None else src,
+                        exact = kt is not None and twap_exact(a, st) == kt
+                        acc = starts[key] = {"K": K0, "K_src": "ptb" if m.get("ptb") else ("twapx" if exact else "twap") if kt is not None else src,
                                              "K_twap": kt, "K_proxy": kp, "spot_start": s_now if now - st < 6 else None}
                     rem = end - now
                     if rem < 2 or not sg:
@@ -345,7 +360,7 @@ def main():
                     if edge >= EDGE and 0.30 <= a_px <= 0.98 and rem <= EXACT_RMAX and zs >= 1.0:
                         picks.append("exact")   # model-favoured side, last 60 s only (the unrestricted rule lost -$710 on 1,666 trades)
                     # lock family: the outcome is locked by the maths, the market still sells it, the feed is exact
-                    lock_base = rem <= 60 and LOCK_MIN_ASK <= a_px <= LOCK_ASK and k_src in ("ptb", "twap", "chainlink") and src == "chainlink"
+                    lock_base = rem <= 60 and LOCK_MIN_ASK <= a_px <= LOCK_ASK and k_src in ("ptb", "twapx", "twap", "chainlink") and src == "chainlink"
                     lk = (m["slug"], side)
                     for zmin in (2.0, 2.5, 3.0):
                         key = (lk, zmin)
@@ -365,6 +380,13 @@ def main():
                             picks.append("lock_m")
                             if held >= LOCK_PERSIST:
                                 picks.append("lock_pm")
+                                # 11-11 candidate: persistence + margin >= 1 bp + at least 6 s left (the replay's remaining losers were
+                                # at rem 3-5 s, where a 2-s-old look and the TWAP window edge misalign): 48 trades 100%, +11%/$, every
+                                # day positive. lock_x = $20, lock_x50 = $50; lock_xk only with the exact price to beat (ptb / twapx)
+                                if rem >= 6:
+                                    picks.append("lock_x"); picks.append("lock_x50")
+                                    if k_src in ("ptb", "twapx"):
+                                        picks.append("lock_xk")
                         if held >= LOCK_PERSIST:
                             picks.append("lock_p")   # 11-09: condition held LOCK_PERSIST s (filters flickers: +7-9%/$ vs +0.3% instant, websocket day)
                         # cheap variants (11-10 replay, 4 days): asks 0.93-0.97 take 2/3 of the capital and earn ~0 (-0.2%/$: one K-error
@@ -397,7 +419,7 @@ def main():
                             picks.append("lock_p_50")
                     # early variant (60-140 s before the end): websocket day gave +6.6% at 2 s persistence on 29 episodes (z>=2.5, ask<=0.95)
                     ek = (lk, "early")
-                    if 60 < rem <= 140 and zs >= 2.5 and 0.50 <= a_px <= 0.95 and k_src in ("ptb", "twap", "chainlink") and src == "chainlink":
+                    if 60 < rem <= 140 and zs >= 2.5 and 0.50 <= a_px <= 0.95 and k_src in ("ptb", "twapx", "twap", "chainlink") and src == "chainlink":
                         lock_since.setdefault(ek, now)
                         if now - lock_since[ek] >= LOCK_PERSIST:
                             picks.append("lock_early")
@@ -416,7 +438,7 @@ def main():
                             continue
                         if strat != "exact" and any((strat, m["slug"], o) in done for o in ("Up", "Down")):
                             continue  # one side per window for lock/fav
-                        cap = 50.0 if strat == "lock_p_50" else SIZE_USD
+                        cap = 50.0 if strat in ("lock_p_50", "lock_x50") else SIZE_USD
                         shares = round(min(a_sz, cap / a_px), 2)
                         if shares < 5:
                             continue

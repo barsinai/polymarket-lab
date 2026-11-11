@@ -10,8 +10,10 @@ import glob, gzip, json, os, sys
 from collections import defaultdict
 D = "data/fast"
 SIZE = 20.0; LOCK_Z = 2.5; PERSIST = 2.0
+KMODE = os.environ.get("KMODE", "bot")     # bot: the bot's own K; ptb: the exact price to beat (lock-window rules only)
 M = json.load(open(f"{D}/results_meta.json"))
 res = {s: md["up"] for s, md in M.items() if md.get("up") is not None}
+PTB = {s: float(md["ptb"]) for s, md in M.items() if md.get("ptb") is not None}
 try:
     for l in open(f"{D}/windows.jsonl"):
         o = json.loads(l)
@@ -51,6 +53,20 @@ for ts in sorted(ticks):
     prev_ts = ts
     for o in ticks[ts]:
         slug, side, a_px, a_sz, zs, rem = o["slug"], o["side"], o["ask"], o["ask_sz"], o["z"], o["rem"]
+        if KMODE == "ptb":
+            # re-score with the exact price to beat (the TWAP message stamped at the window start; == official ptb)
+            ptb = PTB.get(slug)
+            if ptb is None or zs is None or rem > 60:
+                continue
+            A0 = o["A"] if o.get("A") is not None else o["spot"]; proj = o["g"] * A0 + (1 - o["g"]) * o["spot"]
+            d_old = (proj - o["K"]) * (1 if side == "Up" else -1)
+            if abs(zs) < 1e-6 or abs(d_old) < 1e-12:
+                continue
+            sd = d_old / zs
+            if sd <= 0:
+                continue
+            zs = (proj - ptb) * (1 if side == "Up" else -1) / sd
+            o = dict(o, K=ptb, z=zs)
         asset = slug.split("-")[0]; w = {"5m": 300, "15m": 900, "4h": 14400}[slug.split("-")[2]]
         k_ok = o["k_src"] in ("ptb", "twap", "chainlink") and o["src"] == "chainlink"
         picks = []
@@ -131,4 +147,4 @@ los = [t for t in trades if t["strat"] in ("lock_p", "lock_c") and not t["won"]]
 print("\nlock_p / lock_c losers:")
 for t in los:
     print(f"  {t['strat']:7} {dt.datetime.fromtimestamp(t['ts'], dt.timezone.utc):%m-%d %H:%M:%S} {t['slug']:28} {t['side']:4} ask {t['price']:.2f} z {t['z']:4.1f} rem {t['rem']:3} margin {t['margin_bp']:5.2f} {t['pnl']:+.1f}")
-json.dump(trades, open(f"{D}/lock_variants_replay.json", "w"))
+json.dump(trades, open(f"{D}/lock_variants_replay{'' if KMODE == 'bot' else '_' + KMODE}.json", "w"))
