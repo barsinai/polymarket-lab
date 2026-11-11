@@ -55,13 +55,19 @@ evs = []
 for q in ("highest temperature",):
     r = get(f"{GAMMA}/public-search", {"q": q, "limit_per_type": 200, "events_status": "active"})
     evs += [e for e in (r or {}).get("events") or [] if e.get("slug", "").startswith("highest-temperature-in-")]
+cities = {e["slug"].replace("highest-temperature-in-", "").rsplit("-on-", 1)[0] for e in evs} | set(load(f"{D}/cities.json", []))
+json.dump(sorted(cities), open(f"{D}/cities.json", "w"))
+for city in sorted(cities):
+    for k in (1, 2):
+        d_ = now + dt.timedelta(days=k)
+        evs.append({"slug": f"highest-temperature-in-{city}-on-{d_.strftime('%B').lower()}-{d_.day}-{d_.year}"})
 seen = set(); events = []
 for e in evs:
     if e["slug"] in seen:
         continue
     seen.add(e["slug"])
-    full = get(f"{GAMMA}/events", {"slug": e["slug"]})
-    if full:
+    full = get(f"{GAMMA}/events", {"slug": e["slug"]}, tries=2)
+    if full and not full[0].get("closed"):
         events.append(full[0])
 print("open temperature events", len(events), flush=True)
 
@@ -151,15 +157,17 @@ def bucket_probs(vals, buckets, floor=None, unit="C"):
 def parse_bucket(title):
     t = title.replace("°", "").replace("º", "")
     unit = "F" if "F" in t else "C"
-    nums = [int(x) for x in re.findall(r"-?\d+", t)]
-    if re.search(r"or below|or lower|or less", t, re.I):
-        return (None, nums[0]), unit
-    if re.search(r"or higher|or above|or more", t, re.I):
-        return (nums[0], None), unit
-    if len(nums) == 2:
-        return (nums[0], nums[1]), unit
-    if len(nums) == 1:
-        return (nums[0], nums[0]), unit
+    rng = re.search(r"(-?\d+)\s*(?:-|–|to)\s*(-?\d+)", t)
+    one = re.search(r"-?\d+", t)
+    if re.search(r"or below|or lower|or less", t, re.I) and one:
+        return (None, int(one.group())), unit
+    if re.search(r"or higher|or above|or more", t, re.I) and one:
+        return (int(one.group()), None), unit
+    if rng:
+        a, b = int(rng.group(1)), int(rng.group(2))
+        return (min(a, b), max(a, b)), unit
+    if one:
+        return (int(one.group()), int(one.group())), unit
     return None, unit
 
 
@@ -214,8 +222,8 @@ for slug, R in by_ev.items():
             stations[sid] = (lat, lon, tz)
     date = R[0]["date"]; unit = R[0]["unit"]
     local_today = now.astimezone(ZoneInfo(tz)).strftime("%Y-%m-%d")
-    if date < local_today:
-        continue
+    if date <= local_today:
+        continue          # W1 is the forecast idea: days ahead only (same-day nowcasting is W2)
     vals = members(lat, lon, tz, date, unit)
     if len(vals) < 20:
         print("too few members", slug, len(vals)); continue
