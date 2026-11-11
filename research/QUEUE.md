@@ -586,3 +586,20 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - Spike fade: 96 24-h exits -$139 (-17.6%); mean move of the bought token ask->bid -5.8c (fade NO) / -2.4c (fade YES); about
   the spread plus a little continuation. Momentum mirror would net ~0 after two spreads. Dead at 24 h; resolutions pending.
 - Convergence tracker: 85 open (29 YES / 56 NO control) -> NO control capped at 25 open. No settlements yet (first 11-13).
+
+## 11-11 13:30 THE K BUG, lock_x, and the arbitrage census (user: "think deeply, find a winning strategy")
+- The RTDS crypto_prices_twap_sixty message stamped EXACTLY at the window start = official priceToBeat in 2,796 of 2,796
+  windows where it was recorded (the message 1 s later differs in 89%); the one at the end = finalPrice. It arrives ~1.5 s
+  after the stamp (p99 2.6 s). The bot asked for it at the first tick of the window, before it arrived, and fell back to a
+  Chainlink-print average (k_src chainlink: 72% of windows; 84% win vs 94% with twap). Fix: twap_exact(), the window start
+  waits up to 8 s for it (k_src 'twapx').
+- Replay of the bot's whole 2-s tape (11-07..11-11) with the exact K: lock +2.7% -> +4.8%/$; lock_p +5.5% -> +7.4% (95.3%).
+  Remaining lock_p losers: margin < 1 bp or <= 5 s left. lock_p & margin >= 1 bp & rem >= 6 s: 48 trades, 100%, +11.4%/$
+  (bot K) / 45 trades 100% +11.9% (exact K), every day positive; $50 cap +$116 over ~3.5 bot-days. Paper rules lock_x ($20),
+  lock_x50 ($50), lock_xk (exact K only) from the next server part. The rem >= 6 cut is in-sample: paper decides.
+- Arbitrage census (arb_scan.py, 2,100 events, 17,246 books, POST /books): negRisk outcome sums and date/threshold ladders.
+  After fixing survival ('continues through') and downward/'top N' directions: 29 'opportunities', all cents on $1-$200 of size
+  with capital locked for months (FDV ladders 0.3-0.8c, Discord IPO buckets 4c on 5 shares). Competed away. Kept hourly in the
+  slow-paper workflow to log news-time dislocations (data/slow/arb_log.jsonl).
+- Endgame (buy the leader after the end date, history): 0.97-0.995 +0.17%/position; 0.90-0.97 non-sports 55 cases 100% +4.6%
+  over ~7 d (disputed/slow resolutions) - niche, small n.

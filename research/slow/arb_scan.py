@@ -150,9 +150,9 @@ for g in groups:
                     easier = lambda a, b: a[0] > b[0]                # cumulative ('by'): the later date is easier
                 else:
                     continue
-            elif re.search(r"\(low\)|how low|\b(dip|fall|drop|below|under|less than|lower|bottom|low)\b", low):
+            elif re.search(r"\(low\)|how low|\btop\s*<n>|\b(dip|fall|drop|below|under|less than|lower|bottom|low)\b", low):
                 easier = lambda a, b: a[0] > b[0]                    # downward touch / 'below': the higher threshold is easier
-            elif re.search(r"\(high\)|how high|\b(reach|hit|above|over|more than|at least|exceed|higher|or more|top|peak)\b|\+", low):
+            elif re.search(r"\(high\)|how high|\b(reach|hit|above|over|more than|at least|exceed|higher|or more|peak)\b|\+", low):
                 easier = lambda a, b: a[0] < b[0]                    # upward touch / 'above': the lower threshold is easier
             else:
                 continue                                              # 'between' buckets etc.: no ordering
