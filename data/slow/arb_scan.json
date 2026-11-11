@@ -1,9 +1,21 @@
 {
-"scanned": "2026-11-11 14:39",
+"scanned": "2026-11-11 15:42",
 "events": 2100,
 "groups": 2037,
 "books": 17242,
 "opps": [
+{
+"kind": "negrisk_all_no",
+"event": "Anthropic IPO Closing Market Cap",
+"slug": "anthropic-ipo-closing-market-cap-higher-strikes",
+"n": 10,
+"cost": 8.989,
+"payoff": 9,
+"edge": 0.011,
+"edge_after_fee": -0.0418,
+"size_shares": 167.86,
+"usd_at_size": 1508.89
+},
 {
 "kind": "negrisk_all_yes",
 "event": "Who will be the top-selling artist by total auction sales in 2026?",
@@ -22,6 +34,29 @@
 "edge_after_fee": 0.0038,
 "size_shares": 141.99,
 "usd_at_size": 140.43
+},
+{
+"kind": "negrisk_all_yes",
+"event": "What will OpenAI's IPO valuation be?",
+"slug": "what-will-openais-ipo-valuation-be",
+"n": 8,
+"has_other": false,
+"outcomes": [
+"<$1T",
+"$1.0T\u2013$1.25T",
+"$1.25T\u2013$1.5T",
+"$1.5T\u2013$1.75T",
+"$1.75T\u2013$2.0T",
+"$2.0T\u2013$2.25T",
+"$2.25T\u2013$2.5T",
+"$2.5T+"
+],
+"cost": 0.969,
+"payoff": 1,
+"edge": 0.031,
+"edge_after_fee": -0.0259,
+"size_shares": 27.68,
+"usd_at_size": 26.82
 },
 {
 "kind": "ladder_num",
@@ -54,29 +89,6 @@
 "usd_at_size": 49.59
 },
 {
-"kind": "negrisk_all_yes",
-"event": "What will OpenAI's IPO valuation be?",
-"slug": "what-will-openais-ipo-valuation-be",
-"n": 8,
-"has_other": false,
-"outcomes": [
-"<$1T",
-"$1.0T\u2013$1.25T",
-"$1.25T\u2013$1.5T",
-"$1.5T\u2013$1.75T",
-"$1.75T\u2013$2.0T",
-"$2.0T\u2013$2.25T",
-"$2.25T\u2013$2.5T",
-"$2.5T+"
-],
-"cost": 0.987,
-"payoff": 1,
-"edge": 0.013,
-"edge_after_fee": -0.0446,
-"size_shares": 27.68,
-"usd_at_size": 27.32
-},
-{
 "kind": "ladder_num",
 "event": "Felix FDV above ___ one day after launch?",
 "slug": "felix-fdv-above-one-day-after-launch",
@@ -88,23 +100,8 @@
 "cost": 0.994,
 "edge": 0.006,
 "edge_after_fee": 0.0031,
-"size_shares": 46.73,
-"usd_at_size": 46.45
-},
-{
-"kind": "ladder_num",
-"event": "Reya FDV above ___ one day after launch?",
-"slug": "reya-fdv-above-one-day-after-launch",
-"easy": "Reya FDV above $300M one day after launch?",
-"hard": "Reya FDV above $400M one day after launch?",
-"easy_yes_ask": 0.048,
-"hard_no_ask": 0.949,
-"hard_yes_bid": 0.051,
-"cost": 0.997,
-"edge": 0.003,
-"edge_after_fee": -0.0036,
-"size_shares": 85.0,
-"usd_at_size": 84.75
+"size_shares": 53.81,
+"usd_at_size": 53.49
 },
 {
 "kind": "ladder_num",
@@ -191,18 +188,18 @@
 },
 {
 "kind": "ladder_num",
-"event": "How high will US unemployment go in 2026?",
-"slug": "how-high-will-us-unemployment-go-in-2026",
-"easy": "Will US unemployment reach at least 6.0% in 2026?",
-"hard": "Will US unemployment reach at least 10.0% in 2026?",
-"easy_yes_ask": 0.007,
-"hard_no_ask": 0.988,
-"hard_yes_bid": 0.012,
-"cost": 0.995,
-"edge": 0.005,
-"edge_after_fee": 0.0037,
-"size_shares": 29.6,
-"usd_at_size": 29.45
+"event": "Reya FDV above ___ one day after launch?",
+"slug": "reya-fdv-above-one-day-after-launch",
+"easy": "Reya FDV above $300M one day after launch?",
+"hard": "Reya FDV above $400M one day after launch?",
+"easy_yes_ask": 0.048,
+"hard_no_ask": 0.949,
+"hard_yes_bid": 0.051,
+"cost": 0.997,
+"edge": 0.003,
+"edge_after_fee": -0.0036,
+"size_shares": 55.0,
+"usd_at_size": 54.84
 },
 {
 "kind": "ladder_num",
@@ -216,8 +213,23 @@
 "cost": 0.997,
 "edge": 0.003,
 "edge_after_fee": -0.0001,
-"size_shares": 46.73,
-"usd_at_size": 46.59
+"size_shares": 53.81,
+"usd_at_size": 53.65
+},
+{
+"kind": "ladder_num",
+"event": "How high will US unemployment go in 2026?",
+"slug": "how-high-will-us-unemployment-go-in-2026",
+"easy": "Will US unemployment reach at least 6.0% in 2026?",
+"hard": "Will US unemployment reach at least 10.0% in 2026?",
+"easy_yes_ask": 0.007,
+"hard_no_ask": 0.988,
+"hard_yes_bid": 0.012,
+"cost": 0.995,
+"edge": 0.005,
+"edge_after_fee": 0.0037,
+"size_shares": 29.6,
+"usd_at_size": 29.45
 },
 {
 "kind": "ladder_num",
@@ -279,34 +291,12 @@
 "2.7% to 2.9%",
 "3.0%+"
 ],
-"cost": 0.908,
+"cost": 0.913,
 "payoff": 1,
-"edge": 0.092,
-"edge_after_fee": 0.0469,
+"edge": 0.087,
+"edge_after_fee": 0.0418,
 "size_shares": 0.48,
 "usd_at_size": 0.44
-},
-{
-"kind": "negrisk_all_yes",
-"event": "OpenAI IPO Closing Market Cap",
-"slug": "openai-ipo-closing-market-cap-554",
-"n": 7,
-"has_other": false,
-"outcomes": [
-"<500B",
-"500\u2013750B",
-"750B\u20131T",
-"1T\u20131.25T",
-"1.25T\u20131.5T",
-"1.5T+",
-"No IPO by December 31, 2027"
-],
-"cost": 0.996,
-"payoff": 1,
-"edge": 0.004,
-"edge_after_fee": -0.0513,
-"size_shares": 8.9,
-"usd_at_size": 8.86
 },
 {
 "kind": "ladder_num",
@@ -382,6 +372,21 @@
 "edge_after_fee": 0.0061,
 "size_shares": 0.59,
 "usd_at_size": 0.58
+},
+{
+"kind": "ladder_num",
+"event": "How high will US unemployment go in 2026?",
+"slug": "how-high-will-us-unemployment-go-in-2026",
+"easy": "Will US unemployment reach at least 5.0% in 2026?",
+"hard": "Will US unemployment reach at least 7.0% in 2026?",
+"easy_yes_ask": 0.019,
+"hard_no_ask": 0.974,
+"hard_yes_bid": 0.026,
+"cost": 0.993,
+"edge": 0.007,
+"edge_after_fee": 0.0039,
+"size_shares": 0.59,
+"usd_at_size": 0.59
 }
 ]
 }
