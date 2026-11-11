@@ -88,7 +88,10 @@ cands.sort(key=lambda c: c[1] != "YES")        # YES first: that is the strategy
 print(f"open positions {sum(1 for p in positions if not p.get('resolved'))}, settled now {n_settled}, candidates {len(cands)}", flush=True)
 
 # 3. paper-buy at the real best ask
-n_new = 0; n_new_no = 0
+n_new = 0
+# the NO side is only a control: cap its OPEN positions (11-11: 5 per hour had grown it to 56 vs 29 YES)
+MAX_OPEN_NO = int(os.environ.get("MAX_OPEN_NO", "25"))
+n_new_no = max(0, MAX_NEW_NO - max(0, MAX_OPEN_NO - sum(1 for p in positions if not p.get("resolved") and p["side"] == "NO")))
 for m, side, tok, prices, end in cands[:MAX_NEW * 3]:
     if n_new >= MAX_NEW or (side == "NO" and n_new_no >= MAX_NEW_NO):
         if side == "NO" and n_new < MAX_NEW:

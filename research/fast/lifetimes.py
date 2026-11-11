@@ -66,13 +66,29 @@ for s, md in M.items():
 print("tokens known:", len(tok2))
 
 # feed: chainlink prices per asset
-feed = defaultdict(list)
+feed = defaultdict(list); twap60 = defaultdict(list)
 for o in lines(f"{RTDS}/*.jsonl*"):
     m = o.get("m") or {}; p = m.get("payload") or {}
     if m.get("topic") == "crypto_prices_chainlink" and p.get("symbol"):
         feed[p["symbol"].split("/")[0]].append((p["timestamp"] / 1000.0, float(p["value"])))
+    elif m.get("topic") == "crypto_prices_twap_sixty" and p.get("symbol") and isinstance(p.get("value"), (int, float)):
+        twap60[p["symbol"].split("/")[0].lower()].append((p["timestamp"] / 1000.0, float(p["value"])))
 for a in feed:
     feed[a] = sorted(set(feed[a]))
+for a in twap60:
+    twap60[a] = sorted(set(twap60[a]))
+# K: the official price to beat is published only after the window is under way (5m: usually not before the last minute),
+# so K_EST=bot (default since 11-11) uses what the bot can know at the start: the 60-s TWAP topic at the start, else the
+# mean of the Chainlink prints in the minute before. K_EST=ptb reproduces the old (hindsight) study.
+K_EST = os.environ.get("K_EST", "bot")
+
+
+def k_bot(asset, start):
+    tw = [v for t, v in twap60.get(asset.lower(), []) if start - 3 <= t <= start + 3]
+    if tw:
+        return tw[len(tw) // 2], "twap"
+    pre = [v for t, v in feed.get(asset, []) if start - 60 <= t < start]
+    return (sum(pre) / len(pre), "chainlink") if len(pre) >= 20 else (None, None)
 print("feed assets:", {a: len(v) for a, v in feed.items()})
 
 # websocket top-of-book per token
@@ -142,7 +158,12 @@ for tok, recs in top.items():
     asset = slug.split("-")[0]; start = md["start"]; end = start + md["window"]
     if not (WIN_LO <= end < WIN_HI):
         continue
-    zs = z_series(asset, start, end, md["ptb"])
+    K = md["ptb"]
+    if K_EST == "bot":
+        K, ksrc = k_bot(asset, start)
+        if K is None:
+            continue
+    zs = z_series(asset, start, end, K)
     if not zs:
         continue
     n_windows += 1
@@ -193,7 +214,7 @@ if life:
         print(f"  act after {R:5.2f} s of persistence: episodes {n:4} win {w / n if n else 0:.3f}  stake ${usd:,.0f}  pnl ${pnl:+,.1f} ({pnl / usd if usd else 0:+.1%})  ask paid median {prices[len(prices) // 2] if prices else 0:.2f}")
     # window level: one trade per (window, side), the first episode that lasts R seconds (what the bot does)
     print("  window level (one trade per window-side, first episode that persisted R s):")
-    summary = {"hour": HOUR, "since": SINCE, "until": UNTIL, "z": Z, "ask_max": ASK_MAX, "windows": n_windows, "episodes": len(life),
+    summary = {"hour": HOUR, "k_est": K_EST, "since": SINCE, "until": UNTIL, "z": Z, "ask_max": ASK_MAX, "windows": n_windows, "episodes": len(life),
                "episodes_won": sum(1 for x in life if x[3]), "window_level": {}}
     for R in (0.05, 0.5, 1.0, 2.0, 3.0, 5.0):
         first = {}
