@@ -17,11 +17,18 @@ echo "hourly $(date -u +%FT%H:%M) start"
 # 2. official results for the windows of the last 2 days (Gamma, ~1 request per unsettled window)
 SETTLE_DAYS=2 timeout 360 "$PY" research/fast/settle.py 2>&1 | tail -2
 
-# 3. websocket lifetime study for the hour that just finished, window level, two ask caps
-H=$(date -u -d '1 hour ago' +%FT%H)
-for cap in 0.97 0.92; do
-  if ! grep -q "\"hour\": \"$H\".*\"ask_max\": $cap" data/fast/hourly/lifetimes.jsonl 2>/dev/null; then
-    HOUR="$H" ASK_MAX="$cap" R_LO=0 R_HI=60 OUT=data/fast/hourly/lifetimes.jsonl timeout 300 "$PY" research/fast/lifetimes.py 2>&1 | grep -E "windows with|R  2.00" | sed "s/^/  $H cap $cap: /"
-  fi
+# 3. websocket lifetime study, window level, two ask caps, with the K the bot can know (K_EST=bot; before 11-11 the
+#    summaries used the official price to beat, which is published only late in the window = hindsight).
+#    The hour that just finished first, then back-fill up to 4 older hour-cap runs (last 30 h) that have no K_EST=bot line yet.
+done_line() { grep -q "\"hour\": \"$1\", \"k_est\": \"bot\".*\"ask_max\": $2" data/fast/hourly/lifetimes.jsonl 2>/dev/null; }
+n_back=0
+for back in $(seq 1 30); do
+  H=$(date -u -d "$back hour ago" +%FT%H)
+  for cap in 0.97 0.92; do
+    if ! done_line "$H" "$cap"; then
+      [ "$back" -gt 1 ] && { [ "$n_back" -ge 4 ] && break 2; n_back=$((n_back + 1)); }
+      K_EST=bot HOUR="$H" ASK_MAX="$cap" R_LO=0 R_HI=60 OUT=data/fast/hourly/lifetimes.jsonl timeout 300 "$PY" research/fast/lifetimes.py 2>&1 | grep -E "windows with" | sed "s/^/  $H cap $cap: /"
+    fi
+  done
 done
 echo "hourly $(date -u +%FT%H:%M) done; store $(du -sh "$STORE" 2>/dev/null | cut -f1)"

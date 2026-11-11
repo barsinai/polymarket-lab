@@ -573,3 +573,16 @@ Price drift in the trade's direction (what a market maker on the other side lose
   Resolution P&L still pending.
 - Server hook verified: repair 0, 3,400 windows settled on the server, lifetimes T07 (224 windows, 3-5 episodes, all won),
   hourly/lifetimes.jsonl published; store 307M after LAST_S=300.
+
+## 11-11 07:45 HINDSIGHT IN THE WEBSOCKET STUDY (correction) + morning numbers
+- lifetimes.py used the OFFICIAL priceToBeat (md["ptb"]) for z; for 5m windows it is published only late, the bot never has it
+  in the lock window (bot lock trades since 11-09: K from twap 16 trades 94% +$1.4; K from Chainlink proxy 63 trades 84% -$40).
+  The server's hourly summaries (11-10 +15..+22%/$) carried that hindsight. Now K_EST=bot (60-s TWAP topic at the start, else
+  the mean of Chainlink prints in the minute before) is the default; hourly.sh back-fills recent hours with it.
+- Local recordings 11-08..11-10T02, window level, bot K: cap 0.97 R=2 s 46 windows 87% +0.8%/$; R=3 s +3.2%; cap 0.92 R=2 s 27
+  windows 78% -2.2%. With official K (cap 0.92): 34 windows 77% -4.8%. Lock family ~break-even at best. 
+- Bot since 11-10 02:41: lock 64 trades 87.5% -$35; lock_c 17 82% -$10; lock_p 14 93% +$10; lock_early 17/17 +$21 (+7.2%/$);
+  lock_p_50 +$13. Only lock_early and the persistence variants are positive, on small n.
+- Spike fade: 96 24-h exits -$139 (-17.6%); mean move of the bought token ask->bid -5.8c (fade NO) / -2.4c (fade YES); about
+  the spread plus a little continuation. Momentum mirror would net ~0 after two spreads. Dead at 24 h; resolutions pending.
+- Convergence tracker: 85 open (29 YES / 56 NO control) -> NO control capped at 25 open. No settlements yet (first 11-13).
