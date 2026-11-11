@@ -46,6 +46,7 @@ def load(path, default):
 
 
 stations = load(f"{D}/stations.json", {})
+BIAS = load(f"{D}/bias.json", {})
 pos_path = f"{D}/positions.jsonl"
 positions = [json.loads(l) for l in open(pos_path)] if os.path.exists(pos_path) else []
 held = {(p["market_id"], p["side"]) for p in positions}
@@ -139,12 +140,12 @@ def rnd(x):
     return math.floor(x + 0.5)
 
 
-def bucket_probs(vals, buckets, floor=None, unit="C"):
+def bucket_probs(vals, buckets, floor=None, unit="C", kernel_c=None):
     """buckets: list of (lo, hi) whole degrees inclusive (None = open end); P(rounded value in bucket) under a kernel mix"""
     if floor is not None:
         vals = [max(v, floor) for v in vals]
     phi = lambda z: 0.5 * (1 + math.erf(z / math.sqrt(2)))
-    k = KERNEL * (1.8 if unit == "F" else 1.0)
+    k = (kernel_c or KERNEL) * (1.8 if unit == "F" else 1.0)
     out = []
     for lo, hi in buckets:
         a = -1e9 if lo is None else lo - 0.5; b = 1e9 if hi is None else hi + 0.5   # rounding half up: [n-0.5, n+0.5)
@@ -232,14 +233,24 @@ for slug, R in by_ev.items():
         om = observed_max(sid, tz, date)
         if om is not None:
             floor = om * 9 / 5 + 32 if unit == "F" else om
+    # v1 calibration (weather_bias.py): shift by the station's mean error of the hourly-METAR max vs the forecast, and
+    # use as kernel the part of the residual sd that the ensemble spread does not already carry
+    lead = max(1, min(2, (dt.date.fromisoformat(date) - dt.date.fromisoformat(local_today)).days))
+    cal = BIAS.get(sid, {}).get(str(lead)) or BIAS.get(sid, {}).get("1")
+    kernel_c = None; model_v = "v0"
+    if cal:
+        f = 1.8 if unit == "F" else 1.0
+        vals = [v + cal["bias"] * f for v in vals]
+        mu = sum(vals) / len(vals); ens_sd = math.sqrt(sum((v - mu) ** 2 for v in vals) / len(vals)) / f
+        kernel_c = max(0.5, math.sqrt(max(cal["sd"] ** 2 - ens_sd ** 2, 0.25))); model_v = "v1"
     R.sort(key=lambda r: (r["bucket"][0] if r["bucket"][0] is not None else -1e9))
-    ps = bucket_probs(vals, [r["bucket"] for r in R], floor, unit)
+    ps = bucket_probs(vals, [r["bucket"] for r in R], floor, unit, kernel_c)
     n_ev += 1
     for r, p in zip(R, ps):
         ya, yb = B.get(r["yes"], (None, None)); na, _ = B.get(r["no"], (None, None))
         rec = {"ts": now.strftime("%Y-%m-%d %H:%M"), "event": slug, "station": sid, "date": date, "same_day": date == local_today, "bucket": r["title"],
                "market_id": r["market_id"], "p": round(p, 4), "yes_ask": ya[0] if ya else None, "yes_ask_sz": ya[1] if ya else None,
-               "yes_bid": yb[0] if yb else None, "no_ask": na[0] if na else None, "n_members": len(vals), "floor": floor,
+               "yes_bid": yb[0] if yb else None, "no_ask": na[0] if na else None, "n_members": len(vals), "floor": floor, "model": model_v, "kernel_c": kernel_c,
                "ens_mean": round(sum(vals) / len(vals), 2)}
         obs_out.write(json.dumps(rec) + "\n")
         for side, ask, prob, sz in (("YES", ya[0] if ya else None, p, ya[1] if ya else 0), ("NO", na[0] if na else None, 1 - p, na[1] if na else 0)):
@@ -249,9 +260,9 @@ for slug, R in by_ev.items():
                 continue
             if side == "NO" and not (0.30 <= ask <= 0.97):
                 continue
-            if prob - ask >= EDGE and sz * ask >= STAKE:
+            if model_v == "v1" and prob - ask >= EDGE and sz * ask >= STAKE:
                 positions.append({"opened": rec["ts"], "event": slug, "date": date, "same_day": rec["same_day"], "bucket": r["title"], "market_id": r["market_id"],
-                                  "side": side, "ask": ask, "shares": round(STAKE / ask, 2), "p": round(prob, 4), "ens_mean": rec["ens_mean"], "floor": floor, "resolved": False})
+                                  "side": side, "ask": ask, "shares": round(STAKE / ask, 2), "p": round(prob, 4), "ens_mean": rec["ens_mean"], "floor": floor, "model": model_v, "resolved": False})
                 held.add((r["market_id"], side)); n_new += 1
 obs_out.close()
 
@@ -279,6 +290,9 @@ rep = {"updated": now.strftime("%Y-%m-%d %H:%M"), "events_modelled": n_ev, "new_
        "settled": len(done), "won": sum(p["won"] for p in done), "pnl": round(sum(p["pnl"] for p in done), 2),
        "staked_settled": round(sum(p["shares"] * p["ask"] for p in done), 2),
        "by_side": {s: {"n": sum(1 for p in done if p["side"] == s), "won": sum(p["won"] for p in done if p["side"] == s),
-                       "pnl": round(sum(p["pnl"] for p in done if p["side"] == s), 2)} for s in ("YES", "NO")}}
+                       "pnl": round(sum(p["pnl"] for p in done if p["side"] == s), 2)} for s in ("YES", "NO")},
+       "by_model": {mv: {"open": sum(1 for p in positions if p.get("model", "v0") == mv and not p.get("resolved")),
+                         "n": sum(1 for p in done if p.get("model", "v0") == mv), "won": sum(p["won"] for p in done if p.get("model", "v0") == mv),
+                         "pnl": round(sum(p["pnl"] for p in done if p.get("model", "v0") == mv), 2)} for mv in ("v0", "v1")}}
 json.dump(rep, open(f"{D}/report.json", "w"), indent=1)
 print(json.dumps(rep))
