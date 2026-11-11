@@ -14,6 +14,10 @@ import requests
 D = "data/weather"; DAYS = int(os.environ.get("DAYS", "60"))
 S = requests.Session(); S.headers["User-Agent"] = "polymarket-lab-research/0.1"
 stations = json.load(open(f"{D}/stations.json"))
+try:
+    prev = json.load(open(f"{D}/bias.json"))
+except (OSError, ValueError):
+    prev = {}
 end = dt.date.today(); start = end - dt.timedelta(days=DAYS)
 out = {}
 for sid, (lat, lon, tz) in stations.items():
@@ -23,11 +27,16 @@ for sid, (lat, lon, tz) in stations.items():
     url = "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py"
     params = {"station": sid, "data": "tmpc", "year1": start.year, "month1": start.month, "day1": start.day, "year2": end.year, "month2": end.month, "day2": end.day,
               "tz": "Etc/UTC", "format": "onlycomma", "latlon": "no", "missing": "empty", "trace": "empty", "report_type": "3"}
-    try:
-        r = S.get(url, params=params, timeout=60)
-        rows = list(csv.DictReader(io.StringIO(r.text)))
-    except Exception as e:  # noqa: BLE001
-        print(sid, "IEM error", e); continue
+    rows = []
+    for k in range(5):                     # IEM throttles bursts: every other request came back empty on 11-11
+        try:
+            r = S.get(url, params=params, timeout=60)
+            rows = [x for x in csv.DictReader(io.StringIO(r.text)) if x.get("tmpc")]
+        except Exception as e:  # noqa: BLE001
+            print(sid, "IEM error", e)
+        if rows:
+            break
+        time.sleep(5 + 5 * k)
     obs = defaultdict(lambda: -1e9)
     for row in rows:
         try:
@@ -56,8 +65,8 @@ for sid, (lat, lon, tz) in stations.items():
         if len(e) >= 15:
             mu = sum(e) / len(e); sd = math.sqrt(sum((x - mu) ** 2 for x in e) / (len(e) - 1))
             res[lead] = {"n": len(e), "bias": round(mu, 2), "sd": round(sd, 2)}
-    out[sid] = res
+    out[sid] = res or prev.get(sid, {})
     print(f"{sid}: METAR days {sum(1 for v in obs.values() if v > -1e8)}  " + "  ".join(f"lead{l}: bias {v['bias']:+.2f} sd {v['sd']:.2f} (n {v['n']})" for l, v in res.items()), flush=True)
-    time.sleep(0.5)
+    time.sleep(3)
 json.dump(out, open(f"{D}/bias.json", "w"), indent=1)
 print("stations calibrated", len(out))
