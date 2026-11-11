@@ -1,21 +1,9 @@
 {
-"scanned": "2026-11-11 15:42",
+"scanned": "2026-11-11 16:22",
 "events": 2100,
 "groups": 2037,
 "books": 17242,
 "opps": [
-{
-"kind": "negrisk_all_no",
-"event": "Anthropic IPO Closing Market Cap",
-"slug": "anthropic-ipo-closing-market-cap-higher-strikes",
-"n": 10,
-"cost": 8.989,
-"payoff": 9,
-"edge": 0.011,
-"edge_after_fee": -0.0418,
-"size_shares": 167.86,
-"usd_at_size": 1508.89
-},
 {
 "kind": "negrisk_all_yes",
 "event": "Who will be the top-selling artist by total auction sales in 2026?",
@@ -32,8 +20,8 @@
 "payoff": 1,
 "edge": 0.011,
 "edge_after_fee": 0.0038,
-"size_shares": 141.99,
-"usd_at_size": 140.43
+"size_shares": 121.89,
+"usd_at_size": 120.55
 },
 {
 "kind": "negrisk_all_yes",
@@ -51,12 +39,12 @@
 "$2.25T\u2013$2.5T",
 "$2.5T+"
 ],
-"cost": 0.969,
+"cost": 0.967,
 "payoff": 1,
-"edge": 0.031,
-"edge_after_fee": -0.0259,
+"edge": 0.033,
+"edge_after_fee": -0.0238,
 "size_shares": 27.68,
-"usd_at_size": 26.82
+"usd_at_size": 26.77
 },
 {
 "kind": "ladder_num",
@@ -70,8 +58,8 @@
 "cost": 0.996,
 "edge": 0.004,
 "edge_after_fee": 0.0015,
-"size_shares": 195.68,
-"usd_at_size": 194.9
+"size_shares": 165.68,
+"usd_at_size": 165.02
 },
 {
 "kind": "ladder_num",
@@ -100,8 +88,8 @@
 "cost": 0.994,
 "edge": 0.006,
 "edge_after_fee": 0.0031,
-"size_shares": 53.81,
-"usd_at_size": 53.49
+"size_shares": 46.73,
+"usd_at_size": 46.45
 },
 {
 "kind": "ladder_num",
@@ -164,10 +152,10 @@
 "20B+",
 "No IPO by December 31, 2027"
 ],
-"cost": 0.958,
+"cost": 0.959,
 "payoff": 1,
-"edge": 0.042,
-"edge_after_fee": 0.0296,
+"edge": 0.041,
+"edge_after_fee": 0.0285,
 "size_shares": 5.0,
 "usd_at_size": 4.79
 },
@@ -203,21 +191,6 @@
 },
 {
 "kind": "ladder_num",
-"event": "Felix FDV above ___ one day after launch?",
-"slug": "felix-fdv-above-one-day-after-launch",
-"easy": "Felix Protocol FDV above $800M one day after launch?",
-"hard": "Felix Protocol FDV above $2B one day after launch?",
-"easy_yes_ask": 0.021,
-"hard_no_ask": 0.976,
-"hard_yes_bid": 0.024,
-"cost": 0.997,
-"edge": 0.003,
-"edge_after_fee": -0.0001,
-"size_shares": 53.81,
-"usd_at_size": 53.65
-},
-{
-"kind": "ladder_num",
 "event": "How high will US unemployment go in 2026?",
 "slug": "how-high-will-us-unemployment-go-in-2026",
 "easy": "Will US unemployment reach at least 6.0% in 2026?",
@@ -230,6 +203,21 @@
 "edge_after_fee": 0.0037,
 "size_shares": 29.6,
 "usd_at_size": 29.45
+},
+{
+"kind": "ladder_num",
+"event": "Felix FDV above ___ one day after launch?",
+"slug": "felix-fdv-above-one-day-after-launch",
+"easy": "Felix Protocol FDV above $800M one day after launch?",
+"hard": "Felix Protocol FDV above $2B one day after launch?",
+"easy_yes_ask": 0.021,
+"hard_no_ask": 0.976,
+"hard_yes_bid": 0.024,
+"cost": 0.997,
+"edge": 0.003,
+"edge_after_fee": -0.0001,
+"size_shares": 46.73,
+"usd_at_size": 46.59
 },
 {
 "kind": "ladder_num",
@@ -263,6 +251,21 @@
 },
 {
 "kind": "ladder_num",
+"event": "Abstract FDV above ___ one day after launch?",
+"slug": "abstract-fdv-above-one-day-after-launch",
+"easy": "Abstract FDV above $200M one day after launch?",
+"hard": "Abstract FDV above $600M one day after launch?",
+"easy_yes_ask": 0.028,
+"hard_no_ask": 0.969,
+"hard_yes_bid": 0.031,
+"cost": 0.997,
+"edge": 0.003,
+"edge_after_fee": -0.001,
+"size_shares": 20.0,
+"usd_at_size": 19.94
+},
+{
+"kind": "ladder_num",
 "event": "Hurupay FDV above ___ one day after launch?",
 "slug": "hurupay-fdv-above-one-day-after-launch",
 "easy": "Hurupay FDV above $10M one day after launch?",
@@ -275,6 +278,43 @@
 "edge_after_fee": -0.0024,
 "size_shares": 19.86,
 "usd_at_size": 19.8
+},
+{
+"kind": "negrisk_all_yes",
+"event": "UK Annual GDP Growth 2026",
+"slug": "uk-annual-gdp-growth-2026",
+"n": 7,
+"has_other": false,
+"outcomes": [
+"<0",
+"0-1%",
+"1-2%",
+"2-3%",
+"3-4%",
+"4-5%",
+"5%+"
+],
+"cost": 0.992,
+"payoff": 1,
+"edge": 0.008,
+"edge_after_fee": -0.008,
+"size_shares": 6.24,
+"usd_at_size": 6.19
+},
+{
+"kind": "ladder_num",
+"event": "Abstract FDV above ___ one day after launch?",
+"slug": "abstract-fdv-above-one-day-after-launch",
+"easy": "Abstract FDV above $200M one day after launch?",
+"hard": "Abstract FDV above $400M one day after launch?",
+"easy_yes_ask": 0.028,
+"hard_no_ask": 0.968,
+"hard_yes_bid": 0.032,
+"cost": 0.996,
+"edge": 0.004,
+"edge_after_fee": -0.0001,
+"size_shares": 11.33,
+"usd_at_size": 11.28
 },
 {
 "kind": "negrisk_all_yes",
@@ -291,10 +331,10 @@
 "2.7% to 2.9%",
 "3.0%+"
 ],
-"cost": 0.913,
+"cost": 0.907,
 "payoff": 1,
-"edge": 0.087,
-"edge_after_fee": 0.0418,
+"edge": 0.093,
+"edge_after_fee": 0.048,
 "size_shares": 0.48,
 "usd_at_size": 0.44
 },
@@ -312,6 +352,21 @@
 "edge_after_fee": 0.0021,
 "size_shares": 4.48,
 "usd_at_size": 4.45
+},
+{
+"kind": "ladder_num",
+"event": "Pacifica FDV above ___ one day after launch?",
+"slug": "pacifica-fdv-above-one-day-after-launch",
+"easy": "Pacifica FDV above $200M one day after launch?",
+"hard": "Pacifica FDV above $800M one day after launch?",
+"easy_yes_ask": 0.027,
+"hard_no_ask": 0.968,
+"hard_yes_bid": 0.032,
+"cost": 0.995,
+"edge": 0.005,
+"edge_after_fee": 0.001,
+"size_shares": 4.48,
+"usd_at_size": 4.46
 },
 {
 "kind": "ladder_num",
