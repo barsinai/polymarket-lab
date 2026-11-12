@@ -23,7 +23,7 @@ for line in open("data/weather/positions.jsonl"):
 today = time.strftime("%Y-%m-%d", time.gmtime())
 rows = []
 for ev, L in obs.items():
-    if L[0]["date"] >= today:
+    if L[0]["date"] > today:
         continue
     first_ts = min(o["ts"] for o in L)
     snap = {o["market_id"]: o for o in L if o["ts"] == first_ts}
