@@ -18,3 +18,13 @@
 - Health: fast paper 16:32, slow 16:41 OK. combos/sample.py crashed every hour (outcomes is a dict) -> fixed. pilot STOP
   mode, no orders. smoke.py UnboundLocalError when the feed is unreachable (GitHub runner, 14:37) - cosmetic, noted.
 - Next: N2 census of closed box-office markets; read young at 11-13 end dates; lock_early at 50 trades; weather day 2-3.
+
+## 11-12 20:10 UTC check-in (main session)
+- Weather W1 scored at settlement (research/slow/weather_score.py, first snapshot ~1 day ahead, 17 events / 187 buckets,
+  all Asia 11-12): Brier model 0.0741 vs market 0.0685 - the market is better; winning bucket model 0.195 vs market 0.302
+  (model too spread). Paper +$140 is mostly one 6c YES (luck, not skill). Same as the 11-01 prior (LESSONS 9). Keep
+  scoring 3 more days (independent weather days, not cities); kill W1 if Brier still worse on 60+ events.
+- Dead buckets (W2): London 7C bid 6.5c at obs max 8, NYC 54-55F bid 2.1c at 55.9 - not settled yet (resolve with the
+  official source next day); if they lose, a same-day dead-bucket NO is near-riskless but size is a few $.
+- Server websocket lock study, 30 h common hours: rx +4.6% (0.1 s) .. +6.6% (1 s), bn +4.7 .. +7.6%; 7 of 30 hours negative.
+  The REST paper lock_m at the same time: -0.5% on 114 trades -> the gap between websocket-speed and our 2-s loop is the edge.
