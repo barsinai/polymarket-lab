@@ -1,40 +1,9 @@
 {
-"scanned": "2026-11-12 18:50",
+"scanned": "2026-11-12 19:53",
 "events": 2100,
 "groups": 2037,
 "books": 17114,
 "opps": [
-{
-"kind": "negrisk_all_yes",
-"event": "Who will be the top-selling artist by total auction sales in 2026?",
-"slug": "who-will-be-the-top-selling-artist-by-total-auction-sales-in-2026-20260605235158033",
-"n": 4,
-"has_other": true,
-"outcomes": [
-"Andy Warhol",
-"Pablo Picasso",
-"Jean-Michel Basquiat",
-"Other"
-],
-"cost": 0.973,
-"payoff": 1,
-"edge": 0.027,
-"edge_after_fee": 0.0208,
-"size_shares": 171.28,
-"usd_at_size": 166.66
-},
-{
-"kind": "negrisk_all_no",
-"event": "Anthropic IPO Closing Market Cap",
-"slug": "anthropic-ipo-closing-market-cap-higher-strikes",
-"n": 10,
-"cost": 8.988,
-"payoff": 9,
-"edge": 0.012,
-"edge_after_fee": -0.0409,
-"size_shares": 238.13,
-"usd_at_size": 2140.31
-},
 {
 "kind": "negrisk_all_yes",
 "event": "Eurozone Annual GDP Growth 2026",
@@ -52,12 +21,12 @@
 "6.0-7.0%",
 "7.0%+"
 ],
-"cost": 0.974,
+"cost": 0.98,
 "payoff": 1,
-"edge": 0.026,
-"edge_after_fee": 0.0073,
-"size_shares": 46.84,
-"usd_at_size": 45.62
+"edge": 0.02,
+"edge_after_fee": 0.001,
+"size_shares": 41.0,
+"usd_at_size": 40.18
 },
 {
 "kind": "ladder_date",
@@ -73,29 +42,6 @@
 "edge_after_fee": 0.0553,
 "size_shares": 12.5,
 "usd_at_size": 11.7
-},
-{
-"kind": "negrisk_all_yes",
-"event": "What will OpenAI's IPO valuation be?",
-"slug": "what-will-openais-ipo-valuation-be",
-"n": 8,
-"has_other": false,
-"outcomes": [
-"<$1T",
-"$1.0T\u2013$1.25T",
-"$1.25T\u2013$1.5T",
-"$1.5T\u2013$1.75T",
-"$1.75T\u2013$2.0T",
-"$2.0T\u2013$2.25T",
-"$2.25T\u2013$2.5T",
-"$2.5T+"
-],
-"cost": 0.974,
-"payoff": 1,
-"edge": 0.026,
-"edge_after_fee": -0.0311,
-"size_shares": 30.0,
-"usd_at_size": 29.22
 },
 {
 "kind": "ladder_num",
@@ -114,36 +60,6 @@
 },
 {
 "kind": "ladder_num",
-"event": "How high will inflation get in 2026?",
-"slug": "how-high-will-inflation-get-in-2026",
-"easy": "Will inflation reach more than 6% in 2026?",
-"hard": "Will inflation reach more than 8% in 2026?",
-"easy_yes_ask": 0.016,
-"hard_no_ask": 0.981,
-"hard_yes_bid": 0.019,
-"cost": 0.997,
-"edge": 0.003,
-"edge_after_fee": 0.0006,
-"size_shares": 251.7,
-"usd_at_size": 250.94
-},
-{
-"kind": "ladder_num",
-"event": "Hotstuff FDV above ___ one day after launch?",
-"slug": "hotstuff-fdv-above-one-day-after-launch",
-"easy": "Hotstuff FDV above $200M one day after launch?",
-"hard": "Hotstuff FDV above $300M one day after launch?",
-"easy_yes_ask": 0.13,
-"hard_no_ask": 0.86,
-"hard_yes_bid": 0.14,
-"cost": 0.99,
-"edge": 0.01,
-"edge_after_fee": -0.0063,
-"size_shares": 60.0,
-"usd_at_size": 59.4
-},
-{
-"kind": "ladder_num",
 "event": "Ostium FDV above ___ one day after launch?",
 "slug": "ostium-fdv-above-one-day-after-launch",
 "easy": "Ostium FDV above $50M one day after launch?",
@@ -154,8 +70,23 @@
 "cost": 0.996,
 "edge": 0.004,
 "edge_after_fee": 0.0007,
-"size_shares": 70.71,
-"usd_at_size": 70.43
+"size_shares": 182.71,
+"usd_at_size": 181.98
+},
+{
+"kind": "ladder_num",
+"event": "GMGN FDV above ___ one day after launch?",
+"slug": "gmgn-fdv-above-one-day-after-launch",
+"easy": "GMGN FDV above $200M one day after launch",
+"hard": "GMGN FDV above $400M one day after launch",
+"easy_yes_ask": 0.33,
+"hard_no_ask": 0.66,
+"hard_yes_bid": 0.34,
+"cost": 0.99,
+"edge": 0.01,
+"edge_after_fee": -0.0212,
+"size_shares": 60.0,
+"usd_at_size": 59.4
 },
 {
 "kind": "ladder_num",
@@ -169,8 +100,50 @@
 "cost": 0.996,
 "edge": 0.004,
 "edge_after_fee": -0.0026,
-"size_shares": 68.97,
-"usd_at_size": 68.69
+"size_shares": 98.97,
+"usd_at_size": 98.57
+},
+{
+"kind": "ladder_num",
+"event": "Pacifica FDV above ___ one day after launch?",
+"slug": "pacifica-fdv-above-one-day-after-launch",
+"easy": "Pacifica FDV above $500M one day after launch?",
+"hard": "Pacifica FDV above $800M one day after launch?",
+"easy_yes_ask": 0.026,
+"hard_no_ask": 0.968,
+"hard_yes_bid": 0.032,
+"cost": 0.994,
+"edge": 0.006,
+"edge_after_fee": 0.0021,
+"size_shares": 64.48,
+"usd_at_size": 64.09
+},
+{
+"kind": "negrisk_all_no",
+"event": "Anthropic IPO Closing Market Cap",
+"slug": "anthropic-ipo-closing-market-cap-higher-strikes",
+"n": 10,
+"cost": 8.989,
+"payoff": 9,
+"edge": 0.011,
+"edge_after_fee": -0.0419,
+"size_shares": 33.4,
+"usd_at_size": 300.23
+},
+{
+"kind": "ladder_num",
+"event": "Pacifica FDV above ___ one day after launch?",
+"slug": "pacifica-fdv-above-one-day-after-launch",
+"easy": "Pacifica FDV above $300M one day after launch?",
+"hard": "Pacifica FDV above $800M one day after launch?",
+"easy_yes_ask": 0.028,
+"hard_no_ask": 0.968,
+"hard_yes_bid": 0.032,
+"cost": 0.996,
+"edge": 0.004,
+"edge_after_fee": -0.0001,
+"size_shares": 64.48,
+"usd_at_size": 64.22
 },
 {
 "kind": "ladder_num",
@@ -211,36 +184,6 @@
 "usd_at_size": 4.79
 },
 {
-"kind": "ladder_num",
-"event": "Pacifica FDV above ___ one day after launch?",
-"slug": "pacifica-fdv-above-one-day-after-launch",
-"easy": "Pacifica FDV above $500M one day after launch?",
-"hard": "Pacifica FDV above $800M one day after launch?",
-"easy_yes_ask": 0.026,
-"hard_no_ask": 0.968,
-"hard_yes_bid": 0.032,
-"cost": 0.994,
-"edge": 0.006,
-"edge_after_fee": 0.0021,
-"size_shares": 34.48,
-"usd_at_size": 34.27
-},
-{
-"kind": "ladder_num",
-"event": "What price will Sui hit in 2026?",
-"slug": "what-price-will-sui-hit-in-2026",
-"easy": "Will Sui reach $2.50 before 2027?",
-"hard": "Will Sui reach $3.00 before 2027?",
-"easy_yes_ask": 0.06,
-"hard_no_ask": 0.931,
-"hard_yes_bid": 0.069,
-"cost": 0.991,
-"edge": 0.009,
-"edge_after_fee": 0.0006,
-"size_shares": 21.0,
-"usd_at_size": 20.81
-},
-{
 "kind": "ladder_date",
 "event": "Will Israel annex any territory by...?",
 "slug": "will-israel-annex-any-territory-by-december-31",
@@ -272,6 +215,21 @@
 },
 {
 "kind": "ladder_num",
+"event": "What price will Sui hit in 2026?",
+"slug": "what-price-will-sui-hit-in-2026",
+"easy": "Will Sui reach $2.50 before 2027?",
+"hard": "Will Sui reach $3.00 before 2027?",
+"easy_yes_ask": 0.06,
+"hard_no_ask": 0.933,
+"hard_yes_bid": 0.067,
+"cost": 0.993,
+"edge": 0.007,
+"edge_after_fee": -0.0013,
+"size_shares": 20.0,
+"usd_at_size": 19.86
+},
+{
+"kind": "ladder_num",
 "event": "StandX FDV above ___ one day after launch?",
 "slug": "standx-fdv-above-one-day-after-launch",
 "easy": "StandX FDV above $100M one day after launch?",
@@ -284,21 +242,6 @@
 "edge_after_fee": 0.0026,
 "size_shares": 27.95,
 "usd_at_size": 27.81
-},
-{
-"kind": "ladder_num",
-"event": "Pacifica FDV above ___ one day after launch?",
-"slug": "pacifica-fdv-above-one-day-after-launch",
-"easy": "Pacifica FDV above $300M one day after launch?",
-"hard": "Pacifica FDV above $800M one day after launch?",
-"easy_yes_ask": 0.028,
-"hard_no_ask": 0.968,
-"hard_yes_bid": 0.032,
-"cost": 0.996,
-"edge": 0.004,
-"edge_after_fee": -0.0001,
-"size_shares": 34.48,
-"usd_at_size": 34.34
 },
 {
 "kind": "ladder_num",
@@ -320,22 +263,22 @@
 "event": "Printr FDV above ___ one day after launch?",
 "slug": "printr-fdv-above-one-day-after-launch",
 "easy": "Printr FDV above $500M one day after launch?",
-"hard": "Printr FDV above $800M one day after launch?",
+"hard": "Printr FDV above $1B one day after launch?",
 "easy_yes_ask": 0.049,
-"hard_no_ask": 0.939,
-"hard_yes_bid": 0.061,
-"cost": 0.988,
-"edge": 0.012,
-"edge_after_fee": 0.0047,
+"hard_no_ask": 0.932,
+"hard_yes_bid": 0.068,
+"cost": 0.981,
+"edge": 0.019,
+"edge_after_fee": 0.0113,
 "size_shares": 1.61,
-"usd_at_size": 1.59
+"usd_at_size": 1.58
 },
 {
 "kind": "ladder_num",
 "event": "Printr FDV above ___ one day after launch?",
 "slug": "printr-fdv-above-one-day-after-launch",
 "easy": "Printr FDV above $500M one day after launch?",
-"hard": "Printr FDV above $1B one day after launch?",
+"hard": "Printr FDV above $800M one day after launch?",
 "easy_yes_ask": 0.049,
 "hard_no_ask": 0.939,
 "hard_yes_bid": 0.061,
@@ -359,21 +302,6 @@
 "edge_after_fee": 0.0167,
 "size_shares": 0.59,
 "usd_at_size": 0.58
-},
-{
-"kind": "ladder_num",
-"event": "Tabi FDV above ___ one day after launch?",
-"slug": "tabi-fdv-above-one-day-after-launch",
-"easy": "Tabi FDV above $100M one day after launch?",
-"hard": "Tabi FDV above $250M one day after launch?",
-"easy_yes_ask": 0.107,
-"hard_no_ask": 0.89,
-"hard_yes_bid": 0.11,
-"cost": 0.997,
-"edge": 0.003,
-"edge_after_fee": -0.0105,
-"size_shares": 2.32,
-"usd_at_size": 2.31
 },
 {
 "kind": "ladder_num",
