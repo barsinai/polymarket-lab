@@ -378,6 +378,11 @@ def main():
                         held = now - lock_since[(lk, LOCK_Z)]
                         if margin_bp >= 1.0:
                             picks.append("lock_m")
+                            # 11-12 candidate (in-sample, exact-K replay): when the last 60 s ranged more than 2x the margin, lock_m won
+                            # 88.6% (~0 P&L) vs 95-96% (+6..+9%/$) otherwise; 11-12 04:29 lost BTC + SOL in one such burst
+                            _seg = [v for _, v in rtds.series(CL, f"{a}/usd", now - 60, now + 1)]
+                            if len(_seg) >= 10 and (max(_seg) - min(_seg)) / _seg[-1] * 1e4 <= 2 * margin_bp:
+                                picks.append("lock_mv")
                             if held >= LOCK_PERSIST:
                                 picks.append("lock_pm")
                                 # 11-11 candidate: persistence + margin >= 1 bp + at least 6 s left (the replay's remaining losers were

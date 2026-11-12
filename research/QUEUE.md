@@ -621,3 +621,14 @@ Price drift in the trade's direction (what a market maker on the other side lose
   11-12 04:29 with margin 1.79 bp); where the edge is fat (ETH/SOL/BNB/DOGE lock_m 96-100%, +8..+13%) the ask is gone in
   a tenth of a second and holds $25-200.
 - flow_v1 hit the 420-s limit (30 h of events, full JSON parse); flow_v2 tests the time window before parsing (5 h in 26 s).
+
+## 11-12 11:10 lock_m reality check + server incident
+- Since the K fix (11-11 13:00 .. 11-12 08:30 UTC): lock_m 36 trades 91.7% -$13.8 (11-11: 16/16 +$17.6; 11-12: 17/20 -$31.4);
+  lock_c 10 70% -$22.5; lock_x 5 80% +$5.7. One burst lost BTC + SOL (+ XRP 15m) at 04:29 UTC with margins 1.8-6.3 bp and
+  ~50 s left; HYPE 04:54 lost at ask 0.50 (the market disagreed hard). Wins pay +$0.6, losses -$20: at asks 0.95-0.97 the
+  break-even is ~96-97%. Not a strategy yet.
+- Hypothesis (exact-K replay, in-sample): last-60-s range > 2x the margin -> lock_m 88.6% ~0 P&L; else 95-96% +6..+9%/$.
+  Paper rule lock_mv from the next part.
+- Server incident: the 08:28 hook ran the new server job lockm_push_v1 (lifetimes over ~20 h of book events in one process);
+  the job was cancelled at 08:39 (runner most likely out of memory), no hand-over. Job removed; lock_m per hour now runs in the
+  regular hook, one hour of data per process (data/fast/hourly/lockm.jsonl). Bot restarted by dispatch.
