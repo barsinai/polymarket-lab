@@ -223,8 +223,23 @@ for slug, R in by_ev.items():
             stations[sid] = (lat, lon, tz)
     date = R[0]["date"]; unit = R[0]["unit"]
     local_today = now.astimezone(ZoneInfo(tz)).strftime("%Y-%m-%d")
-    if date <= local_today:
-        continue          # W1 is the forecast idea: days ahead only (same-day nowcasting is W2)
+    if date < local_today:
+        continue
+    if date == local_today:
+        # W2 data only (no positions): buckets already impossible because a routine METAR today exceeded them
+        if re.fullmatch(r"[A-Z]{4}", sid):
+            om = observed_max(sid, tz, date)
+            if om is not None:
+                fl = om * 9 / 5 + 32 if unit == "F" else om
+                with open(f"{D}/sameday.jsonl", "a") as fh:
+                    for r in R:
+                        ya, yb = B.get(r["yes"], (None, None)); na, nb = B.get(r["no"], (None, None))
+                        hi = r["bucket"][1]
+                        fh.write(json.dumps({"ts": now.strftime("%Y-%m-%d %H:%M"), "local": now.astimezone(ZoneInfo(tz)).strftime("%H:%M"), "event": slug,
+                                             "bucket": r["title"], "obs_max": round(fl, 1), "dead": hi is not None and rnd(fl) > hi,
+                                             "yes_ask": ya[0] if ya else None, "yes_bid": yb[0] if yb else None, "no_ask": na[0] if na else None,
+                                             "no_ask_sz": na[1] if na else None}) + "\n")
+        continue          # W1 trades forecast days only
     vals = members(lat, lon, tz, date, unit)
     if len(vals) < 20:
         print("too few members", slug, len(vals)); continue

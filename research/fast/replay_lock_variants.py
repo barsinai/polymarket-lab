@@ -56,7 +56,7 @@ for ts in sorted(ticks):
         if KMODE == "ptb":
             # re-score with the exact price to beat (the TWAP message stamped at the window start; == official ptb)
             ptb = PTB.get(slug)
-            if ptb is None or zs is None or rem > 60:
+            if ptb is None or zs is None:
                 continue
             A0 = o["A"] if o.get("A") is not None else o["spot"]; proj = o["g"] * A0 + (1 - o["g"]) * o["spot"]
             d_old = (proj - o["K"]) * (1 if side == "Up" else -1)
@@ -97,6 +97,14 @@ for ts in sorted(ticks):
             if held >= PERSIST and asset in ("btc", "eth", "bnb"): picks.append("lock_p_majors")
             if held >= PERSIST and w == 900: picks.append("lock_p_15m")
             if held >= PERSIST: picks.append("lock_p_50")
+        # 11-12: earlier entries (the bot reads the whole 5-minute window since 11-10 ~08:00); the same z / persistence test
+        for lo_, hi_, zmin, tag in ((60, 140, 3.0, "e1z3"), (140, 240, 2.5, "e2z25"), (140, 240, 3.0, "e2z3"), (60, 240, 3.5, "eaz35")):
+            kk = (lk, tag)
+            if lo_ < rem <= hi_ and zs >= zmin and 0.50 <= a_px <= 0.95 and k_ok:
+                since.setdefault(kk, ts)
+                if ts - since[kk] >= PERSIST: picks.append("lock_" + tag)
+            else:
+                since.pop(kk, None)
         ek = (lk, "early")
         if 60 < rem <= 140 and zs >= 2.5 and 0.50 <= a_px <= 0.95 and k_ok:
             since.setdefault(ek, ts)
@@ -127,7 +135,7 @@ by = defaultdict(lambda: [0, 0, 0.0, 0.0])
 for t in trades:
     for key in (t["strat"], f'{t["strat"]} {day(t["ts"])}'):
         b = by[key]; b[0] += 1; b[1] += t["won"]; b[2] += t["stake"]; b[3] += t["pnl"]
-order = ["lock", "lock_m", "lock_pm", "lock_c", "lock_cm", "lock_cp", "lock_p1", "lock_p", "lock_p3", "lock_p5", "lock_p_z2", "lock_p_z3", "lock_p_majors", "lock_p_15m", "lock_p_50", "lock_early"]
+order = ["lock_e1z3", "lock_e2z25", "lock_e2z3", "lock_eaz35", "lock", "lock_m", "lock_pm", "lock_c", "lock_cm", "lock_cp", "lock_p1", "lock_p", "lock_p3", "lock_p5", "lock_p_z2", "lock_p_z3", "lock_p_majors", "lock_p_15m", "lock_p_50", "lock_early"]
 print(f"\n{'rule':14} {'n':>5} {'win':>6} {'staked':>9} {'pnl':>9} {'pnl/$':>7}")
 for k in order:
     n, w_, st, pnl = by[k]

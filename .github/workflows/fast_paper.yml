@@ -63,19 +63,20 @@ jobs:
             RUN_MIN=60 "$HOME/.venv-pilot/bin/python" -u research/fast/updown_paper.py 2>&1 | tee -a /tmp/fast.txt | grep -v "^$"
             report
             # hourly summaries of the recordings (repair, official results, websocket lifetime study), bot stopped
-            PYTHON="$HOME/.venv-pilot/bin/python" timeout 700 bash research/fast/hourly.sh 2>&1 | tail -12 | tee -a /tmp/fast.txt || true
+            PYTHON="$HOME/.venv-pilot/bin/python" timeout 1200 bash research/fast/hourly.sh 2>&1 | tail -12 | tee -a /tmp/fast.txt || true
             # GitHub's hourly cron for the slow-paper workflow fires only every few hours: kick it from here each hour
             curl -sS -o /dev/null -X POST -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
               https://api.github.com/repos/${{ github.repository }}/actions/workflows/spike_paper.yml/dispatches -d '{"ref":"main"}' || true
             mkdir -p logs && cp /tmp/fast.txt logs/fast-log.txt
             # publish the bot's own files on top of whatever is upstream (only the server writes these); no raw recordings
-            mkdir -p /tmp/fastout/hourly
+            mkdir -p /tmp/fastout/hourly /tmp/fastout/server_out
             for f in obs.jsonl trades.jsonl windows.jsonl model.jsonl pairs.jsonl report.json tokens.jsonl; do [ -s "data/fast/$f" ] && cp "data/fast/$f" /tmp/fastout/; done
             find data/fast -maxdepth 1 \( -name 'obs-*.jsonl.gz' -o -name 'model-*.jsonl.gz' -o -name 'pairs-*.jsonl.gz' \) -newer /tmp/fast.start -size +0 -exec cp {} /tmp/fastout/ \;
             [ -d data/fast/hourly ] && cp data/fast/hourly/*.jsonl /tmp/fastout/hourly/ 2>/dev/null || true
+            [ -d data/fast/server_out ] && cp data/fast/server_out/*.txt /tmp/fastout/server_out/ 2>/dev/null || true
             find /tmp/fastout -type f -size 0 -delete    # a full disk leaves empty copies: never publish those
             for i in 1 2 3; do
-              git fetch -q origin main && git reset -q --hard origin/main && mkdir -p data/fast/hourly logs && cp -r /tmp/fastout/. data/fast/ && cp /tmp/fast.txt logs/fast-log.txt
+              git fetch -q origin main && git reset -q --hard origin/main && mkdir -p data/fast/hourly data/fast/server_out logs && cp -r /tmp/fastout/. data/fast/ && cp /tmp/fast.txt logs/fast-log.txt
               find data/fast -type f \( -name '*.tmp' -o \( -name '*.gz' -size 0 \) \) -delete
               if git add --sparse logs/fast-log.txt data/fast ':!data/fast/bookws' ':!data/fast/rtds' && git commit -qm "Fast paper $(date -u +%FT%H:%M) [skip ci]" && git push -q; then
                 rm -rf /tmp/fastout; break

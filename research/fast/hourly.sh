@@ -31,4 +31,17 @@ for back in $(seq 1 30); do
     fi
   done
 done
+# 4. one-off research jobs on the raw recordings: research/fast/server_jobs/<name>.py runs ONCE (marker in
+#    $STORE/jobs_done/<name>), at most 420 s, stdout -> data/fast/hourly/job_<name>.jsonl (plain text; the .jsonl name makes the
+#    running job's publish step pick it up without a workflow change).
+#    To re-run a job, give it a new name (<name>_v2.py). Env for jobs: STORE, BOOKWS_DIR, RTDS_DIR, RESULTS_META.
+mkdir -p "$STORE/jobs_done"
+for j in research/fast/server_jobs/*.py; do
+  [ -e "$j" ] || continue
+  n=$(basename "$j" .py)
+  [ -e "$STORE/jobs_done/$n" ] && continue
+  touch "$STORE/jobs_done/$n"
+  echo "  server job $n"
+  timeout 420 "$PY" -u "$j" > "data/fast/hourly/job_$n.jsonl" 2>&1 || echo "[exit $?]" >> "data/fast/hourly/job_$n.jsonl"
+done
 echo "hourly $(date -u +%FT%H:%M) done; store $(du -sh "$STORE" 2>/dev/null | cut -f1)"
