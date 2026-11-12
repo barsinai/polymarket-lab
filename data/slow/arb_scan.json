@@ -1,8 +1,8 @@
 {
-"scanned": "2026-11-12 06:31",
+"scanned": "2026-11-12 07:33",
 "events": 2100,
 "groups": 2037,
-"books": 17126,
+"books": 17124,
 "opps": [
 {
 "kind": "negrisk_all_yes",
@@ -20,8 +20,8 @@
 "payoff": 1,
 "edge": 0.024,
 "edge_after_fee": 0.0176,
-"size_shares": 83.34,
-"usd_at_size": 81.34
+"size_shares": 186.28,
+"usd_at_size": 181.81
 },
 {
 "kind": "ladder_date",
@@ -40,6 +40,21 @@
 },
 {
 "kind": "ladder_num",
+"event": "How high will inflation get in 2026?",
+"slug": "how-high-will-inflation-get-in-2026",
+"easy": "Will inflation reach more than 6% in 2026?",
+"hard": "Will inflation reach more than 8% in 2026?",
+"easy_yes_ask": 0.016,
+"hard_no_ask": 0.981,
+"hard_yes_bid": 0.019,
+"cost": 0.997,
+"edge": 0.003,
+"edge_after_fee": 0.0006,
+"size_shares": 257.01,
+"usd_at_size": 256.24
+},
+{
+"kind": "ladder_num",
 "event": "Hyperbeat FDV above ___ one day after launch?",
 "slug": "hyperbeat-fdv-above-one-day-after-launch",
 "easy": "Hyperbeat FDV above $300M one day after launch?",
@@ -50,31 +65,8 @@
 "cost": 0.996,
 "edge": 0.004,
 "edge_after_fee": 0.0015,
-"size_shares": 191.18,
-"usd_at_size": 190.42
-},
-{
-"kind": "negrisk_all_yes",
-"event": "What will OpenAI's IPO valuation be?",
-"slug": "what-will-openais-ipo-valuation-be",
-"n": 8,
-"has_other": false,
-"outcomes": [
-"<$1T",
-"$1.0T\u2013$1.25T",
-"$1.25T\u2013$1.5T",
-"$1.5T\u2013$1.75T",
-"$1.75T\u2013$2.0T",
-"$2.0T\u2013$2.25T",
-"$2.25T\u2013$2.5T",
-"$2.5T+"
-],
-"cost": 0.985,
-"payoff": 1,
-"edge": 0.015,
-"edge_after_fee": -0.0422,
-"size_shares": 27.68,
-"usd_at_size": 27.26
+"size_shares": 161.18,
+"usd_at_size": 160.54
 },
 {
 "kind": "ladder_num",
@@ -145,6 +137,29 @@
 },
 {
 "kind": "negrisk_all_yes",
+"event": "What will OpenAI's IPO valuation be?",
+"slug": "what-will-openais-ipo-valuation-be",
+"n": 8,
+"has_other": false,
+"outcomes": [
+"<$1T",
+"$1.0T\u2013$1.25T",
+"$1.25T\u2013$1.5T",
+"$1.5T\u2013$1.75T",
+"$1.75T\u2013$2.0T",
+"$2.0T\u2013$2.25T",
+"$2.25T\u2013$2.5T",
+"$2.5T+"
+],
+"cost": 0.992,
+"payoff": 1,
+"edge": 0.008,
+"edge_after_fee": -0.0496,
+"size_shares": 27.68,
+"usd_at_size": 27.46
+},
+{
+"kind": "negrisk_all_yes",
 "event": "Discord IPO Closing Market Cap",
 "slug": "discord-ipo-closing-market-cap-20260626185933220",
 "n": 8,
@@ -195,6 +210,21 @@
 "edge_after_fee": 0.0045,
 "size_shares": 27.95,
 "usd_at_size": 27.75
+},
+{
+"kind": "ladder_num",
+"event": "What price will Sui hit in 2026?",
+"slug": "what-price-will-sui-hit-in-2026",
+"easy": "Will Sui reach $2.50 before 2027?",
+"hard": "Will Sui reach $3.00 before 2027?",
+"easy_yes_ask": 0.06,
+"hard_no_ask": 0.936,
+"hard_yes_bid": 0.064,
+"cost": 0.996,
+"edge": 0.004,
+"edge_after_fee": -0.0041,
+"size_shares": 46.8,
+"usd_at_size": 46.61
 },
 {
 "kind": "ladder_num",
@@ -255,43 +285,6 @@
 "edge_after_fee": 0.0017,
 "size_shares": 27.95,
 "usd_at_size": 27.84
-},
-{
-"kind": "negrisk_all_yes",
-"event": "OpenAI IPO Closing Market Cap",
-"slug": "openai-ipo-closing-market-cap-554",
-"n": 7,
-"has_other": false,
-"outcomes": [
-"<500B",
-"500\u2013750B",
-"750B\u20131T",
-"1T\u20131.25T",
-"1.25T\u20131.5T",
-"1.5T+",
-"No IPO by December 31, 2027"
-],
-"cost": 0.997,
-"payoff": 1,
-"edge": 0.003,
-"edge_after_fee": -0.0525,
-"size_shares": 9.28,
-"usd_at_size": 9.25
-},
-{
-"kind": "ladder_num",
-"event": "What price will Sui hit in 2026?",
-"slug": "what-price-will-sui-hit-in-2026",
-"easy": "Will Sui reach $2.50 before 2027?",
-"hard": "Will Sui reach $3.00 before 2027?",
-"easy_yes_ask": 0.06,
-"hard_no_ask": 0.936,
-"hard_yes_bid": 0.064,
-"cost": 0.996,
-"edge": 0.004,
-"edge_after_fee": -0.0041,
-"size_shares": 6.8,
-"usd_at_size": 6.77
 },
 {
 "kind": "ladder_num",
