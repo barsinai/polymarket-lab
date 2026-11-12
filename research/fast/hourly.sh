@@ -19,14 +19,16 @@ SETTLE_DAYS=2 timeout 360 "$PY" research/fast/settle.py 2>&1 | tail -2
 
 # 3. websocket lifetime study, window level, two ask caps, with the K the bot can know (K_EST=bot; before 11-11 the
 #    summaries used the official price to beat, which is published only late in the window = hindsight).
-#    The hour that just finished first, then back-fill up to 4 older hour-cap runs (last 30 h) that have no K_EST=bot line yet.
-done_line() { grep -q "\"hour\": \"$1\", \"k_est\": \"bot\".*\"ask_max\": $2" data/fast/hourly/lifetimes.jsonl 2>/dev/null && { [[ ! "$1" > "2026-11-11T12" ]] || grep -q "\"hour\": \"$1\", \"k_est\": \"ptb\".*\"ask_max\": $2" data/fast/hourly/lockm.jsonl 2>/dev/null; }; }
+#    The hour that just finished first, then back-fill up to 6 older hour-cap runs (last 30 h) that have no K_EST=bot line yet.
+#    Since 11-12 13:00 UTC the lines carry "feed": "rx" (the model only uses Chainlink prints already RECEIVED, ~1.45 s
+#    after their timestamp); older lines without it looked ~1.5 s ahead of the book and are superseded, so they are redone.
+done_line() { grep -q "\"hour\": \"$1\", \"k_est\": \"bot\", \"feed\": \"rx\".*\"ask_max\": $2" data/fast/hourly/lifetimes.jsonl 2>/dev/null && { [[ ! "$1" > "2026-11-11T12" ]] || grep -q "\"hour\": \"$1\", \"k_est\": \"ptb\", \"feed\": \"rx\".*\"ask_max\": $2" data/fast/hourly/lockm.jsonl 2>/dev/null; }; }
 n_back=0
 for back in $(seq 1 30); do
   H=$(date -u -d "$back hour ago" +%FT%H)
   for cap in 0.97 0.92; do
     if ! done_line "$H" "$cap"; then
-      [ "$back" -gt 1 ] && { [ "$n_back" -ge 4 ] && break 2; n_back=$((n_back + 1)); }
+      [ "$back" -gt 1 ] && { [ "$n_back" -ge 6 ] && break 2; n_back=$((n_back + 1)); }
       ( ulimit -v 650000; K_EST=bot HOUR="$H" ASK_MAX="$cap" R_LO=0 R_HI=60 OUT=data/fast/hourly/lifetimes.jsonl timeout 300 "$PY" research/fast/lifetimes.py ) 2>&1 | grep -E "windows with|MemoryError" | sed "s/^/  $H cap $cap: /"
       # the live rule: exact K (= official ptb since 11-11 13:00 UTC, so ptb is no hindsight from then on), margin >= 1 bp,
       # >= 6 s left -> per-hour lock_m at the websocket's decision latencies (R grid), one hour of data per process (memory)

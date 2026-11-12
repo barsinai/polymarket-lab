@@ -29,13 +29,12 @@ SIGMA_FLOOR = {"btc": 1.5e-5, "eth": 2.4e-5, "bnb": 1.6e-5, "sol": 3.4e-5, "doge
 
 
 def lines(pattern):
-    """records of every file matching pattern; duplicate lines within a file are dropped (archives that were
-    appended more than once hold the same hour several times)"""
+    """records of every file matching pattern (duplicates are dropped later, on the few records that are kept: a set of
+    every line's hash took more memory than the 927 MiB server has)"""
     for f in sorted(glob.glob(pattern)):
         if not (SINCE <= os.path.basename(f)[:13] < UNTIL):
             continue
         op = gzip.open if f.endswith(".gz") else open
-        seen = set()
         try:
             with op(f, "rt") as fh:
                 while True:
@@ -45,10 +44,6 @@ def lines(pattern):
                         break
                     if not line:
                         break
-                    h = hash(line)
-                    if h in seen:
-                        continue
-                    seen.add(h)
                     try:
                         yield json.loads(line)
                     except ValueError:
@@ -66,12 +61,16 @@ for s, md in M.items():
         tok2[t] = (s, "Up" if i == 0 else "Down")
 print("tokens known:", len(tok2))
 
-# feed: chainlink prices per asset
+# feed: chainlink prices per asset as (source timestamp, value, receive time). A print stamped t reaches us ~1.45 s later
+# (p50; p99 2.3 s, measured 11-12): with FEED_TIME=rx (default since 11-12) the model at time t only uses prints RECEIVED
+# by t, like the live bot. FEED_TIME=ts reproduces the old studies, which looked ~1.5 s into the future against the book.
+FEED_TIME = os.environ.get("FEED_TIME", "rx")
 feed = defaultdict(list); twap60 = defaultdict(list)
 for o in lines(f"{RTDS}/*.jsonl*"):
     m = o.get("m") or {}; p = m.get("payload") or {}
     if m.get("topic") == "crypto_prices_chainlink" and p.get("symbol"):
-        feed[p["symbol"].split("/")[0]].append((p["timestamp"] / 1000.0, float(p["value"])))
+        ts = p["timestamp"] / 1000.0
+        feed[p["symbol"].split("/")[0]].append((ts, float(p["value"]), o.get("rx", ts) if FEED_TIME == "rx" else ts))
     elif m.get("topic") == "crypto_prices_twap_sixty" and p.get("symbol") and isinstance(p.get("value"), (int, float)):
         twap60[p["symbol"].split("/")[0].lower()].append((p["timestamp"] / 1000.0, float(p["value"])))
 for a in feed:
@@ -88,15 +87,32 @@ def k_bot(asset, start):
     tw = [v for t, v in twap60.get(asset.lower(), []) if start - 3 <= t <= start + 3]
     if tw:
         return tw[len(tw) // 2], "twap"
-    pre = [v for t, v in feed.get(asset, []) if start - 60 <= t < start]
+    pre = [v for t, v, _ in feed.get(asset, []) if start - 60 <= t < start]
     return (sum(pre) / len(pre), "chainlink") if len(pre) >= 20 else (None, None)
 print("feed assets:", {a: len(v) for a, v in feed.items()})
 
 # websocket top-of-book per token
 top = defaultdict(list)
+_end = {}
+for _t, (_s, _side) in tok2.items():
+    _md = M.get(_s)
+    if _md and _md.get("start") and _md.get("window") and WIN_LO <= _md["start"] + _md["window"] < WIN_HI:
+        _end[_t] = _md["start"] + _md["window"]
+_pre = {}                         # the last record before the study range: the ask standing when the range opens
 for o in lines(f"{BOOKWS}/*.jsonl*"):
-    if o.get("t") in ("top", "book") and o.get("top") and o["top"][0] is not None:
-        top[o["a"]].append((o["rx"], o["top"][0], o["top"][1] or 0.0))
+    e_ = _end.get(o.get("a"))
+    if e_ is None or o.get("rx", 0) > e_ + 1 or o.get("t") not in ("top", "book") or not o.get("top") or o["top"][0] is None:
+        continue                  # memory: only the records that can matter (the window's last R_HI seconds)
+    rec = (o["rx"], o["top"][0], o["top"][1] or 0.0)
+    if rec[0] < e_ - R_HI - 2:
+        if rec[0] >= _pre.get(o["a"], (0,))[0]:
+            _pre[o["a"]] = rec
+        continue
+    top[o["a"]].append(rec)
+for _t, rec in _pre.items():
+    top[_t].append(rec)
+for _t in top:
+    top[_t] = sorted(set(top[_t]))
 print("tokens with book records:", len(top), "records:", sum(len(v) for v in top.values()))
 
 
@@ -121,13 +137,13 @@ def sigma30(ser):
 
 def z_series(asset, start, end, K):
     """(t, z_up) every 0.5 s for end-R_HI <= t <= end-R_LO (the bot's model: Brownian mean over what is left)"""
-    ser = [x for x in feed.get(asset, []) if end - 1500 <= x[0] <= end]
+    ser = [x for x in feed.get(asset, []) if end - 1500 <= x[0] <= end + 5]
     if len(ser) < 200:
         return []
     out = []
     t = end - R_HI
     while t <= end - max(R_LO, 1):
-        hist = [x for x in ser if x[0] <= t]
+        hist = [(ts, v) for ts, v, avail in ser if avail <= t and ts <= end]   # what had arrived by t
         if len(hist) < 120:
             t += 0.5; continue
         sg = sigma30(hist[-900:])
@@ -216,7 +232,7 @@ if life:
         print(f"  act after {R:5.2f} s of persistence: episodes {n:4} win {w / n if n else 0:.3f}  stake ${usd:,.0f}  pnl ${pnl:+,.1f} ({pnl / usd if usd else 0:+.1%})  ask paid median {prices[len(prices) // 2] if prices else 0:.2f}")
     # window level: one trade per (window, side), the first episode that lasts R seconds (what the bot does)
     print("  window level (one trade per window-side, first episode that persisted R s):")
-    summary = {"hour": HOUR, "k_est": K_EST, "since": SINCE, "until": UNTIL, "z": Z, "ask_max": ASK_MAX, "windows": n_windows, "episodes": len(life),
+    summary = {"hour": HOUR, "k_est": K_EST, "feed": FEED_TIME, "since": SINCE, "until": UNTIL, "z": Z, "ask_max": ASK_MAX, "windows": n_windows, "episodes": len(life),
                "episodes_won": sum(1 for x in life if x[3]), "window_level": {}}
     for R in (0.05, 0.1, 0.25, 0.5, 1.0, 2.0, 3.0, 5.0):
         first = {}
