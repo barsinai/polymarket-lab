@@ -18,7 +18,7 @@ echo "hourly $(date -u +%FT%H:%M) start"
 SETTLE_DAYS=2 timeout 360 "$PY" research/fast/settle.py 2>&1 | tail -2
 
 # 3. websocket lifetime study, window level, two ask caps, one hour of data per process (memory), the hour that just finished
-#    first, then back-fill older hours (last 30 h) while the hook has run < 14 min.
+#    first, then back-fill older hours (last 30 h) while the hook has run < 7 min.
 #    Lines carry "feed": the model only uses Chainlink prints already RECEIVED (rx, ~1.45 s after their timestamp) - lines
 #    from before 11-12 13:00 UTC without it looked ~1.5 s ahead of the book and are superseded - or, with "feed": "bn", also
 #    a nowcast from the Binance prices on the same socket (arrive ~1 s before the Chainlink prints they anticipate).
@@ -31,7 +31,7 @@ run_lt() {  # hour k_est feed cap file [extra env...]
   ( ulimit -v 650000; env "$@" K_EST="$K" FEED_TIME="$F" HOUR="$H" ASK_MAX="$C" R_LO=0 R_HI=60 OUT="data/fast/hourly/$O" timeout 300 "$PY" research/fast/lifetimes.py ) 2>&1 | grep -E "MemoryError|Traceback" | sed "s/^/  $H $F cap $C: /"
 }
 for back in $(seq 1 30); do
-  [ "$back" -gt 1 ] && [ "$SECONDS" -gt 840 ] && break
+  [ "$back" -gt 1 ] && [ "$SECONDS" -gt 420 ] && break   # the bot is stopped while the hook runs: keep it short
   H=$(date -u -d "$back hour ago" +%FT%H)
   for cap in 0.97 0.92; do
     if [[ "$H" > "2026-11-11T12" ]]; then
