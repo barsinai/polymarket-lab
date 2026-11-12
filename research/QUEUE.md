@@ -603,3 +603,12 @@ Price drift in the trade's direction (what a market maker on the other side lose
   slow-paper workflow to log news-time dislocations (data/slow/arb_log.jsonl).
 - Endgame (buy the leader after the end date, history): 0.97-0.995 +0.17%/position; 0.90-0.97 non-sports 55 cases 100% +4.6%
   over ~7 d (disputed/slow resolutions) - niche, small n.
+
+## 11-12 06:40 first night with the exact K
+- K == official ptb in every 5m window since 13:00 UTC (k_src twapx).
+- Since the fix (15.5 h, bot's own paper trades): lock 30 trades 96.7% +5.4%/$; lock_m (margin >= 1 bp) 28/28 +6.8%;
+  lock_c 6/6 +21%; lock_x 3/3 +44% (persistence now rarely holds: with the exact K the ask moves past 0.97 within 2 s).
+  The only loss: xrp 23:59, margin 0.65 bp, official final-ptb 0.01 bp (excluded by lock_m / lock_x).
+  lock_m before the fix (11-09 22:42 .. 11-11 13:00): 69 trades ~91%, -$6. The K error was the difference.
+- Sharp odds 22:05 snapshot: 70 pairs, |mid - fair| median 0.5c, max fair - ask +1.7c -> no paper position (threshold 2c).
+- Weather: 211 open (94 calibrated); first resolutions today. Converge 89 open, first 11-13. Young 31 open.
