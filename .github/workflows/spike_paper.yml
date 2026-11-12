@@ -42,9 +42,13 @@ jobs:
           fi
       - run: timeout 900 python -u research/slow/weather_paper.py 2>&1 | tail -8 | tee logs/weather-log.txt || true
       - run: timeout 600 python -u research/slow/arb_scan.py 2>&1 | tail -15 | tee logs/arb-log.txt || true
+      - name: "Options-implied fair value (Deribit) vs BTC/ETH price markets, every 2 h (paper)"
+        if: always()
+        run: |
+          if [ $(( 10#$(date -u +%H) % 2 )) -eq 0 ]; then PAPER=1 timeout 600 python -u research/slow/options_probe.py 2>&1 | grep -v "^HTTP\|^$" | tail -25 | tee logs/options-log.txt || true; fi
       - name: Save
         run: |
           git config user.name "lab-bot" && git config user.email "lab-bot@users.noreply.github.com"
-          for p in data/slow/spike_positions.jsonl data/slow/spike_report.json data/slow/converge_positions.jsonl data/slow/converge_report.json data/slow/arb_scan.json data/slow/arb_log.jsonl data/slow/young_positions.jsonl data/slow/young_report.json data/research/scoreboard.json data/weather data/sharp logs; do [ -e "$p" ] && git add --sparse "$p"; done
+          for p in data/slow/spike_positions.jsonl data/slow/spike_report.json data/slow/converge_positions.jsonl data/slow/converge_report.json data/slow/arb_scan.json data/slow/arb_log.jsonl data/slow/young_positions.jsonl data/slow/young_report.json data/research/scoreboard.json data/research/options_obs.jsonl data/research/options_positions.jsonl data/research/options_report.json data/research/options_probe.json data/weather data/sharp logs; do [ -e "$p" ] && git add --sparse "$p"; done
           git commit -qm "Slow paper $(date -u +%FT%H:%M) [skip ci]" || exit 0
           for i in 1 2 3; do git pull -q --rebase -X theirs origin main && git push -q && break; sleep 5; done

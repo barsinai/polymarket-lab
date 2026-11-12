@@ -145,7 +145,7 @@ events = list(events.values())
 print("events scanned", len(events))
 rows = []
 MONTHS = "january|february|march|april|may|june|july|august|september|october|november|december"
-SKIP = re.compile(r"hashprice|dominance|volatility index|kimchi|gas price|\bfirst\b|etf|flows|reserve|treasury|mcap|market cap", re.I)
+SKIP = re.compile(r"hashprice|dominance|volatility index|kimchi|gas price|\bfirst\b|etf|flows|reserve|treasury|mcap|market cap|fees|revenue|%", re.I)
 NUM = r"\$?([\d,]+(?:\.\d+)?)(k?)"
 
 
@@ -270,8 +270,52 @@ for kind in ("above", "below", "between", "touch"):
         if G:
             G.sort()
             print(f"  {kind:7} {lo_d:>4}-{hi_d:<4} d: n {len(G):3}  mid - model median {G[len(G) // 2]:+.3f}  p10 {G[len(G) // 10]:+.3f}  p90 {G[9 * len(G) // 10]:+.3f}")
+# 4. paper tracker (PAPER=1, run from the slow paper workflow): every priced market's model and book go to options_obs.jsonl
+#    (Brier of model vs market at resolution is the decisive test); $10 paper buys where the executable edge >= 4c,
+#    0.5-10 days out, price 0.05-0.95, one position per market; settled from Gamma once closed.
+if os.environ.get("PAPER"):
+    D = "data/research"; POS = f"{D}/options_positions.jsonl"
+    with open(f"{D}/options_obs.jsonl", "a") as fh:
+        for r in good:
+            fh.write(json.dumps({"at": now.strftime("%Y-%m-%d %H:%M"), "slug": r["slug"], "kind": r["kind"], "coin": r["coin"], "lo": r["lo"],
+                                 "hi": r["hi"], "T": r["T"], "days": r["days"], "model": r["model"], "bid": r["bid"][0], "ask": r["ask"][0],
+                                 "no_ask": r["no_ask"][0] if r.get("no_ask") else None}) + "\n")
+    pos = [json.loads(l) for l in open(POS)] if os.path.exists(POS) else []
+    have = {p_["slug"] for p_ in pos}
+    new = 0
+    for r in good:
+        if r["slug"] in have or not (0.5 <= r["days"] <= 10):
+            continue
+        cands = [("YES", r["ask"], r["model"] - r["ask"][0])]
+        if r.get("no_ask"):
+            cands.append(("NO", r["no_ask"], (1 - r["model"]) - r["no_ask"][0]))
+        side, (px_, sz_), edge = max(cands, key=lambda c: c[2])
+        if edge >= 0.04 and 0.05 <= px_ <= 0.95 and sz_ * px_ >= 5:
+            sh = round(min(sz_, 10 / px_), 2)
+            pos.append({"opened": now.strftime("%Y-%m-%d %H:%M"), "slug": r["slug"], "q": r["q"], "kind": r["kind"], "coin": r["coin"],
+                        "T": r["T"], "side": side, "price": px_, "shares": sh, "model": r["model"], "edge": round(edge, 4), "result": None})
+            have.add(r["slug"]); new += 1
+    for p_ in pos:          # settle
+        if p_["result"] is None and dt.datetime.fromisoformat(p_["T"]) < now - dt.timedelta(hours=1):
+            mk = get(f"{GAMMA}/markets", {"slug": p_["slug"]})
+            if mk and mk[0].get("closed"):
+                try:
+                    yes_won = float(json.loads(mk[0]["outcomePrices"])[0]) > 0.5
+                except (ValueError, KeyError, TypeError):
+                    continue
+                won = yes_won if p_["side"] == "YES" else not yes_won
+                p_["result"] = "won" if won else "lost"; p_["pnl"] = round(p_["shares"] * ((1 if won else 0) - p_["price"]), 2)
+    with open(POS, "w") as fh:
+        for p_ in pos:
+            fh.write(json.dumps(p_) + "\n")
+    st_ = [p_ for p_ in pos if p_["result"]]
+    rep = {"updated": now.strftime("%Y-%m-%d %H:%M"), "open": sum(1 for p_ in pos if not p_["result"]), "new": new, "settled": len(st_),
+           "won": sum(p_["result"] == "won" for p_ in st_), "pnl": round(sum(p_["pnl"] for p_ in st_), 2),
+           "staked_settled": round(sum(p_["shares"] * p_["price"] for p_ in st_), 2)}
+    json.dump(rep, open(f"{D}/options_report.json", "w"), indent=1)
+    print("paper:", rep)
 for r in sorted(good, key=lambda r: (r["coin"], r["T"], r["lo"])):
-    if r["days"] < 0.5:
+    if r["days"] < 0.5 or os.environ.get("PAPER"):
         continue
     mid = (r["ask"][0] + r["bid"][0]) / 2
     na = r["no_ask"][0] if r.get("no_ask") else None
