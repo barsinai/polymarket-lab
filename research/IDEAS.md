@@ -8,6 +8,7 @@ Status: TESTING (paper/backtest running) · READY (next up) · PARKED (needs som
 | idea | why it could work | test | started | read-out |
 |---|---|---|---|---|
 | Slow favourites: YES 0.95-0.98, non-sports, 3-30 d | holders sell near-certain outcomes early; the discount is a time premium | history 6,570 markets (+2%/position, 99.5%); converge_paper.py at real asks | 11-10 | first settlements 11-13 |
+| lock_b: lock_m with the Binance nowcast (prints in flight from the crypto_prices topic) | our Chainlink view is 1.45 s stale, Binance on the same socket 0.43 s | replay 20 h: rx -3..-5% vs bn +1.8..+4.6%/$ at <= 0.5 s; paper lock_b (2-s tick) + server lockm.jsonl feed bn per hour | 11-12 | 11-15 |
 | lock_x (5m/15m lock + 2 s persistence + margin >= 1 bp + rem >= 6 s) with the exact price to beat | the K bug made our 'locks' wrong in knife-edge windows; exact K + persistence + margin removes them | replay 48 trades 100% +11%/$; paper lock_x / lock_x50 / lock_xk | 11-11 | 11-13 |
 | lock_early (60-140 s, z >= 2.5, 2 s persistence) | before the last minute the market under-reacts to a large move | replay 65 trades 97% +4.9%; out of sample 17/17 | 11-09 | ongoing |
 | Weather W2 data (same-day buckets already impossible by today's METARs, hourly log data/weather/sameday.jsonl) | if dead buckets still trade above 1c or their NO below 99c, that is riskless | count after 2-3 days | 11-12 | 11-14 |
@@ -15,6 +16,7 @@ Status: TESTING (paper/backtest running) · READY (next up) · PARKED (needs som
 | Young markets, NO side: stand-alone non-sports binaries < 72 h old, YES mid 0.30-0.50 | history: priced 0.425, resolved YES 0.237 (n 283) - but history prices may be mids of empty books | young_paper.py at real NO asks, $10 | 11-11 | as they resolve (1-60 d) |
 | Sports vs Pinnacle (no-vig fair vs Polymarket asks, NBA + NHL moneylines and totals, pre-game) | sharp books set the true price; Polymarket books may lag | sharp_compare.py 3 snapshots a day, paper buys at fair - ask >= 2c, closing-line value + results. First snapshot 11-11: 48 pairs, |mid - fair| median 0.6c, p90 of fair - ask +0.7c, max +2.8c (main lines are tight) | 11-11 | 11-18 |
 | Riskless structure (negRisk sums, ladders) at news time | dislocations appear when news hits and books are thin | arb_scan.py hourly, arb_log.jsonl | 11-11 | weekly |
+| Options-implied fair value (Deribit) vs BTC/ETH price markets (above / below / between / touch) | a deep options market prices the same dates; Polymarket crowds may misprice tails and touches | options_probe.py PAPER=1 every 2 h: model + book log (Brier at resolution), $10 paper at edge >= 4c, 0.5-10 d. First snapshot 459 markets: above/below/between within +-1c (median), tails 1-2c rich, ETH ATM buckets 3.5-7c cheap on 6 dates, touches noisier (my touch model is the weakest part) | 11-12 | 11-19 |
 | Research journal (my forecasts with sources) | reading + cross-checking beats the crowd on slow political/econ questions | forecast_log.py, Brier vs market | 11-10 | weeks |
 
 ## READY (ranked)
@@ -32,10 +34,6 @@ Status: TESTING (paper/backtest running) · READY (next up) · PARKED (needs som
    each METAR in the afternoon. Test: minute price history vs METAR times (IEM ASOS archive).
 2. **Weather W0 skill backtest.** Open-Meteo historical forecasts (previous runs) vs IEM METAR outcomes for the 40
    stations: calibration of bucket probabilities, the station bias of each city, before trusting W1's trades.
-3. **Options-implied fair value for crypto price ladders.** "Bitcoin above X on <date>" / "price range" markets (daily to
-   monthly) vs the risk-neutral distribution from Deribit options (call spreads around X = digital price). Not a latency
-   game (the 11-01 death): the market vs a liquid options market on the same date, hours-days ahead. Test: hourly
-   snapshots of both (Deribit public API from the server), gap distribution, then paper at real asks.
 3a. **Count markets with a public running tally** (tweet counts per week, etc.): bucket prices vs a rate model updated
    from the live count (like W2: the count only rises). Test: list the active count markets and their tally sources first.
 4. **Scheduled data buckets (CPI, PPI, payrolls, Fed).** Bucket markets vs a distribution centred on consensus /

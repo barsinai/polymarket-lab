@@ -644,3 +644,11 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - 11-12 New lead: RTDS also carries Binance prices (topic crypto_prices, btc eth sol xrp doge bnb) that arrive ~0.43 s after
   their timestamp vs ~1.46 s for Chainlink; Binance returns correlate +0.3..+0.44 with Chainlink's same and next second.
   Test: lifetimes FEED_TIME=bn (last received Chainlink print x Binance move since its timestamp).
+- 11-12 13:00 Binance nowcast replay (20 local hours, lock_m exact K, cap 0.97): bn +1.8/+2.0/+3.4/+4.6/+3.7/+5.5/+5.0%/$ at
+  0.05/0.1/0.25/0.5/1/2/5 s vs rx -3.1/-4.0/-4.7/-4.0/-3.6/+1.3/+5.2 (~75 trades each; a hint). Paper rule lock_b live from the
+  next part; server runs bn per hour into lockm.jsonl. End-second check: winner asks <= 0.95 in the last 6 s exist only in
+  windows that finished < 1 bp from K (genuine coin flips), so nothing free at the end either.
+- 11-12 Options-implied fair value (new, options_probe.py): Deribit public API works from Actions. 552 BTC/ETH price markets
+  (hourly/daily above, below, between buckets, touches). Daily/weekly within +-1c of the options median; tails 1-2c rich;
+  ETH 2,000-2,100 bucket 3.5-7c cheap on all 6 dates (model 0.59 vs ask 0.52 tomorrow); long-dated far-OTM YES rich
+  (BTC 150k by end-2027: 0.21 vs 0.06). Tracker every 2 h with paper buys at >= 4c and a Brier log.
