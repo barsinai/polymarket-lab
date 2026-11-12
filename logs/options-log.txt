@@ -1,0 +1,25 @@
+   Bitcoin hashprice: week of November 9? | Will Bitcoin hashprice be less than $25 for the week of November 9?
+   What will the Bitcoin Implied Volatility Index hit by November 30? | Will the Bitcoin Volatility Index hit 70 by November 30?
+   Will Bitcoin Dominance hit 70% before 2027? | Will Bitcoin Dominance hit 70% before 2027?
+   What will the Bitcoin Volatility Index hit in 2026? | Will the Bitcoin Volatility Index hit 80 in 2026?
+   Will Bitcoin kimchi premium hit 8% in 2026? | Will Bitcoin kimchi premium hit 8% in 2026?
+   What will the Ethereum Implied Volatility Index hit by November 30? | Will the Ethereum Volatility Index hit 100 by November 30?
+   What will the average monthly Ethereum gas price hit before 2027? | Will the average monthly Ethereum gas price hit 5 Gwei before 2027?
+   Will Ethereum hit $1,000 or $3,000 first? | Will Ethereum hit $1,000 or $3,000 first?
+example rules: Bitcoin above 74,600 on November 12, 10AM ET? | This market will resolve to "Yes" if the "Close" price for the BTC/USDT 1 hour candle that ends on the time and date specified in the title is higher than the price specified in the title. Otherwise, this market will resolve to "No".
+The resolution source for this market is Binance, specifically the BTC/USDT "Close" prices currently available at https://www.binance.com/en/trade/BTC_USDT with "1h"
+priced with both: 461
+mid - model: p10 -0.025 median +0.008 p90 +0.037
+  above      0-0.5  d: n  47  mid - model median +0.025  p10 -0.126  p90 +0.131
+  above    0.5-3    d: n  43  mid - model median +0.005  p10 -0.004  p90 +0.020
+  above      3-10   d: n  96  mid - model median +0.005  p10 -0.015  p90 +0.025
+  below      0-0.5  d: n   2  mid - model median +0.013  p10 +0.005  p90 +0.013
+  below    0.5-3    d: n   4  mid - model median -0.013  p10 -0.061  p90 -0.001
+  below      3-10   d: n   8  mid - model median -0.013  p10 -0.071  p90 +0.012
+  between    0-0.5  d: n  11  mid - model median +0.012  p10 -0.071  p90 +0.037
+  between  0.5-3    d: n  36  mid - model median +0.005  p10 -0.029  p90 +0.024
+  between    3-10   d: n  72  mid - model median +0.009  p10 -0.034  p90 +0.027
+  touch    0.5-3    d: n  24  mid - model median +0.009  p10 -0.005  p90 +0.048
+  touch      3-10   d: n  27  mid - model median +0.008  p10 -0.022  p90 +0.038
+  touch     10-400  d: n  90  mid - model median +0.011  p10 +0.002  p90 +0.038
+paper: {'updated': '2026-11-12 14:24', 'open': 16, 'new': 16, 'settled': 0, 'won': 0, 'pnl': 0, 'staked_settled': 0}
