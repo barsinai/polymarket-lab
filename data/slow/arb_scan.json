@@ -1,8 +1,8 @@
 {
-"scanned": "2026-11-12 02:16",
+"scanned": "2026-11-12 03:17",
 "events": 2100,
 "groups": 2037,
-"books": 17238,
+"books": 17232,
 "opps": [
 {
 "kind": "negrisk_all_yes",
@@ -22,6 +22,21 @@
 "edge_after_fee": 0.0133,
 "size_shares": 141.99,
 "usd_at_size": 139.15
+},
+{
+"kind": "ladder_num",
+"event": "How high will inflation get in 2026?",
+"slug": "how-high-will-inflation-get-in-2026",
+"easy": "Will inflation reach more than 6% in 2026?",
+"hard": "Will inflation reach more than 8% in 2026?",
+"easy_yes_ask": 0.014,
+"hard_no_ask": 0.981,
+"hard_yes_bid": 0.019,
+"cost": 0.995,
+"edge": 0.005,
+"edge_after_fee": 0.0027,
+"size_shares": 257.01,
+"usd_at_size": 255.72
 },
 {
 "kind": "ladder_date",
@@ -138,26 +153,25 @@
 },
 {
 "kind": "negrisk_all_yes",
-"event": "What will OpenAI's IPO valuation be?",
-"slug": "what-will-openais-ipo-valuation-be",
-"n": 8,
+"event": "Argentina Annual Inflation 2026",
+"slug": "argentina-annual-inflation-2026",
+"n": 7,
 "has_other": false,
 "outcomes": [
-"<$1T",
-"$1.0T\u2013$1.25T",
-"$1.25T\u2013$1.5T",
-"$1.5T\u2013$1.75T",
-"$1.75T\u2013$2.0T",
-"$2.0T\u2013$2.25T",
-"$2.25T\u2013$2.5T",
-"$2.5T+"
+"<20%",
+"20-24.9%",
+"30.0-34.9%",
+"25-29.9%",
+"35\u201339.9%",
+"45%+",
+"40-44.9%"
 ],
-"cost": 0.994,
+"cost": 0.979,
 "payoff": 1,
-"edge": 0.006,
-"edge_after_fee": -0.0519,
-"size_shares": 27.68,
-"usd_at_size": 27.51
+"edge": 0.021,
+"edge_after_fee": 0.0043,
+"size_shares": 7.5,
+"usd_at_size": 7.34
 },
 {
 "kind": "ladder_num",
@@ -191,25 +205,51 @@
 },
 {
 "kind": "negrisk_all_yes",
-"event": "Argentina Annual Inflation 2026",
-"slug": "argentina-annual-inflation-2026",
-"n": 7,
+"event": "What will OpenAI's IPO valuation be?",
+"slug": "what-will-openais-ipo-valuation-be",
+"n": 8,
 "has_other": false,
 "outcomes": [
-"<20%",
-"20-24.9%",
-"30.0-34.9%",
-"25-29.9%",
-"35\u201339.9%",
-"45%+",
-"40-44.9%"
+"<$1T",
+"$1.0T\u2013$1.25T",
+"$1.25T\u2013$1.5T",
+"$1.5T\u2013$1.75T",
+"$1.75T\u2013$2.0T",
+"$2.0T\u2013$2.25T",
+"$2.25T\u2013$2.5T",
+"$2.5T+"
 ],
-"cost": 0.986,
+"cost": 0.996,
 "payoff": 1,
-"edge": 0.014,
-"edge_after_fee": -0.0031,
-"size_shares": 7.5,
-"usd_at_size": 7.39
+"edge": 0.004,
+"edge_after_fee": -0.0539,
+"size_shares": 27.68,
+"usd_at_size": 27.57
+},
+{
+"kind": "negrisk_all_yes",
+"event": "Anthropic IPO Closing Market Cap",
+"slug": "anthropic-ipo-closing-market-cap-higher-strikes",
+"n": 10,
+"has_other": false,
+"outcomes": [
+"<$1.25T",
+"$1.25\u2013$1.5T",
+"$1.5\u2013$1.75T",
+"$1.75\u2013$2.0T",
+"$2.0\u2013$2.25T",
+"$2.25\u2013$2.5T",
+"$2.5\u2013$2.75T",
+"$2.75\u2013$3.0T",
+"$3.0T+",
+"No IPO by December 31, 2027"
+],
+"cost": 0.995,
+"payoff": 1,
+"edge": 0.005,
+"edge_after_fee": -0.046,
+"size_shares": 17.45,
+"usd_at_size": 17.36
 },
 {
 "kind": "negrisk_all_yes",
