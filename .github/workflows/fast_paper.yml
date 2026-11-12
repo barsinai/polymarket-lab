@@ -72,7 +72,7 @@ jobs:
             mkdir -p /tmp/fastout/hourly /tmp/fastout/server_out
             for f in obs.jsonl trades.jsonl windows.jsonl model.jsonl pairs.jsonl report.json tokens.jsonl; do [ -s "data/fast/$f" ] && cp "data/fast/$f" /tmp/fastout/; done
             find data/fast -maxdepth 1 \( -name 'obs-*.jsonl.gz' -o -name 'model-*.jsonl.gz' -o -name 'pairs-*.jsonl.gz' \) -newer /tmp/fast.start -size +0 -exec cp {} /tmp/fastout/ \;
-            [ -d data/fast/hourly ] && cp data/fast/hourly/*.jsonl /tmp/fastout/hourly/ 2>/dev/null || true
+            [ -d data/fast/hourly ] && cp data/fast/hourly/*.jsonl /tmp/fastout/hourly/ 2>/dev/null || true   # lifetimes, lockm, job_* outputs
             [ -d data/fast/server_out ] && cp data/fast/server_out/*.txt /tmp/fastout/server_out/ 2>/dev/null || true
             find /tmp/fastout -type f -size 0 -delete    # a full disk leaves empty copies: never publish those
             for i in 1 2 3; do

@@ -20,7 +20,7 @@ SETTLE_DAYS=2 timeout 360 "$PY" research/fast/settle.py 2>&1 | tail -2
 # 3. websocket lifetime study, window level, two ask caps, with the K the bot can know (K_EST=bot; before 11-11 the
 #    summaries used the official price to beat, which is published only late in the window = hindsight).
 #    The hour that just finished first, then back-fill up to 4 older hour-cap runs (last 30 h) that have no K_EST=bot line yet.
-done_line() { grep -q "\"hour\": \"$1\", \"k_est\": \"bot\".*\"ask_max\": $2" data/fast/hourly/lifetimes.jsonl 2>/dev/null; }
+done_line() { grep -q "\"hour\": \"$1\", \"k_est\": \"bot\".*\"ask_max\": $2" data/fast/hourly/lifetimes.jsonl 2>/dev/null && { [[ ! "$1" > "2026-11-11T12" ]] || grep -q "\"hour\": \"$1\", \"k_est\": \"ptb\".*\"ask_max\": $2" data/fast/hourly/lockm.jsonl 2>/dev/null; }; }
 n_back=0
 for back in $(seq 1 30); do
   H=$(date -u -d "$back hour ago" +%FT%H)
@@ -28,6 +28,11 @@ for back in $(seq 1 30); do
     if ! done_line "$H" "$cap"; then
       [ "$back" -gt 1 ] && { [ "$n_back" -ge 4 ] && break 2; n_back=$((n_back + 1)); }
       K_EST=bot HOUR="$H" ASK_MAX="$cap" R_LO=0 R_HI=60 OUT=data/fast/hourly/lifetimes.jsonl timeout 300 "$PY" research/fast/lifetimes.py 2>&1 | grep -E "windows with" | sed "s/^/  $H cap $cap: /"
+      # the live rule: exact K (= official ptb since 11-11 13:00 UTC, so ptb is no hindsight from then on), margin >= 1 bp,
+      # >= 6 s left -> per-hour lock_m at the websocket's decision latencies (R grid), one hour of data per process (memory)
+      if [[ "$H" > "2026-11-11T12" ]]; then
+        K_EST=ptb MARGIN_MIN=1 REM_MIN=6 HOUR="$H" ASK_MAX="$cap" R_LO=0 R_HI=60 OUT=data/fast/hourly/lockm.jsonl timeout 300 "$PY" research/fast/lifetimes.py > /dev/null 2>&1 || true
+      fi
     fi
   done
 done
