@@ -1,5 +1,5 @@
 {
-"scanned": "2026-11-12 03:59",
+"scanned": "2026-11-12 04:19",
 "events": 2100,
 "groups": 2037,
 "books": 17232,
@@ -65,8 +65,31 @@
 "cost": 0.996,
 "edge": 0.004,
 "edge_after_fee": 0.0007,
-"size_shares": 130.71,
-"usd_at_size": 130.19
+"size_shares": 100.71,
+"usd_at_size": 100.31
+},
+{
+"kind": "negrisk_all_yes",
+"event": "What will OpenAI's IPO valuation be?",
+"slug": "what-will-openais-ipo-valuation-be",
+"n": 8,
+"has_other": false,
+"outcomes": [
+"<$1T",
+"$1.0T\u2013$1.25T",
+"$1.25T\u2013$1.5T",
+"$1.5T\u2013$1.75T",
+"$1.75T\u2013$2.0T",
+"$2.0T\u2013$2.25T",
+"$2.25T\u2013$2.5T",
+"$2.5T+"
+],
+"cost": 0.986,
+"payoff": 1,
+"edge": 0.014,
+"edge_after_fee": -0.0433,
+"size_shares": 27.68,
+"usd_at_size": 27.29
 },
 {
 "kind": "ladder_date",
@@ -99,21 +122,6 @@
 "usd_at_size": 16.44
 },
 {
-"kind": "ladder_num",
-"event": "Felix FDV above ___ one day after launch?",
-"slug": "felix-fdv-above-one-day-after-launch",
-"easy": "Felix Protocol FDV above $1B one day after launch?",
-"hard": "Felix Protocol FDV above $2B one day after launch?",
-"easy_yes_ask": 0.018,
-"hard_no_ask": 0.976,
-"hard_yes_bid": 0.024,
-"cost": 0.994,
-"edge": 0.006,
-"edge_after_fee": 0.0031,
-"size_shares": 39.75,
-"usd_at_size": 39.51
-},
-{
 "kind": "negrisk_all_yes",
 "event": "Discord IPO Closing Market Cap",
 "slug": "discord-ipo-closing-market-cap-20260626185933220",
@@ -135,6 +143,21 @@
 "edge_after_fee": 0.0296,
 "size_shares": 5.0,
 "usd_at_size": 4.79
+},
+{
+"kind": "ladder_num",
+"event": "Felix FDV above ___ one day after launch?",
+"slug": "felix-fdv-above-one-day-after-launch",
+"easy": "Felix Protocol FDV above $1B one day after launch?",
+"hard": "Felix Protocol FDV above $2B one day after launch?",
+"easy_yes_ask": 0.018,
+"hard_no_ask": 0.975,
+"hard_yes_bid": 0.025,
+"cost": 0.993,
+"edge": 0.007,
+"edge_after_fee": 0.0041,
+"size_shares": 30.0,
+"usd_at_size": 29.79
 },
 {
 "kind": "ladder_num",
@@ -188,13 +211,13 @@
 "easy": "Felix Protocol FDV above $800M one day after launch?",
 "hard": "Felix Protocol FDV above $2B one day after launch?",
 "easy_yes_ask": 0.021,
-"hard_no_ask": 0.976,
-"hard_yes_bid": 0.024,
-"cost": 0.997,
-"edge": 0.003,
-"edge_after_fee": -0.0001,
-"size_shares": 39.75,
-"usd_at_size": 39.63
+"hard_no_ask": 0.975,
+"hard_yes_bid": 0.025,
+"cost": 0.996,
+"edge": 0.004,
+"edge_after_fee": 0.0009,
+"size_shares": 30.0,
+"usd_at_size": 29.88
 },
 {
 "kind": "ladder_num",
@@ -232,51 +255,6 @@
 "edge_after_fee": -0.0463,
 "size_shares": 9.28,
 "usd_at_size": 9.2
-},
-{
-"kind": "negrisk_all_yes",
-"event": "What will OpenAI's IPO valuation be?",
-"slug": "what-will-openais-ipo-valuation-be",
-"n": 8,
-"has_other": false,
-"outcomes": [
-"<$1T",
-"$1.0T\u2013$1.25T",
-"$1.25T\u2013$1.5T",
-"$1.5T\u2013$1.75T",
-"$1.75T\u2013$2.0T",
-"$2.0T\u2013$2.25T",
-"$2.25T\u2013$2.5T",
-"$2.5T+"
-],
-"cost": 0.997,
-"payoff": 1,
-"edge": 0.003,
-"edge_after_fee": -0.0549,
-"size_shares": 27.68,
-"usd_at_size": 27.6
-},
-{
-"kind": "negrisk_all_yes",
-"event": "Argentina Annual Inflation 2026",
-"slug": "argentina-annual-inflation-2026",
-"n": 7,
-"has_other": false,
-"outcomes": [
-"<20%",
-"20-24.9%",
-"30.0-34.9%",
-"25-29.9%",
-"35\u201339.9%",
-"45%+",
-"40-44.9%"
-],
-"cost": 0.994,
-"payoff": 1,
-"edge": 0.006,
-"edge_after_fee": -0.0099,
-"size_shares": 7.5,
-"usd_at_size": 7.46
 },
 {
 "kind": "ladder_num",
@@ -397,6 +375,27 @@
 "edge_after_fee": 0.0039,
 "size_shares": 0.59,
 "usd_at_size": 0.59
+},
+{
+"kind": "negrisk_all_yes",
+"event": "Japan Core CPI YoY in 2026",
+"slug": "japan-core-cpi-yoy-in-2026-20260617224131789",
+"n": 6,
+"has_other": false,
+"outcomes": [
+"\u22641.9%",
+"2.0-2.4%",
+"2.5-2.9%",
+"3.0-3.4%",
+"3.5-3.9%",
+"4.0%+"
+],
+"cost": 0.979,
+"payoff": 1,
+"edge": 0.021,
+"edge_after_fee": 0.0062,
+"size_shares": 0.05,
+"usd_at_size": 0.05
 }
 ]
 }
