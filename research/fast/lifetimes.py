@@ -11,6 +11,7 @@ import glob, gzip, json, math, os, sys
 from collections import defaultdict
 D = "data/fast"
 Z, ASK_MAX, ASK_MIN = float(os.environ.get("Z", "2.5")), float(os.environ.get("ASK_MAX", "0.97")), float(os.environ.get("ASK_MIN", "0.50"))
+MARGIN_MIN = float(os.environ.get("MARGIN_MIN", "-1e9")); REM_MIN = float(os.environ.get("REM_MIN", "0"))   # lock_m: MARGIN_MIN=1 (bp), lock_x: REM_MIN=6
 R_LO, R_HI = float(os.environ.get("R_LO", "0")), float(os.environ.get("R_HI", "60"))   # seconds-before-end range to study
 SINCE, UNTIL = os.environ.get("SINCE", ""), os.environ.get("UNTIL", "9")   # archive hours to use, e.g. SINCE=2026-11-09T21 (out-of-sample days)
 BOOKWS = os.environ.get("BOOKWS_DIR") or f"{D}/bookws"; RTDS = os.environ.get("RTDS_DIR") or f"{D}/rtds"
@@ -136,13 +137,13 @@ def z_series(asset, start, end, K):
         S = hist[-1][1]
         if t < end - 60:
             sd = max(S * sg * math.sqrt((end - 60 - t) + 20.0), 1e-9)
-            out.append((t, (S - K) / sd))
+            out.append((t, (S - K) / sd, (S - K) / K * 1e4))
         else:
             last = [p for tt, p in hist if tt >= end - 60]
             g = (t - (end - 60)) / 60.0; A = sum(last) / len(last) if last else S
             r = max(end - t, 1.0)
             sd = max((1 - g) * S * sg * math.sqrt(r / 3), 1e-9)
-            out.append((t, (g * A + (1 - g) * S - K) / sd))
+            out.append((t, (g * A + (1 - g) * S - K) / sd, (g * A + (1 - g) * S - K) / K * 1e4))
         t += 0.5
     return out
 
@@ -171,14 +172,15 @@ for tok, recs in top.items():
     won = (md["up"] == (side == "Up"))
     recs = sorted(recs, key=lambda x: x[0])
     # state machine: opportunity open when z_side >= Z and ask in [ASK_MIN, ASK_MAX]; remember the ask path
-    events = sorted([(t, "z", z) for t, z in zs] + [(rx, "b", (ask, sz)) for rx, ask, sz in recs])
-    cur_z = None; cur_ask = None; cur_sz = None; open_t = None; path = []
+    events = sorted([(t, "z", (z, mg)) for t, z, mg in zs] + [(rx, "b", (ask, sz)) for rx, ask, sz in recs], key=lambda e: e[0])
+    cur_z = None; cur_m = 0.0; cur_ask = None; cur_sz = None; open_t = None; path = []
     for t, kind, v in events:
         if kind == "z":
-            cur_z = v * sign
+            cur_z = v[0] * sign; cur_m = v[1] * sign
         else:
             cur_ask, cur_sz = v
-        locked = cur_z is not None and cur_z >= Z and cur_ask is not None and ASK_MIN <= cur_ask <= ASK_MAX
+        locked = (cur_z is not None and cur_z >= Z and cur_m >= MARGIN_MIN and end - t >= REM_MIN and cur_ask is not None
+                  and ASK_MIN <= cur_ask <= ASK_MAX)
         if locked and open_t is None:
             open_t = t; path = [(t, cur_ask, cur_sz)]
         elif locked and open_t is not None and kind == "b":
@@ -216,7 +218,7 @@ if life:
     print("  window level (one trade per window-side, first episode that persisted R s):")
     summary = {"hour": HOUR, "k_est": K_EST, "since": SINCE, "until": UNTIL, "z": Z, "ask_max": ASK_MAX, "windows": n_windows, "episodes": len(life),
                "episodes_won": sum(1 for x in life if x[3]), "window_level": {}}
-    for R in (0.05, 0.5, 1.0, 2.0, 3.0, 5.0):
+    for R in (0.05, 0.1, 0.25, 0.5, 1.0, 2.0, 3.0, 5.0):
         first = {}
         for x in sorted(life, key=lambda x: x[6][0][0]):
             if x[0] >= R and (x[4], x[5]) not in first:
