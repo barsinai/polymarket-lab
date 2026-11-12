@@ -1,28 +1,9 @@
 {
-"scanned": "2026-11-11 23:08",
+"scanned": "2026-11-12 00:10",
 "events": 2100,
-"groups": 2037,
-"books": 17242,
+"groups": 2038,
+"books": 17236,
 "opps": [
-{
-"kind": "negrisk_all_yes",
-"event": "Who will be the top-selling artist by total auction sales in 2026?",
-"slug": "who-will-be-the-top-selling-artist-by-total-auction-sales-in-2026-20260605235158033",
-"n": 4,
-"has_other": true,
-"outcomes": [
-"Andy Warhol",
-"Pablo Picasso",
-"Jean-Michel Basquiat",
-"Other"
-],
-"cost": 0.988,
-"payoff": 1,
-"edge": 0.012,
-"edge_after_fee": 0.0048,
-"size_shares": 167.79,
-"usd_at_size": 165.78
-},
 {
 "kind": "ladder_num",
 "event": "Hyperbeat FDV above ___ one day after launch?",
@@ -40,6 +21,25 @@
 },
 {
 "kind": "negrisk_all_yes",
+"event": "Who will be the top-selling artist by total auction sales in 2026?",
+"slug": "who-will-be-the-top-selling-artist-by-total-auction-sales-in-2026-20260605235158033",
+"n": 4,
+"has_other": true,
+"outcomes": [
+"Andy Warhol",
+"Pablo Picasso",
+"Jean-Michel Basquiat",
+"Other"
+],
+"cost": 0.986,
+"payoff": 1,
+"edge": 0.014,
+"edge_after_fee": 0.0069,
+"size_shares": 38.99,
+"usd_at_size": 38.44
+},
+{
+"kind": "negrisk_all_yes",
 "event": "What will OpenAI's IPO valuation be?",
 "slug": "what-will-openais-ipo-valuation-be",
 "n": 8,
@@ -54,12 +54,12 @@
 "$2.25T\u2013$2.5T",
 "$2.5T+"
 ],
-"cost": 0.981,
+"cost": 0.985,
 "payoff": 1,
-"edge": 0.019,
-"edge_after_fee": -0.0383,
+"edge": 0.015,
+"edge_after_fee": -0.0426,
 "size_shares": 27.68,
-"usd_at_size": 27.15
+"usd_at_size": 27.26
 },
 {
 "kind": "ladder_date",
@@ -107,6 +107,21 @@
 "usd_at_size": 70.43
 },
 {
+"kind": "ladder_num",
+"event": "Reya FDV above ___ one day after launch?",
+"slug": "reya-fdv-above-one-day-after-launch",
+"easy": "Reya FDV above $300M one day after launch?",
+"hard": "Reya FDV above $400M one day after launch?",
+"easy_yes_ask": 0.048,
+"hard_no_ask": 0.949,
+"hard_yes_bid": 0.051,
+"cost": 0.997,
+"edge": 0.003,
+"edge_after_fee": -0.0036,
+"size_shares": 85.0,
+"usd_at_size": 84.75
+},
+{
 "kind": "negrisk_all_yes",
 "event": "Discord IPO Closing Market Cap",
 "slug": "discord-ipo-closing-market-cap-20260626185933220",
@@ -143,33 +158,6 @@
 "edge_after_fee": 0.0045,
 "size_shares": 27.95,
 "usd_at_size": 27.75
-},
-{
-"kind": "negrisk_all_no",
-"event": "Anthropic IPO Closing Market Cap",
-"slug": "anthropic-ipo-closing-market-cap-higher-strikes",
-"n": 10,
-"cost": 8.983,
-"payoff": 9,
-"edge": 0.017,
-"edge_after_fee": -0.0359,
-"size_shares": 10.0,
-"usd_at_size": 89.83
-},
-{
-"kind": "ladder_num",
-"event": "Reya FDV above ___ one day after launch?",
-"slug": "reya-fdv-above-one-day-after-launch",
-"easy": "Reya FDV above $300M one day after launch?",
-"hard": "Reya FDV above $400M one day after launch?",
-"easy_yes_ask": 0.048,
-"hard_no_ask": 0.949,
-"hard_yes_bid": 0.051,
-"cost": 0.997,
-"edge": 0.003,
-"edge_after_fee": -0.0036,
-"size_shares": 55.0,
-"usd_at_size": 54.84
 },
 {
 "kind": "ladder_num",
@@ -224,28 +212,6 @@
 "usd_at_size": 29.91
 },
 {
-"kind": "negrisk_all_yes",
-"event": "Argentina Annual Inflation 2026",
-"slug": "argentina-annual-inflation-2026",
-"n": 7,
-"has_other": false,
-"outcomes": [
-"<20%",
-"20-24.9%",
-"30.0-34.9%",
-"25-29.9%",
-"35\u201339.9%",
-"45%+",
-"40-44.9%"
-],
-"cost": 0.989,
-"payoff": 1,
-"edge": 0.011,
-"edge_after_fee": -0.0061,
-"size_shares": 5.32,
-"usd_at_size": 5.26
-},
-{
 "kind": "ladder_num",
 "event": "Felix FDV above ___ one day after launch?",
 "slug": "felix-fdv-above-one-day-after-launch",
@@ -261,19 +227,26 @@
 "usd_at_size": 9.69
 },
 {
-"kind": "ladder_num",
-"event": "Printr FDV above ___ one day after launch?",
-"slug": "printr-fdv-above-one-day-after-launch",
-"easy": "Printr FDV above $500M one day after launch?",
-"hard": "Printr FDV above $1B one day after launch?",
-"easy_yes_ask": 0.049,
-"hard_no_ask": 0.925,
-"hard_yes_bid": 0.075,
-"cost": 0.974,
-"edge": 0.026,
-"edge_after_fee": 0.0179,
-"size_shares": 1.61,
-"usd_at_size": 1.57
+"kind": "negrisk_all_yes",
+"event": "South Korea Annual Inflation 2026",
+"slug": "south-korea-annual-inflation-2026",
+"n": 7,
+"has_other": false,
+"outcomes": [
+"<1.5%",
+"1.5% to 1.7%",
+"1.8% to 2.0%",
+"2.1% to 2.3%",
+"2.4% to 2.6%",
+"2.7% to 2.9%",
+"3.0%+"
+],
+"cost": 0.995,
+"payoff": 1,
+"edge": 0.005,
+"edge_after_fee": -0.0425,
+"size_shares": 11.18,
+"usd_at_size": 11.12
 },
 {
 "kind": "ladder_num",
