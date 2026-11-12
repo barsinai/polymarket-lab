@@ -1,8 +1,8 @@
 {
-"scanned": "2026-11-12 04:19",
+"scanned": "2026-11-12 05:21",
 "events": 2100,
 "groups": 2037,
-"books": 17232,
+"books": 17186,
 "opps": [
 {
 "kind": "negrisk_all_yes",
@@ -16,12 +16,12 @@
 "Jean-Michel Basquiat",
 "Other"
 ],
-"cost": 0.979,
+"cost": 0.977,
 "payoff": 1,
-"edge": 0.021,
-"edge_after_fee": 0.0144,
+"edge": 0.023,
+"edge_after_fee": 0.0165,
 "size_shares": 83.34,
-"usd_at_size": 81.59
+"usd_at_size": 81.42
 },
 {
 "kind": "ladder_date",
@@ -40,6 +40,21 @@
 },
 {
 "kind": "ladder_num",
+"event": "How high will inflation get in 2026?",
+"slug": "how-high-will-inflation-get-in-2026",
+"easy": "Will inflation reach more than 6% in 2026?",
+"hard": "Will inflation reach more than 8% in 2026?",
+"easy_yes_ask": 0.016,
+"hard_no_ask": 0.981,
+"hard_yes_bid": 0.019,
+"cost": 0.997,
+"edge": 0.003,
+"edge_after_fee": 0.0006,
+"size_shares": 257.01,
+"usd_at_size": 256.24
+},
+{
+"kind": "ladder_num",
 "event": "Hyperbeat FDV above ___ one day after launch?",
 "slug": "hyperbeat-fdv-above-one-day-after-launch",
 "easy": "Hyperbeat FDV above $300M one day after launch?",
@@ -50,8 +65,8 @@
 "cost": 0.996,
 "edge": 0.004,
 "edge_after_fee": 0.0015,
-"size_shares": 195.7,
-"usd_at_size": 194.92
+"size_shares": 140.18,
+"usd_at_size": 139.62
 },
 {
 "kind": "ladder_num",
@@ -69,29 +84,6 @@
 "usd_at_size": 100.31
 },
 {
-"kind": "negrisk_all_yes",
-"event": "What will OpenAI's IPO valuation be?",
-"slug": "what-will-openais-ipo-valuation-be",
-"n": 8,
-"has_other": false,
-"outcomes": [
-"<$1T",
-"$1.0T\u2013$1.25T",
-"$1.25T\u2013$1.5T",
-"$1.5T\u2013$1.75T",
-"$1.75T\u2013$2.0T",
-"$2.0T\u2013$2.25T",
-"$2.25T\u2013$2.5T",
-"$2.5T+"
-],
-"cost": 0.986,
-"payoff": 1,
-"edge": 0.014,
-"edge_after_fee": -0.0433,
-"size_shares": 27.68,
-"usd_at_size": 27.29
-},
-{
 "kind": "ladder_date",
 "event": "Will Israel annex any territory by...?",
 "slug": "will-israel-annex-any-territory-by-december-31",
@@ -107,19 +99,41 @@
 "usd_at_size": 13.02
 },
 {
+"kind": "negrisk_all_yes",
+"event": "Argentina Annual Inflation 2026",
+"slug": "argentina-annual-inflation-2026",
+"n": 7,
+"has_other": false,
+"outcomes": [
+"<20%",
+"20-24.9%",
+"30.0-34.9%",
+"25-29.9%",
+"35\u201339.9%",
+"45%+",
+"40-44.9%"
+],
+"cost": 0.996,
+"payoff": 1,
+"edge": 0.004,
+"edge_after_fee": -0.0123,
+"size_shares": 91.06,
+"usd_at_size": 90.7
+},
+{
 "kind": "ladder_num",
-"event": "Unit FDV above ___ one day after launch?",
-"slug": "unit-fdv-above-one-day-after-launch",
-"easy": "Unit FDV above $1B one day after launch?",
-"hard": "Unit FDV above $1.5B one day after launch?",
-"easy_yes_ask": 0.18,
-"hard_no_ask": 0.8,
-"hard_yes_bid": 0.2,
-"cost": 0.98,
-"edge": 0.02,
-"edge_after_fee": -0.0015,
-"size_shares": 16.78,
-"usd_at_size": 16.44
+"event": "Reya FDV above ___ one day after launch?",
+"slug": "reya-fdv-above-one-day-after-launch",
+"easy": "Reya FDV above $300M one day after launch?",
+"hard": "Reya FDV above $400M one day after launch?",
+"easy_yes_ask": 0.048,
+"hard_no_ask": 0.949,
+"hard_yes_bid": 0.051,
+"cost": 0.997,
+"edge": 0.003,
+"edge_after_fee": -0.0036,
+"size_shares": 85.0,
+"usd_at_size": 84.75
 },
 {
 "kind": "negrisk_all_yes",
@@ -143,6 +157,29 @@
 "edge_after_fee": 0.0296,
 "size_shares": 5.0,
 "usd_at_size": 4.79
+},
+{
+"kind": "negrisk_all_yes",
+"event": "What will OpenAI's IPO valuation be?",
+"slug": "what-will-openais-ipo-valuation-be",
+"n": 8,
+"has_other": false,
+"outcomes": [
+"<$1T",
+"$1.0T\u2013$1.25T",
+"$1.25T\u2013$1.5T",
+"$1.5T\u2013$1.75T",
+"$1.75T\u2013$2.0T",
+"$2.0T\u2013$2.25T",
+"$2.25T\u2013$2.5T",
+"$2.5T+"
+],
+"cost": 0.993,
+"payoff": 1,
+"edge": 0.007,
+"edge_after_fee": -0.0507,
+"size_shares": 30.0,
+"usd_at_size": 29.79
 },
 {
 "kind": "ladder_num",
@@ -176,18 +213,18 @@
 },
 {
 "kind": "ladder_num",
-"event": "Reya FDV above ___ one day after launch?",
-"slug": "reya-fdv-above-one-day-after-launch",
-"easy": "Reya FDV above $300M one day after launch?",
-"hard": "Reya FDV above $400M one day after launch?",
-"easy_yes_ask": 0.048,
-"hard_no_ask": 0.949,
-"hard_yes_bid": 0.051,
-"cost": 0.997,
-"edge": 0.003,
-"edge_after_fee": -0.0036,
-"size_shares": 55.0,
-"usd_at_size": 54.84
+"event": "Unit FDV above ___ one day after launch?",
+"slug": "unit-fdv-above-one-day-after-launch",
+"easy": "Unit FDV above $1B one day after launch?",
+"hard": "Unit FDV above $1.5B one day after launch?",
+"easy_yes_ask": 0.18,
+"hard_no_ask": 0.81,
+"hard_yes_bid": 0.19,
+"cost": 0.99,
+"edge": 0.01,
+"edge_after_fee": -0.0111,
+"size_shares": 16.78,
+"usd_at_size": 16.61
 },
 {
 "kind": "ladder_num",
@@ -235,6 +272,21 @@
 "usd_at_size": 27.84
 },
 {
+"kind": "ladder_num",
+"event": "Printr FDV above ___ one day after launch?",
+"slug": "printr-fdv-above-one-day-after-launch",
+"easy": "Printr FDV above $500M one day after launch?",
+"hard": "Printr FDV above $1B one day after launch?",
+"easy_yes_ask": 0.049,
+"hard_no_ask": 0.93,
+"hard_yes_bid": 0.07,
+"cost": 0.979,
+"edge": 0.021,
+"edge_after_fee": 0.0132,
+"size_shares": 1.61,
+"usd_at_size": 1.58
+},
+{
 "kind": "negrisk_all_yes",
 "event": "OpenAI IPO Closing Market Cap",
 "slug": "openai-ipo-closing-market-cap-554",
@@ -249,27 +301,12 @@
 "1.5T+",
 "No IPO by December 31, 2027"
 ],
-"cost": 0.991,
+"cost": 0.997,
 "payoff": 1,
-"edge": 0.009,
-"edge_after_fee": -0.0463,
+"edge": 0.003,
+"edge_after_fee": -0.0525,
 "size_shares": 9.28,
-"usd_at_size": 9.2
-},
-{
-"kind": "ladder_num",
-"event": "Pacifica FDV above ___ one day after launch?",
-"slug": "pacifica-fdv-above-one-day-after-launch",
-"easy": "Pacifica FDV above $200M one day after launch?",
-"hard": "Pacifica FDV above $800M one day after launch?",
-"easy_yes_ask": 0.026,
-"hard_no_ask": 0.968,
-"hard_yes_bid": 0.032,
-"cost": 0.994,
-"edge": 0.006,
-"edge_after_fee": 0.0021,
-"size_shares": 4.48,
-"usd_at_size": 4.45
+"usd_at_size": 9.25
 },
 {
 "kind": "ladder_num",
@@ -293,11 +330,11 @@
 "easy": "Printr FDV above $500M one day after launch?",
 "hard": "Printr FDV above $800M one day after launch?",
 "easy_yes_ask": 0.049,
-"hard_no_ask": 0.939,
-"hard_yes_bid": 0.061,
-"cost": 0.988,
-"edge": 0.012,
-"edge_after_fee": 0.0047,
+"hard_no_ask": 0.938,
+"hard_yes_bid": 0.062,
+"cost": 0.987,
+"edge": 0.013,
+"edge_after_fee": 0.0057,
 "size_shares": 1.61,
 "usd_at_size": 1.59
 },
@@ -315,21 +352,6 @@
 "edge_after_fee": -0.0001,
 "size_shares": 4.48,
 "usd_at_size": 4.46
-},
-{
-"kind": "ladder_date",
-"event": "Anthropic IPO by __?",
-"slug": "anthropic-ipo-by",
-"easy": "Will Anthropic IPO by November 24, 2026?",
-"hard": "Will Anthropic IPO by November 23, 2026?",
-"easy_yes_ask": 0.949,
-"hard_no_ask": 0.048,
-"hard_yes_bid": 0.952,
-"cost": 0.997,
-"edge": 0.003,
-"edge_after_fee": -0.0036,
-"size_shares": 4.9,
-"usd_at_size": 4.89
 },
 {
 "kind": "ladder_num",
@@ -375,27 +397,6 @@
 "edge_after_fee": 0.0039,
 "size_shares": 0.59,
 "usd_at_size": 0.59
-},
-{
-"kind": "negrisk_all_yes",
-"event": "Japan Core CPI YoY in 2026",
-"slug": "japan-core-cpi-yoy-in-2026-20260617224131789",
-"n": 6,
-"has_other": false,
-"outcomes": [
-"\u22641.9%",
-"2.0-2.4%",
-"2.5-2.9%",
-"3.0-3.4%",
-"3.5-3.9%",
-"4.0%+"
-],
-"cost": 0.979,
-"payoff": 1,
-"edge": 0.021,
-"edge_after_fee": 0.0062,
-"size_shares": 0.05,
-"usd_at_size": 0.05
 }
 ]
 }
