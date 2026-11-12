@@ -1,5 +1,15 @@
-settled events 0, buckets 0: Brier model 0.0000 vs market 0.0000
-winning bucket: model p mean 0.000  market 0.000
+settled events 17, buckets 187: Brier model 0.0741 vs market 0.0685
+winning bucket: model p mean 0.195  market 0.302
+  highest-temperature-in-singapore-on-november-12-2026    32°C         model 0.141 mkt 0.495
+  highest-temperature-in-beijing-on-november-12-2026      16°C         model 0.010 mkt 0.300
+  highest-temperature-in-seoul-on-november-12-2026        16°C         model 0.289 mkt 0.575
+  highest-temperature-in-manila-on-november-12-2026       32°C         model 0.213 mkt 0.480
+  highest-temperature-in-kuala-lumpur-on-november-12-2026 32°C         model 0.159 mkt 0.420
+  highest-temperature-in-busan-on-november-12-2026        19°C         model 0.113 mkt 0.140
+  highest-temperature-in-tokyo-on-november-12-2026        19°C         model 0.076 mkt 0.039
+  highest-temperature-in-shanghai-on-november-12-2026     20°C         model 0.261 mkt 0.185
+  highest-temperature-in-shenzhen-on-november-12-2026     29°C         model 0.241 mkt 0.145
+  highest-temperature-in-taipei-on-november-12-2026       28°C         model 0.275 mkt 0.075
 same-day dead buckets still bid >= 1c: 6 snapshots
   dead highest-temperature-in-nyc-on-november-12-2026     54-55°F      obs_max 55.9 bid 0.021 -> YES outcome None
   dead highest-temperature-in-london-on-november-12-2026  7°C          obs_max 8 bid 0.065 -> YES outcome None
