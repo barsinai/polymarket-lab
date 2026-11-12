@@ -632,3 +632,15 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - Server incident: the 08:28 hook ran the new server job lockm_push_v1 (lifetimes over ~20 h of book events in one process);
   the job was cancelled at 08:39 (runner most likely out of memory), no hand-over. Job removed; lock_m per hour now runs in the
   regular hook, one hour of data per process (data/fast/hourly/lockm.jsonl). Bot restarted by dispatch.
+- 11-12 12:30 BUG (lookahead) in the websocket lifetime study (lifetimes.py, hourly lifetimes.jsonl / lockm.jsonl): the model
+  used each Chainlink print from its source timestamp, but prints ARRIVE ~1.45 s later (p50; p10 1.2, p99 2.3 s), while the book
+  was replayed by receive time -> the study saw the price ~1.5 s before the market could. Fixed: FEED_TIME=rx (default); old
+  lines superseded and redone by the hook. Effect, local 11-08..11-10, lock_m exact K: with lookahead +0.4..+5.5%/$, without
+  -3.1..-4.7% at 0.05-1 s latency (+1.3% at 2 s, +5.2% at 5 s, 34-51 trades). The server's +21..+39% (11-12 07-11 h) was
+  the lookahead. The paper bot itself and the 2-s tape replays were never affected (they only use what had arrived).
+- 11-12 Experiments on the recordings, all DEAD: maker bid on a lock (fills win 48-67%, -28..-38%); nested 5m/15m windows
+  (riskless in 9/463 pairs, cents); post-end sniping (no winner ask < 0.99 after end + 2 s); flow filter (server flow_v3 did
+  not replicate); late favourite on the server sample (-31..+5%).
+- 11-12 New lead: RTDS also carries Binance prices (topic crypto_prices, btc eth sol xrp doge bnb) that arrive ~0.43 s after
+  their timestamp vs ~1.46 s for Chainlink; Binance returns correlate +0.3..+0.44 with Chainlink's same and next second.
+  Test: lifetimes FEED_TIME=bn (last received Chainlink print x Binance move since its timestamp).

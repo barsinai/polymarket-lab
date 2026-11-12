@@ -24,9 +24,6 @@ Status: TESTING (paper/backtest running) · READY (next up) · PARKED (needs som
    delay of 50 / 100 / 250 ms and count the fills.
 0a. **BTC lock_m sized up:** BTC asks survive (78% > 1 s) and others bought $1.3k per signal at <= our price; edge thin (+2-3%).
    Test: P&L of BTC lock_m at $100 / $250 / $500 against the recorded book (walk the levels).
-0b. **Flow filter for lock_m (server job flow_v1):** local recordings: when net taker flow in the last 40 s points to Up the
-   outcome beat the mid by +4.2 pts (n 55), toward Down -6.1 (n 52), no trades +0.5 (n 246). Takers are informed: skip
-   locks whose flow points the other way? Needs the larger server sample.
 1. **Weather W2 same-day nowcast (low prior).** The max only rises: a bucket below a METAR is dead. 11-02: after the
    day's max is in, the winner trades at ~$1.00 in 99% of 36k markets (bots). What is untested is the hour right after
    each METAR in the afternoon. Test: minute price history vs METAR times (IEM ASOS archive).
@@ -48,6 +45,17 @@ Status: TESTING (paper/backtest running) · READY (next up) · PARKED (needs som
 - Kalshi vs Polymarket automatic pairing (titles do not match; manual for named series only).
 
 ## DEAD (number that killed it)
+- Maker on a lock (11-12, local 11-08..11-10, exact K, prints by receive time): rest a bid 0.90-0.97 on the locked side
+  while z >= 2.5: fills come only from sellers who know better - filled windows won 48-67%, -28..-38%/$.
+- Nested windows (11-12): a 5m and a 15m window ending the same second resolve on the same TWAP, so Up(lower K) +
+  Down(higher K) pays >= $1. Riskless (asks + fees < $1) in 9 of 463 pairs, 3-32 shares, cents each; at fixed times the
+  pair is fairly priced (-1..-3% = spread + fees).
+- After the end (11-12): books and trades go on ~30 s past the end, when the final TWAP is already known, but no
+  winner ask under 0.99 after end + 2 s in 7 h of recordings.
+- Flow filter for locks (server flow_v3, 239 windows, 11-11 18h..11-12): flow toward Up -> outcome 8.3 pts BELOW the mid
+  (n 36), toward Down -1.6 (n 42): the local +4.2 / -6.1 did not replicate.
+- Late favourite at the ask, server sample (flow_v3): -31%..+5%/$ by band; the only positive cell (0.90-0.95 at 20 s,
+  n 14) is noise next to its neighbours.
 - Earlier lock entries 1-4 min before the end (replay, 11-12): z >= 3 at 60-140 s -0.2%/$, z >= 2.5 at 140-240 s 0.0%,
   z >= 3.5 anywhere 60-240 s -17%.
 - Late favourite at the ask, no model (local recordings, 11-12): buy the side whose best ask is 0.60-0.95 at 20/40/60 s
