@@ -72,8 +72,8 @@ def iv_at(smile, K):
     return smile[-1][1], 0.0
 
 
-def digital(cur, K, T):
-    """P(S_T > K) from the Deribit surface, T a datetime"""
+def digital(cur, K, T, skew_on=True):
+    """P(S_T > K) from the Deribit surface, T a datetime (skew_on=False: plain N(d2) at the strike's vol)"""
     exps = sorted(surf.get(cur, {}))
     if not exps:
         return None
@@ -96,26 +96,32 @@ def digital(cur, K, T):
     d1 = d2 + sw
     # digital call = N(d2) - K * phi(d1)... in forward terms: -dC/dK = N(d2) - F*phi(d1)*sqrt(tau)*dsigma/dK
     phi = math.exp(-d1 * d1 / 2) / math.sqrt(2 * math.pi)
-    p = N(d2) - F * phi * skew            # skew already = dsigma/dK * sqrt(t)
+    p = N(d2) - (F * phi * skew if skew_on else 0.0)            # skew already = dsigma/dK * sqrt(t)
     return min(max(p, 0.0), 1.0)
 
 
 def touch(cur, K, T):
-    """P(the price touches K before T), zero-drift risk-neutral GBM with the Deribit vol at strike K (reflection formula)"""
+    """P(the price touches K before T): reflection formula (zero-drift risk-neutral GBM) at the strike's vol, scaled by
+    the skew-adjusted / plain terminal probability on the same side (a touch is ~2x the terminal digital)"""
     exps = sorted(surf.get(cur, {}))
     if not exps:
         return None
     S0 = surf[cur][exps[0]]["F"]
     tau = (T - now).total_seconds() / (365.25 * 86400)
     e = min((x for x in exps if x >= T), default=exps[-1])
-    t_e = max((e - now).total_seconds() / (365.25 * 86400), 1e-6)
     sig, _ = iv_at(surf[cur][e]["iv"], K)
-    sw = sig * math.sqrt(tau)
-    if K >= S0:
-        b = math.log(K / S0)
-        return N((-b - sw * sw / 2) / sw) + (S0 / K) * N((-b + sw * sw / 2) / sw)
-    b = math.log(S0 / K)
-    return N((-b + sw * sw / 2) / sw) + (S0 / K) * N((-b - sw * sw / 2) / sw)
+    sw = sig * math.sqrt(max(tau, 1e-8))
+    up = K >= S0
+    b = math.log(K / S0) if up else math.log(S0 / K)
+    if up:
+        p = N((-b - sw * sw / 2) / sw) + (S0 / K) * N((-b + sw * sw / 2) / sw)
+    else:
+        p = N((-b + sw * sw / 2) / sw) + (S0 / K) * N((-b - sw * sw / 2) / sw)
+    d_sk, d_fl = digital(cur, K, T), digital(cur, K, T, skew_on=False)
+    if d_sk is None or d_fl is None:
+        return min(p, 1.0)
+    t_sk, t_fl = (d_sk, d_fl) if up else (1 - d_sk, 1 - d_fl)
+    return min(p * (t_sk / t_fl), 1.0) if t_fl > 1e-6 else min(p, 1.0)
 
 
 # 2. Polymarket markets
@@ -138,34 +144,67 @@ for tag in ("bitcoin", "ethereum", "crypto-prices", "crypto", None):
 events = list(events.values())
 print("events scanned", len(events))
 rows = []
-pat_above = re.compile(r"(bitcoin|ethereum)\b.*?\babove\s+\$?([\d,\.]+)(k?)\b.*?\bon\s+([a-z]+)\s+(\d+)", re.I)
-pat_between = re.compile(r"(bitcoin|ethereum)\b.*?\bbetween\s+\$?([\d,\.]+)(k?)\s+and\s+\$?([\d,\.]+)(k?)\b.*?\bon\s+([a-z]+)\s+(\d+)", re.I)
-pat_touch = re.compile(r"(bitcoin|ethereum)\b.*?\b(reach|hit|dip to)\s+\$?([\d,\.]+)(k?)\b.*?\b(by|in|before)\s+([a-z]+)\s*(\d+)?(?:,\s*(\d{4}))?", re.I)
+MONTHS = "january|february|march|april|may|june|july|august|september|october|november|december"
+SKIP = re.compile(r"hashprice|dominance|volatility index|kimchi|gas price|\bfirst\b|etf|flows|reserve|treasury|mcap|market cap", re.I)
+NUM = r"\$?([\d,]+(?:\.\d+)?)(k?)"
+
+
+def num(x, k):
+    return float(x.replace(",", "")) * (1000 if k else 1)
+
+
+def et(y, mo, d, h=12, mi=0):           # ET -> UTC (EST from early November to March)
+    return dt.datetime(y, mo, d, h, mi, tzinfo=dt.timezone.utc) + dt.timedelta(hours=5)
+
+
+def parse(q):
+    c = re.search(r"\b(bitcoin|ethereum)\b", q, re.I)
+    if not c or SKIP.search(q):
+        return None
+    coin = COIN[c.group(1).lower()]
+    md = re.search(rf"\b({MONTHS})\s+(\d{{1,2}})(?:\s*-\s*(\d{{1,2}}))?(?:,\s*(\d{{4}}))?", q, re.I)
+    mm = re.search(rf"\bin\s+({MONTHS})\b", q, re.I)
+    tm = re.search(r"(\d{1,2})(?::(\d\d))?\s*(AM|PM)\s*ET", q, re.I)
+    def yr(mo, y4):
+        return int(y4) if y4 else now.year + (1 if mo < now.month - 1 else 0)
+    tch = re.search(rf"\b(reach|hit|dip to)\s+{NUM}", q, re.I)
+    if tch:
+        K = num(tch.group(2), tch.group(3))
+        if md:
+            mo = MON[md.group(1).lower()]; d = int(md.group(3) or md.group(2))
+            T = et(yr(mo, md.group(4)), mo, d, 23, 59)
+        elif mm:
+            mo = MON[mm.group(1).lower()]; y = yr(mo, None)
+            T = et(y + (mo == 12), mo % 12 + 1, 1, 0, 0) - dt.timedelta(minutes=1)
+        else:
+            return None
+        return {"kind": "touch", "coin": coin, "lo": K, "hi": None, "T": T}
+    if not md:
+        return None
+    mo = MON[md.group(1).lower()]; y = yr(mo, md.group(4)); d = int(md.group(2))
+    if tm:
+        h = int(tm.group(1)) % 12 + (12 if tm.group(3).upper() == "PM" else 0)
+        T = et(y, mo, d, h, int(tm.group(2) or 0))
+    else:
+        T = et(y, mo, d, 12, 0)
+    bt = re.search(rf"\bbetween\s+{NUM}\s+and\s+{NUM}", q, re.I)
+    if bt:
+        return {"kind": "between", "coin": coin, "lo": num(bt.group(1), bt.group(2)), "hi": num(bt.group(3), bt.group(4)), "T": T}
+    lt = re.search(rf"\b(less than|below|under)\s+{NUM}", q, re.I)
+    if lt:
+        return {"kind": "below", "coin": coin, "lo": num(lt.group(2), lt.group(3)), "hi": None, "T": T}
+    gt = re.search(rf"\b(above|greater than|more than|over)\s+{NUM}", q, re.I)
+    if gt:
+        return {"kind": "above", "coin": coin, "lo": num(gt.group(2), gt.group(3)), "hi": None, "T": T}
+    return None
+
+
 seen_titles = {}
 for ev in events:
     for m in ev.get("markets") or []:
         q = m.get("question") or ""
-        a = pat_above.search(q); b = None if a else pat_between.search(q)
-        tm = None if (a or b) else pat_touch.search(q)
-        if tm:
-            try:
-                toks = json.loads(m.get("clobTokenIds") or "[]")
-            except ValueError:
-                toks = []
-            coin, verb, k, kk, prep, mon, day = tm.groups()[:7]
-            if len(toks) == 2 and mon.lower() in MON:
-                y = int(tm.group(8)) if tm.group(8) else now.year + (1 if MON[mon.lower()] < now.month - 1 else 0)
-                if day:
-                    T = dt.datetime(y, MON[mon.lower()], int(day), 23, 59, tzinfo=dt.timezone.utc) + dt.timedelta(hours=5)
-                else:            # "in November": to the end of the month, ET
-                    nm = dt.datetime(y + (MON[mon.lower()] == 12), MON[mon.lower()] % 12 + 1, 1, tzinfo=dt.timezone.utc)
-                    T = nm + dt.timedelta(hours=5) - dt.timedelta(minutes=1)
-                if T > now:
-                    rows.append({"q": q, "coin": COIN[coin.lower()], "lo": float(k.replace(",", "")) * (1000 if kk else 1), "hi": None,
-                                 "touch": True, "T": T.isoformat(), "yes": toks[0], "end": m.get("endDate"), "slug": m.get("slug"),
-                                 "desc": (m.get("description") or "")[:300]})
-            continue
-        if not (a or b):
+        r = parse(q)
+        if not r:
             t = ev.get("title") or ""
             if re.search(r"bitcoin|ethereum", t, re.I) and re.search(r"price|above|below|between|hit|reach", t, re.I):
                 seen_titles.setdefault(t, q)
@@ -174,21 +213,11 @@ for ev in events:
             toks = json.loads(m.get("clobTokenIds") or "[]")
         except ValueError:
             continue
-        if len(toks) != 2:
+        if len(toks) != 2 or r["T"] <= now:
             continue
-        if a:
-            coin, k, kk, mon, day = a.groups(); lo = float(k.replace(",", "")) * (1000 if kk else 1); hi = None
-        else:
-            coin, k1, kk1, k2, kk2, mon, day = b.groups()
-            lo = float(k1.replace(",", "")) * (1000 if kk1 else 1); hi = float(k2.replace(",", "")) * (1000 if kk2 else 1)
-        if mon.lower() not in MON:
-            continue
-        y = now.year + (1 if MON[mon.lower()] < now.month - 1 else 0)
-        T = dt.datetime(y, MON[mon.lower()], int(day), 17, 0, tzinfo=dt.timezone.utc)   # 12:00 ET (EST, Nov-Mar)
-        if T <= now:
-            continue
-        rows.append({"q": q, "coin": COIN[coin.lower()], "lo": lo, "hi": hi, "T": T.isoformat(), "yes": toks[0],
-                     "end": m.get("endDate"), "slug": m.get("slug"), "desc": (m.get("description") or "")[:300]})
+        r.update({"q": q, "T": r["T"].isoformat(), "yes": toks[0], "no": toks[1], "end": m.get("endDate"), "slug": m.get("slug"),
+                  "desc": (m.get("description") or "")[:400]})
+        rows.append(r)
 print("price-threshold markets:", len(rows))
 print("unmatched crypto price events (title | first question):")
 for t, q in list(seen_titles.items())[:40]:
@@ -198,7 +227,7 @@ if rows:
 
 # 3. books
 books = {}
-toks = [r["yes"] for r in rows]
+toks = [t for r in rows for t in (r["yes"], r["no"])]
 for i in range(0, len(toks), 400):
     try:
         resp = S.post(f"{CLOB}/books", json=[{"token_id": t} for t in toks[i:i + 400]], timeout=40)
@@ -212,23 +241,40 @@ for i in range(0, len(toks), 400):
 out = []
 for r in rows:
     T = dt.datetime.fromisoformat(r["T"])
-    p = touch(r["coin"], r["lo"], T) if r.get("touch") else digital(r["coin"], r["lo"], T)
-    if p is not None and r["hi"] is not None:
-        p2 = digital(r["coin"], r["hi"], T)
-        p = None if p2 is None else max(p - p2, 0.0)
+    if r["kind"] == "touch":
+        p = touch(r["coin"], r["lo"], T)
+    else:
+        p = digital(r["coin"], r["lo"], T)
+        if p is not None and r["kind"] == "below":
+            p = 1 - p
+        if p is not None and r["kind"] == "between":
+            p2 = digital(r["coin"], r["hi"], T)
+            p = None if p2 is None else max(p - p2, 0.0)
     ask, bid = books.get(r["yes"], (None, None))
-    r.update({"model": None if p is None else round(p, 4), "ask": ask, "bid": bid,
+    no_ask, no_bid = books.get(r["no"], (None, None))
+    r.update({"model": None if p is None else round(p, 4), "ask": ask, "bid": bid, "no_ask": no_ask,
               "days": round((T - now).total_seconds() / 86400, 2)})
     out.append(r)
 os.makedirs("data/research", exist_ok=True)
-json.dump({"at": now.isoformat(), "rows": out}, open("data/research/options_probe.json", "w"), indent=0)
+json.dump({"at": now.isoformat(), "rows": out,
+           "surface": {c: {e.isoformat(): v for e, v in d.items()} for c, d in surf.items()}}, open("data/research/options_probe.json", "w"), indent=0)
 good = [r for r in out if r["model"] is not None and r["ask"] and r["bid"]]
 print(f"\npriced with both: {len(good)}")
 gaps = sorted(((r["ask"][0] + r["bid"][0]) / 2 - r["model"]) for r in good)
 if gaps:
     print("mid - model: p10 %+.3f median %+.3f p90 %+.3f" % (gaps[len(gaps) // 10], gaps[len(gaps) // 2], gaps[9 * len(gaps) // 10]))
+# summary by kind and horizon
+for kind in ("above", "below", "between", "touch"):
+    for lo_d, hi_d in ((0, 0.5), (0.5, 3), (3, 10), (10, 400)):
+        G = [((r["ask"][0] + r["bid"][0]) / 2 - r["model"]) for r in good if r["kind"] == kind and lo_d <= r["days"] < hi_d]
+        if G:
+            G.sort()
+            print(f"  {kind:7} {lo_d:>4}-{hi_d:<4} d: n {len(G):3}  mid - model median {G[len(G) // 2]:+.3f}  p10 {G[len(G) // 10]:+.3f}  p90 {G[9 * len(G) // 10]:+.3f}")
 for r in sorted(good, key=lambda r: (r["coin"], r["T"], r["lo"])):
+    if r["days"] < 0.5:
+        continue
     mid = (r["ask"][0] + r["bid"][0]) / 2
-    flag = " BUY YES" if r["model"] - r["ask"][0] >= 0.03 else (" BUY NO" if r["bid"][0] - r["model"] >= 0.03 else "")
-    print(f"  {r['coin']} {r['days']:5.1f} d  {'touch' if r.get('touch') else ('>' if r['hi'] is None else 'in'):>5} {r['lo']:>9,.0f}{'' if r['hi'] is None else '-' + format(r['hi'], ',.0f'):>9}"
+    na = r["no_ask"][0] if r.get("no_ask") else None
+    flag = " BUY YES" if r["model"] - r["ask"][0] >= 0.03 else (" BUY NO" if na is not None and (1 - r["model"]) - na >= 0.03 else "")
+    print(f"  {r['coin']} {r['days']:5.1f} d  {r['kind']:>7} {r['lo']:>9,.0f}{'' if r['hi'] is None else '-' + format(r['hi'], ',.0f'):>9}"
           f"  model {r['model']:.3f}  bid {r['bid'][0]:.3f} ask {r['ask'][0]:.3f} (size {r['ask'][1]:.0f})  mid-model {mid - r['model']:+.3f}{flag}")
