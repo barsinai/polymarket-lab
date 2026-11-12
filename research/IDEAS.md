@@ -18,10 +18,13 @@ Status: TESTING (paper/backtest running) · READY (next up) · PARKED (needs som
 | Research journal (my forecasts with sources) | reading + cross-checking beats the crowd on slow political/econ questions | forecast_log.py, Brier vs market | 11-10 | weeks |
 
 ## READY (ranked)
-0. **Push-driven lock_m for ETH/SOL (latency, not edge):** capacity_v1: their cheap asks vanish in 0.04-0.11 s after our 2-s
-   REST look, but the edge there is the fattest (+8..+13%). The bot already receives book and price pushes in-process
-   (book_ws, rtds): decide on the push, not the 2-s tick. Test: replay lock_m on the websocket recordings with a decision
-   delay of 50 / 100 / 250 ms and count the fills.
+0. **Push-driven lock_m for ETH/SOL (latency, not edge):** capacity_v1 (bot trades, legit): their cheap asks vanish in
+   0.04-0.11 s after our 2-s REST look. The websocket replay that said +21..+39% at 0.05-1 s had a 1.5-s lookahead (11-12);
+   without it, local 11-08..11-10: -3..-5% at <= 1 s. Read-out: server lockm.jsonl lines with "feed": "rx" (from 11-12 13h).
+0b. **Binance nowcast (testing 11-12):** RTDS carries Binance prices ~1 s before the Chainlink prints they anticipate
+   (arrival 0.43 s vs 1.46 s; return correlation +0.3..+0.44 with Chainlink's same/next second). Model = last received
+   Chainlink print x Binance move since its timestamp. Test: lifetimes FEED_TIME=bn vs rx vs ts (ts = perfect 1.5-s foresight,
+   the ceiling). Live cost: none (same socket, the bot already stores the topic).
 0a. **BTC lock_m sized up:** BTC asks survive (78% > 1 s) and others bought $1.3k per signal at <= our price; edge thin (+2-3%).
    Test: P&L of BTC lock_m at $100 / $250 / $500 against the recorded book (walk the levels).
 1. **Weather W2 same-day nowcast (low prior).** The max only rises: a bucket below a METAR is dead. 11-02: after the
@@ -29,6 +32,12 @@ Status: TESTING (paper/backtest running) · READY (next up) · PARKED (needs som
    each METAR in the afternoon. Test: minute price history vs METAR times (IEM ASOS archive).
 2. **Weather W0 skill backtest.** Open-Meteo historical forecasts (previous runs) vs IEM METAR outcomes for the 40
    stations: calibration of bucket probabilities, the station bias of each city, before trusting W1's trades.
+3. **Options-implied fair value for crypto price ladders.** "Bitcoin above X on <date>" / "price range" markets (daily to
+   monthly) vs the risk-neutral distribution from Deribit options (call spreads around X = digital price). Not a latency
+   game (the 11-01 death): the market vs a liquid options market on the same date, hours-days ahead. Test: hourly
+   snapshots of both (Deribit public API from the server), gap distribution, then paper at real asks.
+3a. **Count markets with a public running tally** (tweet counts per week, etc.): bucket prices vs a rate model updated
+   from the live count (like W2: the count only rises). Test: list the active count markets and their tally sources first.
 4. **Scheduled data buckets (CPI, PPI, payrolls, Fed).** Bucket markets vs a distribution centred on consensus /
    nowcast (Cleveland Fed CPI nowcast) with the historical surprise sd; Kalshi prices on the same release as a cross-check.
 5. **Maker on slow favourites.** Rest a bid 1c under the ask on the YES 0.95-0.98 set: spread + time premium; risk:

@@ -64,19 +64,26 @@ print("tokens known:", len(tok2))
 # feed: chainlink prices per asset as (source timestamp, value, receive time). A print stamped t reaches us ~1.45 s later
 # (p50; p99 2.3 s, measured 11-12): with FEED_TIME=rx (default since 11-12) the model at time t only uses prints RECEIVED
 # by t, like the live bot. FEED_TIME=ts reproduces the old studies, which looked ~1.5 s into the future against the book.
+# FEED_TIME=bn: as rx, plus a nowcast of the prints still in flight from the Binance prices on the same feed (topic
+# crypto_prices, arrives ~0.4 s after its timestamp instead of ~1.45 s): last received Chainlink print x Binance's move since
+# that print's timestamp (no Binance prices for hype and zec: those stay rx).
 FEED_TIME = os.environ.get("FEED_TIME", "rx")
-feed = defaultdict(list); twap60 = defaultdict(list)
+feed = defaultdict(list); twap60 = defaultdict(list); binance = defaultdict(list)
 for o in lines(f"{RTDS}/*.jsonl*"):
     m = o.get("m") or {}; p = m.get("payload") or {}
     if m.get("topic") == "crypto_prices_chainlink" and p.get("symbol"):
         ts = p["timestamp"] / 1000.0
         feed[p["symbol"].split("/")[0]].append((ts, float(p["value"]), o.get("rx", ts) if FEED_TIME == "rx" else ts))
+    elif m.get("topic") == "crypto_prices" and FEED_TIME == "bn" and p.get("symbol") and isinstance(p.get("value"), (int, float)):
+        binance[p["symbol"].replace("usdt", "")].append((p["timestamp"] / 1000.0, float(p["value"]), o.get("rx", 0)))
     elif m.get("topic") == "crypto_prices_twap_sixty" and p.get("symbol") and isinstance(p.get("value"), (int, float)):
         twap60[p["symbol"].split("/")[0].lower()].append((p["timestamp"] / 1000.0, float(p["value"])))
 for a in feed:
     feed[a] = sorted(set(feed[a]))
 for a in twap60:
     twap60[a] = sorted(set(twap60[a]))
+for a in binance:
+    binance[a] = sorted(set(binance[a]))
 # K: the official price to beat is published only after the window is under way (5m: usually not before the last minute),
 # so K_EST=bot (default since 11-11) uses what the bot can know at the start: the 60-s TWAP topic at the start, else the
 # mean of the Chainlink prints in the minute before. K_EST=ptb reproduces the old (hindsight) study.
@@ -138,12 +145,19 @@ def sigma30(ser):
 def z_series(asset, start, end, K):
     """(t, z_up) every 0.5 s for end-R_HI <= t <= end-R_LO (the bot's model: Brownian mean over what is left)"""
     ser = [x for x in feed.get(asset, []) if end - 1500 <= x[0] <= end + 5]
+    bser = [x for x in binance.get(asset, []) if end - R_HI - 30 <= x[0] <= end + 5]
     if len(ser) < 200:
         return []
     out = []
     t = end - R_HI
     while t <= end - max(R_LO, 1):
         hist = [(ts, v) for ts, v, avail in ser if avail <= t and ts <= end]   # what had arrived by t
+        if FEED_TIME == "bn" and hist and bser:
+            tsL, vL = hist[-1]
+            arrived = [(ts, v) for ts, v, avail in bser if avail <= t]
+            ref = [v for ts, v in arrived if ts <= tsL]
+            if ref:
+                hist += [(ts, vL * v / ref[-1]) for ts, v in arrived if tsL < ts <= end]
         if len(hist) < 120:
             t += 0.5; continue
         sg = sigma30(hist[-900:])
