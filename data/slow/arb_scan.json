@@ -1,21 +1,9 @@
 {
-"scanned": "2026-11-12 01:13",
+"scanned": "2026-11-12 02:16",
 "events": 2100,
 "groups": 2037,
-"books": 17242,
+"books": 17238,
 "opps": [
-{
-"kind": "negrisk_all_no",
-"event": "Anthropic IPO Closing Market Cap",
-"slug": "anthropic-ipo-closing-market-cap-higher-strikes",
-"n": 10,
-"cost": 8.984,
-"payoff": 9,
-"edge": 0.016,
-"edge_after_fee": -0.0368,
-"size_shares": 254.37,
-"usd_at_size": 2285.26
-},
 {
 "kind": "negrisk_all_yes",
 "event": "Who will be the top-selling artist by total auction sales in 2026?",
@@ -32,23 +20,8 @@
 "payoff": 1,
 "edge": 0.02,
 "edge_after_fee": 0.0133,
-"size_shares": 83.34,
-"usd_at_size": 81.67
-},
-{
-"kind": "ladder_num",
-"event": "How high will inflation get in 2026?",
-"slug": "how-high-will-inflation-get-in-2026",
-"easy": "Will inflation reach more than 6% in 2026?",
-"hard": "Will inflation reach more than 8% in 2026?",
-"easy_yes_ask": 0.015,
-"hard_no_ask": 0.981,
-"hard_yes_bid": 0.019,
-"cost": 0.996,
-"edge": 0.004,
-"edge_after_fee": 0.0017,
-"size_shares": 305.93,
-"usd_at_size": 304.71
+"size_shares": 141.99,
+"usd_at_size": 139.15
 },
 {
 "kind": "ladder_date",
@@ -96,29 +69,6 @@
 "usd_at_size": 13.02
 },
 {
-"kind": "negrisk_all_yes",
-"event": "What will OpenAI's IPO valuation be?",
-"slug": "what-will-openais-ipo-valuation-be",
-"n": 8,
-"has_other": false,
-"outcomes": [
-"<$1T",
-"$1.0T\u2013$1.25T",
-"$1.25T\u2013$1.5T",
-"$1.5T\u2013$1.75T",
-"$1.75T\u2013$2.0T",
-"$2.0T\u2013$2.25T",
-"$2.25T\u2013$2.5T",
-"$2.5T+"
-],
-"cost": 0.988,
-"payoff": 1,
-"edge": 0.012,
-"edge_after_fee": -0.0455,
-"size_shares": 27.68,
-"usd_at_size": 27.35
-},
-{
 "kind": "ladder_num",
 "event": "Ostium FDV above ___ one day after launch?",
 "slug": "ostium-fdv-above-one-day-after-launch",
@@ -135,21 +85,6 @@
 },
 {
 "kind": "ladder_num",
-"event": "Felix FDV above ___ one day after launch?",
-"slug": "felix-fdv-above-one-day-after-launch",
-"easy": "Felix Protocol FDV above $1B one day after launch?",
-"hard": "Felix Protocol FDV above $2B one day after launch?",
-"easy_yes_ask": 0.018,
-"hard_no_ask": 0.976,
-"hard_yes_bid": 0.024,
-"cost": 0.994,
-"edge": 0.006,
-"edge_after_fee": 0.0031,
-"size_shares": 39.75,
-"usd_at_size": 39.51
-},
-{
-"kind": "ladder_num",
 "event": "Reya FDV above ___ one day after launch?",
 "slug": "reya-fdv-above-one-day-after-launch",
 "easy": "Reya FDV above $300M one day after launch?",
@@ -160,8 +95,8 @@
 "cost": 0.997,
 "edge": 0.003,
 "edge_after_fee": -0.0036,
-"size_shares": 77.47,
-"usd_at_size": 77.24
+"size_shares": 85.0,
+"usd_at_size": 84.75
 },
 {
 "kind": "negrisk_all_yes",
@@ -202,6 +137,29 @@
 "usd_at_size": 27.75
 },
 {
+"kind": "negrisk_all_yes",
+"event": "What will OpenAI's IPO valuation be?",
+"slug": "what-will-openais-ipo-valuation-be",
+"n": 8,
+"has_other": false,
+"outcomes": [
+"<$1T",
+"$1.0T\u2013$1.25T",
+"$1.25T\u2013$1.5T",
+"$1.5T\u2013$1.75T",
+"$1.75T\u2013$2.0T",
+"$2.0T\u2013$2.25T",
+"$2.25T\u2013$2.5T",
+"$2.5T+"
+],
+"cost": 0.994,
+"payoff": 1,
+"edge": 0.006,
+"edge_after_fee": -0.0519,
+"size_shares": 27.68,
+"usd_at_size": 27.51
+},
+{
 "kind": "ladder_num",
 "event": "How high will US unemployment go in 2026?",
 "slug": "how-high-will-us-unemployment-go-in-2026",
@@ -215,21 +173,6 @@
 "edge_after_fee": 0.0037,
 "size_shares": 29.6,
 "usd_at_size": 29.45
-},
-{
-"kind": "ladder_num",
-"event": "Felix FDV above ___ one day after launch?",
-"slug": "felix-fdv-above-one-day-after-launch",
-"easy": "Felix Protocol FDV above $800M one day after launch?",
-"hard": "Felix Protocol FDV above $2B one day after launch?",
-"easy_yes_ask": 0.021,
-"hard_no_ask": 0.976,
-"hard_yes_bid": 0.024,
-"cost": 0.997,
-"edge": 0.003,
-"edge_after_fee": -0.0001,
-"size_shares": 39.75,
-"usd_at_size": 39.63
 },
 {
 "kind": "ladder_num",
@@ -248,25 +191,25 @@
 },
 {
 "kind": "negrisk_all_yes",
-"event": "South Korea Annual Inflation 2026",
-"slug": "south-korea-annual-inflation-2026",
+"event": "Argentina Annual Inflation 2026",
+"slug": "argentina-annual-inflation-2026",
 "n": 7,
 "has_other": false,
 "outcomes": [
-"<1.5%",
-"1.5% to 1.7%",
-"1.8% to 2.0%",
-"2.1% to 2.3%",
-"2.4% to 2.6%",
-"2.7% to 2.9%",
-"3.0%+"
+"<20%",
+"20-24.9%",
+"30.0-34.9%",
+"25-29.9%",
+"35\u201339.9%",
+"45%+",
+"40-44.9%"
 ],
-"cost": 0.991,
+"cost": 0.986,
 "payoff": 1,
-"edge": 0.009,
-"edge_after_fee": -0.0384,
-"size_shares": 11.18,
-"usd_at_size": 11.08
+"edge": 0.014,
+"edge_after_fee": -0.0031,
+"size_shares": 7.5,
+"usd_at_size": 7.39
 },
 {
 "kind": "negrisk_all_yes",
@@ -291,26 +234,34 @@
 "usd_at_size": 9.2
 },
 {
-"kind": "negrisk_all_yes",
-"event": "Argentina Annual Inflation 2026",
-"slug": "argentina-annual-inflation-2026",
-"n": 7,
-"has_other": false,
-"outcomes": [
-"<20%",
-"20-24.9%",
-"30.0-34.9%",
-"25-29.9%",
-"35\u201339.9%",
-"45%+",
-"40-44.9%"
-],
-"cost": 0.996,
-"payoff": 1,
-"edge": 0.004,
-"edge_after_fee": -0.0128,
-"size_shares": 7.5,
-"usd_at_size": 7.47
+"kind": "ladder_num",
+"event": "Felix FDV above ___ one day after launch?",
+"slug": "felix-fdv-above-one-day-after-launch",
+"easy": "Felix Protocol FDV above $1B one day after launch?",
+"hard": "Felix Protocol FDV above $2B one day after launch?",
+"easy_yes_ask": 0.018,
+"hard_no_ask": 0.976,
+"hard_yes_bid": 0.024,
+"cost": 0.994,
+"edge": 0.006,
+"edge_after_fee": 0.0031,
+"size_shares": 9.75,
+"usd_at_size": 9.69
+},
+{
+"kind": "ladder_num",
+"event": "Felix FDV above ___ one day after launch?",
+"slug": "felix-fdv-above-one-day-after-launch",
+"easy": "Felix Protocol FDV above $800M one day after launch?",
+"hard": "Felix Protocol FDV above $2B one day after launch?",
+"easy_yes_ask": 0.021,
+"hard_no_ask": 0.976,
+"hard_yes_bid": 0.024,
+"cost": 0.997,
+"edge": 0.003,
+"edge_after_fee": -0.0001,
+"size_shares": 9.75,
+"usd_at_size": 9.72
 },
 {
 "kind": "ladder_num",
@@ -349,11 +300,11 @@
 "easy": "Printr FDV above $500M one day after launch?",
 "hard": "Printr FDV above $800M one day after launch?",
 "easy_yes_ask": 0.049,
-"hard_no_ask": 0.938,
-"hard_yes_bid": 0.062,
-"cost": 0.987,
-"edge": 0.013,
-"edge_after_fee": 0.0057,
+"hard_no_ask": 0.939,
+"hard_yes_bid": 0.061,
+"cost": 0.988,
+"edge": 0.012,
+"edge_after_fee": 0.0047,
 "size_shares": 1.61,
 "usd_at_size": 1.59
 },
