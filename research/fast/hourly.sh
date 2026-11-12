@@ -27,11 +27,11 @@ for back in $(seq 1 30); do
   for cap in 0.97 0.92; do
     if ! done_line "$H" "$cap"; then
       [ "$back" -gt 1 ] && { [ "$n_back" -ge 4 ] && break 2; n_back=$((n_back + 1)); }
-      K_EST=bot HOUR="$H" ASK_MAX="$cap" R_LO=0 R_HI=60 OUT=data/fast/hourly/lifetimes.jsonl timeout 300 "$PY" research/fast/lifetimes.py 2>&1 | grep -E "windows with" | sed "s/^/  $H cap $cap: /"
+      ( ulimit -v 650000; K_EST=bot HOUR="$H" ASK_MAX="$cap" R_LO=0 R_HI=60 OUT=data/fast/hourly/lifetimes.jsonl timeout 300 "$PY" research/fast/lifetimes.py ) 2>&1 | grep -E "windows with|MemoryError" | sed "s/^/  $H cap $cap: /"
       # the live rule: exact K (= official ptb since 11-11 13:00 UTC, so ptb is no hindsight from then on), margin >= 1 bp,
       # >= 6 s left -> per-hour lock_m at the websocket's decision latencies (R grid), one hour of data per process (memory)
       if [[ "$H" > "2026-11-11T12" ]]; then
-        K_EST=ptb MARGIN_MIN=1 REM_MIN=6 HOUR="$H" ASK_MAX="$cap" R_LO=0 R_HI=60 OUT=data/fast/hourly/lockm.jsonl timeout 300 "$PY" research/fast/lifetimes.py > /dev/null 2>&1 || true
+        ( ulimit -v 650000; K_EST=ptb MARGIN_MIN=1 REM_MIN=6 HOUR="$H" ASK_MAX="$cap" R_LO=0 R_HI=60 OUT=data/fast/hourly/lockm.jsonl timeout 300 "$PY" research/fast/lifetimes.py ) > /dev/null 2>&1 || true
       fi
     fi
   done
@@ -47,6 +47,7 @@ for j in research/fast/server_jobs/*.py; do
   [ -e "$STORE/jobs_done/$n" ] && continue
   touch "$STORE/jobs_done/$n"
   echo "  server job $n"
-  timeout 420 "$PY" -u "$j" > "data/fast/hourly/job_$n.jsonl" 2>&1 || echo "[exit $?]" >> "data/fast/hourly/job_$n.jsonl"
+  # the server has 927 MiB of RAM: cap each job's address space so a greedy job fails alone instead of taking the runner down
+  ( ulimit -v 650000; timeout 420 "$PY" -u "$j" ) > "data/fast/hourly/job_$n.jsonl" 2>&1 || echo "[exit $?]" >> "data/fast/hourly/job_$n.jsonl"
 done
 echo "hourly $(date -u +%FT%H:%M) done; store $(du -sh "$STORE" 2>/dev/null | cut -f1)"
