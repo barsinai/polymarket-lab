@@ -1,9 +1,24 @@
 {
-"scanned": "2026-11-12 19:53",
+"scanned": "2026-11-12 20:54",
 "events": 2100,
 "groups": 2037,
-"books": 17114,
+"books": 17112,
 "opps": [
+{
+"kind": "ladder_num",
+"event": "GMGN FDV above ___ one day after launch?",
+"slug": "gmgn-fdv-above-one-day-after-launch",
+"easy": "GMGN FDV above $200M one day after launch",
+"hard": "GMGN FDV above $400M one day after launch",
+"easy_yes_ask": 0.33,
+"hard_no_ask": 0.66,
+"hard_yes_bid": 0.34,
+"cost": 0.99,
+"edge": 0.01,
+"edge_after_fee": -0.0212,
+"size_shares": 90.0,
+"usd_at_size": 89.1
+},
 {
 "kind": "negrisk_all_yes",
 "event": "Eurozone Annual GDP Growth 2026",
@@ -60,36 +75,6 @@
 },
 {
 "kind": "ladder_num",
-"event": "Ostium FDV above ___ one day after launch?",
-"slug": "ostium-fdv-above-one-day-after-launch",
-"easy": "Ostium FDV above $50M one day after launch?",
-"hard": "Ostium FDV above $100M one day after launch?",
-"easy_yes_ask": 0.022,
-"hard_no_ask": 0.974,
-"hard_yes_bid": 0.026,
-"cost": 0.996,
-"edge": 0.004,
-"edge_after_fee": 0.0007,
-"size_shares": 182.71,
-"usd_at_size": 181.98
-},
-{
-"kind": "ladder_num",
-"event": "GMGN FDV above ___ one day after launch?",
-"slug": "gmgn-fdv-above-one-day-after-launch",
-"easy": "GMGN FDV above $200M one day after launch",
-"hard": "GMGN FDV above $400M one day after launch",
-"easy_yes_ask": 0.33,
-"hard_no_ask": 0.66,
-"hard_yes_bid": 0.34,
-"cost": 0.99,
-"edge": 0.01,
-"edge_after_fee": -0.0212,
-"size_shares": 60.0,
-"usd_at_size": 59.4
-},
-{
-"kind": "ladder_num",
 "event": "Reya FDV above ___ one day after launch?",
 "slug": "reya-fdv-above-one-day-after-launch",
 "easy": "Reya FDV above $300M one day after launch?",
@@ -100,8 +85,23 @@
 "cost": 0.996,
 "edge": 0.004,
 "edge_after_fee": -0.0026,
-"size_shares": 98.97,
-"usd_at_size": 98.57
+"size_shares": 128.97,
+"usd_at_size": 128.45
+},
+{
+"kind": "ladder_num",
+"event": "Ostium FDV above ___ one day after launch?",
+"slug": "ostium-fdv-above-one-day-after-launch",
+"easy": "Ostium FDV above $50M one day after launch?",
+"hard": "Ostium FDV above $100M one day after launch?",
+"easy_yes_ask": 0.022,
+"hard_no_ask": 0.974,
+"hard_yes_bid": 0.026,
+"cost": 0.996,
+"edge": 0.004,
+"edge_after_fee": 0.0007,
+"size_shares": 100.71,
+"usd_at_size": 100.31
 },
 {
 "kind": "ladder_num",
@@ -117,18 +117,6 @@
 "edge_after_fee": 0.0021,
 "size_shares": 64.48,
 "usd_at_size": 64.09
-},
-{
-"kind": "negrisk_all_no",
-"event": "Anthropic IPO Closing Market Cap",
-"slug": "anthropic-ipo-closing-market-cap-higher-strikes",
-"n": 10,
-"cost": 8.989,
-"payoff": 9,
-"edge": 0.011,
-"edge_after_fee": -0.0419,
-"size_shares": 33.4,
-"usd_at_size": 300.23
 },
 {
 "kind": "ladder_num",
@@ -233,30 +221,30 @@
 "event": "StandX FDV above ___ one day after launch?",
 "slug": "standx-fdv-above-one-day-after-launch",
 "easy": "StandX FDV above $100M one day after launch?",
-"hard": "StandX FDV above $400M one day after launch?",
+"hard": "StandX FDV above $800M one day after launch?",
 "easy_yes_ask": 0.015,
-"hard_no_ask": 0.98,
-"hard_yes_bid": 0.02,
-"cost": 0.995,
-"edge": 0.005,
-"edge_after_fee": 0.0026,
+"hard_no_ask": 0.981,
+"hard_yes_bid": 0.019,
+"cost": 0.996,
+"edge": 0.004,
+"edge_after_fee": 0.0017,
 "size_shares": 27.95,
-"usd_at_size": 27.81
+"usd_at_size": 27.84
 },
 {
 "kind": "ladder_num",
 "event": "StandX FDV above ___ one day after launch?",
 "slug": "standx-fdv-above-one-day-after-launch",
 "easy": "StandX FDV above $100M one day after launch?",
-"hard": "StandX FDV above $800M one day after launch?",
+"hard": "StandX FDV above $400M one day after launch?",
 "easy_yes_ask": 0.015,
-"hard_no_ask": 0.982,
-"hard_yes_bid": 0.018,
-"cost": 0.997,
-"edge": 0.003,
-"edge_after_fee": 0.0007,
+"hard_no_ask": 0.981,
+"hard_yes_bid": 0.019,
+"cost": 0.996,
+"edge": 0.004,
+"edge_after_fee": 0.0017,
 "size_shares": 27.95,
-"usd_at_size": 27.87
+"usd_at_size": 27.84
 },
 {
 "kind": "ladder_num",
