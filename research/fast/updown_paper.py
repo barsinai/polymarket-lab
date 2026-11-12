@@ -88,6 +88,20 @@ def feed(a):
     return "binance", [(t, p) for t, p in list(px[a]) if t >= now - 1200]   # copy: the sampler thread appends
 
 
+def nowcast(a, ser):
+    """the Chainlink prints received so far plus the ones still in flight: a print stamped t arrives ~1.45 s later, the
+    Binance price on the same socket (topic crypto_prices) ~0.43 s later -> last print x Binance's move since its timestamp
+    (11-12 replay, lock_m exact K: -3..-5%/$ without, +1.8..+4.6% with; no Binance prices for hype / zec)"""
+    if not ser:
+        return ser
+    tsL, vL = ser[-1]
+    b = rtds.series("crypto_prices", f"{a}usdt", tsL - 5, time.time() + 5)
+    ref = [v for t, v in b if t <= tsL]
+    if not ref or not ref[-1]:
+        return ser
+    return ser + [(t, vL * v / ref[-1]) for t, v in b if t > tsL]
+
+
 def sigma_of(ser, h=30.0):
     """per-second volatility from overlapping h-second log returns (the Chainlink stream is smoothed, so 1 s
     returns understate the variance over the 30-90 s that matter here)"""
@@ -277,11 +291,14 @@ def main():
                 except OSError:
                     pass
             jobs = []
+            zb = {}          # (asset, window, start) -> (z, margin bp) with the Binance nowcast (last 60 s only)
             for a in ASSETS:
                 src, ser = feed(a)
                 if len(ser) < 60:
                     continue
                 s_now = ser[-1][1]
+                serb = nowcast(a, ser) if src == "chainlink" else ser
+                sb_now = serb[-1][1]
                 sg = sigma_of(ser)
                 if sg:
                     sg = max(sg, SIGMA_FLOOR.get(a, 0.0))
@@ -329,6 +346,10 @@ def main():
                         r = max(end - now, 1.0)
                         sd = max((1 - g) * s_now * sg * math.sqrt(r / 3), 1e-9)
                         z = (g * A + (1 - g) * s_now - K) / sd
+                        lastb = [p for t, p in serb if end - 60 <= t <= end]
+                        Ab = sum(lastb) / len(lastb) if lastb else sb_now
+                        xb = g * Ab + (1 - g) * sb_now - K
+                        zb[key] = (xb / max((1 - g) * sb_now * sg * math.sqrt(r / 3), 1e-9), abs(xb) / K * 1e4 if K else 0.0)
                     p_up = min(max(phi(z), 0.001), 0.999)
                     if not late:
                         acc["model_ts"] = now
@@ -345,13 +366,15 @@ def main():
                     if not ask:
                         continue
                     zs = z if side == "Up" else -z
+                    _zb = zb.get((a, w, st))
+                    zsb = (_zb[0] if side == "Up" else -_zb[0]) if _zb else None
                     ws_ask, ws_bid = None, None   # the recorder runs in its own process; compare offline
                     with open(f"{D}/obs.jsonl", "a") as fh:
                         fh.write(json.dumps({"ts": round(now, 1), "slug": m["slug"], "side": side, "ask": ask[0], "ask_sz": ask[1],
                                              "ws_ask": ws_ask[0] if ws_ask else None, "ws_ask_sz": ws_ask[1] if ws_ask else None, "ws_bid": ws_bid[0] if ws_bid else None,
                                              "bid": bid[0] if bid else None, "bid_sz": bid[1] if bid else None, "p_model": round(p_side, 4),
                                              "z": round(zs, 2), "rem": int(rem), "spot": s_now, "K": K, "k_src": k_src, "src": src,
-                                             "g": round(g, 3), "A": A, "sigma": round(sg, 7), "v": 4}) + "\n")
+                                             "g": round(g, 3), "A": A, "sigma": round(sg, 7), "zb": None if zsb is None else round(zsb, 2), "v": 4}) + "\n")
                     n_obs += 1
                     a_px, a_sz = ask
                     fee = 0.07 * a_px * (1 - a_px)
@@ -422,6 +445,9 @@ def main():
                             picks.append("lock_p_15m")
                         if held >= LOCK_PERSIST:
                             picks.append("lock_p_50")
+                    # lock_b (11-12): lock_m with the Binance nowcast instead of the last received Chainlink print, >= 6 s left
+                    if lock_base and zsb is not None and zsb >= LOCK_Z and _zb[1] >= 1.0 and rem >= 6:
+                        picks.append("lock_b")
                     # early variant (60-140 s before the end): websocket day gave +6.6% at 2 s persistence on 29 episodes (z>=2.5, ask<=0.95)
                     ek = (lk, "early")
                     if 60 < rem <= 140 and zs >= 2.5 and 0.50 <= a_px <= 0.95 and k_src in ("ptb", "twapx", "twap", "chainlink") and src == "chainlink":
