@@ -10,6 +10,7 @@ Status: TESTING (paper/backtest running) · READY (next up) · PARKED (needs som
 | Slow favourites: YES 0.95-0.98, non-sports, 3-30 d | holders sell near-certain outcomes early; the discount is a time premium | history 6,570 markets (+2%/position, 99.5%); converge_paper.py at real asks | 11-10 | first settlements 11-13 |
 | lock_x (5m/15m lock + 2 s persistence + margin >= 1 bp + rem >= 6 s) with the exact price to beat | the K bug made our 'locks' wrong in knife-edge windows; exact K + persistence + margin removes them | replay 48 trades 100% +11%/$; paper lock_x / lock_x50 / lock_xk | 11-11 | 11-13 |
 | lock_early (60-140 s, z >= 2.5, 2 s persistence) | before the last minute the market under-reacts to a large move | replay 65 trades 97% +4.9%; out of sample 17/17 | 11-09 | ongoing |
+| Weather W2 data (same-day buckets already impossible by today's METARs, hourly log data/weather/sameday.jsonl) | if dead buckets still trade above 1c or their NO below 99c, that is riskless | count after 2-3 days | 11-12 | 11-14 |
 | Weather W1: latest ensemble forecast vs temperature buckets (40 cities, 11 buckets, daily) | physics ensembles (ECMWF 51 + GFS 31 + ICON 40 members), fresh runs, hourly METAR max per the rules. PRIOR: 11-01 a 2-day-old deterministic forecast lost to the market (Brier .199 vs .164) - this is the stronger model, low prior | weather_paper.py v1 (per-station bias + residual sd from 60 days of METARs vs archived forecasts, weather_bias.py): probability for every bucket, paper buys at real asks, Brier vs market. First run: 80 events, model-vs-market distance 0.27, 26 positions | 11-11 | 11-13 (resolves daily) |
 | Young markets, NO side: stand-alone non-sports binaries < 72 h old, YES mid 0.30-0.50 | history: priced 0.425, resolved YES 0.237 (n 283) - but history prices may be mids of empty books | young_paper.py at real NO asks, $10 | 11-11 | as they resolve (1-60 d) |
 | Sports vs Pinnacle (no-vig fair vs Polymarket asks, NBA + NHL moneylines and totals, pre-game) | sharp books set the true price; Polymarket books may lag | sharp_compare.py 3 snapshots a day, paper buys at fair - ask >= 2c, closing-line value + results. First snapshot 11-11: 48 pairs, |mid - fair| median 0.6c, p90 of fair - ask +0.7c, max +2.8c (main lines are tight) | 11-11 | 11-18 |
@@ -17,6 +18,11 @@ Status: TESTING (paper/backtest running) · READY (next up) · PARKED (needs som
 | Research journal (my forecasts with sources) | reading + cross-checking beats the crowd on slow political/econ questions | forecast_log.py, Brier vs market | 11-10 | weeks |
 
 ## READY (ranked)
+0. **Live-viability of lock_m (server job capacity_v1, 11-12):** how long the cheap ask survives after our signal and how
+   much others bought below 0.95 / 0.97 - decides whether a live order from Helsinki gets filled and how big it can be.
+0b. **Flow filter for lock_m (server job flow_v1):** local recordings: when net taker flow in the last 40 s points to Up the
+   outcome beat the mid by +4.2 pts (n 55), toward Down -6.1 (n 52), no trades +0.5 (n 246). Takers are informed: skip
+   locks whose flow points the other way? Needs the larger server sample.
 1. **Weather W2 same-day nowcast (low prior).** The max only rises: a bucket below a METAR is dead. 11-02: after the
    day's max is in, the winner trades at ~$1.00 in 99% of 36k markets (bots). What is untested is the hour right after
    each METAR in the afternoon. Test: minute price history vs METAR times (IEM ASOS archive).
@@ -38,6 +44,10 @@ Status: TESTING (paper/backtest running) · READY (next up) · PARKED (needs som
 - Kalshi vs Polymarket automatic pairing (titles do not match; manual for named series only).
 
 ## DEAD (number that killed it)
+- Earlier lock entries 1-4 min before the end (replay, 11-12): z >= 3 at 60-140 s -0.2%/$, z >= 2.5 at 140-240 s 0.0%,
+  z >= 3.5 anywhere 60-240 s -17%.
+- Late favourite at the ask, no model (local recordings, 11-12): buy the side whose best ask is 0.60-0.95 at 20/40/60 s
+  before the end: -36%..+0.1%/$ (cheap asks that survive late are cheap for a reason). The mid-based +10 pts was the spread.
 - Weather fair value from a 2-day-old deterministic forecast (11-01): Brier .199 vs market .164. Known-outcome weather after the day's max (11-02): bots, winner at $1.00 in 99%.
 - Date-ladder arbitrage (11-02, 468 ladders; 11-11 census again): cents.
 - Big sparse ridge (11-02, 39k features, 1M rows): +1.5c val / -0.4c lockbox on fair rows - no robust edge.
