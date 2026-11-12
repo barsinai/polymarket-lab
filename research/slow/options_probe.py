@@ -35,6 +35,51 @@ def N(x):
     return 0.5 * (1 + math.erf(x / math.sqrt(2)))
 
 
+def fit_smile(e, t_e):
+    """quadratic smile sigma(x) = a + b x + c x^2 in x = ln(K/F), least squares on the strikes within 2.5 ATM standard
+    deviations (deep-wing marks of short options sit at the minimum tick and give meaningless vols)"""
+    F = e["F"]; pts = [(math.log(k / F), v) for k, v in e["iv"]]
+    atm = min(pts, key=lambda p: abs(p[0]))[1]
+    sd = atm * math.sqrt(max(t_e, 1e-6))
+    use = [(x, v) for x, v in pts if abs(x) <= 2.5 * sd]
+    if len(use) < 5:
+        use = sorted(pts, key=lambda p: abs(p[0]))[:5]
+    S = [[0.0] * 3 for _ in range(3)]; Y = [0.0] * 3
+    for x, v in use:
+        f = (1.0, x, x * x)
+        for i in range(3):
+            Y[i] += f[i] * v
+            for j in range(3):
+                S[i][j] += f[i] * f[j]
+    try:                                   # solve the 3x3 normal equations (Cramer)
+        def det(m):
+            return (m[0][0] * (m[1][1] * m[2][2] - m[1][2] * m[2][1]) - m[0][1] * (m[1][0] * m[2][2] - m[1][2] * m[2][0])
+                    + m[0][2] * (m[1][0] * m[2][1] - m[1][1] * m[2][0]))
+        D0 = det(S)
+        co = []
+        for i in range(3):
+            M = [row[:] for row in S]
+            for r in range(3):
+                M[r][i] = Y[r]
+            co.append(det(M) / D0)
+    except ZeroDivisionError:
+        co = [atm, 0.0, 0.0]
+    xs = [x for x, _ in use]
+    return {"a": co[0], "b": co[1], "c": co[2], "xlo": min(xs), "xhi": max(xs), "atm": atm}
+
+
+def iv_at(e, K):
+    """(sigma, dsigma/dK) at strike K from the fitted smile (flat beyond the fitted range)"""
+    f = e.get("fit")
+    if not f:
+        return e["iv"][0][1], 0.0
+    x = math.log(K / e["F"]); xc = min(max(x, f["xlo"]), f["xhi"])
+    sig = f["a"] + f["b"] * xc + f["c"] * xc * xc
+    sig = min(max(sig, 0.5 * f["atm"]), 2.5 * f["atm"])
+    slope = (f["b"] + 2 * f["c"] * xc) / K if f["xlo"] < x < f["xhi"] else 0.0
+    return sig, slope
+
+
 # 1. Deribit surface
 surf = {}
 for cur in ("BTC", "ETH"):
@@ -56,20 +101,9 @@ for cur in ("BTC", "ETH"):
         if o.get("underlying_price"):
             e["F"] = o["underlying_price"]
     surf[cur] = {exp: {"F": e["F"], "iv": sorted((k, sum(v) / len(v)) for k, v in e["iv"].items())} for exp, e in by_exp.items()}
+    for exp, e in surf[cur].items():
+        e["fit"] = fit_smile(e, (exp - now).total_seconds() / (365.25 * 86400))
     print(cur, "expiries", len(surf[cur]), [x.strftime("%m-%d") for x in sorted(surf[cur])][:8])
-
-
-def iv_at(smile, K):
-    ks = [k for k, _ in smile]
-    if K <= ks[0]:
-        return smile[0][1], 0.0
-    if K >= ks[-1]:
-        return smile[-1][1], 0.0
-    for (k1, v1), (k2, v2) in zip(smile, smile[1:]):
-        if k1 <= K <= k2:
-            sl = (v2 - v1) / (k2 - k1)
-            return v1 + sl * (K - k1), sl
-    return smile[-1][1], 0.0
 
 
 def digital(cur, K, T, skew_on=True):
@@ -82,7 +116,7 @@ def digital(cur, K, T, skew_on=True):
     pts = []
     for e in ([lo[-1]] if lo else []) + ([hi[0]] if hi else []):
         t_e = max((e - now).total_seconds() / (365.25 * 86400), 1e-6)
-        sig, sl = iv_at(surf[cur][e]["iv"], K)
+        sig, sl = iv_at(surf[cur][e], K)
         pts.append((t_e, sig * sig * t_e, surf[cur][e]["F"], sl * math.sqrt(t_e)))
     if len(pts) == 2 and pts[1][0] > pts[0][0]:
         a = (tau - pts[0][0]) / (pts[1][0] - pts[0][0])
@@ -109,7 +143,7 @@ def touch(cur, K, T):
     S0 = surf[cur][exps[0]]["F"]
     tau = (T - now).total_seconds() / (365.25 * 86400)
     e = min((x for x in exps if x >= T), default=exps[-1])
-    sig, _ = iv_at(surf[cur][e]["iv"], K)
+    sig, _ = iv_at(surf[cur][e], K)
     sw = sig * math.sqrt(max(tau, 1e-8))
     up = K >= S0
     b = math.log(K / S0) if up else math.log(S0 / K)
