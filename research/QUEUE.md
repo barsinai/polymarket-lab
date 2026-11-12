@@ -652,3 +652,6 @@ Price drift in the trade's direction (what a market maker on the other side lose
   (hourly/daily above, below, between buckets, touches). Daily/weekly within +-1c of the options median; tails 1-2c rich;
   ETH 2,000-2,100 bucket 3.5-7c cheap on all 6 dates (model 0.59 vs ask 0.52 tomorrow); long-dated far-OTM YES rich
   (BTC 150k by end-2027: 0.21 vs 0.06). Tracker every 2 h with paper buys at >= 4c and a Brier log.
+- 11-12 17h cycle 1: young NO history at executable prices (young_exec_history.py, data/research/young_exec_history.json):
+  path questions +16%/$ at the real +10.5c NO spread (138 events), fixed-date -31% (32), completed 2026H2 path -6.6% (34).
+  Next up: N2 box-office census (closed markets, Fri 12:00 UTC price vs preview multiplier).

@@ -29,6 +29,9 @@ survives them. Add a lesson whenever an idea dies for a reason not already here.
    the exact resolution rule, a deeper market like options).
 10. **Infra bugs masquerade as results.** Wrong K (price to beat), code not picked up until the next publish, memory caps,
     missed snapshots during outages. Before reading a number, check the run actually used the code and data you think.
+11. **Early settlements are a biased sample.** Path questions ('hit X', 'announced by') resolve YES the moment they happen
+    and NO only at the end; the first paper settlements and the newest history half are therefore YES-heavy (young NO: 0/9
+    in paper, 2026H2 history YES 36-39%). Read a tracker at its end dates, or compare only markets that are all finished.
 
 ## Where edges plausibly still live (derived from the above)
 - Information the crowd processes slowly and bots don't cover: resolution-rule details (exact station, exact candle,

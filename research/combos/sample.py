@@ -40,7 +40,12 @@ def main():
         if not isinstance(m, dict):
             continue
         ev = m.get("event_id") or m.get("event_slug") or m.get("game_id") or m.get("event") or m.get("slug")
-        for o in m.get("outcomes") or m.get("positions") or m.get("tokens") or []:
+        outs = m.get("outcomes") or m.get("positions") or m.get("tokens") or []
+        if isinstance(outs, dict):  # combo API: {"yes": {label, position_id, price}, "no": {...}}
+            outs = [dict(v, outcome=v.get("label") or k) for k, v in outs.items() if isinstance(v, dict)]
+        for o in outs:
+            if not isinstance(o, dict):
+                continue
             pid = o.get("position_id") or o.get("token_id") or o.get("id")
             px = o.get("price") or o.get("mid_price") or o.get("mid")
             if pid:
