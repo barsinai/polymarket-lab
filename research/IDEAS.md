@@ -18,8 +18,12 @@ Status: TESTING (paper/backtest running) · READY (next up) · PARKED (needs som
 | Research journal (my forecasts with sources) | reading + cross-checking beats the crowd on slow political/econ questions | forecast_log.py, Brier vs market | 11-10 | weeks |
 
 ## READY (ranked)
-0. **Live-viability of lock_m (server job capacity_v1, 11-12):** how long the cheap ask survives after our signal and how
-   much others bought below 0.95 / 0.97 - decides whether a live order from Helsinki gets filled and how big it can be.
+0. **Push-driven lock_m for ETH/SOL (latency, not edge):** capacity_v1: their cheap asks vanish in 0.04-0.11 s after our 2-s
+   REST look, but the edge there is the fattest (+8..+13%). The bot already receives book and price pushes in-process
+   (book_ws, rtds): decide on the push, not the 2-s tick. Test: replay lock_m on the websocket recordings with a decision
+   delay of 50 / 100 / 250 ms and count the fills.
+0a. **BTC lock_m sized up:** BTC asks survive (78% > 1 s) and others bought $1.3k per signal at <= our price; edge thin (+2-3%).
+   Test: P&L of BTC lock_m at $100 / $250 / $500 against the recorded book (walk the levels).
 0b. **Flow filter for lock_m (server job flow_v1):** local recordings: when net taker flow in the last 40 s points to Up the
    outcome beat the mid by +4.2 pts (n 55), toward Down -6.1 (n 52), no trades +0.5 (n 246). Takers are informed: skip
    locks whose flow points the other way? Needs the larger server sample.

@@ -612,3 +612,12 @@ Price drift in the trade's direction (what a market maker on the other side lose
   lock_m before the fix (11-09 22:42 .. 11-11 13:00): 69 trades ~91%, -$6. The K error was the difference.
 - Sharp odds 22:05 snapshot: 70 pairs, |mid - fair| median 0.5c, max fair - ask +1.7c -> no paper position (threshold 2c).
 - Weather: 211 open (94 calibrated); first resolutions today. Converge 89 open, first 11-13. Young 31 open.
+
+## 11-12 08:50 CAPACITY / LATENCY of the lock signals (server job capacity_v1, 45 signals since the K fix)
+- Survival of the cheap ask after the bot's 2-s look: median 0.48 s; > 0.25 s in 53%, > 1 s in 40%.
+- By asset: BTC survives (median 2.1 s, 78% > 1 s) and is deep: after our signal others bought $776 median / $1,286 mean at
+  <= our price. ETH/SOL: gone in 0.04-0.11 s (fast bots), $85-108 median. XRP/DOGE/BNB/HYPE/ZEC: $0-23 median.
+- The trade-off: where the size is (BTC) the edge is thinnest (lock_m BTC 91-93%, +2-3%/$ in the replays; a BTC lock_m loss at
+  11-12 04:29 with margin 1.79 bp); where the edge is fat (ETH/SOL/BNB/DOGE lock_m 96-100%, +8..+13%) the ask is gone in
+  a tenth of a second and holds $25-200.
+- flow_v1 hit the 420-s limit (30 h of events, full JSON parse); flow_v2 tests the time window before parsing (5 h in 26 s).
