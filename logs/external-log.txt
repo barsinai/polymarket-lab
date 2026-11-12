@@ -1,113 +1,58 @@
-BTC: 25082 hours
-ETH: 25082 hours
-SOL: 25082 hours
-XRP: 25082 hours
-DOGE: 25082 hours
-London: 21456 hours, 21456 with 2-day-old forecast
-New York City: 21456 hours, 21456 with 2-day-old forecast
-Paris: 21456 hours, 21456 with 2-day-old forecast
-Hong Kong: 21456 hours, 21456 with 2-day-old forecast
-Shanghai: 21456 hours, 21456 with 2-day-old forecast
-Atlanta: 21456 hours, 21456 with 2-day-old forecast
-Seoul: 21456 hours, 21456 with 2-day-old forecast
-Beijing: 21456 hours, 21456 with 2-day-old forecast
-Wellington: 21456 hours, 21456 with 2-day-old forecast
-Dallas: 21456 hours, 21456 with 2-day-old forecast
-Seattle: 21456 hours, 21456 with 2-day-old forecast
-Miami: 21456 hours, 21456 with 2-day-old forecast
-Tokyo: 21456 hours, 21456 with 2-day-old forecast
-Buenos Aires: 21456 hours, 21456 with 2-day-old forecast
-Chicago: 21456 hours, 21456 with 2-day-old forecast
-Shenzhen: 21456 hours, 21456 with 2-day-old forecast
-Ankara: 21456 hours, 21456 with 2-day-old forecast
-Munich: 21456 hours, 21456 with 2-day-old forecast
-Madrid: 21456 hours, 21456 with 2-day-old forecast
-Toronto: 21456 hours, 21456 with 2-day-old forecast
-Chengdu: 21456 hours, 21456 with 2-day-old forecast
-Taipei: 21456 hours, 21456 with 2-day-old forecast
-Singapore: 21456 hours, 21456 with 2-day-old forecast
-Chongqing: 21456 hours, 21456 with 2-day-old forecast
-Los Angeles: 21456 hours, 21456 with 2-day-old forecast
-Lucknow: 21456 hours, 21456 with 2-day-old forecast
-Sao Paulo: 21456 hours, 21456 with 2-day-old forecast
-São Paulo: 21456 hours, 21456 with 2-day-old forecast
-Mexico City: 21456 hours, 21456 with 2-day-old forecast
-Moscow: 21456 hours, 21456 with 2-day-old forecast
-Istanbul: 21456 hours, 21456 with 2-day-old forecast
-Denver: 21456 hours, 21456 with 2-day-old forecast
-Houston: 21456 hours, 21456 with 2-day-old forecast
-Phoenix: 21456 hours, 21456 with 2-day-old forecast
-Boston: 21456 hours, 21456 with 2-day-old forecast
-Washington DC: 21456 hours, 21456 with 2-day-old forecast
-San Francisco: 21456 hours, 21456 with 2-day-old forecast
-Philadelphia: 21456 hours, 21456 with 2-day-old forecast
-Austin: 21456 hours, 21456 with 2-day-old forecast
-Sydney: 21456 hours, 21456 with 2-day-old forecast
-Berlin: 21456 hours, 21456 with 2-day-old forecast
-Traceback (most recent call last):
-  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/urllib3/connectionpool.py", line 540, in _make_request
-    response = conn.getresponse()
-               ^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/urllib3/connection.py", line 638, in getresponse
-    httplib_response = super().getresponse()
-                       ^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/http/client.py", line 1478, in getresponse
-    response.begin()
-  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/http/client.py", line 343, in begin
-    version, status, reason = self._read_status()
-                              ^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/http/client.py", line 304, in _read_status
-    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/socket.py", line 720, in readinto
-    return self._sock.recv_into(b)
-           ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/ssl.py", line 1264, in recv_into
-    return self.read(nbytes, buffer)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/ssl.py", line 1116, in read
-    return self._sslobj.read(len, buffer)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-TimeoutError: The read operation timed out
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/requests/adapters.py", line 696, in send
-    resp = conn.urlopen(
-           ^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/urllib3/connectionpool.py", line 847, in urlopen
-    retries = retries.increment(
-              ^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/urllib3/util/retry.py", line 510, in increment
-    raise reraise(type(error), error, _stacktrace)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/urllib3/util/util.py", line 39, in reraise
-    raise value
-  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/urllib3/connectionpool.py", line 793, in urlopen
-    response = self._make_request(
-               ^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/urllib3/connectionpool.py", line 542, in _make_request
-    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
-  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/urllib3/connectionpool.py", line 373, in _raise_timeout
-    raise ReadTimeoutError(
-urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='previous-runs-api.open-meteo.com', port=443): Read timed out. (read timeout=120)
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home/runner/work/polymarket-lab/polymarket-lab/research/external/weather.py", line 39, in <module>
-    r = S.get("https://previous-runs-api.open-meteo.com/v1/forecast",
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/requests/sessions.py", line 671, in get
-    return self.request("GET", url, params=params, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/requests/sessions.py", line 651, in request
-    resp = self.send(prep, **send_kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/requests/sessions.py", line 784, in send
-    r = adapter.send(request, **kwargs)
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/requests/adapters.py", line 742, in send
-    raise ReadTimeout(e, request=request)
-requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='previous-runs-api.open-meteo.com', port=443): Read timed out. (read timeout=120)
+BTC: 25106 hours
+ETH: 25106 hours
+SOL: 25106 hours
+XRP: 25106 hours
+DOGE: 25106 hours
+London: 21480 hours, 21480 with 2-day-old forecast
+New York City: 21480 hours, 21480 with 2-day-old forecast
+Paris: 21480 hours, 21480 with 2-day-old forecast
+Hong Kong: 21480 hours, 21480 with 2-day-old forecast
+Shanghai: 21480 hours, 21480 with 2-day-old forecast
+Atlanta: 21480 hours, 21480 with 2-day-old forecast
+Seoul: 21480 hours, 21480 with 2-day-old forecast
+Beijing: 21480 hours, 21480 with 2-day-old forecast
+Wellington: 21480 hours, 21480 with 2-day-old forecast
+Dallas: 21480 hours, 21480 with 2-day-old forecast
+Seattle: 21480 hours, 21480 with 2-day-old forecast
+Miami: 21480 hours, 21480 with 2-day-old forecast
+Tokyo: 21480 hours, 21480 with 2-day-old forecast
+Buenos Aires: 21480 hours, 21480 with 2-day-old forecast
+Chicago: 21480 hours, 21480 with 2-day-old forecast
+Shenzhen: 21480 hours, 21480 with 2-day-old forecast
+Ankara: 21480 hours, 21480 with 2-day-old forecast
+Munich: 21480 hours, 21480 with 2-day-old forecast
+Madrid: 21480 hours, 21480 with 2-day-old forecast
+Toronto: 21480 hours, 21480 with 2-day-old forecast
+Chengdu: 21480 hours, 21480 with 2-day-old forecast
+Taipei: 21480 hours, 21480 with 2-day-old forecast
+Singapore: 21480 hours, 21480 with 2-day-old forecast
+Chongqing: 21480 hours, 21480 with 2-day-old forecast
+Los Angeles: 21480 hours, 21480 with 2-day-old forecast
+Lucknow: 21480 hours, 21480 with 2-day-old forecast
+Sao Paulo: 21480 hours, 21480 with 2-day-old forecast
+São Paulo: 21480 hours, 21480 with 2-day-old forecast
+Mexico City: 21480 hours, 21480 with 2-day-old forecast
+Moscow: 21480 hours, 21480 with 2-day-old forecast
+Istanbul: 21480 hours, 21480 with 2-day-old forecast
+Denver: 21480 hours, 21480 with 2-day-old forecast
+Houston 429 {"error":true,"reason":"Minutely API request limit exceeded. Please try again in one minute."}
+Houston 429 {"reason":"Minutely API request limit exceeded. Please try again in one minute.","error":true}
+Houston: 21480 hours, 21480 with 2-day-old forecast
+Phoenix: 21480 hours, 21480 with 2-day-old forecast
+Boston: 21480 hours, 21480 with 2-day-old forecast
+Washington DC: 21480 hours, 21480 with 2-day-old forecast
+San Francisco: 21480 hours, 21480 with 2-day-old forecast
+Philadelphia: 21480 hours, 21480 with 2-day-old forecast
+Austin: 21480 hours, 21480 with 2-day-old forecast
+Sydney: 21480 hours, 21480 with 2-day-old forecast
+Berlin: 21480 hours, 21480 with 2-day-old forecast
+Rome: 21480 hours, 21480 with 2-day-old forecast
+Dubai: 21480 hours, 21480 with 2-day-old forecast
+Mumbai: 21480 hours, 21480 with 2-day-old forecast
+Delhi: 21480 hours, 21480 with 2-day-old forecast
+Jakarta: 21480 hours, 21480 with 2-day-old forecast
+Bangkok: 21480 hours, 21480 with 2-day-old forecast
+Cairo: 21480 hours, 21480 with 2-day-old forecast
+Wuhan: 21480 hours, 21480 with 2-day-old forecast
+Guangzhou: 21480 hours, 21480 with 2-day-old forecast
+Hangzhou: 21480 hours, 21480 with 2-day-old forecast
