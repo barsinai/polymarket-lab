@@ -17,27 +17,32 @@ echo "hourly $(date -u +%FT%H:%M) start"
 # 2. official results for the windows of the last 2 days (Gamma, ~1 request per unsettled window)
 SETTLE_DAYS=2 timeout 360 "$PY" research/fast/settle.py 2>&1 | tail -2
 
-# 3. websocket lifetime study, window level, two ask caps, with the K the bot can know (K_EST=bot; before 11-11 the
-#    summaries used the official price to beat, which is published only late in the window = hindsight).
-#    The hour that just finished first, then back-fill up to 6 older hour-cap runs (last 30 h) that have no K_EST=bot line yet.
-#    Since 11-12 13:00 UTC the lines carry "feed": "rx" (the model only uses Chainlink prints already RECEIVED, ~1.45 s
-#    after their timestamp); older lines without it looked ~1.5 s ahead of the book and are superseded, so they are redone.
-done_line() { grep -q "\"hour\": \"$1\", \"k_est\": \"bot\", \"feed\": \"rx\".*\"ask_max\": $2" data/fast/hourly/lifetimes.jsonl 2>/dev/null && { [[ ! "$1" > "2026-11-11T12" ]] || grep -q "\"hour\": \"$1\", \"k_est\": \"ptb\", \"feed\": \"rx\".*\"ask_max\": $2" data/fast/hourly/lockm.jsonl 2>/dev/null; }; }
-n_back=0
+# 3. websocket lifetime study, window level, two ask caps, one hour of data per process (memory), the hour that just finished
+#    first, then back-fill older hours (last 30 h) while the hook has run < 14 min.
+#    Lines carry "feed": the model only uses Chainlink prints already RECEIVED (rx, ~1.45 s after their timestamp) - lines
+#    from before 11-12 13:00 UTC without it looked ~1.5 s ahead of the book and are superseded - or, with "feed": "bn", also
+#    a nowcast from the Binance prices on the same socket (arrive ~1 s before the Chainlink prints they anticipate).
+#    Up to 11-11 12h: K the bot could know then (K_EST=bot) -> lifetimes.jsonl. From 11-11 13h (bot K = official ptb, so ptb
+#    is no hindsight): the live rule lock_m (margin >= 1 bp, >= 6 s left) at the R latency grid -> lockm.jsonl, rx both caps,
+#    bn at cap 0.97.
+has() { grep -q "\"hour\": \"$1\", \"k_est\": \"$2\", \"feed\": \"$3\".*\"ask_max\": $4" "data/fast/hourly/$5" 2>/dev/null; }
+run_lt() {  # hour k_est feed cap file [extra env...]
+  local H=$1 K=$2 F=$3 C=$4 O=$5; shift 5
+  ( ulimit -v 650000; env "$@" K_EST="$K" FEED_TIME="$F" HOUR="$H" ASK_MAX="$C" R_LO=0 R_HI=60 OUT="data/fast/hourly/$O" timeout 300 "$PY" research/fast/lifetimes.py ) 2>&1 | grep -E "MemoryError|Traceback" | sed "s/^/  $H $F cap $C: /"
+}
 for back in $(seq 1 30); do
+  [ "$back" -gt 1 ] && [ "$SECONDS" -gt 840 ] && break
   H=$(date -u -d "$back hour ago" +%FT%H)
   for cap in 0.97 0.92; do
-    if ! done_line "$H" "$cap"; then
-      [ "$back" -gt 1 ] && { [ "$n_back" -ge 6 ] && break 2; n_back=$((n_back + 1)); }
-      ( ulimit -v 650000; K_EST=bot HOUR="$H" ASK_MAX="$cap" R_LO=0 R_HI=60 OUT=data/fast/hourly/lifetimes.jsonl timeout 300 "$PY" research/fast/lifetimes.py ) 2>&1 | grep -E "windows with|MemoryError" | sed "s/^/  $H cap $cap: /"
-      # the live rule: exact K (= official ptb since 11-11 13:00 UTC, so ptb is no hindsight from then on), margin >= 1 bp,
-      # >= 6 s left -> per-hour lock_m at the websocket's decision latencies (R grid), one hour of data per process (memory)
-      if [[ "$H" > "2026-11-11T12" ]]; then
-        ( ulimit -v 650000; K_EST=ptb MARGIN_MIN=1 REM_MIN=6 HOUR="$H" ASK_MAX="$cap" R_LO=0 R_HI=60 OUT=data/fast/hourly/lockm.jsonl timeout 300 "$PY" research/fast/lifetimes.py ) > /dev/null 2>&1 || true
-      fi
+    if [[ "$H" > "2026-11-11T12" ]]; then
+      has "$H" ptb rx "$cap" lockm.jsonl || run_lt "$H" ptb rx "$cap" lockm.jsonl MARGIN_MIN=1 REM_MIN=6
+      [ "$cap" = 0.97 ] && { has "$H" ptb bn "$cap" lockm.jsonl || run_lt "$H" ptb bn "$cap" lockm.jsonl MARGIN_MIN=1 REM_MIN=6; }
+    else
+      has "$H" bot rx "$cap" lifetimes.jsonl || run_lt "$H" bot rx "$cap" lifetimes.jsonl
     fi
   done
 done
+echo "  lifetimes done at ${SECONDS}s"
 # 4. one-off research jobs on the raw recordings: research/fast/server_jobs/<name>.py runs ONCE (marker in
 #    $STORE/jobs_done/<name>), at most 420 s, stdout -> data/fast/hourly/job_<name>.jsonl (plain text; the .jsonl name makes the
 #    running job's publish step pick it up without a workflow change).

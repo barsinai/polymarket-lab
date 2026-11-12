@@ -267,6 +267,10 @@ if life:
     wl = sorted(x[0] for x in life if x[3]); ll = sorted(x[0] for x in life if not x[3])
     if wl: print("  winners' lifetime median", round(wl[len(wl) // 2], 2), "s;", "losers' median", round(ll[len(ll) // 2], 2) if ll else None, "s")
 
+if OUT and not life:            # an hour without episodes still gets its line (the hook would redo it forever otherwise)
+    with open(OUT, "a") as fh:
+        fh.write(json.dumps({"hour": HOUR, "k_est": K_EST, "feed": FEED_TIME, "since": SINCE, "until": UNTIL, "z": Z, "ask_max": ASK_MAX,
+                             "windows": n_windows, "episodes": 0, "episodes_won": 0, "window_level": {}}) + "\n")
 if not OUT:
   json.dump([{"life": round(x[0], 3), "ask0": x[1], "sz0": x[2], "won": bool(x[3]), "slug": x[4], "side": x[5],
             "ask2": ask_at(x[6], 2.0)[0], "sz2": ask_at(x[6], 2.0)[1]} for x in life], open(f"{D}/episodes.json", "w"))
