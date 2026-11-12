@@ -33,6 +33,10 @@ survives them. Add a lesson whenever an idea dies for a reason not already here.
     and NO only at the end; the first paper settlements and the newest history half are therefore YES-heavy (young NO: 0/9
     in paper, 2026H2 history YES 36-39%). Read a tracker at its end dates, or compare only markets that are all finished.
 
+12. **Run a placebo window.** A 'news move' rule on hourly history (box-office preview momentum +4.7%) did as well on a window with
+    no news (+8.4%) and flipped sign with the entry hour. Before believing a reaction effect, test the same rule where there is
+    no news and at neighbouring clock times; an effect that is not specific to the news is noise in the price series.
+
 ## Where edges plausibly still live (derived from the above)
 - Information the crowd processes slowly and bots don't cover: resolution-rule details (exact station, exact candle,
   rounding), public running tallies, scheduled data with good nowcasts, slow non-sports questions.

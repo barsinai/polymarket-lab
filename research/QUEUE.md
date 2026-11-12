@@ -655,3 +655,7 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - 11-12 17h cycle 1: young NO history at executable prices (young_exec_history.py, data/research/young_exec_history.json):
   path questions +16%/$ at the real +10.5c NO spread (138 events), fixed-date -31% (32), completed 2026H2 path -6.6% (34).
   Next up: N2 box-office census (closed markets, Fri 12:00 UTC price vs preview multiplier).
+
+## 11-12 21:00 cycle 2
+- Box office census (134 films): preview momentum dead (placebo +8.4% > signal +4.7%); Saturday favourite +2.9%/$ at +2c,
+  first half -2% -> paper tracker boxoffice_paper.py at real asks (hourly, Sat 14-02 UTC). Ideas N3 (later weekends), N4 (music charts).
