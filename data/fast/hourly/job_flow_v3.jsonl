@@ -1,0 +1,20 @@
+files 17 since 2026-11-11T18; windows with events 1335
+windows with a mid at end-20 s in 5-95c: 239
+  net flow toward Up     n   36  mean mid 0.666  realized Up 0.583  gap -0.083
+  net flow toward Down   n   42  mean mid 0.374  realized Up 0.357  gap -0.016
+  no trades in 40 s      n  161  mean mid 0.482  realized Up 0.453  gap -0.029
+
+late favourite (buy the side whose best ask is in the band, $20 cap, taker fee):
+  20 s before end, ask 0.60-0.70: n   12 win  66.7% staked    114 pnl    -0.9 (-0.8%)
+  20 s before end, ask 0.70-0.80: n   22 win  54.5% staked    180 pnl   -45.5 (-25.3%)
+  20 s before end, ask 0.80-0.90: n   25 win  52.0% staked    273 pnl   -85.3 (-31.2%)
+  20 s before end, ask 0.90-0.95: n   14 win  92.9% staked    186 pnl    +9.3 (+5.0%)
+  40 s before end, ask 0.60-0.70: n   28 win  64.3% staked    183 pnl   -20.0 (-10.9%)
+  40 s before end, ask 0.70-0.80: n   41 win  63.4% staked    403 pnl   -84.1 (-20.9%)
+  40 s before end, ask 0.80-0.90: n   58 win  77.6% staked    622 pnl   -45.8 (-7.4%)
+  40 s before end, ask 0.90-0.95: n   47 win  87.2% staked    622 pnl   -11.3 (-1.8%)
+  60 s before end, ask 0.60-0.70: n   68 win  63.2% staked    679 pnl   +60.6 (+8.9%)
+  60 s before end, ask 0.70-0.80: n   61 win  60.7% staked    675 pnl  -157.8 (-23.4%)
+  60 s before end, ask 0.80-0.90: n   99 win  79.8% staked   1355 pnl  -105.4 (-7.8%)
+  60 s before end, ask 0.90-0.95: n   87 win  87.4% staked   1209 pnl   -77.9 (-6.4%)
+[exit 124]
