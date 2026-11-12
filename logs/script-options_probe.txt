@@ -1,21 +1,444 @@
 BTC expiries 12 ['11-13', '11-14', '11-15', '11-16', '11-20', '11-27', '12-04', '12-25']
 ETH expiries 12 ['11-13', '11-14', '11-15', '11-16', '11-20', '11-27', '12-04', '12-25']
-HTTP 422 https://gamma-api.polymarket.com/events {"type":"validation error","error":"offset too large, use /events/keyset for deeper pagination"}
-
-HTTP 422 https://gamma-api.polymarket.com/events {"type":"validation error","error":"offset too large, use /events/keyset for deeper pagination"}
-
-HTTP 422 https://gamma-api.polymarket.com/events {"type":"validation error","error":"offset too large, use /events/keyset for deeper pagination"}
-
-events scanned 2100
-price-threshold markets: 0
+tag bitcoin: +496 events
+tag ethereum: +467 events
+tag crypto-prices: +1493 events
+tag crypto: +0 events
+tag None: +479 events
+events scanned 2935
+price-threshold markets: 478
 unmatched crypto price events (title | first question):
-   When will Bitcoin hit $150k? | Will Bitcoin hit $150k by September 30?
-   What price will Bitcoin hit in 2026? | Will Bitcoin dip to $60,000 by December 31, 2026?
-   What price will Ethereum hit in 2026? | Will Ethereum reach $3,000 by December 31, 2026?
-   What will the average monthly Ethereum gas price hit before 2027? | Will the average monthly Ethereum gas price hit 5 Gwei before 2027?
+   Bitcoin price on November 12? | Will the price of Bitcoin be less than $68,000 on November 12?
+   What price will Bitcoin hit on November 12? | Will Bitcoin reach $81,000 on November 12?
+   Bitcoin price on November 13? | Will the price of Bitcoin be less than $68,000 on November 13?
+   Bitcoin price on November 14? | Will the price of Bitcoin be less than $66,000 on November 14?
+   Bitcoin price on November 15? | Will the price of Bitcoin be less than $66,000 on November 15?
+   Bitcoin hashprice: week of November 9? | Will Bitcoin hashprice be less than $25 for the week of November 9?
+   What price will Bitcoin hit November 9-15? | Will Bitcoin reach $88,000 November 9-15?
+   Bitcoin price on November 16? | Will the price of Bitcoin be less than $66,000 on November 16?
+   Bitcoin price on November 17? | Will the price of Bitcoin be less than $64,000 on November 17?
+   Bitcoin price on November 18? | Will the price of Bitcoin be less than $66,000 on November 18?
    Will Bitcoin Dominance hit 70% before 2027? | Will Bitcoin Dominance hit 70% before 2027?
    What will the Bitcoin Volatility Index hit in 2026? | Will the Bitcoin Volatility Index hit 80 in 2026?
    Will Bitcoin kimchi premium hit 8% in 2026? | Will Bitcoin kimchi premium hit 8% in 2026?
+   Ethereum price on November 12? | Will the price of Ethereum be less than $1,800 on November 12?
+   What price will Ethereum hit on November 12? | Will Ethereum reach $2,400 on November 12?
+   Ethereum price on November 13? | Will the price of Ethereum be less than $1,800 on November 13?
+   Ethereum price on November 14? | Will the price of Ethereum be less than $1,800 on November 14?
+   Ethereum price on November 15? | Will the price of Ethereum be less than $1,800 on November 15?
+   What price will Ethereum hit November 9-15? | Will Ethereum reach $2,800 November 9-15?
+   Ethereum price on November 16? | Will the price of Ethereum be less than $1,700 on November 16?
+   Ethereum price on November 17? | Will the price of Ethereum be less than $1,600 on November 17?
+   Ethereum price on November 18? | Will the price of Ethereum be less than $1,600 on November 18?
+   What will the average monthly Ethereum gas price hit before 2027? | Will the average monthly Ethereum gas price hit 5 Gwei before 2027?
    Will Ethereum hit $1,000 or $3,000 first? | Will Ethereum hit $1,000 or $3,000 first?
+example rules: Bitcoin above 75,000 on November 12, 8AM ET? | This market will resolve to "Yes" if the "Close" price for the BTC/USDT 1 hour candle that ends on the time and date specified in the title is higher than the price specified in the title. Otherwise, this market will resolve to "No".
 
-priced with both: 0
+The resolution source for this market is Binance, specifically th
+
+priced with both: 404
+mid - model: p10 -0.028 median +0.005 p90 +0.029
+  BTC   0.2 d      >    66,000           model 1.000  bid 0.998 ask 0.999 (size 19571)  mid-model -0.002
+  BTC   0.2 d     in    68,000  -70,000  model 0.000  bid 0.008 ask 0.020 (size 25)  mid-model +0.014
+  BTC   0.2 d      >    68,000           model 1.000  bid 0.993 ask 0.994 (size 428)  mid-model -0.006
+  BTC   0.2 d     in    70,000  -72,000  model 0.081  bid 0.103 ask 0.120 (size 710)  mid-model +0.030
+  BTC   0.2 d      >    70,000           model 1.000  bid 0.980 ask 0.981 (size 214)  mid-model -0.019
+  BTC   0.2 d      >    71,000           model 0.994  bid 0.990 ask 0.999 (size 10)  mid-model +0.001
+  BTC   0.2 d      >    71,200           model 0.989  bid 0.990 ask 0.999 (size 10)  mid-model +0.005
+  BTC   0.2 d      >    71,400           model 0.982  bid 0.990 ask 0.999 (size 10)  mid-model +0.013
+  BTC   0.2 d      >    71,600           model 0.969  bid 0.990 ask 0.999 (size 10)  mid-model +0.025
+  BTC   0.2 d     in    72,000  -74,000  model 0.876  bid 0.740 ask 0.760 (size 456)  mid-model -0.126 BUY YES
+  BTC   0.2 d      >    72,000           model 0.918  bid 0.854 ask 0.855 (size 62)  mid-model -0.064 BUY YES
+  BTC   0.2 d      >    72,200           model 0.850  bid 0.970 ask 0.999 (size 15)  mid-model +0.135 BUY NO
+  BTC   0.2 d      >    72,400           model 0.778  bid 0.970 ask 0.995 (size 120)  mid-model +0.204 BUY NO
+  BTC   0.2 d      >    72,600           model 0.688  bid 0.930 ask 0.960 (size 30)  mid-model +0.257 BUY NO
+  BTC   0.2 d      >    72,800           model 0.581  bid 0.770 ask 0.820 (size 10)  mid-model +0.214 BUY NO
+  BTC   0.2 d      >    73,200           model 0.342  bid 0.070 ask 0.110 (size 130)  mid-model -0.252 BUY YES
+  BTC   0.2 d      >    73,400           model 0.236  bid 0.020 ask 0.070 (size 120)  mid-model -0.191 BUY YES
+  BTC   0.2 d      >    73,600           model 0.146  bid 0.001 ask 0.048 (size 120)  mid-model -0.122 BUY YES
+  BTC   0.2 d      >    73,800           model 0.083  bid 0.001 ask 0.046 (size 120)  mid-model -0.060 BUY YES
+  BTC   0.2 d      >    74,000           model 0.042  bid 0.001 ask 0.045 (size 120)  mid-model -0.019
+  BTC   0.2 d     in    74,000  -76,000  model 0.042  bid 0.100 ask 0.120 (size 165)  mid-model +0.068 BUY NO
+  BTC   0.2 d      >    74,000           model 0.042  bid 0.110 ask 0.120 (size 264)  mid-model +0.073 BUY NO
+  BTC   0.2 d      >    74,200           model 0.016  bid 0.001 ask 0.045 (size 120)  mid-model +0.007
+  BTC   0.2 d      >    74,400           model 0.007  bid 0.001 ask 0.045 (size 120)  mid-model +0.016
+  BTC   0.2 d      >    74,600           model 0.003  bid 0.001 ask 0.045 (size 120)  mid-model +0.020
+  BTC   0.2 d      >    74,800           model 0.001  bid 0.001 ask 0.045 (size 120)  mid-model +0.022
+  BTC   0.2 d      >    75,000           model 0.000  bid 0.001 ask 0.045 (size 120)  mid-model +0.023
+  BTC   0.2 d     in    76,000  -78,000  model 0.000  bid 0.010 ask 0.020 (size 20)  mid-model +0.015
+  BTC   0.2 d      >    76,000           model 0.000  bid 0.016 ask 0.025 (size 214)  mid-model +0.021
+  BTC   0.2 d     in    78,000  -80,000  model 0.000  bid 0.002 ask 0.006 (size 32)  mid-model +0.004
+  BTC   0.2 d      >    78,000           model 0.000  bid 0.002 ask 0.003 (size 90)  mid-model +0.003
+  BTC   1.2 d      >    66,000           model 0.997  bid 0.990 ask 0.994 (size 5)  mid-model -0.005
+  BTC   1.2 d     in    68,000  -70,000  model 0.047  bid 0.044 ask 0.045 (size 15)  mid-model -0.003
+  BTC   1.2 d      >    68,000           model 0.985  bid 0.980 ask 0.982 (size 5)  mid-model -0.004
+  BTC   1.2 d     in    70,000  -72,000  model 0.187  bid 0.220 ask 0.240 (size 482)  mid-model +0.043 BUY NO
+  BTC   1.2 d      >    70,000           model 0.937  bid 0.926 ask 0.932 (size 269)  mid-model -0.008
+  BTC   1.2 d     in    72,000  -74,000  model 0.488  bid 0.440 ask 0.450 (size 5463)  mid-model -0.043 BUY YES
+  BTC   1.2 d      >    72,000           model 0.750  bid 0.720 ask 0.730 (size 1009)  mid-model -0.025
+  BTC   1.2 d     in    74,000  -76,000  model 0.239  bid 0.230 ask 0.240 (size 400)  mid-model -0.004
+  BTC   1.2 d      >    74,000           model 0.262  bid 0.260 ask 0.270 (size 428)  mid-model +0.003
+  BTC   1.2 d     in    76,000  -78,000  model 0.019  bid 0.032 ask 0.042 (size 435)  mid-model +0.018
+  BTC   1.2 d      >    76,000           model 0.024  bid 0.040 ask 0.050 (size 6056)  mid-model +0.021
+  BTC   1.2 d     in    78,000  -80,000  model 0.003  bid 0.010 ask 0.011 (size 5)  mid-model +0.007
+  BTC   1.2 d      >    78,000           model 0.004  bid 0.016 ask 0.017 (size 50)  mid-model +0.012
+  BTC   1.2 d     in    80,000  -82,000  model 0.001  bid 0.001 ask 0.008 (size 381)  mid-model +0.004
+  BTC   1.2 d      >    80,000           model 0.001  bid 0.004 ask 0.006 (size 800)  mid-model +0.004
+  BTC   1.2 d     in    82,000  -84,000  model 0.000  bid 0.001 ask 0.002 (size 420)  mid-model +0.001
+  BTC   1.2 d     in    84,000  -86,000  model 0.000  bid 0.001 ask 0.007 (size 83)  mid-model +0.004
+  BTC   2.2 d     in    66,000  -68,000  model 0.021  bid 0.006 ask 0.029 (size 5035)  mid-model -0.004
+  BTC   2.2 d      >    66,000           model 0.994  bid 0.986 ask 0.991 (size 5)  mid-model -0.006
+  BTC   2.2 d     in    68,000  -70,000  model 0.063  bid 0.056 ask 0.069 (size 34)  mid-model -0.000
+  BTC   2.2 d      >    68,000           model 0.973  bid 0.972 ask 0.977 (size 20)  mid-model +0.001
+  BTC   2.2 d     in    70,000  -72,000  model 0.201  bid 0.220 ask 0.250 (size 547)  mid-model +0.034
+  BTC   2.2 d      >    70,000           model 0.910  bid 0.911 ask 0.917 (size 5)  mid-model +0.004
+  BTC   2.2 d     in    72,000  -74,000  model 0.403  bid 0.370 ask 0.380 (size 82)  mid-model -0.028
+  BTC   2.2 d      >    72,000           model 0.710  bid 0.690 ask 0.700 (size 260)  mid-model -0.015
+  BTC   2.2 d     in    74,000  -76,000  model 0.250  bid 0.220 ask 0.250 (size 4980)  mid-model -0.015
+  BTC   2.2 d      >    74,000           model 0.307  bid 0.300 ask 0.310 (size 60)  mid-model -0.002
+  BTC   2.2 d     in    76,000  -78,000  model 0.047  bid 0.060 ask 0.070 (size 25)  mid-model +0.018
+  BTC   2.2 d      >    76,000           model 0.057  bid 0.070 ask 0.080 (size 5707)  mid-model +0.018
+  BTC   2.2 d     in    78,000  -80,000  model 0.008  bid 0.020 ask 0.021 (size 5188)  mid-model +0.013
+  BTC   2.2 d      >    78,000           model 0.010  bid 0.018 ask 0.019 (size 153)  mid-model +0.008
+  BTC   2.2 d     in    80,000  -82,000  model 0.001  bid 0.010 ask 0.011 (size 4990)  mid-model +0.010
+  BTC   2.2 d      >    80,000           model 0.002  bid 0.008 ask 0.009 (size 157)  mid-model +0.006
+  BTC   2.2 d     in    82,000  -84,000  model 0.001  bid 0.001 ask 0.015 (size 5022)  mid-model +0.007
+  BTC   2.2 d      >    82,000           model 0.002  bid 0.003 ask 0.004 (size 102)  mid-model +0.002
+  BTC   2.2 d      >    84,000           model 0.000  bid 0.003 ask 0.004 (size 405)  mid-model +0.003
+  BTC   2.2 d      >    86,000           model 0.000  bid 0.001 ask 0.003 (size 10)  mid-model +0.002
+  BTC   3.2 d     in    66,000  -68,000  model 0.023  bid 0.009 ask 0.021 (size 18)  mid-model -0.008
+  BTC   3.2 d      >    66,000           model 0.987  bid 0.986 ask 0.991 (size 10)  mid-model +0.001
+  BTC   3.2 d     in    68,000  -70,000  model 0.067  bid 0.061 ask 0.081 (size 25)  mid-model +0.005
+  BTC   3.2 d      >    68,000           model 0.964  bid 0.963 ask 0.975 (size 5)  mid-model +0.005
+  BTC   3.2 d     in    70,000  -72,000  model 0.207  bid 0.210 ask 0.240 (size 812)  mid-model +0.018
+  BTC   3.2 d      >    70,000           model 0.898  bid 0.896 ask 0.906 (size 10)  mid-model +0.003
+  BTC   3.2 d     in    72,000  -74,000  model 0.369  bid 0.340 ask 0.350 (size 54)  mid-model -0.024
+  BTC   3.2 d      >    72,000           model 0.691  bid 0.660 ask 0.680 (size 7300)  mid-model -0.021
+  BTC   3.2 d     in    74,000  -76,000  model 0.244  bid 0.250 ask 0.260 (size 4995)  mid-model +0.011
+  BTC   3.2 d      >    74,000           model 0.323  bid 0.320 ask 0.330 (size 220)  mid-model +0.003
+  BTC   3.2 d     in    76,000  -78,000  model 0.062  bid 0.070 ask 0.080 (size 384)  mid-model +0.013
+  BTC   3.2 d      >    76,000           model 0.079  bid 0.090 ask 0.100 (size 5853)  mid-model +0.017
+  BTC   3.2 d     in    78,000  -80,000  model 0.014  bid 0.012 ask 0.020 (size 25)  mid-model +0.002
+  BTC   3.2 d      >    78,000           model 0.016  bid 0.012 ask 0.024 (size 12105)  mid-model +0.002
+  BTC   3.2 d     in    80,000  -82,000  model 0.000  bid 0.010 ask 0.021 (size 5335)  mid-model +0.015
+  BTC   3.2 d      >    80,000           model 0.002  bid 0.002 ask 0.005 (size 10)  mid-model +0.002
+  BTC   3.2 d     in    82,000  -84,000  model 0.002  bid 0.002 ask 0.020 (size 4995)  mid-model +0.009
+  BTC   3.2 d      >    82,000           model 0.003  bid 0.002 ask 0.006 (size 5)  mid-model +0.001
+  BTC   3.2 d      >    84,000           model 0.001  bid 0.003 ask 0.007 (size 10)  mid-model +0.004
+  BTC   3.2 d      >    86,000           model 0.000  bid 0.001 ask 0.002 (size 305)  mid-model +0.001
+  BTC   4.2 d     in    66,000  -68,000  model 0.034  bid 0.027 ask 0.046 (size 5)  mid-model +0.002
+  BTC   4.2 d      >    66,000           model 0.984  bid 0.975 ask 0.985 (size 5)  mid-model -0.004
+  BTC   4.2 d     in    68,000  -70,000  model 0.074  bid 0.090 ask 0.110 (size 683)  mid-model +0.026
+  BTC   4.2 d      >    68,000           model 0.950  bid 0.945 ask 0.959 (size 25)  mid-model +0.002
+  BTC   4.2 d     in    70,000  -72,000  model 0.202  bid 0.220 ask 0.230 (size 994)  mid-model +0.023
+  BTC   4.2 d      >    70,000           model 0.876  bid 0.850 ask 0.870 (size 415)  mid-model -0.016
+  BTC   4.2 d     in    72,000  -74,000  model 0.328  bid 0.280 ask 0.300 (size 68)  mid-model -0.038
+  BTC   4.2 d      >    72,000           model 0.674  bid 0.630 ask 0.660 (size 7125)  mid-model -0.029
+  BTC   4.2 d     in    74,000  -76,000  model 0.233  bid 0.200 ask 0.220 (size 20)  mid-model -0.023
+  BTC   4.2 d      >    74,000           model 0.345  bid 0.340 ask 0.360 (size 7111)  mid-model +0.005
+  BTC   4.2 d     in    76,000  -78,000  model 0.083  bid 0.090 ask 0.110 (size 5702)  mid-model +0.017
+  BTC   4.2 d      >    76,000           model 0.112  bid 0.120 ask 0.150 (size 13373)  mid-model +0.023
+  BTC   4.2 d     in    78,000  -80,000  model 0.021  bid 0.016 ask 0.037 (size 5223)  mid-model +0.006
+  BTC   4.2 d      >    78,000           model 0.029  bid 0.023 ask 0.043 (size 7105)  mid-model +0.004
+  BTC   4.2 d     in    80,000  -82,000  model 0.002  bid 0.002 ask 0.007 (size 5)  mid-model +0.003
+  BTC   4.2 d      >    80,000           model 0.008  bid 0.007 ask 0.023 (size 5)  mid-model +0.007
+  BTC   4.2 d     in    82,000  -84,000  model 0.005  bid 0.002 ask 0.015 (size 4975)  mid-model +0.004
+  BTC   4.2 d      >    82,000           model 0.007  bid 0.005 ask 0.013 (size 7105)  mid-model +0.002
+  BTC   4.2 d      >    84,000           model 0.002  bid 0.003 ask 0.009 (size 7105)  mid-model +0.004
+  BTC   4.2 d      >    86,000           model 0.000  bid 0.002 ask 0.008 (size 30)  mid-model +0.005
+  BTC   5.2 d      >    62,000           model 0.995  bid 0.992 ask 0.996 (size 5)  mid-model -0.001
+  BTC   5.2 d     in    64,000  -66,000  model 0.008  bid 0.010 ask 0.011 (size 20)  mid-model +0.003
+  BTC   5.2 d      >    64,000           model 0.984  bid 0.978 ask 0.989 (size 5)  mid-model -0.000
+  BTC   5.2 d     in    66,000  -68,000  model 0.041  bid 0.041 ask 0.044 (size 32)  mid-model +0.001
+  BTC   5.2 d      >    66,000           model 0.976  bid 0.965 ask 0.979 (size 248)  mid-model -0.004
+  BTC   5.2 d     in    68,000  -70,000  model 0.085  bid 0.110 ask 0.130 (size 719)  mid-model +0.035
+  BTC   5.2 d      >    68,000           model 0.934  bid 0.924 ask 0.942 (size 449)  mid-model -0.001
+  BTC   5.2 d     in    70,000  -72,000  model 0.195  bid 0.200 ask 0.220 (size 1013)  mid-model +0.015
+  BTC   5.2 d      >    70,000           model 0.850  bid 0.820 ask 0.840 (size 303)  mid-model -0.020
+  BTC   5.2 d     in    72,000  -74,000  model 0.287  bid 0.250 ask 0.260 (size 51)  mid-model -0.032
+  BTC   5.2 d      >    72,000           model 0.655  bid 0.610 ask 0.630 (size 7108)  mid-model -0.035
+  BTC   5.2 d     in    74,000  -76,000  model 0.221  bid 0.200 ask 0.210 (size 32)  mid-model -0.016
+  BTC   5.2 d      >    74,000           model 0.367  bid 0.360 ask 0.380 (size 7147)  mid-model +0.003
+  BTC   5.2 d     in    76,000  -78,000  model 0.100  bid 0.100 ask 0.120 (size 5263)  mid-model +0.010
+  BTC   5.2 d      >    76,000           model 0.146  bid 0.150 ask 0.180 (size 12822)  mid-model +0.019
+  BTC   5.2 d     in    78,000  -80,000  model 0.032  bid 0.030 ask 0.050 (size 5260)  mid-model +0.008
+  BTC   5.2 d      >    78,000           model 0.047  bid 0.050 ask 0.070 (size 12121)  mid-model +0.013
+  BTC   5.2 d     in    80,000  -82,000  model 0.005  bid 0.010 ask 0.013 (size 10)  mid-model +0.006
+  BTC   5.2 d      >    80,000           model 0.015  bid 0.013 ask 0.016 (size 10)  mid-model -0.000
+  BTC   5.2 d      >    82,000           model 0.010  bid 0.012 ask 0.013 (size 7110)  mid-model +0.003
+  BTC   6.2 d      >    64,000           model 0.979  bid 0.974 ask 0.985 (size 5)  mid-model +0.000
+  BTC   6.2 d     in    66,000  -68,000  model 0.047  bid 0.037 ask 0.066 (size 401)  mid-model +0.005
+  BTC   6.2 d      >    66,000           model 0.967  bid 0.975 ask 0.976 (size 5980)  mid-model +0.009
+  BTC   6.2 d     in    68,000  -70,000  model 0.092  bid 0.090 ask 0.130 (size 896)  mid-model +0.018
+  BTC   6.2 d      >    68,000           model 0.920  bid 0.910 ask 0.930 (size 6144)  mid-model +0.000
+  BTC   6.2 d     in    70,000  -72,000  model 0.188  bid 0.170 ask 0.210 (size 896)  mid-model +0.002
+  BTC   6.2 d      >    70,000           model 0.828  bid 0.790 ask 0.820 (size 7336)  mid-model -0.023
+  BTC   6.2 d     in    72,000  -74,000  model 0.258  bid 0.210 ask 0.260 (size 5371)  mid-model -0.023
+  BTC   6.2 d      >    72,000           model 0.640  bid 0.600 ask 0.620 (size 7100)  mid-model -0.030
+  BTC   6.2 d     in    74,000  -76,000  model 0.208  bid 0.180 ask 0.220 (size 4970)  mid-model -0.008
+  BTC   6.2 d      >    74,000           model 0.382  bid 0.360 ask 0.390 (size 7105)  mid-model -0.007
+  BTC   6.2 d     in    76,000  -78,000  model 0.110  bid 0.090 ask 0.130 (size 5206)  mid-model +0.000
+  BTC   6.2 d      >    76,000           model 0.175  bid 0.170 ask 0.200 (size 318)  mid-model +0.010
+  BTC   6.2 d     in    78,000  -80,000  model 0.042  bid 0.030 ask 0.060 (size 484)  mid-model +0.003
+  BTC   6.2 d      >    78,000           model 0.065  bid 0.060 ask 0.090 (size 12584)  mid-model +0.010
+  BTC   6.2 d     in    80,000  -82,000  model 0.010  bid 0.010 ask 0.038 (size 5619)  mid-model +0.014
+  BTC   6.2 d      >    80,000           model 0.023  bid 0.023 ask 0.037 (size 12100)  mid-model +0.007
+  BTC   6.2 d     in    82,000  -84,000  model 0.008  bid 0.010 ask 0.021 (size 5037)  mid-model +0.008
+  BTC   6.2 d      >    82,000           model 0.013  bid 0.006 ask 0.017 (size 7100)  mid-model -0.001
+  BTC   6.2 d      >    84,000           model 0.005  bid 0.002 ask 0.010 (size 5)  mid-model +0.001
+  BTC  18.7 d  touch         1           model 0.000  bid 0.120 ask 0.880 (size 18)  mid-model +0.500 BUY NO
+  BTC  18.7 d  touch         2           model 0.000  bid 0.120 ask 0.770 (size 122)  mid-model +0.445 BUY NO
+  BTC  18.7 d  touch         3           model 0.000  bid 0.050 ask 0.660 (size 25)  mid-model +0.355 BUY NO
+  BTC  18.7 d  touch        30           model 0.000  bid 0.010 ask 0.030 (size 210)  mid-model +0.020
+  BTC  18.7 d  touch        35           model 0.000  bid 0.050 ask 0.080 (size 335)  mid-model +0.065 BUY NO
+  BTC  18.7 d  touch        50           model 0.000  bid 0.190 ask 0.610 (size 20)  mid-model +0.400 BUY NO
+  BTC  18.7 d  touch        55           model 0.000  bid 0.120 ask 0.150 (size 50)  mid-model +0.135 BUY NO
+  BTC  18.7 d  touch        60           model 0.000  bid 0.100 ask 0.140 (size 60)  mid-model +0.120 BUY NO
+  BTC  18.7 d  touch        70           model 0.000  bid 0.010 ask 0.059 (size 6)  mid-model +0.034
+  BTC  18.7 d  touch    55,000           model 0.012  bid 0.020 ask 0.021 (size 5)  mid-model +0.008
+  BTC  18.7 d  touch    57,500           model 0.036  bid 0.046 ask 0.047 (size 4184)  mid-model +0.011
+  BTC  18.7 d  touch    60,000           model 0.086  bid 0.070 ask 0.080 (size 18981)  mid-model -0.011
+  BTC  18.7 d  touch    62,500           model 0.149  bid 0.120 ask 0.130 (size 4317)  mid-model -0.024
+  BTC  18.7 d  touch    65,000           model 0.252  bid 0.200 ask 0.210 (size 123)  mid-model -0.047 BUY YES
+  BTC  18.7 d  touch    67,500           model 0.417  bid 0.350 ask 0.360 (size 7880)  mid-model -0.062 BUY YES
+  BTC  18.7 d  touch    70,000           model 0.656  bid 0.610 ask 0.620 (size 4187)  mid-model -0.041 BUY YES
+  BTC  18.7 d  touch    72,500           model 0.956  bid 0.920 ask 0.930 (size 866)  mid-model -0.030
+  BTC  18.7 d  touch    75,000           model 0.711  bid 0.710 ask 0.720 (size 149)  mid-model +0.004
+  BTC  18.7 d  touch    77,500           model 0.431  bid 0.420 ask 0.440 (size 55)  mid-model -0.001
+  BTC  18.7 d  touch    80,000           model 0.240  bid 0.240 ask 0.250 (size 4207)  mid-model +0.005
+  BTC  18.7 d  touch    82,500           model 0.132  bid 0.120 ask 0.130 (size 2395)  mid-model -0.007
+  BTC  18.7 d  touch    85,000           model 0.071  bid 0.070 ask 0.080 (size 375)  mid-model +0.004
+  BTC  18.7 d  touch    87,500           model 0.032  bid 0.040 ask 0.050 (size 4341)  mid-model +0.013
+  BTC  18.7 d  touch    90,000           model 0.014  bid 0.029 ask 0.030 (size 1054)  mid-model +0.016
+  BTC  18.7 d  touch    92,500           model 0.005  bid 0.017 ask 0.018 (size 1005)  mid-model +0.012
+  BTC  18.7 d  touch    95,000           model 0.002  bid 0.010 ask 0.011 (size 774)  mid-model +0.008
+  BTC  18.7 d  touch    97,500           model 0.001  bid 0.008 ask 0.009 (size 587)  mid-model +0.008
+  BTC  18.7 d  touch   100,000           model 0.000  bid 0.008 ask 0.009 (size 15271)  mid-model +0.008
+  BTC  49.7 d  touch     5,000           model 0.000  bid 0.002 ask 0.004 (size 728)  mid-model +0.003
+  BTC  49.7 d  touch    10,000           model 0.000  bid 0.005 ask 0.006 (size 140)  mid-model +0.005
+  BTC  49.7 d  touch    15,000           model 0.000  bid 0.005 ask 0.007 (size 5662)  mid-model +0.006
+  BTC  49.7 d  touch    20,000           model 0.000  bid 0.006 ask 0.007 (size 20)  mid-model +0.007
+  BTC  49.7 d  touch    25,000           model 0.000  bid 0.012 ask 0.013 (size 5906)  mid-model +0.013
+  BTC  49.7 d  touch    30,000           model 0.000  bid 0.016 ask 0.017 (size 3207)  mid-model +0.017
+  BTC  49.7 d  touch    35,000           model 0.000  bid 0.016 ask 0.020 (size 2640)  mid-model +0.018
+  BTC  49.7 d  touch    40,000           model 0.001  bid 0.026 ask 0.027 (size 3201)  mid-model +0.026
+  BTC  49.7 d  touch    45,000           model 0.007  bid 0.032 ask 0.033 (size 454)  mid-model +0.025
+  BTC  49.7 d  touch    50,000           model 0.037  bid 0.052 ask 0.055 (size 6)  mid-model +0.017
+  BTC  49.7 d  touch    55,000           model 0.122  bid 0.100 ask 0.110 (size 6324)  mid-model -0.017
+  BTC  49.7 d  touch    60,000           model 0.255  bid 0.210 ask 0.220 (size 5)  mid-model -0.040 BUY YES
+  BTC  49.7 d  touch    65,000           model 0.477  bid 0.410 ask 0.420 (size 4003)  mid-model -0.062 BUY YES
+  BTC  49.7 d  touch    70,000           model 0.797  bid 0.710 ask 0.720 (size 1395)  mid-model -0.082 BUY YES
+  BTC  49.7 d  touch    90,000           model 0.120  bid 0.140 ask 0.150 (size 9676)  mid-model +0.025
+  BTC  49.7 d  touch    95,000           model 0.058  bid 0.060 ask 0.070 (size 8)  mid-model +0.007
+  BTC  49.7 d  touch   100,000           model 0.029  bid 0.040 ask 0.050 (size 8940)  mid-model +0.016
+  BTC  49.7 d  touch   110,000           model 0.009  bid 0.016 ask 0.020 (size 62999)  mid-model +0.009
+  BTC  49.7 d  touch   120,000           model 0.004  bid 0.015 ask 0.016 (size 5993)  mid-model +0.012
+  BTC  49.7 d  touch   130,000           model 0.001  bid 0.011 ask 0.012 (size 3461)  mid-model +0.011
+  BTC  49.7 d  touch   140,000           model 0.000  bid 0.008 ask 0.009 (size 5)  mid-model +0.008
+  BTC  49.7 d  touch   150,000           model 0.000  bid 0.007 ask 0.011 (size 1268)  mid-model +0.009
+  BTC  49.7 d  touch   150,000           model 0.000  bid 0.006 ask 0.007 (size 5)  mid-model +0.007
+  BTC  49.7 d  touch   160,000           model 0.000  bid 0.006 ask 0.007 (size 15)  mid-model +0.007
+  BTC  49.7 d  touch   170,000           model 0.000  bid 0.005 ask 0.006 (size 953)  mid-model +0.005
+  BTC  49.7 d  touch   180,000           model 0.000  bid 0.003 ask 0.004 (size 5512)  mid-model +0.004
+  BTC  49.7 d  touch   190,000           model 0.000  bid 0.004 ask 0.005 (size 1015)  mid-model +0.005
+  BTC  49.7 d  touch   200,000           model 0.000  bid 0.004 ask 0.005 (size 785)  mid-model +0.005
+  BTC  49.7 d  touch   250,000           model 0.000  bid 0.001 ask 0.002 (size 485)  mid-model +0.002
+  BTC  49.7 d  touch   500,000           model 0.000  bid 0.001 ask 0.002 (size 9844)  mid-model +0.002
+  BTC  49.7 d  touch 1,000,000           model 0.000  bid 0.001 ask 0.002 (size 10726)  mid-model +0.002
+  BTC 139.7 d  touch   150,000           model 0.006  bid 0.013 ask 0.036 (size 20)  mid-model +0.019
+  BTC 230.7 d  touch   150,000           model 0.022  bid 0.080 ask 0.090 (size 60)  mid-model +0.063 BUY NO
+  BTC 322.7 d  touch   150,000           model 0.049  bid 0.140 ask 0.150 (size 3217)  mid-model +0.097 BUY NO
+  BTC 414.7 d  touch   150,000           model 0.076  bid 0.210 ask 0.220 (size 60)  mid-model +0.139 BUY NO
+  ETH   0.2 d      >     1,800           model 1.000  bid 0.998 ask 0.999 (size 12560)  mid-model -0.002
+  ETH   0.2 d     in     1,800   -1,900  model 0.000  bid 0.008 ask 0.041 (size 35)  mid-model +0.024
+  ETH   0.2 d      >     1,900           model 1.000  bid 0.973 ask 0.979 (size 12)  mid-model -0.024
+  ETH   0.2 d     in     1,900   -2,000  model 0.172  bid 0.184 ask 0.257 (size 6)  mid-model +0.048
+  ETH   0.2 d      >     1,950           model 0.992  bid 0.990 ask 0.999 (size 10)  mid-model +0.002
+  ETH   0.2 d      >     1,960           model 0.985  bid 0.990 ask 0.999 (size 10)  mid-model +0.010
+  ETH   0.2 d      >     1,990           model 0.897  bid 0.960 ask 0.998 (size 8)  mid-model +0.082 BUY NO
+  ETH   0.2 d      >     2,000           model 0.827  bid 0.970 ask 0.998 (size 60)  mid-model +0.157 BUY NO
+  ETH   0.2 d      >     2,000           model 0.827  bid 0.762 ask 0.772 (size 288)  mid-model -0.060 BUY YES
+  ETH   0.2 d     in     2,000   -2,100  model 0.827  bid 0.730 ask 0.770 (size 2805)  mid-model -0.077 BUY YES
+  ETH   0.2 d      >     2,010           model 0.723  bid 0.940 ask 0.970 (size 46)  mid-model +0.232 BUY NO
+  ETH   0.2 d      >     2,020           model 0.590  bid 0.660 ask 0.720 (size 10)  mid-model +0.100 BUY NO
+  ETH   0.2 d      >     2,040           model 0.270  bid 0.002 ask 0.050 (size 60)  mid-model -0.244 BUY YES
+  ETH   0.2 d      >     2,050           model 0.130  bid 0.002 ask 0.047 (size 60)  mid-model -0.105 BUY YES
+  ETH   0.2 d      >     2,060           model 0.068  bid 0.001 ask 0.045 (size 60)  mid-model -0.045
+  ETH   0.2 d      >     2,070           model 0.026  bid 0.001 ask 0.045 (size 60)  mid-model -0.003
+  ETH   0.2 d      >     2,080           model 0.009  bid 0.001 ask 0.045 (size 60)  mid-model +0.013
+  ETH   0.2 d      >     2,090           model 0.003  bid 0.001 ask 0.045 (size 60)  mid-model +0.020
+  ETH   0.2 d      >     2,100           model 0.001  bid 0.001 ask 0.045 (size 60)  mid-model +0.022
+  ETH   0.2 d      >     2,100           model 0.001  bid 0.019 ask 0.025 (size 20)  mid-model +0.021
+  ETH   0.2 d     in     2,100   -2,200  model 0.001  bid 0.021 ask 0.026 (size 30)  mid-model +0.023
+  ETH   0.2 d      >     2,110           model 0.000  bid 0.001 ask 0.045 (size 60)  mid-model +0.023
+  ETH   0.2 d      >     2,200           model 0.000  bid 0.002 ask 0.003 (size 1164)  mid-model +0.003
+  ETH   0.2 d     in     2,200   -2,300  model 0.000  bid 0.002 ask 0.004 (size 29)  mid-model +0.003
+  ETH   1.2 d      >     1,700           model 0.998  bid 0.998 ask 0.999 (size 60)  mid-model +0.001
+  ETH   1.2 d      >     1,800           model 0.971  bid 0.992 ask 0.993 (size 50)  mid-model +0.022
+  ETH   1.2 d     in     1,800   -1,900  model 0.026  bid 0.026 ask 0.056 (size 3128)  mid-model +0.015
+  ETH   1.2 d      >     1,900           model 0.945  bid 0.928 ask 0.946 (size 24)  mid-model -0.007
+  ETH   1.2 d     in     1,900   -2,000  model 0.255  bid 0.294 ask 0.316 (size 30)  mid-model +0.050 BUY NO
+  ETH   1.2 d      >     2,000           model 0.690  bid 0.650 ask 0.660 (size 4582)  mid-model -0.035
+  ETH   1.2 d     in     2,000   -2,100  model 0.592  bid 0.510 ask 0.520 (size 2800)  mid-model -0.077 BUY YES
+  ETH   1.2 d      >     2,100           model 0.097  bid 0.120 ask 0.130 (size 9345)  mid-model +0.028
+  ETH   1.2 d     in     2,100   -2,200  model 0.092  bid 0.100 ask 0.130 (size 377)  mid-model +0.023
+  ETH   1.2 d      >     2,200           model 0.005  bid 0.017 ask 0.026 (size 35)  mid-model +0.016
+  ETH   1.2 d     in     2,200   -2,300  model 0.004  bid 0.010 ask 0.020 (size 2845)  mid-model +0.011
+  ETH   1.2 d      >     2,300           model 0.002  bid 0.004 ask 0.007 (size 855)  mid-model +0.004
+  ETH   1.2 d     in     2,300   -2,400  model 0.001  bid 0.001 ask 0.007 (size 35)  mid-model +0.003
+  ETH   1.2 d      >     2,400           model 0.001  bid 0.004 ask 0.005 (size 850)  mid-model +0.004
+  ETH   1.2 d     in     2,400   -2,500  model 0.001  bid 0.002 ask 0.011 (size 2812)  mid-model +0.006
+  ETH   1.2 d      >     2,500           model 0.000  bid 0.002 ask 0.003 (size 50)  mid-model +0.002
+  ETH   1.2 d     in     2,500   -2,600  model 0.000  bid 0.002 ask 0.009 (size 2827)  mid-model +0.005
+  ETH   1.2 d      >     2,600           model 0.000  bid 0.002 ask 0.003 (size 10)  mid-model +0.003
+  ETH   1.2 d     in     2,600   -2,700  model 0.000  bid 0.002 ask 0.009 (size 2832)  mid-model +0.005
+  ETH   1.2 d      >     2,700           model 0.000  bid 0.001 ask 0.002 (size 10)  mid-model +0.002
+  ETH   2.2 d      >     1,700           model 0.993  bid 0.996 ask 0.998 (size 25)  mid-model +0.004
+  ETH   2.2 d      >     1,800           model 0.950  bid 0.978 ask 0.989 (size 104)  mid-model +0.034
+  ETH   2.2 d     in     1,800   -1,900  model 0.022  bid 0.042 ask 0.075 (size 2825)  mid-model +0.036
+  ETH   2.2 d      >     1,900           model 0.927  bid 0.911 ask 0.934 (size 45)  mid-model -0.005
+  ETH   2.2 d     in     1,900   -2,000  model 0.269  bid 0.291 ask 0.329 (size 240)  mid-model +0.041
+  ETH   2.2 d      >     2,000           model 0.658  bid 0.620 ask 0.640 (size 4000)  mid-model -0.028
+  ETH   2.2 d     in     2,000   -2,100  model 0.501  bid 0.450 ask 0.470 (size 2800)  mid-model -0.041 BUY YES
+  ETH   2.2 d      >     2,100           model 0.157  bid 0.160 ask 0.180 (size 92)  mid-model +0.013
+  ETH   2.2 d     in     2,100   -2,200  model 0.142  bid 0.130 ask 0.160 (size 85)  mid-model +0.003
+  ETH   2.2 d      >     2,200           model 0.015  bid 0.014 ask 0.027 (size 45)  mid-model +0.006
+  ETH   2.2 d     in     2,200   -2,300  model 0.013  bid 0.011 ask 0.027 (size 20)  mid-model +0.006
+  ETH   2.2 d      >     2,300           model 0.002  bid 0.003 ask 0.013 (size 10)  mid-model +0.006
+  ETH   2.2 d     in     2,300   -2,400  model 0.000  bid 0.010 ask 0.017 (size 2805)  mid-model +0.014
+  ETH   2.2 d      >     2,400           model 0.004  bid 0.004 ask 0.007 (size 10)  mid-model +0.001
+  ETH   2.2 d     in     2,400   -2,500  model 0.004  bid 0.010 ask 0.014 (size 2813)  mid-model +0.008
+  ETH   2.2 d      >     2,500           model 0.001  bid 0.002 ask 0.006 (size 10)  mid-model +0.003
+  ETH   2.2 d     in     2,500   -2,600  model 0.001  bid 0.003 ask 0.016 (size 2828)  mid-model +0.009
+  ETH   2.2 d      >     2,600           model 0.000  bid 0.001 ask 0.006 (size 10)  mid-model +0.003
+  ETH   2.2 d     in     2,600   -2,700  model 0.000  bid 0.003 ask 0.008 (size 10)  mid-model +0.005
+  ETH   2.2 d      >     2,700           model 0.000  bid 0.001 ask 0.006 (size 10)  mid-model +0.004
+  ETH   3.2 d      >     1,700           model 0.985  bid 0.989 ask 0.994 (size 45)  mid-model +0.007
+  ETH   3.2 d      >     1,800           model 0.949  bid 0.970 ask 0.984 (size 59)  mid-model +0.028
+  ETH   3.2 d     in     1,800   -1,900  model 0.041  bid 0.048 ask 0.084 (size 35)  mid-model +0.025
+  ETH   3.2 d      >     1,900           model 0.908  bid 0.898 ask 0.922 (size 30)  mid-model +0.002
+  ETH   3.2 d     in     1,900   -2,000  model 0.266  bid 0.280 ask 0.310 (size 65)  mid-model +0.029
+  ETH   3.2 d      >     2,000           model 0.642  bid 0.600 ask 0.620 (size 4005)  mid-model -0.032
+  ETH   3.2 d     in     2,000   -2,100  model 0.458  bid 0.420 ask 0.440 (size 2800)  mid-model -0.028
+  ETH   3.2 d      >     2,100           model 0.183  bid 0.180 ask 0.200 (size 58)  mid-model +0.007
+  ETH   3.2 d     in     2,100   -2,200  model 0.159  bid 0.140 ask 0.160 (size 7)  mid-model -0.009
+  ETH   3.2 d      >     2,200           model 0.024  bid 0.023 ask 0.048 (size 4035)  mid-model +0.011
+  ETH   3.2 d     in     2,200   -2,300  model 0.015  bid 0.015 ask 0.041 (size 35)  mid-model +0.013
+  ETH   3.2 d      >     2,300           model 0.009  bid 0.002 ask 0.007 (size 5)  mid-model -0.005
+  ETH   3.2 d     in     2,300   -2,400  model 0.004  bid 0.002 ask 0.018 (size 2820)  mid-model +0.005
+  ETH   3.2 d      >     2,400           model 0.005  bid 0.002 ask 0.009 (size 4025)  mid-model +0.001
+  ETH   3.2 d     in     2,400   -2,500  model 0.004  bid 0.002 ask 0.023 (size 2817)  mid-model +0.009
+  ETH   3.2 d      >     2,500           model 0.001  bid 0.004 ask 0.009 (size 4005)  mid-model +0.006
+  ETH   3.2 d     in     2,500   -2,600  model 0.001  bid 0.001 ask 0.022 (size 2831)  mid-model +0.011
+  ETH   3.2 d      >     2,600           model 0.000  bid 0.005 ask 0.009 (size 4005)  mid-model +0.007
+  ETH   3.2 d     in     2,600   -2,700  model 0.000  bid 0.001 ask 0.023 (size 2805)  mid-model +0.012
+  ETH   3.2 d      >     2,700           model 0.000  bid 0.002 ask 0.003 (size 5)  mid-model +0.003
+  ETH   4.2 d      >     1,600           model 0.995  bid 0.990 ask 0.993 (size 5)  mid-model -0.003
+  ETH   4.2 d      >     1,700           model 0.970  bid 0.984 ask 0.999 (size 85)  mid-model +0.021
+  ETH   4.2 d     in     1,700   -1,800  model 0.017  bid 0.010 ask 0.035 (size 2835)  mid-model +0.006
+  ETH   4.2 d      >     1,800           model 0.953  bid 0.959 ask 0.973 (size 36)  mid-model +0.013
+  ETH   4.2 d     in     1,800   -1,900  model 0.077  bid 0.076 ask 0.107 (size 192)  mid-model +0.014
+  ETH   4.2 d      >     1,900           model 0.876  bid 0.860 ask 0.890 (size 9038)  mid-model -0.001
+  ETH   4.2 d     in     1,900   -2,000  model 0.249  bid 0.260 ask 0.290 (size 35)  mid-model +0.026
+  ETH   4.2 d      >     2,000           model 0.627  bid 0.590 ask 0.610 (size 4005)  mid-model -0.027
+  ETH   4.2 d     in     2,000   -2,100  model 0.427  bid 0.360 ask 0.390 (size 2800)  mid-model -0.052 BUY YES
+  ETH   4.2 d      >     2,100           model 0.200  bid 0.220 ask 0.250 (size 9122)  mid-model +0.035
+  ETH   4.2 d     in     2,100   -2,200  model 0.160  bid 0.160 ask 0.190 (size 70)  mid-model +0.015
+  ETH   4.2 d      >     2,200           model 0.040  bid 0.050 ask 0.070 (size 9078)  mid-model +0.021
+  ETH   4.2 d     in     2,200   -2,300  model 0.019  bid 0.025 ask 0.054 (size 35)  mid-model +0.021
+  ETH   4.2 d      >     2,300           model 0.021  bid 0.003 ask 0.016 (size 4005)  mid-model -0.011
+  ETH   4.2 d     in     2,300   -2,400  model 0.017  bid 0.010 ask 0.027 (size 2805)  mid-model +0.002
+  ETH   4.2 d      >     2,400           model 0.004  bid 0.004 ask 0.011 (size 4005)  mid-model +0.004
+  ETH   4.2 d     in     2,400   -2,500  model 0.003  bid 0.010 ask 0.015 (size 2816)  mid-model +0.009
+  ETH   4.2 d      >     2,500           model 0.001  bid 0.005 ask 0.011 (size 4005)  mid-model +0.007
+  ETH   4.2 d     in     2,500   -2,600  model 0.001  bid 0.010 ask 0.022 (size 2805)  mid-model +0.015
+  ETH   4.2 d      >     2,600           model 0.000  bid 0.001 ask 0.016 (size 4005)  mid-model +0.008
+  ETH   5.2 d      >     1,500           model 0.999  bid 0.984 ask 0.999 (size 65)  mid-model -0.008
+  ETH   5.2 d      >     1,600           model 0.994  bid 0.984 ask 0.999 (size 60)  mid-model -0.002
+  ETH   5.2 d     in     1,600   -1,700  model 0.027  bid 0.010 ask 0.029 (size 2812)  mid-model -0.007
+  ETH   5.2 d      >     1,700           model 0.967  bid 0.984 ask 0.989 (size 10)  mid-model +0.019
+  ETH   5.2 d     in     1,700   -1,800  model 0.034  bid 0.015 ask 0.051 (size 2805)  mid-model -0.001
+  ETH   5.2 d      >     1,800           model 0.933  bid 0.942 ask 0.962 (size 35)  mid-model +0.019
+  ETH   5.2 d     in     1,800   -1,900  model 0.072  bid 0.090 ask 0.120 (size 65)  mid-model +0.033
+  ETH   5.2 d      >     1,900           model 0.862  bid 0.830 ask 0.860 (size 4000)  mid-model -0.017
+  ETH   5.2 d     in     1,900   -2,000  model 0.245  bid 0.250 ask 0.280 (size 88)  mid-model +0.020
+  ETH   5.2 d      >     2,000           model 0.617  bid 0.580 ask 0.590 (size 4005)  mid-model -0.032
+  ETH   5.2 d     in     2,000   -2,100  model 0.383  bid 0.310 ask 0.340 (size 2800)  mid-model -0.058 BUY YES
+  ETH   5.2 d      >     2,100           model 0.234  bid 0.240 ask 0.270 (size 72)  mid-model +0.021
+  ETH   5.2 d     in     2,100   -2,200  model 0.174  bid 0.160 ask 0.210 (size 2888)  mid-model +0.011
+  ETH   5.2 d      >     2,200           model 0.059  bid 0.060 ask 0.090 (size 9058)  mid-model +0.016
+  ETH   5.2 d     in     2,200   -2,300  model 0.034  bid 0.030 ask 0.070 (size 58)  mid-model +0.016
+  ETH   5.2 d      >     2,300           model 0.026  bid 0.014 ask 0.030 (size 4005)  mid-model -0.004
+  ETH   5.2 d     in     2,300   -2,400  model 0.019  bid 0.010 ask 0.033 (size 2859)  mid-model +0.003
+  ETH   5.2 d      >     2,400           model 0.007  bid 0.003 ask 0.007 (size 5)  mid-model -0.002
+  ETH   5.2 d     in     2,400   -2,500  model 0.005  bid 0.010 ask 0.023 (size 2812)  mid-model +0.012
+  ETH   5.2 d      >     2,500           model 0.002  bid 0.001 ask 0.009 (size 4005)  mid-model +0.003
+  ETH   6.2 d      >     1,600           model 0.993  bid 0.987 ask 0.999 (size 50)  mid-model +0.000
+  ETH   6.2 d     in     1,600   -1,700  model 0.029  bid 0.010 ask 0.026 (size 2800)  mid-model -0.011
+  ETH   6.2 d      >     1,700           model 0.964  bid 0.970 ask 0.984 (size 9)  mid-model +0.013
+  ETH   6.2 d     in     1,700   -1,800  model 0.052  bid 0.021 ask 0.055 (size 2800)  mid-model -0.014
+  ETH   6.2 d      >     1,800           model 0.912  bid 0.930 ask 0.948 (size 30)  mid-model +0.027
+  ETH   6.2 d     in     1,800   -1,900  model 0.061  bid 0.100 ask 0.130 (size 68)  mid-model +0.054 BUY NO
+  ETH   6.2 d      >     1,900           model 0.850  bid 0.810 ask 0.840 (size 4000)  mid-model -0.025
+  ETH   6.2 d     in     1,900   -2,000  model 0.241  bid 0.220 ask 0.260 (size 38)  mid-model -0.001
+  ETH   6.2 d      >     2,000           model 0.609  bid 0.560 ask 0.580 (size 4005)  mid-model -0.039
+  ETH   6.2 d     in     2,000   -2,100  model 0.347  bid 0.290 ask 0.300 (size 2767)  mid-model -0.052 BUY YES
+  ETH   6.2 d      >     2,100           model 0.262  bid 0.260 ask 0.300 (size 9050)  mid-model +0.018
+  ETH   6.2 d     in     2,100   -2,200  model 0.182  bid 0.160 ask 0.210 (size 2838)  mid-model +0.003
+  ETH   6.2 d      >     2,200           model 0.079  bid 0.080 ask 0.110 (size 68)  mid-model +0.016
+  ETH   6.2 d     in     2,200   -2,300  model 0.050  bid 0.040 ask 0.080 (size 45)  mid-model +0.010
+  ETH   6.2 d      >     2,300           model 0.029  bid 0.017 ask 0.038 (size 4000)  mid-model -0.002
+  ETH   6.2 d     in     2,300   -2,400  model 0.020  bid 0.010 ask 0.038 (size 30)  mid-model +0.004
+  ETH   6.2 d      >     2,400           model 0.010  bid 0.005 ask 0.015 (size 4005)  mid-model +0.000
+  ETH   6.2 d     in     2,400   -2,500  model 0.006  bid 0.010 ask 0.026 (size 8)  mid-model +0.012
+  ETH   6.2 d      >     2,500           model 0.004  bid 0.002 ask 0.009 (size 5)  mid-model +0.002
+  ETH   6.2 d      >     2,600           model 0.002  bid 0.002 ask 0.008 (size 5)  mid-model +0.003
+  ETH  18.7 d  touch        35           model 0.000  bid 0.010 ask 0.040 (size 335)  mid-model +0.025
+  ETH  18.7 d  touch        40           model 0.000  bid 0.032 ask 0.076 (size 124)  mid-model +0.054 BUY NO
+  ETH  18.7 d  touch        45           model 0.000  bid 0.032 ask 0.688 (size 59)  mid-model +0.360 BUY NO
+  ETH  18.7 d  touch        50           model 0.000  bid 0.180 ask 0.780 (size 410)  mid-model +0.480 BUY NO
+  ETH  18.7 d  touch        65           model 0.000  bid 0.420 ask 0.990 (size 44)  mid-model +0.705 BUY NO
+  ETH  18.7 d  touch        70           model 0.000  bid 0.260 ask 0.300 (size 137)  mid-model +0.280 BUY NO
+  ETH  18.7 d  touch        80           model 0.000  bid 0.110 ask 0.139 (size 105)  mid-model +0.124 BUY NO
+  ETH  18.7 d  touch        90           model 0.000  bid 0.011 ask 0.039 (size 314)  mid-model +0.025
+  ETH  18.7 d  touch       100           model 0.000  bid 0.018 ask 0.039 (size 10)  mid-model +0.028
+  ETH  18.7 d  touch     1,300           model 0.006  bid 0.016 ask 0.017 (size 5)  mid-model +0.011
+  ETH  18.7 d  touch     1,400           model 0.022  bid 0.025 ask 0.026 (size 396)  mid-model +0.004
+  ETH  18.7 d  touch     1,500           model 0.064  bid 0.065 ask 0.069 (size 963)  mid-model +0.003
+  ETH  18.7 d  touch     1,600           model 0.149  bid 0.107 ask 0.113 (size 250)  mid-model -0.039 BUY YES
+  ETH  18.7 d  touch     1,700           model 0.249  bid 0.170 ask 0.190 (size 6794)  mid-model -0.069 BUY YES
+  ETH  18.7 d  touch     1,800           model 0.403  bid 0.340 ask 0.350 (size 3606)  mid-model -0.058 BUY YES
+  ETH  18.7 d  touch     1,900           model 0.638  bid 0.550 ask 0.560 (size 5)  mid-model -0.083 BUY YES
+  ETH  18.7 d  touch     2,000           model 0.936  bid 0.900 ask 0.920 (size 9734)  mid-model -0.026
+  ETH  18.7 d  touch     2,200           model 0.439  bid 0.420 ask 0.440 (size 6299)  mid-model -0.009
+  ETH  18.7 d  touch     2,300           model 0.246  bid 0.230 ask 0.250 (size 148)  mid-model -0.006
+  ETH  18.7 d  touch     2,400           model 0.138  bid 0.120 ask 0.130 (size 111)  mid-model -0.013
+  ETH  18.7 d  touch     2,500           model 0.081  bid 0.070 ask 0.090 (size 4779)  mid-model -0.001
+  ETH  18.7 d  touch     2,600           model 0.048  bid 0.040 ask 0.050 (size 106)  mid-model -0.003
+  ETH  18.7 d  touch     2,700           model 0.024  bid 0.022 ask 0.029 (size 450)  mid-model +0.002
+  ETH  18.7 d  touch     2,800           model 0.011  bid 0.022 ask 0.024 (size 247)  mid-model +0.012
+  ETH  18.7 d  touch     2,900           model 0.005  bid 0.013 ask 0.014 (size 2485)  mid-model +0.009
+  ETH  18.7 d  touch     3,000           model 0.002  bid 0.010 ask 0.011 (size 1990)  mid-model +0.008
+  ETH  18.7 d  touch     3,100           model 0.001  bid 0.004 ask 0.005 (size 5)  mid-model +0.004
+  ETH  18.7 d  touch     3,500           model 0.000  bid 0.001 ask 0.002 (size 4673)  mid-model +0.002
+  ETH  49.7 d  touch       500           model 0.000  bid 0.008 ask 0.010 (size 654)  mid-model +0.009
+  ETH  49.7 d  touch       600           model 0.000  bid 0.010 ask 0.017 (size 4632)  mid-model +0.014
+  ETH  49.7 d  touch       700           model 0.000  bid 0.008 ask 0.014 (size 10)  mid-model +0.011
+  ETH  49.7 d  touch       800           model 0.000  bid 0.022 ask 0.024 (size 5)  mid-model +0.023
+  ETH  49.7 d  touch     1,000           model 0.004  bid 0.038 ask 0.040 (size 406)  mid-model +0.035 BUY NO
+  ETH  49.7 d  touch     1,250           model 0.055  bid 0.060 ask 0.070 (size 22)  mid-model +0.010
+  ETH  49.7 d  touch     1,500           model 0.220  bid 0.149 ask 0.153 (size 720)  mid-model -0.069 BUY YES
+  ETH  49.7 d  touch     1,750           model 0.521  bid 0.300 ask 0.310 (size 291)  mid-model -0.216 BUY YES
+  ETH  49.7 d  touch     2,000           model 0.963  bid 0.910 ask 0.930 (size 3338)  mid-model -0.043 BUY YES
+  ETH  49.7 d  touch     3,000           model 0.046  bid 0.070 ask 0.080 (size 4357)  mid-model +0.029
+  ETH  49.7 d  touch     3,500           model 0.011  bid 0.022 ask 0.024 (size 400)  mid-model +0.012
+  ETH  49.7 d  touch     4,000           model 0.004  bid 0.017 ask 0.018 (size 1565)  mid-model +0.014
+  ETH  49.7 d  touch     4,500           model 0.001  bid 0.015 ask 0.016 (size 5378)  mid-model +0.014
+  ETH  49.7 d  touch     5,000           model 0.000  bid 0.012 ask 0.013 (size 3496)  mid-model +0.012
+  ETH  49.7 d  touch     5,500           model 0.000  bid 0.011 ask 0.012 (size 5306)  mid-model +0.011
+  ETH  49.7 d  touch     6,000           model 0.000  bid 0.011 ask 0.012 (size 1606)  mid-model +0.011
+  ETH  49.7 d  touch     6,500           model 0.000  bid 0.009 ask 0.010 (size 1867)  mid-model +0.009
+  ETH  49.7 d  touch     7,000           model 0.000  bid 0.008 ask 0.009 (size 1747)  mid-model +0.009
+  ETH  49.7 d  touch     7,500           model 0.000  bid 0.004 ask 0.005 (size 5)  mid-model +0.005
+  ETH  49.7 d  touch     8,000           model 0.000  bid 0.005 ask 0.006 (size 1308)  mid-model +0.005
+  ETH  49.7 d  touch    10,000           model 0.000  bid 0.003 ask 0.004 (size 1837)  mid-model +0.004
