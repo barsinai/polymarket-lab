@@ -55,7 +55,7 @@ seen = 0; n_new = 0; off = 0; spreads = []
 while off < 4000:
     page = get(f"{GAMMA}/events", {"active": "true", "closed": "false", "limit": 100, "offset": off,
                "end_date_min": (now + dt.timedelta(hours=1)).strftime("%Y-%m-%dT%H:%M:%SZ"),
-               "end_date_max": (now + dt.timedelta(hours=30)).strftime("%Y-%m-%dT%H:%M:%SZ")})
+               "end_date_max": (now + dt.timedelta(days=21)).strftime("%Y-%m-%dT%H:%M:%SZ")})   # event end can be later than the word markets' end
     if not page:
         break
     off += 100
