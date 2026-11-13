@@ -1,5 +1,5 @@
 {
-"scanned": "2026-11-13 23:26",
+"scanned": "2026-11-13 23:44",
 "events": 2100,
 "groups": 2037,
 "books": 16896,
@@ -78,6 +78,21 @@
 "edge_after_fee": 0.0026,
 "size_shares": 90.71,
 "usd_at_size": 90.26
+},
+{
+"kind": "ladder_num",
+"event": "Pacifica FDV above ___ one day after launch?",
+"slug": "pacifica-fdv-above-one-day-after-launch",
+"easy": "Pacifica FDV above $1B one day after launch?",
+"hard": "Pacifica FDV above $3B one day after launch?",
+"easy_yes_ask": 0.006,
+"hard_no_ask": 0.991,
+"hard_yes_bid": 0.009,
+"cost": 0.997,
+"edge": 0.003,
+"edge_after_fee": 0.002,
+"size_shares": 121.1,
+"usd_at_size": 120.74
 },
 {
 "kind": "ladder_num",
@@ -185,24 +200,19 @@
 "usd_at_size": 35.42
 },
 {
-"kind": "negrisk_all_yes",
-"event": "Maduro Prison Time?",
-"slug": "maduro-prison-time-527",
-"n": 5,
-"has_other": false,
-"outcomes": [
-"No prison time",
-"<20",
-"20\u201340",
-"40\u201360",
-"60+"
-],
-"cost": 0.996,
-"payoff": 1,
-"edge": 0.004,
-"edge_after_fee": -0.0361,
-"size_shares": 14.52,
-"usd_at_size": 14.46
+"kind": "ladder_num",
+"event": "Printr FDV above ___ one day after launch?",
+"slug": "printr-fdv-above-one-day-after-launch",
+"easy": "Printr FDV above $500M one day after launch?",
+"hard": "Printr FDV above $1B one day after launch?",
+"easy_yes_ask": 0.049,
+"hard_no_ask": 0.927,
+"hard_yes_bid": 0.073,
+"cost": 0.976,
+"edge": 0.024,
+"edge_after_fee": 0.016,
+"size_shares": 1.61,
+"usd_at_size": 1.57
 },
 {
 "kind": "ladder_num",
@@ -220,19 +230,26 @@
 "usd_at_size": 7.67
 },
 {
-"kind": "ladder_num",
-"event": "Printr FDV above ___ one day after launch?",
-"slug": "printr-fdv-above-one-day-after-launch",
-"easy": "Printr FDV above $500M one day after launch?",
-"hard": "Printr FDV above $1B one day after launch?",
-"easy_yes_ask": 0.049,
-"hard_no_ask": 0.93,
-"hard_yes_bid": 0.07,
-"cost": 0.979,
-"edge": 0.021,
-"edge_after_fee": 0.0132,
-"size_shares": 1.61,
-"usd_at_size": 1.58
+"kind": "negrisk_all_yes",
+"event": "Japan 10Y Bond Yield: End of 2026",
+"slug": "japan-10y-bond-yield-end-of-2026",
+"n": 7,
+"has_other": false,
+"outcomes": [
+"<2.0%",
+"2.0-2.2%",
+"2.2-2.4%",
+"2.4-2.6%",
+"2.6-2.8%",
+"2.8-3.0%",
+"3.0%+"
+],
+"cost": 0.994,
+"payoff": 1,
+"edge": 0.006,
+"edge_after_fee": -0.05,
+"size_shares": 5.0,
+"usd_at_size": 4.97
 },
 {
 "kind": "ladder_num",
@@ -248,28 +265,6 @@
 "edge_after_fee": 0.0066,
 "size_shares": 1.61,
 "usd_at_size": 1.59
-},
-{
-"kind": "negrisk_all_yes",
-"event": "Japan 10Y Bond Yield: End of 2026",
-"slug": "japan-10y-bond-yield-end-of-2026",
-"n": 7,
-"has_other": false,
-"outcomes": [
-"<2.0%",
-"2.0-2.2%",
-"2.2-2.4%",
-"2.4-2.6%",
-"2.6-2.8%",
-"2.8-3.0%",
-"3.0%+"
-],
-"cost": 0.996,
-"payoff": 1,
-"edge": 0.004,
-"edge_after_fee": -0.0521,
-"size_shares": 5.0,
-"usd_at_size": 4.98
 },
 {
 "kind": "ladder_num",
