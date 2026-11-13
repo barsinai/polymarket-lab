@@ -171,3 +171,8 @@
   logs/script-log.txt (11:34 copy, cosmetic). Pilot STOP, no orders. A parallel deep session was editing IDEAS; merged by hand.
 - Next: weather_score via Actions (Brier with 2+ days); lock_x / lock_p to 30 end-times; young at the 11-16..11-30 end dates; box office Sat
   11-14 14 UTC; N18 census with real spreads first.
+- 11-13 20:30 UTC liquidity review (user asked): contested reward markets lose (paper MM fills -5.4..-6.7% of notional in every
+  category; at the pilot's 1/5 reward haircut all 6 variants -$90..-730/day). NEW: uncontested pools - lp_screen.py over 11,507
+  reward markets ($121k/day): 837 of the 1,487 largest have no quote in the band (>= $10/day, $22k/day), persistent (94% still
+  empty 2 h later, median 6.4 days at the current pool), paid in USDC. Never tested: the paper MM and the pilot skipped wide books.
+  Docs: no liquidity minimum or per-maker cap; per-market pools, daily payout. Next: user OK for a 48 h, <= $200 live test (LP-1).
