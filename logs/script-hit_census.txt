@@ -1,79 +1,297 @@
-hit events 0 Counter()
+series from sample 81 ['airbnb-hit-price-monthly', 'airbnb-hit-price-weekly', 'amazon-hit-price-monthly', 'amazon-hit-price-weekly', 'apple-hit-price-monthly', 'apple-hit-price-weekly', 'atp', 'bitcoin-hit-price-daily', 'bitcoin-hit-price-monthly', 'bitcoin-hit-price-weekly', 'bnb-hit-price-monthly', 'bnb-hit-price-weekly', 'btc-monthly-prices', 'btc-weeklies', 'btc-weekly-prices', 'chainlink-hit-price-monthly', 'chainlink-hit-price-weekly', 'counter-strike', 'crude-oil-cl-hit', 'doge-monthly', 'doge-weekly', 'dogecoin-hit-price-monthly', 'dogecoin-hit-price-weekly', 'eth-monthly-prices', 'eth-weeklies', 'eth-weekly-prices', 'ethena-hit-price-monthly', 'ethena-hit-price-weekly', 'ethereum-hit-price-monthly', 'ethereum-hit-price-weekly', 'fartcoin-monthly-hit-price', 'fartcoin-weekly-hit-price', 'google-hit-price-monthly', 'google-hit-price-weekly', 'gpu-rental-prices', 'hyperliquid-hit-price-monthly', 'hyperliquid-hit-price-weekly', 'hyperliquid-monthly-hit-price', 'hyperliquid-weekly-hit-price', 'league-of-legends']
+after series 1228
+generic first page 100 2029-01-19T23:59:00Z
+scan 0 hit events 1228
+hit events 1228 Counter({('stock/cmdty', 'week'): 352, ('crypto', 'other'): 317, ('crypto', 'week'): 247, ('stock/cmdty', 'month'): 156, ('crypto', 'month'): 142, ('stock/cmdty', 'other'): 14})
+hist 200 157
+hist 400 220
+hist 600 282
+hist 800 346
+hist 1000 410
+hist 1200 478
+hist 1400 545
+hist 1600 611
+hist 1800 675
+hist 2000 742
+hist 2200 810
+hist 2400 880
+hist 2600 946
+hist 2800 1011
+hist 3000 1080
+hist 3200 1147
+hist 3400 1214
+hist 3600 1278
+hist 3800 1347
+hist 4000 1415
+hist 4200 1485
+hist 4400 1554
+hist 4600 1620
+hist 4800 1693
+hist 5000 1766
+hist 5200 1838
+hist 5400 1905
+hist 5600 1970
+hist 5800 2041
+hist 6000 2112
+hist 6200 2184
+hist 6400 2258
+hist 6600 2328
+hist 6800 2392
+hist 7000 2457
+/home/runner/work/polymarket-lab/polymarket-lab/research/slow/hit_census.py:184: DeprecationWarning: datetime.datetime.utcfromtimestamp() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.fromtimestamp(timestamp, datetime.UTC).
+  "week": dt.datetime.utcfromtimestamp(en).strftime("%G-W%V"), "half": "2025" if e["end"] < "2026" else "2026"})
 {
- "updated": "2026-11-13 17:06",
- "events": 0,
- "by_kind_period": {},
- "markets_with_hist": 0,
+ "updated": "2026-11-13 17:53",
+ "events": 1228,
+ "by_kind_period": {
+  "crypto/month": 142,
+  "crypto/week": 247,
+  "stock/cmdty/month": 156,
+  "stock/cmdty/other": 14,
+  "stock/cmdty/week": 352,
+  "crypto/other": 317
+ },
+ "markets_with_hist": 4592,
  "start+24h": {
-  "rows": 0,
+  "rows": 3978,
   "brier": {
-   "stock/cmdty": 0.0,
+   "stock/cmdty": 0.1549,
    "crypto": 0.0
   },
-  "calibration": {},
+  "calibration": {
+   "stock/cmdty 0.03-0.10": {
+    "n": 607,
+    "events": 194,
+    "weeks": 27,
+    "avg_p": 0.067,
+    "yes_rate": 0.053
+   },
+   "stock/cmdty 0.10-0.20": {
+    "n": 750,
+    "events": 245,
+    "weeks": 28,
+    "avg_p": 0.137,
+    "yes_rate": 0.087
+   },
+   "stock/cmdty 0.20-0.35": {
+    "n": 698,
+    "events": 257,
+    "weeks": 27,
+    "avg_p": 0.27,
+    "yes_rate": 0.173
+   },
+   "stock/cmdty 0.35-0.50": {
+    "n": 686,
+    "events": 257,
+    "weeks": 28,
+    "avg_p": 0.43,
+    "yes_rate": 0.347
+   },
+   "stock/cmdty 0.50-0.65": {
+    "n": 777,
+    "events": 265,
+    "weeks": 28,
+    "avg_p": 0.554,
+    "yes_rate": 0.526
+   },
+   "stock/cmdty 0.65-0.80": {
+    "n": 391,
+    "events": 243,
+    "weeks": 27,
+    "avg_p": 0.707,
+    "yes_rate": 0.798
+   },
+   "stock/cmdty 0.80-0.97": {
+    "n": 69,
+    "events": 66,
+    "weeks": 17,
+    "avg_p": 0.866,
+    "yes_rate": 0.884
+   }
+  },
   "rules": {
    "stock/cmdty YES 0.1-0.5 +1c +fee": {
-    "n": 0
+    "n": 2134,
+    "won": 424,
+    "events": 287,
+    "weeks": 28,
+    "weeks_pos": 5,
+    "avg_cost": 0.298,
+    "pct_per_$": -33.2
    },
    "stock/cmdty YES 0.1-0.5 +2c +fee": {
-    "n": 0
+    "n": 2134,
+    "won": 424,
+    "events": 287,
+    "weeks": 28,
+    "weeks_pos": 5,
+    "avg_cost": 0.308,
+    "pct_per_$": -35.4
    },
    "stock/cmdty YES 0.1-0.5 +5c +fee": {
-    "n": 0
+    "n": 2134,
+    "won": 424,
+    "events": 287,
+    "weeks": 28,
+    "weeks_pos": 3,
+    "avg_cost": 0.338,
+    "pct_per_$": -41.1
    },
    "stock/cmdty YES 0.03-0.2 +1c +fee": {
-    "n": 0
+    "n": 1357,
+    "won": 97,
+    "events": 260,
+    "weeks": 28,
+    "weeks_pos": 6,
+    "avg_cost": 0.122,
+    "pct_per_$": -41.4
    },
    "stock/cmdty YES 0.03-0.2 +2c +fee": {
-    "n": 0
+    "n": 1357,
+    "won": 97,
+    "events": 260,
+    "weeks": 28,
+    "weeks_pos": 6,
+    "avg_cost": 0.132,
+    "pct_per_$": -45.9
    },
    "stock/cmdty YES 0.03-0.2 +5c +fee": {
-    "n": 0
+    "n": 1357,
+    "won": 97,
+    "events": 260,
+    "weeks": 28,
+    "weeks_pos": 3,
+    "avg_cost": 0.162,
+    "pct_per_$": -55.9
    },
    "stock/cmdty YES 0.2-0.5 +1c +fee": {
-    "n": 0
+    "n": 1384,
+    "won": 359,
+    "events": 286,
+    "weeks": 28,
+    "weeks_pos": 7,
+    "avg_cost": 0.375,
+    "pct_per_$": -30.8
    },
    "stock/cmdty YES 0.2-0.5 +2c +fee": {
-    "n": 0
+    "n": 1384,
+    "won": 359,
+    "events": 286,
+    "weeks": 28,
+    "weeks_pos": 7,
+    "avg_cost": 0.385,
+    "pct_per_$": -32.6
    },
    "stock/cmdty YES 0.2-0.5 +5c +fee": {
-    "n": 0
+    "n": 1384,
+    "won": 359,
+    "events": 286,
+    "weeks": 28,
+    "weeks_pos": 4,
+    "avg_cost": 0.415,
+    "pct_per_$": -37.4
    },
    "stock/cmdty NO 0.5-0.7 +1c +fee": {
-    "n": 0
+    "n": 1052,
+    "won": 708,
+    "events": 283,
+    "weeks": 28,
+    "weeks_pos": 19,
+    "avg_cost": 0.605,
+    "pct_per_$": 11.2
    },
    "stock/cmdty NO 0.5-0.7 +2c +fee": {
-    "n": 0
+    "n": 1052,
+    "won": 708,
+    "events": 283,
+    "weeks": 28,
+    "weeks_pos": 19,
+    "avg_cost": 0.615,
+    "pct_per_$": 9.4
    },
    "stock/cmdty NO 0.5-0.7 +5c +fee": {
-    "n": 0
+    "n": 1052,
+    "won": 708,
+    "events": 283,
+    "weeks": 28,
+    "weeks_pos": 15,
+    "avg_cost": 0.645,
+    "pct_per_$": 4.3
    },
    "stock/cmdty NO 0.8-0.97 +1c +fee": {
-    "n": 0
+    "n": 1377,
+    "won": 1275,
+    "events": 259,
+    "weeks": 28,
+    "weeks_pos": 21,
+    "avg_cost": 0.909,
+    "pct_per_$": 1.9
    },
    "stock/cmdty NO 0.8-0.97 +2c +fee": {
-    "n": 0
+    "n": 1377,
+    "won": 1275,
+    "events": 259,
+    "weeks": 28,
+    "weeks_pos": 18,
+    "avg_cost": 0.919,
+    "pct_per_$": 0.8
    },
    "stock/cmdty NO 0.8-0.97 +5c +fee": {
-    "n": 0
+    "n": 1377,
+    "won": 1275,
+    "events": 259,
+    "weeks": 28,
+    "weeks_pos": 12,
+    "avg_cost": 0.947,
+    "pct_per_$": -2.3
    },
    "stock/cmdty YES 0.1-0.5 +2c +fee week": {
-    "n": 0
+    "n": 2130,
+    "won": 424,
+    "events": 286,
+    "weeks": 27,
+    "weeks_pos": 5,
+    "avg_cost": 0.308,
+    "pct_per_$": -35.3
    },
    "stock/cmdty YES 0.1-0.5 +2c +fee month": {
-    "n": 0
+    "n": 4,
+    "won": 0,
+    "events": 1,
+    "weeks": 1,
+    "weeks_pos": 0,
+    "avg_cost": 0.343,
+    "pct_per_$": -100.0
    },
    "stock/cmdty YES 0.1-0.5 +2c +fee HIGH": {
-    "n": 0
+    "n": 1094,
+    "won": 258,
+    "events": 285,
+    "weeks": 28,
+    "weeks_pos": 8,
+    "avg_cost": 0.313,
+    "pct_per_$": -24.8
    },
    "stock/cmdty YES 0.1-0.5 +2c +fee LOW": {
-    "n": 0
+    "n": 1040,
+    "won": 166,
+    "events": 283,
+    "weeks": 28,
+    "weeks_pos": 5,
+    "avg_cost": 0.301,
+    "pct_per_$": -47.0
    },
    "stock/cmdty YES 0.1-0.5 +2c +fee 2025": {
     "n": 0
    },
    "stock/cmdty YES 0.1-0.5 +2c +fee 2026": {
-    "n": 0
+    "n": 2134,
+    "won": 424,
+    "events": 287,
+    "weeks": 28,
+    "weeks_pos": 5,
+    "avg_cost": 0.308,
+    "pct_per_$": -35.4
    },
    "crypto YES 0.1-0.5 +1c +fee": {
     "n": 0
@@ -141,139 +359,154 @@ hit events 0 Counter()
   }
  },
  "mid-life": {
-  "rows": 0,
+  "rows": 3323,
   "brier": {
-   "stock/cmdty": 0.0,
+   "stock/cmdty": 0.1265,
    "crypto": 0.0
   },
-  "calibration": {},
+  "calibration": {
+   "stock/cmdty 0.03-0.10": {
+    "n": 1142,
+    "events": 271,
+    "weeks": 27,
+    "avg_p": 0.059,
+    "yes_rate": 0.032
+   },
+   "stock/cmdty 0.10-0.20": {
+    "n": 669,
+    "events": 272,
+    "weeks": 28,
+    "avg_p": 0.138,
+    "yes_rate": 0.114
+   },
+   "stock/cmdty 0.20-0.35": {
+    "n": 536,
+    "events": 263,
+    "weeks": 28,
+    "avg_p": 0.27,
+    "yes_rate": 0.246
+   },
+   "stock/cmdty 0.35-0.50": {
+    "n": 391,
+    "events": 224,
+    "weeks": 27,
+    "avg_p": 0.426,
+    "yes_rate": 0.384
+   },
+   "stock/cmdty 0.50-0.65": {
+    "n": 330,
+    "events": 212,
+    "weeks": 28,
+    "avg_p": 0.56,
+    "yes_rate": 0.518
+   },
+   "stock/cmdty 0.65-0.80": {
+    "n": 162,
+    "events": 141,
+    "weeks": 26,
+    "avg_p": 0.712,
+    "yes_rate": 0.679
+   },
+   "stock/cmdty 0.80-0.97": {
+    "n": 93,
+    "events": 80,
+    "weeks": 22,
+    "avg_p": 0.875,
+    "yes_rate": 0.849
+   }
+  },
   "rules": {
    "stock/cmdty YES 0.1-0.5 +1c +fee": {
-    "n": 0
+    "n": 1596,
+    "won": 358,
+    "events": 289,
+    "weeks": 28,
+    "weeks_pos": 6,
+    "avg_cost": 0.275,
+    "pct_per_$": -18.5
    },
    "stock/cmdty YES 0.1-0.5 +2c +fee": {
-    "n": 0
+    "n": 1596,
+    "won": 358,
+    "events": 289,
+    "weeks": 28,
+    "weeks_pos": 6,
+    "avg_cost": 0.285,
+    "pct_per_$": -21.3
    },
    "stock/cmdty YES 0.1-0.5 +5c +fee": {
-    "n": 0
+    "n": 1596,
+    "won": 358,
+    "events": 289,
+    "weeks": 28,
+    "weeks_pos": 4,
+    "avg_cost": 0.315,
+    "pct_per_$": -28.8
    },
    "stock/cmdty YES 0.03-0.2 +1c +fee": {
-    "n": 0
+    "n": 1811,
+    "won": 112,
+    "events": 285,
+    "weeks": 28,
+    "weeks_pos": 5,
+    "avg_cost": 0.104,
+    "pct_per_$": -40.4
    },
    "stock/cmdty YES 0.03-0.2 +2c +fee": {
-    "n": 0
+    "n": 1811,
+    "won": 112,
+    "events": 285,
+    "weeks": 28,
+    "weeks_pos": 4,
+    "avg_cost": 0.114,
+    "pct_per_$": -45.6
    },
    "stock/cmdty YES 0.03-0.2 +5c +fee": {
-    "n": 0
+    "n": 1811,
+    "won": 112,
+    "events": 285,
+    "weeks": 28,
+    "weeks_pos": 4,
+    "avg_cost": 0.144,
+    "pct_per_$": -57.0
    },
    "stock/cmdty YES 0.2-0.5 +1c +fee": {
-    "n": 0
+    "n": 927,
+    "won": 282,
+    "events": 282,
+    "weeks": 28,
+    "weeks_pos": 7,
+    "avg_cost": 0.361,
+    "pct_per_$": -15.7
    },
    "stock/cmdty YES 0.2-0.5 +2c +fee": {
-    "n": 0
+    "n": 927,
+    "won": 282,
+    "events": 282,
+    "weeks": 28,
+    "weeks_pos": 7,
+    "avg_cost": 0.371,
+    "pct_per_$": -18.0
    },
    "stock/cmdty YES 0.2-0.5 +5c +fee": {
-    "n": 0
+    "n": 927,
+    "won": 282,
+    "events": 282,
+    "weeks": 28,
+    "weeks_pos": 5,
+    "avg_cost": 0.401,
+    "pct_per_$": -24.1
    },
    "stock/cmdty NO 0.5-0.7 +1c +fee": {
-    "n": 0
+    "n": 590,
+    "won": 375,
+    "events": 258,
+    "weeks": 28,
+    "weeks_pos": 11,
+    "avg_cost": 0.621,
+    "pct_per_$": 2.3
    },
    "stock/cmdty NO 0.5-0.7 +2c +fee": {
-    "n": 0
-   },
-   "stock/cmdty NO 0.5-0.7 +5c +fee": {
-    "n": 0
-   },
-   "stock/cmdty NO 0.8-0.97 +1c +fee": {
-    "n": 0
-   },
-   "stock/cmdty NO 0.8-0.97 +2c +fee": {
-    "n": 0
-   },
-   "stock/cmdty NO 0.8-0.97 +5c +fee": {
-    "n": 0
-   },
-   "stock/cmdty YES 0.1-0.5 +2c +fee week": {
-    "n": 0
-   },
-   "stock/cmdty YES 0.1-0.5 +2c +fee month": {
-    "n": 0
-   },
-   "stock/cmdty YES 0.1-0.5 +2c +fee HIGH": {
-    "n": 0
-   },
-   "stock/cmdty YES 0.1-0.5 +2c +fee LOW": {
-    "n": 0
-   },
-   "stock/cmdty YES 0.1-0.5 +2c +fee 2025": {
-    "n": 0
-   },
-   "stock/cmdty YES 0.1-0.5 +2c +fee 2026": {
-    "n": 0
-   },
-   "crypto YES 0.1-0.5 +1c +fee": {
-    "n": 0
-   },
-   "crypto YES 0.1-0.5 +2c +fee": {
-    "n": 0
-   },
-   "crypto YES 0.1-0.5 +5c +fee": {
-    "n": 0
-   },
-   "crypto YES 0.03-0.2 +1c +fee": {
-    "n": 0
-   },
-   "crypto YES 0.03-0.2 +2c +fee": {
-    "n": 0
-   },
-   "crypto YES 0.03-0.2 +5c +fee": {
-    "n": 0
-   },
-   "crypto YES 0.2-0.5 +1c +fee": {
-    "n": 0
-   },
-   "crypto YES 0.2-0.5 +2c +fee": {
-    "n": 0
-   },
-   "crypto YES 0.2-0.5 +5c +fee": {
-    "n": 0
-   },
-   "crypto NO 0.5-0.7 +1c +fee": {
-    "n": 0
-   },
-   "crypto NO 0.5-0.7 +2c +fee": {
-    "n": 0
-   },
-   "crypto NO 0.5-0.7 +5c +fee": {
-    "n": 0
-   },
-   "crypto NO 0.8-0.97 +1c +fee": {
-    "n": 0
-   },
-   "crypto NO 0.8-0.97 +2c +fee": {
-    "n": 0
-   },
-   "crypto NO 0.8-0.97 +5c +fee": {
-    "n": 0
-   },
-   "crypto YES 0.1-0.5 +2c +fee week": {
-    "n": 0
-   },
-   "crypto YES 0.1-0.5 +2c +fee month": {
-    "n": 0
-   },
-   "crypto YES 0.1-0.5 +2c +fee HIGH": {
-    "n": 0
-   },
-   "crypto YES 0.1-0.5 +2c +fee LOW": {
-    "n": 0
-   },
-   "crypto YES 0.1-0.5 +2c +fee 2025": {
-    "n": 0
-   },
-   "crypto YES 0.1-0.5 +2c +fee 2026": {
-    "n": 0
-   }
-  }
- }
-}
+    "n": 590,
+    "won": 375,
+    "events
