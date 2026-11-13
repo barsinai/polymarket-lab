@@ -76,4 +76,5 @@
 - New ideas: N9 (adjacent, dead same cycle), N10 (outside the box, TESTING), N11 Netflix FlixPatrol nowcast (follow-up to N10).
 - Health: fast paper 04:57, slow 04:06, MM v2 05:01, order books every 15 min - OK. No new Tracebacks/MemoryErrors (pilot-log and
   script-log are the old 11-12 copies; smoke.py UnboundLocalError when the feed is unreachable still cosmetic). Pilot STOP, no orders.
-- Next: first charts paper entries + spreads; box-office Saturday 11-14 14 UTC; lock_mv on its first losing day; young/converge end dates.
+- Charts paper first run (05:21): 12 live events, fees now ON, favourite spreads wide (bid 0.41 / ask 0.76) -> spread cap 10c + fee; 2 kept.
+- Next: charts paper spreads + first settlements; box-office Saturday 11-14 14 UTC; lock_mv on its first losing day; young/converge end dates.

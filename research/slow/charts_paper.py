@@ -5,7 +5,7 @@ Netflix favourites 0.50-0.97 +6.7% (72 events), App Store -6.2% (37), first half
 priced >= 0.95 won only 92-96% (3-4 losses -> the leader's NO at <= 5c is a hint, not a rule). Fees disabled on these markets.
 This checks it at REAL asks. Rule: open negRisk event whose title names Netflix / App Store / Play Store / Spotify / Billboard /
 Hot 100, event end in 2..24 h; favourite = market with the highest YES mid; buy YES at its best ask if 0.60 <= ask <= 0.97 and
->= $10 at that ask (rule 'fav'); if the favourite's YES bid >= 0.95, also buy its NO at the ask if <= 0.06 (rule 'tail').
+>= $10 at that ask (rule 'fav', spread <= 10c, fee 0.07p(1-p) when enabled - fees are ON for these markets since 11-13); if the favourite's YES bid >= 0.95, also buy its NO at the ask if <= 0.06 (rule 'tail').
 $10 each, once per event and rule. Settles on gamma outcomePrices. State data/slow/charts_positions.jsonl, summary
 data/slow/charts_report.json (by kind)."""
 import json, os, re, time, datetime as dt, collections
@@ -36,6 +36,14 @@ def best(book, side):
     return lv[0] if lv else (None, 0)
 
 
+MAXSPREAD = 0.10  # the census used last prices; wide books (bid 0.41 / ask 0.76 seen 11-13) are not the same favourite
+
+
+def fee(p, shares, m):
+    """taker fee convention of the lab: 0.07 p (1-p) per share when the market has fees enabled"""
+    return 0.07 * p * (1 - p) * shares if m.get("feesEnabled") else 0.0
+
+
 def kind(t):
     t = t.lower()
     for k in ("netflix", "app store", "play store", "spotify", "billboard", "hot 100"):
@@ -58,7 +66,7 @@ for p in pos:
         pr = []
     if m and m.get("closed") and pr and max(pr) >= 0.99:
         y = int(pr[0] > pr[1]); win = (y == 1) == (p["side"] == "YES")
-        p.update(resolved=True, y=y, won=int(win), pnl=round(p["shares"] * (1 if win else 0) - STAKE, 2), settled=now.strftime("%Y-%m-%d %H:%M"))
+        p.update(resolved=True, y=y, won=int(win), pnl=round(p["shares"] * (1 if win else 0) - STAKE - p.get("fee", 0), 2), settled=now.strftime("%Y-%m-%d %H:%M"))
 
 seen = 0; n_new = 0; off = 0
 while off < 3000:
@@ -70,7 +78,7 @@ while off < 3000:
     off += 100
     for e in page:
         title = e.get("title") or ""
-        if not PAT.search(title) or re.search(r"say|mention|earnings|subscriber", title, re.I):
+        if not PAT.search(title) or re.search(r"say|mention|earnings|subscriber|nflx|spot\)|up or down|\bhit\b|stock|price", title, re.I):
             continue
         seen += 1
         rows = []
@@ -98,14 +106,16 @@ while off < 3000:
                 "second_mid": round(sorted(r["mid"] for r in rows)[-2], 3) if len(rows) > 1 else None,
                 "hours_left": round((dt.datetime.fromisoformat(e["endDate"].replace("Z", "+00:00")) - now).total_seconds() / 3600, 1),
                 "fees": f["m"].get("feesEnabled"), "resolved": False, "stake": STAKE}
-        if (e["id"], "fav") not in held and f["ask"] is not None and 0.60 <= f["ask"] <= 0.97 and f["ask"] * f["asz"] >= STAKE:
-            pos.append(dict(base, rule="fav", side="YES", ask=f["ask"], shares=round(STAKE / f["ask"], 2)))
+        if (e["id"], "fav") not in held and f["ask"] is not None and 0.60 <= f["ask"] <= 0.97 and f["ask"] * f["asz"] >= STAKE \
+                and f["bid"] is not None and f["ask"] - f["bid"] <= MAXSPREAD:
+            pos.append(dict(base, rule="fav", side="YES", ask=f["ask"], spread=round(f["ask"] - f["bid"], 4), shares=round(STAKE / f["ask"], 2),
+                            fee=round(fee(f["ask"], STAKE / f["ask"], f["m"]), 4)))
             held.add((e["id"], "fav")); n_new += 1
         if (e["id"], "tail") not in held and (f["bid"] or 0) >= 0.95:
             nb = get(f"{CLOB}/book", {"token_id": f["toks"][1]})
             na, nsz = best(nb, "asks")
             if na is not None and na <= 0.06 and na * nsz >= STAKE:
-                pos.append(dict(base, rule="tail", side="NO", ask=na, shares=round(STAKE / na, 2)))
+                pos.append(dict(base, rule="tail", side="NO", ask=na, shares=round(STAKE / na, 2), fee=round(fee(na, STAKE / na, f["m"]), 4)))
                 held.add((e["id"], "tail")); n_new += 1
     if len(page) < 100:
         break
