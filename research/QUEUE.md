@@ -664,3 +664,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - Earnings beat census (470 markets): calibrated (0.734 priced vs 0.737 won) -> DEAD, lesson 13. Scheduled-data favourites: same as converge,
   PARKED. Weather Brier still worse than market (31 events, one day). Paper lock_x 15/16 +12%, lock_mv 19/19 +8% but 1-2 days only.
   Next: N7 (lock_x ∩ lock_mv), N8 earnings-call mention census, Saturday box-office paper.
+
+## 11-13 05:10 cycle 4
+- Charts census (208 Netflix/App Store/Spotify/Billboard events): favourite 0.60-0.85 +5.6%/$ at +2c (49 events), Netflix +6.7% (72), App
+  Store -6.2% -> paper charts_paper.py. lock_m cool-down dead (no loss clustering). lock_mv's 21/21 came on days when every lock won.
+  Next: N11 FlixPatrol nowcast if the Netflix paper holds; N8 mention census; N3/N4 still queued.

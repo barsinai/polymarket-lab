@@ -60,3 +60,20 @@
   (sample.py already fixed). Pilot STOP (since 11-05), no orders. No MemoryErrors. Polymarket APIs are not reachable from the cycle
   sandbox (proxy) -> network tests go through run_script.yml.
 - Next: first Saturday box-office paper (11-14 14 UTC); converge/young end dates; N8 census; lock_x/lock_mv at 30 end-times.
+
+## 11-13 05:10 UTC cycle 4 (scheduled)
+- Read-outs: server websocket lock_m (lockm.jsonl, 39 h, unique windows, flat $1): rx 301 trades +7.7%/$ at 0.1 s (115 end-times), bn 276
+  +8.5% (1 s: rx +8.7, bn +10.7). Paper (2-s) lock_m 133 94% +0.8%/$, lock_mv 21/21 +7.5% (15 end-times), lock_b 18/18 +8.5%, lock_x 16
+  unchanged, lock_early 39 +1.9%. Caveat found: since lock_mv started, every lock_m trade won (27/27, the 6 filtered out too) - the
+  range filter is untested on a losing day. All 8 lock_m losses are 5m windows; 15m lock_m 13/13 +6.4% (idea 7, small n).
+  Young 18 settled 3 won -$135 (more early path touches). Converge 2 settled, 90 open. Weather paper 73 settled +$133 (YES +$131 on 11,
+  NO 37/62 +$3); Brier not re-scored since 01:05 (model .073 vs market .066). Options 36 open, 0 settled. Box office: out of window.
+- Test 1 (adjacent, N9 lock_m cool-down after a loss, local paper trades): no clustering (30 min after a loss 3/4, 60 min 11/12 +9%) -> DEAD.
+- Test 2 (outside the box, N10 ranking-chart markets, charts_census.py via run_script, 208 closed events / 1,128 markets with history,
+  2025-10..2026-02, hourly last prices, fees disabled): favourites 0.70-0.85 won 87-90% vs priced 0.78; fav 0.60-0.85 +5.6%/$ at +2c
+  (49 events, end-24h), +13.6% (26, end-2h); Netflix fav +6.7% (72 events), App Store -6.2% (37); halves -5.4% / +6.2% at 24 h.
+  Hint, not proof (last prices not asks, LESSONS 3/5) -> paper charts_paper.py (hourly in spike_paper.yml, real asks, $10, rules fav + tail).
+- New ideas: N9 (adjacent, dead same cycle), N10 (outside the box, TESTING), N11 Netflix FlixPatrol nowcast (follow-up to N10).
+- Health: fast paper 04:57, slow 04:06, MM v2 05:01, order books every 15 min - OK. No new Tracebacks/MemoryErrors (pilot-log and
+  script-log are the old 11-12 copies; smoke.py UnboundLocalError when the feed is unreachable still cosmetic). Pilot STOP, no orders.
+- Next: first charts paper entries + spreads; box-office Saturday 11-14 14 UTC; lock_mv on its first losing day; young/converge end dates.
