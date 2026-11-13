@@ -59,7 +59,7 @@ for _ in range(600):
 print("reward markets", len(cfg), flush=True)
 
 # 2. candidates: ours already held + new ones by pool size
-held = [c for c, x in st["markets"].items() if x.get("active")]
+held = [c for c, x in st["markets"].items() if x.get("active") or (x.get("settled") is None and (abs(x.get("inv", 0)) > 1e-9 or abs(x.get("inv2", 0)) > 1e-9))]
 new = sorted((c for c in cfg if c not in st["markets"] and cfg[c]["rate"] >= MIN_POOL and 0 < cfg[c]["min"] <= MAX_MIN and cfg[c]["v"] > 1),
              key=lambda c: -cfg[c]["rate"])
 cands = held + new[:max(0, 8 * N_MAX - len(held))]
@@ -89,7 +89,7 @@ for c in cands:
             pr = [float(p) for p in json.loads(g.get("outcomePrices") or "[]")]
         except Exception:  # noqa: BLE001
             pr = []
-        if pr and max(pr) >= 0.99 and x.get("active"):
+        if pr and max(pr) >= 0.99 and x.get("settled") is None:
             yes_pay = 1.0 if pr[0] >= 0.99 else 0.0
             x["cash"] += x["inv"] * yes_pay; x["inv"] = 0.0; x["active"] = False; x["settled"] = yes_pay
             x["cash2"] = x.get("cash2", 0.0) + x.get("inv2", 0.0) * yes_pay; x["inv2"] = 0.0
@@ -100,38 +100,46 @@ for c in cands:
         continue
     if not x and active_n >= N_MAX:
         continue
-    # fair price
-    fair, src = None, None
-    if c in manual:
-        fair, src = float(manual[c]["fair"]), "manual"
-    else:
-        try:
-            fair = float(json.loads(g.get("outcomePrices") or "[]")[0]); src = "displayed"
-        except Exception:  # noqa: BLE001
-            fair = None
-    if not x:
-        if fair is None or not (0.02 <= fair <= 0.98):
-            continue
-    elif not x.get("active"):
-        continue
-    tick = k["tick"]; size = max(k["min"], 5.0)
-    bid = max(tick, math.floor(round((fair - 0.01) / tick, 6)) * tick); ask = min(1 - tick, math.ceil(round((fair + 0.01) / tick, 6)) * tick)
-    mid = (bid + ask) / 2
-    if 100 * (mid - bid) >= k["v"] or 100 * (ask - mid) >= k["v"]:
-        if x:
-            x["why_off"] = "band too narrow for the tick"
-        continue
+    # fair price: a researched value (data/slow/lp_fair.json: long shots / near-certainties) or the middle of a REAL two-sided book
+    # (spread <= 20c). Never Polymarket's displayed price of an empty book: that is a stale last trade (11-13: the Anthropic valuation
+    # ladder showed $1.6T at 0.645 above $1.575T at 0.565).
     b = books.get(k["toks"][0]) or {}
     bl = sorted(((float(o["price"]), float(o["size"])) for o in b.get("bids") or []), reverse=True)
     al = sorted((float(o["price"]), float(o["size"])) for o in b.get("asks") or [])
+    fair, src = None, None
+    if c in manual:
+        fair, src = float(manual[c]["fair"]), "manual"
+    elif bl and al and al[0][0] - bl[0][0] <= 0.20:
+        fair, src = (al[0][0] + bl[0][0]) / 2, "book"
+    if not x:
+        if fair is None or not (0.005 <= fair <= 0.995):
+            continue
+    elif not x.get("active"):
+        continue
+    if fair is None:
+        fair, src = x.get("fair"), x.get("src")           # held market whose book emptied: keep the last price
+    tick = k["tick"]; size = max(k["min"], 5.0)
+    # the WIDEST two-sided quote that still scores: half-width just under the max spread v. Alone in the band our share is 100%
+    # however wide we are, so the whole band becomes our safety margin. Shifted inside [tick, 1 - tick] for long shots.
+    hw = max(tick, math.floor(round((k["v"] / 100 - 0.005) / tick, 6)) * tick)
+    bid = round(round((fair - hw) / tick) * tick, 6); ask = round(bid + 2 * hw, 6)
+    if bid < tick:
+        bid = tick; ask = round(tick + 2 * hw, 6)
+    if ask > 1 - tick:
+        ask = round(1 - tick, 6); bid = round(ask - 2 * hw, 6)
+    mid = (bid + ask) / 2
+    if 100 * (mid - bid) >= k["v"] or bid <= 0 or ask >= 1:
+        if x:
+            x["why_off"] = "band too narrow for the tick"
+        continue
     sb_, sa_ = score(bl, mid, k["v"], k["min"], True), score(al, mid, k["v"], k["min"], False)
     comp = max(min(sb_, sa_), (sb_ + sa_) / 3)
     ours = min(((k["v"] - 100 * (mid - bid)) / k["v"]) ** 2, ((k["v"] - 100 * (ask - mid)) / k["v"]) ** 2) * size
     share = ours / (ours + comp) if ours > 0 else 0.0
     tr_all = collect.trades_since(c, (x or {}).get("last_ts", now - FAIR_DAYS * 86400), max_rows=500)
     if not x:                                             # LP-1 enters only where nobody else quotes (our share >= MIN_SHARE)
-        if share < MIN_SHARE or (src != "manual" and not tr_all):
-            continue                                      # contested, or never traded recently (no basis for a price)
+        if share < MIN_SHARE:
+            continue                                      # someone already quotes inside the band: not LP-1
         x = st["markets"][c] = {"q": k["q"], "opened": int(now), "inv": 0.0, "cash": 0.0, "reward": 0.0, "fills": [], "comp_runs": 0,
                                 "runs": 0, "active": True, "last_ts": now, "fair0": fair, "src": src}
         active_n += 1
@@ -167,6 +175,9 @@ for c in cands:
     hrs = min((now - x["last_ts"]) / 3600, 2.0) if x["runs"] else 0.0   # the first run only posts; rewards accrue from the next
     x["reward"] += k["rate"] * share * hrs / 24
     x["comp_runs"] += comp > 0; x["runs"] += 1; x["last_ts"] = now
+    x["low_runs"] = x.get("low_runs", 0) + 1 if share < MIN_SHARE else 0
+    if x["low_runs"] >= 2:
+        x["active"] = False; x["why_off"] = "competitor inside the band"
     x.update(fair=fair, src=src, rate=k["rate"], v=k["v"], min=k["min"], bid=bid, ask=ask, share=round(share, 3), comp=round(comp, 1),
              capital=round(size * (bid + 1 - ask), 2))
 
