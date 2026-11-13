@@ -26,7 +26,8 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -q requests
-      - run: mkdir -p logs data/slow data/research && python -u research/slow/spike_monitor.py 2>&1 | tee logs/spike-log.txt
+      - run: mkdir -p logs data/slow data/research   # spike_monitor dropped 11-13 (DEAD: -20..-25% at 24 h; it used 8 of 13 min)
+      - run: timeout 300 python -u research/slow/sports_fav_paper.py 2>&1 | tail -3 | tee logs/sports-fav-log.txt || true
       - run: python -u research/slow/converge_paper.py 2>&1 | tee logs/converge-log.txt
       - run: python -u research/slow/score_forecasts.py 2>&1 | tail -5 | tee logs/forecast-log.txt || true
       - run: timeout 300 python -u research/slow/young_paper.py 2>&1 | tail -6 | tee logs/young-log.txt || true
@@ -52,6 +53,6 @@ jobs:
       - name: Save
         run: |
           git config user.name "lab-bot" && git config user.email "lab-bot@users.noreply.github.com"
-          for p in data/slow/spike_positions.jsonl data/slow/spike_report.json data/slow/converge_positions.jsonl data/slow/converge_report.json data/slow/arb_scan.json data/slow/arb_log.jsonl data/slow/young_positions.jsonl data/slow/young_report.json data/slow/boxoffice_positions.jsonl data/slow/boxoffice_report.json data/slow/charts_positions.jsonl data/slow/charts_report.json data/slow/mention_positions.jsonl data/slow/mention_report.json data/research/scoreboard.json data/research/options_obs.jsonl data/research/options_positions.jsonl data/research/options_report.json data/research/options_probe.json data/weather data/sharp logs; do [ -e "$p" ] && git add --sparse "$p"; done
+          for p in data/slow/spike_positions.jsonl data/slow/spike_report.json data/slow/converge_positions.jsonl data/slow/converge_report.json data/slow/arb_scan.json data/slow/arb_log.jsonl data/slow/young_positions.jsonl data/slow/young_report.json data/slow/boxoffice_positions.jsonl data/slow/boxoffice_report.json data/slow/charts_positions.jsonl data/slow/charts_report.json data/slow/mention_positions.jsonl data/slow/mention_report.json data/slow/sports_fav_positions.jsonl data/slow/sports_fav_report.json data/research/scoreboard.json data/research/options_obs.jsonl data/research/options_positions.jsonl data/research/options_report.json data/research/options_probe.json data/weather data/sharp logs; do [ -e "$p" ] && git add --sparse "$p"; done
           git commit -qm "Slow paper $(date -u +%FT%H:%M) [skip ci]" || exit 0
           for i in 1 2 3; do git pull -q --rebase --autostash -X theirs origin main && git push -q && break; sleep 5; done
