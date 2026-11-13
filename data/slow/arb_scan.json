@@ -1,8 +1,8 @@
 {
-"scanned": "2026-11-13 01:02",
+"scanned": "2026-11-13 02:03",
 "events": 2100,
 "groups": 2037,
-"books": 16918,
+"books": 16916,
 "opps": [
 {
 "kind": "ladder_num",
@@ -31,8 +31,23 @@
 "cost": 0.99,
 "edge": 0.01,
 "edge_after_fee": -0.0063,
-"size_shares": 204.77,
-"usd_at_size": 202.72
+"size_shares": 210.72,
+"usd_at_size": 208.61
+},
+{
+"kind": "ladder_num",
+"event": "What price will Sui hit in 2026?",
+"slug": "what-price-will-sui-hit-in-2026",
+"easy": "Will Sui reach $2.50 before 2027?",
+"hard": "Will Sui reach $3.00 before 2027?",
+"easy_yes_ask": 0.06,
+"hard_no_ask": 0.928,
+"hard_yes_bid": 0.072,
+"cost": 0.988,
+"edge": 0.012,
+"edge_after_fee": 0.0034,
+"size_shares": 101.0,
+"usd_at_size": 99.79
 },
 {
 "kind": "ladder_date",
@@ -66,6 +81,21 @@
 },
 {
 "kind": "ladder_num",
+"event": "Valantis FDV above ___ one day after launch?",
+"slug": "valantis-fdv-above-one-day-after-launch",
+"easy": "Valantis FDV above $150M one day after launch?",
+"hard": "Valantis FDV above $500M one day after launch?",
+"easy_yes_ask": 0.19,
+"hard_no_ask": 0.8,
+"hard_yes_bid": 0.2,
+"cost": 0.99,
+"edge": 0.01,
+"edge_after_fee": -0.012,
+"size_shares": 70.04,
+"usd_at_size": 69.34
+},
+{
+"kind": "ladder_num",
 "event": "Pacifica FDV above ___ one day after launch?",
 "slug": "pacifica-fdv-above-one-day-after-launch",
 "easy": "Pacifica FDV above $500M one day after launch?",
@@ -96,18 +126,18 @@
 },
 {
 "kind": "ladder_num",
-"event": "What price will Sui hit in 2026?",
-"slug": "what-price-will-sui-hit-in-2026",
-"easy": "Will Sui reach $2.50 before 2027?",
-"hard": "Will Sui reach $3.00 before 2027?",
-"easy_yes_ask": 0.06,
-"hard_no_ask": 0.929,
-"hard_yes_bid": 0.071,
-"cost": 0.989,
-"edge": 0.011,
-"edge_after_fee": 0.0024,
-"size_shares": 40.0,
-"usd_at_size": 39.56
+"event": "StandX FDV above ___ one day after launch?",
+"slug": "standx-fdv-above-one-day-after-launch",
+"easy": "StandX FDV above $800M one day after launch?",
+"hard": "StandX FDV above $1B one day after launch?",
+"easy_yes_ask": 0.019,
+"hard_no_ask": 0.978,
+"hard_yes_bid": 0.022,
+"cost": 0.997,
+"edge": 0.003,
+"edge_after_fee": 0.0002,
+"size_shares": 155.21,
+"usd_at_size": 154.74
 },
 {
 "kind": "ladder_num",
@@ -162,21 +192,6 @@
 "usd_at_size": 10.05
 },
 {
-"kind": "ladder_num",
-"event": "How high will US unemployment go in 2026?",
-"slug": "how-high-will-us-unemployment-go-in-2026",
-"easy": "Will US unemployment reach at least 6.0% in 2026?",
-"hard": "Will US unemployment reach at least 10.0% in 2026?",
-"easy_yes_ask": 0.007,
-"hard_no_ask": 0.987,
-"hard_yes_bid": 0.013,
-"cost": 0.994,
-"edge": 0.006,
-"edge_after_fee": 0.0046,
-"size_shares": 35.56,
-"usd_at_size": 35.35
-},
-{
 "kind": "negrisk_all_yes",
 "event": "Discord IPO Closing Market Cap",
 "slug": "discord-ipo-closing-market-cap-20260626185933220",
@@ -200,6 +215,21 @@
 "usd_at_size": 4.79
 },
 {
+"kind": "ladder_num",
+"event": "StandX FDV above ___ one day after launch?",
+"slug": "standx-fdv-above-one-day-after-launch",
+"easy": "StandX FDV above $100M one day after launch?",
+"hard": "StandX FDV above $1B one day after launch?",
+"easy_yes_ask": 0.015,
+"hard_no_ask": 0.978,
+"hard_yes_bid": 0.022,
+"cost": 0.993,
+"edge": 0.007,
+"edge_after_fee": 0.0045,
+"size_shares": 27.95,
+"usd_at_size": 27.75
+},
+{
 "kind": "ladder_date",
 "event": "Will Israel annex any territory by...?",
 "slug": "will-israel-annex-any-territory-by-december-31",
@@ -216,18 +246,18 @@
 },
 {
 "kind": "ladder_num",
-"event": "StandX FDV above ___ one day after launch?",
-"slug": "standx-fdv-above-one-day-after-launch",
-"easy": "StandX FDV above $100M one day after launch?",
-"hard": "StandX FDV above $1B one day after launch?",
-"easy_yes_ask": 0.015,
-"hard_no_ask": 0.979,
-"hard_yes_bid": 0.021,
-"cost": 0.994,
-"edge": 0.006,
-"edge_after_fee": 0.0035,
-"size_shares": 27.95,
-"usd_at_size": 27.78
+"event": "How high will US unemployment go in 2026?",
+"slug": "how-high-will-us-unemployment-go-in-2026",
+"easy": "Will US unemployment reach at least 6.0% in 2026?",
+"hard": "Will US unemployment reach at least 10.0% in 2026?",
+"easy_yes_ask": 0.007,
+"hard_no_ask": 0.988,
+"hard_yes_bid": 0.012,
+"cost": 0.995,
+"edge": 0.005,
+"edge_after_fee": 0.0037,
+"size_shares": 29.6,
+"usd_at_size": 29.45
 },
 {
 "kind": "ladder_num",
@@ -288,51 +318,6 @@
 "edge_after_fee": 0.0047,
 "size_shares": 1.61,
 "usd_at_size": 1.59
-},
-{
-"kind": "ladder_num",
-"event": "How high will US unemployment go in 2026?",
-"slug": "how-high-will-us-unemployment-go-in-2026",
-"easy": "Will US unemployment reach at least 6.0% in 2026?",
-"hard": "Will US unemployment reach at least 7.0% in 2026?",
-"easy_yes_ask": 0.007,
-"hard_no_ask": 0.974,
-"hard_yes_bid": 0.026,
-"cost": 0.981,
-"edge": 0.019,
-"edge_after_fee": 0.0167,
-"size_shares": 0.59,
-"usd_at_size": 0.58
-},
-{
-"kind": "ladder_num",
-"event": "How high will US unemployment go in 2026?",
-"slug": "how-high-will-us-unemployment-go-in-2026",
-"easy": "Will US unemployment reach at least 5.5% in 2026?",
-"hard": "Will US unemployment reach at least 7.0% in 2026?",
-"easy_yes_ask": 0.017,
-"hard_no_ask": 0.974,
-"hard_yes_bid": 0.026,
-"cost": 0.991,
-"edge": 0.009,
-"edge_after_fee": 0.0061,
-"size_shares": 0.59,
-"usd_at_size": 0.58
-},
-{
-"kind": "ladder_num",
-"event": "How high will US unemployment go in 2026?",
-"slug": "how-high-will-us-unemployment-go-in-2026",
-"easy": "Will US unemployment reach at least 5.0% in 2026?",
-"hard": "Will US unemployment reach at least 7.0% in 2026?",
-"easy_yes_ask": 0.02,
-"hard_no_ask": 0.974,
-"hard_yes_bid": 0.026,
-"cost": 0.994,
-"edge": 0.006,
-"edge_after_fee": 0.0029,
-"size_shares": 0.59,
-"usd_at_size": 0.59
 }
 ]
 }
