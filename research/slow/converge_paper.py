@@ -16,7 +16,9 @@ STAKE = float(os.environ.get("STAKE", "20")); MAX_NEW = int(os.environ.get("MAX_
 SPORT = re.compile(r"\b(vs\.?|nba|nfl|nhl|mlb|ncaa|ufc|mma|premier|la liga|serie a|bundesliga|ligue|champions|europa|mls|atp|wta|tennis|open|cup|league|match|game|win on|spread|o/u|over/under|f1|grand prix|boxing|fight|cricket|rugby|golf|pga|nascar|esports|lol|cs2|dota|valorant)\b", re.I)
 S = requests.Session(); S.headers["User-Agent"] = "polymarket-lab-research/0.1"
 SKIP = re.compile(r"updown|up-or-down|-5m-|-15m-|-4h-", re.I)
-POS = f"{D}/converge_positions.jsonl"
+NAME = os.environ.get("NAME", "converge")          # 11-13: a second instance 'converge_day' (last day, 0.95-0.99) keeps its own state
+POS = f"{D}/{NAME}_positions.jsonl"
+EXCL = re.compile(os.environ["EXCL"], re.I) if os.environ.get("EXCL") else None   # extra exclusions (e.g. tweet counts, data releases)
 
 
 def get(url, params, tries=3):
@@ -80,7 +82,8 @@ while offset < 3000:
             continue
         side = "YES" if LO <= prices[0] <= HI else "NO" if LO <= prices[1] <= HI else None
         ev_title = ((m.get("events") or [{}])[0].get("title") if m.get("events") else "") or ""
-        if side and not SPORT.search(f"{m.get('question') or ''} {m.get('slug') or ''} {ev_title}"):
+        txt = f"{m.get('question') or ''} {m.get('slug') or ''} {ev_title}"
+        if side and not SPORT.search(txt) and not (EXCL and EXCL.search(txt)):
             cands.append((m, side, toks[0] if side == "YES" else toks[1], prices, end))
     if len(page) < 100:
         break
@@ -125,7 +128,7 @@ rep = {"updated": now.strftime("%Y-%m-%d %H:%M"), "open": len(openp), "new_this_
        "open_mark": round(sum(p["shares"] * ((p["now_p"] if p["side"] == "YES" else 1 - p["now_p"]) - p["ask"]) for p in openp if p.get("now_p") is not None), 2),
        "open_by_side": {sd: sum(1 for p in openp if p["side"] == sd) for sd in ("YES", "NO")},
        "avg_ask": round(sum(p["ask"] for p in positions) / len(positions), 4) if positions else None, "avg_days": round(sum(p["days_left"] for p in positions) / len(positions), 1) if positions else None}
-json.dump(rep, open(f"{D}/converge_report.json", "w"), indent=1)
+json.dump(rep, open(f"{D}/{NAME}_report.json", "w"), indent=1)
 print(json.dumps(rep))
 for p in positions[-n_new:] if n_new else []:
     print(f"  new: {p['side']:3} {p['ask']:.3f} x {p['shares']:5.1f} {p['days_left']:4.1f}d  {p['question'][:80]}")
