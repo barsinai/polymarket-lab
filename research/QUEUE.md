@@ -669,3 +669,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - Charts census (208 Netflix/App Store/Spotify/Billboard events): favourite 0.60-0.85 +5.6%/$ at +2c (49 events), Netflix +6.7% (72), App
   Store -6.2% -> paper charts_paper.py. lock_m cool-down dead (no loss clustering). lock_mv's 21/21 came on days when every lock won.
   Next: N11 FlixPatrol nowcast if the Netflix paper holds; N8 mention census; N3/N4 still queued.
+
+## 11-13 09:10 cycle 5
+- Mention markets (N8): YES rich; earnings-call NO on words 0.10-0.40 +15..+17%/$ on 27-29 calls (history, last prices) -> paper
+  mention_paper.py. lock_m 15m +14% vs 5m +7% on the websocket sample (25 end-times) -> read-out. W2 same-day 'dead bucket' flags were a
+  timestamp bug (reportTime), fixed. Next: mention paper spreads, W2 recount, Saturday box office.

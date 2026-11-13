@@ -78,3 +78,22 @@
   script-log are the old 11-12 copies; smoke.py UnboundLocalError when the feed is unreachable still cosmetic). Pilot STOP, no orders.
 - Charts paper first run (05:21): 12 live events, fees now ON, favourite spreads wide (bid 0.41 / ask 0.76) -> spread cap 10c + fee; 2 kept.
 - Next: charts paper spreads + first settlements; box-office Saturday 11-14 14 UTC; lock_mv on its first losing day; young/converge end dates.
+
+## 11-13 09:10 UTC cycle 5 (scheduled)
+- Read-outs: server websocket lock_m (lockm.jsonl 41 h, unique windows, scored won/ask - 1 - 0.07(1-ask)): rx 329 trades 88% +8.4%/$ at 0.1 s
+  (123 end-times), bn 300 +8.9%; 1 s rx +9.2 / bn +11.1. Paper (2-s): no new lock signals 05-09h - lock_m 133 +0.8%/$, lock_b 20/20 +8.0%,
+  lock_x 16 +12.3%, lock_mv 21/21, lock_early 39 +1.9%. Converge 2 settled / 90 open, young 18 settled -$135 (unchanged), weather paper
+  89 settled +$123 (YES +$121 on 13), options 47 open 0 settled, charts 2 open, box office out of window.
+- BUG (W2): weather_paper.observed_max dated METARs by reportTime (nominal hour) -> the previous day's 23:51 report counted for today;
+  'dead' buckets at local midnight (NYC 00:05, Munich 5C bid 15-27c all night) were artifacts, the market was right. Fixed (obsTime).
+- Test 1 (adjacent, N12 = idea 7, server lockm.jsonl): 15m windows +14.0%/$ on 25 end-times (bootstrap +2.8..+23.5) vs 5m +6.8% on 104
+  (-4.5..+17). Promising, small -> TESTING read-out at 40 15m end-times.
+- Test 2 (outside the box, N8 mention markets, mention_census.py via run_script, 2,277 markets sampled, 1,689 with history): YES is rich
+  everywhere (earnings avg price 0.60 vs said 0.53; other 0.45 vs 0.38). Earnings calls (36 calls): NO when YES 0.10-0.40 +14.6%/$ at
+  24 h / +17.3% at 2 h (+2c + fee), 22-23 of 27-29 calls positive, both halves positive. Hourly last prices, not asks (LESSONS 3) ->
+  paper mention_paper.py (hourly in spike_paper.yml, real NO asks, spread <= 6c, $10 per word, count by call).
+- New ideas: N13 index/gold daily markets vs futures (outside the box), N14 mention NO for single-event speeches (adjacent).
+- Health: fast paper 09:04, slow 09:14, MM v2 09:01, books every 15 min - OK. Tracebacks only in the old 11-12 pilot-log/script-log copies.
+  score_locks.py's results_meta.json is stale (shows settled lock trades as open) - cosmetic, trades.jsonl results are current.
+  Pilot STOP, no orders.
+- Next: first mention paper positions + spreads (earnings season: NVDA etc.); W2 recount after the fix; box-office Saturday 11-14; lock 15m.

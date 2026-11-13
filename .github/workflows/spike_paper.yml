@@ -32,6 +32,7 @@ jobs:
       - run: timeout 300 python -u research/slow/young_paper.py 2>&1 | tail -6 | tee logs/young-log.txt || true
       - run: timeout 300 python -u research/slow/boxoffice_paper.py 2>&1 | tail -3 | tee logs/boxoffice-log.txt || true
       - run: timeout 300 python -u research/slow/charts_paper.py 2>&1 | tail -3 | tee logs/charts-log.txt || true
+      - run: timeout 300 python -u research/slow/mention_paper.py 2>&1 | tail -3 | tee logs/mention-log.txt || true
       - name: "Sharp-odds snapshot, 3 a day at 10, 16, 22 UTC (NBA + NHL keep the free odds plan under 500 credits a month)"
         if: always()
         env:
