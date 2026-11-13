@@ -40,6 +40,13 @@ survives them. Add a lesson whenever an idea dies for a reason not already here.
 13. **A public base rate is already in the price.** Earnings 'beat' markets (470): priced 0.734, resolved 0.737. When the edge is a fact
     anyone can look up (beat rates, seasonal averages), assume the crowd has it; bring information that is fresher or per-case.
 
+14. **Our own machine is part of the data.** The server's websocket lock replay said +8..+11%/$ for two days; all of it came
+    from windows that ended while our hourly hook ran a heavy replay on the same 927 MiB box (4.8 cheap-lock trades per
+    end-time at +14..+20% vs 1.4 and ~0% while the bot ran). The recorder fell behind, stamped book records late, and the
+    replay bought asks that were already gone. Tell-tales: an opportunity rate that depends on OUR schedule, and 'cheap'
+    prices that survive R = 0.1 s and R = 2 s alike. Split every replay result by our own activity (bot up/down, jobs running)
+    and by recording lag (rx - exchange ts) before reading it.
+
 ## Where edges plausibly still live (derived from the above)
 - Information the crowd processes slowly and bots don't cover: resolution-rule details (exact station, exact candle,
   rounding), public running tallies, scheduled data with good nowcasts, slow non-sports questions.
