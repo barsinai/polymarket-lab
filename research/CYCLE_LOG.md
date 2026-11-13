@@ -99,3 +99,29 @@
 - Next: first mention paper positions + spreads (earnings season: NVDA etc.); W2 recount after the fix; box-office Saturday 11-14; lock 15m.
 - 09:28 mention_paper smoke run (run_script): works, but only 1 live mention event found ending within 21 d, 0 candidates -> next cycle check
   whether the gamma events scan misses them (tag/series listing) before reading the tracker as 'no markets'.
+
+## 11-13 13:15 UTC cycle 6 (scheduled)
+- HEALTH BUG (LESSONS 10): slow paper ran every hour but did not push since 09:14 - cycle 5's mention_paper writes data/slow/mention_*.json,
+  which the Save step did not `git add`, so `git pull --rebase` refused ("unstaged changes") 10:06, 11:07, 12:08 (13:10 run too). Converge /
+  young / weather / options / charts / mention state from 10-13h is lost (trackers resume from the 09:14 files). Fixed: mention files added,
+  `--autostash`. All slow read-outs below are therefore the 09:14 numbers.
+- Read-outs (fast paper, data/fast/trades.jsonl): lock_m 142 trades 133 won +0.1%/$ (106 end-times, 5 days); lock_b 26 / 25 won +2.4%;
+  lock_mv 26 / 25 won +1.8% (19 end-times) - FIRST LOSS: sol-updown-5m 13:00, Down at 0.97, margin 7.6 bp, 57 s left (lock_m/lock_b also);
+  the 'never tested on a losing day' caveat is now answered once: one loss at 0.97 wipes ~32 wins of +3c. lock_x 16 / 15 +12.3% (no new
+  signal since 11-12 22:24); lock_early 40 / 38 +2.0% (29 end-times); lock_m 15m (2-s paper) 14/14 +6.5% (11 end-times).
+  Server websocket lockm.jsonl (ask_max 0.97, unique windows, 11-11 13h..11-13 12h): rx 0.1 s 355 trades 88.5% +9.1%/$ (134 end-times),
+  bn 322 +10.4%; 15m rx 73 trades +14.0% on 25 end-times - no new 15m signal since cycle 5; 5m rx 282 +7.8% (115).
+- Test (adjacent, N15, research/slow/tod_asks.py on 1,261 order-book snapshots 10-31..11-13, 192 slow favourite tokens 0.92-0.985 / 189
+  events, best ask with >= $10 depth): hour-of-day effect is real but cents - asks are lowest 04-05 UTC (-0.13c vs the same-day median) and
+  highest 22-23 UTC (+0.04..+0.09c); max-min 0.22c vs shuffled-hour placebo p95 0.08c (placebo ignores within-token clustering, so
+  overstated). Weekend no cheaper (-0.02c vs weekday -0.04c). Dips >= 1c under the trailing 24-h median (177 on 70 events): 24 h later the
+  ask is +0.97c higher (median +1.0c), the bid +0.21c over the dip ask; 34/70 back at the old median within 24 h. -> As a strategy DEAD
+  (cents, LESSONS 8); as an entry rule for converge it could save ~1c of a ~2c edge -> READY N15b (converge 'dip entry', needs outcomes).
+- Idea 2 (outside the box, N16 Elon tweet-count markets, running public tally): looked at the recorded books - the Nov 6-13 event in its
+  last hours: dead buckets at 0.001, sum of YES asks 1.037 / bids 1.004 (tight, bots read the tracker). Any edge would be mid-week rate
+  modelling (LESSONS 1, 9). READY with a low prior; test = census of closed weekly tweet events, bucket price at day 3-5 vs a rate model
+  from the tally at that time (needs the tracker's history - check reachability first).
+- Health: fast paper 13:10, live snapshot 13:04, order books every 15 min, boosts hourly - OK. Slow paper: see bug above. Pilot STOP, no orders.
+  spike_monitor (DEAD idea, -20..-25% at 24 h) still uses 8 of the 13 min of the slow job - candidate to drop next cycle.
+- Next: confirm the 14:23 slow paper push lands; mention paper candidates (scan coverage); box-office Saturday 11-14 14 UTC; lock_mv after
+  its first loss; N15b dip-entry on converge.

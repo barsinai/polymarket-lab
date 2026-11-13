@@ -674,3 +674,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - Mention markets (N8): YES rich; earnings-call NO on words 0.10-0.40 +15..+17%/$ on 27-29 calls (history, last prices) -> paper
   mention_paper.py. lock_m 15m +14% vs 5m +7% on the websocket sample (25 end-times) -> read-out. W2 same-day 'dead bucket' flags were a
   timestamp bug (reportTime), fixed. Next: mention paper spreads, W2 recount, Saturday box office.
+
+## 11-13 13:15 cycle 6
+- Slow paper had not pushed since 09:14 (mention files missing from the Save step) - fixed. lock_mv first loss (25/26 +1.8%). Order-book
+  time-of-day test (N15): asks of slow favourites lowest 04-05 UTC but only by 0.2c; 1c dips revert +1c in 24 h -> N15b converge dip entry.
+  N16 tweet-count markets: books tight in the last hours. Next: verify slow push, box office Sat, mention scan coverage.
