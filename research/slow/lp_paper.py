@@ -215,5 +215,18 @@ rep = {"updated": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d %H:%M"), "
        "pessimistic_trading_pnl": round(sum(x.get("cash2", 0.0) + x.get("inv2", 0.0) * (x.get("fair") or 0) for x in ms.values()), 2),
        "worst": sorted(([round(pnl(x), 2), x["q"][:70], len(x["fills"])] for x in ms.values()), key=lambda r: r[0])[:5],
        "top_reward": sorted(([round(x["reward"], 2), x["q"][:70], x.get("share")] for x in ms.values()), key=lambda r: -r[0])[:5]}
+# the user's proposed live test (48 h, <= $200), simulated only: the markets a $200 budget would have taken, in entry order and
+# largest pool first within an entry run (both known at entry time, no hindsight); same fills / rewards as the full simulation
+BUDGET = float(os.environ.get("LP_BUDGET", "200"))
+sl, cap = [], 0.0
+for x in sorted(ms.values(), key=lambda x: (x["opened"], -(x.get("rate") or 0))):
+    c_ = x.get("capital") or 0.0
+    if cap + c_ <= BUDGET:
+        sl.append(x); cap += c_
+sr = sum(x["reward"] for x in sl); stt = sum(pnl(x) for x in sl)
+rep["budget_slice"] = {"budget": BUDGET, "markets": len(sl), "capital": round(cap, 2), "pool_per_day": round(sum(x.get("rate", 0) for x in sl), 1),
+                       "formula_reward": round(sr, 2), "trading_pnl": round(stt, 2),
+                       "pessimistic_trading_pnl": round(sum(x.get("cash2", 0.0) + x.get("inv2", 0.0) * (x.get("fair") or 0) for x in sl), 2),
+                       "net_if_paid_100pct": round(sr + stt, 2), "net_if_paid_20pct": round(sr / 5 + stt, 2)}
 json.dump(st, open(ST, "w")); json.dump(rep, open(REP, "w"), indent=1)
 print(json.dumps(rep))

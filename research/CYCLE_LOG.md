@@ -175,7 +175,7 @@
   category; at the pilot's 1/5 reward haircut all 6 variants -$90..-730/day). NEW: uncontested pools - lp_screen.py over 11,507
   reward markets ($121k/day): 837 of the 1,487 largest have no quote in the band (>= $10/day, $22k/day), persistent (94% still
   empty 2 h later, median 6.4 days at the current pool), paid in USDC. Never tested: the paper MM and the pilot skipped wide books.
-  Docs: no liquidity minimum or per-maker cap; per-market pools, daily payout. Next: user OK for a 48 h, <= $200 live test (LP-1).
+  Docs: no liquidity minimum or per-maker cap; per-market pools, daily payout. Next: user OK for a 48 h, <= $200 live test (LP-1). -> 11-13 21:50 the user chose SIMULATION ONLY: no live LP-1 test is approved.
 
 ## 11-13 21:00-21:40 UTC cycle 8 (scheduled)
 - Read-outs (fast trades.jsonl): lock_x 17 / 16 +11.9%/$ (13 end-times, no signal since 13:29); lock_p 37 / 34 +8.1% (32 end-times, 4 days;
@@ -195,3 +195,6 @@
   pilot-log Traceback is the old combo sampler crash (fixed at 17:53, isinstance guard). No MemoryErrors.
 - Next: lock_p week mark 11-17 (40+ end-times at >= +5% -> write up for the user); W2 dead-bucket recount; converge_day filter; N19 tag in
   converge_paper; box office Sat 11-14 14 UTC; LP-1 first daily read 11-14.
+- 11-13 21:50 user: run the experiment as a simulation only. LP-1 stays paper; lp_paper.py report now also has 'budget_slice' = the
+  proposed 48 h / $200 test simulated (markets a $200 budget would have entered, entry order + largest pool first). First read on the
+  current state: 6 markets, $195, pools $1,331/day, formula reward $41, fills +$6.5 (pessimistic -$8.7). Read it at 48 h (11-15 ~19 UTC).
