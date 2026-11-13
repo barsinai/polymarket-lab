@@ -125,3 +125,21 @@
   spike_monitor (DEAD idea, -20..-25% at 24 h) still uses 8 of the 13 min of the slow job - candidate to drop next cycle.
 - Next: confirm the 14:23 slow paper push lands; mention paper candidates (scan coverage); box-office Saturday 11-14 14 UTC; lock_mv after
   its first loss; N15b dip-entry on converge.
+
+## 11-13 16:40-19:30 UTC deep session (main, user asked for a hard look at how to make money)
+- KILLED the websocket lock edge (LESSONS 14): split of server lockm.jsonl by whether the paper bot was running in the window's last
+  minute - running: 1.4 trades/end-time, -0.3%/$ (0.1 s), -0.9% (1 s), -6.4% (2 s); our hook running: 4.8 trades/end-time, +14..+20%/$,
+  count flat from R 0.1 s to 2 s (frozen recording). Hook replay step removed (also gave the bot back ~7 min/h); lag_check server job.
+- Fixed: options_probe never settled (/markets?slug= hides closed markets -> closed=true); mention_paper scan (tags first).
+- W2 same-day dead buckets DEAD: after the obsTime fix 719 dead rows, 0 with a YES bid >= 1c.
+- Executable census on the 15-min books (10-31..11-13, 9,620 markets, 7,814 with outcomes, exact fee per market, books_outcomes.py):
+  * non-sports favourites in the last 1-12 h: 0.98-0.99 +1.0..+1.1%/$ with 0 losses in ~100 families per horizon; 0.90-0.95 +7..+9%
+    but the sample is election night (11-03 races), month-end markets and Elon tweet buckets (where the losses are) - not repeatable as is.
+  * sports pre-game full-game moneylines: favourite at the ask won above its price at every band 0.60-0.90 (3-6 h before: +2..+10%/$,
+    ~340 markets); NBA 15/15 at 0.835. No pre-game drift (buy 24/12/6 h before, sell before the start: -1.4..-6.8% = costs), so any
+    edge is in outcomes, i.e. a closing-price favourite-longshot bias - or luck. Polymarket already prices heavy favourites ABOVE
+    Pinnacle's proportional fair (0.851 vs 0.832, n 10). Big-history test running (hist_prices.py, 6.5k moneylines Jun-Nov) and a
+    forward paper tracker (sports_fav_paper.py in the slow job; spike_monitor dropped).
+  * crypto price markets vs lognormal at Deribit DVOL (530 markets): model ~= market at < 12 h; touches 12-48 h model better
+    (Brier .116 vs .133) but only ~12 independent events and trade results swing with the threshold -> paper options tracker decides.
+- Running: kalshi_mentions.py (mention bias at executable Kalshi bid/ask), hist_prices.py.
