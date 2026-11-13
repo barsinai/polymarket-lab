@@ -127,13 +127,29 @@ for c in cands:
         bid = tick; ask = round(tick + 2 * hw, 6)
     if ask > 1 - tick:
         ask = round(1 - tick, 6); bid = round(ask - 2 * hw, 6)
-    mid = (bid + ask) / 2
-    if 100 * (mid - bid) >= k["v"] or bid <= 0 or ask >= 1:
+    # Polymarket scores against the SIZE-CUTOFF-ADJUSTED midpoint of the whole book: other people's orders of at least the min size
+    # can move it. Re-centre: if their best bid / ask (>= min size) sits inside our quotes, the midpoint follows it and one of our
+    # orders may fall outside the band (a 'silent zero'); then pull that order in to just inside the band (never across the fair
+    # price by more than the band). Up to 3 passes.
+    vb = k["v"] / 100
+    tb_ = max([p_ for p_, s_ in bl if s_ >= k["min"]] or [0.0]); ta_ = min([p_ for p_, s_ in al if s_ >= k["min"]] or [1.0])
+    for _ in range(3):
+        bb = max(bid, tb_ if tb_ < ask else 0.0); ba = min(ask, ta_ if ta_ > bid else 1.0)
+        mid = (bb + ba) / 2
+        nb = bid if mid - bid < vb - 1e-9 else round(math.ceil(round((mid - vb + tick) / tick, 6)) * tick, 6)
+        na = ask if ask - mid < vb - 1e-9 else round(math.floor(round((mid + vb - tick) / tick, 6)) * tick, 6)
+        if (nb, na) == (bid, ask):
+            break
+        bid, ask = nb, na
+    bb = max(bid, tb_ if tb_ < ask else 0.0); ba = min(ask, ta_ if ta_ > bid else 1.0); mid = (bb + ba) / 2
+    if not (0 < bid < ask < 1) or mid - bid >= vb or ask - mid >= vb:
         if x:
-            x["why_off"] = "band too narrow for the tick"
+            x["why_off"] = "cannot sit inside the band"
         continue
+    # competitors: two-sided depth counts fully; one-sided excess counts 1/3 inside 0.10-0.90 and NOTHING outside (rules: Qmin)
     sb_, sa_ = score(bl, mid, k["v"], k["min"], True), score(al, mid, k["v"], k["min"], False)
-    comp = max(min(sb_, sa_), (sb_ + sa_) / 3)
+    two = min(sb_, sa_); one = max(sb_, sa_) - two
+    comp = two + (one / 3 if 0.10 <= mid <= 0.90 else 0.0)
     ours = min(((k["v"] - 100 * (mid - bid)) / k["v"]) ** 2, ((k["v"] - 100 * (ask - mid)) / k["v"]) ** 2) * size
     share = ours / (ours + comp) if ours > 0 else 0.0
     tr_all = collect.trades_since(c, (x or {}).get("last_ts", now - FAIR_DAYS * 86400), max_rows=500)
