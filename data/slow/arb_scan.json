@@ -1,5 +1,5 @@
 {
-"scanned": "2026-11-13 22:25",
+"scanned": "2026-11-13 23:26",
 "events": 2100,
 "groups": 2037,
 "books": 16896,
@@ -16,8 +16,8 @@
 "cost": 0.996,
 "edge": 0.004,
 "edge_after_fee": 0.0013,
-"size_shares": 1677.14,
-"usd_at_size": 1670.43
+"size_shares": 1647.14,
+"usd_at_size": 1640.55
 },
 {
 "kind": "ladder_num",
@@ -226,11 +226,11 @@
 "easy": "Printr FDV above $500M one day after launch?",
 "hard": "Printr FDV above $1B one day after launch?",
 "easy_yes_ask": 0.049,
-"hard_no_ask": 0.933,
-"hard_yes_bid": 0.067,
-"cost": 0.982,
-"edge": 0.018,
-"edge_after_fee": 0.0104,
+"hard_no_ask": 0.93,
+"hard_yes_bid": 0.07,
+"cost": 0.979,
+"edge": 0.021,
+"edge_after_fee": 0.0132,
 "size_shares": 1.61,
 "usd_at_size": 1.58
 },
@@ -248,6 +248,28 @@
 "edge_after_fee": 0.0066,
 "size_shares": 1.61,
 "usd_at_size": 1.59
+},
+{
+"kind": "negrisk_all_yes",
+"event": "Japan 10Y Bond Yield: End of 2026",
+"slug": "japan-10y-bond-yield-end-of-2026",
+"n": 7,
+"has_other": false,
+"outcomes": [
+"<2.0%",
+"2.0-2.2%",
+"2.2-2.4%",
+"2.4-2.6%",
+"2.6-2.8%",
+"2.8-3.0%",
+"3.0%+"
+],
+"cost": 0.996,
+"payoff": 1,
+"edge": 0.004,
+"edge_after_fee": -0.0521,
+"size_shares": 5.0,
+"usd_at_size": 4.98
 },
 {
 "kind": "ladder_num",
