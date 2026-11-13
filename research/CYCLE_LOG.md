@@ -143,3 +143,13 @@
   * crypto price markets vs lognormal at Deribit DVOL (530 markets): model ~= market at < 12 h; touches 12-48 h model better
     (Brier .116 vs .133) but only ~12 independent events and trade results swing with the threshold -> paper options tracker decides.
 - Running: kalshi_mentions.py (mention bias at executable Kalshi bid/ask), hist_prices.py.
+- 11-13 19:55 UTC deep-session verdicts (decisive tests, all at executable prices or with real costs):
+  * Mention NO: DEAD - Kalshi 9,623 settled mention markets / 494 events with hourly bid/ask: YES 0-6 pts rich at the mid, spread 3-9c,
+    NO at the ask -0.1..-13.7%/$ (3 h) in every band.
+  * Sports favourite-longshot: DEAD - 5 months / 8,871 moneylines: majors calibrated (MLB 60.7% vs 60.5%, NHL 62.9/63.0, NFL 68.2/67.1,
+    esports 70.0/70.2); after +0.5c + fee favourites -2.0%/$ (n 629), underdogs -7.2%; other leagues' gap = final-volume selection
+    (LESSONS 16). sports_fav_paper removed from the slow job.
+  * Last-day favourites 0.95-0.99: 5 months 369 / 11 losses / -0.7%/$ (August war events -11.8%) vs 167/167 in the calm 2 weeks
+    (LESSONS 15). converge_day paper kept to measure the calm-period yield only.
+  * Net: every large category we can test systematically is efficient at the prices we can trade. Remaining small candidates: crypto
+    touches vs options (model Brier better at 12 h+, few events; options paper settling now), converge 3-30 d, perps carry, charts/box office.
