@@ -24,7 +24,7 @@ import collect  # noqa: E402
 
 D = "data/slow"; ST = f"{D}/lp_paper_state.json"; REP = f"{D}/lp_paper_report.json"; FAIR = f"{D}/lp_fair.json"
 MIN_POOL = float(os.environ.get("MIN_POOL", "10")); MAX_MIN = float(os.environ.get("MAX_MIN", "100"))
-N_MAX = int(os.environ.get("N_MAX", "60")); FAIR_DAYS = float(os.environ.get("FAIR_DAYS", "14"))
+N_MAX = int(os.environ.get("N_MAX", "60")); FAIR_DAYS = float(os.environ.get("FAIR_DAYS", "14")); MIN_SHARE = float(os.environ.get("MIN_SHARE", "0.5"))
 now = time.time(); T0 = now
 
 
@@ -62,7 +62,7 @@ print("reward markets", len(cfg), flush=True)
 held = [c for c, x in st["markets"].items() if x.get("active")]
 new = sorted((c for c in cfg if c not in st["markets"] and cfg[c]["rate"] >= MIN_POOL and 0 < cfg[c]["min"] <= MAX_MIN and cfg[c]["v"] > 1),
              key=lambda c: -cfg[c]["rate"])
-cands = held + new[:max(0, 4 * N_MAX - len(held))]
+cands = held + new[:max(0, 8 * N_MAX - len(held))]
 # displayed prices (Gamma) for the candidates
 gm = {}
 for i in range(0, len(cands), 40):
@@ -80,7 +80,7 @@ for i in range(0, len(toks), 50):
 
 active_n = sum(1 for c in held if c in cfg)
 for c in cands:
-    if time.time() - T0 > 240:
+    if time.time() - T0 > 270:
         break
     x = st["markets"].get(c); g = gm.get(c) or {}; k = cfg.get(c)
     # settle closed markets
@@ -92,6 +92,7 @@ for c in cands:
         if pr and max(pr) >= 0.99 and x.get("active"):
             yes_pay = 1.0 if pr[0] >= 0.99 else 0.0
             x["cash"] += x["inv"] * yes_pay; x["inv"] = 0.0; x["active"] = False; x["settled"] = yes_pay
+            x["cash2"] = x.get("cash2", 0.0) + x.get("inv2", 0.0) * yes_pay; x["inv2"] = 0.0
         continue
     if not k:
         if x:
@@ -108,27 +109,34 @@ for c in cands:
             fair = float(json.loads(g.get("outcomePrices") or "[]")[0]); src = "displayed"
         except Exception:  # noqa: BLE001
             fair = None
-    tr_all = collect.trades_since(c, (x or {}).get("last_ts", now - FAIR_DAYS * 86400), max_rows=500)
     if not x:
-        if src != "manual" and not tr_all:
-            continue                                      # never traded recently: no basis for a price
         if fair is None or not (0.02 <= fair <= 0.98):
             continue
-        x = st["markets"][c] = {"q": k["q"], "opened": int(now), "inv": 0.0, "cash": 0.0, "reward": 0.0, "fills": [], "comp_runs": 0,
-                                "runs": 0, "active": True, "last_ts": now, "fair0": fair, "src": src}
-        active_n += 1
-        tr_all = []                                       # trades before we started quoting are not fills
-    if not x.get("active"):
+    elif not x.get("active"):
         continue
     tick = k["tick"]; size = max(k["min"], 5.0)
     bid = max(tick, math.floor(round((fair - 0.01) / tick, 6)) * tick); ask = min(1 - tick, math.ceil(round((fair + 0.01) / tick, 6)) * tick)
     mid = (bid + ask) / 2
     if 100 * (mid - bid) >= k["v"] or 100 * (ask - mid) >= k["v"]:
-        x["why_off"] = "band too narrow for the tick"; continue
-    # fills from crossing book orders and from public taker trades since the last run
+        if x:
+            x["why_off"] = "band too narrow for the tick"
+        continue
     b = books.get(k["toks"][0]) or {}
     bl = sorted(((float(o["price"]), float(o["size"])) for o in b.get("bids") or []), reverse=True)
     al = sorted((float(o["price"]), float(o["size"])) for o in b.get("asks") or [])
+    sb_, sa_ = score(bl, mid, k["v"], k["min"], True), score(al, mid, k["v"], k["min"], False)
+    comp = max(min(sb_, sa_), (sb_ + sa_) / 3)
+    ours = min(((k["v"] - 100 * (mid - bid)) / k["v"]) ** 2, ((k["v"] - 100 * (ask - mid)) / k["v"]) ** 2) * size
+    share = ours / (ours + comp) if ours > 0 else 0.0
+    tr_all = collect.trades_since(c, (x or {}).get("last_ts", now - FAIR_DAYS * 86400), max_rows=500)
+    if not x:                                             # LP-1 enters only where nobody else quotes (our share >= MIN_SHARE)
+        if share < MIN_SHARE or (src != "manual" and not tr_all):
+            continue                                      # contested, or never traded recently (no basis for a price)
+        x = st["markets"][c] = {"q": k["q"], "opened": int(now), "inv": 0.0, "cash": 0.0, "reward": 0.0, "fills": [], "comp_runs": 0,
+                                "runs": 0, "active": True, "last_ts": now, "fair0": fair, "src": src}
+        active_n += 1
+        tr_all = []                                       # trades before we started quoting are not fills
+    # fills from crossing book orders and from public taker trades since the last run
     left_b, left_a = size, size
     for p, s in bl:                                       # a resting bid above our ask: we would sell to it at its price
         if p > ask and left_a > 0:
@@ -147,11 +155,15 @@ for c in cands:
             q = min(s, ta); x["cash"] += pa * q; x["inv"] -= q; ta -= q; x["fills"].append([int(t["timestamp"]), "sell", pa, q, fair])
         elif (not buy_yes) and py <= pb and tb > 0:
             q = min(s, tb); x["cash"] -= pb * q; x["inv"] += q; tb -= q; x["fills"].append([int(t["timestamp"]), "buy", pb, q, fair])
+    # pessimistic model (arbitrageurs drawn in by our quotes): if the fair price moved through a quote that was resting since the
+    # last run, assume our full size there was taken at our price (separate book: inv2 / cash2)
+    x.setdefault("inv2", 0.0); x.setdefault("cash2", 0.0); x.setdefault("fills2", 0)
+    if pb is not None and pa is not None:
+        if fair >= pa + tick:
+            x["cash2"] += pa * size; x["inv2"] -= size; x["fills2"] += 1
+        elif fair <= pb - tick:
+            x["cash2"] -= pb * size; x["inv2"] += size; x["fills2"] += 1
     # competition inside the band around our mid (orders that are not ours; we have none on the real book)
-    comp = max(min(score(bl, mid, k["v"], k["min"], True), score(al, mid, k["v"], k["min"], False)),
-               (score(bl, mid, k["v"], k["min"], True) + score(al, mid, k["v"], k["min"], False)) / 3)
-    ours = min(((k["v"] - 100 * (mid - bid)) / k["v"]) ** 2, ((k["v"] - 100 * (ask - mid)) / k["v"]) ** 2) * size
-    share = ours / (ours + comp) if ours > 0 else 0.0
     hrs = min((now - x["last_ts"]) / 3600, 2.0) if x["runs"] else 0.0   # the first run only posts; rewards accrue from the next
     x["reward"] += k["rate"] * share * hrs / 24
     x["comp_runs"] += comp > 0; x["runs"] += 1; x["last_ts"] = now
@@ -172,6 +184,8 @@ rep = {"updated": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d %H:%M"), "
        "formula_reward": round(tot_r, 2), "fills": sum(len(x["fills"]) for x in ms.values()), "trading_pnl": round(tot_t, 2),
        "net_if_paid_100pct": round(tot_r + tot_t, 2), "net_if_paid_50pct": round(tot_r / 2 + tot_t, 2), "net_if_paid_20pct": round(tot_r / 5 + tot_t, 2),
        "markets_with_competition_seen": sum(1 for x in ms.values() if x["comp_runs"]),
+       "pessimistic_fills": sum(x.get("fills2", 0) for x in ms.values()),
+       "pessimistic_trading_pnl": round(sum(x.get("cash2", 0.0) + x.get("inv2", 0.0) * (x.get("fair") or 0) for x in ms.values()), 2),
        "worst": sorted(([round(pnl(x), 2), x["q"][:70], len(x["fills"])] for x in ms.values()), key=lambda r: r[0])[:5],
        "top_reward": sorted(([round(x["reward"], 2), x["q"][:70], x.get("share")] for x in ms.values()), key=lambda r: -r[0])[:5]}
 json.dump(st, open(ST, "w")); json.dump(rep, open(REP, "w"), indent=1)
