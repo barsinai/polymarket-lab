@@ -1,24 +1,9 @@
 {
-"scanned": "2026-11-13 17:30",
+"scanned": "2026-11-13 17:54",
 "events": 2100,
 "groups": 2037,
 "books": 16894,
 "opps": [
-{
-"kind": "ladder_num",
-"event": "Extended FDV above ___ one day after launch?",
-"slug": "extended-fdv-above-one-day-after-launch",
-"easy": "Extended FDV above $800M one day after launch?",
-"hard": "Extended FDV above $1B one day after launch?",
-"easy_yes_ask": 0.022,
-"hard_no_ask": 0.97,
-"hard_yes_bid": 0.03,
-"cost": 0.992,
-"edge": 0.008,
-"edge_after_fee": 0.0045,
-"size_shares": 1249.32,
-"usd_at_size": 1239.33
-},
 {
 "kind": "ladder_num",
 "event": "StandX FDV above ___ one day after launch?",
@@ -46,8 +31,8 @@
 "cost": 0.99,
 "edge": 0.01,
 "edge_after_fee": -0.0173,
-"size_shares": 129.0,
-"usd_at_size": 127.71
+"size_shares": 168.0,
+"usd_at_size": 166.32
 },
 {
 "kind": "ladder_num",
@@ -61,8 +46,8 @@
 "cost": 0.99,
 "edge": 0.01,
 "edge_after_fee": -0.0173,
-"size_shares": 129.0,
-"usd_at_size": 127.71
+"size_shares": 168.0,
+"usd_at_size": 166.32
 },
 {
 "kind": "ladder_num",
@@ -108,21 +93,6 @@
 "edge_after_fee": -0.0026,
 "size_shares": 128.97,
 "usd_at_size": 128.45
-},
-{
-"kind": "ladder_num",
-"event": "OpenAI IPO closing market cap above ___ ?",
-"slug": "openai-ipo-closing-market-cap-above",
-"easy": "OpenAI IPO closing market cap above $1.6T?",
-"hard": "OpenAI IPO closing market cap above $2T?",
-"easy_yes_ask": 0.16,
-"hard_no_ask": 0.83,
-"hard_yes_bid": 0.17,
-"cost": 0.99,
-"edge": 0.01,
-"edge_after_fee": -0.0093,
-"size_shares": 50.0,
-"usd_at_size": 49.5
 },
 {
 "kind": "ladder_num",
@@ -216,28 +186,6 @@
 },
 {
 "kind": "negrisk_all_yes",
-"event": "South Korea Annual Inflation 2026",
-"slug": "south-korea-annual-inflation-2026",
-"n": 7,
-"has_other": false,
-"outcomes": [
-"<1.5%",
-"1.5% to 1.7%",
-"1.8% to 2.0%",
-"2.1% to 2.3%",
-"2.4% to 2.6%",
-"2.7% to 2.9%",
-"3.0%+"
-],
-"cost": 0.966,
-"payoff": 1,
-"edge": 0.034,
-"edge_after_fee": -0.0126,
-"size_shares": 5.0,
-"usd_at_size": 4.83
-},
-{
-"kind": "negrisk_all_yes",
 "event": "Discord IPO Closing Market Cap",
 "slug": "discord-ipo-closing-market-cap-20260626185933220",
 "n": 8,
@@ -273,6 +221,28 @@
 "edge_after_fee": 0.0028,
 "size_shares": 35.56,
 "usd_at_size": 35.42
+},
+{
+"kind": "negrisk_all_yes",
+"event": "South Korea Annual Inflation 2026",
+"slug": "south-korea-annual-inflation-2026",
+"n": 7,
+"has_other": false,
+"outcomes": [
+"<1.5%",
+"1.5% to 1.7%",
+"1.8% to 2.0%",
+"2.1% to 2.3%",
+"2.4% to 2.6%",
+"2.7% to 2.9%",
+"3.0%+"
+],
+"cost": 0.976,
+"payoff": 1,
+"edge": 0.024,
+"edge_after_fee": -0.0228,
+"size_shares": 5.0,
+"usd_at_size": 4.88
 },
 {
 "kind": "negrisk_all_yes",
@@ -331,11 +301,11 @@
 "easy": "Printr FDV above $500M one day after launch?",
 "hard": "Printr FDV above $800M one day after launch?",
 "easy_yes_ask": 0.049,
-"hard_no_ask": 0.938,
-"hard_yes_bid": 0.062,
-"cost": 0.987,
-"edge": 0.013,
-"edge_after_fee": 0.0057,
+"hard_no_ask": 0.937,
+"hard_yes_bid": 0.063,
+"cost": 0.986,
+"edge": 0.014,
+"edge_after_fee": 0.0066,
 "size_shares": 1.61,
 "usd_at_size": 1.59
 },
