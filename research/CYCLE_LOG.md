@@ -176,3 +176,22 @@
   reward markets ($121k/day): 837 of the 1,487 largest have no quote in the band (>= $10/day, $22k/day), persistent (94% still
   empty 2 h later, median 6.4 days at the current pool), paid in USDC. Never tested: the paper MM and the pilot skipped wide books.
   Docs: no liquidity minimum or per-maker cap; per-market pools, daily payout. Next: user OK for a 48 h, <= $200 live test (LP-1).
+
+## 11-13 21:00-21:40 UTC cycle 8 (scheduled)
+- Read-outs (fast trades.jsonl): lock_x 17 / 16 +11.9%/$ (13 end-times, no signal since 13:29); lock_p 37 / 34 +8.1% (32 end-times, 4 days;
+  contains all of lock_x: p∩x +11.9%, p-only 20 / 18 +3.9%); lock_early 41 / 39 +2.1% (unchanged); lock_m 154 / 143 -0.8%; lock_b 31 / 30
+  +3.0%. lock_mv 34 / 32 -0.6%, mv-only 22 / 20 -6.4% -> DEAD. Slow: converge 4 settled (non-sports 3/3 +3.5%), 88 open mark -$31; young 29
+  settled 3 won -$245; charts 2/2 +$3; LP-1 3 runs: formula reward $145 (upper bound) vs pessimistic fills -$59, 26 of 59 markets saw a
+  competitor - too early. converge_day: 0 positions (1 candidate) - check its filter next cycle.
+- Weather W1 DEAD: weather_score.py via Actions, 66 events / 726 buckets (2 days): Brier model .0732 vs market .0635; NO bets: model
+  expected 103.5 wins, market 81.0, actual 82; paper +$89 is one 6c Taipei bucket (+$78). Paper keeps logging to 11-22.
+  Side note: the same run lists 22 same-day 'dead bucket' snapshots still bid >= 1c (SF 62-63F bid 0.46 at obs max 64.0) although W2 was
+  declared dead at 0 rows - the two scripts disagree (clock or F/C rounding? LESSONS 10). The 2 with outcomes resolved NO. Recount next cycle.
+- Test (N18 Rotten Tomatoes, rt_census.py via Actions, 264 markets / 64 events, hourly CLOB last prices, +c + fee): near-certain 0.90-0.97
+  won 39/39 at end-72h (26 films) +3.9%/$ at +2c, 26/26 at end-24h (19 films) +3.5%; the 0.60-0.90 'anchoring' band flips sign with
+  the entry clock (-18% / +8.6% / +15%) = noise. ~5 RT events a month -> PARKED, folded into N19.
+- New ideas: N19 (adjacent) running-tally near-certainties 0.90-0.97 inside converge; N20 (outside the box) the UMA proposal window.
+- Health: fast paper 20:20, slow 20:27, books 21:00, boosts 20:55, MM v2 20:32 - OK. Pilot STOP, no orders, equity $224.06 unchanged.
+  pilot-log Traceback is the old combo sampler crash (fixed at 17:53, isinstance guard). No MemoryErrors.
+- Next: lock_p week mark 11-17 (40+ end-times at >= +5% -> write up for the user); W2 dead-bucket recount; converge_day filter; N19 tag in
+  converge_paper; box office Sat 11-14 14 UTC; LP-1 first daily read 11-14.

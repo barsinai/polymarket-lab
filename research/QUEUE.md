@@ -684,3 +684,7 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - Touch ladders (N17, 1,228 'hit' events): YES rich on last prices (0.27 priced -> 0.17), NO +9% at +2c but the real NO spread early in the
   week is +13c -> DEAD as taker; maker variant N17b. lock_mv adds nothing outside lock_x (x∩mv 12/12, mv-only -3%). New: N18 Rotten Tomatoes.
   Next: weather Brier via Actions, lock_x/lock_p to 30 end-times, box office Saturday.
+
+## 11-13 21:40 cycle 8
+- W1 weather model DEAD (Brier .0732 vs market .0635, 66 events); lock_mv DEAD (outside lock_x -6.4%); RT census: near-certain 39/39 +3.9%
+  (26 films) but ~5 events/month -> PARKED into N19. lock_p at 32 end-times +8.1%, week mark 11-17. New: N19 running tallies, N20 UMA window.
