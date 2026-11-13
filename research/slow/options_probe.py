@@ -331,7 +331,8 @@ if os.environ.get("PAPER"):
             have.add(r["slug"]); new += 1
     for p_ in pos:          # settle
         if p_["result"] is None and dt.datetime.fromisoformat(p_["T"]) < now - dt.timedelta(hours=1):
-            mk = get(f"{GAMMA}/markets", {"slug": p_["slug"]})
+            # /markets?slug= leaves closed markets out unless closed=true is asked for (11-13: 0 settlements in 2 days)
+            mk = get(f"{GAMMA}/markets", {"slug": p_["slug"], "closed": "true"}) or get(f"{GAMMA}/markets", {"slug": p_["slug"]})
             if mk and mk[0].get("closed"):
                 try:
                     yes_won = float(json.loads(mk[0]["outcomePrices"])[0]) > 0.5
