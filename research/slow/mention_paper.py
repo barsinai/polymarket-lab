@@ -51,14 +51,30 @@ for p in pos:
         y = int(pr[0] > pr[1]); win = y == 0
         p.update(resolved=True, y=y, won=int(win), pnl=round(p["shares"] * (1 if win else 0) - STAKE - p.get("fee", 0), 2), settled=now.strftime("%Y-%m-%d %H:%M"))
 
-seen = 0; n_new = 0; off = 0; spreads = []
-while off < 4000:
-    page = get(f"{GAMMA}/events", {"active": "true", "closed": "false", "limit": 100, "offset": off,
-               "end_date_min": (now + dt.timedelta(hours=1)).strftime("%Y-%m-%dT%H:%M:%SZ"),
-               "end_date_max": (now + dt.timedelta(days=21)).strftime("%Y-%m-%dT%H:%M:%SZ")})   # event end can be later than the word markets' end
-    if not page:
-        break
-    off += 100
+seen = 0; n_new = 0; spreads = []
+
+
+def event_pages():
+    """11-13: the plain end-date scan found 1 mention event in a day (offset pages stop near 2,100 and mention events sort late).
+    First the tags Polymarket files them under, then the old scan; each event once."""
+    done_ids = set()
+    srcs = [{"tag_slug": t} for t in ("mentions", "mention-markets", "earnings-calls", "earnings")] + [{
+        "end_date_min": (now + dt.timedelta(hours=1)).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "end_date_max": (now + dt.timedelta(days=21)).strftime("%Y-%m-%dT%H:%M:%SZ")}]   # event end can be later than the word markets' end
+    for src in srcs:
+        off = 0
+        while off < 2000:
+            page = get(f"{GAMMA}/events", dict(src, active="true", closed="false", limit=100, offset=off))
+            if not page:
+                break
+            off += 100
+            yield [e for e in page if e.get("id") not in done_ids]
+            done_ids.update(e.get("id") for e in page)
+            if len(page) < 100:
+                break
+
+
+for page in event_pages():
     for e in page:
         title = e.get("title") or ""; slug = e.get("slug") or ""
         if "mention" not in slug and not re.search(r"\bsay\b", title, re.I):
@@ -96,8 +112,6 @@ while off < 4000:
                         "spread": round(na - nbid, 3), "shares": round(sh, 2), "fee": round(0.07 * na * (1 - na) * sh if m.get("feesEnabled") else 0.0, 4),
                         "fees": m.get("feesEnabled"), "resolved": False, "stake": STAKE})
             held.add(m["id"]); n_new += 1
-    if len(page) < 100:
-        break
 
 with open(POS, "w") as fh:
     for p in pos:
