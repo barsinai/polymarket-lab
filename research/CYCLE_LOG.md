@@ -97,3 +97,5 @@
   score_locks.py's results_meta.json is stale (shows settled lock trades as open) - cosmetic, trades.jsonl results are current.
   Pilot STOP, no orders.
 - Next: first mention paper positions + spreads (earnings season: NVDA etc.); W2 recount after the fix; box-office Saturday 11-14; lock 15m.
+- 09:28 mention_paper smoke run (run_script): works, but only 1 live mention event found ending within 21 d, 0 candidates -> next cycle check
+  whether the gamma events scan misses them (tag/series listing) before reading the tracker as 'no markets'.
