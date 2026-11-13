@@ -123,8 +123,19 @@ def observed_max(icao, tz, date):
     r = get("https://aviationweather.gov/api/data/metar", {"ids": icao, "format": "json", "hours": 36})
     best = None
     for o in r or []:
+        # 11-13 fix: use the OBSERVATION time. reportTime is the nominal hour (a 23:51 METAR is reported as 00:00), which put the
+        # previous evening's last report into today's max and flagged buckets 'dead' at local midnight (NYC 00:05, Munich 5C).
         try:
-            t = dt.datetime.fromisoformat(str(o.get("reportTime")).replace("Z", "+00:00")).astimezone(ZoneInfo(tz))
+            if o.get("obsTime"):
+                t = dt.datetime.fromtimestamp(int(o["obsTime"]), dt.timezone.utc).astimezone(ZoneInfo(tz))
+            else:
+                t = dt.datetime.fromisoformat(str(o.get("reportTime")).replace("Z", "+00:00"))
+                m0 = re.search(r"\s(\d{2})(\d{2})(\d{2})Z\s", " " + str(o.get("rawOb", "")) + " ")
+                if m0:   # DDHHMMZ group in the raw report
+                    t = t.replace(hour=int(m0.group(2)), minute=int(m0.group(3)))
+                    if int(m0.group(1)) != t.day:
+                        t = t - dt.timedelta(days=1)
+                t = t.astimezone(ZoneInfo(tz))
         except Exception:  # noqa: BLE001
             continue
         if t.strftime("%Y-%m-%d") != date or str(o.get("rawOb", "")).startswith("SPECI"):
