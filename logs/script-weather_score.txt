@@ -1,16 +1,21 @@
-settled events 31, buckets 341: Brier model 0.0732 vs market 0.0662
-winning bucket: model p mean 0.210  market 0.330
+settled events 66, buckets 726: Brier model 0.0732 vs market 0.0635
+winning bucket: model p mean 0.201  market 0.334
+  highest-temperature-in-austin-on-november-12-2026       78-79°F      model 0.099 mkt 0.515
+  highest-temperature-in-beijing-on-november-13-2026      15°C         model 0.030 mkt 0.415
   highest-temperature-in-singapore-on-november-12-2026    32°C         model 0.141 mkt 0.495
   highest-temperature-in-istanbul-on-november-12-2026     22°C         model 0.187 mkt 0.525
   highest-temperature-in-amsterdam-on-november-12-2026    10°C         model 0.309 mkt 0.645
-  highest-temperature-in-beijing-on-november-12-2026      16°C         model 0.010 mkt 0.300
-  highest-temperature-in-seoul-on-november-12-2026        16°C         model 0.289 mkt 0.575
-  highest-temperature-in-tokyo-on-november-12-2026        19°C         model 0.076 mkt 0.039
-  highest-temperature-in-madrid-on-november-12-2026       18°C         model 0.149 mkt 0.105
-  highest-temperature-in-shanghai-on-november-12-2026     20°C         model 0.261 mkt 0.185
+  highest-temperature-in-kuala-lumpur-on-november-13-2026 30°C         model 0.236 mkt 0.140
   highest-temperature-in-shenzhen-on-november-12-2026     29°C         model 0.241 mkt 0.145
+  highest-temperature-in-san-francisco-on-november-12-202 70-71°F      model 0.300 mkt 0.175
   highest-temperature-in-taipei-on-november-12-2026       28°C         model 0.275 mkt 0.075
-same-day dead buckets still bid >= 1c: 8 snapshots
-  dead highest-temperature-in-nyc-on-november-12-2026     54-55°F      obs_max 55.9 bid 0.021 -> YES outcome None
+  highest-temperature-in-denver-on-november-12-2026       64-65°F      model 0.329 mkt 0.110
+same-day dead buckets still bid >= 1c: 22 snapshots
+  dead highest-temperature-in-nyc-on-november-12-2026     54-55°F      obs_max 55.9 bid 0.021 -> YES outcome 0.0
   dead highest-temperature-in-london-on-november-12-2026  7°C          obs_max 8 bid 0.065 -> YES outcome 0.0
   dead highest-temperature-in-munich-on-november-13-2026  5°C          obs_max 6 bid 0.15 -> YES outcome None
+  dead highest-temperature-in-nyc-on-november-13-2026     46-47°F      obs_max 48.9 bid 0.11 -> YES outcome None
+  dead highest-temperature-in-miami-on-november-13-2026   74-75°F      obs_max 75.9 bid 0.013 -> YES outcome None
+  dead highest-temperature-in-los-angeles-on-november-13- 64-65°F      obs_max 66.0 bid 0.017 -> YES outcome None
+  dead highest-temperature-in-san-francisco-on-november-1 60-61°F      obs_max 64.0 bid 0.1 -> YES outcome None
+  dead highest-temperature-in-san-francisco-on-november-1 62-63°F      obs_max 64.0 bid 0.46 -> YES outcome None
