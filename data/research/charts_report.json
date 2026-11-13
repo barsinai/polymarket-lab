@@ -1,0 +1,779 @@
+{
+ "updated": "2026-11-13 05:15",
+ "events": 208,
+ "markets_fetched": 1168,
+ "with_history": 1128,
+ "fees_enabled": {
+  "False": 1168
+ },
+ "end-24h": {
+  "rows": 492,
+  "events_with_fav": 197,
+  "fav_won": 162,
+  "brier": 0.0598,
+  "calibration": {
+   "0.00-0.10": {
+    "n": 248,
+    "events": 125,
+    "avg_p": 0.034,
+    "yes_rate": 0.004
+   },
+   "0.10-0.30": {
+    "n": 55,
+    "events": 51,
+    "avg_p": 0.168,
+    "yes_rate": 0.145
+   },
+   "0.30-0.50": {
+    "n": 32,
+    "events": 17,
+    "avg_p": 0.404,
+    "yes_rate": 0.312
+   },
+   "0.50-0.70": {
+    "n": 17,
+    "events": 16,
+    "avg_p": 0.625,
+    "yes_rate": 0.471
+   },
+   "0.70-0.85": {
+    "n": 38,
+    "events": 37,
+    "avg_p": 0.787,
+    "yes_rate": 0.895
+   },
+   "0.85-0.95": {
+    "n": 48,
+    "events": 48,
+    "avg_p": 0.904,
+    "yes_rate": 0.938
+   },
+   "0.95-1.00": {
+    "n": 54,
+    "events": 54,
+    "avg_p": 0.972,
+    "yes_rate": 0.944
+   }
+  },
+  "rules": {
+   "fav 0.5-0.97 +1c": {
+    "n": 120,
+    "won": 105,
+    "avg_p": 0.843,
+    "pct_per_$": 2.6,
+    "by_kind_$": {
+     "billboard": -0.24,
+     "netflix": 4.95,
+     "app store": -1.54,
+     "spotify": 0.41,
+     "play store": -0.97
+    }
+   },
+   "fav 0.5-0.97 +2c": {
+    "n": 120,
+    "won": 105,
+    "avg_p": 0.843,
+    "pct_per_$": 1.4,
+    "by_kind_$": {
+     "billboard": -0.3,
+     "netflix": 4.23,
+     "app store": -1.91,
+     "spotify": 0.37,
+     "play store": -0.98
+    }
+   },
+   "fav 0.5-0.97 +3c": {
+    "n": 120,
+    "won": 105,
+    "avg_p": 0.843,
+    "pct_per_$": 0.2,
+    "by_kind_$": {
+     "billboard": -0.36,
+     "netflix": 3.52,
+     "app store": -2.28,
+     "spotify": 0.33,
+     "play store": -0.99
+    }
+   },
+   "fav 0.5-0.97 +2c +fee": {
+    "n": 120,
+    "won": 105,
+    "avg_p": 0.843,
+    "pct_per_$": 0.4,
+    "by_kind_$": {
+     "billboard": -0.35,
+     "netflix": 3.65,
+     "app store": -2.26,
+     "spotify": 0.35,
+     "play store": -0.98
+    }
+   },
+   "fav 0.6-0.85 +1c": {
+    "n": 49,
+    "won": 40,
+    "avg_p": 0.753,
+    "pct_per_$": 7.0,
+    "by_kind_$": {
+     "billboard": -0.47,
+     "netflix": 2.12,
+     "app store": 0.73,
+     "spotify": 0.22
+    }
+   },
+   "fav 0.6-0.85 +2c": {
+    "n": 49,
+    "won": 40,
+    "avg_p": 0.753,
+    "pct_per_$": 5.6,
+    "by_kind_$": {
+     "billboard": -0.49,
+     "netflix": 1.85,
+     "app store": 0.54,
+     "spotify": 0.21
+    }
+   },
+   "fav 0.6-0.85 +3c": {
+    "n": 49,
+    "won": 40,
+    "avg_p": 0.753,
+    "pct_per_$": 4.2,
+    "by_kind_$": {
+     "billboard": -0.51,
+     "netflix": 1.58,
+     "app store": 0.35,
+     "spotify": 0.2
+    }
+   },
+   "fav 0.6-0.85 +2c +fee": {
+    "n": 49,
+    "won": 40,
+    "avg_p": 0.753,
+    "pct_per_$": 3.9,
+    "by_kind_$": {
+     "billboard": -0.52,
+     "netflix": 1.51,
+     "app store": 0.3,
+     "spotify": 0.2
+    }
+   },
+   "fav 0.85-0.97 +1c": {
+    "n": 68,
+    "won": 64,
+    "avg_p": 0.921,
+    "pct_per_$": 1.1,
+    "by_kind_$": {
+     "billboard": 0.23,
+     "netflix": 2.98,
+     "app store": -1.75,
+     "spotify": 0.19,
+     "play store": -0.97
+    }
+   },
+   "fav 0.85-0.97 +2c": {
+    "n": 68,
+    "won": 64,
+    "avg_p": 0.921,
+    "pct_per_$": -0.0,
+    "by_kind_$": {
+     "billboard": 0.19,
+     "netflix": 2.55,
+     "app store": -1.92,
+     "spotify": 0.16,
+     "play store": -0.98
+    }
+   },
+   "fav 0.85-0.97 +3c": {
+    "n": 68,
+    "won": 64,
+    "avg_p": 0.921,
+    "pct_per_$": -1.0,
+    "by_kind_$": {
+     "billboard": 0.15,
+     "netflix": 2.13,
+     "app store": -2.09,
+     "spotify": 0.13,
+     "play store": -0.99
+    }
+   },
+   "fav 0.85-0.97 +2c +fee": {
+    "n": 68,
+    "won": 64,
+    "avg_p": 0.921,
+    "pct_per_$": -0.5,
+    "by_kind_$": {
+     "billboard": 0.17,
+     "netflix": 2.34,
+     "app store": -2.01,
+     "spotify": 0.14,
+     "play store": -0.98
+    }
+   },
+   "fav 0.5-0.97 +2c netflix": {
+    "n": 72,
+    "won": 67,
+    "avg_p": 0.852,
+    "pct_per_$": 6.7,
+    "by_kind_$": {
+     "netflix": 4.23
+    }
+   },
+   "fav 0.5-0.97 +2c app store": {
+    "n": 37,
+    "won": 29,
+    "avg_p": 0.815,
+    "pct_per_$": -6.2,
+    "by_kind_$": {
+     "app store": -1.91
+    }
+   },
+   "fav 0.5-0.97 +2c spotify": {
+    "n": 4,
+    "won": 4,
+    "avg_p": 0.887,
+    "pct_per_$": 10.3,
+    "by_kind_$": {
+     "spotify": 0.37
+    }
+   },
+   "fav 0.5-0.97 +2c billboard": {
+    "n": 6,
+    "won": 5,
+    "avg_p": 0.864,
+    "pct_per_$": -5.7,
+    "by_kind_$": {
+     "billboard": -0.3
+    }
+   },
+   "fav 0.5-0.97 +2c <=2025-12": {
+    "n": 51,
+    "won": 41,
+    "avg_p": 0.83,
+    "pct_per_$": -5.4,
+    "by_kind_$": {
+     "billboard": -0.65,
+     "netflix": 1.08,
+     "app store": -2.17,
+     "spotify": 0.37,
+     "play store": -0.98
+    }
+   },
+   "fav 0.5-0.97 +2c >=2026-01": {
+    "n": 69,
+    "won": 64,
+    "avg_p": 0.853,
+    "pct_per_$": 6.2,
+    "by_kind_$": {
+     "app store": 0.27,
+     "netflix": 3.15,
+     "billboard": 0.35
+    }
+   }
+  }
+ },
+ "end-6h": {
+  "rows": 414,
+  "events_with_fav": 196,
+  "fav_won": 159,
+  "brier": 0.0736,
+  "calibration": {
+   "0.00-0.10": {
+    "n": 208,
+    "events": 109,
+    "avg_p": 0.032,
+    "yes_rate": 0.024
+   },
+   "0.10-0.30": {
+    "n": 34,
+    "events": 30,
+    "avg_p": 0.183,
+    "yes_rate": 0.176
+   },
+   "0.30-0.50": {
+    "n": 30,
+    "events": 19,
+    "avg_p": 0.387,
+    "yes_rate": 0.3
+   },
+   "0.50-0.70": {
+    "n": 18,
+    "events": 18,
+    "avg_p": 0.609,
+    "yes_rate": 0.5
+   },
+   "0.70-0.85": {
+    "n": 23,
+    "events": 23,
+    "avg_p": 0.787,
+    "yes_rate": 0.87
+   },
+   "0.85-0.95": {
+    "n": 39,
+    "events": 39,
+    "avg_p": 0.905,
+    "yes_rate": 0.923
+   },
+   "0.95-1.00": {
+    "n": 62,
+    "events": 62,
+    "avg_p": 0.973,
+    "yes_rate": 0.919
+   }
+  },
+  "rules": {
+   "fav 0.5-0.97 +1c": {
+    "n": 102,
+    "won": 86,
+    "avg_p": 0.843,
+    "pct_per_$": -1.2,
+    "by_kind_$": {
+     "billboard": -0.39,
+     "app store": -1.98,
+     "netflix": 2.88,
+     "play store": -0.98,
+     "spotify": -0.55
+    }
+   },
+   "fav 0.5-0.97 +2c": {
+    "n": 102,
+    "won": 86,
+    "avg_p": 0.843,
+    "pct_per_$": -2.3,
+    "by_kind_$": {
+     "billboard": -0.44,
+     "app store": -2.32,
+     "netflix": 2.28,
+     "play store": -0.99,
+     "spotify": -0.57
+    }
+   },
+   "fav 0.5-0.97 +3c": {
+    "n": 102,
+    "won": 86,
+    "avg_p": 0.843,
+    "pct_per_$": -3.4,
+    "by_kind_$": {
+     "billboard": -0.49,
+     "app store": -2.66,
+     "netflix": 1.69,
+     "play store": -0.99,
+     "spotify": -0.59
+    }
+   },
+   "fav 0.5-0.97 +2c +fee": {
+    "n": 102,
+    "won": 86,
+    "avg_p": 0.843,
+    "pct_per_$": -3.2,
+    "by_kind_$": {
+     "billboard": -0.48,
+     "app store": -2.65,
+     "netflix": 1.84,
+     "play store": -0.99,
+     "spotify": -0.59
+    }
+   },
+   "fav 0.6-0.85 +1c": {
+    "n": 32,
+    "won": 26,
+    "avg_p": 0.749,
+    "pct_per_$": 7.1,
+    "by_kind_$": {
+     "billboard": -0.65,
+     "netflix": 2.66,
+     "app store": -0.29
+    }
+   },
+   "fav 0.6-0.85 +2c": {
+    "n": 32,
+    "won": 26,
+    "avg_p": 0.749,
+    "pct_per_$": 5.7,
+    "by_kind_$": {
+     "billboard": -0.66,
+     "netflix": 2.54,
+     "app store": -0.48
+    }
+   },
+   "fav 0.6-0.85 +3c": {
+    "n": 32,
+    "won": 26,
+    "avg_p": 0.749,
+    "pct_per_$": 4.3,
+    "by_kind_$": {
+     "billboard": -0.67,
+     "netflix": 2.42,
+     "app store": -0.67
+    }
+   },
+   "fav 0.6-0.85 +2c +fee": {
+    "n": 32,
+    "won": 26,
+    "avg_p": 0.749,
+    "pct_per_$": 3.9,
+    "by_kind_$": {
+     "billboard": -0.68,
+     "netflix": 2.39,
+     "app store": -0.73
+    }
+   },
+   "fav 0.85-0.97 +1c": {
+    "n": 63,
+    "won": 57,
+    "avg_p": 0.925,
+    "pct_per_$": -3.3,
+    "by_kind_$": {
+     "billboard": 0.26,
+     "app store": -1.16,
+     "netflix": -0.07,
+     "play store": -0.98,
+     "spotify": 0.03
+    }
+   },
+   "fav 0.85-0.97 +2c": {
+    "n": 63,
+    "won": 57,
+    "avg_p": 0.925,
+    "pct_per_$": -4.3,
+    "by_kind_$": {
+     "billboard": 0.22,
+     "app store": -1.3,
+     "netflix": -0.5,
+     "play store": -0.99,
+     "spotify": 0.02
+    }
+   },
+   "fav 0.85-0.97 +3c": {
+    "n": 63,
+    "won": 57,
+    "avg_p": 0.925,
+    "pct_per_$": -5.3,
+    "by_kind_$": {
+     "billboard": 0.18,
+     "app store": -1.43,
+     "netflix": -0.93,
+     "play store": -0.99,
+     "spotify": 0.01
+    }
+   },
+   "fav 0.85-0.97 +2c +fee": {
+    "n": 63,
+    "won": 57,
+    "avg_p": 0.925,
+    "pct_per_$": -4.8,
+    "by_kind_$": {
+     "billboard": 0.2,
+     "app store": -1.36,
+     "netflix": -0.71,
+     "play store": -0.99,
+     "spotify": 0.02
+    }
+   },
+   "fav 0.5-0.97 +2c netflix": {
+    "n": 60,
+    "won": 55,
+    "avg_p": 0.859,
+    "pct_per_$": 4.3,
+    "by_kind_$": {
+     "netflix": 2.28
+    }
+   },
+   "fav 0.5-0.97 +2c app store": {
+    "n": 34,
+    "won": 26,
+    "avg_p": 0.813,
+    "pct_per_$": -8.2,
+    "by_kind_$": {
+     "app store": -2.32
+    }
+   },
+   "fav 0.5-0.97 +2c spotify": {
+    "n": 2,
+    "won": 1,
+    "avg_p": 0.764,
+    "pct_per_$": -36.2,
+    "by_kind_$": {
+     "spotify": -0.57
+    }
+   },
+   "fav 0.5-0.97 +2c billboard": {
+    "n": 5,
+    "won": 4,
+    "avg_p": 0.869,
+    "pct_per_$": -10.0,
+    "by_kind_$": {
+     "billboard": -0.44
+    }
+   },
+   "fav 0.5-0.97 +2c <=2025-12": {
+    "n": 47,
+    "won": 37,
+    "avg_p": 0.822,
+    "pct_per_$": -6.5,
+    "by_kind_$": {
+     "billboard": -0.62,
+     "app store": -0.94,
+     "netflix": 0.56,
+     "play store": -0.99,
+     "spotify": -0.57
+    }
+   },
+   "fav 0.5-0.97 +2c >=2026-01": {
+    "n": 55,
+    "won": 49,
+    "avg_p": 0.861,
+    "pct_per_$": 1.1,
+    "by_kind_$": {
+     "app store": -1.38,
+     "netflix": 1.72,
+     "billboard": 0.18
+    }
+   }
+  }
+ },
+ "end-2h": {
+  "rows": 356,
+  "events_with_fav": 196,
+  "fav_won": 162,
+  "brier": 0.0643,
+  "calibration": {
+   "0.00-0.10": {
+    "n": 164,
+    "events": 98,
+    "avg_p": 0.029,
+    "yes_rate": 0.006
+   },
+   "0.10-0.30": {
+    "n": 40,
+    "events": 30,
+    "avg_p": 0.192,
+    "yes_rate": 0.175
+   },
+   "0.30-0.50": {
+    "n": 28,
+    "events": 17,
+    "avg_p": 0.403,
+    "yes_rate": 0.393
+   },
+   "0.50-0.70": {
+    "n": 11,
+    "events": 11,
+    "avg_p": 0.582,
+    "yes_rate": 0.545
+   },
+   "0.70-0.85": {
+    "n": 23,
+    "events": 23,
+    "avg_p": 0.783,
+    "yes_rate": 0.87
+   },
+   "0.85-0.95": {
+    "n": 20,
+    "events": 20,
+    "avg_p": 0.919,
+    "yes_rate": 0.9
+   },
+   "0.95-1.00": {
+    "n": 70,
+    "events": 70,
+    "avg_p": 0.974,
+    "yes_rate": 0.957
+   }
+  },
+  "rules": {
+   "fav 0.5-0.97 +1c": {
+    "n": 75,
+    "won": 67,
+    "avg_p": 0.847,
+    "pct_per_$": 4.3,
+    "by_kind_$": {
+     "netflix": 3.4,
+     "app store": -0.05,
+     "spotify": -0.61,
+     "billboard": 0.02
+    }
+   },
+   "fav 0.5-0.97 +2c": {
+    "n": 75,
+    "won": 67,
+    "avg_p": 0.847,
+    "pct_per_$": 3.1,
+    "by_kind_$": {
+     "netflix": 2.98,
+     "app store": -0.36,
+     "spotify": -0.62,
+     "billboard": 0.01
+    }
+   },
+   "fav 0.5-0.97 +3c": {
+    "n": 75,
+    "won": 67,
+    "avg_p": 0.847,
+    "pct_per_$": 1.9,
+    "by_kind_$": {
+     "netflix": 2.57,
+     "app store": -0.67,
+     "spotify": -0.63,
+     "billboard": 0.01
+    }
+   },
+   "fav 0.5-0.97 +2c +fee": {
+    "n": 75,
+    "won": 67,
+    "avg_p": 0.847,
+    "pct_per_$": 2.2,
+    "by_kind_$": {
+     "netflix": 2.72,
+     "app store": -0.67,
+     "spotify": -0.64,
+     "billboard": 0.01
+    }
+   },
+   "fav 0.6-0.85 +1c": {
+    "n": 26,
+    "won": 23,
+    "avg_p": 0.759,
+    "pct_per_$": 15.1,
+    "by_kind_$": {
+     "netflix": 2.73,
+     "app store": 0.89,
+     "spotify": -0.61
+    }
+   },
+   "fav 0.6-0.85 +2c": {
+    "n": 26,
+    "won": 23,
+    "avg_p": 0.759,
+    "pct_per_$": 13.6,
+    "by_kind_$": {
+     "netflix": 2.61,
+     "app store": 0.76,
+     "spotify": -0.62
+    }
+   },
+   "fav 0.6-0.85 +3c": {
+    "n": 26,
+    "won": 23,
+    "avg_p": 0.759,
+    "pct_per_$": 12.2,
+    "by_kind_$": {
+     "netflix": 2.49,
+     "app store": 0.63,
+     "spotify": -0.63
+    }
+   },
+   "fav 0.6-0.85 +2c +fee": {
+    "n": 26,
+    "won": 23,
+    "avg_p": 0.759,
+    "pct_per_$": 11.8,
+    "by_kind_$": {
+     "netflix": 2.46,
+     "app store": 0.61,
+     "spotify": -0.64
+    }
+   },
+   "fav 0.85-0.97 +1c": {
+    "n": 43,
+    "won": 41,
+    "avg_p": 0.941,
+    "pct_per_$": 0.3,
+    "by_kind_$": {
+     "netflix": 0.22,
+     "app store": -0.13,
+     "billboard": 0.02
+    }
+   },
+   "fav 0.85-0.97 +2c": {
+    "n": 43,
+    "won": 41,
+    "avg_p": 0.941,
+    "pct_per_$": -0.8,
+    "by_kind_$": {
+     "netflix": -0.07,
+     "app store": -0.26,
+     "billboard": 0.01
+    }
+   },
+   "fav 0.85-0.97 +3c": {
+    "n": 43,
+    "won": 41,
+    "avg_p": 0.941,
+    "pct_per_$": -1.7,
+    "by_kind_$": {
+     "netflix": -0.35,
+     "app store": -0.38,
+     "billboard": 0.01
+    }
+   },
+   "fav 0.85-0.97 +2c +fee": {
+    "n": 43,
+    "won": 41,
+    "avg_p": 0.941,
+    "pct_per_$": -1.2,
+    "by_kind_$": {
+     "netflix": -0.17,
+     "app store": -0.32,
+     "billboard": 0.01
+    }
+   },
+   "fav 0.5-0.97 +2c netflix": {
+    "n": 42,
+    "won": 41,
+    "avg_p": 0.885,
+    "pct_per_$": 7.8,
+    "by_kind_$": {
+     "netflix": 2.98
+    }
+   },
+   "fav 0.5-0.97 +2c app store": {
+    "n": 31,
+    "won": 25,
+    "avg_p": 0.798,
+    "pct_per_$": -1.4,
+    "by_kind_$": {
+     "app store": -0.36
+    }
+   },
+   "fav 0.5-0.97 +2c spotify": {
+    "n": 1,
+    "won": 0,
+    "avg_p": 0.6,
+    "pct_per_$": -100.0,
+    "by_kind_$": {
+     "spotify": -0.62
+    }
+   },
+   "fav 0.5-0.97 +2c billboard": {
+    "n": 1,
+    "won": 1,
+    "avg_p": 0.969,
+    "pct_per_$": 1.1,
+    "by_kind_$": {
+     "billboard": 0.01
+    }
+   },
+   "fav 0.5-0.97 +2c <=2025-12": {
+    "n": 38,
+    "won": 33,
+    "avg_p": 0.83,
+    "pct_per_$": 2.1,
+    "by_kind_$": {
+     "netflix": 2.3,
+     "app store": -1.0,
+     "spotify": -0.62
+    }
+   },
+   "fav 0.5-0.97 +2c >=2026-01": {
+    "n": 37,
+    "won": 34,
+    "avg_p": 0.863,
+    "pct_per_$": 4.1,
+    "by_kind_$": {
+     "app store": 0.64,
+     "netflix": 0.68,
+     "billboard": 0.01
+    }
+   }
+  }
+ }
+}
