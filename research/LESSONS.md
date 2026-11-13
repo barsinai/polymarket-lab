@@ -37,6 +37,9 @@ survives them. Add a lesson whenever an idea dies for a reason not already here.
     no news (+8.4%) and flipped sign with the entry hour. Before believing a reaction effect, test the same rule where there is
     no news and at neighbouring clock times; an effect that is not specific to the news is noise in the price series.
 
+13. **A public base rate is already in the price.** Earnings 'beat' markets (470): priced 0.734, resolved 0.737. When the edge is a fact
+    anyone can look up (beat rates, seasonal averages), assume the crowd has it; bring information that is fresher or per-case.
+
 ## Where edges plausibly still live (derived from the above)
 - Information the crowd processes slowly and bots don't cover: resolution-rule details (exact station, exact candle,
   rounding), public running tallies, scheduled data with good nowcasts, slow non-sports questions.

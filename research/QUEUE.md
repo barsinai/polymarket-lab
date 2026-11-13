@@ -659,3 +659,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
 ## 11-12 21:00 cycle 2
 - Box office census (134 films): preview momentum dead (placebo +8.4% > signal +4.7%); Saturday favourite +2.9%/$ at +2c,
   first half -2% -> paper tracker boxoffice_paper.py at real asks (hourly, Sat 14-02 UTC). Ideas N3 (later weekends), N4 (music charts).
+
+## 11-13 01:15 cycle 3
+- Earnings beat census (470 markets): calibrated (0.734 priced vs 0.737 won) -> DEAD, lesson 13. Scheduled-data favourites: same as converge,
+  PARKED. Weather Brier still worse than market (31 events, one day). Paper lock_x 15/16 +12%, lock_mv 19/19 +8% but 1-2 days only.
+  Next: N7 (lock_x ∩ lock_mv), N8 earnings-call mention census, Saturday box-office paper.

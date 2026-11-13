@@ -45,3 +45,18 @@
 - Health: fast paper 20:45, slow 21:05 OK. pilot-log combos AttributeError is the old 16:32 log (fixed in cycle 1; the log is only
   copied when the pilot job saves). Pilot STOP, no orders. No MemoryErrors.
 - Next: N3 census (cheap rerun); first Saturday box-office paper; lock_x/xk read 11-13; converge + young first end dates 11-13.
+
+## 11-13 01:15 UTC cycle 3 (scheduled)
+- Read-outs: server websocket lock_m (lockm.jsonl 11-11 13h..11-12 23h, unique windows, flat $10): rx 285 trades +7.6%/$ at 0.1 s
+  (108 end-times), bn 261 +8.0%; paper (2-s) lock_m 128 93.8% +0.6%/$, lock_x 16 (15 won) +12.3% on 12 end-times / 2 days, lock_mv 19/19
+  +7.9% (14 end-times, 1 day), lock_b 13/13 +8.6%, lock_early 36 +1.4%. Converge 2 settled (one is a pre-filter sports position, -$20;
+  the real one +$0.78). Young 16 settled 3 won -$115 (path touches 0/13 = ~3 bets). Weather paper 62 settled +$153; scored 31 events
+  (one day) Brier model .0732 vs market .0662 - market better. W2: London dead 7C bucket resolved NO (bid was 6.5c). Box office: 0 markets yet.
+- Test 1 (outside the box, N6 earnings beat, via run_script): 470 closed markets, D-1 price 0.734 vs 73.7% YES -> calibrated. YES -2.2%/$
+  at +2c, mid band -10%, 0.80-0.95 +0.6% (0 after fee). DEAD; lesson 13 (public base rates are priced).
+- Test 2 (adjacent, N5 scheduled-data favourites, local history): ~20 releases, +1..+5% vs converge +0.4..+1.1% - not distinguishable; PARKED.
+- New ideas queued: N7 lock_x ∩ lock_mv (adjacent), N8 earnings-call mention markets with past transcripts (outside the box).
+- Health: fast paper 00:51, slow 01:02, MM v2 00:31, order books every 15 min - OK. pilot-log traceback is the old 11-12 17:03 copy
+  (sample.py already fixed). Pilot STOP (since 11-05), no orders. No MemoryErrors. Polymarket APIs are not reachable from the cycle
+  sandbox (proxy) -> network tests go through run_script.yml.
+- Next: first Saturday box-office paper (11-14 14 UTC); converge/young end dates; N8 census; lock_x/lock_mv at 30 end-times.
