@@ -1,53 +1,53 @@
 {
- "updated": "2026-11-13T08:00:42.018941+00:00",
- "trades": 20346,
- "settled": 20327,
- "obs_this_run": 29450,
+ "updated": "2026-11-13T09:03:31.656322+00:00",
+ "trades": 20515,
+ "settled": 20506,
+ "obs_this_run": 30003,
  "rest_ms": {
-  "n": 13676,
-  "min": 39.2,
-  "p50": 48.9,
-  "p90": 57.8
+  "n": 14560,
+  "min": 39.5,
+  "p50": 49.5,
+  "p90": 58.2
  },
  "feed": {
-  "msgs": 77185,
-  "connects": 4,
+  "msgs": 78033,
+  "connects": 2,
   "errors": 0,
-  "last_msg": 1794556841.5253356,
-  "silent_reconnects": 3
+  "last_msg": 1794560611.4079237,
+  "silent_reconnects": 1
  },
  "feed_topics": {
-  "crypto_prices_chainlink": 27978,
-  "crypto_prices_twap_sixty": 27973,
-  "crypto_prices": 21230
+  "crypto_prices_chainlink": 28282,
+  "crypto_prices_twap_sixty": 28286,
+  "crypto_prices": 21463
  },
  "bookws": {
   "ran_to_end": true
  },
  "by_strat": {
   "dog": {
-   "trades": 9277,
-   "won": 1375,
-   "staked": 54202.09,
-   "pnl": -13911.98
+   "trades": 9368,
+   "won": 1393,
+   "staked": 54719.25,
+   "pnl": -13687.47
   },
   "exact": {
-   "trades": 3219,
-   "won": 1834,
-   "staked": 32644.54,
-   "pnl": -1884.47
+   "trades": 3234,
+   "won": 1847,
+   "staked": 32857.03,
+   "pnl": -1880.2
   },
   "fav": {
-   "trades": 6259,
-   "won": 4950,
-   "staked": 80256.93,
-   "pnl": -2951.89
+   "trades": 6320,
+   "won": 4997,
+   "staked": 81048.29,
+   "pnl": -3022.95
   },
   "lock": {
-   "trades": 279,
-   "won": 247,
-   "staked": 3970.9,
-   "pnl": 44.92
+   "trades": 282,
+   "won": 250,
+   "staked": 4022.05,
+   "pnl": 47.26
   },
   "lock_b": {
    "trades": 20,
@@ -80,22 +80,22 @@
    "pnl": -27.03
   },
   "lock_early": {
-   "trades": 39,
-   "won": 37,
-   "staked": 661.83,
-   "pnl": 12.31
+   "trades": 40,
+   "won": 38,
+   "staked": 672.47,
+   "pnl": 13.3
   },
   "lock_m": {
-   "trades": 133,
-   "won": 125,
-   "staked": 1932.85,
-   "pnl": 16.42
+   "trades": 136,
+   "won": 128,
+   "staked": 1984.01,
+   "pnl": 18.76
   },
   "lock_mv": {
-   "trades": 21,
-   "won": 21,
-   "staked": 323.8,
-   "pnl": 24.53
+   "trades": 22,
+   "won": 22,
+   "staked": 343.79,
+   "pnl": 25.31
   },
   "lock_p": {
    "trades": 35,
@@ -140,10 +140,10 @@
    "pnl": 30.2
   },
   "lock_p_z2": {
-   "trades": 154,
-   "won": 140,
-   "staked": 2361.5,
-   "pnl": 9.91
+   "trades": 158,
+   "won": 144,
+   "staked": 2431.09,
+   "pnl": 12.51
   },
   "lock_p_z3": {
    "trades": 16,
@@ -760,28 +760,28 @@
    "pnl": 32.41
   },
   "2026-11-13 dog": {
-   "trades": 677,
-   "won": 83,
-   "staked": 3735.47,
-   "pnl": -1596.23
+   "trades": 768,
+   "won": 101,
+   "staked": 4252.63,
+   "pnl": -1371.72
   },
   "2026-11-13 exact": {
-   "trades": 94,
-   "won": 77,
-   "staked": 1051.66,
-   "pnl": -40.89
+   "trades": 109,
+   "won": 90,
+   "staked": 1264.15,
+   "pnl": -36.62
   },
   "2026-11-13 fav": {
-   "trades": 436,
-   "won": 354,
-   "staked": 5454.45,
-   "pnl": -78.05
+   "trades": 497,
+   "won": 401,
+   "staked": 6245.81,
+   "pnl": -149.11
   },
   "2026-11-13 lock": {
-   "trades": 7,
-   "won": 7,
-   "staked": 101.44,
-   "pnl": 6.01
+   "trades": 10,
+   "won": 10,
+   "staked": 152.6,
+   "pnl": 8.35
   },
   "2026-11-13 lock_b": {
    "trades": 9,
@@ -808,28 +808,28 @@
    "pnl": 2.91
   },
   "2026-11-13 lock_early": {
-   "trades": 3,
-   "won": 3,
-   "staked": 60.0,
-   "pnl": 3.8
-  },
-  "2026-11-13 lock_m": {
-   "trades": 6,
-   "won": 6,
-   "staked": 81.44,
-   "pnl": 5.43
-  },
-  "2026-11-13 lock_mv": {
-   "trades": 2,
-   "won": 2,
-   "staked": 24.8,
-   "pnl": 0.76
-  },
-  "2026-11-13 lock_p_z2": {
    "trades": 4,
    "won": 4,
-   "staked": 48.55,
-   "pnl": 1.93
+   "staked": 70.64,
+   "pnl": 4.79
+  },
+  "2026-11-13 lock_m": {
+   "trades": 9,
+   "won": 9,
+   "staked": 132.6,
+   "pnl": 7.77
+  },
+  "2026-11-13 lock_mv": {
+   "trades": 3,
+   "won": 3,
+   "staked": 44.8,
+   "pnl": 1.54
+  },
+  "2026-11-13 lock_p_z2": {
+   "trades": 8,
+   "won": 8,
+   "staked": 118.14,
+   "pnl": 4.53
   },
   "2026-11-13 pair": {
    "trades": 2,
