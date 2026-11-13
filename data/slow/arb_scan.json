@@ -1,8 +1,8 @@
 {
-"scanned": "2026-11-13 17:54",
+"scanned": "2026-11-13 18:22",
 "events": 2100,
 "groups": 2037,
-"books": 16894,
+"books": 16896,
 "opps": [
 {
 "kind": "ladder_num",
@@ -55,14 +55,14 @@
 "slug": "standx-fdv-above-one-day-after-launch",
 "easy": "StandX FDV above $50M one day after launch?",
 "hard": "StandX FDV above $1B one day after launch?",
-"easy_yes_ask": 0.018,
+"easy_yes_ask": 0.017,
 "hard_no_ask": 0.978,
 "hard_yes_bid": 0.022,
-"cost": 0.996,
-"edge": 0.004,
-"edge_after_fee": 0.0013,
-"size_shares": 242.9,
-"usd_at_size": 241.93
+"cost": 0.995,
+"edge": 0.005,
+"edge_after_fee": 0.0023,
+"size_shares": 205.9,
+"usd_at_size": 204.87
 },
 {
 "kind": "ladder_date",
@@ -95,6 +95,28 @@
 "usd_at_size": 128.45
 },
 {
+"kind": "negrisk_all_yes",
+"event": "South Korea Annual Inflation 2026",
+"slug": "south-korea-annual-inflation-2026",
+"n": 7,
+"has_other": false,
+"outcomes": [
+"<1.5%",
+"1.5% to 1.7%",
+"1.8% to 2.0%",
+"2.1% to 2.3%",
+"2.4% to 2.6%",
+"2.7% to 2.9%",
+"3.0%+"
+],
+"cost": 0.976,
+"payoff": 1,
+"edge": 0.024,
+"edge_after_fee": -0.0228,
+"size_shares": 16.2,
+"usd_at_size": 15.81
+},
+{
 "kind": "ladder_num",
 "event": "Hyperbeat FDV above ___ one day after launch?",
 "slug": "hyperbeat-fdv-above-one-day-after-launch",
@@ -110,27 +132,19 @@
 "usd_at_size": 82.32
 },
 {
-"kind": "negrisk_all_yes",
-"event": "What will OpenAI's IPO valuation be?",
-"slug": "what-will-openais-ipo-valuation-be",
-"n": 8,
-"has_other": false,
-"outcomes": [
-"<$1T",
-"$1.0T\u2013$1.25T",
-"$1.25T\u2013$1.5T",
-"$1.5T\u2013$1.75T",
-"$1.75T\u2013$2.0T",
-"$2.0T\u2013$2.25T",
-"$2.25T\u2013$2.5T",
-"$2.5T+"
-],
-"cost": 0.986,
-"payoff": 1,
-"edge": 0.014,
-"edge_after_fee": -0.0433,
-"size_shares": 16.0,
-"usd_at_size": 15.78
+"kind": "ladder_num",
+"event": "StandX FDV above ___ one day after launch?",
+"slug": "standx-fdv-above-one-day-after-launch",
+"easy": "StandX FDV above $50M one day after launch?",
+"hard": "StandX FDV above $400M one day after launch?",
+"easy_yes_ask": 0.017,
+"hard_no_ask": 0.98,
+"hard_yes_bid": 0.02,
+"cost": 0.997,
+"edge": 0.003,
+"edge_after_fee": 0.0005,
+"size_shares": 90.71,
+"usd_at_size": 90.44
 },
 {
 "kind": "negrisk_all_yes",
@@ -224,28 +238,6 @@
 },
 {
 "kind": "negrisk_all_yes",
-"event": "South Korea Annual Inflation 2026",
-"slug": "south-korea-annual-inflation-2026",
-"n": 7,
-"has_other": false,
-"outcomes": [
-"<1.5%",
-"1.5% to 1.7%",
-"1.8% to 2.0%",
-"2.1% to 2.3%",
-"2.4% to 2.6%",
-"2.7% to 2.9%",
-"3.0%+"
-],
-"cost": 0.976,
-"payoff": 1,
-"edge": 0.024,
-"edge_after_fee": -0.0228,
-"size_shares": 5.0,
-"usd_at_size": 4.88
-},
-{
-"kind": "negrisk_all_yes",
 "event": "Maduro Prison Time?",
 "slug": "maduro-prison-time-527",
 "n": 5,
@@ -278,6 +270,33 @@
 "edge_after_fee": 0.001,
 "size_shares": 7.71,
 "usd_at_size": 7.67
+},
+{
+"kind": "ladder_num",
+"event": "How high will inflation get in 2026?",
+"slug": "how-high-will-inflation-get-in-2026",
+"easy": "Will inflation reach more than 6% in 2026?",
+"hard": "Will inflation reach more than 8% in 2026?",
+"easy_yes_ask": 0.014,
+"hard_no_ask": 0.983,
+"hard_yes_bid": 0.017,
+"cost": 0.997,
+"edge": 0.003,
+"edge_after_fee": 0.0009,
+"size_shares": 12.11,
+"usd_at_size": 12.07
+},
+{
+"kind": "negrisk_all_no",
+"event": "China Annual Inflation 2026",
+"slug": "china-annual-inflation-2026",
+"n": 9,
+"cost": 7.994,
+"payoff": 8,
+"edge": 0.006,
+"edge_after_fee": -0.0357,
+"size_shares": 6.0,
+"usd_at_size": 47.96
 },
 {
 "kind": "ladder_num",
