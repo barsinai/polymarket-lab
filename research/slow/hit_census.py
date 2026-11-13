@@ -42,18 +42,16 @@ def ts(s):
 
 
 def discover():
-    if os.path.exists(EVS):
+    if os.path.exists(EVS) and json.load(open(EVS)):
         return json.load(open(EVS))
-    out = []; off = 0
-    while off < 60000:
-        page = get(f"{GAMMA}/events", {"closed": "true", "limit": 200, "offset": off, "order": "endDate", "ascending": "false",
-                                      "end_date_min": "2025-06-01T00:00:00Z", "end_date_max": "2026-11-13T00:00:00Z"})
-        if not page:
-            break
-        for e in page:
+    out = []; seen = set()
+
+    def take(page):
+        for e in page or []:
             t = e.get("title") or ""
-            if not TITLE.search(t) or "spotify" in t.lower():
+            if e.get("slug") in seen or not TITLE.search(t) or "spotify" in t.lower() or (e.get("endDate") or "") > "2026-11-13":
                 continue
+            seen.add(e.get("slug"))
             ms = []
             for m in e.get("markets") or []:
                 try:
@@ -69,10 +67,37 @@ def discover():
                     r"in (january|february|march|april|may|june|july|august|september|october|november|december)", t, re.I) else "other")
                 out.append({"event": e.get("slug"), "title": t, "start": e["startDate"], "end": e["endDate"],
                             "kind": "crypto" if CRYPTO.search(t) else "stock/cmdty", "period": period, "markets": ms})
-        off += 200
-        if len(page) < 200:
+
+    # 1) series: hit-price series slugs found in the local closed-events sample + the young paper slugs
+    import gzip
+    series = set()
+    try:
+        for l in gzip.open("data/events_closed.jsonl.gz", "rt"):
+            e = json.loads(l)
+            sl = e.get("seriesSlug") or ""
+            if "hit" in sl or ("hit" in (e.get("title") or "").lower() and sl):
+                series.add(sl)
+    except Exception as ex:
+        print("local series scan", ex)
+    series = {x for x in series if not re.search(r"white-house|mrbeast|kharg|iranian", x)}
+    series |= {x.replace("monthly", "weekly") for x in series if "monthly" in x}
+    print("series from sample", len(series), sorted(series)[:40], flush=True)
+    for sl in sorted(series):
+        for off in range(0, 2000, 100):
+            page = get(f"{GAMMA}/events", {"series_slug": sl, "closed": "true", "limit": 100, "offset": off})
+            take(page)
+            if not page or len(page) < 100:
+                break
+    print("after series", len(out), flush=True)
+    # 2) generic closed scan, newest first (no date params: they returned nothing in run 54)
+    for off in range(0, 40000, 500):
+        page = get(f"{GAMMA}/events", {"closed": "true", "limit": 500, "offset": off, "order": "endDate", "ascending": "false"})
+        if off == 0:
+            print("generic first page", len(page or []), (page or [{}])[0].get("endDate"), flush=True)
+        take(page)
+        if not page or (page[-1].get("endDate") or "9") < "2025-06-01":
             break
-        if off % 4000 == 0:
+        if off % 5000 == 0:
             print("scan", off, "hit events", len(out), flush=True)
     json.dump(out, open(EVS, "w"))
     return out
