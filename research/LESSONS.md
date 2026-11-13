@@ -47,6 +47,15 @@ survives them. Add a lesson whenever an idea dies for a reason not already here.
     prices that survive R = 0.1 s and R = 2 s alike. Split every replay result by our own activity (bot up/down, jobs running)
     and by recording lag (rx - exchange ts) before reading it.
 
+15. **Two calm weeks are not a sample for a tail strategy.** Last-day favourites 0.95-0.99 won 167/167 in the 15-min books (10-31..11-13,
+    no war news) and lost 11 of 369 over Jun-Nov (August: 5 losses, -11.8%: last-day war events). Near-certain strategies need the
+    bad months in the sample; read them over a year or not at all.
+
+16. **Never select a history by FINAL volume** (11-01, again 11-13): upsets and late drama attract volume, so the sample is full of
+    them. Inside MLB the favourite's edge falls from +7.9 to -4.3 pts from the lowest to the highest final-volume tercile; in leagues
+    where every game clears the bar the market is calibrated. Select by what was knowable at the entry time, or use leagues/markets
+    that all pass the bar.
+
 ## Where edges plausibly still live (derived from the above)
 - Information the crowd processes slowly and bots don't cover: resolution-rule details (exact station, exact candle,
   rounding), public running tallies, scheduled data with good nowcasts, slow non-sports questions.

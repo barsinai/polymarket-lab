@@ -27,7 +27,6 @@ jobs:
           python-version: "3.12"
       - run: pip install -q requests
       - run: mkdir -p logs data/slow data/research   # spike_monitor dropped 11-13 (DEAD: -20..-25% at 24 h; it used 8 of 13 min)
-      - run: timeout 300 python -u research/slow/sports_fav_paper.py 2>&1 | tail -3 | tee logs/sports-fav-log.txt || true
       - run: python -u research/slow/converge_paper.py 2>&1 | tee logs/converge-log.txt
       - name: converge_day (last day, 0.95-0.99, both sides; 11-13 books census 167/167 won +2.0%/$ excl. tweets/data/crypto)
         run: |
