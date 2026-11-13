@@ -153,3 +153,21 @@
     (LESSONS 15). converge_day paper kept to measure the calm-period yield only.
   * Net: every large category we can test systematically is efficient at the prices we can trade. Remaining small candidates: crypto
     touches vs options (model Brier better at 12 h+, few events; options paper settling now), converge 3-30 d, perps carry, charts/box office.
+
+## 11-13 17:00-18:10 UTC cycle 7 (scheduled)
+- Read-outs (fast paper trades.jsonl, settled): lock_x 17 / 16 +12.0%/$ (13 end-times, 3 days); lock_mv 30 / 29 +2.2% (22); lock_early
+  41 / 39 +2.1% (30); lock_m 147 / 138 +0.2%; lock_p 36 / 33 +8.2% (31 end-times, 4 days). N7: lock_x ∩ lock_mv 12/12 +13.6% on 8 end-times,
+  mv-only 18 / 17 -3.2% (its one loss, sol 0.97) -> lock_mv adds nothing outside lock_x. Slow: converge 4 settled (rule-conforming 3/3
+  +3.5%), 88 open mark -$27; young 28 settled 3 won -$235 (36 'Week of 11-09' touch rungs marked -$168, NO ask = NO mid + 13c median);
+  weather paper 143 settled +$106 / $715 (YES longshots +$94 on 26); charts 2 open; box office out of window; mention 1 event seen at 16:24
+  (scan fix landed 16:55). weather_score.py cannot run here (gamma 403 from the cycle sandbox, not a workaround case) -> via Actions next.
+- Test (adjacent, N17 touch ladders, hit_census.py via run_script, 1,228 'hit' events found via hit-price series; 4,592 rungs with
+  history, stocks/commodities only - crypto not reached in the 42-min budget): touch YES is RICH, not cheap - start + 24 h YES 0.27 ->
+  0.17, 0.43 -> 0.35 (LOW/dip touches worst). NO on YES 0.30-0.50: +9.4%/$ at +2c + fee (283 events, 19/28 weeks +), +4.3% at +5c, mid-life
+  +0.7%. Hourly last prices; the real NO ask on these rungs early in the week is mid + 13c -> DEAD as a taker (same story as the mention
+  census). Maker variant N17b queued (fills likely adverse, LESSONS 2).
+- New ideas: N17b maker NO on touch ladders (adjacent), N18 Rotten Tomatoes score markets vs the review tally (outside the box).
+- Health: fast paper 16:15, slow 16:27 (pushes OK again), MM v2 17:01, books 17:00, live snapshot 17:04. Old smoke Traceback in
+  logs/script-log.txt (11:34 copy, cosmetic). Pilot STOP, no orders. A parallel deep session was editing IDEAS; merged by hand.
+- Next: weather_score via Actions (Brier with 2+ days); lock_x / lock_p to 30 end-times; young at the 11-16..11-30 end dates; box office Sat
+  11-14 14 UTC; N18 census with real spreads first.

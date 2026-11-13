@@ -679,3 +679,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - Slow paper had not pushed since 09:14 (mention files missing from the Save step) - fixed. lock_mv first loss (25/26 +1.8%). Order-book
   time-of-day test (N15): asks of slow favourites lowest 04-05 UTC but only by 0.2c; 1c dips revert +1c in 24 h -> N15b converge dip entry.
   N16 tweet-count markets: books tight in the last hours. Next: verify slow push, box office Sat, mention scan coverage.
+
+## 11-13 18:10 cycle 7
+- Touch ladders (N17, 1,228 'hit' events): YES rich on last prices (0.27 priced -> 0.17), NO +9% at +2c but the real NO spread early in the
+  week is +13c -> DEAD as taker; maker variant N17b. lock_mv adds nothing outside lock_x (x∩mv 12/12, mv-only -3%). New: N18 Rotten Tomatoes.
+  Next: weather Brier via Actions, lock_x/lock_p to 30 end-times, box office Saturday.
