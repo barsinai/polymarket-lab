@@ -52,6 +52,6 @@ jobs:
       - name: Save
         run: |
           git config user.name "lab-bot" && git config user.email "lab-bot@users.noreply.github.com"
-          for p in data/slow/spike_positions.jsonl data/slow/spike_report.json data/slow/converge_positions.jsonl data/slow/converge_report.json data/slow/arb_scan.json data/slow/arb_log.jsonl data/slow/young_positions.jsonl data/slow/young_report.json data/slow/boxoffice_positions.jsonl data/slow/boxoffice_report.json data/slow/charts_positions.jsonl data/slow/charts_report.json data/research/scoreboard.json data/research/options_obs.jsonl data/research/options_positions.jsonl data/research/options_report.json data/research/options_probe.json data/weather data/sharp logs; do [ -e "$p" ] && git add --sparse "$p"; done
+          for p in data/slow/spike_positions.jsonl data/slow/spike_report.json data/slow/converge_positions.jsonl data/slow/converge_report.json data/slow/arb_scan.json data/slow/arb_log.jsonl data/slow/young_positions.jsonl data/slow/young_report.json data/slow/boxoffice_positions.jsonl data/slow/boxoffice_report.json data/slow/charts_positions.jsonl data/slow/charts_report.json data/slow/mention_positions.jsonl data/slow/mention_report.json data/research/scoreboard.json data/research/options_obs.jsonl data/research/options_positions.jsonl data/research/options_report.json data/research/options_probe.json data/weather data/sharp logs; do [ -e "$p" ] && git add --sparse "$p"; done
           git commit -qm "Slow paper $(date -u +%FT%H:%M) [skip ci]" || exit 0
-          for i in 1 2 3; do git pull -q --rebase -X theirs origin main && git push -q && break; sleep 5; done
+          for i in 1 2 3; do git pull -q --rebase --autostash -X theirs origin main && git push -q && break; sleep 5; done
