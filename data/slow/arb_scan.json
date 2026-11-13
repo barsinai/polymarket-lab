@@ -1,9 +1,24 @@
 {
-"scanned": "2026-11-13 05:07",
+"scanned": "2026-11-13 06:07",
 "events": 2100,
 "groups": 2037,
-"books": 16900,
+"books": 16898,
 "opps": [
+{
+"kind": "ladder_num",
+"event": "StandX FDV above ___ one day after launch?",
+"slug": "standx-fdv-above-one-day-after-launch",
+"easy": "StandX FDV above $800M one day after launch?",
+"hard": "StandX FDV above $1B one day after launch?",
+"easy_yes_ask": 0.018,
+"hard_no_ask": 0.978,
+"hard_yes_bid": 0.022,
+"cost": 0.996,
+"edge": 0.004,
+"edge_after_fee": 0.0013,
+"size_shares": 2702.39,
+"usd_at_size": 2691.58
+},
 {
 "kind": "ladder_num",
 "event": "Hotstuff FDV above ___ one day after launch?",
@@ -16,8 +31,8 @@
 "cost": 0.99,
 "edge": 0.01,
 "edge_after_fee": -0.0063,
-"size_shares": 180.16,
-"usd_at_size": 178.36
+"size_shares": 224.1,
+"usd_at_size": 221.86
 },
 {
 "kind": "ladder_date",
@@ -81,36 +96,6 @@
 },
 {
 "kind": "ladder_num",
-"event": "StandX FDV above ___ one day after launch?",
-"slug": "standx-fdv-above-one-day-after-launch",
-"easy": "StandX FDV above $800M one day after launch?",
-"hard": "StandX FDV above $1B one day after launch?",
-"easy_yes_ask": 0.019,
-"hard_no_ask": 0.978,
-"hard_yes_bid": 0.022,
-"cost": 0.997,
-"edge": 0.003,
-"edge_after_fee": 0.0002,
-"size_shares": 154.94,
-"usd_at_size": 154.48
-},
-{
-"kind": "ladder_num",
-"event": "Ostium FDV above ___ one day after launch?",
-"slug": "ostium-fdv-above-one-day-after-launch",
-"easy": "Ostium FDV above $75M one day after launch?",
-"hard": "Ostium FDV above $100M one day after launch?",
-"easy_yes_ask": 0.026,
-"hard_no_ask": 0.971,
-"hard_yes_bid": 0.029,
-"cost": 0.997,
-"edge": 0.003,
-"edge_after_fee": -0.0007,
-"size_shares": 153.25,
-"usd_at_size": 152.79
-},
-{
-"kind": "ladder_num",
 "event": "Saturn FDV above ___ one day after launch?",
 "slug": "saturn-fdv-above-one-day-after-launch-20260623191408697",
 "easy": "Saturn FDV above $600M one day after launch",
@@ -140,18 +125,6 @@
 "usd_at_size": 94.1
 },
 {
-"kind": "negrisk_all_no",
-"event": "Anthropic IPO Closing Market Cap",
-"slug": "anthropic-ipo-closing-market-cap-higher-strikes",
-"n": 10,
-"cost": 8.989,
-"payoff": 9,
-"edge": 0.011,
-"edge_after_fee": -0.0419,
-"size_shares": 30.0,
-"usd_at_size": 269.67
-},
-{
 "kind": "negrisk_all_yes",
 "event": "South Korea Annual Inflation 2026",
 "slug": "south-korea-annual-inflation-2026",
@@ -166,12 +139,27 @@
 "2.7% to 2.9%",
 "3.0%+"
 ],
-"cost": 0.976,
+"cost": 0.975,
 "payoff": 1,
-"edge": 0.024,
-"edge_after_fee": -0.0223,
+"edge": 0.025,
+"edge_after_fee": -0.0213,
 "size_shares": 10.3,
-"usd_at_size": 10.05
+"usd_at_size": 10.04
+},
+{
+"kind": "ladder_num",
+"event": "StandX FDV above ___ one day after launch?",
+"slug": "standx-fdv-above-one-day-after-launch",
+"easy": "StandX FDV above $200M one day after launch?",
+"hard": "StandX FDV above $1B one day after launch?",
+"easy_yes_ask": 0.019,
+"hard_no_ask": 0.978,
+"hard_yes_bid": 0.022,
+"cost": 0.997,
+"edge": 0.003,
+"edge_after_fee": 0.0002,
+"size_shares": 82.03,
+"usd_at_size": 81.78
 },
 {
 "kind": "ladder_num",
@@ -234,19 +222,16 @@
 "usd_at_size": 27.81
 },
 {
-"kind": "ladder_num",
-"event": "Ostium FDV above ___ one day after launch?",
-"slug": "ostium-fdv-above-one-day-after-launch",
-"easy": "Ostium FDV above $50M one day after launch?",
-"hard": "Ostium FDV above $100M one day after launch?",
-"easy_yes_ask": 0.026,
-"hard_no_ask": 0.971,
-"hard_yes_bid": 0.029,
-"cost": 0.997,
-"edge": 0.003,
-"edge_after_fee": -0.0007,
-"size_shares": 30.0,
-"usd_at_size": 29.91
+"kind": "negrisk_all_no",
+"event": "Anthropic IPO Closing Market Cap",
+"slug": "anthropic-ipo-closing-market-cap-higher-strikes",
+"n": 10,
+"cost": 8.993,
+"payoff": 9,
+"edge": 0.007,
+"edge_after_fee": -0.0454,
+"size_shares": 8.7,
+"usd_at_size": 78.24
 },
 {
 "kind": "ladder_num",
@@ -270,28 +255,13 @@
 "easy": "Printr FDV above $500M one day after launch?",
 "hard": "Printr FDV above $1B one day after launch?",
 "easy_yes_ask": 0.049,
-"hard_no_ask": 0.933,
-"hard_yes_bid": 0.067,
-"cost": 0.982,
-"edge": 0.018,
-"edge_after_fee": 0.0104,
+"hard_no_ask": 0.932,
+"hard_yes_bid": 0.068,
+"cost": 0.981,
+"edge": 0.019,
+"edge_after_fee": 0.0113,
 "size_shares": 1.61,
 "usd_at_size": 1.58
-},
-{
-"kind": "ladder_num",
-"event": "What price will Sui hit in 2026?",
-"slug": "what-price-will-sui-hit-in-2026",
-"easy": "Will Sui reach $2.50 before 2027?",
-"hard": "Will Sui reach $3.00 before 2027?",
-"easy_yes_ask": 0.06,
-"hard_no_ask": 0.935,
-"hard_yes_bid": 0.065,
-"cost": 0.995,
-"edge": 0.005,
-"edge_after_fee": -0.0032,
-"size_shares": 5.3,
-"usd_at_size": 5.27
 },
 {
 "kind": "ladder_num",
@@ -307,6 +277,21 @@
 "edge_after_fee": 0.0047,
 "size_shares": 1.61,
 "usd_at_size": 1.59
+},
+{
+"kind": "ladder_num",
+"event": "Tabi FDV above ___ one day after launch?",
+"slug": "tabi-fdv-above-one-day-after-launch",
+"easy": "Tabi FDV above $100M one day after launch?",
+"hard": "Tabi FDV above $250M one day after launch?",
+"easy_yes_ask": 0.106,
+"hard_no_ask": 0.89,
+"hard_yes_bid": 0.11,
+"cost": 0.996,
+"edge": 0.004,
+"edge_after_fee": -0.0095,
+"size_shares": 2.32,
+"usd_at_size": 2.31
 }
 ]
 }
