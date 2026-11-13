@@ -1,0 +1,40 @@
+reward markets 11507 total pool $/day 121290
+with Gamma volume 11507 (batch of 40 condition_ids per Gamma call)
+pool/volume >= 0.054: markets 7601  pool $60,285/day of $121,290
+pool/volume >= 0.27: markets 6688  pool $45,639/day of $121,290
+pool/volume >= 1.0: markets 6326  pool $40,578/day of $121,290
+
+booked candidates (mid 0.10-0.90): 1366
+  haircut 1.0, best  20 markets: est reward $ 2704.3/day on $   460 min-size quotes; expected fill loss ~$ 459.9/day -> net $+2244.4/day
+  haircut 1.0, best  50 markets: est reward $ 4452.9/day on $  1060 min-size quotes; expected fill loss ~$ 721.7/day -> net $+3731.1/day
+  haircut 1.0, best 100 markets: est reward $ 6967.4/day on $  2150 min-size quotes; expected fill loss ~$1018.3/day -> net $+5949.1/day
+  haircut 0.2, best  20 markets: est reward $  540.9/day on $   460 min-size quotes; expected fill loss ~$ 459.9/day -> net $  +81.0/day
+  haircut 0.2, best  50 markets: est reward $  890.6/day on $  1060 min-size quotes; expected fill loss ~$ 721.7/day -> net $ +168.8/day
+  haircut 0.2, best 100 markets: est reward $ 1393.5/day on $  2150 min-size quotes; expected fill loss ~$1018.3/day -> net $ +375.2/day
+
+top 25 by estimated reward per $ (before haircut):
+  pool $ 400.0/d  vol $      263/d  min   20  v 6.5c  comp      0.0  book 0.220  mid 0.680  share 1.00  $400.00/d  Will SpaceX Starship Flight Test 15 launch by November 13, 2
+  pool $ 200.0/d  vol $        1/d  min   20  v 6.5c  comp      0.0  book 0.920  mid 0.480  share 1.00  $200.00/d  Will Daft Punk perform at Coachella 2027?
+  pool $ 200.0/d  vol $      431/d  min   20  v 6.5c  comp      0.0  book 0.140  mid 0.690  share 1.00  $200.00/d  Will SpaceX Starship Flight Test 15 launch by November 14, 2
+  pool $ 200.0/d  vol $        1/d  min   20  v 6.5c  comp      0.0  book 0.380  mid 0.210  share 1.00  $200.00/d  Will "GTA VI" have a Metascore of at least 99?
+  pool $ 127.0/d  vol $        1/d  min   20  v 4.5c  comp      0.0  book 0.110  mid 0.674  share 1.00  $127.00/d  Will the median home value in San Francisco Metro be less th
+  pool $ 100.0/d  vol $      694/d  min   20  v 6.5c  comp      0.0  book 0.350  mid 0.555  share 1.00  $100.00/d  Will "The Hunger Games: Sunrise on the Reaping" score at lea
+  pool $ 100.0/d  vol $        1/d  min   20  v 6.5c  comp      0.0  book 0.980  mid 0.500  share 1.00  $100.00/d  Will US gas hit $3.60 (Low) in November?
+  pool $ 250.0/d  vol $        1/d  min   50  v 4.5c  comp      0.0  book 0.890  mid 0.515  share 1.00  $250.00/d  Will Jensen Huang join SpaceX by March 31, 2027?
+  pool $ 250.0/d  vol $        1/d  min   50  v 4.5c  comp      0.0  book 0.900  mid 0.500  share 1.00  $250.00/d  Will Jensen Huang join SpaceX by December 31, 2027?
+  pool $  98.0/d  vol $      306/d  min   20  v 6.5c  comp      0.0  book 0.230  mid 0.455  share 1.00  $ 98.00/d  Will the Ornn H100 Index be at least $3.25 on November 30, 2
+  pool $  96.0/d  vol $     1143/d  min   20  v 4.5c  comp      0.0  book 0.180  mid 0.480  share 1.00  $ 96.00/d  Will Core PCE YoY be 3.2% in October?
+  pool $  85.0/d  vol $     1566/d  min   20  v 4.5c  comp      0.0  book 0.100  mid 0.310  share 1.00  $ 85.00/d  Will Jensen Huang not join any company by December 31, 2027?
+  pool $  79.0/d  vol $      573/d  min   20  v 4.5c  comp      0.0  book 0.340  mid 0.440  share 1.00  $ 79.00/d  Will Joe Henley come in second-place on The Voice season 30?
+  pool $  78.0/d  vol $      100/d  min   20  v 6.5c  comp      0.0  book 0.740  mid 0.390  share 1.00  $ 78.00/d  Will Sweet Nuthins - Kehlani feat. Leon Thomas win Best R&B 
+  pool $  76.0/d  vol $     1267/d  min   20  v 4.5c  comp      0.0  book 0.348  mid 0.506  share 1.00  $ 76.00/d  Will the highest temperature in Moscow be 4°C on November 13
+  pool $  75.0/d  vol $        1/d  min   20  v 6.5c  comp      0.0  book 0.854  mid 0.430  share 1.00  $ 75.00/d  Will Michael Mebruer be the Republican nominee for LA-05?
+  pool $  75.0/d  vol $       71/d  min   20  v 6.5c  comp      0.1  book 0.120  mid 0.670  share 0.99  $ 74.28/d  Will Wildwood win Best Motion Picture – Animated at the 84th
+  pool $  74.0/d  vol $      717/d  min   20  v 4.5c  comp      0.0  book 0.250  mid 0.365  share 1.00  $ 74.00/d  Will Canada's GDP growth rate MoM in September 2026 be less 
+  pool $  73.0/d  vol $      712/d  min   20  v 4.5c  comp      0.0  book 0.130  mid 0.635  share 1.00  $ 73.00/d  Will the highest temperature in Atlanta be between 52-53°F o
+  pool $  69.0/d  vol $      667/d  min   20  v 4.5c  comp      0.0  book 0.330  mid 0.345  share 1.00  $ 69.00/d  Will Canada's GDP growth rate MoM in September 2026 be betwe
+  pool $  68.0/d  vol $        1/d  min   20  v 6.5c  comp      0.0  book 0.890  mid 0.455  share 1.00  $ 68.00/d  Will MORNING DEW (DONK) (Remix) - Beyonce feat. JAY-Z win Be
+  pool $  68.0/d  vol $       80/d  min   20  v 6.5c  comp      0.0  book 0.840  mid 0.460  share 1.00  $ 68.00/d  Will Opalite (Chris Lake Remix) - Taylor Swift win Best Remi
+  pool $  66.0/d  vol $        1/d  min   20  v 6.5c  comp      0.0  book 0.290  mid 0.715  share 1.00  $ 66.00/d  Will the Republicans win Tennessee in the 2028 Presidential 
+  pool $  65.0/d  vol $        1/d  min   20  v 4.5c  comp      0.0  book 0.790  mid 0.465  share 1.00  $ 65.00/d  Democratic 2028 presidential odds 66-68% on November 20?
+  pool $  64.0/d  vol $        1/d  min   20  v 6.5c  comp      0.0  book 0.840  mid 0.460  share 1.00  $ 64.00/d  Will The Fate of Ophelia (Loud Luxury Remix) - Taylor Swift 
