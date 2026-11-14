@@ -8,18 +8,18 @@ unmatched crypto price events (title | first question):
    What will the Ethereum Implied Volatility Index hit by November 30? | Will the Ethereum Volatility Index hit 100 by November 30?
    What will the average monthly Ethereum gas price hit before 2027? | Will the average monthly Ethereum gas price hit 5 Gwei before 2027?
    Will Ethereum hit $1,000 or $3,000 first? | Will Ethereum hit $1,000 or $3,000 first?
-example rules: Bitcoin above 70,200 on November 13, 10PM ET? | This market will resolve to "Yes" if the "Close" price for the BTC/USDT 1 hour candle that ends on the time and date specified in the title is higher than the price specified in the title. Otherwise, this market will resolve to "No".
-The resolution source for this market is Binance, specifically the BTC/USDT "Close" prices currently available at https://www.binance.com/en/trade/BTC_USDT with "1h"
-priced with both: 418
-mid - model: p10 -0.045 median +0.007 p90 +0.040
-  above      0-0.5  d: n  19  mid - model median +0.021  p10 -0.165  p90 +0.394
-  above    0.5-3    d: n  50  mid - model median +0.003  p10 -0.054  p90 +0.014
-  above      3-10   d: n  95  mid - model median +0.006  p10 -0.051  p90 +0.017
-  below    0.5-3    d: n   6  mid - model median +0.012  p10 -0.038  p90 +0.096
-  below      3-10   d: n   8  mid - model median -0.013  p10 -0.076  p90 +0.041
-  between  0.5-3    d: n  43  mid - model median +0.005  p10 -0.059  p90 +0.037
-  between    3-10   d: n  72  mid - model median +0.010  p10 -0.033  p90 +0.040
-  touch      0-0.5  d: n  10  mid - model median +0.011  p10 +0.003  p90 +0.297
-  touch    0.5-3    d: n  24  mid - model median +0.004  p10 -0.026  p90 +0.015
-  touch     10-400  d: n  90  mid - model median +0.013  p10 +0.002  p90 +0.072
-paper: {'updated': '2026-11-14 02:28', 'open': 51, 'new': 8, 'settled': 13, 'won': 3, 'pnl': -89.32, 'staked_settled': 129.99}
+example rules: Will Bitcoin reach $76,000 on November 13? | This market will immediately resolve to "Yes" if any Binance 1-minute candle for Bitcoin (BTC/USDT) on the date specified in the title, between 12:00 AM ET and 11:59 PM ET has a final "High" price equal to or greater than the price specified in the title. Otherwise, this market will resolve to "No".
+The resolution source for this market is Binance, specifically the BTC/USDT "High" prices availabl
+priced with both: 434
+mid - model: p10 -0.026 median +0.007 p90 +0.037
+  above      0-0.5  d: n  44  mid - model median +0.017  p10 -0.102  p90 +0.137
+  above    0.5-3    d: n  46  mid - model median +0.004  p10 -0.008  p90 +0.023
+  above      3-10   d: n  95  mid - model median +0.005  p10 -0.027  p90 +0.019
+  below    0.5-3    d: n   6  mid - model median -0.016  p10 -0.045  p90 +0.016
+  below      3-10   d: n   8  mid - model median -0.008  p10 -0.049  p90 +0.024
+  between  0.5-3    d: n  43  mid - model median +0.005  p10 -0.018  p90 +0.019
+  between    3-10   d: n  72  mid - model median +0.005  p10 -0.031  p90 +0.031
+  touch      0-0.5  d: n   5  mid - model median +0.017  p10 +0.005  p90 +0.054
+  touch    0.5-3    d: n  24  mid - model median +0.005  p10 -0.019  p90 +0.018
+  touch     10-400  d: n  90  mid - model median +0.013  p10 +0.002  p90 +0.046
+paper: {'updated': '2026-11-14 04:27', 'open': 52, 'new': 1, 'settled': 13, 'won': 3, 'pnl': -89.32, 'staked_settled': 129.99}

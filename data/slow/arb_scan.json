@@ -1,8 +1,8 @@
 {
-"scanned": "2026-11-14 03:26",
+"scanned": "2026-11-14 04:27",
 "events": 2100,
 "groups": 2037,
-"books": 16892,
+"books": 16904,
 "opps": [
 {
 "kind": "ladder_num",
@@ -34,12 +34,12 @@
 "1.5T+",
 "No IPO by December 31, 2027"
 ],
-"cost": 0.961,
+"cost": 0.959,
 "payoff": 1,
-"edge": 0.039,
-"edge_after_fee": -0.0137,
-"size_shares": 83.0,
-"usd_at_size": 79.76
+"edge": 0.041,
+"edge_after_fee": -0.0117,
+"size_shares": 55.8,
+"usd_at_size": 53.51
 },
 {
 "kind": "ladder_num",
@@ -70,6 +70,28 @@
 "edge_after_fee": 0.0446,
 "size_shares": 12.5,
 "usd_at_size": 11.83
+},
+{
+"kind": "negrisk_all_yes",
+"event": "South Korea Annual Inflation 2026",
+"slug": "south-korea-annual-inflation-2026",
+"n": 7,
+"has_other": false,
+"outcomes": [
+"<1.5%",
+"1.5% to 1.7%",
+"1.8% to 2.0%",
+"2.1% to 2.3%",
+"2.4% to 2.6%",
+"2.7% to 2.9%",
+"3.0%+"
+],
+"cost": 0.971,
+"payoff": 1,
+"edge": 0.029,
+"edge_after_fee": -0.0178,
+"size_shares": 19.29,
+"usd_at_size": 18.73
 },
 {
 "kind": "ladder_num",
@@ -195,28 +217,6 @@
 "usd_at_size": 41.43
 },
 {
-"kind": "negrisk_all_yes",
-"event": "South Korea Annual Inflation 2026",
-"slug": "south-korea-annual-inflation-2026",
-"n": 7,
-"has_other": false,
-"outcomes": [
-"<1.5%",
-"1.5% to 1.7%",
-"1.8% to 2.0%",
-"2.1% to 2.3%",
-"2.4% to 2.6%",
-"2.7% to 2.9%",
-"3.0%+"
-],
-"cost": 0.971,
-"payoff": 1,
-"edge": 0.029,
-"edge_after_fee": -0.0178,
-"size_shares": 5.0,
-"usd_at_size": 4.85
-},
-{
 "kind": "ladder_num",
 "event": "How high will US unemployment go in 2026?",
 "slug": "how-high-will-us-unemployment-go-in-2026",
@@ -230,6 +230,21 @@
 "edge_after_fee": 0.0028,
 "size_shares": 35.56,
 "usd_at_size": 35.42
+},
+{
+"kind": "ladder_num",
+"event": "Ostium FDV above ___ one day after launch?",
+"slug": "ostium-fdv-above-one-day-after-launch",
+"easy": "Ostium FDV above $50M one day after launch?",
+"hard": "Ostium FDV above $100M one day after launch?",
+"easy_yes_ask": 0.026,
+"hard_no_ask": 0.97,
+"hard_yes_bid": 0.03,
+"cost": 0.996,
+"edge": 0.004,
+"edge_after_fee": 0.0002,
+"size_shares": 30.0,
+"usd_at_size": 29.88
 },
 {
 "kind": "negrisk_all_yes",
@@ -253,21 +268,6 @@
 },
 {
 "kind": "ladder_num",
-"event": "Printr FDV above ___ one day after launch?",
-"slug": "printr-fdv-above-one-day-after-launch",
-"easy": "Printr FDV above $500M one day after launch?",
-"hard": "Printr FDV above $1B one day after launch?",
-"easy_yes_ask": 0.049,
-"hard_no_ask": 0.926,
-"hard_yes_bid": 0.074,
-"cost": 0.975,
-"edge": 0.025,
-"edge_after_fee": 0.0169,
-"size_shares": 1.61,
-"usd_at_size": 1.57
-},
-{
-"kind": "ladder_num",
 "event": "Pacifica FDV above ___ one day after launch?",
 "slug": "pacifica-fdv-above-one-day-after-launch",
 "easy": "Pacifica FDV above $500M one day after launch?",
@@ -286,6 +286,21 @@
 "event": "Printr FDV above ___ one day after launch?",
 "slug": "printr-fdv-above-one-day-after-launch",
 "easy": "Printr FDV above $500M one day after launch?",
+"hard": "Printr FDV above $1B one day after launch?",
+"easy_yes_ask": 0.049,
+"hard_no_ask": 0.931,
+"hard_yes_bid": 0.069,
+"cost": 0.98,
+"edge": 0.02,
+"edge_after_fee": 0.0122,
+"size_shares": 1.61,
+"usd_at_size": 1.58
+},
+{
+"kind": "ladder_num",
+"event": "Printr FDV above ___ one day after launch?",
+"slug": "printr-fdv-above-one-day-after-launch",
+"easy": "Printr FDV above $500M one day after launch?",
 "hard": "Printr FDV above $800M one day after launch?",
 "easy_yes_ask": 0.049,
 "hard_no_ask": 0.937,
@@ -295,28 +310,6 @@
 "edge_after_fee": 0.0066,
 "size_shares": 1.61,
 "usd_at_size": 1.59
-},
-{
-"kind": "negrisk_all_yes",
-"event": "Japan 10Y Bond Yield: End of 2026",
-"slug": "japan-10y-bond-yield-end-of-2026",
-"n": 7,
-"has_other": false,
-"outcomes": [
-"<2.0%",
-"2.0-2.2%",
-"2.2-2.4%",
-"2.4-2.6%",
-"2.6-2.8%",
-"2.8-3.0%",
-"3.0%+"
-],
-"cost": 0.997,
-"payoff": 1,
-"edge": 0.003,
-"edge_after_fee": -0.0531,
-"size_shares": 5.0,
-"usd_at_size": 4.99
 },
 {
 "kind": "ladder_num",
