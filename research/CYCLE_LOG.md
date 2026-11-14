@@ -267,3 +267,24 @@
 - LP-1: v1 numbers void (re-fill artifact + my manual fair values), restarted as v2. Told the user the 'unclaimed pools' claim was overstated.
 - New READY: N27 mention transcript model (the next thing to test - text is our comparative advantage), N28 bid for favourites.
 - Lessons 17-24 added. Next cycle: N27 feasibility (are transcripts reachable from Actions?), COPY-1 health, LP-1 v2.
+
+## 11-14 13:00-13:45 UTC cycle 12 (scheduled)
+- Read-outs (fast trades.jsonl, settled, last trade 12:03): lock_x 18 / 16 +9.2%, lock_p 39 / 35 +6.8% (34 end-times), lock_p_majors 13/13
+  +14.1%, lock_early 46 / 42 -3.0% (still 4 from its kill rule), lock_m 168 / 155 -1.4%, lock_b 36 / 33 -2.0% - no new lock signals since c11.
+  N21 forward: BTC/ETH 4 / 4 +7.8%, alts 12 / 11 -1.0% (1 day). N25 forward (price split): 4 trades >= 0.80, 4/4 +7.6%, 0 below 0.80.
+  Slow (12:04-12:09): converge 5 settled 4 won -$18 (non-sports 4/4 +2.8%), 88 open mark -$38; young 50 settled 20 won -$181 (end dates
+  11-16..30); options 19 settled 6 won -$114 / $190 (still ~2-3 BTC-move events); charts 2/2 +$3, 0 live; mention 2 open; box office out of
+  window. LP-1 v2 3 runs (0.08 d): formula $93 (upper bound), pessimistic fills -$44, 22 of 60 markets saw a competitor already.
+  COPY-1 (1.9 h): sharp 5 positions / 1 primary, control 7; sharp ask is +10.9c over the wallet's price (median, 217 s lag), only 20% pass
+  the +3c cap - the WEAK POINT shows from the first hours (price runs before we copy). Too early to judge; decision rule unchanged.
+- Test (N28 favourite bid, tape_favbid.py, local, raw mention + awards tapes): live-pegged bid on the 0.94-0.985 side, filled by the next
+  selling print: 140 fills / 63 events, +2.27 pts/share [-0.0, +3.7], 2 losses (both on a falling price, -97 pts each); Oct-Nov 125 fills
+  +3.65 / 0 losses, Aug-Sep 15 fills; >= 7 d before end -0.2. Same sign as the 6-week number but a tail bet on a calm sample (LESSONS 15)
+  -> not killed, not a result: N29 forward paper with the cancel-on-down rule pre-registered. Limits: only 2 of 6 raw tapes are in the repo.
+- New ideas: N29 (adjacent) favourite-bid forward paper; N30 (outside the box) Google Year in Search markets vs Google Trends (TRENDING rule
+  fine print; ~1 release a year, so census first and park if < 10 events).
+- Health: fast paper 12:03, slow 12:09, follow 12:47 (COPY-1 report 12:39, < 70 min), boosts 12:13, MM v2 13:00, books 13:00 - OK. Tracebacks only
+  the old combo-sampler crash in pilot-log and the old script-log smoke; no MemoryErrors. Pilot STOP, no orders.
+- Next: N29 needs every print, not the >= $FILTER feed follow_paper.py reads -> a small separate poller of /trades for live mention/awards
+  markets (next cycle); N27 transcript feasibility via Actions; box office window 14-02 UTC tonight; lock_early kill at 50; lock_p week 11-17;
+  LP-1 v2 48 h 11-16 ~10 UTC.

@@ -703,3 +703,9 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - Fast bot was down 06:58-09:03 (runner shutdown signal); restarted fast + slow paper. lock_p's +6.8% is 7 trades bought at 0.52-0.74; the
   >= 0.80 'locks' are +1.0% (lock_x -3.9%) -> N25 forward read-out. N26 TSA buckets: fav 0.80-0.90 +7..+11% on last prices, no live markets
   -> PARKED. W2 recount closed (dead). Next: lock_early kill, box office 14 UTC, lock_p week 11-17.
+
+## 11-14 13:40 cycle 12
+- N28 favourite bid replayed on the raw mention + awards tapes (tape_favbid.py): 140 fills / 63 events +2.3 pts/share [-0.0, +3.7], 2 losses
+  (both fills on a falling price); Oct-Nov 125 fills +3.65, Aug-Sep only 15. Tail-exposed -> N29 forward paper (pre-registered cancel-on-down,
+  1 h - 7 d). New N30 Google Year in Search vs Trends (outside the box, census first). COPY-1: sharp asks already +10.9c above the wallet's
+  price at ~3.6 min lag. Lock read-outs unchanged. Next: N29 peg in follow_paper.py, N27 transcript feasibility, box office tonight, lock_p 11-17.
