@@ -1,8 +1,8 @@
 {
-"scanned": "2026-11-14 06:44",
+"scanned": "2026-11-14 09:07",
 "events": 2100,
 "groups": 2037,
-"books": 16902,
+"books": 16864,
 "opps": [
 {
 "kind": "ladder_num",
@@ -34,12 +34,12 @@
 "1.5T+",
 "No IPO by December 31, 2027"
 ],
-"cost": 0.959,
+"cost": 0.961,
 "payoff": 1,
-"edge": 0.041,
-"edge_after_fee": -0.0117,
-"size_shares": 55.8,
-"usd_at_size": 53.51
+"edge": 0.039,
+"edge_after_fee": -0.0138,
+"size_shares": 30.0,
+"usd_at_size": 28.83
 },
 {
 "kind": "ladder_num",
@@ -53,8 +53,33 @@
 "cost": 0.994,
 "edge": 0.006,
 "edge_after_fee": 0.0034,
-"size_shares": 144.33,
-"usd_at_size": 143.46
+"size_shares": 149.33,
+"usd_at_size": 148.43
+},
+{
+"kind": "negrisk_all_yes",
+"event": "South Africa Annual Inflation 2026",
+"slug": "south-africa-annual-inflation-2026",
+"n": 10,
+"has_other": false,
+"outcomes": [
+"<2.6%",
+"2.6-2.9%",
+"2.9-3.2%",
+"3.2-3.5%",
+"3.5-3.8%",
+"3.8-4.1%",
+"4.1-4.4%",
+"4.4-4.7%",
+"4.7-5.0%",
+">5.0%"
+],
+"cost": 0.972,
+"payoff": 1,
+"edge": 0.028,
+"edge_after_fee": -0.0197,
+"size_shares": 26.06,
+"usd_at_size": 25.33
 },
 {
 "kind": "ladder_date",
@@ -70,6 +95,18 @@
 "edge_after_fee": 0.0446,
 "size_shares": 12.5,
 "usd_at_size": 11.83
+},
+{
+"kind": "negrisk_all_no",
+"event": "China Annual Inflation 2026",
+"slug": "china-annual-inflation-2026",
+"n": 9,
+"cost": 7.985,
+"payoff": 8,
+"edge": 0.015,
+"edge_after_fee": -0.0253,
+"size_shares": 40.0,
+"usd_at_size": 319.4
 },
 {
 "kind": "ladder_num",
@@ -88,6 +125,41 @@
 },
 {
 "kind": "ladder_num",
+"event": "Hyperbeat FDV above ___ one day after launch?",
+"slug": "hyperbeat-fdv-above-one-day-after-launch",
+"easy": "Hyperbeat FDV above $300M one day after launch?",
+"hard": "Hyperbeat FDV above $400M one day after launch?",
+"easy_yes_ask": 0.016,
+"hard_no_ask": 0.98,
+"hard_yes_bid": 0.02,
+"cost": 0.996,
+"edge": 0.004,
+"edge_after_fee": 0.0015,
+"size_shares": 112.65,
+"usd_at_size": 112.2
+},
+{
+"kind": "negrisk_all_yes",
+"event": "Maduro Prison Time?",
+"slug": "maduro-prison-time-527",
+"n": 5,
+"has_other": false,
+"outcomes": [
+"No prison time",
+"<20",
+"20\u201340",
+"40\u201360",
+"60+"
+],
+"cost": 0.965,
+"payoff": 1,
+"edge": 0.035,
+"edge_after_fee": 0.0011,
+"size_shares": 11.88,
+"usd_at_size": 11.46
+},
+{
+"kind": "ladder_num",
 "event": "StandX FDV above ___ one day after launch?",
 "slug": "standx-fdv-above-one-day-after-launch",
 "easy": "StandX FDV above $50M one day after launch?",
@@ -100,21 +172,6 @@
 "edge_after_fee": 0.0015,
 "size_shares": 90.71,
 "usd_at_size": 90.35
-},
-{
-"kind": "ladder_num",
-"event": "Hyperbeat FDV above ___ one day after launch?",
-"slug": "hyperbeat-fdv-above-one-day-after-launch",
-"easy": "Hyperbeat FDV above $300M one day after launch?",
-"hard": "Hyperbeat FDV above $400M one day after launch?",
-"easy_yes_ask": 0.016,
-"hard_no_ask": 0.98,
-"hard_yes_bid": 0.02,
-"cost": 0.996,
-"edge": 0.004,
-"edge_after_fee": 0.0015,
-"size_shares": 82.65,
-"usd_at_size": 82.32
 },
 {
 "kind": "ladder_num",
@@ -147,27 +204,19 @@
 "usd_at_size": 44.82
 },
 {
-"kind": "negrisk_all_yes",
-"event": "Discord IPO Closing Market Cap",
-"slug": "discord-ipo-closing-market-cap-20260626185933220",
-"n": 8,
-"has_other": false,
-"outcomes": [
-"<5B",
-"5\u20138B",
-"8\u201311B",
-"11\u201314B",
-"14\u201317B",
-"17\u201320B",
-"20B+",
-"No IPO by December 31, 2027"
-],
-"cost": 0.996,
-"payoff": 1,
-"edge": 0.004,
-"edge_after_fee": -0.011,
-"size_shares": 41.6,
-"usd_at_size": 41.43
+"kind": "ladder_num",
+"event": "Pacifica FDV above ___ one day after launch?",
+"slug": "pacifica-fdv-above-one-day-after-launch",
+"easy": "Pacifica FDV above $300M one day after launch?",
+"hard": "Pacifica FDV above $800M one day after launch?",
+"easy_yes_ask": 0.027,
+"hard_no_ask": 0.968,
+"hard_yes_bid": 0.032,
+"cost": 0.995,
+"edge": 0.005,
+"edge_after_fee": 0.001,
+"size_shares": 34.48,
+"usd_at_size": 34.31
 },
 {
 "kind": "ladder_num",
@@ -186,43 +235,48 @@
 },
 {
 "kind": "ladder_num",
+"event": "Pacifica FDV above ___ one day after launch?",
+"slug": "pacifica-fdv-above-one-day-after-launch",
+"easy": "Pacifica FDV above $500M one day after launch?",
+"hard": "Pacifica FDV above $800M one day after launch?",
+"easy_yes_ask": 0.027,
+"hard_no_ask": 0.968,
+"hard_yes_bid": 0.032,
+"cost": 0.995,
+"edge": 0.005,
+"edge_after_fee": 0.001,
+"size_shares": 13.4,
+"usd_at_size": 13.33
+},
+{
+"kind": "ladder_num",
+"event": "How high will inflation get in 2026?",
+"slug": "how-high-will-inflation-get-in-2026",
+"easy": "Will inflation reach more than 6% in 2026?",
+"hard": "Will inflation reach more than 8% in 2026?",
+"easy_yes_ask": 0.014,
+"hard_no_ask": 0.983,
+"hard_yes_bid": 0.017,
+"cost": 0.997,
+"edge": 0.003,
+"edge_after_fee": 0.0009,
+"size_shares": 12.11,
+"usd_at_size": 12.07
+},
+{
+"kind": "ladder_num",
 "event": "Printr FDV above ___ one day after launch?",
 "slug": "printr-fdv-above-one-day-after-launch",
 "easy": "Printr FDV above $500M one day after launch?",
 "hard": "Printr FDV above $1B one day after launch?",
 "easy_yes_ask": 0.049,
-"hard_no_ask": 0.932,
-"hard_yes_bid": 0.068,
-"cost": 0.981,
-"edge": 0.019,
-"edge_after_fee": 0.0113,
+"hard_no_ask": 0.936,
+"hard_yes_bid": 0.064,
+"cost": 0.985,
+"edge": 0.015,
+"edge_after_fee": 0.0075,
 "size_shares": 1.61,
-"usd_at_size": 1.58
-},
-{
-"kind": "negrisk_all_yes",
-"event": "Anthropic IPO Closing Market Cap",
-"slug": "anthropic-ipo-closing-market-cap-higher-strikes",
-"n": 10,
-"has_other": false,
-"outcomes": [
-"<$1.25T",
-"$1.25\u2013$1.5T",
-"$1.5\u2013$1.75T",
-"$1.75\u2013$2.0T",
-"$2.0\u2013$2.25T",
-"$2.25\u2013$2.5T",
-"$2.5\u2013$2.75T",
-"$2.75\u2013$3.0T",
-"$3.0T+",
-"No IPO by December 31, 2027"
-],
-"cost": 0.997,
-"payoff": 1,
-"edge": 0.003,
-"edge_after_fee": -0.0459,
-"size_shares": 10.0,
-"usd_at_size": 9.97
+"usd_at_size": 1.59
 },
 {
 "kind": "ladder_num",
@@ -238,36 +292,6 @@
 "edge_after_fee": 0.0066,
 "size_shares": 1.61,
 "usd_at_size": 1.59
-},
-{
-"kind": "ladder_num",
-"event": "Pacifica FDV above ___ one day after launch?",
-"slug": "pacifica-fdv-above-one-day-after-launch",
-"easy": "Pacifica FDV above $500M one day after launch?",
-"hard": "Pacifica FDV above $800M one day after launch?",
-"easy_yes_ask": 0.027,
-"hard_no_ask": 0.968,
-"hard_yes_bid": 0.032,
-"cost": 0.995,
-"edge": 0.005,
-"edge_after_fee": 0.001,
-"size_shares": 4.48,
-"usd_at_size": 4.46
-},
-{
-"kind": "ladder_num",
-"event": "Pacifica FDV above ___ one day after launch?",
-"slug": "pacifica-fdv-above-one-day-after-launch",
-"easy": "Pacifica FDV above $300M one day after launch?",
-"hard": "Pacifica FDV above $800M one day after launch?",
-"easy_yes_ask": 0.027,
-"hard_no_ask": 0.968,
-"hard_yes_bid": 0.032,
-"cost": 0.995,
-"edge": 0.005,
-"edge_after_fee": 0.001,
-"size_shares": 4.48,
-"usd_at_size": 4.46
 },
 {
 "kind": "ladder_num",
