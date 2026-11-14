@@ -29,12 +29,16 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -q requests
-      - name: Track for ~5.3 h, saving hourly
+      - name: Track for ~5.2 h (one process), saving every hour
         run: |
           git config user.name "polymarket-lab-bot"
           git config user.email "actions@users.noreply.github.com"
-          save() { mkdir -p logs && cp /tmp/bigfollow.txt logs/bigfollow-log.txt 2>/dev/null; git add --sparse data/bigfollow logs/bigfollow-log.txt; git commit -qm "Big-follow paper $(date -u +%FT%H:%M) [skip ci]" && for i in 1 2 3 4 5; do git pull -q --rebase -X theirs origin main && git push -q && break; sleep $((RANDOM % 10 + 3)); done; }
-          for part in 1 2 3 4 5; do RUN_MIN=62 python -u research/slow/big_follow_paper.py 2>&1 | tail -3 | tee /tmp/bigfollow.txt; save; done
+          save() { mkdir -p logs && tail -c 4000 /tmp/bigfollow.txt > logs/bigfollow-log.txt 2>/dev/null; git add --sparse data/bigfollow logs/bigfollow-log.txt; git commit -qm "Big-follow paper $(date -u +%FT%H:%M) [skip ci]" && for i in 1 2 3 4 5; do git pull -q --rebase -X theirs origin main && git push -q && break; sleep $((RANDOM % 10 + 3)); done; true; }
+          RUN_MIN=312 python -u research/slow/big_follow_paper.py > /tmp/bigfollow.txt 2>&1 &
+          PID=$!
+          for i in 1 2 3 4 5 6; do for s in $(seq 1 360); do sleep 10; kill -0 $PID 2>/dev/null || break 2; done; save; done
+          wait $PID || true
+          tail -c 1500 /tmp/bigfollow.txt; save
       - name: Hand over
         if: always()
         env:
