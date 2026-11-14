@@ -1,27 +1,117 @@
-GET /v2/positions/combos {'user': '0x2b9653d5e0a68b4867eacfa26cfa04c3802831b1', 'limit': 3, 'status': 'OPEN'} -> 200 rows 3 
-   statuses: Counter({'OPEN': 3}) sample: {"combo_condition_id": "0x035b79032bafa62c13bc57e5e112a819370000000000000000000000000000", "outcome_index": 1, "outcome_label": "No", "combo_position_id": "1518556825433120193304755037914681422817574468565252041621526687453387161601", "proxy_wallet": "0x2b9653d5e0a68b4867eacfa26cfa04c3802831b1", "current_size": 9.559534, "entry_avg_price_usdc": 0.699685, "entry_cost_usdc": 6.688662, "gross_entry_cost_usdc": 6.688664, "entry_fees_usdc": 0.0, "realized_payout_usdc": 0.0, "status": "OPEN", "redeema
-GET /v2/positions/combos {'user': '0x2b9653d5e0a68b4867eacfa26cfa04c3802831b1', 'limit': 3, 'status': 'REDEEMABLE'} -> 200 rows 0 {"data":[],"pagination":{"limit":3,"offset":0,"has_more":false,"next_cursor":null}}
-GET /v2/positions/combos {'user': '0x2b9653d5e0a68b4867eacfa26cfa04c3802831b1', 'limit': 3, 'status': 'RESOLVED_WIN'} -> 200 rows 3 
-   statuses: Counter({'RESOLVED_WIN': 3}) sample: {"combo_condition_id": "0x036e5be642339bbd7da5cea65c9f3ef0f20000000000000000000000000000", "outcome_index": 1, "outcome_label": "No", "combo_position_id": "1551925989552554525406524631410012461364349397156980564866259389517536428033", "proxy_wallet": "0x2b9653d5e0a68b4867eacfa26cfa04c3802831b1", "current_size": 0.0, "entry_avg_price_usdc": 0.730247, "entry_cost_usdc": 5088.004623, "gross_entry_cost_usdc": 5088.004625, "entry_fees_usdc": 0.0, "realized_payout_usdc": 6967.511847, "status": "RESOLV
-GET /v2/positions/combos {'user': '0x2b9653d5e0a68b4867eacfa26cfa04c3802831b1', 'limit': 3, 'status': 'RESOLVED_LOSS'} -> 200 rows 3 
-   statuses: Counter({'RESOLVED_LOSS': 3}) sample: {"combo_condition_id": "0x03f649721beeee1bf0a4df29fe2cbf24ce0000000000000000000000000000", "outcome_index": 1, "outcome_label": "No", "combo_position_id": "1792089827544239499375393742245961736106179476646663269265078630278664028161", "proxy_wallet": "0x2b9653d5e0a68b4867eacfa26cfa04c3802831b1", "current_size": 9.733511, "entry_avg_price_usdc": 0.387217, "entry_cost_usdc": 3.76898, "gross_entry_cost_usdc": 3.768982, "entry_fees_usdc": 0.0, "realized_payout_usdc": 0.0, "status": "RESOLVED_LOSS", 
-GET /v2/positions/combos {'user': '0x2b9653d5e0a68b4867eacfa26cfa04c3802831b1', 'limit': 3, 'status': 'RESOLVED'} -> 400 rows - {"error":"unknown combo position status: RESOLVED","code":"invalid_request","parameter":"status","retryable":false,"trace_id":"95232f30509340cba46b1789084a6223"}
-GET /v2/positions/combos {'user': '0x2b9653d5e0a68b4867eacfa26cfa04c3802831b1', 'limit': 3, 'status': 'REDEEMED'} -> 400 rows - {"error":"unknown combo position status: REDEEMED","code":"invalid_request","parameter":"status","retryable":false,"trace_id":"2164d9b499da44519837804c26c2693b"}
-GET /v2/positions/combos {'user': '0x2b9653d5e0a68b4867eacfa26cfa04c3802831b1', 'limit': 3, 'status': 'CLOSED'} -> 400 rows - {"error":"unknown combo position status: CLOSED","code":"invalid_request","parameter":"status","retryable":false,"trace_id":"2243cacabffa4d40832d3244a27245de"}
-GET /v2/positions/combos {'user': '0x2b9653d5e0a68b4867eacfa26cfa04c3802831b1', 'limit': 3, 'status': 'PARTIAL'} -> 200 rows 0 {"data":[],"pagination":{"limit":3,"offset":0,"has_more":false,"next_cursor":null}}
-GET /v2/positions/combos {'user': '0x2b9653d5e0a68b4867eacfa26cfa04c3802831b1', 'limit': 3, 'status': 'ALL'} -> 400 rows - {"error":"unknown combo position status: ALL","code":"invalid_request","parameter":"status","retryable":false,"trace_id":"59df6c4e24284f52bcf1cdc9e5e19567"}
-GET /v2/positions/combos {'user': '0x2b9653d5e0a68b4867eacfa26cfa04c3802831b1', 'limit': 3, 'status': 'WON'} -> 400 rows - {"error":"unknown combo position status: WON","code":"invalid_request","parameter":"status","retryable":false,"trace_id":"1805706e3d1b487f9a1d5ab2ee2e18a2"}
-GET /v2/positions/combos {'user': '0x2b9653d5e0a68b4867eacfa26cfa04c3802831b1', 'limit': 3, 'status': 'bogus'} -> 400 rows - {"error":"unknown combo position status: BOGUS","code":"invalid_request","parameter":"status","retryable":false,"trace_id":"08fc34bbefd343f4b6c53eb874991f00"}
-GET /v2/positions/combos {'user': '0x2b9653d5e0a68b4867eacfa26cfa04c3802831b1', 'limit': 3, 'size_threshold': 0} -> 200 rows 3 
-   statuses: Counter({'OPEN': 3})
-GET /v2/positions/combos {'user': '0x2b9653d5e0a68b4867eacfa26cfa04c3802831b1', 'limit': 3, 'sizeThreshold': 0} -> 200 rows 3 
-   statuses: Counter({'OPEN': 3})
-GET /v2/positions/combos {'user': '0x2b9653d5e0a68b4867eacfa26cfa04c3802831b1', 'limit': 3, 'include_dust': 'true'} -> 200 rows 3 
-   statuses: Counter({'OPEN': 3})
-GET /v2/positions/combos {'user': '0x2b9653d5e0a68b4867eacfa26cfa04c3802831b1', 'limit': 3, 'sort_by': 'bogus'} -> 400 rows - {"error":"sortBy must be one of FIRST_ENTRY, ENTRY_COST, CURRENT_VALUE, UPDATED: BOGUS","code":"invalid_request","parameter":"sort_by","retryable":false,"trace_id":"80a8236cb18842c0a8957cab57455fef"}
-GET /v2/activity/combos {'user': '0x2b9653d5e0a68b4867eacfa26cfa04c3802831b1', 'limit': 1000} -> 200 rows 1000 
-activity types: Counter({('SPLIT', None, None): 516, ('REDEEM', None, None): 484})
-   {"id": "0x19dcf424104a4909d40f9d766fe44f024c03c4823a164be68571e89f6c0385d6-519", "type": "SPLIT", "proxy_wallet": "0x2b9653d5e0a68b4867eacfa26cfa04c3802831b1", "combo_condition_id": "0x0312360a5e7ff474672d024aa908b51e0f0000000000000000000000000000", "combo_position_id": "1389114766769996455099179251456206751205241311340824477091587721278624104448", "amount_usdc": 14.246336, "payout_usdc": null, "block_number": 97295063, "timestamp": 1794648064, "transaction_hash": "0x19dcf424104a4909d40f9d766fe44f024c03c4823a164be68571e89f6c0385d6", "legs": [{"leg_index": 0, "leg_position_id": "1075082010549090408434672602557020922108327302559823961297186715754943217664", "leg_condition_id": "0x42cfd61e1eca82d444a9f0bf9d584161e58705132196c98acfb7ebe8038d08f6", "leg_outcome_index": 0, "leg_outcome_label": "Yes", "leg_status": "OPEN", "leg_resolved_at": null, "leg_current_price": 0.675, "market": {"market_
-   {"id": "0x67ce99e7a379f9e834d9a8fee2fe0a0353bb8e15940f199817f6002b7eefaab5-262", "type": "REDEEM", "proxy_wallet": "0x2b9653d5e0a68b4867eacfa26cfa04c3802831b1", "combo_condition_id": "0x0359d81efa93f71065cd5a50d4dd100c3a0000000000000000000000000000", "combo_position_id": "1515679546913324372997758123016750333177694865718136263408916652016636264449", "amount_usdc": null, "payout_usdc": 5465.239682, "block_number": 97289647, "timestamp": 1794639940, "transaction_hash": "0x67ce99e7a379f9e834d9a8fee2fe0a0353bb8e15940f199817f6002b7eefaab5", "legs": [{"leg_index": 0, "leg_position_id": "790807740090306547027746191044843220216752957334053966857512638175239995392", "leg_condition_id": "0xd2a03fad445e7a40ec8674bf35feb854bf94d155e6120d8b7336a58d8d6259cd", "leg_outcome_index": 0, "leg_outcome_label": "Yes", "leg_status": "RESOLVED_WIN", "leg_resolved_at": "2026-11-14T03:47:43Z", "leg_current_price"
-  time span of 1000 rows: 1794434529 1794648064
-GET /v2/activity {'user': '0x2b9653d5e0a68b4867eacfa26cfa04c3802831b1', 'limit': 3} -> 200 rows 3 
+   68: def list_trades_spec(
+   69:     *,
+   70:     user: str | None = None,
+   71:     condition_id: str | Sequence[str] | None = None,
+   72:     event_id: int | Sequence[int] | None = None,
+   73:     side: OrderSide | None = None,
+   74:     taker_only: bool | None = None,
+   75:     filter_type: TradeFilterType | None = None,
+   76:     filter_amount: float | None = None,
+   77:     start: int | datetime | None = None,
+   78:     end: int | datetime | None = None,
+   79:     full_history: bool = False,
+   80: ) -> KeysetPaginatedSpec[Trade]:
+   81:     if user is not None:
+   82:         _require_user(user)
+   83:     _check_enum("side", side, get_args(OrderSide))
+   84:     _check_enum("filter_type", filter_type, get_args(TradeFilterType))
+   85:     _check_selectors(condition_id, event_id)
+   86:     event_id = build_event_ids(event_id)
+   87:     condition_id = build_distinct_condition_ids(condition_id, grammar="feed")
+   88:     start, end = build_time_window(start=start, end=end, full_history=full_history)
+   89:     _check_nonnegative_amount("filter_amount", filter_amount)
+   90:     return KeysetPaginatedSpec(
+   91:         service="data",
+   92:         path="/v2/trades",
+   93:         base_params=build_data_params(
+   94:             {
+   95:                 "user": user,
+   96:                 "condition_id": condition_id,
+   97:                 "event_id": event_id,
+   98:                 "side": side,
+   99:                 "taker_only": taker_only,
+  100:                 "filter_type": filter_type,
+  101:                 "filter_amount": filter_amount,
+  102:                 "start": start,
+  103:                 "end": end,
+  104:             }
+  105:         ),
+  106:         parse_page=lambda payload: parse_data_page(payload, Trade.parse_response_list),
+  107:         cursor_param="cursor",
+  108:         max_page_size=1000,
+  109:         retry=DATA_READ_RETRY,
+  110:     )
+  111: 
+  112: 
+  113: def list_activity_spec(
+  114:     *,
+  115:     user: str,
+  116:     condition_id: str | Sequence[str] | None = None,
+  117:     event_id: int | Sequence[int] | None = None,
+  118:     activity_types: Sequence[ActivityTypeFilter] | None = None,
+  119:     side: OrderSide | None = None,
+  120:     sort_direction: SortDirection | None = None,
+  121:     start: int | datetime | None = None,
+  122:     end: int | datetime | None = None,
+  113: def list_activity_spec(
+  114:     *,
+  115:     user: str,
+  116:     condition_id: str | Sequence[str] | None = None,
+  117:     event_id: int | Sequence[int] | None = None,
+  118:     activity_types: Sequence[ActivityTypeFilter] | None = None,
+  119:     side: OrderSide | None = None,
+  120:     sort_direction: SortDirection | None = None,
+  121:     start: int | datetime | None = None,
+  122:     end: int | datetime | None = None,
+  123:     full_history: bool = False,
+  124: ) -> KeysetPaginatedSpec[Activity]:
+  125:     _check_enum("side", side, get_args(OrderSide))
+  126:     _check_enum("sort_direction", sort_direction, get_args(SortDirection))
+  127:     _require_user(user)
+  128:     _check_selectors(condition_id, event_id)
+  129:     event_id = build_event_ids(event_id)
+  130:     condition_id = build_distinct_condition_ids(condition_id, grammar="feed")
+  131:     start, end = build_time_window(start=start, end=end, full_history=full_history)
+  132:     if activity_types is not None:
+  133:         if isinstance(activity_types, str):
+  134:             raise UserInputError("activity_types must be a sequence of activity types")
+  135:         for value in activity_types:
+  136:             _check_enum("activity_types", value, ActivityType)
+  137:     return KeysetPaginatedSpec(
+  138:         service="data",
+  139:         path="/v2/activity",
+  140:         base_params=build_data_params(
+  141:             {
+  142:                 "user": user,
+  143:                 "condition_id": condition_id,
+  144:                 "event_id": event_id,
+  145:                 "type": activity_types,
+  146:                 "side": side,
+  147:                 "sort_direction": sort_direction,
+  148:                 "start": start,
+  149:                 "end": end,
+  150:                 "exclude_deposits_withdrawals": False,
+  151:             }
+  152:         ),
+  153:         parse_page=lambda payload: parse_data_page(payload, parse_activities),
+  154:         cursor_param="cursor",
+  155:         max_page_size=1000,
+  156:         retry=DATA_READ_RETRY,
+  157:     )
+  158: 
+  159: 
+  160: def list_combo_activity_spec(
+  161:     *,
+  162:     user: str,
+  163:     condition_id: str | Sequence[str] | None = None,
+  164: ) -> KeysetPaginatedSpec[ComboActivity]:
+  165:     _require_user(user)
+  166:     condition_id = build_distinct_condition_ids(condition_id, grammar="combo")
+  167:     return KeysetPaginatedSpec(
+GET /v2/trades {'limit': 20} -> 200 rows 20; usd sizes [2, 40, 215, 1, 11, 0, 10, 2, 10, 1, 5, 5]; age s [6, 6, 6, 6, 6, 6]; titles ['Bitcoin Up or Down - November ', 'Counter-Strike: Spirit vs MOUZ', 'Counter-Strike: Spirit vs MOUZ']; pagination {'limit': 20, 'offset': 0, 'has_more': True, 'next_cursor': 'eyJkYXRhIjp7InR5cGUiOiJ0cmFkZXMiLCJwYXJhbXMiOnsibCI6MjAsInRzIjoxNzk0NjQ5NjMwLCJzcSI6Ijk3Mjk2MTA3MDAwMzgwNjE1MCIsImQiOjIwfX0sInNpZyI6IjZhODFkYjlhZDc5NWRmZDgxOWUyNjA1YWQ0MWMyYmNjIn0'}
+GET /v2/trades {'limit': 20, 'filter_type': 'CASH', 'filter_amount': 1000} -> 200 rows 20; usd sizes [2987, 2000, 1161, 1056, 1000, 1155, 1580, 3556, 2787, 1513, 2139, 4749]; age s [25, 28, 37, 37, 58, 106]; titles ['Counter-Strike: Spirit vs MOUZ', 'Will Brazil win on 2026-11-14?', 'Spread: Norway (-1.5)']; pagination {'limit': 20, 'offset': 0, 'has_more': True, 'next_cursor': 'eyJkYXRhIjp7InR5cGUiOiJ0cmFkZXMiLCJwYXJhbXMiOnsibCI6MjAsInRzIjoxNzk0NjQ5MzU4LCJzcSI6Ijk3Mjk1OTI2MDAwMjkwMjczMCIsImQiOjIwfX0sInNpZyI6IjFjODA4ZjNlOTE3ZDhlNmFlZmFmNGIxYWMxZDlmYjNjIn0'}
+GET /v2/trades {'limit': 20, 'filterType': 'CASH', 'filterAmount': 1000} -> 200 rows 20; usd sizes [2987, 2000, 1161, 1056, 1000, 1155, 1580, 3556, 2787, 1513, 2139, 4749]; age s [25, 28, 37, 37, 58, 106]; titles ['Counter-Strike: Spirit vs MOUZ', 'Will Brazil win on 2026-11-14?', 'Spread: Norway (-1.5)']; pagination {'limit': 20, 'offset': 0, 'has_more': True, 'next_cursor': 'eyJkYXRhIjp7InR5cGUiOiJ0cmFkZXMiLCJwYXJhbXMiOnsibCI6MjAsInRzIjoxNzk0NjQ5MzU4LCJzcSI6Ijk3Mjk1OTI2MDAwMjkwMjczMCIsImQiOjIwfX0sInNpZyI6IjFjODA4ZjNlOTE3ZDhlNmFlZmFmNGIxYWMxZDlmYjNjIn0'}
+GET /v2/trades {'limit': 20, 'min_usdc_size': 1000} -> 200 rows 20; usd sizes [2, 40, 215, 1, 11, 0, 10, 2, 10, 1, 5, 5]; age s [6, 6, 6, 6, 6, 6]; titles ['Bitcoin Up or Down - November ', 'Counter-Strike: Spirit vs MOUZ', 'Counter-Strike: Spirit vs MOUZ']; pagination {'limit': 20, 'offset': 0, 'has_more': True, 'next_cursor': 'eyJkYXRhIjp7InR5cGUiOiJ0cmFkZXMiLCJwYXJhbXMiOnsibCI6MjAsInRzIjoxNzk0NjQ5NjMwLCJzcSI6Ijk3Mjk2MTA3MDAwMzgwNjE1MCIsImQiOjIwfX0sInNpZyI6IjZhODFkYjlhZDc5NWRmZDgxOWUyNjA1YWQ0MWMyYmNjIn0'}
+GET /v2/trades {'limit': 20, 'user': '0x2b9653d5e0a68b4867eacfa26cfa04c3802831b1'} -> 200 rows 0; usd sizes []; age s []; titles []; pagination {'limit': 20, 'offset': 0, 'has_more': False, 'next_cursor': None}
+GET /v2/trades {'limit': 20, 'event_slug': 'what-will-trump-say-during-60-minutes-extended-interview'} -> 200 rows 20; usd sizes [323, 1, 2, 500, 10, 0, 2, 9, 1, 16, 29, 30]; age s [1, 1, 1, 1, 1, 1]; titles ['Will Bitcoin reach $72,000 Nov', 'Bitcoin Up or Down - November ', 'Bitcoin Up or Down - November ']; pagination {'limit': 20, 'offset': 0, 'has_more': True, 'next_cursor': 'eyJkYXRhIjp7InR5cGUiOiJ0cmFkZXMiLCJwYXJhbXMiOnsibCI6MjAsInRzIjoxNzk0NjQ5NjM0LCJzcSI6Ijk3Mjk2MTEwMDAwNDYwNTAzMCIsImQiOjIwfX0sInNpZyI6ImM3M2I4NDM5ZmI1ZTdjY2RmZGFlMTYyN2QxYTgxNWE3In0'}
+GET /v2/trades {'limit': 20, 'taker_only': 'true', 'side': 'BUY', 'filter_type': 'CASH', 'filter_amount': 2000} -> 200 rows 20; usd sizes [2987, 2787, 4749, 6426, 3135, 3511, 3361, 2461, 2087, 7913, 3880, 3176]; age s [25, 169, 249, 253, 268, 273]; titles ['Counter-Strike: Spirit vs MOUZ', 'Japan vs. Brazil: O/U 3.5', 'WTA Finals, Final Stage: Linda']; pagination {'limit': 20, 'offset': 0, 'has_more': True, 'next_cursor': 'eyJkYXRhIjp7InR5cGUiOiJ0cmFkZXMiLCJwYXJhbXMiOnsibCI6MjAsInRzIjoxNzk0NjQ5MDQ4LCJzcSI6Ijk3Mjk1NzE5MDAwMzIwNTA3MCIsImQiOjIwfX0sInNpZyI6ImI1NzAyOWE2YWU3NDY0ZDVlNzAyYTJhOGZiMjc0ZDAwIn0'}
