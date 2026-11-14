@@ -1,5 +1,5 @@
 {
-"scanned": "2026-11-14 23:08",
+"scanned": "2026-11-14 23:13",
 "events": 2100,
 "groups": 2037,
 "books": 16848,
@@ -91,21 +91,6 @@
 },
 {
 "kind": "ladder_num",
-"event": "StandX FDV above ___ one day after launch?",
-"slug": "standx-fdv-above-one-day-after-launch",
-"easy": "StandX FDV above $50M one day after launch?",
-"hard": "StandX FDV above $400M one day after launch?",
-"easy_yes_ask": 0.016,
-"hard_no_ask": 0.98,
-"hard_yes_bid": 0.02,
-"cost": 0.996,
-"edge": 0.004,
-"edge_after_fee": 0.0015,
-"size_shares": 130.81,
-"usd_at_size": 130.29
-},
-{
-"kind": "ladder_num",
 "event": "Hyperbeat FDV above ___ one day after launch?",
 "slug": "hyperbeat-fdv-above-one-day-after-launch",
 "easy": "Hyperbeat FDV above $300M one day after launch?",
@@ -134,12 +119,27 @@
 "2.8-3.0%",
 "3.0%+"
 ],
-"cost": 0.976,
+"cost": 0.97,
 "payoff": 1,
-"edge": 0.024,
-"edge_after_fee": -0.0309,
+"edge": 0.03,
+"edge_after_fee": -0.0246,
 "size_shares": 10.6,
-"usd_at_size": 10.35
+"usd_at_size": 10.28
+},
+{
+"kind": "ladder_num",
+"event": "StandX FDV above ___ one day after launch?",
+"slug": "standx-fdv-above-one-day-after-launch",
+"easy": "StandX FDV above $50M one day after launch?",
+"hard": "StandX FDV above $400M one day after launch?",
+"easy_yes_ask": 0.016,
+"hard_no_ask": 0.979,
+"hard_yes_bid": 0.021,
+"cost": 0.995,
+"edge": 0.005,
+"edge_after_fee": 0.0025,
+"size_shares": 60.71,
+"usd_at_size": 60.41
 },
 {
 "kind": "ladder_num",
