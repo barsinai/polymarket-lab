@@ -49,44 +49,74 @@ for p in pos:
         p.update(resolved=True, y=y, won=int(win), pnl=round(p["shares"] * (1 if win else 0) - STAKE, 2), settled=now.strftime("%Y-%m-%d %H:%M"))
 
 in_window = (now.weekday() == 5 and now.hour >= 14) or (now.weekday() == 6 and now.hour < 2) or os.environ.get("FORCE") == "1"
-n_new = 0; seen = 0
-if in_window:
-    off = 0
-    while off < 4000:
-        page = get(f"{GAMMA}/markets", {"active": "true", "closed": "false", "limit": 100, "offset": off,
-                   "end_date_min": now.strftime("%Y-%m-%dT%H:%M:%SZ"), "end_date_max": (now + dt.timedelta(days=4)).strftime("%Y-%m-%dT%H:%M:%SZ")})
-        if not page:
-            break
-        off += 100
-        for m in page:
-            q = m.get("question") or ""
-            if "box office" not in q.lower() or m["id"] in held:
-                continue
-            try:
-                toks = json.loads(m.get("clobTokenIds") or "[]")
-            except ValueError:
-                continue
-            if len(toks) != 2:
-                continue
-            seen += 1
-            for side, tok in (("YES", toks[0]), ("NO", toks[1])):
-                book = get(f"{CLOB}/book", {"token_id": tok})
-                ask, size = best(book, "asks"); bid, _ = best(book, "bids")
-                if ask is None or not (LO <= ask <= HI) or ask * size < STAKE:
-                    continue
-                pos.append({"id": m["id"], "question": q, "side": side, "ask": ask, "ask_size": size, "bid": bid,
-                            "spread": round(ask - bid, 4) if bid else None, "shares": round(STAKE / ask, 2), "stake": STAKE,
-                            "end": m.get("endDate"), "opened": now.strftime("%Y-%m-%d %H:%M"), "resolved": False})
-                held.add(m["id"]); n_new += 1
+def candidates():
+    """11-14 c13 fix: the old loop paged every market ending in 4 days with a 4,000 offset cap; up/down crypto markets fill that
+    window, so on the first live Saturday it saw 0 box-office markets while LP-1 was quoting 'Ebenezer Opening Weekend'.
+    Now: text search + event listings first (few calls), the paged scan only as a fallback. Returns {market id: market}."""
+    out = {}; srcs = {}
+    def add(ms, src):
+        for m in ms or []:
+            if "box office" in (m.get("question") or "").lower() and not m.get("closed"):
+                out.setdefault(str(m["id"]), m); srcs[src] = srcs.get(src, 0) + 1
+    for q in ("box office", "opening weekend"):
+        r = get(f"{GAMMA}/public-search", {"q": q, "events_status": "active", "limit_per_type": 50})
+        for e in (r or {}).get("events", []) or []:
+            ms = e.get("markets")
+            if not ms and e.get("id"):
+                ms = (get(f"{GAMMA}/events/{e['id']}") or {}).get("markets")
+            add(ms, "search")
+    for tag in ("box-office", "movies"):
+        for e in get(f"{GAMMA}/events", {"tag_slug": tag, "active": "true", "closed": "false", "limit": 100}) or []:
+            add(e.get("markets"), "tag")
+    if not out:
+        off = 0
+        while off < 20000:
+            page = get(f"{GAMMA}/markets", {"active": "true", "closed": "false", "limit": 100, "offset": off,
+                       "end_date_min": now.strftime("%Y-%m-%dT%H:%M:%SZ"), "end_date_max": (now + dt.timedelta(days=6)).strftime("%Y-%m-%dT%H:%M:%SZ")})
+            if not page:
                 break
-        if len(page) < 100:
+            add(page, "paged"); off += 100
+            if len(page) < 100:
+                break
+    return out, srcs
+
+
+n_new = 0; seen = 0; sources = {}
+if in_window:
+    cands, sources = candidates()
+    for mid, m in cands.items():
+        q = m.get("question") or ""
+        end = m.get("endDate") or ""
+        try:
+            if dt.datetime.fromisoformat(end.replace("Z", "+00:00")) > now + dt.timedelta(days=6):
+                continue
+        except ValueError:
+            pass
+        if m["id"] in held:
+            continue
+        try:
+            toks = json.loads(m.get("clobTokenIds") or "[]")
+        except (ValueError, TypeError):
+            continue
+        if len(toks) != 2:
+            continue
+        seen += 1
+        for side, tok in (("YES", toks[0]), ("NO", toks[1])):
+            book = get(f"{CLOB}/book", {"token_id": tok})
+            ask, size = best(book, "asks"); bid, _ = best(book, "bids")
+            if ask is None or not (LO <= ask <= HI) or ask * size < STAKE:
+                continue
+            pos.append({"id": m["id"], "question": q, "side": side, "ask": ask, "ask_size": size, "bid": bid,
+                        "spread": round(ask - bid, 4) if bid else None, "shares": round(STAKE / ask, 2), "stake": STAKE,
+                        "end": m.get("endDate"), "opened": now.strftime("%Y-%m-%d %H:%M"), "resolved": False})
+            held.add(m["id"]); n_new += 1
             break
 with open(POS, "w") as fh:
     for p in pos:
         fh.write(json.dumps(p, ensure_ascii=False) + "\n")
 done = [p for p in pos if p.get("resolved")]
 sp = [p["spread"] for p in pos if p.get("spread") is not None]
-rep = {"updated": now.strftime("%Y-%m-%d %H:%M"), "in_window": in_window, "box_office_markets_seen": seen, "new": n_new,
+rep = {"updated": now.strftime("%Y-%m-%d %H:%M"), "in_window": in_window, "box_office_markets_seen": seen, "sources": sources, "new": n_new,
        "open": len(pos) - len(done), "settled": len(done), "won": sum(p["won"] for p in done), "pnl": round(sum(p["pnl"] for p in done), 2),
        "staked_settled": STAKE * len(done), "median_spread": sorted(sp)[len(sp) // 2] if sp else None,
        "weekends": len({p["opened"][:10] for p in pos})}
