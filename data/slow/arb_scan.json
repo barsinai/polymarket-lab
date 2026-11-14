@@ -1,5 +1,5 @@
 {
-"scanned": "2026-11-14 09:07",
+"scanned": "2026-11-14 10:06",
 "events": 2100,
 "groups": 2037,
 "books": 16864,
@@ -34,12 +34,12 @@
 "1.5T+",
 "No IPO by December 31, 2027"
 ],
-"cost": 0.961,
+"cost": 0.96,
 "payoff": 1,
-"edge": 0.039,
-"edge_after_fee": -0.0138,
+"edge": 0.04,
+"edge_after_fee": -0.0128,
 "size_shares": 30.0,
-"usd_at_size": 28.83
+"usd_at_size": 28.8
 },
 {
 "kind": "ladder_num",
@@ -55,31 +55,6 @@
 "edge_after_fee": 0.0034,
 "size_shares": 149.33,
 "usd_at_size": 148.43
-},
-{
-"kind": "negrisk_all_yes",
-"event": "South Africa Annual Inflation 2026",
-"slug": "south-africa-annual-inflation-2026",
-"n": 10,
-"has_other": false,
-"outcomes": [
-"<2.6%",
-"2.6-2.9%",
-"2.9-3.2%",
-"3.2-3.5%",
-"3.5-3.8%",
-"3.8-4.1%",
-"4.1-4.4%",
-"4.4-4.7%",
-"4.7-5.0%",
-">5.0%"
-],
-"cost": 0.972,
-"payoff": 1,
-"edge": 0.028,
-"edge_after_fee": -0.0197,
-"size_shares": 26.06,
-"usd_at_size": 25.33
 },
 {
 "kind": "ladder_date",
@@ -109,19 +84,49 @@
 "usd_at_size": 319.4
 },
 {
-"kind": "ladder_num",
-"event": "Reya FDV above ___ one day after launch?",
-"slug": "reya-fdv-above-one-day-after-launch",
-"easy": "Reya FDV above $300M one day after launch?",
-"hard": "Reya FDV above $400M one day after launch?",
-"easy_yes_ask": 0.048,
-"hard_no_ask": 0.948,
-"hard_yes_bid": 0.052,
-"cost": 0.996,
-"edge": 0.004,
-"edge_after_fee": -0.0026,
-"size_shares": 128.97,
-"usd_at_size": 128.45
+"kind": "negrisk_all_yes",
+"event": "Maduro Prison Time?",
+"slug": "maduro-prison-time-527",
+"n": 5,
+"has_other": false,
+"outcomes": [
+"No prison time",
+"<20",
+"20\u201340",
+"40\u201360",
+"60+"
+],
+"cost": 0.954,
+"payoff": 1,
+"edge": 0.046,
+"edge_after_fee": 0.0128,
+"size_shares": 11.88,
+"usd_at_size": 11.33
+},
+{
+"kind": "negrisk_all_yes",
+"event": "South Africa Annual Inflation 2026",
+"slug": "south-africa-annual-inflation-2026",
+"n": 10,
+"has_other": false,
+"outcomes": [
+"<2.6%",
+"2.6-2.9%",
+"2.9-3.2%",
+"3.2-3.5%",
+"3.5-3.8%",
+"3.8-4.1%",
+"4.1-4.4%",
+"4.4-4.7%",
+"4.7-5.0%",
+">5.0%"
+],
+"cost": 0.953,
+"payoff": 1,
+"edge": 0.047,
+"edge_after_fee": -0.0004,
+"size_shares": 10.67,
+"usd_at_size": 10.17
 },
 {
 "kind": "ladder_num",
@@ -139,24 +144,19 @@
 "usd_at_size": 112.2
 },
 {
-"kind": "negrisk_all_yes",
-"event": "Maduro Prison Time?",
-"slug": "maduro-prison-time-527",
-"n": 5,
-"has_other": false,
-"outcomes": [
-"No prison time",
-"<20",
-"20\u201340",
-"40\u201360",
-"60+"
-],
-"cost": 0.965,
-"payoff": 1,
-"edge": 0.035,
-"edge_after_fee": 0.0011,
-"size_shares": 11.88,
-"usd_at_size": 11.46
+"kind": "ladder_num",
+"event": "Reya FDV above ___ one day after launch?",
+"slug": "reya-fdv-above-one-day-after-launch",
+"easy": "Reya FDV above $300M one day after launch?",
+"hard": "Reya FDV above $400M one day after launch?",
+"easy_yes_ask": 0.048,
+"hard_no_ask": 0.948,
+"hard_yes_bid": 0.052,
+"cost": 0.996,
+"edge": 0.004,
+"edge_after_fee": -0.0026,
+"size_shares": 98.97,
+"usd_at_size": 98.57
 },
 {
 "kind": "ladder_num",
@@ -187,6 +187,29 @@
 "edge_after_fee": 0.003,
 "size_shares": 30.0,
 "usd_at_size": 29.79
+},
+{
+"kind": "negrisk_all_yes",
+"event": "Mexico Annual Inflation 2026",
+"slug": "mexico-annual-inflation-2026",
+"n": 8,
+"has_other": false,
+"outcomes": [
+"<2.50%",
+"2.50% to 2.99%",
+"3.00% to 3.49%",
+"3.50% to 3.99%",
+"4.00% to 4.49%",
+"4.50% to 4.99%",
+"5.00% to 5.49%",
+"5.50%+"
+],
+"cost": 0.964,
+"payoff": 1,
+"edge": 0.036,
+"edge_after_fee": -0.007,
+"size_shares": 5.0,
+"usd_at_size": 4.82
 },
 {
 "kind": "ladder_date",
@@ -250,21 +273,6 @@
 },
 {
 "kind": "ladder_num",
-"event": "How high will inflation get in 2026?",
-"slug": "how-high-will-inflation-get-in-2026",
-"easy": "Will inflation reach more than 6% in 2026?",
-"hard": "Will inflation reach more than 8% in 2026?",
-"easy_yes_ask": 0.014,
-"hard_no_ask": 0.983,
-"hard_yes_bid": 0.017,
-"cost": 0.997,
-"edge": 0.003,
-"edge_after_fee": 0.0009,
-"size_shares": 12.11,
-"usd_at_size": 12.07
-},
-{
-"kind": "ladder_num",
 "event": "Printr FDV above ___ one day after launch?",
 "slug": "printr-fdv-above-one-day-after-launch",
 "easy": "Printr FDV above $500M one day after launch?",
@@ -307,6 +315,21 @@
 "edge_after_fee": -0.0021,
 "size_shares": 2.23,
 "usd_at_size": 2.22
+},
+{
+"kind": "ladder_num",
+"event": "Tuyo FDV above ___ one day after launch?",
+"slug": "tuyo-fdv-above-one-day-after-launch",
+"easy": "Tuyo FDV above $300M one day after launch?",
+"hard": "Tuyo FDV above $500M one day after launch?",
+"easy_yes_ask": 0.19,
+"hard_no_ask": 0.77,
+"hard_yes_bid": 0.23,
+"cost": 0.96,
+"edge": 0.04,
+"edge_after_fee": 0.0168,
+"size_shares": 0.04,
+"usd_at_size": 0.04
 }
 ]
 }
