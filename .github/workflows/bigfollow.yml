@@ -1,0 +1,42 @@
+name: Big-order follow paper tracker (no orders, chained)
+
+# Paper only: reads the public trade feed and public order books, places nothing and uses no account or key.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "41 */6 * * *"
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: bigfollow
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout: |
+            research
+            data/bigfollow
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q requests
+      - name: Track for ~5.3 h, saving hourly
+        run: |
+          git config user.name "polymarket-lab-bot"
+          git config user.email "actions@users.noreply.github.com"
+          save() { mkdir -p logs && cp /tmp/bigfollow.txt logs/bigfollow-log.txt 2>/dev/null; git add --sparse data/bigfollow logs/bigfollow-log.txt; git commit -qm "Big-follow paper $(date -u +%FT%H:%M) [skip ci]" && for i in 1 2 3 4 5; do git pull -q --rebase -X theirs origin main && git push -q && break; sleep $((RANDOM % 10 + 3)); done; }
+          for part in 1 2 3 4 5; do RUN_MIN=62 python -u research/slow/big_follow_paper.py 2>&1 | tail -3 | tee /tmp/bigfollow.txt; save; done
+      - name: Hand over
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run bigfollow.yml --ref main -R ${{ github.repository }}
