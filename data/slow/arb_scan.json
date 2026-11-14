@@ -1,5 +1,5 @@
 {
-"scanned": "2026-11-14 13:08",
+"scanned": "2026-11-14 14:09",
 "events": 2100,
 "groups": 2037,
 "books": 16862,
@@ -18,21 +18,6 @@
 "edge_after_fee": 0.0013,
 "size_shares": 1647.14,
 "usd_at_size": 1640.55
-},
-{
-"kind": "ladder_num",
-"event": "Ostium FDV above ___ one day after launch?",
-"slug": "ostium-fdv-above-one-day-after-launch",
-"easy": "Ostium FDV above $50M one day after launch?",
-"hard": "Ostium FDV above $100M one day after launch?",
-"easy_yes_ask": 0.026,
-"hard_no_ask": 0.965,
-"hard_yes_bid": 0.035,
-"cost": 0.991,
-"edge": 0.009,
-"edge_after_fee": 0.0049,
-"size_shares": 130.0,
-"usd_at_size": 128.83
 },
 {
 "kind": "negrisk_all_yes",
@@ -90,6 +75,21 @@
 "usd_at_size": 11.83
 },
 {
+"kind": "ladder_num",
+"event": "Pacifica FDV above ___ one day after launch?",
+"slug": "pacifica-fdv-above-one-day-after-launch",
+"easy": "Pacifica FDV above $1B one day after launch?",
+"hard": "Pacifica FDV above $3B one day after launch?",
+"easy_yes_ask": 0.006,
+"hard_no_ask": 0.989,
+"hard_yes_bid": 0.011,
+"cost": 0.995,
+"edge": 0.005,
+"edge_after_fee": 0.0038,
+"size_shares": 121.1,
+"usd_at_size": 120.49
+},
+{
 "kind": "negrisk_all_no",
 "event": "China Annual Inflation 2026",
 "slug": "china-annual-inflation-2026",
@@ -100,6 +100,36 @@
 "edge_after_fee": -0.0262,
 "size_shares": 40.0,
 "usd_at_size": 319.44
+},
+{
+"kind": "ladder_num",
+"event": "Extended FDV above ___ one day after launch?",
+"slug": "extended-fdv-above-one-day-after-launch",
+"easy": "Extended FDV above $800M one day after launch?",
+"hard": "Extended FDV above $1B one day after launch?",
+"easy_yes_ask": 0.026,
+"hard_no_ask": 0.97,
+"hard_yes_bid": 0.03,
+"cost": 0.996,
+"edge": 0.004,
+"edge_after_fee": 0.0002,
+"size_shares": 134.0,
+"usd_at_size": 133.46
+},
+{
+"kind": "ladder_num",
+"event": "StandX FDV above ___ one day after launch?",
+"slug": "standx-fdv-above-one-day-after-launch",
+"easy": "StandX FDV above $50M one day after launch?",
+"hard": "StandX FDV above $400M one day after launch?",
+"easy_yes_ask": 0.016,
+"hard_no_ask": 0.98,
+"hard_yes_bid": 0.02,
+"cost": 0.996,
+"edge": 0.004,
+"edge_after_fee": 0.0015,
+"size_shares": 130.81,
+"usd_at_size": 130.29
 },
 {
 "kind": "ladder_num",
@@ -130,21 +160,6 @@
 "edge_after_fee": 0.0015,
 "size_shares": 112.65,
 "usd_at_size": 112.2
-},
-{
-"kind": "ladder_num",
-"event": "StandX FDV above ___ one day after launch?",
-"slug": "standx-fdv-above-one-day-after-launch",
-"easy": "StandX FDV above $50M one day after launch?",
-"hard": "StandX FDV above $400M one day after launch?",
-"easy_yes_ask": 0.016,
-"hard_no_ask": 0.98,
-"hard_yes_bid": 0.02,
-"cost": 0.996,
-"edge": 0.004,
-"edge_after_fee": 0.0015,
-"size_shares": 60.71,
-"usd_at_size": 60.47
 },
 {
 "kind": "ladder_date",
@@ -192,6 +207,28 @@
 "usd_at_size": 35.42
 },
 {
+"kind": "negrisk_all_yes",
+"event": "Japan 10Y Bond Yield: End of 2026",
+"slug": "japan-10y-bond-yield-end-of-2026",
+"n": 7,
+"has_other": false,
+"outcomes": [
+"<2.0%",
+"2.0-2.2%",
+"2.2-2.4%",
+"2.4-2.6%",
+"2.6-2.8%",
+"2.8-3.0%",
+"3.0%+"
+],
+"cost": 0.983,
+"payoff": 1,
+"edge": 0.017,
+"edge_after_fee": -0.0384,
+"size_shares": 5.0,
+"usd_at_size": 4.92
+},
+{
 "kind": "ladder_num",
 "event": "Pacifica FDV above ___ one day after launch?",
 "slug": "pacifica-fdv-above-one-day-after-launch",
@@ -213,13 +250,13 @@
 "easy": "Printr FDV above $500M one day after launch?",
 "hard": "Printr FDV above $1B one day after launch?",
 "easy_yes_ask": 0.049,
-"hard_no_ask": 0.936,
-"hard_yes_bid": 0.064,
-"cost": 0.985,
-"edge": 0.015,
-"edge_after_fee": 0.0075,
+"hard_no_ask": 0.935,
+"hard_yes_bid": 0.065,
+"cost": 0.984,
+"edge": 0.016,
+"edge_after_fee": 0.0085,
 "size_shares": 1.61,
-"usd_at_size": 1.59
+"usd_at_size": 1.58
 },
 {
 "kind": "ladder_num",
