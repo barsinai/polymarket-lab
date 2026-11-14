@@ -26,6 +26,8 @@ Goal: keep finding, testing and killing ideas on our own recorded data without b
    executable prices + fees, receive-time ordering, count independent events. If promising -> add a paper tracker
    (TESTING row). Keep 3+ ideas in TESTING.
 5. **Health**: last fast/slow paper publishes, Tracebacks/MemoryErrors in logs/*.txt. Fix small breakages; note big ones.
+   Also the hosted chained trackers: boosts.yml and follow.yml (COPY-1: data/follow/report.json 'updated' within ~70 min, logs/follow-log.txt);
+   re-dispatch with `gh workflow run <file> --ref main` if the chain stopped.
 6. **Write** a CYCLE_LOG.md entry (date, read-outs, ideas, test result, next), update IDEAS/QUEUE, commit, push.
 7. **Report** to the user in Hebrew, short and plain: what was tested, the number, what died, what's next. Say clearly
    when nothing works. Never ask for live trading; if something survives paper for a week with 30+ independent events,

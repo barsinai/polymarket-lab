@@ -56,9 +56,46 @@ survives them. Add a lesson whenever an idea dies for a reason not already here.
     where every game clears the bar the market is calibrated. Select by what was knowable at the entry time, or use leagues/markets
     that all pass the bar.
 
+17. **On Polymarket the passive side pays the informed side** (11-14, public trade tape: 5.5M taker trades, 49k markets, 12 weeks).
+    Taker entries under $10 lose 1.3 points per share [-1.5, -1.2], $200-1,000 win +1.2 [+0.6, +1.9]; taker P&L after fees is
+    +2.7% of cost in mention [+1.4, +4.0], +3.7% movies, +1.6% youtube, +0.2% weather, -1.6% politics. Makers earn the spread from
+    small orders and give it back, and more, to the few who know something. 'Be the house' (resting quotes, reward farming, combo
+    quoting) is the losing seat unless the reward is larger than that loss - the opposite of Kalshi. Matches our pilot and 6 paper MMs.
+
+18. **A default listing can hide the winners.** The combo positions endpoint returns OPEN + RESOLVED_LOSS unless each status is
+    asked for; every wallet looked like -100%. Before reading any wallet table, check that both sides of the book add up to about
+    minus the fees.
+
+19. **Per-$ returns are a long-shot lottery; measure edge in price points per share** (win - price - fee), clustered by event.
+    'Follow sharp wallets' was +9.6% per $ and -1.4 points per entry on the same trades.
+
+20. **Never set a 'fair value' from priors without reading the news.** LP-1 v1: I put Jensen Huang -> SpaceX at 1% while a November
+    story had the market bidding 10-21c; the paper MM then 'earned' +$437 from that and from hourly re-fills against the same
+    resting bids (no inventory cap).
+
+21. **One snapshot is not persistence.** 'Reward pools nobody quotes' came from one screen and a 2-h recheck; in the paper run 98
+    of 127 quoted markets had a competitor inside the band within 15 h. Measure 'unclaimed' as a duration over days.
+
+22. **A bootstrap interval does not protect a rule found by looking.** 'Trades >= $1,000 win +6.4 points [3.2, 9.9]' (61 events,
+    a hash SAMPLE of 6 categories, threshold and categories chosen after seeing the table) became -1.3 [-3.9, +1.2] on ALL events
+    of the same six weeks and -1.7 [-5.8, +1.6] on 13,002 orders / 968 events. Heavy-tailed event sums make the interval too narrow
+    and the forking paths are not in it. Before building: all events, a second period, and categories never looked at.
+
+23. **The weighting decides the sign - simulate the fill, not the average.** Same tape, takers buying favourites at 0.95-0.98:
+    per market side the maker who sold to them earned +1.8 points; per print he lost 1.5; a resting bid pegged to the last print
+    lost 1.8 [-2.6, -0.8]; a live-pegged bid got -0.1 [-1.0, +0.9]. Choose the unit by how the strategy would really be filled
+    (one fill per market, at the price that existed when we could act) and replay the sequence.
+
+24. **An edge that is in one half and not in the other is gone.** Mention markets, buy NO at <= 0.50 at the first real fill:
+    +16.9 points [13.2, 21.0] in Aug 17 - Sep 30, +0.8 [-3.0, +4.2] in Oct - Nov. The 12-week average (+9.3 [6.4, 12.3]) would have
+    looked like a discovery. Always print the halves and the weeks before the total.
+
 ## Where edges plausibly still live (derived from the above)
 - Information the crowd processes slowly and bots don't cover: resolution-rule details (exact station, exact candle,
   rounding), public running tallies, scheduled data with good nowcasts, slow non-sports questions.
 - A deeper market pricing the same thing (options vs crypto price markets, Pinnacle vs sports) - only where the
   Polymarket book is thin and nobody arbitrages it.
-- Being paid for patience on near-certain outcomes (time premium, liquidity rewards) where adverse selection is small.
+- ~~Being paid for patience on near-certain outcomes~~ - as a TAKER this is dead (11-14 tape: buying at 0.80-0.995 loses 1.1-2.8 points
+  per share after fees in every category and month, 4,000+ events). Liquidity rewards: only where the pool beats lesson 17.
+- Our own information in a niche where informed takers visibly win and the input is text or a public number we can read
+  (mention markets, box office / charts, model leaderboards): the tape says skill is paid there (lesson 17), copying is not.

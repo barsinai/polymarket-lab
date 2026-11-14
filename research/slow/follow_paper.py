@@ -1,6 +1,6 @@
 """Paper tracker (NO ORDERS, public endpoints only): copy the takers with a winning record at the REAL ask a moment later.
 
-Why (11-14, tape_entries.py: 7.6M taker trades, 49k markets, 12 weeks): the only public signal that held out of sample is WHO is
+Why (11-14, tape_entries.py: 5.5M taker trades, 49k markets, 12 weeks): the only public signal that held out of sample is WHO is
 buying. Wallets that won in the older 6 weeks kept winning in the newer 6 (+1.6 points per share [1.0, 2.2] at their own prices,
 +8% of the money they put in; the 46 largest winners +2.9 [1.7, 3.9]). Order SIZE alone carries nothing (12,830 orders >= $1,000,
 822 events: -1.7 [-6.0, +1.6]). In the back-test a follower who bought at the next same-way print by someone else, a minute or more

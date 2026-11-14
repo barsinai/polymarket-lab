@@ -253,3 +253,17 @@
 - Parallel session active (tape_census.py, maker-vs-taker); did not touch its files.
 - Next: confirm fast run 40 publishes at ~10:05; lock_early kill at 50; lock_p week mark 11-17 with the price split; box office 14 UTC today;
   LP-1 48-h read 11-15 ~19 UTC; N22 Argentina CPI census.
+
+## 11-14 08:50-11:00 UTC deep session (user: 'bring me an idea that works')
+- Built the largest test so far from the public trade tape (data-api /v2/trades, real fills): 12 weeks, 48,933 closed markets, 5.46M taker
+  trades, wallets, fees, outcomes (research/slow/tape_entries.py via 3 Actions jobs -> data/research/entries_{a,b,c}*, orders_{a,b,c}*).
+- KILLED on it (numbers in IDEAS/DEAD 'TAPE STUDIES 11-14'): passive maker, combo maker, follow big orders (my morning candidate: +6.4 on 61
+  sampled events -> -1.7 on 968), copy sharp wallets a minute later, bonds as a taker, resting bids on the cheap side, mention blanket NO.
+- What the tape does show: small takers lose 1.3 pts/share, takers of $200-1,000 win 1.2, wallets with a record keep +1.6 (out of sample)
+  - skill is paid, flow-following is not. Information is paid most visibly in mention, movies, ai/tech leaderboards, youtube.
+- NEW TESTING: COPY-1 (research/slow/follow_paper.py, workflow follow.yml, data/follow/): real-time copy of 148 two-half winners at the real ask,
+  control group, fixed decision rule (300 settled primaries / 100 events / 10 days). First run 10:47 UTC. Health check it each cycle
+  (logs/follow-log.txt, data/follow/report.json 'updated'); it chains itself and has a 6-h cron fallback.
+- LP-1: v1 numbers void (re-fill artifact + my manual fair values), restarted as v2. Told the user the 'unclaimed pools' claim was overstated.
+- New READY: N27 mention transcript model (the next thing to test - text is our comparative advantage), N28 bid for favourites.
+- Lessons 17-24 added. Next cycle: N27 feasibility (are transcripts reachable from Actions?), COPY-1 health, LP-1 v2.
