@@ -1,0 +1,133 @@
+{
+ "files": 1308,
+ "closed_markets": 7814,
+ "seen_after_end": 3911,
+ "in_2h_window": 2119,
+ "first_obs": {
+  "all": {
+   "markets": 2119,
+   "events": 2119,
+   "ask_le_098": 2007,
+   "events_le_098": 2007,
+   "median_ask": 0.68,
+   "mean_ret_all": 0.8354,
+   "cheap_mean_ret": 0.8817,
+   "cheap_dollars_le98": 89895567.8,
+   "cheap_profit_upper": 40532416.39,
+   "loser_bid_ge_2c": 2007
+  },
+  "non_sports": {
+   "markets": 19,
+   "events": 19,
+   "ask_le_098": 2,
+   "events_le_098": 2,
+   "median_ask": 0.999,
+   "mean_ret_all": 0.0868,
+   "cheap_mean_ret": 0.8091,
+   "cheap_dollars_le98": 4581.5,
+   "cheap_profit_upper": 2670.59,
+   "loser_bid_ge_2c": 2
+  },
+  "sports": {
+   "markets": 2100,
+   "events": 2100,
+   "ask_le_098": 2005,
+   "events_le_098": 2005,
+   "median_ask": 0.68,
+   "mean_ret_all": 0.8422,
+   "cheap_mean_ret": 0.8818,
+   "cheap_dollars_le98": 89890986.3,
+   "cheap_profit_upper": 40529745.8,
+   "loser_bid_ge_2c": 2005
+  }
+ },
+ "cheapest_obs": {
+  "all": {
+   "markets": 2119,
+   "events": 2119,
+   "ask_le_098": 2017,
+   "events_le_098": 2017,
+   "median_ask": 0.6,
+   "mean_ret_all": 1.9848,
+   "cheap_mean_ret": 2.0849,
+   "cheap_dollars_le98": 75004824.2,
+   "cheap_profit_upper": 43451276.09,
+   "loser_bid_ge_2c": 2017
+  },
+  "non_sports": {
+   "markets": 19,
+   "events": 19,
+   "ask_le_098": 2,
+   "events_le_098": 2,
+   "median_ask": 0.999,
+   "mean_ret_all": 0.0869,
+   "cheap_mean_ret": 0.8091,
+   "cheap_dollars_le98": 4581.5,
+   "cheap_profit_upper": 2670.59,
+   "loser_bid_ge_2c": 2
+  }
+ },
+ "examples_cheap": [
+  [
+   "6719498",
+   "www.binance.com",
+   0.48,
+   50.68,
+   0.74,
+   0.52,
+   1.0469
+  ],
+  [
+   "6753233",
+   "www.binance.com",
+   0.626,
+   40.0,
+   0.22,
+   0.374,
+   0.5713
+  ]
+ ],
+ "non_sports_by_source": {
+  "www.binance.com": {
+   "markets": 9,
+   "events": 9,
+   "ask_le_098": 2,
+   "events_le_098": 2,
+   "median_ask": 0.999,
+   "mean_ret_all": 0.1806,
+   "cheap_mean_ret": 0.8091,
+   "cheap_dollars_le98": 4581.5,
+   "cheap_profit_upper": 2670.59,
+   "loser_bid_ge_2c": 2
+  },
+  "": {
+   "markets": 8,
+   "events": 8,
+   "ask_le_098": 0,
+   "events_le_098": 0,
+   "median_ask": 0.999,
+   "mean_ret_all": 0.0027,
+   "cheap_mean_ret": null,
+   "cheap_dollars_le98": 0,
+   "cheap_profit_upper": 0,
+   "loser_bid_ge_2c": 0
+  },
+  "www.gov.il": {
+   "markets": 2,
+   "events": 2,
+   "ask_le_098": 0,
+   "events_le_098": 0,
+   "median_ask": 0.999,
+   "mean_ret_all": 0.0014,
+   "cheap_mean_ret": null,
+   "cheap_dollars_le98": 0,
+   "cheap_profit_upper": 0,
+   "loser_bid_ge_2c": 0
+  }
+ },
+ "hours_end_to_close_quartiles": [
+  0.19,
+  2.46,
+  3.84
+ ]
+}
