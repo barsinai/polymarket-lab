@@ -37,7 +37,11 @@ def score(levels, mid, v, ms, is_bid):
     return s_
 
 
-st = json.load(open(ST)) if os.path.exists(ST) else {"markets": {}, "runs": 0, "started": int(now)}
+VERSION = 2   # 11-14: v1 had no inventory cap (the same resting bid was 'sold to' every hour: Jensen Huang/SpaceX -2,200 shares) and used
+              # my uninformed manual fair values (1% for a market others bid 10-21c after the November news) -> restart clean
+st = json.load(open(ST)) if os.path.exists(ST) else {}
+if st.get("version") != VERSION:
+    st = {"markets": {}, "runs": 0, "started": int(now), "version": VERSION}
 manual = json.load(open(FAIR)) if os.path.exists(FAIR) else {}
 
 # 1. reward configs
@@ -161,31 +165,34 @@ for c in cands:
         active_n += 1
         tr_all = []                                       # trades before we started quoting are not fills
     # fills from crossing book orders and from public taker trades since the last run
-    left_b, left_a = size, size
+    # Inventory cap: never more than 2 x the quote size long or short (the side that would add to it stops quoting). Without it the
+    # same resting order in the real book was 'filled' again every hour.
+    CAP = 2 * size
+    left_b, left_a = min(size, CAP - x["inv"]), min(size, CAP + x["inv"])
     for p, s in bl:                                       # a resting bid above our ask: we would sell to it at its price
-        if p > ask and left_a > 0:
+        if p > ask and left_a > 1e-9:
             q = min(s, left_a); x["cash"] += p * q; x["inv"] -= q; left_a -= q; x["fills"].append([int(now), "book_sell", p, q, fair])
     for p, s in al:
-        if p < bid and left_b > 0:
+        if p < bid and left_b > 1e-9:
             q = min(s, left_b); x["cash"] -= p * q; x["inv"] += q; left_b -= q; x["fills"].append([int(now), "book_buy", p, q, fair])
     pb, pa = x.get("bid"), x.get("ask")                # the quotes that were resting since the last run
-    tb, ta = size, size
+    tb, ta = min(size, CAP - x["inv"]), min(size, CAP + x["inv"])
     for t in sorted(tr_all, key=lambda t: float(t["timestamp"] or 0)):
         if pb is None or pa is None:
             break
         p = float(t["price"] or 0); s = float(t["size"] or 0); oi = int(t.get("outcomeIndex") or 0); side = t.get("side")
         buy_yes = (side == "BUY") == (oi == 0); py = p if oi == 0 else 1 - p
-        if buy_yes and py >= pa and ta > 0:
+        if buy_yes and py >= pa and ta > 1e-9:
             q = min(s, ta); x["cash"] += pa * q; x["inv"] -= q; ta -= q; x["fills"].append([int(t["timestamp"]), "sell", pa, q, fair])
-        elif (not buy_yes) and py <= pb and tb > 0:
+        elif (not buy_yes) and py <= pb and tb > 1e-9:
             q = min(s, tb); x["cash"] -= pb * q; x["inv"] += q; tb -= q; x["fills"].append([int(t["timestamp"]), "buy", pb, q, fair])
     # pessimistic model (arbitrageurs drawn in by our quotes): if the fair price moved through a quote that was resting since the
     # last run, assume our full size there was taken at our price (separate book: inv2 / cash2)
     x.setdefault("inv2", 0.0); x.setdefault("cash2", 0.0); x.setdefault("fills2", 0)
     if pb is not None and pa is not None:
-        if fair >= pa + tick:
+        if fair >= pa + tick and x["inv2"] - size >= -CAP - 1e-9:
             x["cash2"] += pa * size; x["inv2"] -= size; x["fills2"] += 1
-        elif fair <= pb - tick:
+        elif fair <= pb - tick and x["inv2"] + size <= CAP + 1e-9:
             x["cash2"] -= pb * size; x["inv2"] += size; x["fills2"] += 1
     # competition inside the band around our mid (orders that are not ours; we have none on the real book)
     hrs = min((now - x["last_ts"]) / 3600, 2.0) if x["runs"] else 0.0   # the first run only posts; rewards accrue from the next
