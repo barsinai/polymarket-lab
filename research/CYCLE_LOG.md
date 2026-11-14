@@ -198,3 +198,21 @@
 - 11-13 21:50 user: run the experiment as a simulation only. LP-1 stays paper; lp_paper.py report now also has 'budget_slice' = the
   proposed 48 h / $200 test simulated (markets a $200 budget would have entered, entry order + largest pool first). First read on the
   current state: 6 markets, $195, pools $1,331/day, formula reward $41, fills +$6.5 (pessimistic -$8.7). Read it at 48 h (11-15 ~19 UTC).
+
+## 11-14 00:55-01:40 UTC cycle 9 (scheduled)
+- Read-outs (fast trades.jsonl, settled): lock_x 18 / 16 +9.2%/$ (14 end-times; new loss hype 5m Down 0.92, margin 14.6 bp, -$7.3); lock_p
+  39 / 35 +6.8% (34 end-times, 4 days); lock_early 44 / 41 -0.6% (31 end-times; its kill rule is 50 trades <= 0); lock_m 159 / 147 -1.5%
+  (118 end-times); lock_b 35 / 33 -0.4%. Slow: converge 4 settled, 88 open mark -$37; converge_day 0 positions (1 candidate at 00:22, night);
+  young 48 settled 20 won -$161 / $480 (early YES-heavy, LESSONS 11); options 13 settled 3 won -$89 (~2 independent events: 11-12/13 BTC drop);
+  LP-1 8 runs: formula $427 upper bound, pessimistic fills -$145, $200 slice +$7.2 at 100% pay / -$2.9 at 20%; charts 2/2; mention 0 settled.
+- Test (N20 UMA proposal window, uma_window.py, local, 1,308 snapshots / 7,814 closed markets): non-sports winners in the last 2 h before
+  resolution trade at 0.999 (17/19 seen); the 2 cheaper were Binance candle markets pre-close. Recorder sees only 19 of 1,829 non-sports
+  markets after their end date (thin), but nothing there -> DEAD. First pass had all 'winners' at 0.05 - sports endDate = game start, so the
+  window was the live game (LESSONS 10); fixed by excluding gameStartTime / sportsMarketType markets.
+- Side test (-> N21 adjacent): first lock signal per window, all lock_* rules: BTC/ETH 179 windows +3.5%/$ (6/8 days >= 0) vs alts 265
+  windows -3.2% (1/8 days > 0). Chosen after looking -> forward-only read-out (lock_be_readout.py, from 11-14 01:00 UTC).
+- New ideas: N21 lock_be (adjacent, TESTING), N22 Argentina CPI buckets vs Buenos Aires City CPI released days earlier (outside the box, READY).
+- Health: fast paper 00:22, slow 00:29, MM v2 00:32, books 01:00 - OK. Tracebacks only the old combo sampler crash in pilot-log (fixed 11-13
+  17:53) and the old script-log smoke. No MemoryErrors. Pilot STOP, no orders.
+- Next: lock_early 50-trade kill check; lock_p week mark 11-17; LP-1 48-h read 11-15 ~19 UTC; box office Sat 11-14 14 UTC; N22 census via
+  Actions; N19 tally tag in converge_paper; W2 dead-bucket recount (still open).

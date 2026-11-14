@@ -688,3 +688,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
 ## 11-13 21:40 cycle 8
 - W1 weather model DEAD (Brier .0732 vs market .0635, 66 events); lock_mv DEAD (outside lock_x -6.4%); RT census: near-certain 39/39 +3.9%
   (26 films) but ~5 events/month -> PARKED into N19. lock_p at 32 end-times +8.1%, week mark 11-17. New: N19 running tallies, N20 UMA window.
+
+## 11-14 01:40 cycle 9
+- N20 UMA window DEAD (winners at 0.999 in the last 2 h, 17/19 non-sports; recorder coverage thin). New N21 lock_be: lock signals on BTC/ETH
+  +3.5%/$ (179 windows) vs alts -3.2% (265) in sample -> forward read-out only. N22 Argentina CPI vs Buenos Aires City CPI (READY).
+  lock_x 18/16 +9.2%, lock_p 39/35 +6.8% (34 end-times), lock_early -0.6% near its kill rule. Next: lock_p week mark 11-17, LP-1 48 h read.
