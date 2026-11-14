@@ -306,3 +306,20 @@
   combo-sampler crash in pilot-log and the old script-log smoke; no MemoryErrors. Pilot STOP, no orders.
 - Next: confirm boxoffice_paper sees markets (tonight to 02 UTC); lock_early kill at 50; LP-1 v2 48 h 11-16 with the N33 hour split;
   lock_p week mark 11-17; N27 transcript feasibility; N22 Argentina CPI census.
+
+## 11-14 21:00-21:35 UTC cycle 14 (scheduled)
+- Read-outs (fast trades.jsonl, last 20:04): lock_x 19 / 17 +8.8% (15 end-times), lock_p 40 / 36 +6.6% (35), lock_p_majors 14/14 +13.2%,
+  lock_early 47 / 43 -2.7% (unchanged, 3 from kill), lock_m 181 / 168 -0.8%, lock_b 41 / 38 -1.2%. N21 forward BTC/ETH 19/19 +5.3%, alts 21 / 20
+  +2.7% (1 day). N25 forward >= 0.80 27/27 +5.2%. Slow (20:06-20:10): converge 5 settled -$18, 88 open mark -$40; young 50 / 20 -$181; options
+  25 / 7 -$156, 58 open; charts 2/2, 0 live; box office FIX WORKS (27 markets, 6 open, spread 7c). LP-1 v2 0.42 d: formula $502 (upper bound),
+  pessimistic -$204, 100/121 saw a competitor. COPY-1 10.1 h: sharp 20 primaries, 0 settled; ask +4.6c over theirs, 36% pass the cap.
+- Test (adjacent N35, lp_fill_split.py, LP-1 v2 state): weather same-day buckets carry all the loss - formula $100 vs pessimistic -$167 (fills
+  -11.5% of notional, 30 markets); the rest formula $401 vs pessimistic -$37 (fills +0.3%, 33 markets). In-sample, one Saturday -> lp_paper.py
+  now reports by_kind with a forward block (markets opened >= 21:00). N33 clock split: all fills Saturday, not readable yet.
+- Test (outside the box N37, approval_census.py via Actions, 382 markets / 101 Trump approval events, RCP average): favourite 0.60-0.97 at +2c
+  -5.3%/$ end-72h (78 events, both halves negative), -4.6% end-24h, -0.7% end-6h on last prices (which flatter). DEAD. RCP 403 from Actions.
+- New ideas: N35 (adjacent, TESTING split), N36 (adjacent, low prior: be the METAR taker), N37 (outside the box, DEAD).
+- Health: fast paper 20:06, slow 20:11, follow 21:00 (report 20:54), boosts 21:01, MM v2 20:31, books 21:00 - OK. Tracebacks only the old
+  combo-sampler crash in pilot-log and the old script-log smoke; no MemoryErrors. Pilot STOP, no orders.
+- Next: LP-1 v2 48 h 11-16 (by_kind forward + N33 hour split on weekday fills); lock_early kill at 50; lock_p week mark 11-17 with the price
+  split; box office settlements Monday; N27 transcript feasibility; N22 Argentina CPI census.

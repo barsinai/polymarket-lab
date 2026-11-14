@@ -713,3 +713,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
 ## 11-14 17:40 cycle 13
 - boxoffice_paper bug fixed (0 markets in its first live window). N29 favourite bid DEAD out of category (-0.3 pts on 180 events); maker-by-clock
   DEAD (US night +0.8% of cost, interval through 0). New N33 LP-1 off-US-hours, N34 Kalshi-first series. Next: box office tonight, LP-1 48 h.
+
+## 11-14 21:35 cycle 14
+- LP-1 v2's loss is almost all same-day weather buckets (pessimistic -$167 vs formula $100; rest -$37 vs $401) -> N35 forward split in the
+  report. Trump approval buckets (N37, 101 events) DEAD: favourite -5.3%/$ at end-72h even on last prices. Box-office scan fix confirmed
+  (27 markets, 6 positions). Next: LP-1 48 h 11-16, lock_p 11-17, lock_early kill at 50.
