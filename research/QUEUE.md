@@ -693,3 +693,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - N20 UMA window DEAD (winners at 0.999 in the last 2 h, 17/19 non-sports; recorder coverage thin). New N21 lock_be: lock signals on BTC/ETH
   +3.5%/$ (179 windows) vs alts -3.2% (265) in sample -> forward read-out only. N22 Argentina CPI vs Buenos Aires City CPI (READY).
   lock_x 18/16 +9.2%, lock_p 39/35 +6.8% (34 end-times), lock_early -0.6% near its kill rule. Next: lock_p week mark 11-17, LP-1 48 h read.
+
+## 11-14 05:35 cycle 10
+- N23 / converge_day DEAD: last-day favourites 0.95-0.99, 750 events over 5 months -1.3%/$, a war-topic filter does not rescue it (rest -1.9%);
+  removed from the slow job. N24 earthquakes vs USGS PARKED (13 markets). lock_x / lock_p unchanged (no new signals), lock_early -3.2% at 45.
+  Next: lock_early kill check, box office Saturday, LP-1 48 h read, N22 Argentina CPI census.

@@ -28,11 +28,8 @@ jobs:
       - run: pip install -q requests
       - run: mkdir -p logs data/slow data/research   # spike_monitor dropped 11-13 (DEAD: -20..-25% at 24 h; it used 8 of 13 min)
       - run: python -u research/slow/converge_paper.py 2>&1 | tee logs/converge-log.txt
-      - name: converge_day (last day, 0.95-0.99, both sides; 11-13 books census 167/167 won +2.0%/$ excl. tweets/data/crypto)
-        run: |
-          NAME=converge_day DMIN=0.04 DMAX=1 LO=0.95 HI=0.99 STAKE=20 MAX_NEW=40 MAX_NEW_NO=40 MAX_OPEN_NO=1000 \
-          EXCL='elon musk|tweets|bitcoin|ethereum|solana|\bxrp\b|price of|cpi|inflation|gdp|payroll|jobs report|unemployment|\bfed\b|fomc|interest rate|bps' \
-          timeout 300 python -u research/slow/converge_paper.py 2>&1 | tail -3 | tee logs/converge-day-log.txt || true
+      # converge_day removed 11-14 c10: DEAD (5-month history 755 last-day favourites 0.95-0.99, -1.3%/$, losses not filterable by topic);
+      # it also never entered (0 candidates: the 1-day Gamma window is likely filled by up/down windows before the 3,000 offset cap).
       - run: python -u research/slow/score_forecasts.py 2>&1 | tail -5 | tee logs/forecast-log.txt || true
       - run: timeout 300 python -u research/slow/lp_paper.py 2>&1 | tail -2 | tee logs/lp-paper-log.txt || true   # LP-1 paper (11-13)
       - run: timeout 300 python -u research/slow/young_paper.py 2>&1 | tail -6 | tee logs/young-log.txt || true

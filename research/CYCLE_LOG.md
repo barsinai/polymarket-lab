@@ -216,3 +216,19 @@
   17:53) and the old script-log smoke. No MemoryErrors. Pilot STOP, no orders.
 - Next: lock_early 50-trade kill check; lock_p week mark 11-17; LP-1 48-h read 11-15 ~19 UTC; box office Sat 11-14 14 UTC; N22 census via
   Actions; N19 tally tag in converge_paper; W2 dead-bucket recount (still open).
+
+## 11-14 04:55-05:35 UTC cycle 10 (scheduled)
+- Read-outs (fast trades.jsonl, settled): lock_x 18 / 16 +9.2%/$ (14 end-times, no new signal); lock_p 39 / 35 +6.8% (34 end-times, 4 days);
+  lock_p_majors 13/13 +14.1%; lock_early 45 / 41 -3.2% (32 end-times, 5 trades from its kill rule); lock_m 164 / 151 -1.5%; N21 forward:
+  5 alt windows 5/5 +4.9%, 0 BTC/ETH yet. Slow: converge 4 settled (non-sports 3/3 +3.5%), 89 open mark -$40; young 50 settled 20 won -$181
+  / $500; options 13 settled 3 won -$89 (~2 events), 52 open; charts 2/2 +$3; LP-1 12 runs (0.4 d): formula $663 upper bound, pessimistic
+  fills -$199, $200 slice +$7.2 at 100% pay / -$2.9 at 20%; box office out of window (Sat 14 UTC); mention 1 open.
+- Test (adjacent N23, converge_geo_split.py, local, 5-month hourly history): last-day favourites 0.95-0.99, 755 markets / 750 events,
+  +0.5c + fee: 24 losses (3.2%) -1.3%/$; geopolitics filter 280 / 6 -0.4%, the rest 475 / 18 -1.9%. The tail is not war-only -> N23 DEAD
+  and converge_day DEAD; removed from the slow job (its 0 candidates were also a scan problem, not worth fixing now).
+- Test (outside the box N24, quake_census.py via Actions): only 13 earthquake markets found (yearly M7 count buckets + one 2021 market) ->
+  PARKED, too few events. (The script's 'resolved against catalog' rows are count buckets my by-date logic misreads - not a finding.)
+- Health: fast paper 04:23, slow 04:28, MM v2 05:01, books 05:00, live snapshot 05:05 - OK. Tracebacks only the old combo sampler crash in
+  pilot-log and the old script-log smoke. No MemoryErrors. Pilot STOP, no orders.
+- Next: lock_early kill at 50 trades; lock_p week mark 11-17; LP-1 48-h read 11-15 ~19 UTC; box office Sat 11-14 14 UTC; N22 Argentina CPI
+  census via Actions; N19 tally tag in converge_paper; W2 dead-bucket recount (still open).
