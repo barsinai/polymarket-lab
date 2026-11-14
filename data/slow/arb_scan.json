@@ -1,5 +1,5 @@
 {
-"scanned": "2026-11-14 21:10",
+"scanned": "2026-11-14 22:09",
 "events": 2100,
 "groups": 2037,
 "books": 16848,
@@ -20,36 +20,6 @@
 "usd_at_size": 1579.95
 },
 {
-"kind": "ladder_num",
-"event": "Makina FDV above ___ one day after launch?",
-"slug": "makina-fdv-above-one-day-after-launch",
-"easy": "Makina FDV above $80M one day after launch?",
-"hard": "Makina FDV above $100M one day after launch?",
-"easy_yes_ask": 0.057,
-"hard_no_ask": 0.934,
-"hard_yes_bid": 0.066,
-"cost": 0.991,
-"edge": 0.009,
-"edge_after_fee": 0.0009,
-"size_shares": 112.2,
-"usd_at_size": 111.19
-},
-{
-"kind": "ladder_num",
-"event": "StandX FDV above ___ one day after launch?",
-"slug": "standx-fdv-above-one-day-after-launch",
-"easy": "StandX FDV above $50M one day after launch?",
-"hard": "StandX FDV above $1B one day after launch?",
-"easy_yes_ask": 0.016,
-"hard_no_ask": 0.978,
-"hard_yes_bid": 0.022,
-"cost": 0.994,
-"edge": 0.006,
-"edge_after_fee": 0.0034,
-"size_shares": 144.37,
-"usd_at_size": 143.5
-},
-{
 "kind": "negrisk_all_yes",
 "event": "South Africa Annual Inflation 2026",
 "slug": "south-africa-annual-inflation-2026",
@@ -67,12 +37,27 @@
 "4.7-5.0%",
 ">5.0%"
 ],
-"cost": 0.969,
+"cost": 0.965,
 "payoff": 1,
-"edge": 0.031,
-"edge_after_fee": -0.0169,
+"edge": 0.035,
+"edge_after_fee": -0.0127,
 "size_shares": 26.06,
-"usd_at_size": 25.25
+"usd_at_size": 25.15
+},
+{
+"kind": "ladder_num",
+"event": "StandX FDV above ___ one day after launch?",
+"slug": "standx-fdv-above-one-day-after-launch",
+"easy": "StandX FDV above $50M one day after launch?",
+"hard": "StandX FDV above $1B one day after launch?",
+"easy_yes_ask": 0.016,
+"hard_no_ask": 0.978,
+"hard_yes_bid": 0.022,
+"cost": 0.994,
+"edge": 0.006,
+"edge_after_fee": 0.0034,
+"size_shares": 144.37,
+"usd_at_size": 143.5
 },
 {
 "kind": "ladder_date",
@@ -103,18 +88,6 @@
 "edge_after_fee": -0.0026,
 "size_shares": 158.97,
 "usd_at_size": 158.33
-},
-{
-"kind": "negrisk_all_no",
-"event": "China Annual Inflation 2026",
-"slug": "china-annual-inflation-2026",
-"n": 9,
-"cost": 7.986,
-"payoff": 8,
-"edge": 0.014,
-"edge_after_fee": -0.0262,
-"size_shares": 40.0,
-"usd_at_size": 319.44
 },
 {
 "kind": "ladder_num",
@@ -150,21 +123,6 @@
 "kind": "ladder_num",
 "event": "Pacifica FDV above ___ one day after launch?",
 "slug": "pacifica-fdv-above-one-day-after-launch",
-"easy": "Pacifica FDV above $1B one day after launch?",
-"hard": "Pacifica FDV above $2B one day after launch?",
-"easy_yes_ask": 0.006,
-"hard_no_ask": 0.991,
-"hard_yes_bid": 0.009,
-"cost": 0.997,
-"edge": 0.003,
-"edge_after_fee": 0.002,
-"size_shares": 121.1,
-"usd_at_size": 120.74
-},
-{
-"kind": "ladder_num",
-"event": "Pacifica FDV above ___ one day after launch?",
-"slug": "pacifica-fdv-above-one-day-after-launch",
 "easy": "Pacifica FDV above $300M one day after launch?",
 "hard": "Pacifica FDV above $800M one day after launch?",
 "easy_yes_ask": 0.028,
@@ -175,28 +133,6 @@
 "edge_after_fee": -0.0001,
 "size_shares": 60.0,
 "usd_at_size": 59.76
-},
-{
-"kind": "negrisk_all_yes",
-"event": "Japan 10Y Bond Yield: End of 2026",
-"slug": "japan-10y-bond-yield-end-of-2026",
-"n": 7,
-"has_other": false,
-"outcomes": [
-"<2.0%",
-"2.0-2.2%",
-"2.2-2.4%",
-"2.4-2.6%",
-"2.6-2.8%",
-"2.8-3.0%",
-"3.0%+"
-],
-"cost": 0.969,
-"payoff": 1,
-"edge": 0.031,
-"edge_after_fee": -0.0236,
-"size_shares": 7.24,
-"usd_at_size": 7.02
 },
 {
 "kind": "ladder_date",
@@ -229,19 +165,26 @@
 "usd_at_size": 35.42
 },
 {
-"kind": "ladder_date",
-"event": "Anthropic IPO by __?",
-"slug": "anthropic-ipo-by",
-"easy": "Will Anthropic IPO by November 23, 2026?",
-"hard": "Will Anthropic IPO by November 20, 2026?",
-"easy_yes_ask": 0.962,
-"hard_no_ask": 0.035,
-"hard_yes_bid": 0.965,
-"cost": 0.997,
-"edge": 0.003,
-"edge_after_fee": -0.0019,
-"size_shares": 26.32,
-"usd_at_size": 26.24
+"kind": "negrisk_all_yes",
+"event": "South Korea Annual Inflation 2026",
+"slug": "south-korea-annual-inflation-2026",
+"n": 7,
+"has_other": false,
+"outcomes": [
+"<1.5%",
+"1.5% to 1.7%",
+"1.8% to 2.0%",
+"2.1% to 2.3%",
+"2.4% to 2.6%",
+"2.7% to 2.9%",
+"3.0%+"
+],
+"cost": 0.992,
+"payoff": 1,
+"edge": 0.008,
+"edge_after_fee": -0.0382,
+"size_shares": 6.56,
+"usd_at_size": 6.51
 },
 {
 "kind": "ladder_num",
@@ -257,21 +200,6 @@
 "edge_after_fee": 0.001,
 "size_shares": 7.71,
 "usd_at_size": 7.67
-},
-{
-"kind": "ladder_num",
-"event": "How high will inflation get in 2026?",
-"slug": "how-high-will-inflation-get-in-2026",
-"easy": "Will inflation reach more than 6% in 2026?",
-"hard": "Will inflation reach more than 8% in 2026?",
-"easy_yes_ask": 0.014,
-"hard_no_ask": 0.983,
-"hard_yes_bid": 0.017,
-"cost": 0.997,
-"edge": 0.003,
-"edge_after_fee": 0.0009,
-"size_shares": 12.11,
-"usd_at_size": 12.07
 },
 {
 "kind": "ladder_num",
