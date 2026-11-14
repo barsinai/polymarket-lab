@@ -4,12 +4,14 @@ peg; the NEXT one >= 60 s later fills us at its price + one tick (that print sho
 sells the favourite, or buys the other outcome (matched against a favourite bid at 1 - p). One fill per market side; maker pays no fee.
 Edge = won - bid, in points per share, bootstrap clustered by event; split by end-date halves and weeks (LESSONS 23, 24).
 Rows within 1 h of the end are dropped (resolution-time noise)."""
-import json, gzip, collections, random, datetime
+import json, gzip, collections, random, datetime, os
+CATS = os.environ.get("CATS", "mention,awards").split(",")   # c13: N31 replication on categories never looked at
+REPORT = os.environ.get("REPORT", "data/research/tape_favbid_report.json")
 random.seed(12)
 LO, HI = 0.94, 0.985
 SPLIT = datetime.datetime(2026, 10, 1, tzinfo=datetime.timezone.utc).timestamp()
 RT = []; ALL = []
-for cat in ("mention", "awards"):
+for cat in CATS:
     for l in gzip.open(f"data/research/tape_raw_{cat}.jsonl.gz", "rt"):
         m = json.loads(l)
         rows = sorted(r for r in m["rows"] if r[0] <= m["end"] - 3600)
@@ -57,7 +59,7 @@ out = []
 P = lambda *a: out.append(" ".join(str(x) for x in a))
 P("== live peg, first fill per market side:", stat(RT))
 P("   halves by end date: Aug-Sep", stat([r for r in RT if r[6] < SPLIT]), "| Oct-Nov", stat([r for r in RT if r[6] >= SPLIT]))
-for cat in ("mention", "awards"):
+for cat in CATS:
     P(f"   {cat:8}", stat([r for r in RT if r[1] == cat], 5))
 for lo, hi in ((0.94, 0.96), (0.96, 0.98), (0.98, 1.0)):
     P(f"   bid {lo}-{hi}:", stat([r for r in RT if lo <= r[2] < hi], 5))
@@ -70,6 +72,8 @@ for r in RT:
     wk[datetime.datetime.utcfromtimestamp(r[6]).strftime("%G-W%V")].append(r)
 for k in sorted(wk):
     v = wk[k]; P(f"   week {k}: n {len(v):4} losses {sum(1 - r[3] for r in v):3} edge {100 * sum(r[3] - r[2] for r in v) / len(v):+6.2f} pts")
+P("== N29 pre-registered rule (1 h - 7 d before the end, no fill right after a lower selling print):",
+  stat([r for r in RT if r[4] < 168 and r[5] != "down"], 5))
 P("== every later selling print (weight = prints):", stat(ALL))
 print("\n".join(out))
-json.dump({"lines": out}, open("data/research/tape_favbid_report.json", "w"), indent=1)
+json.dump({"lines": out}, open(REPORT, "w"), indent=1)

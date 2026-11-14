@@ -288,3 +288,21 @@
 - Next: N29 needs every print, not the >= $FILTER feed follow_paper.py reads -> a small separate poller of /trades for live mention/awards
   markets (next cycle); N27 transcript feasibility via Actions; box office window 14-02 UTC tonight; lock_early kill at 50; lock_p week 11-17;
   LP-1 v2 48 h 11-16 ~10 UTC.
+
+## 11-14 17:00-17:40 UTC cycle 13 (scheduled)
+- Read-outs (fast trades.jsonl, last settled 16:58): lock_x 18 / 16 +9.2%, lock_p 39 / 35 +6.8% (34 end-times) - no signal since 11-13 20:09;
+  checked it is not a bug: lock_p_z2 fired 21 times since, max z 2.59 (17 before), none of the 3 z >= 2.5 held 2 s. lock_early 47 / 43 -2.7%
+  (3 from its kill rule); lock_m 177 / 164 -1.0%. N21 forward: BTC/ETH 12 / 12 +5.9%, alts 18 / 17 +2.5%. N25 forward: >= 0.80 17/17 +5.7%,
+  < 0.80 1/1. Slow (16:05-16:08): converge 5 settled 4 won -$18, 88 open mark -$38; young 50 / 20 -$181 (end dates 11-16..30); options 19 / 6
+  -$114, 53 open; charts 2/2; LP-1 v2 0.25 d: formula $290 (upper bound), pessimistic fills -$138, 78/97 markets saw a competitor (worst:
+  same-day weather buckets). COPY-1 6.1 h: sharp 10 primaries, 0 settled; ask minus their price median +4.7c, 31% pass the cap.
+- BUG (LESSONS 10): boxoffice_paper saw 0 box-office markets in its first live window (14-16 UTC) while LP-1 was quoting 'Ebenezer' Opening
+  Weekend - the capped 4-day end-date scan. Fixed (search + tag first, paged fallback to 20,000), pushed 17:04; the 17:06 run saw 33 markets and opened 1 position.
+- Tests: N31 (adjacent) favourite bid on movies/music/tweets/youtube tapes (never looked at): -0.3 pts [-2.2, +1.3] on 180 events, the
+  pre-registered N29 rule +0.3 [-1.9, +2.1] -> N28/N29 DEAD, poller not built. N32 (outside the box) maker P&L by the taker's clock, 1.51M
+  entries: US night +0.8% [-1.1, +2.8], weekend -0.3%, US day -2.0% [-4.2, -0.3] -> no slot pays a maker; DEAD, kept as N33 question for LP-1.
+- New READY: N33 LP-1 off-US-hours (split LP-1 fills by hour at the 48-h read), N34 Polymarket copies of Kalshi series (Kalshi as prior/fair).
+- Health: fast paper 16:04, slow 16:10, follow 16:59 (report 16:50), boosts 16:37, MM v2 17:01, books 17:00 - OK. Tracebacks only the old
+  combo-sampler crash in pilot-log and the old script-log smoke; no MemoryErrors. Pilot STOP, no orders.
+- Next: confirm boxoffice_paper sees markets (tonight to 02 UTC); lock_early kill at 50; LP-1 v2 48 h 11-16 with the N33 hour split;
+  lock_p week mark 11-17; N27 transcript feasibility; N22 Argentina CPI census.
