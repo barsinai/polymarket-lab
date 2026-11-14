@@ -1,5 +1,5 @@
 {
-"scanned": "2026-11-14 05:28",
+"scanned": "2026-11-14 06:25",
 "events": 2100,
 "groups": 2037,
 "books": 16902,
@@ -16,8 +16,8 @@
 "cost": 0.996,
 "edge": 0.004,
 "edge_after_fee": 0.0013,
-"size_shares": 1647.14,
-"usd_at_size": 1640.55
+"size_shares": 1677.14,
+"usd_at_size": 1670.43
 },
 {
 "kind": "negrisk_all_yes",
@@ -117,6 +117,21 @@
 "usd_at_size": 82.32
 },
 {
+"kind": "ladder_num",
+"event": "Ostium FDV above ___ one day after launch?",
+"slug": "ostium-fdv-above-one-day-after-launch",
+"easy": "Ostium FDV above $50M one day after launch?",
+"hard": "Ostium FDV above $100M one day after launch?",
+"easy_yes_ask": 0.026,
+"hard_no_ask": 0.967,
+"hard_yes_bid": 0.033,
+"cost": 0.993,
+"edge": 0.007,
+"edge_after_fee": 0.003,
+"size_shares": 30.0,
+"usd_at_size": 29.79
+},
+{
 "kind": "ladder_date",
 "event": "Will Israel annex any territory by...?",
 "slug": "will-israel-annex-any-territory-by-december-31",
@@ -171,21 +186,6 @@
 },
 {
 "kind": "ladder_num",
-"event": "Ostium FDV above ___ one day after launch?",
-"slug": "ostium-fdv-above-one-day-after-launch",
-"easy": "Ostium FDV above $50M one day after launch?",
-"hard": "Ostium FDV above $100M one day after launch?",
-"easy_yes_ask": 0.026,
-"hard_no_ask": 0.969,
-"hard_yes_bid": 0.031,
-"cost": 0.995,
-"edge": 0.005,
-"edge_after_fee": 0.0011,
-"size_shares": 30.0,
-"usd_at_size": 29.85
-},
-{
-"kind": "ladder_num",
 "event": "How high will US unemployment go in 2026?",
 "slug": "how-high-will-us-unemployment-go-in-2026",
 "easy": "Will US unemployment reach at least 6.0% in 2026?",
@@ -201,28 +201,28 @@
 },
 {
 "kind": "negrisk_all_yes",
-"event": "South Africa Annual Inflation 2026",
-"slug": "south-africa-annual-inflation-2026",
+"event": "Anthropic IPO Closing Market Cap",
+"slug": "anthropic-ipo-closing-market-cap-higher-strikes",
 "n": 10,
 "has_other": false,
 "outcomes": [
-"<2.6%",
-"2.6-2.9%",
-"2.9-3.2%",
-"3.2-3.5%",
-"3.5-3.8%",
-"3.8-4.1%",
-"4.1-4.4%",
-"4.4-4.7%",
-"4.7-5.0%",
-">5.0%"
+"<$1.25T",
+"$1.25\u2013$1.5T",
+"$1.5\u2013$1.75T",
+"$1.75\u2013$2.0T",
+"$2.0\u2013$2.25T",
+"$2.25\u2013$2.5T",
+"$2.5\u2013$2.75T",
+"$2.75\u2013$3.0T",
+"$3.0T+",
+"No IPO by December 31, 2027"
 ],
-"cost": 0.981,
+"cost": 0.993,
 "payoff": 1,
-"edge": 0.019,
-"edge_after_fee": -0.029,
-"size_shares": 7.45,
-"usd_at_size": 7.31
+"edge": 0.007,
+"edge_after_fee": -0.0416,
+"size_shares": 10.0,
+"usd_at_size": 9.93
 },
 {
 "kind": "ladder_num",
@@ -236,8 +236,8 @@
 "cost": 0.995,
 "edge": 0.005,
 "edge_after_fee": 0.001,
-"size_shares": 7.71,
-"usd_at_size": 7.67
+"size_shares": 13.4,
+"usd_at_size": 13.33
 },
 {
 "kind": "ladder_num",
@@ -246,11 +246,11 @@
 "easy": "Printr FDV above $500M one day after launch?",
 "hard": "Printr FDV above $1B one day after launch?",
 "easy_yes_ask": 0.049,
-"hard_no_ask": 0.934,
-"hard_yes_bid": 0.066,
-"cost": 0.983,
-"edge": 0.017,
-"edge_after_fee": 0.0094,
+"hard_no_ask": 0.932,
+"hard_yes_bid": 0.068,
+"cost": 0.981,
+"edge": 0.019,
+"edge_after_fee": 0.0113,
 "size_shares": 1.61,
 "usd_at_size": 1.58
 },
