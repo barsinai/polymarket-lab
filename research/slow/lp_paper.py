@@ -235,5 +235,17 @@ rep["budget_slice"] = {"budget": BUDGET, "markets": len(sl), "capital": round(ca
                        "formula_reward": round(sr, 2), "trading_pnl": round(stt, 2),
                        "pessimistic_trading_pnl": round(sum(x.get("cash2", 0.0) + x.get("inv2", 0.0) * (x.get("fair") or 0) for x in sl), 2),
                        "net_if_paid_100pct": round(sr + stt, 2), "net_if_paid_20pct": round(sr / 5 + stt, 2)}
+# N35 (11-14 c14, report only, no strategy change): weather same-day buckets vs everything else. The split was seen in-sample
+# (0.42 d: weather pessimistic -$167 vs formula $100; other -$37 vs $401) -> the 'forward' block counts only markets opened after
+# N35_FROM, which is the read-out.
+N35_FROM = 1794697200  # 2026-11-14 21:00 UTC
+def _kind_block(xs):
+    return {"markets": len(xs), "formula_reward": round(sum(x["reward"] for x in xs), 2), "trading_pnl": round(sum(pnl(x) for x in xs), 2),
+            "pessimistic_fills": sum(x.get("fills2", 0) for x in xs),
+            "pessimistic_trading_pnl": round(sum(x.get("cash2", 0.0) + x.get("inv2", 0.0) * (x.get("fair") or 0) for x in xs), 2)}
+_isw = lambda x: "temperature" in x["q"].lower()
+rep["by_kind"] = {"weather": _kind_block([x for x in ms.values() if _isw(x)]), "other": _kind_block([x for x in ms.values() if not _isw(x)]),
+                  "forward_weather": _kind_block([x for x in ms.values() if _isw(x) and x["opened"] >= N35_FROM]),
+                  "forward_other": _kind_block([x for x in ms.values() if not _isw(x) and x["opened"] >= N35_FROM])}
 json.dump(st, open(ST, "w")); json.dump(rep, open(REP, "w"), indent=1)
 print(json.dumps(rep))
