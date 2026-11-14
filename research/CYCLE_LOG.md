@@ -232,3 +232,24 @@
   pilot-log and the old script-log smoke. No MemoryErrors. Pilot STOP, no orders.
 - Next: lock_early kill at 50 trades; lock_p week mark 11-17; LP-1 48-h read 11-15 ~19 UTC; box office Sat 11-14 14 UTC; N22 Argentina CPI
   census via Actions; N19 tally tag in converge_paper; W2 dead-bucket recount (still open).
+
+## 11-14 09:00-09:40 UTC cycle 11 (scheduled)
+- Health FIRST: the fast paper bot was DOWN 06:58-09:03 (run 39: 'runner has received a shutdown signal' on pilot-helsinki; the self-chain
+  only re-dispatches after a clean part, so nothing restarted it) and with it the hourly slow-paper kick (last slow 06:45). Re-dispatched
+  fast_paper.yml (run 40 running) and spike_paper.yml (slow, 09:07 OK). ~2 h of lock signals missing. No orders anywhere; pilot STOP.
+- Read-outs (fast trades.jsonl, settled): lock_x 18 / 16 +9.2%, lock_p 39 / 35 +6.8% (34 end-times) - unchanged, no signal since 11-13 20h;
+  lock_early 46 / 42 -3.0% (4 trades from its kill rule); lock_m 166 / 153 -1.4%; N21 forward BTC/ETH 1 window, alts 11 / 10 -1.2%.
+  NEW SPLIT (lock_price_split.py): lock_p's whole profit is 7 trades bought at 0.52-0.74 (+$34.7); its 32 trades at >= 0.80 are +1.0%/$;
+  lock_x >= 0.80 -3.9%. The 11-17 write-up must show this; it is not a '0.9x lock' edge. Slow (06:43 reports): converge 4 settled, 89 open
+  mark -$37; young 50 settled 20 won -$181; charts 2/2; LP-1 15 runs (0.5 d): formula $763 (upper bound), pessimistic fills -$249, $200
+  slice +$7.2 / -$2.9; box office out of window until 14 UTC.
+- W2 recount (open since c8): after the 11-13 fix 2 of 3,537 dead-bucket rows bid >= 1c; the 22 'bid >= 1c' rows are pre-fix, local hours
+  00-10 (previous-day obs). W2 stays DEAD; item closed.
+- Test (outside the box N26, tsa_census.py via Actions, 488 markets / 70 TSA-passenger events Nov 2025 - Mar 2026): YES rich on 0.10-0.50
+  buckets; favourite side 0.80-0.90 +7..+11%/$ at +2c + fee at all three clocks (27-35 days); 0.60-0.80 flips sign = noise. Last prices,
+  one 4-month period, and no TSA market is live now -> PARKED (relaunch watch; tsa.gov is reachable from Actions for a YoY model).
+- New ideas: N25 lock_cheap (adjacent, forward read-out from 11-14 09:00), N26 TSA (outside the box, PARKED). Gas-price markets checked
+  first: 13 events ever -> not worth a test.
+- Parallel session active (tape_census.py, maker-vs-taker); did not touch its files.
+- Next: confirm fast run 40 publishes at ~10:05; lock_early kill at 50; lock_p week mark 11-17 with the price split; box office 14 UTC today;
+  LP-1 48-h read 11-15 ~19 UTC; N22 Argentina CPI census.

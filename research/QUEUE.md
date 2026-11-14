@@ -698,3 +698,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - N23 / converge_day DEAD: last-day favourites 0.95-0.99, 750 events over 5 months -1.3%/$, a war-topic filter does not rescue it (rest -1.9%);
   removed from the slow job. N24 earthquakes vs USGS PARKED (13 markets). lock_x / lock_p unchanged (no new signals), lock_early -3.2% at 45.
   Next: lock_early kill check, box office Saturday, LP-1 48 h read, N22 Argentina CPI census.
+
+## 11-14 09:40 cycle 11
+- Fast bot was down 06:58-09:03 (runner shutdown signal); restarted fast + slow paper. lock_p's +6.8% is 7 trades bought at 0.52-0.74; the
+  >= 0.80 'locks' are +1.0% (lock_x -3.9%) -> N25 forward read-out. N26 TSA buckets: fav 0.80-0.90 +7..+11% on last prices, no live markets
+  -> PARKED. W2 recount closed (dead). Next: lock_early kill, box office 14 UTC, lock_p week 11-17.
