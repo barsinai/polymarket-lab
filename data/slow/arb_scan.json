@@ -1,5 +1,5 @@
 {
-"scanned": "2026-11-14 02:27",
+"scanned": "2026-11-14 03:26",
 "events": 2100,
 "groups": 2037,
 "books": 16892,
@@ -87,28 +87,6 @@
 "usd_at_size": 128.45
 },
 {
-"kind": "negrisk_all_yes",
-"event": "South Korea Annual Inflation 2026",
-"slug": "south-korea-annual-inflation-2026",
-"n": 7,
-"has_other": false,
-"outcomes": [
-"<1.5%",
-"1.5% to 1.7%",
-"1.8% to 2.0%",
-"2.1% to 2.3%",
-"2.4% to 2.6%",
-"2.7% to 2.9%",
-"3.0%+"
-],
-"cost": 0.975,
-"payoff": 1,
-"edge": 0.025,
-"edge_after_fee": -0.0219,
-"size_shares": 19.29,
-"usd_at_size": 18.81
-},
-{
 "kind": "ladder_num",
 "event": "StandX FDV above ___ one day after launch?",
 "slug": "standx-fdv-above-one-day-after-launch",
@@ -170,6 +148,31 @@
 },
 {
 "kind": "negrisk_all_yes",
+"event": "South Africa Annual Inflation 2026",
+"slug": "south-africa-annual-inflation-2026",
+"n": 10,
+"has_other": false,
+"outcomes": [
+"<2.6%",
+"2.6-2.9%",
+"2.9-3.2%",
+"3.2-3.5%",
+"3.5-3.8%",
+"3.8-4.1%",
+"4.1-4.4%",
+"4.4-4.7%",
+"4.7-5.0%",
+">5.0%"
+],
+"cost": 0.977,
+"payoff": 1,
+"edge": 0.023,
+"edge_after_fee": -0.0249,
+"size_shares": 7.45,
+"usd_at_size": 7.28
+},
+{
+"kind": "negrisk_all_yes",
 "event": "Discord IPO Closing Market Cap",
 "slug": "discord-ipo-closing-market-cap-20260626185933220",
 "n": 8,
@@ -192,6 +195,28 @@
 "usd_at_size": 41.43
 },
 {
+"kind": "negrisk_all_yes",
+"event": "South Korea Annual Inflation 2026",
+"slug": "south-korea-annual-inflation-2026",
+"n": 7,
+"has_other": false,
+"outcomes": [
+"<1.5%",
+"1.5% to 1.7%",
+"1.8% to 2.0%",
+"2.1% to 2.3%",
+"2.4% to 2.6%",
+"2.7% to 2.9%",
+"3.0%+"
+],
+"cost": 0.971,
+"payoff": 1,
+"edge": 0.029,
+"edge_after_fee": -0.0178,
+"size_shares": 5.0,
+"usd_at_size": 4.85
+},
+{
 "kind": "ladder_num",
 "event": "How high will US unemployment go in 2026?",
 "slug": "how-high-will-us-unemployment-go-in-2026",
@@ -205,31 +230,6 @@
 "edge_after_fee": 0.0028,
 "size_shares": 35.56,
 "usd_at_size": 35.42
-},
-{
-"kind": "negrisk_all_yes",
-"event": "South Africa Annual Inflation 2026",
-"slug": "south-africa-annual-inflation-2026",
-"n": 10,
-"has_other": false,
-"outcomes": [
-"<2.6%",
-"2.6-2.9%",
-"2.9-3.2%",
-"3.2-3.5%",
-"3.5-3.8%",
-"3.8-4.1%",
-"4.1-4.4%",
-"4.4-4.7%",
-"4.7-5.0%",
-">5.0%"
-],
-"cost": 0.981,
-"payoff": 1,
-"edge": 0.019,
-"edge_after_fee": -0.029,
-"size_shares": 7.45,
-"usd_at_size": 7.31
 },
 {
 "kind": "negrisk_all_yes",
@@ -258,11 +258,11 @@
 "easy": "Printr FDV above $500M one day after launch?",
 "hard": "Printr FDV above $1B one day after launch?",
 "easy_yes_ask": 0.049,
-"hard_no_ask": 0.927,
-"hard_yes_bid": 0.073,
-"cost": 0.976,
-"edge": 0.024,
-"edge_after_fee": 0.016,
+"hard_no_ask": 0.926,
+"hard_yes_bid": 0.074,
+"cost": 0.975,
+"edge": 0.025,
+"edge_after_fee": 0.0169,
 "size_shares": 1.61,
 "usd_at_size": 1.57
 },
