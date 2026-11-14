@@ -1,53 +1,42 @@
-"""Read-only look at public combo (parlay) data: SDK public-client methods and model fields, then the raw endpoints
-(combo markets, combo activity, combo positions, biggest winners) without keys. No orders, no quote requests."""
-import os, re, subprocess, sys, json, inspect, time
-subprocess.run([sys.executable, "-m", "pip", "install", "-q", "polymarket-client"], check=False)
+"""Read-only probe: status filters of /v2/positions/combos (the default listing hides redeemed winners) and the row shapes of
+/v2/activity/combos, for one maker wallet seen in the census. No keys, no orders."""
+import json, collections
 import requests
-try:
-    import polymarket
-except Exception as e:  # noqa: BLE001
-    print("import failed", e); sys.exit(0)
-d = os.path.dirname(polymarket.__file__)
-print("clients:", [n for n in dir(polymarket) if "Client" in n])
-
-
-def show(path, a, b):
-    try:
-        lines = open(os.path.join(d, path), encoding="utf-8").read().split("\n")
-        print(f"\n--- {path} [{a}:{b}]")
-        for i in range(a - 1, min(b, len(lines))):
-            print(f"{i + 1:5}: {lines[i][:200]}")
-    except Exception as e:  # noqa: BLE001
-        print("  cannot show", path, e)
-
-
-show("_internal/actions/data.py", 155, 180)
-show("_internal/actions/data.py", 248, 295)
-show("_internal/actions/data.py", 590, 640)
-show("_internal/actions/rfq.py", 60, 90)
-# model fields
-for root, _, fs in os.walk(os.path.join(d, "models")):
-    for f in fs:
-        p = os.path.join(root, f)
-        src = open(p, encoding="utf-8", errors="ignore").read()
-        for cls in ("ComboTradeActivity", "ComboPosition", "ComboPositionLeg", "ComboMarket", "ComboBiggestWinner", "ComboActivity"):
-            m = re.search(rf"class {cls}\b[^\n]*\n((?:    [^\n]*\n|\n){{1,45}})", src)
-            if m:
-                print(f"\n--- {os.path.relpath(p, d)} class {cls}\n{m.group(1)[:1800]}")
 S = requests.Session(); S.headers["User-Agent"] = "polymarket-lab-research/0.1"
+DA = "https://data-api.polymarket.com"
+W = "0x2b9653d5e0a68b4867eacfa26cfa04c3802831b1"
 
 
-def raw(url, params=None):
+def raw(path, params, show=600):
     try:
-        r = S.get(url, params=params, timeout=30)
-        print(f"\nGET {url} {params} -> {r.status_code} {len(r.content)} bytes\n{r.text[:1800]}")
-        return r.json() if r.status_code == 200 else None
+        r = S.get(DA + path, params=params, timeout=30)
+        try:
+            d = r.json()
+        except Exception:  # noqa: BLE001
+            d = None
+        rows = (d or {}).get("data") if isinstance(d, dict) else None
+        print(f"GET {path} {params} -> {r.status_code} rows {len(rows) if rows is not None else '-'} {'' if rows else r.text[:show]}")
+        return rows
     except Exception as e:  # noqa: BLE001
-        print("  !", url, e); return None
+        print("  !", path, e); return None
 
 
-cm = raw("https://combos-rfq-api.polymarket.com/v1/rfq/combo-markets", {"limit": 3})
-act = raw("https://data-api.polymarket.com/v2/activity/combos", {"limit": 5})
-pos = raw("https://data-api.polymarket.com/v2/positions/combos", {"limit": 5})
-for path in ("/v2/biggest-winners", "/v2/winners", "/biggest-winners", "/v2/leaderboard/biggest-winners"):
-    raw("https://data-api.polymarket.com" + path, {"limit": 3})
+for st in ("OPEN", "REDEEMABLE", "RESOLVED_WIN", "RESOLVED_LOSS", "RESOLVED", "REDEEMED", "CLOSED", "PARTIAL", "ALL", "WON", "bogus"):
+    rows = raw("/v2/positions/combos", {"user": W, "limit": 3, "status": st})
+    if rows:
+        print("   statuses:", collections.Counter(r.get("status") for r in rows), "sample:", json.dumps({k: v for k, v in rows[0].items() if k != "legs"})[:500])
+for extra in ({"size_threshold": 0}, {"sizeThreshold": 0}, {"include_dust": "true"}, {"sort_by": "bogus"}):
+    rows = raw("/v2/positions/combos", dict({"user": W, "limit": 3}, **extra))
+    if rows:
+        print("   statuses:", collections.Counter(r.get("status") for r in rows))
+rows = raw("/v2/activity/combos", {"user": W, "limit": 1000})
+if rows:
+    print("activity types:", collections.Counter((r.get("type"), r.get("side"), r.get("outcome_index")) for r in rows))
+    seen = set()
+    for r in rows:
+        k = (r.get("type"), r.get("side"))
+        if k not in seen:
+            seen.add(k); print("  ", json.dumps({kk: vv for kk, vv in r.items() if kk not in ("icon", "image")})[:900])
+    ts = [r.get("timestamp") for r in rows if r.get("timestamp")]
+    print("  time span of 1000 rows:", min(ts), max(ts))
+raw("/v2/activity", {"user": W, "limit": 3})
