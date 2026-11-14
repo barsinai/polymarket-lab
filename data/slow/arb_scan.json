@@ -1,8 +1,8 @@
 {
-"scanned": "2026-11-14 19:17",
+"scanned": "2026-11-14 20:10",
 "events": 2100,
 "groups": 2037,
-"books": 16850,
+"books": 16848,
 "opps": [
 {
 "kind": "ladder_num",
@@ -20,6 +20,31 @@
 "usd_at_size": 1579.95
 },
 {
+"kind": "negrisk_all_yes",
+"event": "South Africa Annual Inflation 2026",
+"slug": "south-africa-annual-inflation-2026",
+"n": 10,
+"has_other": false,
+"outcomes": [
+"<2.6%",
+"2.6-2.9%",
+"2.9-3.2%",
+"3.2-3.5%",
+"3.5-3.8%",
+"3.8-4.1%",
+"4.1-4.4%",
+"4.4-4.7%",
+"4.7-5.0%",
+">5.0%"
+],
+"cost": 0.964,
+"payoff": 1,
+"edge": 0.036,
+"edge_after_fee": -0.0117,
+"size_shares": 26.06,
+"usd_at_size": 25.12
+},
+{
 "kind": "ladder_num",
 "event": "StandX FDV above ___ one day after launch?",
 "slug": "standx-fdv-above-one-day-after-launch",
@@ -35,21 +60,6 @@
 "usd_at_size": 143.5
 },
 {
-"kind": "ladder_num",
-"event": "Reya FDV above ___ one day after launch?",
-"slug": "reya-fdv-above-one-day-after-launch",
-"easy": "Reya FDV above $300M one day after launch?",
-"hard": "Reya FDV above $400M one day after launch?",
-"easy_yes_ask": 0.048,
-"hard_no_ask": 0.948,
-"hard_yes_bid": 0.052,
-"cost": 0.996,
-"edge": 0.004,
-"edge_after_fee": -0.0026,
-"size_shares": 188.97,
-"usd_at_size": 188.21
-},
-{
 "kind": "ladder_date",
 "event": "Will Israel annex any territory by...?",
 "slug": "will-israel-annex-any-territory-by-december-31",
@@ -63,6 +73,21 @@
 "edge_after_fee": 0.0446,
 "size_shares": 12.5,
 "usd_at_size": 11.83
+},
+{
+"kind": "ladder_num",
+"event": "Reya FDV above ___ one day after launch?",
+"slug": "reya-fdv-above-one-day-after-launch",
+"easy": "Reya FDV above $300M one day after launch?",
+"hard": "Reya FDV above $400M one day after launch?",
+"easy_yes_ask": 0.048,
+"hard_no_ask": 0.948,
+"hard_yes_bid": 0.052,
+"cost": 0.996,
+"edge": 0.004,
+"edge_after_fee": -0.0026,
+"size_shares": 158.97,
+"usd_at_size": 158.33
 },
 {
 "kind": "negrisk_all_no",
@@ -118,33 +143,8 @@
 "cost": 0.996,
 "edge": 0.004,
 "edge_after_fee": -0.0001,
-"size_shares": 94.48,
-"usd_at_size": 94.1
-},
-{
-"kind": "negrisk_all_yes",
-"event": "South Africa Annual Inflation 2026",
-"slug": "south-africa-annual-inflation-2026",
-"n": 10,
-"has_other": false,
-"outcomes": [
-"<2.6%",
-"2.6-2.9%",
-"2.9-3.2%",
-"3.2-3.5%",
-"3.5-3.8%",
-"3.8-4.1%",
-"4.1-4.4%",
-"4.4-4.7%",
-"4.7-5.0%",
-">5.0%"
-],
-"cost": 0.966,
-"payoff": 1,
-"edge": 0.034,
-"edge_after_fee": -0.0138,
-"size_shares": 9.91,
-"usd_at_size": 9.57
+"size_shares": 76.97,
+"usd_at_size": 76.66
 },
 {
 "kind": "ladder_date",
@@ -175,6 +175,21 @@
 "edge_after_fee": 0.0028,
 "size_shares": 35.56,
 "usd_at_size": 35.42
+},
+{
+"kind": "ladder_date",
+"event": "Anthropic IPO by __?",
+"slug": "anthropic-ipo-by",
+"easy": "Will Anthropic IPO by November 23, 2026?",
+"hard": "Will Anthropic IPO by November 20, 2026?",
+"easy_yes_ask": 0.962,
+"hard_no_ask": 0.033,
+"hard_yes_bid": 0.967,
+"cost": 0.995,
+"edge": 0.005,
+"edge_after_fee": 0.0002,
+"size_shares": 26.32,
+"usd_at_size": 26.19
 },
 {
 "kind": "ladder_num",
