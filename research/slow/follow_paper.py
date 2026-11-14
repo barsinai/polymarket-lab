@@ -1,33 +1,42 @@
-"""Paper tracker (NO ORDERS, public endpoints only): follow big taker orders at the REAL ask a moment later.
+"""Paper tracker (NO ORDERS, public endpoints only): copy the takers with a winning record at the REAL ask a moment later.
 
-Why (11-14, tape_census.py / tape_entries.py, public trade tape): on Polymarket the makers lose to the takers in slow categories,
-and the taker's edge grows with the size of the trade: trades under $10 lose 1.6 points per share, trades of $1,000+ win 6.4
-[3.2, 9.9], and a follower who bought at the next same-way print still kept +4.6 [1.1, 8.1] (6 weeks, 6 small categories, 61
-events). 'Next print' is a proxy; this tracker measures the real thing: the best ask in the order book when a slow bot would act.
+Why (11-14, tape_entries.py: 7.6M taker trades, 49k markets, 12 weeks): the only public signal that held out of sample is WHO is
+buying. Wallets that won in the older 6 weeks kept winning in the newer 6 (+1.6 points per share [1.0, 2.2] at their own prices,
++8% of the money they put in; the 46 largest winners +2.9 [1.7, 3.9]). Order SIZE alone carries nothing (12,830 orders >= $1,000,
+822 events: -1.7 [-6.0, +1.6]). In the back-test a follower who bought at the next same-way print by someone else, a minute or more
+later, kept only +0.4 [-0.2, +1.2] - but that print is a late and biased proxy. This tracker measures the real thing: the best
+ask in the order book 10-40 s after their trade.
+
+Signal wallets: research/slow/follow_whitelist.json (148 wallets that won in BOTH halves of the 12 weeks; in each half >= 15 entries,
+>= 5 events, >= $500, P&L >= +5% of cost and >= +2 points per entry). Control group: every 5th order >= $1,000 by any other
+wallet (the back-test says ~0; if the control shows an edge too, the method is flattering us).
 
 Loop (RUN_MIN minutes, one poll every POLL s): the public feed of taker fills >= $FILTER (data-api /v2/trades, a few seconds
 behind the chain). Fills of one wallet one way in one market are summed per transaction (an 'order') and over 30 minutes (an
 'accumulation'). Direction +1 = towards YES (buy YES or sell NO); every fill is booked as buying the token of its direction at the
-ask-equivalent price (buy: p, sell: 1 - p) - the same definitions as the back-test (buy_frac = the share that was real buys;
-a sale of YES counts as 'towards NO' but may be profit-taking - the back-test file cannot tell them apart, this log can).
-When the sum crosses a tier ($1,000, $2,500, $10,000): classify the market by its event's tags, drop sports / e-sports / parlays /
-crypto up-down (fast, in-play), drop markets that are closed, end in < 1 h or in > 60 days, read the book of the token of the
-order's direction and paper-buy $20 at the best ask if it is 0.03-0.97.
-Flags on every paper position: tier, cap_ok (ask <= the order's average price + 3c) and primary (the first cap_ok position in
-that market and direction that UTC day) - 'primary' is the rule a real bot would run; the rest is for slicing (category, price,
-market volume, order size vs volume, days to the end, buy vs sell).
+ask-equivalent price (buy: p, sell: 1 - p) - the same definitions as the back-test (buy_frac = the share that was real buys).
+When the sum crosses a tier (signal wallets $50 / $250 / $1,000; control $1,000 / $2,500 / $10,000): classify the market by its
+event's tags, drop sports / e-sports / parlays / crypto up-down (fast, in-play), drop markets that are closed, end in < 1 h or in
+> 60 days, read the book of the token of the order's direction and paper-buy $20 at the best ask if it is 0.03-0.97.
+Flags on every paper position: grp ('sharp' or 'control'), tier, cap_ok (ask <= their average price + 3c) and primary (the first
+cap_ok position of that group in that market and direction that UTC day) - 'primary' is the rule a real bot would run.
 The ask is read again 5 and 60 minutes later (does it run away?) and the bid/ask 24 and 72 hours later (a mark for positions that
 settle late). Settled at resolution with the market's taker fee.
 
-Storage (append-only, so the hourly git save stays small): data/bigfollow/opens-<day>.jsonl (one line per position),
+Decision rule, fixed before the first position (11-14): read 'sharp' primary positions after >= 300 settled over >= 100 events
+and >= 10 days. Edge >= +1.5 points per share with the event-bootstrap 95% interval above 0 -> propose a small live test to the
+user. Edge < +0.5 or the interval's top < +1.5 -> DEAD. Anything else: keep collecting to 1,000.
+
+Storage (append-only, so the hourly git save stays small): data/follow/opens-<day>.jsonl (one line per position),
 upd-<day>.jsonl (later prices and settlements, by position id), state.json, report.json."""
-import json, os, time, glob, datetime as dt, collections
+import json, os, time, glob, hashlib, datetime as dt, collections
 import requests
 
 DA = "https://data-api.polymarket.com"; G = "https://gamma-api.polymarket.com"; CLOB = "https://clob.polymarket.com"
 RUN_MIN = float(os.environ.get("RUN_MIN", "55")); POLL = float(os.environ.get("POLL", "20")); FILTER = float(os.environ.get("FILTER", "10"))
-TIERS = (1000, 2500, 10000); STAKE = 20.0; CAP = 0.03; WINDOW = 1800; BACK = 60; MAX_DAYS = 60
-D = os.environ.get("BF_DIR", "data/bigfollow"); CACHE = os.environ.get("BF_CACHE", "/tmp/bf_cache.json")
+TIERS = {"sharp": (50, 250, 1000), "control": (1000, 2500, 10000)}; CONTROL_1_IN = int(os.environ.get("CONTROL_1_IN", "5")); STAKE = 20.0; CAP = 0.03; WINDOW = 1800; BACK = 60; MAX_DAYS = 60
+D = os.environ.get("BF_DIR", "data/follow"); CACHE = os.environ.get("BF_CACHE", "/tmp/follow_cache.json")
+WL = os.environ.get("BF_WHITELIST", os.path.join(os.path.dirname(os.path.abspath(__file__)), "follow_whitelist.json"))
 STATE = f"{D}/state.json"; REP = f"{D}/report.json"
 FAST = {"sports", "games", "esports", "soccer", "nba", "nfl", "nhl", "mlb", "ncaa", "tennis", "ufc", "mma", "cricket", "golf", "f1", "formula1", "cfb", "cbb",
         "boxing", "epl", "ucl", "up-or-down", "crypto-up-down", "5m", "15m", "1h", "hourly", "4h"}
@@ -90,6 +99,7 @@ def append(kind, obj):                                           # one JSON line
 
 
 os.makedirs(D, exist_ok=True); _checked = set()
+SHARP = {a.lower() for a in (load(WL, {}).get("wallets") or {})}
 st = load(STATE, {})
 since = max(float(st.get("since", 0)), time.time() - 600)             # a restart never replays more than 10 minutes
 primary = set(st.get("primary", [])); started = st.get("started") or int(time.time()); hours = float(st.get("hours", 0)); seq = int(st.get("seq", 0))
@@ -194,9 +204,9 @@ def skip(why):
     stats["skip: " + why] += 1; total["skip: " + why] += 1
 
 
-def trigger(cid, w, d, tier, o, acc, row):
+def trigger(cid, w, d, tier, o, acc, row, grp):
     global seq
-    now = time.time(); total[f"crossings ${tier}"] += 1
+    now = time.time(); total[f"{grp} crossings ${tier}"] += 1
     ev_slug = row.get("event_slug") or ""; title = row.get("title") or ""
     if is_fast(ev_slug, None) or is_fast(row.get("slug"), None):
         return skip("fast: crypto up/down")
@@ -227,19 +237,19 @@ def trigger(cid, w, d, tier, o, acc, row):
     if not 0.03 <= b["ask"] <= 0.97:
         return skip("ask outside 0.03-0.97")
     avg = acc["usd"] / acc["sh"]
-    day = time.strftime("%Y-%m-%d", time.gmtime(now)); pk = f"{cid}|{d}|{day}"
+    day = time.strftime("%Y-%m-%d", time.gmtime(now)); pk = f"{cid}|{d}|{grp[0]}|{day}"
     cap_ok = b["ask"] <= avg + CAP + 1e-9
     prim = bool(cap_ok and pk not in primary)
     if prim:
-        primary.add(pk); total["primary follows"] += 1
+        primary.add(pk); total[f"{grp} primary follows"] += 1
     sh = STAKE / b["ask"]; seq += 1
-    rec = {"id": str(seq), "t": int(now), "lag": int(now - acc["t_last"]), "cid": cid, "mid": m["id"], "idx": idx, "dir": d, "tier": tier,
+    rec = {"id": str(seq), "t": int(now), "grp": grp, "lag": int(now - acc["t_last"]), "cid": cid, "mid": m["id"], "idx": idx, "dir": d, "tier": tier,
            "kind": "order" if o["usd"] >= tier else "accum", "usd": round(acc["usd"]), "avg": round(avg, 4), "max": round(acc["max"], 4),
            "buy_frac": round(acc["buy"] / acc["usd"], 2), "fills": acc["n"], "w": w, "q": m["q"], "ev": ev_slug,
            "cat": next((c for t, c in CATS if t in tags), "other"), "tags": tags[:5], "hb": round(hb, 1), "end": int(m["end"] or 0), "vol": m["vol"],
            "ask": b["ask"], "ask_usd": b["ask_usd"], "usd2c": b["usd2c"], "bid": b["bid"], "cap_ok": cap_ok, "primary": prim, "sh": round(sh, 3),
            "fee_rate": m["fee"], "fee": round(m["fee"] * b["ask"] * (1 - b["ask"]) * sh, 4), "tok": m["tok"][idx]}
-    pos[rec["id"]] = rec; append("opens", rec); total["paper positions"] += 1; stats["paper positions"] += 1
+    pos[rec["id"]] = rec; append("opens", rec); total[f"{grp} paper positions"] += 1; stats[f"{grp} paper positions"] += 1
     recheck.extend((now + dl, rec["id"], key) for dl, key in LATER)
 
 
@@ -274,26 +284,30 @@ def save():
     hrs = round(hours + (time.time() - T0) / 3600, 2)
     dump({"since": since, "primary": sorted(k for k in primary if k.rsplit("|", 1)[-1] >= cutday), "started": started, "hours": hrs, "seq": seq, "totals": dict(total)}, STATE)
     dump({"e": ecache, "m": {k: v for k, v in mcache.items() if v}}, CACHE)
-    P = list(pos.values()); done = [p for p in P if p.get("res")]; main = [p for p in done if p["primary"]]; prim = [p for p in P if p["primary"]]
-    sl = sorted(p["ask"] - p["avg"] for p in P) or [0]; med = lambda L: sorted(L)[len(L) // 2] if L else None   # noqa: E731
+    P = list(pos.values()); med = lambda L: sorted(L)[len(L) // 2] if L else None   # noqa: E731
     band = lambda p: "ask < 0.20" if p["ask"] < 0.2 else "ask 0.20-0.50" if p["ask"] < 0.5 else "ask 0.50-0.80" if p["ask"] < 0.8 else "ask 0.80-0.97"   # noqa: E731
     hz = lambda p: "ends in < 24 h" if p["hb"] < 24 else "ends in 1-7 d" if p["hb"] < 168 else "ends in 7-60 d"   # noqa: E731
-    vb = lambda p: "market volume < $50k" if p["vol"] < 5e4 else "$50k-500k" if p["vol"] < 5e5 else ">= $500k"   # noqa: E731
-    rel = lambda p: "order >= 5% of market volume" if p["usd"] >= 0.05 * max(p["vol"], 1) else "order < 5% of market volume"   # noqa: E731
-    rep = {"updated": time.strftime("%Y-%m-%d %H:%M", time.gmtime()), "tracking_hours": hrs,
-           "rule": "primary = first position per market+direction+UTC day after a taker order/accumulation >= $1,000 (non-sports, ends in 1 h - 60 d), "
-                   "ask 0.03-0.97 and <= its average price + 3c; $20 at the ask; taker fee paid",
-           "positions": len(P), "open": len(P) - len(done), "settled": len(done), "primary": len(prim), "primary_settled": len(main),
-           "primary_per_day": round(len(prim) / max(hrs / 24, 0.01), 1),
-           "PRIMARY": table(main, lambda p: "all"), "primary_by_category": table(main, lambda p: p["cat"]), "primary_by_price": table(main, band),
-           "primary_by_days_to_end": table(main, hz), "primary_by_market_volume": table(main, vb), "primary_by_order_vs_volume": table(main, rel),
-           "primary_by_tier": table(main, lambda p: f"${p['tier']}+"), "primary_buys_vs_sells": table(main, lambda p: "real buys" if p["buy_frac"] >= 0.5 else "sells of the other side"),
-           "not_primary_cap_ok": table([p for p in done if p["cap_ok"] and not p["primary"]], lambda p: "all"),
-           "ask_ran_away_more_than_3c": table([p for p in done if not p["cap_ok"]], lambda p: "all"),
-           "mark_24h_all_primary_positions": mark(prim, "m24"), "mark_72h_all_primary_positions": mark(prim, "m72"),
-           "ask_minus_order_avg": {"p25": round(sl[len(sl) // 4], 3), "median": round(sl[len(sl) // 2], 3), "p75": round(sl[3 * len(sl) // 4], 3)},
-           "median_lag_s": med([p["lag"] for p in P]), "median_usd_at_ask": med([p["ask_usd"] for p in P]), "median_usd_within_2c": med([p["usd2c"] for p in P]),
-           "open_primary_by_category": dict(collections.Counter(p["cat"] for p in prim if not p.get("res"))), "totals": dict(total), "this_run": dict(stats)}
+    slip = lambda p: "ask <= their price" if p["ask"] <= p["avg"] + 1e-9 else "ask up to 1c above" if p["ask"] <= p["avg"] + 0.01 + 1e-9 else "ask 1-3c above"   # noqa: E731
+    rep = {"updated": time.strftime("%Y-%m-%d %H:%M", time.gmtime()), "tracking_hours": hrs, "signal_wallets": len(SHARP),
+           "rule": "primary = first position per market+direction+UTC day after a taker order/accumulation by a signal wallet (>= $50) or, control, "
+                   "every 5th order >= $1,000 by another wallet; non-sports, ends in 1 h - 60 d; ask 0.03-0.97 and <= their average price + 3c; $20 at the ask; fee paid",
+           "decision_rule": "sharp primary: >= 300 settled over >= 100 events and >= 10 days; >= +1.5 pts with the 95% interval above 0 -> propose a small live test; "
+                            "< +0.5 or interval top < +1.5 -> DEAD"}
+    for grp in ("sharp", "control"):
+        G_ = [p for p in P if p.get("grp") == grp]; done = [p for p in G_ if p.get("res")]; main = [p for p in done if p["primary"]]; prim = [p for p in G_ if p["primary"]]
+        sl = sorted(p["ask"] - p["avg"] for p in G_) or [0]
+        r = {"positions": len(G_), "open": len(G_) - len(done), "settled": len(done), "primary": len(prim), "primary_settled": len(main),
+             "primary_per_day": round(len(prim) / max(hrs / 24, 0.01), 1), "PRIMARY": table(main, lambda p: "all"), "by_category": table(main, lambda p: p["cat"]),
+             "by_price": table(main, band), "by_days_to_end": table(main, hz), "by_ask_vs_their_price": table(main, slip), "by_tier": table(main, lambda p: f"${p['tier']}+"),
+             "buys_vs_sells": table(main, lambda p: "real buys" if p["buy_frac"] >= 0.5 else "sells of the other side"),
+             "ask_ran_away_more_than_3c": table([p for p in done if not p["cap_ok"]], lambda p: "all"),
+             "mark_24h_all_primary": mark(prim, "m24"), "mark_72h_all_primary": mark(prim, "m72"),
+             "ask_minus_their_price": {"p25": round(sl[len(sl) // 4], 3), "median": round(sl[len(sl) // 2], 3), "p75": round(sl[3 * len(sl) // 4], 3)},
+             "share_cap_ok": round(sum(1 for p in G_ if p["cap_ok"]) / max(len(G_), 1), 3), "median_lag_s": med([p["lag"] for p in G_]),
+             "median_usd_at_ask": med([p["ask_usd"] for p in G_]), "median_usd_within_2c": med([p["usd2c"] for p in G_]),
+             "open_primary_by_category": dict(collections.Counter(p["cat"] for p in prim if not p.get("res")))}
+        rep[grp] = r
+    rep["positions"] = len(P); rep["settled"] = sum(1 for p in P if p.get("res")); rep["primary"] = sum(1 for p in P if p["primary"]); rep["totals"] = dict(total); rep["this_run"] = dict(stats)
     dump(rep, REP, indent=1)
     return rep
 
@@ -362,12 +376,15 @@ def poll():
         touched[ak] = (o, acc, r)
     since = tmax
     for (cid, w, d), (o, acc, r) in touched.items():
-        tier = max((x for x in TIERS if acc["usd"] >= x), default=0)
+        grp = "sharp" if w.lower() in SHARP else "control"
+        if grp == "control" and int(hashlib.md5(f"{cid}{w}".encode()).hexdigest(), 16) % CONTROL_1_IN:
+            continue
+        tier = max((x for x in TIERS[grp] if acc["usd"] >= x), default=0)
         f = fired.get((cid, w, d))
         if tier and (f is None or f[1] != acc["t"] or tier > f[0]):
             fired[(cid, w, d)] = (tier, acc["t"])
             try:
-                trigger(cid, w, d, tier, o, acc, r)
+                trigger(cid, w, d, tier, o, acc, r, grp)
             except Exception as e:  # noqa: BLE001
                 stats[f"trigger error {type(e).__name__}"] += 1
     cut = time.time() - 3 * WINDOW
@@ -405,4 +422,5 @@ while time.time() - T0 < RUN_MIN * 60:
     time.sleep(max(1.0, POLL - (time.time() - t_poll)))
 settle()
 rep = save()
-print(json.dumps({k: rep[k] for k in ("updated", "tracking_hours", "positions", "open", "settled", "primary", "primary_settled", "PRIMARY", "this_run")}))
+print(json.dumps({"updated": rep["updated"], "tracking_hours": rep["tracking_hours"], "sharp": {k: rep["sharp"][k] for k in ("positions", "settled", "primary", "primary_settled", "PRIMARY")},
+                  "control": {k: rep["control"][k] for k in ("positions", "settled", "primary", "primary_settled", "PRIMARY")}, "this_run": rep["this_run"]}))

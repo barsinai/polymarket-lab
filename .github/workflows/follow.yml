@@ -1,4 +1,4 @@
-name: Big-order follow paper tracker (no orders, chained)
+name: Follow-the-winning-wallets paper tracker (no orders, chained)
 
 # Paper only: reads the public trade feed and public order books, places nothing and uses no account or key.
 on:
@@ -11,7 +11,7 @@ permissions:
   actions: write
 
 concurrency:
-  group: bigfollow
+  group: follow
   cancel-in-progress: false
 
 jobs:
@@ -24,7 +24,7 @@ jobs:
           filter: blob:none
           sparse-checkout: |
             research
-            data/bigfollow
+            data/follow
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -33,14 +33,14 @@ jobs:
         run: |
           git config user.name "polymarket-lab-bot"
           git config user.email "actions@users.noreply.github.com"
-          save() { mkdir -p logs && tail -c 4000 /tmp/bigfollow.txt > logs/bigfollow-log.txt 2>/dev/null; git add --sparse data/bigfollow logs/bigfollow-log.txt; git commit -qm "Big-follow paper $(date -u +%FT%H:%M) [skip ci]" && for i in 1 2 3 4 5; do git pull -q --rebase -X theirs origin main && git push -q && break; sleep $((RANDOM % 10 + 3)); done; true; }
-          RUN_MIN=312 python -u research/slow/big_follow_paper.py > /tmp/bigfollow.txt 2>&1 &
+          save() { mkdir -p logs && tail -c 4000 /tmp/follow.txt > logs/follow-log.txt 2>/dev/null; git add --sparse data/follow logs/follow-log.txt; git commit -qm "Follow paper $(date -u +%FT%H:%M) [skip ci]" && for i in 1 2 3 4 5; do git pull -q --rebase -X theirs origin main && git push -q && break; sleep $((RANDOM % 10 + 3)); done; true; }
+          RUN_MIN=312 python -u research/slow/follow_paper.py > /tmp/follow.txt 2>&1 &
           PID=$!
           for i in 1 2 3 4 5 6; do for s in $(seq 1 360); do sleep 10; kill -0 $PID 2>/dev/null || break 2; done; save; done
           wait $PID || true
-          tail -c 1500 /tmp/bigfollow.txt; save
+          tail -c 1500 /tmp/follow.txt; save
       - name: Hand over
         if: always()
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh workflow run bigfollow.yml --ref main -R ${{ github.repository }}
+        run: gh workflow run follow.yml --ref main -R ${{ github.repository }}
