@@ -1,5 +1,5 @@
 {
-"scanned": "2026-11-14 14:22",
+"scanned": "2026-11-14 15:10",
 "events": 2100,
 "groups": 2037,
 "books": 16862,
@@ -16,8 +16,8 @@
 "cost": 0.996,
 "edge": 0.004,
 "edge_after_fee": 0.0013,
-"size_shares": 1647.14,
-"usd_at_size": 1640.55
+"size_shares": 1672.3,
+"usd_at_size": 1665.61
 },
 {
 "kind": "negrisk_all_yes",
@@ -56,8 +56,8 @@
 "cost": 0.994,
 "edge": 0.006,
 "edge_after_fee": 0.0034,
-"size_shares": 149.33,
-"usd_at_size": 148.43
+"size_shares": 144.37,
+"usd_at_size": 143.5
 },
 {
 "kind": "ladder_num",
@@ -132,18 +132,6 @@
 "usd_at_size": 128.45
 },
 {
-"kind": "negrisk_all_no",
-"event": "Anthropic IPO Closing Market Cap",
-"slug": "anthropic-ipo-closing-market-cap-higher-strikes",
-"n": 10,
-"cost": 8.996,
-"payoff": 9,
-"edge": 0.004,
-"edge_after_fee": -0.0454,
-"size_shares": 127.11,
-"usd_at_size": 1143.48
-},
-{
 "kind": "ladder_num",
 "event": "Hyperbeat FDV above ___ one day after launch?",
 "slug": "hyperbeat-fdv-above-one-day-after-launch",
@@ -157,6 +145,28 @@
 "edge_after_fee": 0.0015,
 "size_shares": 112.65,
 "usd_at_size": 112.2
+},
+{
+"kind": "negrisk_all_yes",
+"event": "Japan 10Y Bond Yield: End of 2026",
+"slug": "japan-10y-bond-yield-end-of-2026",
+"n": 7,
+"has_other": false,
+"outcomes": [
+"<2.0%",
+"2.0-2.2%",
+"2.2-2.4%",
+"2.4-2.6%",
+"2.6-2.8%",
+"2.8-3.0%",
+"3.0%+"
+],
+"cost": 0.964,
+"payoff": 1,
+"edge": 0.036,
+"edge_after_fee": -0.0187,
+"size_shares": 5.0,
+"usd_at_size": 4.82
 },
 {
 "kind": "ladder_date",
@@ -204,26 +214,16 @@
 "usd_at_size": 35.42
 },
 {
-"kind": "negrisk_all_yes",
-"event": "Anthropic IPO Closing Market Cap (Middle Brackets)",
-"slug": "anthropic-ipo-closing-market-cap-979",
-"n": 7,
-"has_other": false,
-"outcomes": [
-"<0.6T",
-"0.6\u20130.9T",
-"0.9\u20131.2T",
-"1.2\u20131.5T",
-"1.5\u20131.8T",
-"1.8T+",
-"No IPO by December 31, 2027"
-],
-"cost": 0.997,
-"payoff": 1,
-"edge": 0.003,
-"edge_after_fee": -0.0451,
-"size_shares": 38.9,
-"usd_at_size": 38.78
+"kind": "negrisk_all_no",
+"event": "Anthropic IPO Closing Market Cap",
+"slug": "anthropic-ipo-closing-market-cap-higher-strikes",
+"n": 10,
+"cost": 8.993,
+"payoff": 9,
+"edge": 0.007,
+"edge_after_fee": -0.0424,
+"size_shares": 20.0,
+"usd_at_size": 179.86
 },
 {
 "kind": "ladder_num",
@@ -232,13 +232,13 @@
 "easy": "Pacifica FDV above $1B one day after launch?",
 "hard": "Pacifica FDV above $3B one day after launch?",
 "easy_yes_ask": 0.006,
-"hard_no_ask": 0.987,
-"hard_yes_bid": 0.013,
-"cost": 0.993,
-"edge": 0.007,
-"edge_after_fee": 0.0057,
-"size_shares": 14.9,
-"usd_at_size": 14.8
+"hard_no_ask": 0.989,
+"hard_yes_bid": 0.011,
+"cost": 0.995,
+"edge": 0.005,
+"edge_after_fee": 0.0038,
+"size_shares": 20.4,
+"usd_at_size": 20.3
 },
 {
 "kind": "ladder_num",
@@ -254,21 +254,6 @@
 "edge_after_fee": 0.001,
 "size_shares": 7.71,
 "usd_at_size": 7.67
-},
-{
-"kind": "ladder_num",
-"event": "How high will inflation get in 2026?",
-"slug": "how-high-will-inflation-get-in-2026",
-"easy": "Will inflation reach more than 6% in 2026?",
-"hard": "Will inflation reach more than 8% in 2026?",
-"easy_yes_ask": 0.014,
-"hard_no_ask": 0.983,
-"hard_yes_bid": 0.017,
-"cost": 0.997,
-"edge": 0.003,
-"edge_after_fee": 0.0009,
-"size_shares": 12.11,
-"usd_at_size": 12.07
 },
 {
 "kind": "ladder_num",
