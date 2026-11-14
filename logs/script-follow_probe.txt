@@ -1,0 +1,76 @@
+{"updated": "2026-11-14 10:46", "tracking_hours": 0.1, "sharp": {"positions": 2, "settled": 0, "primary": 1, "primary_settled": 0, "PRIMARY": {}}, "control": {"positions": 1, "settled": 0, "primary": 1, "primary_settled": 0, "PRIMARY": {}}, "this_run": {"feed pages": 26, "polls": 18, "fills": 4085, "skip: fast: sports": 21, "sharp paper positions": 2, "skip: closed or ends in < 1 h": 2, "skip: ask outside 0.03-0.97": 2, "skip: fast: crypto up/down": 2, "control paper positions": 1}}
+
+== /tmp/bf_probe/opens-2026-11-14.jsonl: 4 lines, 2226 bytes
+{"id":"1","t":1794652843,"grp":"sharp","lag":410,"cid":"0x26cc1cc2c3dc4d6418878954dba8a356deafdd9b2221f7d6a749a6ecfea58e10","mid":"6981347","idx":0,"dir":1,"tier":50,"kind":"order","usd":59,"avg":0.9534,"max":0.9534,"buy_frac":1.0,"fills":1,"w":"0x0b435b5aee34b3295a36ff2c69de1d35b6642405","q":"Will the highest temperature in Jeddah be 35°C on November 14?","ev":"highest-temperature-in-jeddah-on-november-14-2026","cat":"weather","tags":["weather","recurring","hide-from-new","daily-temperature","jeddah"],"hb":1.3,"end":1794657600,"vol":2111,"ask":0.961,"ask_usd":77,"usd2c":216,"bid":0.891,"cap_ok":true,"primary":true,"sh":20.812,"fee_rate":0.05,"fee":0.039,"tok":"220268773789329166837587544294
+{"id":"2","t":1794653163,"grp":"control","lag":313,"cid":"0xd594753a5d2b4d3b9e65cdd06c3cbb0645d70be7626fad94774f45560b150d23","mid":"2299952","idx":1,"dir":-1,"tier":1000,"kind":"order","usd":1222,"avg":0.94,"max":0.94,"buy_frac":1.0,"fills":1,"w":"0xf1fddaa5047e7ea0188ecebf8effb2a3a6edb42c","q":"Will Anthropic's valuation hit (HIGH) $3.0T by December 31?","ev":"will-anthropics-valuation-hit-by-december-31","cat":"economy","tags":["finance","privates","llm","anthropic","dario-amodei"],"hb":1242.2,"end":1799125140,"vol":1918731,"ask":0.94,"ask_usd":39107,"usd2c":58655,"bid":0.93,"cap_ok":true,"primary":true,"sh":21.277,"fee_rate":0.04,"fee":0.048,"tok":"405046029997465020520811854093224224512
+{"id":"3","t":1794653163,"grp":"sharp","lag":80,"cid":"0xc612acd6fcd50e0c64d733dc0a5ac0a3997b980be1f5cf759c3307caedc64300","mid":"6934597","idx":0,"dir":1,"tier":250,"kind":"order","usd":400,"avg":0.6857,"max":0.6857,"buy_frac":1.0,"fills":1,"w":"0xf9db42cd8186e1547c85bb80f2616af109c88dc1","q":"Will MrBeast's next video get at least 110 million views on week 1?","ev":"of-views-of-next-mrbeast-video-on-week-1-20261110","cat":"culture","tags":["pop-culture","mrbeast","youtube","recurring"],"hb":186.2,"end":1795323540,"vol":4220,"ask":0.93,"ask_usd":42,"usd2c":74,"bid":0.56,"cap_ok":false,"primary":false,"sh":21.505,"fee_rate":0.05,"fee":0.07,"tok":"663352976446246731108006020959152533937759466
+
+
+== /tmp/bf_probe/report.json: 96 lines, 2556 bytes
+{
+ "updated": "2026-11-14 10:46",
+ "tracking_hours": 0.1,
+ "signal_wallets": 148,
+ "rule": "primary = first position per market+direction+UTC day after a taker order/accumulation by a signal wallet (>= $50) or, control, every 5th order >= $1,000 by another wallet; non-sports, ends in 1 h - 60 d; ask 0.03-0.97 and <= their average price + 3c; $20 at the ask; fee paid",
+ "decision_rule": "sharp primary: >= 300 settled over >= 100 events and >= 10 days; >= +1.5 pts with the 95% interval above 0 -> propose a small live test; < +0.5 or interval top < +1.5 -> DEAD",
+ "sharp": {
+  "positions": 2,
+  "open": 2,
+  "settled": 0,
+  "primary": 1,
+  "primary_settled": 0,
+  "primary_per_day": 100.0,
+  "PRIMARY": {},
+  "by_category": {},
+  "by_price": {},
+  "by_days_to_end": {},
+  "by_ask_vs_their_price": {},
+  "by_tier": {},
+  "buys_vs_sells": {},
+  "ask_ran_away_more_than_3c": {},
+  "mark_24h_all_primary": {},
+  "mark_72h_all_primary": {},
+  "ask_minus_their_price": {
+   "p25": 0.008,
+   "median": 0.244,
+   "p75": 0.244
+  },
+  "share_cap_ok": 0.5,
+  "median_lag_s": 410,
+  "median_usd_at_ask": 77,
+  "median_usd_within_2c": 216,
+  "open_primary_by_category": {
+   "weather": 1
+  }
+ },
+ "control": {
+  "positions": 1,
+  "open": 1,
+  "settled": 0,
+  "primary": 1,
+  "primary_settled": 0,
+  "primary_per_day": 100.0,
+  "PRIMARY": {},
+  "by_category": {},
+  "by_price": {},
+  "by_days_to_end": {},
+  "by_ask_vs_their_price": {},
+  "by_tier": {},
+  "buys_vs_sells": {},
+  "ask_ran_away_more_than_3c": {},
+  "mark_24h_all_primary": {},
+  "mark_72h_all_primary": {},
+  "ask_minus_their_price": {
+   "p25": 0.0,
+   "median": 0.0,
+   "p75": 0.0
+  },
+  "share_cap_ok": 1.0,
+  "median_lag_s": 313,
+
+== /tmp/bf_probe/state.json: 1 lines, 656 bytes
+{"since": 1794653161.0, "primary": ["0x26cc1cc2c3dc4d6418878954dba8a356deafdd9b2221f7d6a749a6ecfea58e10|1|s|2026-11-14", "0xd594753a5d2b4d3b9e65cdd06c3cbb0645d70be7626fad94774f45560b150d23|-1|c|2026-11-14"], "started": 1794652842, "hours": 0.1, "seq": 3, "totals": {"control crossings $1000": 16, "skip: fast: sports": 21, "control crossings $10000": 3, "control crossings $2500": 8, "sharp crossings $50": 1, "sharp primary follows": 1, "sharp paper positions": 2, "sharp crossings $250": 2, "skip: closed or ends in < 1 h": 2, "skip: ask outside 0.03-0.97": 2, "skip: fast: crypto up/down": 2, "control primary follows": 1, "control paper positions": 1}}
+
+== /tmp/bf_probe/upd-2026-11-14.jsonl: 2 lines, 24 bytes
+{"id":"1","ask5":0.973}
+
