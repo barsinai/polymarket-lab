@@ -22,6 +22,7 @@ PLANS = {"a": [("mention-markets", "mention", 1), ("earnings-calls", "mention", 
          "c": [("economy", "economy", 1), ("ai", "ai/tech", 1), ("tech", "ai/tech", 1), ("geopolitics", "geopolitics", 1), ("politics", "politics", 4)]}
 PLAN = PLANS[GROUP]
 ROW = struct.Struct("<IIIhfffHHHIB")
+ROW2 = struct.Struct("<IIIhffHHHHHIffB")     # big taker orders (>= $100)
 tl = threading.local(); lock = threading.Lock(); nxt = [0.0]; n429 = [0]
 
 
@@ -79,48 +80,71 @@ def ts(s):
 
 def process(m):
     if m["vol"] > 3e6:                                         # would hit the page cap anyway (truncated tapes are not used)
-        return m, None, 0, True
+        return m, None, None, 0, True
     rows, trunc = trades(m["cid"])
     if not rows or trunc:
-        return m, None, len(rows), trunc
-    T = []
+        return m, None, None, len(rows), trunc
+    # fills -> taker ORDERS (one transaction of one wallet one way): shares, cost, worst fill price, fee
+    od = {}
     for r in rows:
         try:
             p = float(r["price"]); s = float(r["size"]); oi = int(r["outcome_index"]); t = float(r["timestamp"]); buy = r["side"] == "BUY"
         except Exception:  # noqa: BLE001
             continue
-        if not (0 < p < 1) or s <= 0:
+        w = r.get("proxy_wallet") or ""
+        if not (0 < p < 1) or s <= 0 or not w:
             continue
         d = 1 if (buy and oi == 0) or ((not buy) and oi == 1) else -1
         a = p if buy else 1 - p
-        T.append((t, r.get("proxy_wallet") or "", d, a, s, m["fee"] * p * (1 - p) * s))
-    T.sort()
-    seq = {1: ([], [], []), -1: ([], [], [])}                  # per direction: times, prices, wallets
-    for t, w, d, a, s, f in T:
-        seq[d][0].append(t); seq[d][1].append(a); seq[d][2].append(w)
-    ent = {}; pre_cut = m["end"] - 3600
-    for t, w, d, a, s, f in T:
-        if not w:
-            continue
+        k = (r.get("transaction_hash") or t, w, d)
+        o = od.get(k)
+        if o is None:
+            od[k] = [t, w, d, s, a * s, a, m["fee"] * p * (1 - p) * s]
+        else:
+            o[3] += s; o[4] += a * s; o[5] = max(o[5], a); o[6] += m["fee"] * p * (1 - p) * s
+    T = sorted(od.values())
+    seq = {1: ([], [], []), -1: ([], [], [])}                  # per direction: times, average prices, wallets
+    for t, w, d, s, c, amax, f in T:
+        seq[d][0].append(t); seq[d][1].append(c / s); seq[d][2].append(w)
+
+    def nxt(t, w, d, delay):
+        ts_, ps_, ws_ = seq[d]
+        i = bisect.bisect_left(ts_, t + delay)
+        while i < len(ts_) and ts_[i] <= t + 6 * 3600:
+            if ws_[i] != w:
+                return ps_[i], ts_[i] - t
+            i += 1
+        return 0.0, 0
+
+    def prev(t, w, d):
+        ts_, ps_, ws_ = seq[d]
+        i = bisect.bisect_left(ts_, t) - 1
+        while i >= 0 and ts_[i] >= t - 24 * 3600:
+            if ws_[i] != w:
+                return ps_[i]
+            i -= 1
+        return 0.0
+
+    ent = {}; pre_cut = m["end"] - 3600; big = []; vol = 0.0; cum = collections.defaultdict(float)
+    for t, w, d, s, c, amax, f in T:
+        ywin = m["y0"] if d == 1 else 1 - m["y0"]
+        fl = (1 if d == 1 else 0) | (2 if ywin >= 0.5 else 0)
+        hb = max(-32000, min(32000, int((m["end"] - t) / 3600)))
+        if c >= 100:                                           # a 'big' taker order
+            a60, lag = nxt(t, w, d, 60); a300, _ = nxt(t, w, d, 300)
+            big.append((int(t), w, hb, c, s, c / s, amax, prev(t, w, d), a60, a300, int(lag), vol, cum[(w, d)], fl))
+        vol += c; cum[(w, d)] += c
         e = ent.get((w, d))
         if e is None:
-            ent[(w, d)] = [t, a, s, a * s, f, t <= pre_cut]
+            ent[(w, d)] = [t, c / s, s, c, f, t <= pre_cut]
         elif not (e[5] and t > pre_cut):                       # an entry opened before the event ignores the wallet's later live trades
-            e[2] += s; e[3] += a * s; e[4] += f
+            e[2] += s; e[3] += c; e[4] += f
     out = []
     for (w, d), (t, a, S, C, F, _pre) in ent.items():
-        ts_, ps_, ws_ = seq[d]
-        nx = []
-        for delay in (60, 300):
-            i = bisect.bisect_left(ts_, t + delay); a2 = 0.0; lag = 0
-            while i < len(ts_) and ts_[i] <= t + 6 * 3600:
-                if ws_[i] != w:
-                    a2 = ps_[i]; lag = ts_[i] - t; break
-                i += 1
-            nx.append((a2, lag))
+        a60, lag = nxt(t, w, d, 60); a300, _ = nxt(t, w, d, 300)
         ywin = m["y0"] if d == 1 else 1 - m["y0"]
-        out.append((int(t), w, max(-32000, min(32000, int((m["end"] - t) / 3600))), S, C, F, a, nx[0][0], nx[1][0], int(nx[0][1]), (1 if d == 1 else 0) | (2 if ywin >= 0.5 else 0)))
-    return m, out, len(rows), trunc
+        out.append((int(t), w, max(-32000, min(32000, int((m["end"] - t) / 3600))), S, C, F, a, a60, a300, int(lag), (1 if d == 1 else 0) | (2 if ywin >= 0.5 else 0)))
+    return m, out, big, len(rows), trunc
 
 
 now = dt.datetime.now(dt.timezone.utc)
@@ -168,13 +192,15 @@ for w in range(1, WEEKS + 1):                                  # newest weeks fi
     if w % 3 == 0:
         print(f"weeks 1-{w}: events {dict(ev_n)} markets {len(todo)}  ({time.time() - T0:.0f}s)", flush=True)
 
-markets = []; wallets = {}; wl = []; blob = bytearray(); n_tr = 0; n_trunc = 0; done = 0
+markets = []; wallets = {}; wl = []; blob = bytearray(); blob2 = bytearray(); n_tr = 0; n_trunc = 0; done = 0
 
 
 def save():
     with gzip.open(f"data/research/entries_{GROUP}.bin.gz", "wb") as fh:
         fh.write(bytes(blob))
-    json.dump({"at": now.strftime("%Y-%m-%d %H:%M"), "group": GROUP, "weeks": WEEKS, "row": ROW.format, "markets": markets, "wallets": wl,
+    with gzip.open(f"data/research/orders_{GROUP}.bin.gz", "wb") as fh:
+        fh.write(bytes(blob2))
+    json.dump({"at": now.strftime("%Y-%m-%d %H:%M"), "group": GROUP, "weeks": WEEKS, "row": ROW.format, "row2": ROW2.format, "markets": markets, "wallets": wl,
                "trades": n_tr, "truncated_markets": n_trunc}, gzip.open(f"data/research/entries_{GROUP}_meta.json.gz", "wt"), separators=(",", ":"))
 
 
@@ -189,7 +215,7 @@ with ThreadPoolExecutor(5) as ex:
             futs.append(ex.submit(process, m))
         if not futs:
             break
-        m, out, n, trunc = futs.pop(0).result()
+        m, out, big, n, trunc = futs.pop(0).result()
         done += 1; n_tr += n; n_trunc += trunc
         if out:
             mi = len(markets)
@@ -199,8 +225,14 @@ with ThreadPoolExecutor(5) as ex:
                 if wi is None:
                     wi = wallets[w] = len(wl); wl.append(w)
                 blob += ROW.pack(t, mi, wi, hb, S, C, F, int(round(a * 1e4)), int(round(a60 * 1e4)), int(round(a300 * 1e4)), min(lag, 4000000000), fl)
+            for t, w, hb, c, sh, aavg, amax, aprev, a60, a300, lag, volp, cumw, fl in big:
+                wi = wallets.get(w)
+                if wi is None:
+                    wi = wallets[w] = len(wl); wl.append(w)
+                blob2 += ROW2.pack(t, mi, wi, hb, c, sh, int(round(aavg * 1e4)), int(round(amax * 1e4)), int(round(aprev * 1e4)), int(round(a60 * 1e4)),
+                                   int(round(a300 * 1e4)), min(lag, 4000000000), volp, cumw, fl)
         if done % 2000 == 0:
-            print(f"  {done}/{len(todo)} markets, {n_tr} trades, entries {len(blob) // ROW.size}, wallets {len(wl)}, truncated {n_trunc}, 429s {n429[0]}, {time.time() - T0:.0f}s", flush=True)
+            print(f"  {done}/{len(todo)} markets, {n_tr} trades, entries {len(blob) // ROW.size}, big orders {len(blob2) // ROW2.size}, wallets {len(wl)}, truncated {n_trunc}, 429s {n429[0]}, {time.time() - T0:.0f}s", flush=True)
         if time.time() - last_save > 900:
             save(); last_save = time.time()
     left = sum(1 for _ in it)
