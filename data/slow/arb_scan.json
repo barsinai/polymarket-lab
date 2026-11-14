@@ -1,5 +1,5 @@
 {
-"scanned": "2026-11-14 15:10",
+"scanned": "2026-11-14 16:09",
 "events": 2100,
 "groups": 2037,
 "books": 16862,
@@ -16,33 +16,8 @@
 "cost": 0.996,
 "edge": 0.004,
 "edge_after_fee": 0.0013,
-"size_shares": 1672.3,
-"usd_at_size": 1665.61
-},
-{
-"kind": "negrisk_all_yes",
-"event": "South Africa Annual Inflation 2026",
-"slug": "south-africa-annual-inflation-2026",
-"n": 10,
-"has_other": false,
-"outcomes": [
-"<2.6%",
-"2.6-2.9%",
-"2.9-3.2%",
-"3.2-3.5%",
-"3.5-3.8%",
-"3.8-4.1%",
-"4.1-4.4%",
-"4.4-4.7%",
-"4.7-5.0%",
-">5.0%"
-],
-"cost": 0.949,
-"payoff": 1,
-"edge": 0.051,
-"edge_after_fee": 0.0037,
-"size_shares": 20.0,
-"usd_at_size": 18.98
+"size_shares": 1642.3,
+"usd_at_size": 1635.73
 },
 {
 "kind": "ladder_num",
@@ -58,21 +33,6 @@
 "edge_after_fee": 0.0034,
 "size_shares": 144.37,
 "usd_at_size": 143.5
-},
-{
-"kind": "ladder_num",
-"event": "Extended FDV above ___ one day after launch?",
-"slug": "extended-fdv-above-one-day-after-launch",
-"easy": "Extended FDV above $800M one day after launch?",
-"hard": "Extended FDV above $1B one day after launch?",
-"easy_yes_ask": 0.024,
-"hard_no_ask": 0.97,
-"hard_yes_bid": 0.03,
-"cost": 0.994,
-"edge": 0.006,
-"edge_after_fee": 0.0023,
-"size_shares": 134.0,
-"usd_at_size": 133.2
 },
 {
 "kind": "ladder_date",
@@ -100,6 +60,31 @@
 "edge_after_fee": -0.0262,
 "size_shares": 40.0,
 "usd_at_size": 319.44
+},
+{
+"kind": "negrisk_all_yes",
+"event": "South Africa Annual Inflation 2026",
+"slug": "south-africa-annual-inflation-2026",
+"n": 10,
+"has_other": false,
+"outcomes": [
+"<2.6%",
+"2.6-2.9%",
+"2.9-3.2%",
+"3.2-3.5%",
+"3.5-3.8%",
+"3.8-4.1%",
+"4.1-4.4%",
+"4.4-4.7%",
+"4.7-5.0%",
+">5.0%"
+],
+"cost": 0.946,
+"payoff": 1,
+"edge": 0.054,
+"edge_after_fee": 0.0067,
+"size_shares": 9.91,
+"usd_at_size": 9.37
 },
 {
 "kind": "ladder_num",
@@ -147,28 +132,6 @@
 "usd_at_size": 112.2
 },
 {
-"kind": "negrisk_all_yes",
-"event": "Japan 10Y Bond Yield: End of 2026",
-"slug": "japan-10y-bond-yield-end-of-2026",
-"n": 7,
-"has_other": false,
-"outcomes": [
-"<2.0%",
-"2.0-2.2%",
-"2.2-2.4%",
-"2.4-2.6%",
-"2.6-2.8%",
-"2.8-3.0%",
-"3.0%+"
-],
-"cost": 0.964,
-"payoff": 1,
-"edge": 0.036,
-"edge_after_fee": -0.0187,
-"size_shares": 5.0,
-"usd_at_size": 4.82
-},
-{
 "kind": "ladder_date",
 "event": "Will Israel annex any territory by...?",
 "slug": "will-israel-annex-any-territory-by-december-31",
@@ -184,19 +147,26 @@
 "usd_at_size": 44.82
 },
 {
-"kind": "ladder_num",
-"event": "Pacifica FDV above ___ one day after launch?",
-"slug": "pacifica-fdv-above-one-day-after-launch",
-"easy": "Pacifica FDV above $300M one day after launch?",
-"hard": "Pacifica FDV above $800M one day after launch?",
-"easy_yes_ask": 0.027,
-"hard_no_ask": 0.968,
-"hard_yes_bid": 0.032,
-"cost": 0.995,
-"edge": 0.005,
-"edge_after_fee": 0.001,
-"size_shares": 34.48,
-"usd_at_size": 34.31
+"kind": "negrisk_all_yes",
+"event": "Japan 10Y Bond Yield: End of 2026",
+"slug": "japan-10y-bond-yield-end-of-2026",
+"n": 7,
+"has_other": false,
+"outcomes": [
+"<2.0%",
+"2.0-2.2%",
+"2.2-2.4%",
+"2.4-2.6%",
+"2.6-2.8%",
+"2.8-3.0%",
+"3.0%+"
+],
+"cost": 0.967,
+"payoff": 1,
+"edge": 0.033,
+"edge_after_fee": -0.0219,
+"size_shares": 5.0,
+"usd_at_size": 4.84
 },
 {
 "kind": "ladder_num",
@@ -214,31 +184,19 @@
 "usd_at_size": 35.42
 },
 {
-"kind": "negrisk_all_no",
-"event": "Anthropic IPO Closing Market Cap",
-"slug": "anthropic-ipo-closing-market-cap-higher-strikes",
-"n": 10,
-"cost": 8.993,
-"payoff": 9,
-"edge": 0.007,
-"edge_after_fee": -0.0424,
-"size_shares": 20.0,
-"usd_at_size": 179.86
-},
-{
 "kind": "ladder_num",
-"event": "Pacifica FDV above ___ one day after launch?",
-"slug": "pacifica-fdv-above-one-day-after-launch",
-"easy": "Pacifica FDV above $1B one day after launch?",
-"hard": "Pacifica FDV above $3B one day after launch?",
-"easy_yes_ask": 0.006,
-"hard_no_ask": 0.989,
-"hard_yes_bid": 0.011,
-"cost": 0.995,
-"edge": 0.005,
-"edge_after_fee": 0.0038,
-"size_shares": 20.4,
-"usd_at_size": 20.3
+"event": "Extended FDV above ___ one day after launch?",
+"slug": "extended-fdv-above-one-day-after-launch",
+"easy": "Extended FDV above $800M one day after launch?",
+"hard": "Extended FDV above $1B one day after launch?",
+"easy_yes_ask": 0.024,
+"hard_no_ask": 0.969,
+"hard_yes_bid": 0.031,
+"cost": 0.993,
+"edge": 0.007,
+"edge_after_fee": 0.0033,
+"size_shares": 18.2,
+"usd_at_size": 18.07
 },
 {
 "kind": "ladder_num",
@@ -269,6 +227,21 @@
 "edge_after_fee": 0.0085,
 "size_shares": 1.61,
 "usd_at_size": 1.58
+},
+{
+"kind": "ladder_num",
+"event": "Pacifica FDV above ___ one day after launch?",
+"slug": "pacifica-fdv-above-one-day-after-launch",
+"easy": "Pacifica FDV above $300M one day after launch?",
+"hard": "Pacifica FDV above $800M one day after launch?",
+"easy_yes_ask": 0.028,
+"hard_no_ask": 0.968,
+"hard_yes_bid": 0.032,
+"cost": 0.996,
+"edge": 0.004,
+"edge_after_fee": -0.0001,
+"size_shares": 5.94,
+"usd_at_size": 5.92
 },
 {
 "kind": "ladder_num",
