@@ -1,8 +1,8 @@
 {
-"scanned": "2026-11-14 00:27",
+"scanned": "2026-11-14 01:24",
 "events": 2100,
 "groups": 2037,
-"books": 16896,
+"books": 16894,
 "opps": [
 {
 "kind": "ladder_num",
@@ -38,8 +38,8 @@
 "payoff": 1,
 "edge": 0.039,
 "edge_after_fee": -0.0137,
-"size_shares": 55.8,
-"usd_at_size": 53.62
+"size_shares": 83.0,
+"usd_at_size": 79.76
 },
 {
 "kind": "ladder_num",
@@ -186,6 +186,36 @@
 },
 {
 "kind": "ladder_num",
+"event": "Probable FDV above ___ one day after launch?",
+"slug": "probable-fdv-above-one-day-after-launch",
+"easy": "Probable FDV above $50M one day after launch?",
+"hard": "Probable FDV above $500M one day after launch?",
+"easy_yes_ask": 0.1,
+"hard_no_ask": 0.893,
+"hard_yes_bid": 0.107,
+"cost": 0.993,
+"edge": 0.007,
+"edge_after_fee": -0.006,
+"size_shares": 14.44,
+"usd_at_size": 14.34
+},
+{
+"kind": "ladder_num",
+"event": "Printr FDV above ___ one day after launch?",
+"slug": "printr-fdv-above-one-day-after-launch",
+"easy": "Printr FDV above $500M one day after launch?",
+"hard": "Printr FDV above $1B one day after launch?",
+"easy_yes_ask": 0.049,
+"hard_no_ask": 0.926,
+"hard_yes_bid": 0.074,
+"cost": 0.975,
+"edge": 0.025,
+"edge_after_fee": 0.0169,
+"size_shares": 1.61,
+"usd_at_size": 1.57
+},
+{
+"kind": "ladder_num",
 "event": "Pacifica FDV above ___ one day after launch?",
 "slug": "pacifica-fdv-above-one-day-after-launch",
 "easy": "Pacifica FDV above $500M one day after launch?",
@@ -196,60 +226,8 @@
 "cost": 0.995,
 "edge": 0.005,
 "edge_after_fee": 0.001,
-"size_shares": 13.05,
-"usd_at_size": 12.98
-},
-{
-"kind": "ladder_num",
-"event": "How high will inflation get in 2026?",
-"slug": "how-high-will-inflation-get-in-2026",
-"easy": "Will inflation reach more than 6% in 2026?",
-"hard": "Will inflation reach more than 8% in 2026?",
-"easy_yes_ask": 0.014,
-"hard_no_ask": 0.983,
-"hard_yes_bid": 0.017,
-"cost": 0.997,
-"edge": 0.003,
-"edge_after_fee": 0.0009,
-"size_shares": 12.11,
-"usd_at_size": 12.07
-},
-{
-"kind": "ladder_num",
-"event": "Printr FDV above ___ one day after launch?",
-"slug": "printr-fdv-above-one-day-after-launch",
-"easy": "Printr FDV above $500M one day after launch?",
-"hard": "Printr FDV above $1B one day after launch?",
-"easy_yes_ask": 0.049,
-"hard_no_ask": 0.931,
-"hard_yes_bid": 0.069,
-"cost": 0.98,
-"edge": 0.02,
-"edge_after_fee": 0.0122,
-"size_shares": 1.61,
-"usd_at_size": 1.58
-},
-{
-"kind": "negrisk_all_yes",
-"event": "Japan 10Y Bond Yield: End of 2026",
-"slug": "japan-10y-bond-yield-end-of-2026",
-"n": 7,
-"has_other": false,
-"outcomes": [
-"<2.0%",
-"2.0-2.2%",
-"2.2-2.4%",
-"2.4-2.6%",
-"2.6-2.8%",
-"2.8-3.0%",
-"3.0%+"
-],
-"cost": 0.994,
-"payoff": 1,
-"edge": 0.006,
-"edge_after_fee": -0.05,
-"size_shares": 5.0,
-"usd_at_size": 4.97
+"size_shares": 7.71,
+"usd_at_size": 7.67
 },
 {
 "kind": "ladder_num",
