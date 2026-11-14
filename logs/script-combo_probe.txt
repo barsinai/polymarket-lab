@@ -1,0 +1,477 @@
+polymarket-client 0.18.0 /opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/polymarket
+201 files
+
+=== __init__.py (123 lines mention combo/rfq)
+     43: ComboActivityId,
+     44: ComboConditionId,
+     45: ComboKnownStatus,
+     46: ComboMarket,
+     47: ComboMarketOutcome,
+     48: ComboMarketOutcomes,
+     49: ComboStatus,
+    169: to_combo_condition_id,
+    182: ComboActivity,
+    183: ComboActivityType,
+    184: ComboBiggestWinner,
+    185: ComboCompressActivity,
+    186: ComboConvertActivity,
+    187: ComboMergeActivity,
+    188: ComboPosition,
+    189: ComboPositionLeg,
+    190: ComboPositionMarket,
+    191: ComboPositionMarketEvent,
+    192: ComboPositionSortBy,
+    193: ComboPositionStatus,
+    194: ComboPositionStatusFilter,
+    195: ComboRedeemActivity,
+    196: ComboSplitActivity,
+    197: ComboTradeActivity,
+    198: ComboUnwrapActivity,
+    199: ComboWrapActivity,
+    287: from polymarket.rfq import (
+    288: ComboAcceptFailureReason,
+    289: ComboFillResult,
+    290: ComboQuote,
+    291: ComboQuoteAcceptance,
+    292: ComboQuoteResult,
+    293: ComboQuoteUnavailableReason,
+    294: RfqCancelQuoteAck,
+    295: RfqCancelQuoteRejectedError,
+    296: RfqConfirmationAck,
+    297: RfqConfirmationDecision,
+    298: RfqConfirmationRejectedError,
+    299: RfqConfirmationRequestEvent,
+    300: RfqDirection,
+    301: RfqErrorCode,
+    302: RfqErrorDetail,
+    303: RfqEvent,
+    304: RfqExecutionStatus,
+    305: RfqExecutionUpdateEvent,
+    306: RfqId,
+    307: RfqQuoteId,
+    308: RfqQuoteReference,
+    309: RfqQuoteRejectedError,
+    310: RfqQuoteRequestEvent,
+    311: RfqQuoteSource,
+    312: RfqRejectionCode,
+    313: RfqRequestedSize,
+    314: RfqRequestedSizeUnit,
+    315: RfqRequestorPublicId,
+    316: RfqRequestRejectedError,
+    317: RfqSession,
+    318: RfqSide,
+    319: RfqStatus,
+    320: RfqStatusResult,
+
+=== _internal/actions/combo_rfq.py (220 lines mention combo/rfq)
+      1: """Requester-side combo RFQ actions over the builder gateway."""
+     34: from polymarket.models.types import ComboConditionId, PositionId, TokenId, to_combo_condition_id
+     35: from polymarket.rfq import (
+     36: ComboAcceptFailureReason,
+     37: ComboFillResult,
+     38: ComboQuote,
+     39: ComboQuoteAcceptance,
+     40: ComboQuoteResult,
+     41: ComboQuoteUnavailableReason,
+     42: RfqDirection,
+     43: RfqErrorCode,
+     44: RfqErrorDetail,
+     45: RfqExecutionStatus,
+     46: RfqRejectionCode,
+     47: RfqRequestedSizeUnit,
+     48: RfqRequestRejectedError,
+     49: RfqSide,
+     50: RfqStatus,
+     51: RfqStatusResult,
+     61: _REQUESTS_PATH = "/v1/builder/rfq/requests"
+     72: "Combo RFQ requests require a Builder API Key. Pass api_key= when constructing the client."
+     78: async def request_combo_quote(
+     82: direction: RfqDirection | str,
+     85: side: RfqSide | str = RfqSide.YES,
+     86: ) -> ComboQuoteResult:
+     87: assert_combos_supported(ctx)
+     88: _, body = build_combo_quote_request_body(
+    102: raise _to_rfq_request_rejected(error) from error
+    103: return _parse_combo_quote_result(data, request=body)
+    106: def request_combo_quote_sync(
+    110: direction: RfqDirection | str,
+    113: side: RfqSide | str = RfqSide.YES,
+    114: ) -> ComboQuoteResult:
+    115: assert_combos_supported(ctx)
+    116: _, body = build_combo_quote_request_body(
+    130: raise _to_rfq_request_rejected(error) from error
+    131: return _parse_combo_quote_result(data, request=body)
+    134: async def accept_combo_quote(
+    135: ctx: AsyncSecureClientContext, quote: ComboQuote | Mapping[str, object]
+    136: ) -> ComboQuoteAcceptance:
+    137: assert_combos_supported(ctx)
+    138: quote = _parse_combo_quote_input(quote)
+    141: path = f"{_REQUESTS_PATH}/{_encode_path_segment(quote.rfq_id)}/accept"
+    147: status = _parse_rfq_status(data, expected_rfq_id=quote.rfq_id)
+    155: status = _parse_rfq_status(data, expected_rfq_id=quote.rfq_id)
+    157: expired = _to_expired_acceptance(quote.rfq_id, error)
+    160: raise _to_rfq_request_rejected(error) from error
+    166: while status.status == RfqStatus.AWAITING_MAKER_CONFIRMATION:
+    169: f"Timed out waiting for the acceptance outcome of RFQ {quote.rfq_id}."
+    172: status = await fetch_rfq_status(ctx, rfq_id=quote.rfq_id)
+    176: def accept_combo_quote_sync(
+    177: ctx: SyncSecureClientContext, quote: ComboQuote | Mapping[str, object]
+    178: ) -> ComboQuoteAcceptance:
+    179: assert_combos_supported(ctx)
+    180: quote = _parse_combo_quote_input(quote)
+    183: path = f"{_REQUESTS_PATH}/{_encode_path_segment(quote.rfq_id)}/accept"
+    187: status = _parse_rfq_status(data, expected_rfq_id=quote.rfq_id)
+    193: status = _parse_rfq_status(data, expected_rfq_id=quote.rfq_id)
+    195: expired = _to_expired_acceptance(quote.rfq_id, error)
+    198: raise _to_rfq_request_rejected(error) from error
+
+=== _internal/actions/combos.py (6 lines mention combo/rfq)
+     39: data = await ctx.combos.post_json(
+     47: data = ctx.combos.post_json(
+    107: data = await ctx.combos.post_json(
+    119: data = await ctx.combos.post_json(
+    132: data = ctx.combos.post_json(
+    144: data = ctx.combos.post_json(
+
+=== _internal/actions/data.py (26 lines mention combo/rfq)
+     28: ComboActivity,
+     29: ComboBiggestWinner,
+     30: ComboPosition,
+     31: ComboPositionSortBy,
+     32: ComboPositionStatus,
+     33: ComboPositionStatusFilter,
+     63: from polymarket.models.data.activity import parse_activities, parse_combo_activities
+    160: def list_combo_activity_spec(
+    164: ) -> KeysetPaginatedSpec[ComboActivity]:
+    166: condition_id = build_distinct_condition_ids(condition_id, grammar="combo")
+    169: path="/v2/activity/combos",
+    171: parse_page=lambda payload: parse_data_page(payload, parse_combo_activities),
+    250: def list_combo_positions_spec(
+    254: status: ComboPositionStatusFilter | Sequence[ComboPositionStatusFilter] | None = None,
+    255: sort_by: ComboPositionSortBy | None = None,
+    259: ) -> KeysetPaginatedSpec[ComboPosition]:
+    260: _check_enum("sort_by", sort_by, get_args(ComboPositionSortBy))
+    263: condition_id = build_distinct_condition_ids(condition_id, grammar="combo")
+    269: _check_enum("status", value, ComboPositionStatus)
+    273: updated_after = _check_combo_watermark(updated_after)
+    274: updated_before = _check_combo_watermark(updated_before)
+    279: path="/v2/positions/combos",
+    291: parse_page=lambda payload: parse_data_page(payload, ComboPosition.parse_response_list),
+    610: ) -> KeysetPaginatedSpec[MarketBiggestWinner | ComboBiggestWinner]:
+    693: def _check_combo_watermark(value: int | datetime | None) -> int | None:
+    699: "Combo watermark must be non-negative and no later than 9999-12-31T23:59:59Z"
+
+=== _internal/actions/gamma.py (2 lines mention combo/rfq)
+    579: rfq_enabled: bool | None = None,
+    649: _add_optional(params, "rfq_enabled", rfq_enabled)
+
+=== _internal/actions/relayer/positions.py (28 lines mention combo/rfq)
+     20: ComboConditionId,
+     24: to_combo_condition_id,
+     33: _MAX_COMBO_LEGS = 50
+     36: CanonicalComboLegs = tuple[int, ...]
+     40: class ComboPositionContext:
+     41: condition_id: ComboConditionId
+     60: DecodedComboOutcomePositionId = DecodedV2OutcomePositionId
+     65: kind: Literal["combo", "market"]
+    250: def canonicalize_combo_legs(legs: Sequence[str]) -> CanonicalComboLegs:
+    251: if not 1 <= len(legs) <= _MAX_COMBO_LEGS:
+    252: raise UserInputError(f"Combo legs must include 1 to {_MAX_COMBO_LEGS} position IDs")
+    261: raise UserInputError("Combo legs must be binary or neg-risk YES/NO position IDs")
+    269: raise UserInputError("Combo legs must not contain duplicate position IDs")
+    271: raise UserInputError("Combo legs must not contain both outcomes for the same condition")
+    276: def derive_combo_position_context(legs: CanonicalComboLegs) -> ComboPositionContext:
+    279: condition_id = to_combo_condition_id(f"0x03{base_hash.hex()[32:]}{'0' * 28}")
+    280: return ComboPositionContext(
+    282: position_ids=derive_combo_outcome_position_ids(condition_id),
+    286: def derive_combo_outcome_position_ids(condition_id: str) -> tuple[PositionId, PositionId]:
+    296: def decode_combo_outcome_position_id(position_id: str) -> DecodedComboOutcomePositionId:
+    322: return BatchMergePositionRequest(kind="combo", position_id=value, amount=amount)
+    359: "CanonicalComboLegs",
+    360: "ComboPositionContext",
+    361: "DecodedComboOutcomePositionId",
+    366: "canonicalize_combo_legs",
+    367: "decode_combo_outcome_position_id",
+    369: "derive_combo_outcome_position_ids",
+    370: "derive_combo_position_context",
+
+=== _internal/actions/rfq.py (7 lines mention combo/rfq)
+      6: from polymarket.models import ComboMarket
+     70: def list_combo_markets_spec(
+     73: ) -> KeysetPaginatedSpec[ComboMarket]:
+     78: service="rfq",
+     79: path="/v1/rfq/combo-markets",
+     80: parse_page=_make_keyset_parser("markets", ComboMarket.parse_response),
+     87: __all__ = ["list_combo_markets_spec"]
+
+=== _internal/context.py (4 lines mention combo/rfq)
+     27: rfq: SyncTransport
+     45: combos: SyncTransport
+     58: rfq: AsyncTransport
+     77: combos: AsyncTransport
+
+=== _internal/data_params.py (3 lines mention combo/rfq)
+      9: from polymarket.models.types import to_combo_condition_id, to_condition_id, to_market_condition_id
+     37: grammar: Literal["feed", "market", "combo"],
+     51: "combo": to_combo_condition_id,
+
+=== _internal/dispatch.py (4 lines mention combo/rfq)
+     37: case "rfq":
+     38: return ctx.rfq
+     49: case "rfq":
+     50: return ctx.rfq
+
+=== _internal/request.py (1 lines mention combo/rfq)
+      7: Service = Literal["gamma", "data", "rfq"]
+
+=== _internal/rfq.py (175 lines mention combo/rfq)
+     36: ComboConditionId,
+     40: to_combo_condition_id,
+     42: from polymarket.rfq import (
+     43: RfqCancelQuoteAck,
+     44: RfqCancelQuoteRejectedError,
+     45: RfqConfirmationAck,
+     46: RfqConfirmationDecision,
+     47: RfqConfirmationRejectedError,
+     48: RfqConfirmationRequestEvent,
+     49: RfqDirection,
+     50: RfqErrorCode,
+     51: RfqEvent,
+     52: RfqExecutionStatus,
+     53: RfqExecutionUpdateEvent,
+     54: RfqId,
+     55: RfqQuoteId,
+     56: RfqQuoteReference,
+     57: RfqQuoteRejectedError,
+     58: RfqQuoteRequestEvent,
+     59: RfqQuoteSource,
+     60: RfqRequestedSize,
+     61: RfqRequestedSizeUnit,
+     62: RfqSide,
+     63: RfqTradeEvent,
+     80: class RfqSessionContext:
+     81: def __init__(self, open_session: Callable[[], Awaitable[RfqQuoterSession]]) -> None:
+     83: self._session: RfqQuoterSession | None = None
+     85: def __await__(self) -> Generator[Any, None, RfqQuoterSession]:
+     88: def __aiter__(self) -> AsyncIterator[RfqEvent]:
+     91: async def __anext__(self) -> RfqEvent:
+     95: async def __aenter__(self) -> RfqQuoterSession:
+    111: async def cancel_quote(self, quote: RfqQuoteReference) -> RfqCancelQuoteAck:
+    117: request: RfqQuoteRequestEvent,
+    121: source: RfqQuoteSource | str = RfqQuoteSource.COLLATERAL,
+    122: ) -> RfqQuoteReference:
+    128: rfq_id: RfqId,
+    129: quote_id: RfqQuoteId,
+    130: decision: RfqConfirmationDecision,
+    131: ) -> RfqConfirmationAck:
+    133: return await session.respond_to_confirmation(rfq_id, quote_id, decision)
+    135: async def _ensure_open(self) -> RfqQuoterSession:
+    148: class RfqQuoterSession:
+    167: self._logger = logger or logging.getLogger("polymarket.rfq")
+    174: self._queue: asyncio.Queue[RfqEvent | _EndSentinel] = asyncio.Queue(maxsize=_QUEUE_SIZE)
+    198: auth_future = self._wait_for("auth", "Timed out waiting for RFQ authentication.")
+    211: async def __anext__(self) -> RfqEvent:
+    234: self._reject_all_pending(TransportError("RFQ quoter websocket closed."))
+    242: request: RfqQuoteRequestEvent,
+    246: source: RfqQuoteSource | str = RfqQuoteSource.COLLATERAL,
+    247: ) -> RfqQuoteReference:
+    263: key = _quote_ack_key(request.rfq_id)
+    265: key, f"Timed out waiting for RFQ quote acknowledgement for {request.rfq_id}."
+    270: "type": "RFQ_QUOTE",
+    271: "rfq_id": request.rfq_id,
+    277: return cast(RfqQuoteReference, await pending)
+    282: async def cancel_quote(self, quote: RfqQuoteReference) -> RfqCancelQuoteAck:
+    283: key = _quote_cancel_ack_key(quote.rfq_id, quote.quote_id)
+    285: key, f"Timed out waiting for RFQ quote cancellation acknowledgement for {quote.rfq_id}."
+    290: "type": "RFQ_QUOTE_CANCEL",
+    291: "rfq_id": quote.rfq_id,
+
+=== clients/async_public.py (30 lines mention combo/rfq)
+     16: from polymarket._internal.actions import rfq as _rfq_actions
+     47: ComboMarket,
+     84: ComboActivity,
+     85: ComboBiggestWinner,
+     86: ComboPosition,
+     87: ComboPositionSortBy,
+     88: ComboPositionStatusFilter,
+    222: Amounts are USDC and shares are outcome units. Combo trades and redemptions
+    224: ``RedeemActivity``; check ``is_combo`` to identify a basket.
+    245: def list_combo_activity(
+    251: ) -> AsyncPaginator[ComboActivity]:
+    252: """List combo lifecycle activity. Amounts and payouts are USDC.
+    255: spec = _data_actions.list_combo_activity_spec(user=user, condition_id=condition_id)
+    317: def list_combo_positions(
+    322: status: ComboPositionStatusFilter | Sequence[ComboPositionStatusFilter] | None = None,
+    323: sort_by: ComboPositionSortBy | None = None,
+    328: ) -> AsyncPaginator[ComboPosition]:
+    329: """List combo positions, optionally filtering by multiple statuses.
+    337: spec = _data_actions.list_combo_positions_spec(
+    536: ) -> AsyncPaginator[MarketBiggestWinner | ComboBiggestWinner]:
+    537: """List winning market and combo positions, ordered by USDC PnL.
+    580: rfq=AsyncTransport(base_url=config.rfq_url, logger=logger),
+    795: await self._ctx.rfq.close()
+   1175: rfq_enabled: bool | None = None,
+   1244: rfq_enabled=rfq_enabled,
+   1259: def list_combo_markets(
+   1264: ) -> AsyncPaginator[ComboMarket]:
+   1265: """List markets available for Combos.
+   1268: An async paginator over matching Combo markets.
+   1270: spec = _rfq_actions.list_combo_markets_spec(exclude=exclude)
+
+=== clients/async_secure.py (152 lines mention combo/rfq)
+     30: from polymarket._internal.actions import combo_rfq as _combo_rfq_actions
+     31: from polymarket._internal.actions import combos as _combos_actions
+     36: from polymarket._internal.actions import rfq as _rfq_actions
+    113: canonicalize_combo_legs,
+    114: decode_combo_outcome_position_id,
+    115: derive_combo_outcome_position_ids,
+    116: derive_combo_position_context,
+    135: from polymarket._internal.rfq import RfqSessionContext
+    164: ComboMarket,
+    215: ComboActivity,
+    216: ComboBiggestWinner,
+    217: ComboPosition,
+    218: ComboPositionSortBy,
+    219: ComboPositionStatusFilter,
+    285: from polymarket.rfq import (
+    286: ComboFillResult,
+    287: ComboQuote,
+    288: ComboQuoteAcceptance,
+    289: ComboQuoteResult,
+    290: RfqDirection,
+    291: RfqSide,
+    292: RfqStatusResult,
+    330: from polymarket._internal.rfq import RfqQuoterSession
+    337: from polymarket.rfq import RfqSession
+    349: class _RfqSessionCloser:
+    416: Amounts are USDC and shares are outcome units. Combo trades and redemptions
+    418: ``RedeemActivity``; check ``is_combo`` to identify a basket.
+    441: def list_combo_activity(
+    447: ) -> AsyncPaginator[ComboActivity]:
+    448: """List combo lifecycle activity. Amounts and payouts are USDC.
+    453: spec = _data_actions.list_combo_activity_spec(
+    519: def list_combo_positions(
+    524: status: ComboPositionStatusFilter | Sequence[ComboPositionStatusFilter] | None = None,
+    525: sort_by: ComboPositionSortBy | None = None,
+    530: ) -> AsyncPaginator[ComboPosition]:
+    531: """List combo positions, optionally filtering by multiple statuses.
+    541: spec = _data_actions.list_combo_positions_spec(
+    752: ) -> AsyncPaginator[MarketBiggestWinner | ComboBiggestWinner]:
+    753: """List winning market and combo positions, ordered by USDC PnL.
+    802: self._rfq_session: RfqQuoterSession | None = None
+    803: self._rfq_session_connecting: RfqQuoterSession | None = None
+    804: self._rfq_session_opening: asyncio.Task[RfqQuoterSession] | None = None
+    955: rfq = AsyncTransport(base_url=config.rfq_url, logger=logger)
+    967: combos = AsyncTransport(
+    991: rfq=rfq,
+   1001: combos=combos,
+   1558: def open_rfq_session(self) -> "RfqSession":
+   1559: """Open an RFQ event session.
+   1561: The returned session is an async iterator of RFQ events and an async
+   1565: _combo_rfq_actions.assert_combos_supported(self._ctx)
+   1566: return RfqSessionContext(self._open_rfq_session)
+   1568: async def _open_rfq_session(self) -> "RfqQuoterSession":
+   1569: if self._rfq_session is not None:
+   1570: if not self._rfq_session.closed:
+   1571: return self._rfq_session
+   1572: self._rfq_session = None
+   1574: if self._rfq_session_opening is not None:
+   1575: return await self._rfq_session_opening
+   1577: task = asyncio.create_task(self._create_rfq_session())
+   1578: self._rfq_session_opening = task
+
+=== clients/public.py (30 lines mention combo/rfq)
+     15: from polymarket._internal.actions import rfq as _rfq_actions
+     42: ComboMarket,
+     78: ComboActivity,
+     79: ComboBiggestWinner,
+     80: ComboPosition,
+     81: ComboPositionSortBy,
+     82: ComboPositionStatusFilter,
+    169: Amounts are USDC and shares are outcome units. Combo trades and redemptions
+    171: ``RedeemActivity``; check ``is_combo`` to identify a basket.
+    192: def list_combo_activity(
+    198: ) -> Paginator[ComboActivity]:
+    199: """List combo lifecycle activity. Amounts and payouts are USDC.
+    202: spec = _data_actions.list_combo_activity_spec(user=user, condition_id=condition_id)
+    264: def list_combo_positions(
+    269: status: ComboPositionStatusFilter | Sequence[ComboPositionStatusFilter] | None = None,
+    270: sort_by: ComboPositionSortBy | None = None,
+    275: ) -> Paginator[ComboPosition]:
+    276: """List combo positions, optionally filtering by multiple statuses.
+    284: spec = _data_actions.list_combo_positions_spec(
+    483: ) -> Paginator[MarketBiggestWinner | ComboBiggestWinner]:
+    484: """List winning market and combo positions, ordered by USDC PnL.
+    527: rfq=SyncTransport(base_url=config.rfq_url, logger=logger),
+    556: self._ctx.rfq.close()
+    939: rfq_enabled: bool | None = None,
+   1013: rfq_enabled=rfq_enabled,
+   1028: def list_combo_markets(
+   1033: ) -> Paginator[ComboMarket]:
+   1034: """List markets available for Combos.
+   1037: A paginator over matching Combo markets.
+   1039: spec = _rfq_actions.list_combo_markets_spec(exclude=exclude)
+
+=== clients/secure.py (104 lines mention combo/rfq)
+     20: from polymarket._internal.actions import combo_rfq as _combo_rfq_actions
+     21: from polymarket._internal.actions import combos as _combos_actions
+     26: from polymarket._internal.actions import rfq as _rfq_actions
+     98: canonicalize_combo_legs,
+     99: decode_combo_outcome_position_id,
+    100: derive_combo_outcome_position_ids,
+    101: derive_combo_position_context,
+    144: ComboMarket,
+    193: ComboActivity,
+    194: ComboBiggestWinner,
+    195: ComboPosition,
+    196: ComboPositionSortBy,
+    197: ComboPositionStatusFilter,
+    227: from polymarket.rfq import (
+    228: ComboFillResult,
+    229: ComboQuote,
+    230: ComboQuoteAcceptance,
+    231: ComboQuoteResult,
+    232: RfqDirection,
+    233: RfqSide,
+    234: RfqStatusResult,
+    323: Amounts are USDC and shares are outcome units. Combo trades and redemptions
+    325: ``RedeemActivity``; check ``is_combo`` to identify a basket.
+    348: def list_combo_activity(
+    354: ) -> Paginator[ComboActivity]:
+    355: """List combo lifecycle activity. Amounts and payouts are USDC.
+    360: spec = _data_actions.list_combo_activity_spec(
+    426: def list_combo_positions(
+    431: status: ComboPositionStatusFilter | Sequence[ComboPositionStatusFilter] | None = None,
+    432: sort_by: ComboPositionSortBy | None = None,
+    437: ) -> Paginator[ComboPosition]:
+    438: """List combo positions, optionally filtering by multiple statuses.
+    448: spec = _data_actions.list_combo_positions_spec(
+    659: ) -> Paginator[MarketBiggestWinner | ComboBiggestWinner]:
+    660: """List winning market and combo positions, ordered by USDC PnL.
+    850: rfq = SyncTransport(base_url=config.rfq_url, logger=logger)
+    864: combos = SyncTransport(
+    888: rfq.close()
+    891: combos.close()
+    900: rfq=rfq,
+    909: combos=combos,
+   1045: ctx.rfq.close()
+   1054: ctx.combos.close()
+   1417: rfq_enabled: bool | None = None,
+   1473: rfq_enabled=rfq_enabled,
+   1488: def list_combo_markets(
+   1493: ) -> Paginator[ComboMarket]:
+   1494: """List markets available for Combos.
+   1497: A paginator over matching Combo markets.
+   1499: spec = _rfq_actions.list_combo_markets_spec(exclude=exclude)
+   2880: """Split collateral into market or combo positions.
+   2883: for combo positions.
+   2895: raise UserInputError("Split amount must be positive for combo positions")
+   2896: canonical_legs = canonicalize_combo_legs(legs)
+   2897: combo = derive_combo_position_context(canonical_legs)
+   2907: condition_id=combo.condition_id,
+   2914: else f"Split {amount} combo positions for condition {combo.condition_id}"
+   2948: """Merge market or combo positions back into collateral.
+   2951: for combo positions.
+   2963: canonical_legs = canonicalize_combo_legs(legs)
+
+hosts in the SDK: ['https://api.perpetuals.polymarket.com', 'https://clob.polymarket.com', 'https://combos-rfq-api.polymarket.com', 'https://combos-rfq-collateral-return.polymarket.com', 'https://combos-rfq-gateway-builder.polymarket.com', 'https://data-api.polymarket.com', 'https://gamma-api.polymarket.com', 'https://polygon.drpc.org', 'https://relayer-v2.polymarket.com']
