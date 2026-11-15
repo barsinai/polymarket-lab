@@ -1,0 +1,197 @@
+fills 2497 markets 361 dates 26
+NYC obs 1992 cli 318
+http 429 ATL
+ATL obs 1992 cli 318
+BOS obs 1970 cli 318
+http 429 MIA
+MIA obs 1990 cli 318
+http 429 PHL
+PHL obs 1992 cli 318
+http 429 DCA
+DCA obs 1992 cli 318
+http 429 ORD
+ORD obs 1983 cli 318
+http 429 DFW
+DFW obs 1987 cli 318
+http 429 IAH
+IAH obs 1989 cli 318
+http 429 MSY
+MSY obs 1988 cli 318
+DEN obs 1991 cli 319
+http 429 PHX
+PHX obs 1992 cli 318
+http 429 LAX
+LAX obs 1990 cli 318
+http 429 SFO
+SFO obs 1992 cli 318
+SEA obs 1991 cli 318
+{
+ "agreement": {
+  "metar:True": 357,
+  "cli:True": 359,
+  "metar:False": 4,
+  "cli:False": 2
+ },
+ "metar_mismatch": [
+  [
+   "Atlanta, GA",
+   "2026-11-05",
+   "metar_sum",
+   0.01,
+   "res_yes",
+   0,
+   "cli",
+   "T"
+  ],
+  [
+   "Chicago, IL",
+   "2026-10-29",
+   "metar_sum",
+   0.0,
+   "res_yes",
+   1,
+   "cli",
+   "T"
+  ],
+  [
+   "Phoenix, AZ",
+   "2026-10-30",
+   "metar_sum",
+   0.12,
+   "res_yes",
+   0,
+   "cli",
+   "M"
+  ],
+  [
+   "Chicago, IL",
+   "2026-09-21",
+   "metar_sum",
+   0.0,
+   "res_yes",
+   1,
+   "cli",
+   "T"
+  ]
+ ],
+ "N47 after-day METAR side": {
+  "n": 7,
+  "dates": 5,
+  "pts": 9.44,
+  "avg_p": 0.756,
+  "won": 6,
+  "dates_pos": 4,
+  "usd_at_1sh": 0.66,
+  "ci": [
+   -23.0,
+   34.3
+  ]
+ },
+ "N47 after-day, before the archived CLI product": {
+  "n": 0,
+  "dates": 0,
+  "pts": null,
+  "avg_p": null,
+  "won": 0,
+  "dates_pos": 0,
+  "usd_at_1sh": 0
+ },
+ "N47 after-day, after the archived CLI product": {
+  "n": 7,
+  "dates": 5,
+  "pts": 9.44,
+  "avg_p": 0.756,
+  "won": 6,
+  "dates_pos": 4,
+  "usd_at_1sh": 0.66,
+  "ci": [
+   -28.6,
+   34.3
+  ]
+ },
+ "after-day favourite 0.60-0.97 (baseline)": {
+  "n": 5,
+  "dates": 3,
+  "pts": -9.06,
+  "avg_p": 0.886,
+  "won": 4,
+  "dates_pos": 2,
+  "usd_at_1sh": -0.45
+ },
+ "after-day fills AGAINST the METAR side": {
+  "n": 16,
+  "dates": 6,
+  "pts": -34.73,
+  "avg_p": 0.337,
+  "won": 0,
+  "dates_pos": 0,
+  "usd_at_1sh": -5.56,
+  "ci": [
+   -46.3,
+   -20.6
+  ]
+ },
+ "N48 running: YES fills after METAR >= 0.01 so far": {
+  "n": 9,
+  "dates": 4,
+  "pts": 8.46,
+  "avg_p": 0.912,
+  "won": 9,
+  "dates_pos": 4,
+  "usd_at_1sh": 0.76
+ },
+ "N47 after-day METAR side p 0.03-0.8": {
+  "n": 3,
+  "dates": 2,
+  "pts": 15.42,
+  "avg_p": 0.5,
+  "won": 2,
+  "dates_pos": 1,
+  "usd_at_1sh": 0.46
+ },
+ "N48 running p 0.03-0.8": {
+  "n": 2,
+  "dates": 1,
+  "pts": 23.09,
+  "avg_p": 0.76,
+  "won": 2,
+  "dates_pos": 1,
+  "usd_at_1sh": 0.46
+ },
+ "N47 after-day METAR side p 0.8-0.93": {
+  "n": 1,
+  "dates": 1,
+  "pts": 6.96,
+  "avg_p": 0.927,
+  "won": 1,
+  "dates_pos": 1,
+  "usd_at_1sh": 0.07
+ },
+ "N48 running p 0.8-0.93": {
+  "n": 0,
+  "dates": 0,
+  "pts": null,
+  "avg_p": null,
+  "won": 0,
+  "dates_pos": 0,
+  "usd_at_1sh": 0
+ },
+ "N47 after-day METAR side p 0.93-0.97": {
+  "n": 3,
+  "dates": 2,
+  "pts": 4.29,
+  "avg_p": 0.955,
+  "won": 3,
+  "dates_pos": 2,
+  "usd_at_1sh": 0.13
+ },
+ "N48 running p 0.93-0.97": {
+  "n": 7,
+  "dates": 4,
+  "pts": 4.28,
+  "avg_p": 0.955,
+  "won": 7,
+  "dates_pos": 4,
+  "usd_at_1sh": 0.3
+ }
+}
