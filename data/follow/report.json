@@ -1,16 +1,16 @@
 {
- "updated": "2026-11-15 19:53",
- "tracking_hours": 33.06,
+ "updated": "2026-11-15 20:55",
+ "tracking_hours": 34.08,
  "signal_wallets": 148,
  "rule": "primary = first position per market+direction+UTC day after a taker order/accumulation by a signal wallet (>= $50) or, control, every 5th order >= $1,000 by another wallet; non-sports, ends in 1 h - 60 d; ask 0.03-0.97 and <= their average price + 3c; $20 at the ask; fee paid",
  "decision_rule": "sharp primary: >= 300 settled over >= 100 events and >= 10 days; >= +1.5 pts with the 95% interval above 0 -> propose a small live test; < +0.5 or interval top < +1.5 -> DEAD",
  "sharp": {
-  "positions": 201,
-  "open": 193,
+  "positions": 211,
+  "open": 203,
   "settled": 8,
-  "primary": 60,
+  "primary": 63,
   "primary_settled": 4,
-  "primary_per_day": 43.6,
+  "primary_per_day": 44.4,
   "PRIMARY": {
    "all": {
     "n": 4,
@@ -209,32 +209,32 @@
   },
   "mark_72h_all_primary": {},
   "ask_minus_their_price": {
-   "p25": 0.013,
-   "median": 0.047,
-   "p75": 0.096
+   "p25": 0.011,
+   "median": 0.046,
+   "p75": 0.095
   },
-  "share_cap_ok": 0.363,
-  "median_lag_s": 136,
-  "median_usd_at_ask": 28,
-  "median_usd_within_2c": 128,
+  "share_cap_ok": 0.379,
+  "median_lag_s": 137,
+  "median_usd_at_ask": 29,
+  "median_usd_within_2c": 134,
   "open_primary_by_category": {
    "weather": 12,
-   "economy": 6,
+   "economy": 7,
    "crypto": 2,
-   "culture": 16,
-   "politics": 2,
+   "culture": 17,
+   "politics": 3,
    "tech": 8,
    "tweets": 3,
    "geopolitics": 7
   }
  },
  "control": {
-  "positions": 227,
-  "open": 167,
+  "positions": 236,
+  "open": 176,
   "settled": 60,
-  "primary": 138,
+  "primary": 144,
   "primary_settled": 25,
-  "primary_per_day": 100.2,
+  "primary_per_day": 101.4,
   "PRIMARY": {
    "all": {
     "n": 25,
@@ -453,8 +453,8 @@
   },
   "mark_24h_all_primary": {
    "all": {
-    "n": 36,
-    "mid_minus_ask_pts": 1.35
+    "n": 39,
+    "mid_minus_ask_pts": 1.34
    },
    "crypto": {
     "n": 17,
@@ -465,12 +465,12 @@
     "mid_minus_ask_pts": 8.5
    },
    "economy": {
-    "n": 1,
-    "mid_minus_ask_pts": -0.5
+    "n": 2,
+    "mid_minus_ask_pts": -0.3
    },
    "geopolitics": {
-    "n": 9,
-    "mid_minus_ask_pts": 0.61
+    "n": 11,
+    "mid_minus_ask_pts": 0.82
    },
    "politics": {
     "n": 4,
@@ -483,58 +483,59 @@
   },
   "mark_72h_all_primary": {},
   "ask_minus_their_price": {
-   "p25": 0.0,
+   "p25": -0.0,
    "median": 0.001,
    "p75": 0.01
   },
-  "share_cap_ok": 0.912,
+  "share_cap_ok": 0.915,
   "median_lag_s": 123,
-  "median_usd_at_ask": 251,
-  "median_usd_within_2c": 5806,
+  "median_usd_at_ask": 243,
+  "median_usd_within_2c": 5948,
   "open_primary_by_category": {
    "economy": 12,
    "crypto": 60,
-   "geopolitics": 24,
+   "geopolitics": 26,
    "culture": 5,
    "politics": 7,
-   "tech": 5
+   "tech": 6,
+   "tweets": 3
   }
  },
- "positions": 428,
+ "positions": 447,
  "settled": 68,
- "primary": 198,
+ "primary": 207,
  "totals": {
-  "control crossings $2500": 1237,
-  "skip: fast: sports": 3109,
-  "control crossings $10000": 308,
-  "control crossings $1000": 2250,
-  "skip: fast: crypto up/down": 306,
-  "control primary follows": 138,
-  "control paper positions": 227,
-  "skip: closed or ends in < 1 h": 90,
-  "sharp crossings $250": 116,
-  "sharp paper positions": 201,
-  "sharp crossings $50": 371,
-  "skip: ask outside 0.03-0.97": 140,
-  "skip: ends in > 60 days": 126,
-  "sharp primary follows": 60,
-  "skip: fast: sports parlay (combo)": 68,
+  "control crossings $2500": 1284,
+  "skip: fast: sports": 3241,
+  "control crossings $10000": 322,
+  "control crossings $1000": 2349,
+  "skip: fast: crypto up/down": 313,
+  "control primary follows": 144,
+  "control paper positions": 236,
+  "skip: closed or ends in < 1 h": 94,
+  "sharp crossings $250": 117,
+  "sharp paper positions": 211,
+  "sharp crossings $50": 386,
+  "skip: ask outside 0.03-0.97": 147,
+  "skip: ends in > 60 days": 132,
+  "sharp primary follows": 63,
+  "skip: fast: sports parlay (combo)": 72,
   "skip: no ask in the book": 31,
   "settled": 68,
-  "sharp crossings $1000": 16
+  "sharp crossings $1000": 19
  },
  "this_run": {
-  "feed pages": 443,
-  "polls": 336,
-  "fills": 40464,
-  "skip: fast: sports": 240,
-  "skip: closed or ends in < 1 h": 12,
-  "sharp paper positions": 16,
-  "control paper positions": 3,
-  "skip: fast: crypto up/down": 9,
-  "skip: ask outside 0.03-0.97": 8,
-  "skip: fast: sports parlay (combo)": 5,
-  "skip: ends in > 60 days": 2,
+  "feed pages": 674,
+  "polls": 520,
+  "fills": 62740,
+  "skip: fast: sports": 372,
+  "skip: closed or ends in < 1 h": 16,
+  "sharp paper positions": 26,
+  "control paper positions": 12,
+  "skip: fast: crypto up/down": 16,
+  "skip: ask outside 0.03-0.97": 15,
+  "skip: fast: sports parlay (combo)": 9,
+  "skip: ends in > 60 days": 8,
   "skip: no ask in the book": 1
  }
 }
