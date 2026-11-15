@@ -24,6 +24,16 @@ Status: TESTING (paper/backtest running) · READY (next up) · PARKED (needs som
 | Research journal (my forecasts with sources) | reading + cross-checking beats the crowd on slow political/econ questions | forecast_log.py, Brier vs market | 11-10 | weeks |
 
 ## READY (ranked)
+N45. **(outside the box, 11-15 c18) AI-leaderboard markets (LMArena / LiveBench / AI-agent 'best / 2nd / 3rd lab end of <week|month>').**
+   Never touched. Why the crowd could be wrong: the resolving leaderboard is public and moves rarely inside a month, the books are thin and
+   priced by AI fans who over-weight 'a new model drops this week'. Tape (leaderboard_census.py, rule pre-registered): favourite 0.60-0.97
+   24-168 h out +3.7 pts [-1.0, +7.1] on 46 events (40 positive), 6-24 h +5.6 [4.7, 6.3] (15 events), halves +3.3 / +4.1, follower holds;
+   BUT the events bunch on 16 end-days (month-ends): clustered by end-day +3.7 [-0.5, +6.2], 12/16 days positive. Losses are the weekly
+   'best AI model on <date>' markets in weeks a new model dropped (08-31 -7.9, 09-07 -11.6, 11-02 -18.5) and three 3rd-place / LiveBench
+   month-end markets (-26..-31). OpenRouter share weekly: -5.9 [-13.0, +1.4] (30 events) -> not part of it. Exposed to 6 (one month-end
+   = one bet), 15 (a calm-quarter tail), 22 (monthly-vs-weekly split seen after looking), 13. Next: forward paper on the 11-30 month-end
+   markets (one cluster) - needs a small tracker in the slow hook; decision only after 6+ month-end/week-end clusters.
+N44. -> tested 11-15 (cycle 18), DEAD (see DEAD). **(adjacent) N41's count-bucket favourite on tweet / post counts.**
 N41. -> checked 11-15 (cycle 17), DEAD as a source edge (see DEAD). **(outside the box, 11-15 c16) Ship-transit count markets.**
 N42. -> 11-15 (cycle 17), TESTING as a read-out split of the options paper. **(adjacent) Options paper: tails vs the rest.**
 N43. -> tested 11-15 (cycle 17), DEAD (see DEAD). **(outside the box) Daily US gas-price (AAA) 1-cent bucket markets.**
@@ -227,6 +237,9 @@ OLD N2. **(outside the box, 11-12) Box-office opening-weekend markets vs Thursda
 - Kalshi vs Polymarket automatic pairing (titles do not match; manual for named series only).
 
 ## DEAD (number that killed it)
+- N44 count-bucket favourite on tweet / post counts (11-15 c18, leaderboard_census.py, 12-week tape, 343k taker entries / 133 weekly events,
+  N41 rule unchanged): favourite 0.60-0.97 6-24 h before end -3.1 pts [-10.5, +3.2] on 105 events, follower -1.8, newer 6 weeks -7.5
+  [-17.5, +0.2]; 1-6 h -5.1. The +11 pts of ship transits (N41) does not generalise to count buckets whose tracker is live -> DEAD by its rule.
 - N41 ship-transit count markets (11-15 c17, transit_check.py via Actions): markets ARE live (153: Bab el-Mandeb / Hormuz weekly buckets, 'any day' thresholds, Panama Canal weekly), but the resolving source does not lead: IMF PortWatch (ArcGIS, reachable from Actions) had its last day at 11-08 on 11-15 - a ~7-day lag, so the 'Nov 9-15' buckets resolve about a week AFTER their end date and the last-day price is set by people with faster AIS data, not by a number we can read first. The tape's +11.1 pts [-0.8, +18.8] (29 events) stays an unexplained favourite effect: replicate once on the next tape refresh (new weeks only, same rule) before any tracker. LESSONS 25.
 - N43 daily US gas price (AAA) 1-cent buckets (11-15 c17, gas_census.py, 12-week tape: 26 days / 156 markets / 1,560 taker entries, all 6-24 h before end): favourite 0.60-0.97 -4.7 pts [-16.4, +6.4] (26 days), halves -5.1 / -4.6; a linear-trend nowcast from the two previous resolved days hits the bucket only 46% (24 days) and its trades are -0.9 pts [-22, +18]; NO on buckets the nowcast rejects +4.5 [-15, +25] on 19 days. Calibration fine (0.80-0.97 priced 0.90, won 0.87). Nothing here; a real nowcast needs daily station data (GasBuddy/OPIS) we do not have.
 - lock_early (11-15 c16, its pre-registered kill rule: 50 settled trades and <= 0): 51 trades 47 won -2.1%/$ on 37 end-times (11-09..11-15).

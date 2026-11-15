@@ -378,3 +378,23 @@
 - Next: LP-1 v2 48 h 11-16 ~10 UTC (N33/N35/N38 splits); box office settlements Monday; lock_p week mark 11-17 with the price split;
   options N42 forward 11-19; N27 transcript feasibility; N34 Kalshi-first census.
 
+
+## 11-15 13:00-13:40 UTC cycle 18 (scheduled)
+- Read-outs (fast trades.jsonl, last settled 12:04): lock_x 19 / 17 +8.8% (no signal since 11-14 16:14), lock_p 41 / 37 +6.7% (36 end-times),
+  lock_p_majors 15/15 +13.3% (one new win); lock_m 196 / 180 -1.9%, lock_b 48 / 44 -0.9%. N21 forward BTC/ETH 36 / 35 +2.1% (first loss),
+  alts 41 / 35 -4.7% (2 days). N25 forward >= 0.80 60 / 58 +1.5% (43 end-times; +5.5 -> +2.9 -> +1.5 over three cycles, decaying),
+  < 0.80 5 / 1 -75%. lock_x >= 0.80 16 / 14 -3.4% vs < 0.80 3/3 +60% -> lock_x's edge is 3 cheap fills.
+  Slow (12:11-12:16): converge 9 / 8 -$13, 85 open mark -$31; young 52 / 20 -$201 (37 open); options 31 / 11 +$13, 75 open, N42 forward 0
+  settled (26 open tails, 25 crash bets); box office 9 open (Monday); charts 2/2; mention 1 / 0 -$10. LP-1 v2 30 runs / 1.09 d: formula
+  $1,156 (upper bound), trading -$238, pessimistic -$421; core 99 markets formula $727 vs pessimistic -$50, forward_core 4 markets; count/
+  mention 14 markets pessimistic -$178. COPY-1 26 h: sharp 44 primaries, 1 settled (+49 pts, n=1).
+- Test (adjacent N44, leaderboard_census.py, local, 12-week tape): N41's favourite rule on tweet / post count buckets, 6-24 h: -3.1 pts
+  [-10.5, +3.2] on 105 events, newer half -7.5. DEAD - the transit result does not generalise.
+- Test (outside the box N45, same script): AI-leaderboard markets (LMArena / LiveBench / AI agent, best / 2nd / 3rd end of week/month):
+  favourite 24-168 h +3.7 pts [-1.0, +7.1] (46 events, 40 positive), 6-24 h +5.6 [4.7, 6.3] (15), halves +3.3 / +4.1; clustered by end-day
+  +3.7 [-0.5, +6.2] on 16 days. OpenRouter share weekly -5.9 (30 events). Not a result (16 independent days, interval through 0) -> READY:
+  forward paper on the 11-30 month-end markets.
+- Health: fast paper 12:11, slow 12:16, follow 12:49 (report 12:49, < 70 min), boosts 12:23, MM v2 13:01, books 13:00 - OK. Tracebacks only
+  the old pilot-log (2) / script-log (1) ones; no MemoryErrors. Pilot STOP, no orders.
+- Next: LP-1 v2 48 h 11-16 ~10 UTC (N33 hour split + N35/N38 forward); box office settlements Monday; lock_p week mark 11-17 with the price
+  split (lock_x/lock_p look like a few cheap fills); N45 tracker for the 11-30 month-end; options N42 forward 11-19; N34 Kalshi-first census.

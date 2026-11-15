@@ -733,3 +733,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - N41 ship transits DEAD as a source edge: 153 markets live, but IMF PortWatch publishes ~7 days late (last day 11-08 on 11-15) -> LESSONS 25.
   N43 AAA gas-price buckets DEAD (26 days, favourite -4.7 pts [-16, +6], trend nowcast 46% hit). N42 options split: rest -33 pts on 6 coin-dates
   (0 positive), tails +29 on 3 -> forward read-out. N21 forward BTC/ETH 30/30 +5.4% vs alts -2.1%. Next: LP-1 48 h 11-16, lock_p 11-17.
+
+## 11-15 13:40 cycle 18
+- N44 count-bucket favourite on tweet/post counts DEAD (6-24 h -3.1 pts [-10.5, +3.2], 105 events; newer half -7.5): N41 does not generalise.
+  N45 AI-leaderboard favourites (LMArena/LiveBench/agents): +3.7 pts on 46 events but only 16 end-days, clustered [-0.5, +6.2] -> READY,
+  forward on the 11-30 month-end. N25 forward decaying (+1.5%, 60 trades). Next: LP-1 48 h 11-16, lock_p 11-17.
