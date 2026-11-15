@@ -340,3 +340,21 @@
   the old combo-sampler crash in pilot-log and the old script-log smoke; no MemoryErrors. Pilot STOP, no orders.
 - Next: lock_early kill at 50 (next signal); LP-1 v2 48 h 11-16 ~10 UTC with N33 hour split + N35/N38 forward; box office settlements Monday;
   lock_p week mark 11-17; N27 transcript feasibility; N34 Kalshi-first census.
+
+## 11-15 05:00-05:30 UTC cycle 16 (scheduled)
+- Read-outs (fast trades.jsonl, last 04:08): lock_x 19 / 17 +8.8% (15 end-times), lock_p 40 / 36 +6.6% (35), lock_p_majors 14/14 +13.2% - no new
+  lock_x/lock_p signal; lock_m 184 / 171 -0.7%, lock_b 43 / 40 -0.9%. lock_early 51 / 47 -2.1% (37 end-times) -> KILL RULE FIRED, DEAD.
+  N21 forward BTC/ETH 24/24 +5.6%, alts 28 / 26 +2.4% (2 days). N25 forward >= 0.80 38/38 +5.5% (28 end-times), < 0.80 2 / 1.
+  Slow (04:08-04:16): converge 9 settled 8 won -$13, 85 open mark -$29; young 52 / 20 -$201; options 25 / 7 -$156, 71 open; charts 0 live;
+  box office 9 open (Monday); mention 2 open. LP-1 v2 22 runs / 0.75 d: formula $857 (upper bound), trading -$114, pessimistic -$285, 130 of 147
+  markets saw a competitor; core 96 markets formula $618 vs pessimistic -$42; forward_other 14 markets $65 vs -$16 (too early).
+  COPY-1 17.5 h: sharp 29 primaries, 0 settled; ask +4.8c over theirs, 34% pass the cap, lag 159 s; control 18 primaries settled -0.5 pts.
+- Test (adjacent N40, lock_early autopsy): BTC/ETH 21 / 19 -4.6%, alts 30 / 28 -0.1% -> the N21 asset split does not rescue it; N40 DEAD.
+- Test (outside the box N41, tally_source_census.py, local, 12-week tape): markets resolving on slow public counts. Ship transits (Hormuz /
+  Bab el-Mandeb, 34 events): favourite 0.60-0.97 6-24 h out +11.1 pts [-0.8, +18.8] (29 events, 24 positive), follower +11.0 [-3.0, +20.7];
+  24-168 h +3.4 [-2.1, +8.3]; halves +3.7 / +4.7; equal weight per event +4.9. Drought (5 events) and CDC counts (2) too few. Not a result
+  (interval through 0, windows looked at) -> READY: live-market check + is the transit source readable early, then forward paper.
+- Health: fast paper 04:08, slow 04:13, follow 04:24 (report 04:16, < 70 min), boosts 04:41, MM v2 04:01, books 04:45 - OK. Tracebacks only the
+  old combo-sampler crash in pilot-log and the old script-log smoke; no MemoryErrors. Pilot STOP, no orders.
+- Next: N41 (a) live 'ships transit' markets, (b) source reachability via Actions; LP-1 v2 48 h 11-16 ~10 UTC (N33/N35/N38 splits); box office
+  settlements Monday; lock_p week mark 11-17 with the price split; N27 transcript feasibility; N34 Kalshi-first census.

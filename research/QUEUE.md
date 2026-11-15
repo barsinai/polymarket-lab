@@ -723,3 +723,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - N39 central-bank decision favourites DEAD (22 meetings, -0.2 pts [-30, +18], -9.9 per meeting; 7-30 d out -21.7). N38 LP-1 core split
   (ex-weather, ex-live-count): in-sample core formula $523 vs pessimistic -$39 -> forward block in lp_paper.py. lock_early 49 (kill at 50).
   Next: LP-1 48 h 11-16, lock_p 11-17.
+
+## 11-15 05:30 cycle 16
+- lock_early DEAD by its kill rule (51 trades -2.1%/$, 37 end-times); BTC/ETH-only variant -4.6% (N40 DEAD). N41 ship-transit count markets:
+  favourite 6-24 h out +11.1 pts [-0.8, +18.8] on 29 events (tape, real fills) -> READY (live markets + source check). N25 forward 38/38 +5.5%.
+  Next: N41 checks, LP-1 48 h 11-16, lock_p 11-17.
