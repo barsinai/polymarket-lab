@@ -1,5 +1,5 @@
 {
-"scanned": "2026-11-15 05:11",
+"scanned": "2026-11-15 06:12",
 "events": 2100,
 "groups": 2037,
 "books": 16836,
@@ -20,31 +20,6 @@
 "usd_at_size": 1578.37
 },
 {
-"kind": "negrisk_all_yes",
-"event": "Anthropic IPO Closing Market Cap",
-"slug": "anthropic-ipo-closing-market-cap-higher-strikes",
-"n": 10,
-"has_other": false,
-"outcomes": [
-"<$1.25T",
-"$1.25\u2013$1.5T",
-"$1.5\u2013$1.75T",
-"$1.75\u2013$2.0T",
-"$2.0\u2013$2.25T",
-"$2.25\u2013$2.5T",
-"$2.5\u2013$2.75T",
-"$2.75\u2013$3.0T",
-"$3.0T+",
-"No IPO by December 31, 2027"
-],
-"cost": 0.987,
-"payoff": 1,
-"edge": 0.013,
-"edge_after_fee": -0.0366,
-"size_shares": 79.47,
-"usd_at_size": 78.44
-},
-{
 "kind": "ladder_num",
 "event": "StandX FDV above ___ one day after launch?",
 "slug": "standx-fdv-above-one-day-after-launch",
@@ -58,21 +33,6 @@
 "edge_after_fee": 0.0043,
 "size_shares": 144.37,
 "usd_at_size": 143.36
-},
-{
-"kind": "ladder_num",
-"event": "Reya FDV above ___ one day after launch?",
-"slug": "reya-fdv-above-one-day-after-launch",
-"easy": "Reya FDV above $300M one day after launch?",
-"hard": "Reya FDV above $400M one day after launch?",
-"easy_yes_ask": 0.048,
-"hard_no_ask": 0.948,
-"hard_yes_bid": 0.052,
-"cost": 0.996,
-"edge": 0.004,
-"edge_after_fee": -0.0026,
-"size_shares": 188.97,
-"usd_at_size": 188.21
 },
 {
 "kind": "ladder_date",
@@ -103,6 +63,21 @@
 "edge_after_fee": 0.0001,
 "size_shares": 220.12,
 "usd_at_size": 219.46
+},
+{
+"kind": "ladder_num",
+"event": "Reya FDV above ___ one day after launch?",
+"slug": "reya-fdv-above-one-day-after-launch",
+"easy": "Reya FDV above $300M one day after launch?",
+"hard": "Reya FDV above $400M one day after launch?",
+"easy_yes_ask": 0.048,
+"hard_no_ask": 0.948,
+"hard_yes_bid": 0.052,
+"cost": 0.996,
+"edge": 0.004,
+"edge_after_fee": -0.0026,
+"size_shares": 128.97,
+"usd_at_size": 128.45
 },
 {
 "kind": "ladder_num",
@@ -150,6 +125,31 @@
 "usd_at_size": 44.82
 },
 {
+"kind": "negrisk_all_yes",
+"event": "Anthropic IPO Closing Market Cap",
+"slug": "anthropic-ipo-closing-market-cap-higher-strikes",
+"n": 10,
+"has_other": false,
+"outcomes": [
+"<$1.25T",
+"$1.25\u2013$1.5T",
+"$1.5\u2013$1.75T",
+"$1.75\u2013$2.0T",
+"$2.0\u2013$2.25T",
+"$2.25\u2013$2.5T",
+"$2.5\u2013$2.75T",
+"$2.75\u2013$3.0T",
+"$3.0T+",
+"No IPO by December 31, 2027"
+],
+"cost": 0.997,
+"payoff": 1,
+"edge": 0.003,
+"edge_after_fee": -0.0471,
+"size_shares": 51.84,
+"usd_at_size": 51.68
+},
+{
 "kind": "ladder_num",
 "event": "How high will US unemployment go in 2026?",
 "slug": "how-high-will-us-unemployment-go-in-2026",
@@ -195,29 +195,6 @@
 "usd_at_size": 29.88
 },
 {
-"kind": "negrisk_all_yes",
-"event": "How many SpaceX Starship launches reach space in 2026?",
-"slug": "how-many-spacex-starship-launches-reach-space-in-2026",
-"n": 8,
-"has_other": false,
-"outcomes": [
-"<5",
-"5-6",
-"7-8",
-"9-10",
-"11-12",
-"13-14",
-"15-16",
-">16"
-],
-"cost": 0.994,
-"payoff": 1,
-"edge": 0.006,
-"edge_after_fee": -0.0182,
-"size_shares": 10.0,
-"usd_at_size": 9.94
-},
-{
 "kind": "ladder_num",
 "event": "Pacifica FDV above ___ one day after launch?",
 "slug": "pacifica-fdv-above-one-day-after-launch",
@@ -233,41 +210,19 @@
 "usd_at_size": 7.67
 },
 {
-"kind": "negrisk_all_yes",
-"event": "South Korea Annual Inflation 2026",
-"slug": "south-korea-annual-inflation-2026",
-"n": 7,
-"has_other": false,
-"outcomes": [
-"<1.5%",
-"1.5% to 1.7%",
-"1.8% to 2.0%",
-"2.1% to 2.3%",
-"2.4% to 2.6%",
-"2.7% to 2.9%",
-"3.0%+"
-],
-"cost": 0.996,
-"payoff": 1,
-"edge": 0.004,
-"edge_after_fee": -0.0427,
-"size_shares": 8.3,
-"usd_at_size": 8.27
-},
-{
 "kind": "ladder_num",
 "event": "Printr FDV above ___ one day after launch?",
 "slug": "printr-fdv-above-one-day-after-launch",
 "easy": "Printr FDV above $500M one day after launch?",
 "hard": "Printr FDV above $1B one day after launch?",
 "easy_yes_ask": 0.049,
-"hard_no_ask": 0.935,
-"hard_yes_bid": 0.065,
-"cost": 0.984,
-"edge": 0.016,
-"edge_after_fee": 0.0085,
+"hard_no_ask": 0.936,
+"hard_yes_bid": 0.064,
+"cost": 0.985,
+"edge": 0.015,
+"edge_after_fee": 0.0075,
 "size_shares": 1.61,
-"usd_at_size": 1.58
+"usd_at_size": 1.59
 },
 {
 "kind": "ladder_num",
@@ -283,31 +238,6 @@
 "edge_after_fee": 0.0066,
 "size_shares": 1.61,
 "usd_at_size": 1.59
-},
-{
-"kind": "negrisk_all_yes",
-"event": "South Africa Annual Inflation 2026",
-"slug": "south-africa-annual-inflation-2026",
-"n": 10,
-"has_other": false,
-"outcomes": [
-"<2.6%",
-"2.6-2.9%",
-"2.9-3.2%",
-"3.2-3.5%",
-"3.5-3.8%",
-"3.8-4.1%",
-"4.1-4.4%",
-"4.4-4.7%",
-"4.7-5.0%",
-">5.0%"
-],
-"cost": 0.974,
-"payoff": 1,
-"edge": 0.026,
-"edge_after_fee": -0.0218,
-"size_shares": 0.62,
-"usd_at_size": 0.6
 }
 ]
 }
