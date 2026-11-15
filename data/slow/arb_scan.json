@@ -1,5 +1,5 @@
 {
-"scanned": "2026-11-15 02:10",
+"scanned": "2026-11-15 02:52",
 "events": 2100,
 "groups": 2037,
 "books": 16842,
@@ -20,6 +20,18 @@
 "usd_at_size": 1578.37
 },
 {
+"kind": "negrisk_all_no",
+"event": "Anthropic IPO Closing Market Cap",
+"slug": "anthropic-ipo-closing-market-cap-higher-strikes",
+"n": 10,
+"cost": 8.986,
+"payoff": 9,
+"edge": 0.014,
+"edge_after_fee": -0.0363,
+"size_shares": 197.71,
+"usd_at_size": 1776.62
+},
+{
 "kind": "negrisk_all_yes",
 "event": "South Africa Annual Inflation 2026",
 "slug": "south-africa-annual-inflation-2026",
@@ -37,24 +49,12 @@
 "4.7-5.0%",
 ">5.0%"
 ],
-"cost": 0.939,
+"cost": 0.934,
 "payoff": 1,
-"edge": 0.061,
-"edge_after_fee": 0.0143,
+"edge": 0.066,
+"edge_after_fee": 0.0195,
 "size_shares": 26.06,
-"usd_at_size": 24.47
-},
-{
-"kind": "negrisk_all_no",
-"event": "Anthropic IPO Closing Market Cap",
-"slug": "anthropic-ipo-closing-market-cap-higher-strikes",
-"n": 10,
-"cost": 8.984,
-"payoff": 9,
-"edge": 0.016,
-"edge_after_fee": -0.0345,
-"size_shares": 71.13,
-"usd_at_size": 639.03
+"usd_at_size": 24.34
 },
 {
 "kind": "ladder_num",
@@ -128,8 +128,8 @@
 "cost": 0.995,
 "edge": 0.005,
 "edge_after_fee": 0.0025,
-"size_shares": 120.71,
-"usd_at_size": 120.11
+"size_shares": 90.71,
+"usd_at_size": 90.26
 },
 {
 "kind": "ladder_num",
@@ -160,30 +160,6 @@
 "edge_after_fee": -0.0001,
 "size_shares": 65.3,
 "usd_at_size": 65.04
-},
-{
-"kind": "negrisk_all_yes",
-"event": "U.K. Annual Inflation 2026",
-"slug": "uk-annual-inflation-in-2026",
-"n": 9,
-"has_other": false,
-"outcomes": [
-"<1.0%",
-"1.0\u20131.4%",
-"1.5\u20131.9%",
-"2.0\u20132.4%",
-"2.5\u20132.9%",
-"3.0\u20133.4%",
-"3.5\u20133.9%",
-"4.5%+",
-"4.0-4.4%"
-],
-"cost": 0.991,
-"payoff": 1,
-"edge": 0.009,
-"edge_after_fee": -0.0331,
-"size_shares": 20.0,
-"usd_at_size": 19.82
 },
 {
 "kind": "ladder_date",
@@ -231,6 +207,28 @@
 "usd_at_size": 35.42
 },
 {
+"kind": "negrisk_all_yes",
+"event": "South Korea Annual Inflation 2026",
+"slug": "south-korea-annual-inflation-2026",
+"n": 7,
+"has_other": false,
+"outcomes": [
+"<1.5%",
+"1.5% to 1.7%",
+"1.8% to 2.0%",
+"2.1% to 2.3%",
+"2.4% to 2.6%",
+"2.7% to 2.9%",
+"3.0%+"
+],
+"cost": 0.994,
+"payoff": 1,
+"edge": 0.006,
+"edge_after_fee": -0.0407,
+"size_shares": 8.3,
+"usd_at_size": 8.25
+},
+{
 "kind": "ladder_num",
 "event": "Pacifica FDV above ___ one day after launch?",
 "slug": "pacifica-fdv-above-one-day-after-launch",
@@ -244,21 +242,6 @@
 "edge_after_fee": 0.001,
 "size_shares": 7.71,
 "usd_at_size": 7.67
-},
-{
-"kind": "ladder_date",
-"event": "Anthropic IPO by __?",
-"slug": "anthropic-ipo-by",
-"easy": "Will Anthropic IPO by December 31, 2026?",
-"hard": "Will Anthropic IPO by November 30, 2026?",
-"easy_yes_ask": 0.982,
-"hard_no_ask": 0.015,
-"hard_yes_bid": 0.985,
-"cost": 0.997,
-"edge": 0.003,
-"edge_after_fee": 0.0007,
-"size_shares": 11.0,
-"usd_at_size": 10.97
 },
 {
 "kind": "ladder_num",
