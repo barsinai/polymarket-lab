@@ -24,6 +24,18 @@ Status: TESTING (paper/backtest running) · READY (next up) · PARKED (needs som
 | Research journal (my forecasts with sources) | reading + cross-checking beats the crowd on slow political/econ questions | forecast_log.py, Brier vs market | 11-10 | weeks |
 
 ## READY (ranked)
+N47. **(outside the box, 11-15 c19) Daily city weather-EVENT binaries: 'Where will it rain on <date>' (NWS CLI) and 'Which cities face
+   tornado risk on <date>' (SPC Day 1 outlook).** Never touched. Rules (riskday_check.py via Actions): rain resolves on the NWS Daily
+   Climate Report (>= 0.01 in, local-standard-time climate day), CLI issued the next morning, market ends 19:00 UTC the next day; tornado
+   resolves on the 01:00 UTC SPC Day 1 update (city inside a >= 2% tornado polygon, GeoJSON public and reachable), market ends 12:00 UTC.
+   So both have hours where the answer is mostly public (METARs / earlier outlooks) but the market is still open (LESSONS 25 passes).
+   Tape (riskday_census.py, pre-registered; riskday_clock.py split by what was public, cuts from the rules): rain favourite 0.60-0.97 6-24 h
+   +3.3 pts [-2.2, +7.4] (20 events), follower +6.3 [3.3, 9.1]; at hb 6-13 (climate day over, CLI pending) favourite avg 0.897 +6.3 pts
+   [3.6, 10.0] on 7 events (7/7 positive), long shots -7.5 [-9.6, -6.1]; 24-48 h ~0. Tornado NO favourite 6-24 h +3.0 [1.7, 3.7] on 9 events
+   at 0.96 (99.1% won) - a tail strategy (LESSONS 15), series seems to have stopped (only 11-05 found in the last 10 days). Books are very
+   thin (live 11-15: bid 0.001 / ask 0.909 x 45). Exposed to 5 (7 dates), 22 (clock split chosen after the first table), 8 (capacity), 10
+   (METAR clocks). Next: METAR nowcast check (Iowa Mesonet ASOS hourly precip per CLI station) - were the hb 6-13 fills already decided by
+   the METARs?; if yes, forward paper at real asks in 06-13 UTC, $10, decision at 30 dates.
 N45. **(outside the box, 11-15 c18) AI-leaderboard markets (LMArena / LiveBench / AI-agent 'best / 2nd / 3rd lab end of <week|month>').**
    Never touched. Why the crowd could be wrong: the resolving leaderboard is public and moves rarely inside a month, the books are thin and
    priced by AI fans who over-weight 'a new model drops this week'. Tape (leaderboard_census.py, rule pre-registered): favourite 0.60-0.97
@@ -237,6 +249,10 @@ OLD N2. **(outside the box, 11-12) Box-office opening-weekend markets vs Thursda
 - Kalshi vs Polymarket automatic pairing (titles do not match; manual for named series only).
 
 ## DEAD (number that killed it)
+- N46 month-end RANK markets beyond LMArena (11-15 c19, riskday_census.py, 12-week tape, N45 rule pre-registered): largest / 2nd / 3rd
+  largest company: favourite 24-168 h -40.1 pts [-47.4, -0.2] on 6 events (the 0.90 favourites won 44%: Microsoft/NVIDIA/Apple swaps),
+  168-720 h -17.0; best / 2nd / 3rd Chinese AI company 6-168 h +0.5 [-9.0, +7.1] (9 events); top Spotify artist 1 event. DEAD by its rule -
+  N45's effect is not a 'rank market' effect; a live public number that can swap at month-end is priced too confidently, not too shyly.
 - N44 count-bucket favourite on tweet / post counts (11-15 c18, leaderboard_census.py, 12-week tape, 343k taker entries / 133 weekly events,
   N41 rule unchanged): favourite 0.60-0.97 6-24 h before end -3.1 pts [-10.5, +3.2] on 105 events, follower -1.8, newer 6 weeks -7.5
   [-17.5, +0.2]; 1-6 h -5.1. The +11 pts of ship transits (N41) does not generalise to count buckets whose tracker is live -> DEAD by its rule.

@@ -398,3 +398,25 @@
   the old pilot-log (2) / script-log (1) ones; no MemoryErrors. Pilot STOP, no orders.
 - Next: LP-1 v2 48 h 11-16 ~10 UTC (N33 hour split + N35/N38 forward); box office settlements Monday; lock_p week mark 11-17 with the price
   split (lock_x/lock_p look like a few cheap fills); N45 tracker for the 11-30 month-end; options N42 forward 11-19; N34 Kalshi-first census.
+
+## 11-15 17:00-17:55 UTC cycle 19 (scheduled)
+- Read-outs (fast trades.jsonl, last settled 16:09): lock_x 19 / 17 +8.8% (no signal since 11-14 16:14), lock_p 41 / 37 +6.7% (36 end-times,
+  no new trade since 11:09), lock_p_majors 15/15 +13.3%; lock_m 201 / 184 -2.1%, lock_b 49 / 45 -0.7%, lock_p_z2 234 / 215 +0.2%.
+  N21 forward BTC/ETH 39 / 38 +2.3% (2 days), alts 45 / 38 -5.7%. N25 forward >= 0.80 67 / 64 +0.8% (48 end-times; +5.5 -> +2.9 -> +1.5
+  -> +0.8, decaying to zero), < 0.80 (the N25 rule itself) 5 / 1 -75% on 4 end-times - against it so far.
+  Slow (16:12-16:16): converge 9 / 8 -$13, 85 open mark -$32; young 52 / 20 -$201 (38 open); options 31 / 11 +$13, 77 open, N42 forward 0
+  settled (26 tails, 25 crash bets); box office 9 open (Monday); charts 2/2 +$3; mention 1 / 0 -$10. LP-1 v2 34 runs / 1.26 d: formula
+  $1,273 (upper bound), trading -$155, pessimistic -$493; only 11 markets still quoted (150 of 170 saw a competitor); core 101 markets
+  formula $740 vs pessimistic -$50, forward_core 6 markets $12 vs -$7, forward_other 20 markets $263 vs -$197 (N35 failing).
+  COPY-1 29.9 h: sharp 52 primaries, 3 settled 3/3 +34.7 pts (n=3, means nothing yet); control 21 / 9 events -0.3 pts.
+- Test (adjacent N46, riskday_census.py, local, 12-week tape, N45 rule): month-end rank markets beyond LMArena - largest company favourite
+  24-168 h -40.1 pts [-47.4, -0.2] (6 events), Chinese AI company +0.5 [-9.0, +7.1] (9). DEAD.
+- Test (outside the box N47, riskday_census.py + riskday_clock.py local, riskday_check.py via Actions): rain / tornado-risk city binaries.
+  Rules read: rain = NWS CLI next morning, ends 19 UTC next day; tornado = SPC 01 UTC Day 1 polygon, ends 12 UTC; SPC GeoJSON reachable.
+  Rain favourite at hb 6-13 (day over, CLI pending) +6.3 pts [3.6, 10.0] on 7 dates (7/7), long shots -7.5; all 6-24 h +3.3 [-2.2, +7.4]
+  (20 dates). Tornado NO favourite +3.0 [1.7, 3.7] on 9 dates at 0.96 (tail, series looks stopped). Books very thin. Not a result -> READY:
+  METAR nowcast check, then forward paper.
+- Health: fast paper 16:12, slow 16:16, follow 16:49 (report 16:43, < 70 min), boosts 16:47, MM v2 16:32, books 17:00 - OK. Tracebacks only the
+  old pilot-log (2) / script-log (1) ones; no MemoryErrors. Pilot STOP, no orders.
+- Next: LP-1 v2 48 h 11-16 ~10 UTC; box office settlements Monday; lock_p week mark 11-17 (it is a few cheap fills; N25 forward says no);
+  N47 METAR check (Iowa Mesonet ASOS) for the hb 6-13 rain fills; N45 tracker for 11-30; options N42 forward 11-19.

@@ -738,3 +738,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - N44 count-bucket favourite on tweet/post counts DEAD (6-24 h -3.1 pts [-10.5, +3.2], 105 events; newer half -7.5): N41 does not generalise.
   N45 AI-leaderboard favourites (LMArena/LiveBench/agents): +3.7 pts on 46 events but only 16 end-days, clustered [-0.5, +6.2] -> READY,
   forward on the 11-30 month-end. N25 forward decaying (+1.5%, 60 trades). Next: LP-1 48 h 11-16, lock_p 11-17.
+
+## 11-15 17:55 cycle 19
+- N46 month-end rank markets (largest company, Chinese AI) DEAD (largest company favourite -40 pts on 6 events). N47 rain / tornado-risk city
+  binaries: rain favourite after the climate day ends but before the NWS report +6.3 pts [3.6, 10.0] on 7 dates -> READY (METAR check, then
+  forward paper; books very thin). N25 forward cheap locks 5 / 1 -75%, >= 0.80 +0.8% (decayed). Next: LP-1 48 h 11-16, lock_p 11-17.
