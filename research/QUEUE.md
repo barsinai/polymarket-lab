@@ -718,3 +718,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - LP-1 v2's loss is almost all same-day weather buckets (pessimistic -$167 vs formula $100; rest -$37 vs $401) -> N35 forward split in the
   report. Trump approval buckets (N37, 101 events) DEAD: favourite -5.3%/$ at end-72h even on last prices. Box-office scan fix confirmed
   (27 markets, 6 positions). Next: LP-1 48 h 11-16, lock_p 11-17, lock_early kill at 50.
+
+## 11-15 01:30 cycle 15
+- N39 central-bank decision favourites DEAD (22 meetings, -0.2 pts [-30, +18], -9.9 per meeting; 7-30 d out -21.7). N38 LP-1 core split
+  (ex-weather, ex-live-count): in-sample core formula $523 vs pessimistic -$39 -> forward block in lp_paper.py. lock_early 49 (kill at 50).
+  Next: LP-1 48 h 11-16, lock_p 11-17.

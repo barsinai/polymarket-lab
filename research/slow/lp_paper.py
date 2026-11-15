@@ -17,7 +17,7 @@ Each hourly run:
     have reached us (buy YES at >= our ask, sell YES at <= our bid), up to our size per side per run;
   - formula reward accrued = pool x share x hours/24; inventory marked at the current fair; settled at resolution.
 State data/slow/lp_paper_state.json, report data/slow/lp_paper_report.json. Env: MIN_POOL (10) MAX_MIN (100) N_MAX (60) FAIR_DAYS (14)."""
-import json, math, os, sys, time, datetime as dt
+import json, math, os, re, sys, time, datetime as dt
 import requests
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 import collect  # noqa: E402
@@ -247,5 +247,14 @@ _isw = lambda x: "temperature" in x["q"].lower()
 rep["by_kind"] = {"weather": _kind_block([x for x in ms.values() if _isw(x)]), "other": _kind_block([x for x in ms.values() if not _isw(x)]),
                   "forward_weather": _kind_block([x for x in ms.values() if _isw(x) and x["opened"] >= N35_FROM]),
                   "forward_other": _kind_block([x for x in ms.values() if not _isw(x) and x["opened"] >= N35_FROM])}
+# N38 (11-15 c15, report only): 'core' = not weather and not a live count / mention / views market (someone watching the stream or the
+# account counts before our quote moves; in-sample 0.59 d: count/mention 14 markets formula $70 vs pessimistic -$57, rest 89 formula $519 vs
+# pessimistic -$38). Regex fixed here; forward = markets opened after N38_FROM only.
+N38_FROM = 1794711600  # 2026-11-15 01:00 UTC
+_iscount = lambda x: bool(re.search(r"\bsay\b|\bposts?\b|tweets?\b|mention|on stream|\bviews\b", x["q"].lower()))
+rep["by_kind"]["count_mention"] = _kind_block([x for x in ms.values() if not _isw(x) and _iscount(x)])
+rep["by_kind"]["core"] = _kind_block([x for x in ms.values() if not _isw(x) and not _iscount(x)])
+rep["by_kind"]["forward_core"] = _kind_block([x for x in ms.values() if not _isw(x) and not _iscount(x) and x["opened"] >= N38_FROM])
+rep["by_kind"]["forward_count_mention"] = _kind_block([x for x in ms.values() if not _isw(x) and _iscount(x) and x["opened"] >= N38_FROM])
 json.dump(st, open(ST, "w")); json.dump(rep, open(REP, "w"), indent=1)
 print(json.dumps(rep))

@@ -323,3 +323,20 @@
   combo-sampler crash in pilot-log and the old script-log smoke; no MemoryErrors. Pilot STOP, no orders.
 - Next: LP-1 v2 48 h 11-16 (by_kind forward + N33 hour split on weekday fills); lock_early kill at 50; lock_p week mark 11-17 with the price
   split; box office settlements Monday; N27 transcript feasibility; N22 Argentina CPI census.
+
+## 11-15 01:00-01:30 UTC cycle 15 (scheduled)
+- Read-outs (fast trades.jsonl, last 00:04): lock_x 19 / 17 +8.8% (15 end-times), lock_p 40 / 36 +6.6% (35), lock_p_majors 14/14 +13.2%,
+  lock_early 49 / 45 -2.4% (1 from its kill rule at 50), lock_m 182 / 169 -0.8%, lock_b 41 / 38 -1.2% - no new lock_x/lock_p signal.
+  N21 forward BTC/ETH 22/22 +5.5%, alts 24 / 22 +1.8% (1 day). N25 forward >= 0.80 32/32 +5.3% (24 end-times), < 0.80 2 / 1.
+  Slow (00:07-00:10): converge 5 settled -$18, 88 open mark -$40; young 50 / 20 -$181 (39 open); options 25 / 7 -$156, 67 open; charts 2/2,
+  0 live; box office 8 open, 0 settled (Monday). LP-1 v2 0.59 d: formula $689 (upper bound), realistic trading -$139, pessimistic -$262;
+  'other' pessimistic fell from -$37 to -$94 since c14, almost all one stream market (Caedrel 'Crab / Scuttle 10+ times' -$79 realistic).
+  COPY-1 13.3 h: sharp 24 primaries, 0 settled; ask +4.4c over theirs (median), 37% pass the cap; control 9 settled +5.7 pts (noise).
+- Test (outside the box N39, cb_decision_census.py, local, 12-week tape): central-bank decision favourites 0.60-0.97, 24-168 h out: -0.2 pts
+  [-29.8, +17.6] on 22 meetings, -9.9 per meeting equal-weight, halves +16 / -12.5, 7-30 d out -21.7 [-39.8, -5.2]. DEAD (LESSONS 13).
+- Test (adjacent N38, LP-1 v2 state, in-sample): live-count / mention / views markets 11: formula $65 vs pessimistic -$56; core 92: formula
+  $523 vs pessimistic -$39, realistic +$30. -> lp_paper.py now reports by_kind.core / forward_core (markets opened after 01:00 UTC).
+- Health: fast paper 00:07, slow 00:10, follow 00:12 (report 00:04, < 70 min), boosts 00:20, MM v2 01:01, books 01:00 - OK. Tracebacks only
+  the old combo-sampler crash in pilot-log and the old script-log smoke; no MemoryErrors. Pilot STOP, no orders.
+- Next: lock_early kill at 50 (next signal); LP-1 v2 48 h 11-16 ~10 UTC with N33 hour split + N35/N38 forward; box office settlements Monday;
+  lock_p week mark 11-17; N27 transcript feasibility; N34 Kalshi-first census.
