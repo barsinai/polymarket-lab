@@ -1,8 +1,8 @@
 {
-"scanned": "2026-11-15 00:09",
+"scanned": "2026-11-15 01:11",
 "events": 2100,
 "groups": 2037,
-"books": 16844,
+"books": 16842,
 "opps": [
 {
 "kind": "ladder_num",
@@ -20,19 +20,16 @@
 "usd_at_size": 1579.95
 },
 {
-"kind": "ladder_num",
-"event": "StandX FDV above ___ one day after launch?",
-"slug": "standx-fdv-above-one-day-after-launch",
-"easy": "StandX FDV above $50M one day after launch?",
-"hard": "StandX FDV above $1B one day after launch?",
-"easy_yes_ask": 0.016,
-"hard_no_ask": 0.978,
-"hard_yes_bid": 0.022,
-"cost": 0.994,
-"edge": 0.006,
-"edge_after_fee": 0.0034,
-"size_shares": 144.37,
-"usd_at_size": 143.5
+"kind": "negrisk_all_no",
+"event": "Anthropic IPO Closing Market Cap",
+"slug": "anthropic-ipo-closing-market-cap-higher-strikes",
+"n": 10,
+"cost": 8.991,
+"payoff": 9,
+"edge": 0.009,
+"edge_after_fee": -0.0412,
+"size_shares": 382.0,
+"usd_at_size": 3434.56
 },
 {
 "kind": "negrisk_all_yes",
@@ -52,12 +49,27 @@
 "4.7-5.0%",
 ">5.0%"
 ],
-"cost": 0.967,
+"cost": 0.943,
 "payoff": 1,
-"edge": 0.033,
-"edge_after_fee": -0.0148,
+"edge": 0.057,
+"edge_after_fee": 0.0101,
 "size_shares": 26.06,
-"usd_at_size": 25.2
+"usd_at_size": 24.57
+},
+{
+"kind": "ladder_num",
+"event": "StandX FDV above ___ one day after launch?",
+"slug": "standx-fdv-above-one-day-after-launch",
+"easy": "StandX FDV above $50M one day after launch?",
+"hard": "StandX FDV above $1B one day after launch?",
+"easy_yes_ask": 0.016,
+"hard_no_ask": 0.978,
+"hard_yes_bid": 0.022,
+"cost": 0.994,
+"edge": 0.006,
+"edge_after_fee": 0.0034,
+"size_shares": 144.37,
+"usd_at_size": 143.5
 },
 {
 "kind": "ladder_num",
@@ -166,6 +178,21 @@
 },
 {
 "kind": "ladder_num",
+"event": "Ostium FDV above ___ one day after launch?",
+"slug": "ostium-fdv-above-one-day-after-launch",
+"easy": "Ostium FDV above $50M one day after launch?",
+"hard": "Ostium FDV above $100M one day after launch?",
+"easy_yes_ask": 0.04,
+"hard_no_ask": 0.956,
+"hard_yes_bid": 0.044,
+"cost": 0.996,
+"edge": 0.004,
+"edge_after_fee": -0.0016,
+"size_shares": 33.0,
+"usd_at_size": 32.87
+},
+{
+"kind": "ladder_num",
 "event": "Pacifica FDV above ___ one day after launch?",
 "slug": "pacifica-fdv-above-one-day-after-launch",
 "easy": "Pacifica FDV above $500M one day after launch?",
@@ -178,6 +205,53 @@
 "edge_after_fee": 0.001,
 "size_shares": 7.71,
 "usd_at_size": 7.67
+},
+{
+"kind": "negrisk_all_yes",
+"event": "South Korea Annual Inflation 2026",
+"slug": "south-korea-annual-inflation-2026",
+"n": 7,
+"has_other": false,
+"outcomes": [
+"<1.5%",
+"1.5% to 1.7%",
+"1.8% to 2.0%",
+"2.1% to 2.3%",
+"2.4% to 2.6%",
+"2.7% to 2.9%",
+"3.0%+"
+],
+"cost": 0.996,
+"payoff": 1,
+"edge": 0.004,
+"edge_after_fee": -0.0427,
+"size_shares": 8.36,
+"usd_at_size": 8.33
+},
+{
+"kind": "negrisk_all_yes",
+"event": "Brazil Annual Inflation 2026",
+"slug": "brazil-annual-inflation-2026",
+"n": 10,
+"has_other": false,
+"outcomes": [
+"<3.00%",
+"3.00-3.49%",
+"3.50-3.99%",
+"4.00-4.49%",
+"4.50-4.99%",
+"5.00-5.49%",
+"5.50-5.99%",
+"6.00-6.49%",
+"6.50-6.99%",
+"7.00%+"
+],
+"cost": 0.997,
+"payoff": 1,
+"edge": 0.003,
+"edge_after_fee": -0.0437,
+"size_shares": 10.84,
+"usd_at_size": 10.81
 },
 {
 "kind": "ladder_num",
