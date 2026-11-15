@@ -90,6 +90,10 @@ survives them. Add a lesson whenever an idea dies for a reason not already here.
     +16.9 points [13.2, 21.0] in Aug 17 - Sep 30, +0.8 [-3.0, +4.2] in Oct - Nov. The 12-week average (+9.3 [6.4, 12.3]) would have
     looked like a discovery. Always print the halves and the weeks before the total.
 
+25. **Check when the resolving source publishes before calling it an early read** (11-15, ship transits): IMF PortWatch posts daily
+    transits ~7 days late, so a weekly market 'ends' long before its number exists and the price is set by people with faster raw data
+    (AIS). 'Resolves on a public dataset' is an edge only if that dataset (or something we can read) arrives before the price settles.
+
 ## Where edges plausibly still live (derived from the above)
 - Information the crowd processes slowly and bots don't cover: resolution-rule details (exact station, exact candle,
   rounding), public running tallies, scheduled data with good nowcasts, slow non-sports questions.

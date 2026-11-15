@@ -728,3 +728,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - lock_early DEAD by its kill rule (51 trades -2.1%/$, 37 end-times); BTC/ETH-only variant -4.6% (N40 DEAD). N41 ship-transit count markets:
   favourite 6-24 h out +11.1 pts [-0.8, +18.8] on 29 events (tape, real fills) -> READY (live markets + source check). N25 forward 38/38 +5.5%.
   Next: N41 checks, LP-1 48 h 11-16, lock_p 11-17.
+
+## 11-15 09:40 cycle 17
+- N41 ship transits DEAD as a source edge: 153 markets live, but IMF PortWatch publishes ~7 days late (last day 11-08 on 11-15) -> LESSONS 25.
+  N43 AAA gas-price buckets DEAD (26 days, favourite -4.7 pts [-16, +6], trend nowcast 46% hit). N42 options split: rest -33 pts on 6 coin-dates
+  (0 positive), tails +29 on 3 -> forward read-out. N21 forward BTC/ETH 30/30 +5.4% vs alts -2.1%. Next: LP-1 48 h 11-16, lock_p 11-17.

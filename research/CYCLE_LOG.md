@@ -358,3 +358,23 @@
   old combo-sampler crash in pilot-log and the old script-log smoke; no MemoryErrors. Pilot STOP, no orders.
 - Next: N41 (a) live 'ships transit' markets, (b) source reachability via Actions; LP-1 v2 48 h 11-16 ~10 UTC (N33/N35/N38 splits); box office
   settlements Monday; lock_p week mark 11-17 with the price split; N27 transcript feasibility; N34 Kalshi-first census.
+## 11-15 09:00-09:40 UTC cycle 17 (scheduled)
+- Read-outs (fast trades.jsonl, last 08:04): lock_x 19 / 17 +8.8% (15 end-times), lock_p 40 / 36 +6.6% (35), lock_p_majors 14/14 +13.2% - no new
+  lock_x/lock_p signal since 11-14; lock_m 189 / 176 -0.5%, lock_b 45 / 42 -0.6%. N21 forward BTC/ETH 30/30 +5.4%, alts 35 / 31 -2.1% (2 days) -
+  the split shows forward for the first time. N25 forward >= 0.80 50 / 49 +2.9% (37 end-times, first loss), < 0.80 3 / 1 -36.7%.
+  Slow (08:10-08:13): converge 9 settled 8 won -$13, 85 open mark -$35; young 52 / 20 -$201 (37 open); options 31 / 11 +$13 (see N42); charts
+  0 live; box office 9 open (Monday); mention 1 / 0 -$10. LP-1 v2 26 runs / 0.92 d: formula $1,009 (upper bound), trading -$262, pessimistic
+  -$425; forward_other (N35) 15 markets formula $120 vs pessimistic -$145 (MrBeast views buckets) - failing so far; forward_core 2 markets.
+  COPY-1 21.6 h: sharp 37 primaries, 1 settled; ask +4.7c over theirs, 38% pass the cap, lag 165 s; control 21 / 9 events -0.3 pts.
+- Test N41 checks (transit_check.py via Actions): 153 live transit markets (Bab el-Mandeb / Hormuz weekly buckets, Panama Canal weekly, 'any
+  day' thresholds); PortWatch reachable, but its last day on 11-15 is 11-08 (~7-day lag) -> the weekly buckets resolve a week after they 'end',
+  the source cannot lead the price. DEAD as a source edge (LESSONS 25); the tape favourite effect gets one replication on the next tape refresh.
+- Test (outside the box N43, gas_census.py, local, 12-week tape): AAA daily gas 1-cent buckets, 26 days: favourite -4.7 pts [-16.4, +6.4],
+  trend nowcast hits 46% of days, its trades -0.9 pts. DEAD.
+- New (adjacent N42, options_tail_readout.py): options paper tails < 0.20 5 / 2 +28.7 pts (3 coin-dates, two BTC dip long shots), rest 26 / 9
+  -33.0 pts on 6 coin-dates, 0 positive. Open: 24 of 25 tails are crash bets, 0 of 48 rest -> one directional bet. TESTING (forward read-out).
+- Health: fast paper 08:09, slow 08:13, follow 08:37 (report 08:27, < 70 min), boosts 07:59, MM v2 08:31, books 09:00 - OK. Tracebacks only the
+  old pilot-log / script-log ones; no MemoryErrors. Pilot STOP, no orders.
+- Next: LP-1 v2 48 h 11-16 ~10 UTC (N33/N35/N38 splits); box office settlements Monday; lock_p week mark 11-17 with the price split;
+  options N42 forward 11-19; N27 transcript feasibility; N34 Kalshi-first census.
+
