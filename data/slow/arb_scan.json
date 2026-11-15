@@ -1,5 +1,5 @@
 {
-"scanned": "2026-11-15 04:12",
+"scanned": "2026-11-15 05:11",
 "events": 2100,
 "groups": 2037,
 "books": 16836,
@@ -18,6 +18,31 @@
 "edge_after_fee": 0.0022,
 "size_shares": 1586.3,
 "usd_at_size": 1578.37
+},
+{
+"kind": "negrisk_all_yes",
+"event": "Anthropic IPO Closing Market Cap",
+"slug": "anthropic-ipo-closing-market-cap-higher-strikes",
+"n": 10,
+"has_other": false,
+"outcomes": [
+"<$1.25T",
+"$1.25\u2013$1.5T",
+"$1.5\u2013$1.75T",
+"$1.75\u2013$2.0T",
+"$2.0\u2013$2.25T",
+"$2.25\u2013$2.5T",
+"$2.5\u2013$2.75T",
+"$2.75\u2013$3.0T",
+"$3.0T+",
+"No IPO by December 31, 2027"
+],
+"cost": 0.987,
+"payoff": 1,
+"edge": 0.013,
+"edge_after_fee": -0.0366,
+"size_shares": 79.47,
+"usd_at_size": 78.44
 },
 {
 "kind": "ladder_num",
@@ -106,38 +131,8 @@
 "cost": 0.996,
 "edge": 0.004,
 "edge_after_fee": 0.0015,
-"size_shares": 82.65,
-"usd_at_size": 82.32
-},
-{
-"kind": "ladder_date",
-"event": "Anthropic IPO by __?",
-"slug": "anthropic-ipo-by",
-"easy": "Will Anthropic IPO by December 31, 2026?",
-"hard": "Will Anthropic IPO by November 30, 2026?",
-"easy_yes_ask": 0.981,
-"hard_no_ask": 0.016,
-"hard_yes_bid": 0.984,
-"cost": 0.997,
-"edge": 0.003,
-"edge_after_fee": 0.0006,
-"size_shares": 100.0,
-"usd_at_size": 99.7
-},
-{
-"kind": "ladder_num",
-"event": "Pacifica FDV above ___ one day after launch?",
-"slug": "pacifica-fdv-above-one-day-after-launch",
-"easy": "Pacifica FDV above $300M one day after launch?",
-"hard": "Pacifica FDV above $800M one day after launch?",
-"easy_yes_ask": 0.028,
-"hard_no_ask": 0.968,
-"hard_yes_bid": 0.032,
-"cost": 0.996,
-"edge": 0.004,
-"edge_after_fee": -0.0001,
-"size_shares": 65.3,
-"usd_at_size": 65.04
+"size_shares": 112.65,
+"usd_at_size": 112.2
 },
 {
 "kind": "ladder_date",
@@ -153,21 +148,6 @@
 "edge_after_fee": -0.0024,
 "size_shares": 45.0,
 "usd_at_size": 44.82
-},
-{
-"kind": "ladder_num",
-"event": "Ostium FDV above ___ one day after launch?",
-"slug": "ostium-fdv-above-one-day-after-launch",
-"easy": "Ostium FDV above $50M one day after launch?",
-"hard": "Ostium FDV above $100M one day after launch?",
-"easy_yes_ask": 0.04,
-"hard_no_ask": 0.955,
-"hard_yes_bid": 0.045,
-"cost": 0.995,
-"edge": 0.005,
-"edge_after_fee": -0.0007,
-"size_shares": 33.0,
-"usd_at_size": 32.84
 },
 {
 "kind": "ladder_num",
@@ -188,6 +168,59 @@
 "kind": "ladder_num",
 "event": "Pacifica FDV above ___ one day after launch?",
 "slug": "pacifica-fdv-above-one-day-after-launch",
+"easy": "Pacifica FDV above $300M one day after launch?",
+"hard": "Pacifica FDV above $800M one day after launch?",
+"easy_yes_ask": 0.028,
+"hard_no_ask": 0.968,
+"hard_yes_bid": 0.032,
+"cost": 0.996,
+"edge": 0.004,
+"edge_after_fee": -0.0001,
+"size_shares": 34.48,
+"usd_at_size": 34.34
+},
+{
+"kind": "ladder_num",
+"event": "Ostium FDV above ___ one day after launch?",
+"slug": "ostium-fdv-above-one-day-after-launch",
+"easy": "Ostium FDV above $50M one day after launch?",
+"hard": "Ostium FDV above $100M one day after launch?",
+"easy_yes_ask": 0.041,
+"hard_no_ask": 0.955,
+"hard_yes_bid": 0.045,
+"cost": 0.996,
+"edge": 0.004,
+"edge_after_fee": -0.0018,
+"size_shares": 30.0,
+"usd_at_size": 29.88
+},
+{
+"kind": "negrisk_all_yes",
+"event": "How many SpaceX Starship launches reach space in 2026?",
+"slug": "how-many-spacex-starship-launches-reach-space-in-2026",
+"n": 8,
+"has_other": false,
+"outcomes": [
+"<5",
+"5-6",
+"7-8",
+"9-10",
+"11-12",
+"13-14",
+"15-16",
+">16"
+],
+"cost": 0.994,
+"payoff": 1,
+"edge": 0.006,
+"edge_after_fee": -0.0182,
+"size_shares": 10.0,
+"usd_at_size": 9.94
+},
+{
+"kind": "ladder_num",
+"event": "Pacifica FDV above ___ one day after launch?",
+"slug": "pacifica-fdv-above-one-day-after-launch",
 "easy": "Pacifica FDV above $500M one day after launch?",
 "hard": "Pacifica FDV above $800M one day after launch?",
 "easy_yes_ask": 0.027,
@@ -198,6 +231,28 @@
 "edge_after_fee": 0.001,
 "size_shares": 7.71,
 "usd_at_size": 7.67
+},
+{
+"kind": "negrisk_all_yes",
+"event": "South Korea Annual Inflation 2026",
+"slug": "south-korea-annual-inflation-2026",
+"n": 7,
+"has_other": false,
+"outcomes": [
+"<1.5%",
+"1.5% to 1.7%",
+"1.8% to 2.0%",
+"2.1% to 2.3%",
+"2.4% to 2.6%",
+"2.7% to 2.9%",
+"3.0%+"
+],
+"cost": 0.996,
+"payoff": 1,
+"edge": 0.004,
+"edge_after_fee": -0.0427,
+"size_shares": 8.3,
+"usd_at_size": 8.27
 },
 {
 "kind": "ladder_num",
@@ -247,12 +302,12 @@
 "4.7-5.0%",
 ">5.0%"
 ],
-"cost": 0.984,
+"cost": 0.974,
 "payoff": 1,
-"edge": 0.016,
-"edge_after_fee": -0.0321,
+"edge": 0.026,
+"edge_after_fee": -0.0218,
 "size_shares": 0.62,
-"usd_at_size": 0.61
+"usd_at_size": 0.6
 }
 ]
 }
