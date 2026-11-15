@@ -1,8 +1,8 @@
 {
-"scanned": "2026-11-14 23:13",
+"scanned": "2026-11-15 00:09",
 "events": 2100,
 "groups": 2037,
-"books": 16848,
+"books": 16844,
 "opps": [
 {
 "kind": "ladder_num",
@@ -52,12 +52,12 @@
 "4.7-5.0%",
 ">5.0%"
 ],
-"cost": 0.969,
+"cost": 0.967,
 "payoff": 1,
-"edge": 0.031,
-"edge_after_fee": -0.0169,
+"edge": 0.033,
+"edge_after_fee": -0.0148,
 "size_shares": 26.06,
-"usd_at_size": 25.25
+"usd_at_size": 25.2
 },
 {
 "kind": "ladder_num",
@@ -91,6 +91,21 @@
 },
 {
 "kind": "ladder_num",
+"event": "StandX FDV above ___ one day after launch?",
+"slug": "standx-fdv-above-one-day-after-launch",
+"easy": "StandX FDV above $50M one day after launch?",
+"hard": "StandX FDV above $400M one day after launch?",
+"easy_yes_ask": 0.016,
+"hard_no_ask": 0.979,
+"hard_yes_bid": 0.021,
+"cost": 0.995,
+"edge": 0.005,
+"edge_after_fee": 0.0025,
+"size_shares": 90.71,
+"usd_at_size": 90.26
+},
+{
+"kind": "ladder_num",
 "event": "Hyperbeat FDV above ___ one day after launch?",
 "slug": "hyperbeat-fdv-above-one-day-after-launch",
 "easy": "Hyperbeat FDV above $300M one day after launch?",
@@ -105,43 +120,6 @@
 "usd_at_size": 112.2
 },
 {
-"kind": "negrisk_all_yes",
-"event": "Japan 10Y Bond Yield: End of 2026",
-"slug": "japan-10y-bond-yield-end-of-2026",
-"n": 7,
-"has_other": false,
-"outcomes": [
-"<2.0%",
-"2.0-2.2%",
-"2.2-2.4%",
-"2.4-2.6%",
-"2.6-2.8%",
-"2.8-3.0%",
-"3.0%+"
-],
-"cost": 0.97,
-"payoff": 1,
-"edge": 0.03,
-"edge_after_fee": -0.0246,
-"size_shares": 10.6,
-"usd_at_size": 10.28
-},
-{
-"kind": "ladder_num",
-"event": "StandX FDV above ___ one day after launch?",
-"slug": "standx-fdv-above-one-day-after-launch",
-"easy": "StandX FDV above $50M one day after launch?",
-"hard": "StandX FDV above $400M one day after launch?",
-"easy_yes_ask": 0.016,
-"hard_no_ask": 0.979,
-"hard_yes_bid": 0.021,
-"cost": 0.995,
-"edge": 0.005,
-"edge_after_fee": 0.0025,
-"size_shares": 60.71,
-"usd_at_size": 60.41
-},
-{
 "kind": "ladder_num",
 "event": "Pacifica FDV above ___ one day after launch?",
 "slug": "pacifica-fdv-above-one-day-after-launch",
@@ -153,8 +131,8 @@
 "cost": 0.996,
 "edge": 0.004,
 "edge_after_fee": -0.0001,
-"size_shares": 60.0,
-"usd_at_size": 59.76
+"size_shares": 65.3,
+"usd_at_size": 65.04
 },
 {
 "kind": "ladder_date",
@@ -206,22 +184,22 @@
 "event": "Printr FDV above ___ one day after launch?",
 "slug": "printr-fdv-above-one-day-after-launch",
 "easy": "Printr FDV above $500M one day after launch?",
-"hard": "Printr FDV above $1B one day after launch?",
+"hard": "Printr FDV above $800M one day after launch?",
 "easy_yes_ask": 0.049,
-"hard_no_ask": 0.935,
-"hard_yes_bid": 0.065,
-"cost": 0.984,
-"edge": 0.016,
-"edge_after_fee": 0.0085,
+"hard_no_ask": 0.937,
+"hard_yes_bid": 0.063,
+"cost": 0.986,
+"edge": 0.014,
+"edge_after_fee": 0.0066,
 "size_shares": 1.61,
-"usd_at_size": 1.58
+"usd_at_size": 1.59
 },
 {
 "kind": "ladder_num",
 "event": "Printr FDV above ___ one day after launch?",
 "slug": "printr-fdv-above-one-day-after-launch",
 "easy": "Printr FDV above $500M one day after launch?",
-"hard": "Printr FDV above $800M one day after launch?",
+"hard": "Printr FDV above $1B one day after launch?",
 "easy_yes_ask": 0.049,
 "hard_no_ask": 0.937,
 "hard_yes_bid": 0.063,
