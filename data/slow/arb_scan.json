@@ -1,5 +1,5 @@
 {
-"scanned": "2026-11-15 18:15",
+"scanned": "2026-11-15 19:18",
 "events": 2100,
 "groups": 2037,
 "books": 16840,
@@ -65,29 +65,6 @@
 "usd_at_size": 11.83
 },
 {
-"kind": "negrisk_all_yes",
-"event": "Mexico Annual Inflation 2026",
-"slug": "mexico-annual-inflation-2026",
-"n": 8,
-"has_other": false,
-"outcomes": [
-"<2.50%",
-"2.50% to 2.99%",
-"3.00% to 3.49%",
-"3.50% to 3.99%",
-"4.00% to 4.49%",
-"4.50% to 4.99%",
-"5.00% to 5.49%",
-"5.50%+"
-],
-"cost": 0.973,
-"payoff": 1,
-"edge": 0.027,
-"edge_after_fee": -0.0147,
-"size_shares": 15.0,
-"usd_at_size": 14.6
-},
-{
 "kind": "ladder_num",
 "event": "Ostium FDV above ___ one day after launch?",
 "slug": "ostium-fdv-above-one-day-after-launch",
@@ -101,31 +78,6 @@
 "edge_after_fee": 0.0018,
 "size_shares": 60.0,
 "usd_at_size": 59.7
-},
-{
-"kind": "negrisk_all_yes",
-"event": "South Africa Annual Inflation 2026",
-"slug": "south-africa-annual-inflation-2026",
-"n": 10,
-"has_other": false,
-"outcomes": [
-"<2.6%",
-"2.6-2.9%",
-"2.9-3.2%",
-"3.2-3.5%",
-"3.5-3.8%",
-"3.8-4.1%",
-"4.1-4.4%",
-"4.4-4.7%",
-"4.7-5.0%",
-">5.0%"
-],
-"cost": 0.971,
-"payoff": 1,
-"edge": 0.029,
-"edge_after_fee": -0.017,
-"size_shares": 7.55,
-"usd_at_size": 7.33
 },
 {
 "kind": "negrisk_all_yes",
@@ -163,6 +115,31 @@
 "usd_at_size": 59.82
 },
 {
+"kind": "negrisk_all_yes",
+"event": "South Africa Annual Inflation 2026",
+"slug": "south-africa-annual-inflation-2026",
+"n": 10,
+"has_other": false,
+"outcomes": [
+"<2.6%",
+"2.6-2.9%",
+"2.9-3.2%",
+"3.2-3.5%",
+"3.5-3.8%",
+"3.8-4.1%",
+"4.1-4.4%",
+"4.4-4.7%",
+"4.7-5.0%",
+">5.0%"
+],
+"cost": 0.978,
+"payoff": 1,
+"edge": 0.022,
+"edge_after_fee": -0.0242,
+"size_shares": 7.55,
+"usd_at_size": 7.38
+},
+{
 "kind": "ladder_num",
 "event": "StandX FDV above ___ one day after launch?",
 "slug": "standx-fdv-above-one-day-after-launch",
@@ -176,18 +153,6 @@
 "edge_after_fee": 0.0029,
 "size_shares": 22.12,
 "usd_at_size": 21.99
-},
-{
-"kind": "negrisk_all_no",
-"event": "Anthropic IPO Closing Market Cap",
-"slug": "anthropic-ipo-closing-market-cap-higher-strikes",
-"n": 10,
-"cost": 8.994,
-"payoff": 9,
-"edge": 0.006,
-"edge_after_fee": -0.0439,
-"size_shares": 20.0,
-"usd_at_size": 179.88
 },
 {
 "kind": "ladder_date",
@@ -235,6 +200,29 @@
 "usd_at_size": 15.68
 },
 {
+"kind": "negrisk_all_yes",
+"event": "Mexico Annual Inflation 2026",
+"slug": "mexico-annual-inflation-2026",
+"n": 8,
+"has_other": false,
+"outcomes": [
+"<2.50%",
+"2.50% to 2.99%",
+"3.00% to 3.49%",
+"3.50% to 3.99%",
+"4.00% to 4.49%",
+"4.50% to 4.99%",
+"5.00% to 5.49%",
+"5.50%+"
+],
+"cost": 0.993,
+"payoff": 1,
+"edge": 0.007,
+"edge_after_fee": -0.0349,
+"size_shares": 8.96,
+"usd_at_size": 8.9
+},
+{
 "kind": "ladder_num",
 "event": "Hurupay FDV above ___ one day after launch?",
 "slug": "hurupay-fdv-above-one-day-after-launch",
@@ -250,17 +238,44 @@
 "usd_at_size": 19.8
 },
 {
+"kind": "negrisk_all_no",
+"event": "Anthropic IPO Closing Market Cap",
+"slug": "anthropic-ipo-closing-market-cap-higher-strikes",
+"n": 10,
+"cost": 8.992,
+"payoff": 9,
+"edge": 0.008,
+"edge_after_fee": -0.042,
+"size_shares": 6.51,
+"usd_at_size": 58.54
+},
+{
+"kind": "ladder_num",
+"event": "Probable FDV above ___ one day after launch?",
+"slug": "probable-fdv-above-one-day-after-launch",
+"easy": "Probable FDV above $50M one day after launch?",
+"hard": "Probable FDV above $500M one day after launch?",
+"easy_yes_ask": 0.13,
+"hard_no_ask": 0.865,
+"hard_yes_bid": 0.135,
+"cost": 0.995,
+"edge": 0.005,
+"edge_after_fee": -0.0111,
+"size_shares": 9.44,
+"usd_at_size": 9.39
+},
+{
 "kind": "ladder_num",
 "event": "Printr FDV above ___ one day after launch?",
 "slug": "printr-fdv-above-one-day-after-launch",
 "easy": "Printr FDV above $500M one day after launch?",
 "hard": "Printr FDV above $1B one day after launch?",
 "easy_yes_ask": 0.049,
-"hard_no_ask": 0.935,
-"hard_yes_bid": 0.065,
-"cost": 0.984,
-"edge": 0.016,
-"edge_after_fee": 0.0085,
+"hard_no_ask": 0.934,
+"hard_yes_bid": 0.066,
+"cost": 0.983,
+"edge": 0.017,
+"edge_after_fee": 0.0094,
 "size_shares": 1.61,
 "usd_at_size": 1.58
 },
