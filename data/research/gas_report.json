@@ -1,0 +1,179 @@
+{
+ "A FAV 1-6h": {
+  "n": 1,
+  "events": 1,
+  "pts": 16.24
+ },
+ "A FAV 1-6h follower": {
+  "n": 0,
+  "events": 0,
+  "pts": null
+ },
+ "A FAV 6-24h": {
+  "n": 412,
+  "events": 26,
+  "pts": -4.72,
+  "ci": [
+   -16.4,
+   6.4
+  ],
+  "pts_per_event_eq": 1.75,
+  "events_pos": 18
+ },
+ "A FAV 6-24h follower": {
+  "n": 342,
+  "events": 25,
+  "pts": -3.34,
+  "ci": [
+   -15.6,
+   7.9
+  ],
+  "pts_per_event_eq": 4.87,
+  "events_pos": 21
+ },
+ "A FAV 24-168h": {
+  "n": 0,
+  "events": 0,
+  "pts": null
+ },
+ "A FAV 24-168h follower": {
+  "n": 0,
+  "events": 0,
+  "pts": null
+ },
+ "A FAV 6-168h older": {
+  "n": 131,
+  "events": 13,
+  "pts": -5.07,
+  "ci": [
+   -16.8,
+   7.1
+  ],
+  "pts_per_event_eq": -0.36,
+  "events_pos": 8
+ },
+ "A FAV 6-168h newer": {
+  "n": 281,
+  "events": 13,
+  "pts": -4.55,
+  "ci": [
+   -20.2,
+   8.8
+  ],
+  "pts_per_event_eq": 3.85,
+  "events_pos": 10
+ },
+ "B YES band 0.03-0.2": {
+  "n": 59,
+  "events": 17,
+  "pts": 10.6,
+  "ci": [
+   -4.3,
+   24.2
+  ],
+  "pts_per_event_eq": 8.11,
+  "events_pos": 4,
+  "avg_p": 0.079,
+  "won": 0.186
+ },
+ "B YES band 0.2-0.4": {
+  "n": 23,
+  "events": 12,
+  "pts": 0.49,
+  "ci": [
+   -19.7,
+   20.6
+  ],
+  "pts_per_event_eq": -3.99,
+  "events_pos": 4,
+  "avg_p": 0.298,
+  "won": 0.304
+ },
+ "B YES band 0.4-0.6": {
+  "n": 20,
+  "events": 13,
+  "pts": 1.02,
+  "ci": [
+   -18.6,
+   19.2
+  ],
+  "pts_per_event_eq": -2.48,
+  "events_pos": 7,
+  "avg_p": 0.486,
+  "won": 0.5
+ },
+ "B YES band 0.6-0.8": {
+  "n": 26,
+  "events": 17,
+  "pts": -17.35,
+  "ci": [
+   -39.5,
+   9.3
+  ],
+  "pts_per_event_eq": -7.31,
+  "events_pos": 10,
+  "avg_p": 0.708,
+  "won": 0.538
+ },
+ "B YES band 0.8-0.97": {
+  "n": 99,
+  "events": 23,
+  "pts": -3.74,
+  "ci": [
+   -21.1,
+   6.4
+  ],
+  "pts_per_event_eq": -3.12,
+  "events_pos": 18,
+  "avg_p": 0.904,
+  "won": 0.869
+ },
+ "C nowcast bucket hit rate": {
+  "days": 24,
+  "hit": 0.458
+ },
+ "C YES nowcast bucket 6-48h": {
+  "n": 83,
+  "events": 22,
+  "pts": -0.93,
+  "ci": [
+   -22.5,
+   18.4
+  ],
+  "pts_per_event_eq": -11.11,
+  "events_pos": 8
+ },
+ "C YES nowcast bucket follower": {
+  "n": 40,
+  "events": 15,
+  "pts": 10.87,
+  "ci": [
+   -22.7,
+   35.5
+  ],
+  "pts_per_event_eq": -4.42,
+  "events_pos": 8
+ },
+ "C NO on rejected bucket priced >=0.30 6-48h": {
+  "n": 135,
+  "events": 19,
+  "pts": 4.49,
+  "ci": [
+   -14.8,
+   25.2
+  ],
+  "pts_per_event_eq": 1.58,
+  "events_pos": 6
+ },
+ "C NO rejected follower": {
+  "n": 102,
+  "events": 15,
+  "pts": 6.48,
+  "ci": [
+   -15.6,
+   28.6
+  ],
+  "pts_per_event_eq": 7.24,
+  "events_pos": 7
+ }
+}
