@@ -1,46 +1,47 @@
 {
- "updated": "2026-11-15T14:11:29.899573+00:00",
- "trades": 28713,
- "settled": 28697,
- "obs_this_run": 30171,
+ "updated": "2026-11-15T15:11:45.428276+00:00",
+ "trades": 28826,
+ "settled": 28820,
+ "obs_this_run": 29149,
  "rest_ms": {
-  "n": 14634,
-  "min": 39.6,
-  "p50": 49.1,
-  "p90": 58.7
+  "n": 14856,
+  "min": 39.3,
+  "p50": 49.5,
+  "p90": 60.1
  },
  "feed": {
-  "msgs": 78553,
-  "connects": 1,
+  "msgs": 77790,
+  "connects": 2,
   "errors": 0,
-  "last_msg": 1794751889.6336741
+  "last_msg": 1794755505.268606,
+  "silent_reconnects": 1
  },
  "feed_topics": {
-  "crypto_prices_twap_sixty": 28483,
-  "crypto_prices_chainlink": 28474,
-  "crypto_prices": 21595
+  "crypto_prices_twap_sixty": 28158,
+  "crypto_prices_chainlink": 28162,
+  "crypto_prices": 21468
  },
  "bookws": {
   "ran_to_end": true
  },
  "by_strat": {
   "dog": {
-   "trades": 13597,
-   "won": 2090,
-   "staked": 78947.09,
-   "pnl": -17192.67
+   "trades": 13667,
+   "won": 2109,
+   "staked": 79377.85,
+   "pnl": -17153.72
   },
   "exact": {
-   "trades": 3820,
-   "won": 2305,
-   "staked": 40373.5,
-   "pnl": -2431.76
+   "trades": 3827,
+   "won": 2311,
+   "staked": 40435.12,
+   "pnl": -2424.58
   },
   "fav": {
-   "trades": 9151,
-   "won": 7210,
-   "staked": 119899.2,
-   "pnl": -5344.83
+   "trades": 9197,
+   "won": 7240,
+   "staked": 120550.57,
+   "pnl": -5473.23
   },
   "lock": {
    "trades": 350,
@@ -1065,22 +1066,22 @@
    "pnl": -2.86
   },
   "2026-11-15 dog": {
-   "trades": 1274,
-   "won": 200,
-   "staked": 7568.91,
-   "pnl": -1974.89
+   "trades": 1344,
+   "won": 219,
+   "staked": 7999.67,
+   "pnl": -1935.94
   },
   "2026-11-15 exact": {
-   "trades": 150,
-   "won": 105,
-   "staked": 2032.32,
-   "pnl": -361.72
+   "trades": 157,
+   "won": 111,
+   "staked": 2093.94,
+   "pnl": -354.54
   },
   "2026-11-15 fav": {
-   "trades": 839,
-   "won": 640,
-   "staked": 11985.2,
-   "pnl": -959.32
+   "trades": 885,
+   "won": 670,
+   "staked": 12636.57,
+   "pnl": -1087.73
   },
   "2026-11-15 lock": {
    "trades": 17,
