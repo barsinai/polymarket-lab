@@ -1,20 +1,53 @@
 {
-"scanned": "2026-11-15 17:55",
+"scanned": "2026-11-15 18:15",
 "events": 2100,
 "groups": 2037,
 "books": 16840,
 "opps": [
 {
-"kind": "negrisk_all_no",
-"event": "Anthropic IPO Closing Market Cap",
-"slug": "anthropic-ipo-closing-market-cap-higher-strikes",
-"n": 10,
-"cost": 8.994,
-"payoff": 9,
-"edge": 0.006,
-"edge_after_fee": -0.0438,
-"size_shares": 300.0,
-"usd_at_size": 2698.2
+"kind": "ladder_num",
+"event": "Pacifica FDV above ___ one day after launch?",
+"slug": "pacifica-fdv-above-one-day-after-launch",
+"easy": "Pacifica FDV above $500M one day after launch?",
+"hard": "Pacifica FDV above $800M one day after launch?",
+"easy_yes_ask": 0.027,
+"hard_no_ask": 0.968,
+"hard_yes_bid": 0.032,
+"cost": 0.995,
+"edge": 0.005,
+"edge_after_fee": 0.001,
+"size_shares": 337.71,
+"usd_at_size": 336.02
+},
+{
+"kind": "ladder_num",
+"event": "Pacifica FDV above ___ one day after launch?",
+"slug": "pacifica-fdv-above-one-day-after-launch",
+"easy": "Pacifica FDV above $300M one day after launch?",
+"hard": "Pacifica FDV above $800M one day after launch?",
+"easy_yes_ask": 0.028,
+"hard_no_ask": 0.968,
+"hard_yes_bid": 0.032,
+"cost": 0.996,
+"edge": 0.004,
+"edge_after_fee": -0.0001,
+"size_shares": 394.48,
+"usd_at_size": 392.9
+},
+{
+"kind": "ladder_num",
+"event": "Hyperbeat FDV above ___ one day after launch?",
+"slug": "hyperbeat-fdv-above-one-day-after-launch",
+"easy": "Hyperbeat FDV above $300M one day after launch?",
+"hard": "Hyperbeat FDV above $400M one day after launch?",
+"easy_yes_ask": 0.016,
+"hard_no_ask": 0.98,
+"hard_yes_bid": 0.02,
+"cost": 0.996,
+"edge": 0.004,
+"edge_after_fee": 0.0015,
+"size_shares": 304.2,
+"usd_at_size": 302.98
 },
 {
 "kind": "ladder_date",
@@ -51,38 +84,8 @@
 "payoff": 1,
 "edge": 0.027,
 "edge_after_fee": -0.0147,
-"size_shares": 17.89,
-"usd_at_size": 17.41
-},
-{
-"kind": "ladder_num",
-"event": "Hyperbeat FDV above ___ one day after launch?",
-"slug": "hyperbeat-fdv-above-one-day-after-launch",
-"easy": "Hyperbeat FDV above $300M one day after launch?",
-"hard": "Hyperbeat FDV above $400M one day after launch?",
-"easy_yes_ask": 0.016,
-"hard_no_ask": 0.98,
-"hard_yes_bid": 0.02,
-"cost": 0.996,
-"edge": 0.004,
-"edge_after_fee": 0.0015,
-"size_shares": 112.65,
-"usd_at_size": 112.2
-},
-{
-"kind": "ladder_num",
-"event": "Pacifica FDV above ___ one day after launch?",
-"slug": "pacifica-fdv-above-one-day-after-launch",
-"easy": "Pacifica FDV above $300M one day after launch?",
-"hard": "Pacifica FDV above $800M one day after launch?",
-"easy_yes_ask": 0.028,
-"hard_no_ask": 0.968,
-"hard_yes_bid": 0.032,
-"cost": 0.996,
-"edge": 0.004,
-"edge_after_fee": -0.0001,
-"size_shares": 94.48,
-"usd_at_size": 94.1
+"size_shares": 15.0,
+"usd_at_size": 14.6
 },
 {
 "kind": "ladder_num",
@@ -117,12 +120,12 @@
 "4.7-5.0%",
 ">5.0%"
 ],
-"cost": 0.97,
+"cost": 0.971,
 "payoff": 1,
-"edge": 0.03,
-"edge_after_fee": -0.0159,
+"edge": 0.029,
+"edge_after_fee": -0.017,
 "size_shares": 7.55,
-"usd_at_size": 7.32
+"usd_at_size": 7.33
 },
 {
 "kind": "negrisk_all_yes",
@@ -137,27 +140,27 @@
 "40\u201360",
 "60+"
 ],
-"cost": 0.988,
+"cost": 0.987,
 "payoff": 1,
-"edge": 0.012,
-"edge_after_fee": -0.0227,
+"edge": 0.013,
+"edge_after_fee": -0.0216,
 "size_shares": 16.78,
-"usd_at_size": 16.58
+"usd_at_size": 16.56
 },
 {
 "kind": "ladder_num",
-"event": "Pacifica FDV above ___ one day after launch?",
-"slug": "pacifica-fdv-above-one-day-after-launch",
-"easy": "Pacifica FDV above $500M one day after launch?",
-"hard": "Pacifica FDV above $800M one day after launch?",
-"easy_yes_ask": 0.027,
-"hard_no_ask": 0.968,
-"hard_yes_bid": 0.032,
-"cost": 0.995,
-"edge": 0.005,
-"edge_after_fee": 0.001,
-"size_shares": 37.71,
-"usd_at_size": 37.52
+"event": "Ostium FDV above ___ one day after launch?",
+"slug": "ostium-fdv-above-one-day-after-launch",
+"easy": "Ostium FDV above $75M one day after launch?",
+"hard": "Ostium FDV above $200M one day after launch?",
+"easy_yes_ask": 0.021,
+"hard_no_ask": 0.976,
+"hard_yes_bid": 0.024,
+"cost": 0.997,
+"edge": 0.003,
+"edge_after_fee": -0.0001,
+"size_shares": 60.0,
+"usd_at_size": 59.82
 },
 {
 "kind": "ladder_num",
@@ -173,6 +176,18 @@
 "edge_after_fee": 0.0029,
 "size_shares": 22.12,
 "usd_at_size": 21.99
+},
+{
+"kind": "negrisk_all_no",
+"event": "Anthropic IPO Closing Market Cap",
+"slug": "anthropic-ipo-closing-market-cap-higher-strikes",
+"n": 10,
+"cost": 8.994,
+"payoff": 9,
+"edge": 0.006,
+"edge_after_fee": -0.0439,
+"size_shares": 20.0,
+"usd_at_size": 179.88
 },
 {
 "kind": "ladder_date",
@@ -235,43 +250,19 @@
 "usd_at_size": 19.8
 },
 {
-"kind": "negrisk_all_yes",
-"event": "U.K. Annual Inflation 2026",
-"slug": "uk-annual-inflation-in-2026",
-"n": 9,
-"has_other": false,
-"outcomes": [
-"<1.0%",
-"1.0\u20131.4%",
-"1.5\u20131.9%",
-"2.0\u20132.4%",
-"2.5\u20132.9%",
-"3.0\u20133.4%",
-"3.5\u20133.9%",
-"4.5%+",
-"4.0-4.4%"
-],
-"cost": 0.997,
-"payoff": 1,
-"edge": 0.003,
-"edge_after_fee": -0.0397,
-"size_shares": 16.23,
-"usd_at_size": 16.18
-},
-{
 "kind": "ladder_num",
 "event": "Printr FDV above ___ one day after launch?",
 "slug": "printr-fdv-above-one-day-after-launch",
 "easy": "Printr FDV above $500M one day after launch?",
 "hard": "Printr FDV above $1B one day after launch?",
 "easy_yes_ask": 0.049,
-"hard_no_ask": 0.936,
-"hard_yes_bid": 0.064,
-"cost": 0.985,
-"edge": 0.015,
-"edge_after_fee": 0.0075,
+"hard_no_ask": 0.935,
+"hard_yes_bid": 0.065,
+"cost": 0.984,
+"edge": 0.016,
+"edge_after_fee": 0.0085,
 "size_shares": 1.61,
-"usd_at_size": 1.59
+"usd_at_size": 1.58
 },
 {
 "kind": "ladder_num",
