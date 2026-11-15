@@ -1,0 +1,1374 @@
+{
+ "at": "2026-11-15 17:06",
+ "events": {
+  "which-cities-face-tornado-risk-on-november-5-2026": {
+   "end": "2026-11-06T12:00:00Z",
+   "src": "https://www.spc.noaa.gov/products/outlook/day1otlk.html",
+   "desc": "This market will resolve to \"Yes\" for each listed city that falls within a tornado probability area rated \u22652% in the NOAA Storm Prediction Center Day 1 Convective Outlook on November 5, 2026. Otherwise, this market will resolve to \"No\".\n\nThe SPC Day 1 Convective Outlook assigns tornado probability percentages (2%, 5%, 10%, etc.) to geographic areas across the US. If a city's coordinates fall inside any area rated 2% or higher, that city resolves \"Yes\". If a city is outside all tornado probability areas, or only within areas rated below 2%, that city resolves \"No\".\n\nThe SPC outlook is published as machine-readable geographic data (GeoJSON) at spc.noaa.gov. Each city's coordinates and the polygon boundaries are publicly verifiable. Borderline cases can be independently confirmed using the polygon data (excluding the hatched SIGN overlay, which is not a probability rating) and the city's listed coordinates. The point-in-polygon test is performed on unprojected WGS84 (EPSG:4326) coordinates, which is the native coordinate system of the SPC GeoJSON data.\n\nResolution is based on the scheduled 01:00 UTC Day 1 Convective Outlook update issued on the following UTC calendar day. The SPC Day 1 outlook covers a 24-hour period from 12:00 UTC to 12:00 UTC the following day. That scheduled update is the revisions cutoff; subsequent revisions published after it will not be considered. If the SPC Day 1 Convective Outlook has not been published by the time the market closes, this market will r",
+   "n_markets": 25,
+   "markets": [
+    {
+     "q": "Will Chicago, IL face tornado risk on November 5?",
+     "end": "2026-11-06T12:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "155"
+    },
+    {
+     "q": "Will Houston, TX face tornado risk on November 5?",
+     "end": "2026-11-06T12:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "5"
+    },
+    {
+     "q": "Will San Antonio, TX face tornado risk on November 5?",
+     "end": "2026-11-06T12:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "5"
+    },
+    {
+     "q": "Will Dallas, TX face tornado risk on November 5?",
+     "end": "2026-11-06T12:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "155"
+    },
+    {
+     "q": "Will Austin, TX face tornado risk on November 5?",
+     "end": "2026-11-06T12:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "5"
+    },
+    {
+     "q": "Will Fort Worth, TX face tornado risk on November 5?",
+     "end": "2026-11-06T12:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "5"
+    },
+    {
+     "q": "Will Columbus, OH face tornado risk on November 5?",
+     "end": "2026-11-06T12:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "5"
+    },
+    {
+     "q": "Will Charlotte, NC face tornado risk on November 5?",
+     "end": "2026-11-06T12:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "5"
+    },
+    {
+     "q": "Will Indianapolis, IN face tornado risk on November 5?",
+     "end": "2026-11-06T12:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "5"
+    },
+    {
+     "q": "Will Denver, CO face tornado risk on November 5?",
+     "end": "2026-11-06T12:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "5"
+    },
+    {
+     "q": "Will Nashville, TN face tornado risk on November 5?",
+     "end": "2026-11-06T12:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "5"
+    },
+    {
+     "q": "Will Oklahoma City, OK face tornado risk on November 5?",
+     "end": "2026-11-06T12:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "5"
+    },
+    {
+     "q": "Will Memphis, TN face tornado risk on November 5?",
+     "end": "2026-11-06T12:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "5"
+    },
+    {
+     "q": "Will Louisville, KY face tornado risk on November 5?",
+     "end": "2026-11-06T12:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "5"
+    },
+    {
+     "q": "Will Atlanta, GA face tornado risk on November 5?",
+     "end": "2026-11-06T12:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "5"
+    },
+    {
+     "q": "Will Kansas City, MO face tornado risk on November 5?",
+     "end": "2026-11-06T12:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "5"
+    },
+    {
+     "q": "Will Omaha, NE face tornado risk on November 5?",
+     "end": "2026-11-06T12:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "5"
+    },
+    {
+     "q": "Will Minneapolis, MN face tornado risk on November 5?",
+     "end": "2026-11-06T12:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "5"
+    },
+    {
+     "q": "Will Wichita, KS face tornado risk on November 5?",
+     "end": "2026-11-06T12:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "5"
+    },
+    {
+     "q": "Will New Orleans, LA face tornado risk on November 5?",
+     "end": "2026-11-06T12:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "5"
+    },
+    {
+     "q": "Will Tampa, FL face tornado risk on November 5?",
+     "end": "2026-11-06T12:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "5"
+    },
+    {
+     "q": "Will St. Louis, MO face tornado risk on November 5?",
+     "end": "2026-11-06T12:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "5"
+    },
+    {
+     "q": "Will Birmingham, AL face tornado risk on November 5?",
+     "end": "2026-11-06T12:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "5"
+    },
+    {
+     "q": "Will Des Moines, IA face tornado risk on November 5?",
+     "end": "2026-11-06T12:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "5"
+    },
+    {
+     "q": "Will Little Rock, AR face tornado risk on November 5?",
+     "end": "2026-11-06T12:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "5"
+    }
+   ]
+  },
+  "where-will-it-rain-on-november-5-2026": {
+   "end": "2026-11-06T19:00:00Z",
+   "src": "https://forecast.weather.gov/product_sites.php?site=NWS&product=CLI",
+   "desc": "This market will resolve to \"Yes\" for each listed city that records measurable precipitation on November 5, 2026. Otherwise, this market will resolve to \"No\".\n\nMeasurable precipitation means 0.01 inches or more as reported by the PRECIPITATION (IN) figure in the NWS Daily Climate Report (CLI) for the city's station.\n\nA report of trace (\"T\") does not qualify.\n\nThe PRECIPITATION (IN) figure measures total liquid-equivalent precipitation and does not distinguish between precipitation types.\n\nThe observation period is the NWS climate day for each station: midnight to midnight local standard time. The final CLI report for a climate day is issued the following morning.\n\nEach city is an independent market. Any number of cities may resolve \"Yes\", including all of them or none of them.\n\nThis market will resolve according to the NWS Daily Climate Report as published by 2:00 PM ET on the day following the observation date. If multiple versions of the report are issued, the last version published before that time governs. A governing report that gives the figure as missing (\"M\" or \"MM\") is treated as reporting 0.00 inches, and this market will resolve to \"No\". If no figure has been published by that time, this market will resolve to \"No\".\n\nThe resolution source for this market is the NWS Daily Climate Report (CLI) for each city's station.",
+   "n_markets": 10,
+   "markets": [
+    {
+     "q": "Will it rain in Los Angeles, CA on November 5?",
+     "end": "2026-11-06T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "236"
+    },
+    {
+     "q": "Will it rain in Houston, TX on November 5?",
+     "end": "2026-11-06T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "69.997"
+    },
+    {
+     "q": "Will it rain in Dallas, TX on November 5?",
+     "end": "2026-11-06T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "35.202"
+    },
+    {
+     "q": "Will it rain in Phoenix, AZ on November 5?",
+     "end": "2026-11-06T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "591.092"
+    },
+    {
+     "q": "Will it rain in Philadelphia, PA on November 5?",
+     "end": "2026-11-06T19:00:00Z",
+     "closed": true,
+     "prices": "[\"1\", \"0\"]",
+     "vol": "40"
+    },
+    {
+     "q": "Will it rain in Washington, DC on November 5?",
+     "end": "2026-11-06T19:00:00Z",
+     "closed": true,
+     "prices": "[\"1\", \"0\"]",
+     "vol": "40"
+    },
+    {
+     "q": "Will it rain in Atlanta, GA on November 5?",
+     "end": "2026-11-06T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "65"
+    },
+    {
+     "q": "Will it rain in Miami, FL on November 5?",
+     "end": "2026-11-06T19:00:00Z",
+     "closed": true,
+     "prices": "[\"1\", \"0\"]",
+     "vol": "85.102"
+    },
+    {
+     "q": "Will it rain in New Orleans, LA on November 5?",
+     "end": "2026-11-06T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "304.996"
+    },
+    {
+     "q": "Will it rain in San Francisco, CA on November 5?",
+     "end": "2026-11-06T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "305"
+    }
+   ]
+  },
+  "where-will-it-rain-on-november-6-2026": {
+   "end": "2026-11-07T19:00:00Z",
+   "src": "https://forecast.weather.gov/product_sites.php?site=NWS&product=CLI",
+   "desc": "This market will resolve to \"Yes\" for each listed city that records measurable precipitation on November 6, 2026. Otherwise, this market will resolve to \"No\".\n\nMeasurable precipitation means 0.01 inches or more as reported by the PRECIPITATION (IN) figure in the NWS Daily Climate Report (CLI) for the city's station.\n\nA report of trace (\"T\") does not qualify.\n\nThe PRECIPITATION (IN) figure measures total liquid-equivalent precipitation and does not distinguish between precipitation types.\n\nThe observation period is the NWS climate day for each station: midnight to midnight local standard time. The final CLI report for a climate day is issued the following morning.\n\nEach city is an independent market. Any number of cities may resolve \"Yes\", including all of them or none of them.\n\nThis market will resolve according to the NWS Daily Climate Report as published by 2:00 PM ET on the day following the observation date. If multiple versions of the report are issued, the last version published before that time governs. A governing report that gives the figure as missing (\"M\" or \"MM\") is treated as reporting 0.00 inches, and this market will resolve to \"No\". If no figure has been published by that time, this market will resolve to \"No\".\n\nThe resolution source for this market is the NWS Daily Climate Report (CLI) for each city's station.",
+   "n_markets": 10,
+   "markets": [
+    {
+     "q": "Will it rain in Los Angeles, CA on November 6?",
+     "end": "2026-11-07T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "441.802"
+    },
+    {
+     "q": "Will it rain in Houston, TX on November 6?",
+     "end": "2026-11-07T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "20"
+    },
+    {
+     "q": "Will it rain in Dallas, TX on November 6?",
+     "end": "2026-11-07T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "20"
+    },
+    {
+     "q": "Will it rain in Phoenix, AZ on November 6?",
+     "end": "2026-11-07T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "340.997"
+    },
+    {
+     "q": "Will it rain in Philadelphia, PA on November 6?",
+     "end": "2026-11-07T19:00:00Z",
+     "closed": true,
+     "prices": "[\"1\", \"0\"]",
+     "vol": "20"
+    },
+    {
+     "q": "Will it rain in Washington, DC on November 6?",
+     "end": "2026-11-07T19:00:00Z",
+     "closed": true,
+     "prices": "[\"1\", \"0\"]",
+     "vol": "20"
+    },
+    {
+     "q": "Will it rain in Atlanta, GA on November 6?",
+     "end": "2026-11-07T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "55"
+    },
+    {
+     "q": "Will it rain in Miami, FL on November 6?",
+     "end": "2026-11-07T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "20.202"
+    },
+    {
+     "q": "Will it rain in New Orleans, LA on November 6?",
+     "end": "2026-11-07T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "20.202"
+    },
+    {
+     "q": "Will it rain in San Francisco, CA on November 6?",
+     "end": "2026-11-07T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "55"
+    }
+   ]
+  },
+  "where-will-it-rain-on-november-7-2026": {
+   "end": "2026-11-08T19:00:00Z",
+   "src": "https://forecast.weather.gov/product_sites.php?site=NWS&product=CLI",
+   "desc": "This market will resolve to \"Yes\" for each listed city that records measurable precipitation on November 7, 2026. Otherwise, this market will resolve to \"No\".\n\nMeasurable precipitation means 0.01 inches or more as reported by the PRECIPITATION (IN) figure in the NWS Daily Climate Report (CLI) for the city's station.\n\nA report of trace (\"T\") does not qualify.\n\nThe PRECIPITATION (IN) figure measures total liquid-equivalent precipitation and does not distinguish between precipitation types.\n\nThe observation period is the NWS climate day for each station: midnight to midnight local standard time. The final CLI report for a climate day is issued the following morning.\n\nEach city is an independent market. Any number of cities may resolve \"Yes\", including all of them or none of them.\n\nThis market will resolve according to the NWS Daily Climate Report as published by 2:00 PM ET on the day following the observation date. If multiple versions of the report are issued, the last version published before that time governs. A governing report that gives the figure as missing (\"M\" or \"MM\") is treated as reporting 0.00 inches, and this market will resolve to \"No\". If no figure has been published by that time, this market will resolve to \"No\".\n\nThe resolution source for this market is the NWS Daily Climate Report (CLI) for each city's station.",
+   "n_markets": 10,
+   "markets": [
+    {
+     "q": "Will it rain in Los Angeles, CA on November 7?",
+     "end": "2026-11-08T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "138.192"
+    },
+    {
+     "q": "Will it rain in Houston, TX on November 7?",
+     "end": "2026-11-08T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "20"
+    },
+    {
+     "q": "Will it rain in Dallas, TX on November 7?",
+     "end": "2026-11-08T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "19.142858"
+    },
+    {
+     "q": "Will it rain in Phoenix, AZ on November 7?",
+     "end": "2026-11-08T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "381"
+    },
+    {
+     "q": "Will it rain in Philadelphia, PA on November 7?",
+     "end": "2026-11-08T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "39.9922"
+    },
+    {
+     "q": "Will it rain in Washington, DC on November 7?",
+     "end": "2026-11-08T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "85.202"
+    },
+    {
+     "q": "Will it rain in Atlanta, GA on November 7?",
+     "end": "2026-11-08T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "205.202"
+    },
+    {
+     "q": "Will it rain in Miami, FL on November 7?",
+     "end": "2026-11-08T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "10"
+    },
+    {
+     "q": "Will it rain in New Orleans, LA on November 7?",
+     "end": "2026-11-08T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "70.202"
+    },
+    {
+     "q": "Will it rain in San Francisco, CA on November 7?",
+     "end": "2026-11-08T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "70.202"
+    }
+   ]
+  },
+  "where-will-it-rain-on-november-8-2026": {
+   "end": "2026-11-09T19:00:00Z",
+   "src": "https://forecast.weather.gov/product_sites.php?site=NWS&product=CLI",
+   "desc": "This market will resolve to \"Yes\" for each listed city that records measurable precipitation on November 8, 2026. Otherwise, this market will resolve to \"No\".\n\nMeasurable precipitation means 0.01 inches or more as reported by the PRECIPITATION (IN) figure in the NWS Daily Climate Report (CLI) for the city's station.\n\nA report of trace (\"T\") does not qualify.\n\nThe PRECIPITATION (IN) figure measures total liquid-equivalent precipitation and does not distinguish between precipitation types.\n\nThe observation period is the NWS climate day for each station: midnight to midnight local standard time. The final CLI report for a climate day is issued the following morning.\n\nEach city is an independent market. Any number of cities may resolve \"Yes\", including all of them or none of them.\n\nThis market will resolve according to the NWS Daily Climate Report as published by 2:00 PM ET on the day following the observation date. If multiple versions of the report are issued, the last version published before that time governs. A governing report that gives the figure as missing (\"M\" or \"MM\") is treated as reporting 0.00 inches, and this market will resolve to \"No\". If no figure has been published by that time, this market will resolve to \"No\".\n\nThe resolution source for this market is the NWS Daily Climate Report (CLI) for each city's station.",
+   "n_markets": 10,
+   "markets": [
+    {
+     "q": "Will it rain in Los Angeles, CA on November 8?",
+     "end": "2026-11-09T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "358"
+    },
+    {
+     "q": "Will it rain in Houston, TX on November 8?",
+     "end": "2026-11-09T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "20"
+    },
+    {
+     "q": "Will it rain in Dallas, TX on November 8?",
+     "end": "2026-11-09T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "20"
+    },
+    {
+     "q": "Will it rain in Phoenix, AZ on November 8?",
+     "end": "2026-11-09T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "328"
+    },
+    {
+     "q": "Will it rain in Philadelphia, PA on November 8?",
+     "end": "2026-11-09T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "102.99000000000001"
+    },
+    {
+     "q": "Will it rain in Washington, DC on November 8?",
+     "end": "2026-11-09T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "327.99"
+    },
+    {
+     "q": "Will it rain in Atlanta, GA on November 8?",
+     "end": "2026-11-09T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "20"
+    },
+    {
+     "q": "Will it rain in Miami, FL on November 8?",
+     "end": "2026-11-09T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "20"
+    },
+    {
+     "q": "Will it rain in New Orleans, LA on November 8?",
+     "end": "2026-11-09T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "20"
+    },
+    {
+     "q": "Will it rain in San Francisco, CA on November 8?",
+     "end": "2026-11-09T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "20"
+    }
+   ]
+  },
+  "where-will-it-rain-on-november-9-2026": {
+   "end": "2026-11-10T19:00:00Z",
+   "src": "https://forecast.weather.gov/product_sites.php?site=NWS&product=CLI",
+   "desc": "This market will resolve to \"Yes\" for each listed city that records measurable precipitation on November 9, 2026. Otherwise, this market will resolve to \"No\".\n\nMeasurable precipitation means 0.01 inches or more as reported by the PRECIPITATION (IN) figure in the NWS Daily Climate Report (CLI) for the city's station.\n\nA report of trace (\"T\") does not qualify.\n\nThe PRECIPITATION (IN) figure measures total liquid-equivalent precipitation and does not distinguish between precipitation types.\n\nThe observation period is the NWS climate day for each station: midnight to midnight local standard time. The final CLI report for a climate day is issued the following morning.\n\nEach city is an independent market. Any number of cities may resolve \"Yes\", including all of them or none of them.\n\nThis market will resolve according to the NWS Daily Climate Report as published by 2:00 PM ET on the day following the observation date. If multiple versions of the report are issued, the last version published before that time governs. A governing report that gives the figure as missing (\"M\" or \"MM\") is treated as reporting 0.00 inches, and this market will resolve to \"No\". If no figure has been published by that time, this market will resolve to \"No\".\n\nThe resolution source for this market is the NWS Daily Climate Report (CLI) for each city's station.",
+   "n_markets": 10,
+   "markets": [
+    {
+     "q": "Will it rain in Los Angeles, CA on November 9?",
+     "end": "2026-11-10T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "334"
+    },
+    {
+     "q": "Will it rain in Houston, TX on November 9?",
+     "end": "2026-11-10T19:00:00Z",
+     "closed": true,
+     "prices": "[\"1\", \"0\"]",
+     "vol": "96.71875"
+    },
+    {
+     "q": "Will it rain in Dallas, TX on November 9?",
+     "end": "2026-11-10T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "70"
+    },
+    {
+     "q": "Will it rain in Phoenix, AZ on November 9?",
+     "end": "2026-11-10T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "333.992"
+    },
+    {
+     "q": "Will it rain in Philadelphia, PA on November 9?",
+     "end": "2026-11-10T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "535.2630770000001"
+    },
+    {
+     "q": "Will it rain in Washington, DC on November 9?",
+     "end": "2026-11-10T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "334"
+    },
+    {
+     "q": "Will it rain in Atlanta, GA on November 9?",
+     "end": "2026-11-10T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "333.992"
+    },
+    {
+     "q": "Will it rain in Miami, FL on November 9?",
+     "end": "2026-11-10T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "109.990684"
+    },
+    {
+     "q": "Will it rain in New Orleans, LA on November 9?",
+     "end": "2026-11-10T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "85.202"
+    },
+    {
+     "q": "Will it rain in San Francisco, CA on November 9?",
+     "end": "2026-11-10T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "131.202"
+    }
+   ]
+  },
+  "where-will-it-rain-on-november-10-2026": {
+   "end": "2026-11-11T19:00:00Z",
+   "src": "https://forecast.weather.gov/product_sites.php?site=NWS&product=CLI",
+   "desc": "This market will resolve to \"Yes\" for each listed city that records measurable precipitation on November 10, 2026. Otherwise, this market will resolve to \"No\".\n\nMeasurable precipitation means 0.01 inches or more as reported by the PRECIPITATION (IN) figure in the NWS Daily Climate Report (CLI) for the city's station.\n\nA report of trace (\"T\") does not qualify.\n\nThe PRECIPITATION (IN) figure measures total liquid-equivalent precipitation and does not distinguish between precipitation types.\n\nThe observation period is the NWS climate day for each station: midnight to midnight local standard time. The final CLI report for a climate day is issued the following morning.\n\nEach city is an independent market. Any number of cities may resolve \"Yes\", including all of them or none of them.\n\nThis market will resolve according to the NWS Daily Climate Report as published by 2:00 PM ET on the day following the observation date. If multiple versions of the report are issued, the last version published before that time governs. A governing report that gives the figure as missing (\"M\" or \"MM\") is treated as reporting 0.00 inches, and this market will resolve to \"No\". If no figure has been published by that time, this market will resolve to \"No\".\n\nThe resolution source for this market is the NWS Daily Climate Report (CLI) for each city's station.",
+   "n_markets": 10,
+   "markets": [
+    {
+     "q": "Will it rain in Los Angeles, CA on November 10?",
+     "end": "2026-11-11T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "330.992"
+    },
+    {
+     "q": "Will it rain in Houston, TX on November 10?",
+     "end": "2026-11-11T19:00:00Z",
+     "closed": true,
+     "prices": "[\"1\", \"0\"]",
+     "vol": "70"
+    },
+    {
+     "q": "Will it rain in Dallas, TX on November 10?",
+     "end": "2026-11-11T19:00:00Z",
+     "closed": true,
+     "prices": "[\"1\", \"0\"]",
+     "vol": "244.27723600000002"
+    },
+    {
+     "q": "Will it rain in Phoenix, AZ on November 10?",
+     "end": "2026-11-11T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "330.992"
+    },
+    {
+     "q": "Will it rain in Philadelphia, PA on November 10?",
+     "end": "2026-11-11T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "330.992"
+    },
+    {
+     "q": "Will it rain in Washington, DC on November 10?",
+     "end": "2026-11-11T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "135.252"
+    },
+    {
+     "q": "Will it rain in Atlanta, GA on November 10?",
+     "end": "2026-11-11T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "330.992"
+    },
+    {
+     "q": "Will it rain in Miami, FL on November 10?",
+     "end": "2026-11-11T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "236.29354"
+    },
+    {
+     "q": "Will it rain in New Orleans, LA on November 10?",
+     "end": "2026-11-11T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "238.775554"
+    },
+    {
+     "q": "Will it rain in San Francisco, CA on November 10?",
+     "end": "2026-11-11T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "85.202"
+    }
+   ]
+  },
+  "where-will-it-rain-on-november-11-2026": {
+   "end": "2026-11-12T19:00:00Z",
+   "src": "https://forecast.weather.gov/product_sites.php?site=NWS&product=CLI",
+   "desc": "This market will resolve to \"Yes\" for each listed city that records measurable precipitation on November 11, 2026. Otherwise, this market will resolve to \"No\".\n\nMeasurable precipitation means 0.01 inches or more as reported by the PRECIPITATION (IN) figure in the NWS Daily Climate Report (CLI) for the city's station.\n\nA report of trace (\"T\") does not qualify.\n\nThe PRECIPITATION (IN) figure measures total liquid-equivalent precipitation and does not distinguish between precipitation types.\n\nThe observation period is the NWS climate day for each station: midnight to midnight local standard time. The final CLI report for a climate day is issued the following morning.\n\nEach city is an independent market. Any number of cities may resolve \"Yes\", including all of them or none of them.\n\nThis market will resolve according to the NWS Daily Climate Report as published by 2:00 PM ET on the day following the observation date. If multiple versions of the report are issued, the last version published before that time governs. A governing report that gives the figure as missing (\"M\" or \"MM\") is treated as reporting 0.00 inches, and this market will resolve to \"No\". If no figure has been published by that time, this market will resolve to \"No\".\n\nThe resolution source for this market is the NWS Daily Climate Report (CLI) for each city's station.",
+   "n_markets": 10,
+   "markets": [
+    {
+     "q": "Will it rain in Los Angeles, CA on November 11?",
+     "end": "2026-11-12T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "116.202"
+    },
+    {
+     "q": "Will it rain in Houston, TX on November 11?",
+     "end": "2026-11-12T19:00:00Z",
+     "closed": true,
+     "prices": "[\"1\", \"0\"]",
+     "vol": "70.142856"
+    },
+    {
+     "q": "Will it rain in Dallas, TX on November 11?",
+     "end": "2026-11-12T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "70.202"
+    },
+    {
+     "q": "Will it rain in Phoenix, AZ on November 11?",
+     "end": "2026-11-12T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "70.202"
+    },
+    {
+     "q": "Will it rain in Philadelphia, PA on November 11?",
+     "end": "2026-11-12T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "136.202"
+    },
+    {
+     "q": "Will it rain in Washington, DC on November 11?",
+     "end": "2026-11-12T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "70.202"
+    },
+    {
+     "q": "Will it rain in Atlanta, GA on November 11?",
+     "end": "2026-11-12T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "328.267698"
+    },
+    {
+     "q": "Will it rain in Miami, FL on November 11?",
+     "end": "2026-11-12T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "372.471501"
+    },
+    {
+     "q": "Will it rain in New Orleans, LA on November 11?",
+     "end": "2026-11-12T19:00:00Z",
+     "closed": true,
+     "prices": "[\"1\", \"0\"]",
+     "vol": "338.681729"
+    },
+    {
+     "q": "Will it rain in San Francisco, CA on November 11?",
+     "end": "2026-11-12T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "70.202"
+    }
+   ]
+  },
+  "where-will-it-rain-on-november-12-2026": {
+   "end": "2026-11-13T19:00:00Z",
+   "src": "https://forecast.weather.gov/product_sites.php?site=NWS&product=CLI",
+   "desc": "This market will resolve to \"Yes\" for each listed city that records measurable precipitation on November 12, 2026. Otherwise, this market will resolve to \"No\".\n\nMeasurable precipitation means 0.01 inches or more as reported by the PRECIPITATION (IN) figure in the NWS Daily Climate Report (CLI) for the city's station.\n\nA report of trace (\"T\") does not qualify.\n\nThe PRECIPITATION (IN) figure measures total liquid-equivalent precipitation and does not distinguish between precipitation types.\n\nThe observation period is the NWS climate day for each station: midnight to midnight local standard time. The final CLI report for a climate day is issued the following morning.\n\nEach city is an independent market. Any number of cities may resolve \"Yes\", including all of them or none of them.\n\nThis market will resolve according to the NWS Daily Climate Report as published by 2:00 PM ET on the day following the observation date. If multiple versions of the report are issued, the last version published before that time governs. A governing report that gives the figure as missing (\"M\" or \"MM\") is treated as reporting 0.00 inches, and this market will resolve to \"No\". If no figure has been published by that time, this market will resolve to \"No\".\n\nThe resolution source for this market is the NWS Daily Climate Report (CLI) for each city's station.",
+   "n_markets": 10,
+   "markets": [
+    {
+     "q": "Will it rain in Los Angeles, CA on November 12?",
+     "end": "2026-11-13T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "375.108546"
+    },
+    {
+     "q": "Will it rain in Houston, TX on November 12?",
+     "end": "2026-11-13T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "185.252"
+    },
+    {
+     "q": "Will it rain in Dallas, TX on November 12?",
+     "end": "2026-11-13T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "147.202"
+    },
+    {
+     "q": "Will it rain in Phoenix, AZ on November 12?",
+     "end": "2026-11-13T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "332.992"
+    },
+    {
+     "q": "Will it rain in Philadelphia, PA on November 12?",
+     "end": "2026-11-13T19:00:00Z",
+     "closed": true,
+     "prices": "[\"1\", \"0\"]",
+     "vol": "254.174467"
+    },
+    {
+     "q": "Will it rain in Washington, DC on November 12?",
+     "end": "2026-11-13T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "354.487371"
+    },
+    {
+     "q": "Will it rain in Atlanta, GA on November 12?",
+     "end": "2026-11-13T19:00:00Z",
+     "closed": true,
+     "prices": "[\"1\", \"0\"]",
+     "vol": "193.09433299999998"
+    },
+    {
+     "q": "Will it rain in Miami, FL on November 12?",
+     "end": "2026-11-13T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "254.451143"
+    },
+    {
+     "q": "Will it rain in New Orleans, LA on November 12?",
+     "end": "2026-11-13T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "185.252"
+    },
+    {
+     "q": "Will it rain in San Francisco, CA on November 12?",
+     "end": "2026-11-13T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "266.566678"
+    }
+   ]
+  },
+  "where-will-it-rain-on-november-13-2026": {
+   "end": "2026-11-14T19:00:00Z",
+   "src": "https://forecast.weather.gov/product_sites.php?site=NWS&product=CLI",
+   "desc": "This market will resolve to \"Yes\" for each listed city that records measurable precipitation on November 13, 2026. Otherwise, this market will resolve to \"No\".\n\nMeasurable precipitation means 0.01 inches or more as reported by the PRECIPITATION (IN) figure in the NWS Daily Climate Report (CLI) for the city's station.\n\nA report of trace (\"T\") does not qualify.\n\nThe PRECIPITATION (IN) figure measures total liquid-equivalent precipitation and does not distinguish between precipitation types.\n\nThe observation period is the NWS climate day for each station: midnight to midnight local standard time. The final CLI report for a climate day is issued the following morning.\n\nEach city is an independent market. Any number of cities may resolve \"Yes\", including all of them or none of them.\n\nThis market will resolve according to the NWS Daily Climate Report as published by 2:00 PM ET on the day following the observation date. If multiple versions of the report are issued, the last version published before that time governs. A governing report that gives the figure as missing (\"M\" or \"MM\") is treated as reporting 0.00 inches, and this market will resolve to \"No\". If no figure has been published by that time, this market will resolve to \"No\".\n\nThe resolution source for this market is the NWS Daily Climate Report (CLI) for each city's station.",
+   "n_markets": 10,
+   "markets": [
+    {
+     "q": "Will it rain in Los Angeles, CA on November 13?",
+     "end": "2026-11-14T19:00:00Z",
+     "closed": true,
+     "prices": "[\"1\", \"0\"]",
+     "vol": "532.4562189999999"
+    },
+    {
+     "q": "Will it rain in Houston, TX on November 13?",
+     "end": "2026-11-14T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "332.992"
+    },
+    {
+     "q": "Will it rain in Dallas, TX on November 13?",
+     "end": "2026-11-14T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "521.028618"
+    },
+    {
+     "q": "Will it rain in Phoenix, AZ on November 13?",
+     "end": "2026-11-14T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "95"
+    },
+    {
+     "q": "Will it rain in Philadelphia, PA on November 13?",
+     "end": "2026-11-14T19:00:00Z",
+     "closed": true,
+     "prices": "[\"1\", \"0\"]",
+     "vol": "125.714286"
+    },
+    {
+     "q": "Will it rain in Washington, DC on November 13?",
+     "end": "2026-11-14T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "217.445926"
+    },
+    {
+     "q": "Will it rain in Atlanta, GA on November 13?",
+     "end": "2026-11-14T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "498.80265999999995"
+    },
+    {
+     "q": "Will it rain in Miami, FL on November 13?",
+     "end": "2026-11-14T19:00:00Z",
+     "closed": true,
+     "prices": "[\"1\", \"0\"]",
+     "vol": "666.829891"
+    },
+    {
+     "q": "Will it rain in New Orleans, LA on November 13?",
+     "end": "2026-11-14T19:00:00Z",
+     "closed": true,
+     "prices": "[\"0\", \"1\"]",
+     "vol": "600.357819"
+    },
+    {
+     "q": "Will it rain in San Francisco, CA on November 13?",
+     "end": "2026-11-14T19:00:00Z",
+     "closed": true,
+     "prices": "[\"1\", \"0\"]",
+     "vol": "150"
+    }
+   ]
+  },
+  "where-will-it-rain-on-november-14-2026": {
+   "end": "2026-11-15T19:00:00Z",
+   "src": "https://forecast.weather.gov/product_sites.php?site=NWS&product=CLI",
+   "desc": "This market will resolve to \"Yes\" for each listed city that records measurable precipitation on November 14, 2026. Otherwise, this market will resolve to \"No\".\n\nMeasurable precipitation means 0.01 inches or more as reported by the PRECIPITATION (IN) figure in the NWS Daily Climate Report (CLI) for the city's station.\n\nA report of trace (\"T\") does not qualify.\n\nThe PRECIPITATION (IN) figure measures total liquid-equivalent precipitation and does not distinguish between precipitation types.\n\nThe observation period is the NWS climate day for each station: midnight to midnight local standard time. The final CLI report for a climate day is issued the following morning.\n\nEach city is an independent market. Any number of cities may resolve \"Yes\", including all of them or none of them.\n\nThis market will resolve according to the NWS Daily Climate Report as published by 2:00 PM ET on the day following the observation date. If multiple versions of the report are issued, the last version published before that time governs. A governing report that gives the figure as missing (\"M\" or \"MM\") is treated as reporting 0.00 inches, and this market will resolve to \"No\". If no figure has been published by that time, this market will resolve to \"No\".\n\nThe resolution source for this market is the NWS Daily Climate Report (CLI) for each city's station.",
+   "n_markets": 10,
+   "markets": [
+    {
+     "q": "Will it rain in Los Angeles, CA on November 14?",
+     "end": "2026-11-15T19:00:00Z",
+     "closed": false,
+     "prices": "[\"0.9995\", \"0.0005\"]",
+     "vol": "118.710921",
+     "yes_bid": [
+      0.999,
+      6.0
+     ],
+     "yes_ask": null
+    },
+    {
+     "q": "Will it rain in Houston, TX on November 14?",
+     "end": "2026-11-15T19:00:00Z",
+     "closed": false,
+     "prices": "[\"0.005\", \"0.995\"]",
+     "vol": "235.937818",
+     "yes_bid": [
+      0.001,
+      10.0
+     ],
+     "yes_ask": [
+      0.009,
+      25.66
+     ]
+    },
+    {
+     "q": "Will it rain in Dallas, TX on November 14?",
+     "end": "2026-11-15T19:00:00Z",
+     "closed": false,
+     "prices": "[\"0.705\", \"0.295\"]",
+     "vol": "788.035273",
+     "yes_bid": [
+      0.41,
+      7.0
+     ],
+     "yes_ask": null
+    },
+    {
+     "q": "Will it rain in Phoenix, AZ on November 14?",
+     "end": "2026-11-15T19:00:00Z",
+     "closed": false,
+     "prices": "[\"0.005\", \"0.995\"]",
+     "vol": "157",
+     "yes_bid": null,
+     "yes_ask": [
+      0.01,
+      15.0
+     ]
+    },
+    {
+     "q": "Will it rain in Philadelphia, PA on November 14?",
+     "end": "2026-11-15T19:00:00Z",
+     "closed": false,
+     "prices": "[\"0.0005\", \"0.9995\"]",
+     "vol": "140.404",
+     "yes_bid": null,
+     "yes_ask": [
+      0.001,
+      6.0
+     ]
+    },
+    {
+     "q": "Will it rain in Washington, DC on November 14?",
+     "end": "2026-11-15T19:00:00Z",
+     "closed": false,
+     "prices": "[\"0.0005\", \"0.9995\"]",
+     "vol": "85.202",
+     "yes_bid": null,
+     "yes_ask": [
+      0.001,
+      7.0
+     ]
+    },
+    {
+     "q": "Will it rain in Atlanta, GA on November 14?",
+     "end": "2026-11-15T19:00:00Z",
+     "closed": false,
+     "prices": "[\"0.0045\", \"0.9955\"]",
+     "vol": "248.178",
+     "yes_bid": null,
+     "yes_ask": [
+      0.009,
+      25.67
+     ]
+    },
+    {
+     "q": "Will it rain in Miami, FL on November 14?",
+     "end": "2026-11-15T19:00:00Z",
+     "closed": false,
+     "prices": "[\"0.0045\", \"0.9955\"]",
+     "vol": "85.202",
+     "yes_bid": null,
+     "yes_ask": [
+      0.009,
+      25.67
+     ]
+    },
+    {
+     "q": "Will it rain in New Orleans, LA on November 14?",
+     "end": "2026-11-15T19:00:00Z",
+     "closed": false,
+     "prices": "[\"0.0045\", \"0.9955\"]",
+     "vol": "85.202",
+     "yes_bid": null,
+     "yes_ask": [
+      0.009,
+      25.66
+     ]
+    },
+    {
+     "q": "Will it rain in San Francisco, CA on November 14?",
+     "end": "2026-11-15T19:00:00Z",
+     "closed": false,
+     "prices": "[\"0.996\", \"0.004\"]",
+     "vol": "520.109786",
+     "yes_bid": [
+      0.992,
+      100.0
+     ],
+     "yes_ask": null
+    }
+   ]
+  },
+  "where-will-it-rain-on-november-15-2026": {
+   "end": "2026-11-16T19:00:00Z",
+   "src": "https://forecast.weather.gov/product_sites.php?site=NWS&product=CLI",
+   "desc": "This market will resolve to \"Yes\" for each listed city that records measurable precipitation on November 15, 2026. Otherwise, this market will resolve to \"No\".\n\nMeasurable precipitation means 0.01 inches or more as reported by the PRECIPITATION (IN) figure in the NWS Daily Climate Report (CLI) for the city's station.\n\nA report of trace (\"T\") does not qualify.\n\nThe PRECIPITATION (IN) figure measures total liquid-equivalent precipitation and does not distinguish between precipitation types.\n\nThe observation period is the NWS climate day for each station: midnight to midnight local standard time. The final CLI report for a climate day is issued the following morning.\n\nEach city is an independent market. Any number of cities may resolve \"Yes\", including all of them or none of them.\n\nThis market will resolve according to the NWS Daily Climate Report as published by 2:00 PM ET on the day following the observation date. If multiple versions of the report are issued, the last version published before that time governs. A governing report that gives the figure as missing (\"M\" or \"MM\") is treated as reporting 0.00 inches, and this market will resolve to \"No\". If no figure has been published by that time, this market will resolve to \"No\".\n\nThe resolution source for this market is the NWS Daily Climate Report (CLI) for each city's station.",
+   "n_markets": 10,
+   "markets": [
+    {
+     "q": "Will it rain in Los Angeles, CA on November 15?",
+     "end": "2026-11-16T19:00:00Z",
+     "closed": false,
+     "prices": "[\"0.455\", \"0.545\"]",
+     "vol": "10",
+     "yes_bid": [
+      0.001,
+      65.0
+     ],
+     "yes_ask": [
+      0.909,
+      45.0
+     ]
+    },
+    {
+     "q": "Will it rain in Houston, TX on November 15?",
+     "end": "2026-11-16T19:00:00Z",
+     "closed": false,
+     "prices": "[\"0.7495\", \"0.2505\"]",
+     "vol": "10",
+     "yes_bid": [
+      0.5,
+      39.0
+     ],
+     "yes_ask": [
+      0.999,
+      65.0
+     ]
+    },
+    {
+     "q": "Will it rain in Dallas, TX on November 15?",
+     "end": "2026-11-16T19:00:00Z",
+     "closed": false,
+     "prices": "[\"0.545\", \"0.455\"]",
+     "vol": "9.9905",
+     "yes_bid": [
+      0.091,
+      45.0
+     ],
+     "yes_ask": [
+      0.999,
+      65.0
+     ]
+    },
+    {
+     "q": "Will it rain in Phoenix, AZ on November 15?",
+     "end": "2026-11-16T19:00:00Z",
+     "closed": false,
+     "prices": "[\"0.0055\", \"0.9945\"]",
+     "vol": "275.992",
+     "yes_bid": [
+      0.001,
+      65.0
+     ],
+     "yes_ask": [
+      0.01,
+      20.0
+     ]
+    },
+    {
+     "q": "Will it rain in Philadelphia, PA on November 15?",
+     "end": "2026-11-16T19:00:00Z",
+     "closed": false,
+     "prices": "[\"0.4945\", \"0.5055\"]",
+     "vol": "20.202",
+     "yes_bid": [
+      0.001,
+      65.0
+     ],
+     "yes_ask": [
+      0.988,
+      10.2
+     ]
+    },
+    {
+     "q": "Will it rain in Washington, DC on November 15?",
+     "end": "2026-11-16T19:00:00Z",
+     "closed": false,
+     "prices": "[\"0.46\", \"0.54\"]",
+     "vol": "10",
+     "yes_bid": [
+      0.01,
+      10.0
+     ],
+     "yes_ask": [
+      0.909,
+      45.0
+     ]
+    },
+    {
+     "q": "Will it rain in Atlanta, GA on November 15?",
+     "end": "2026-11-16T19:00:00Z",
+     "closed": false,
+     "prices": "[\"0.011\", \"0.989\"]",
+     "vol": "20.202",
+     "yes_bid": [
+      0.001,
+      65.0
+     ],
+     "yes_ask": [
+      0.021,
+      40.2
+     ]
+    },
+    {
+     "q": "Will it rain in Miami, FL on November 15?",
+     "end": "2026-11-16T19:00:00Z",
+     "closed": false,
+     "prices": "[\"0.006\", \"0.994\"]",
+     "vol": "780.736134",
+     "yes_bid": [
+      0.002,
+      20.0
+     ],
+     "yes_ask": [
+      0.01,
+      20.0
+     ]
+    },
+    {
+     "q": "Will it rain in New Orleans, LA on November 15?",
+     "end": "2026-11-16T19:00:00Z",
+     "closed": false,
+     "prices": "[\"0.515\", \"0.485\"]",
+     "vol": "249.711664",
+     "yes_bid": [
+      0.37,
+      9.0
+     ],
+     "yes_ask": [
+      0.67,
+      29.0
+     ]
+    },
+    {
+     "q": "Will it rain in San Francisco, CA on November 15?",
+     "end": "2026-11-16T19:00:00Z",
+     "closed": false,
+     "prices": "[\"0.5015\", \"0.4985\"]",
+     "vol": null,
+     "yes_bid": [
+      0.013,
+      13.0
+     ],
+     "yes_ask": [
+      0.99,
+      10.0
+     ]
+    }
+   ]
+  },
+  "where-will-it-rain-on-november-16-2026": {
+   "end": "2026-11-17T19:00:00Z",
+   "src": "https://forecast.weather.gov/product_sites.php?site=NWS&product=CLI",
+   "desc": "This market will resolve to \"Yes\" for each listed city that records measurable precipitation on November 16, 2026. Otherwise, this market will resolve to \"No\".\n\nMeasurable precipitation means 0.01 inches or more as reported by the PRECIPITATION (IN) figure in the NWS Daily Climate Report (CLI) for the city's station.\n\nA report of trace (\"T\") does not qualify.\n\nThe PRECIPITATION (IN) figure measures total liquid-equivalent precipitation and does not distinguish between precipitation types.\n\nThe observation period is the NWS climate day for each station: midnight to midnight local standard time. The final CLI report for a climate day is issued the following morning.\n\nEach city is an independent market. Any number of cities may resolve \"Yes\", including all of them or none of them.\n\nThis market will resolve according to the NWS Daily Climate Report as published by 2:00 PM ET on the day following the observation date. If multiple versions of the report are issued, the last version published before that time governs. A governing report that gives the figure as missing (\"M\" or \"MM\") is treated as reporting 0.00 inches, and this market will resolve to \"No\". If no figure has been published by that time, this market will resolve to \"No\".\n\nThe resolution source for this market is the NWS Daily Climate Report (CLI) for each city's station.",
+   "n_markets": 10,
+   "markets": [
+    {
+     "q": "Will it rain in Los Angeles, CA on November 16?",
+     "end": "2026-11-17T19:00:00Z",
+     "closed": false,
+     "prices": "[\"0.5\", \"0.5\"]",
+     "vol": null,
+     "yes_bid": [
+      0.02,
+      30.0
+     ],
+     "yes_ask": [
+      0.98,
+      55.0
+     ]
+    },
+    {
+     "q": "Will it rain in Houston, TX on November 16?",
+     "end": "2026-11-17T19:00:00Z",
+     "closed": false,
+     "prices": "[\"0.5\", \"0.5\"]",
+     "vol": null,
+     "yes_bid": [
+      0.01,
+      277.0
+     ],
+     "yes_ask": [
+      0.99,
+      277.0
+     ]
+    },
+    {
+     "q": "Will it rain in Dallas, TX on November 16?",
+     "end": "2026-11-17T19:00:00Z",
+     "closed": false,
+     "prices": "[\"0.5\", \"0.5\"]",
+     "vol": null,
+     "yes_bid": [
+      0.02,
+      41.0
+     ],
+     "yes_ask": [
+      0.98,
+      36.0
+     ]
+    },
+    {
+     "q": "Will it rain in Phoenix, AZ on November 16?",
+     "end": "2026-11-17T19:00:00Z",
+     "closed": false,
+     "prices": "[\"0.5\", \"0.5\"]",
+     "vol": null,
+     "yes_bid": [
+      0.01,
+      277.0
+     ],
+     "yes_ask": [
+      0.99,
+      277.0
+     ]
+    },
+    {
+     "q": "Will it rain in Philadelphia, PA on November 16?",
+     "end": "2026-11-17T19:00:00Z",
+     "closed": false,
+     "prices": "[\"0.41\", \"0.59\"]",
+     "vol": "20.202",
+     "yes_bid": [
+      0.01,
+      256.79
+     ],
+     "yes_ask": [
+      0.81,
+      18.0
+     ]
+    },
+    {
+     "q": "Will it rain in Washington, DC on November 16?",
+     "end": "2026-11-17T19:00:00Z",
+     "closed": false,
+     "prices": "[\"0.005\", \"0.995\"]",
+     "vol": "657.672",
+     "yes_bid": null,
+     "yes_ask": [
+      0.01,
+      40.1
+     ]
+    },
+    {
+     "q": "Will it rain in Atlanta, GA on November 16?",
+     "end": "2026-11-17T19:00:00Z",
+     "closed": false,
+     "prices": "[\"0.0055\", \"0.9945\"]",
+     "vol": "948.092",
+     "yes_bid": [
+      0.001,
+      45.0
+     ],
+     "yes_ask": [
+      0.01,
+      60.1
+     ]
+    },
+    {
+     "q": "Will it rain in Miami, FL on November 16?",
+     "end": "2026-11-17T19:00:00Z",
+     "closed": false,
+     "prices": "[\"0.5\", \"0.5\"]",
+     "vol": null,
+     "yes_bid": [
+      0.02,
+      44.0
+     ],
+     "yes_ask": [
+      0.98,
+      20.0
+     ]
+    },
+    {
+     "q": "Will it rain in New Orleans, LA on November 16?",
+     "end": "2026-11-17T19:00:00Z",
+     "closed": false,
+     "prices": "[\"0.52\", \"0.48\"]",
+     "vol": "20",
+     "yes_bid": [
+      0.08,
+      20.0
+     ],
+     "yes_ask": [
+      0.97,
+      19.0
+     ]
+    },
+    {
+     "q": "Will it rain in San Francisco, CA on November 16?",
+     "end": "2026-11-17T19:00:00Z",
+     "closed": false,
+     "prices": "[\"0.5\", \"0.5\"]",
+     "vol": null,
+     "yes_bid": [
+      0.02,
+      55.0
+     ],
+     "yes_ask": [
+      0.98,
+      30.0
+     ]
+    }
+   ]
+  }
+ },
+ "spc": {
+  "day1_cat": [
+   {
+    "LABEL": "TSTM",
+    "LABEL2": "General Thunderstorms Risk",
+    "VALID": "202611151630",
+    "EXPIRE": "202611161200",
+    "ISSUE": "202611151607",
+    "DN": 2
+   },
+   {
+    "LABEL": "MRGL",
+    "LABEL2": "Marginal Risk",
+    "VALID": "202611151630",
+    "EXPIRE": "202611161200",
+    "ISSUE": "202611151607",
+    "DN": 3
+   }
+  ],
+  "day1_torn": [
+   {
+    "LABEL": "0.02",
+    "LABEL2": "2% Tornado Risk",
+    "VALID": "202611151630",
+    "EXPIRE": "202611161200",
+    "ISSUE": "202611151607",
+    "DN": 2
+   }
+  ],
+  "day2_cat": [
+   {
+    "LABEL": "No Thunderstorms Forecast",
+    "LABEL2": "",
+    "VALID": "202611161200",
+    "EXPIRE": "202611171200",
+    "ISSUE": "202611151642",
+    "DN": 0
+   }
+  ]
+ }
+}

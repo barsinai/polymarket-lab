@@ -1,0 +1,50 @@
+/home/runner/work/polymarket-lab/polymarket-lab/research/slow/riskday_check.py:7: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  out = {"at": dt.datetime.utcnow().strftime("%Y-%m-%d %H:%M"), "events": {}, "spc": {}}
+which-cities-face-tornado-risk-on-november-5-2026 2026-11-06T12:00:00Z 25 markets
+where-will-it-rain-on-november-5-2026 2026-11-06T19:00:00Z 10 markets
+where-will-it-rain-on-november-6-2026 2026-11-07T19:00:00Z 10 markets
+where-will-it-rain-on-november-7-2026 2026-11-08T19:00:00Z 10 markets
+where-will-it-rain-on-november-8-2026 2026-11-09T19:00:00Z 10 markets
+where-will-it-rain-on-november-9-2026 2026-11-10T19:00:00Z 10 markets
+where-will-it-rain-on-november-10-2026 2026-11-11T19:00:00Z 10 markets
+where-will-it-rain-on-november-11-2026 2026-11-12T19:00:00Z 10 markets
+where-will-it-rain-on-november-12-2026 2026-11-13T19:00:00Z 10 markets
+where-will-it-rain-on-november-13-2026 2026-11-14T19:00:00Z 10 markets
+where-will-it-rain-on-november-14-2026 2026-11-15T19:00:00Z 10 markets
+where-will-it-rain-on-november-15-2026 2026-11-16T19:00:00Z 10 markets
+where-will-it-rain-on-november-16-2026 2026-11-17T19:00:00Z 10 markets
+RULE which-cities-face-tornado-risk-on-november-5-2026 | https://www.spc.noaa.gov/products/outlook/day1otlk.html | This market will resolve to "Yes" for each listed city that falls within a tornado probability area rated ≥2% in the NOAA Storm Prediction Center Day 1 Convective Outlook on November 5, 2026. Otherwise, this market will resolve to "No".  The SPC Day 1 Convective Outlook assigns tornado probability percentages (2%, 5%, 10%, etc.) to geographic areas across the US. If a city's coordinates fall inside any area rated 2% or higher, that city resolves "Yes". If a city is outside all tornado probability areas, or only within areas rated below 2%, that city resolves "No".  The SPC outlook is published as machine-readable geographic data (GeoJSON) at spc.noaa.gov. Each city's coordinates and the polygon boundaries are publicly verifiable. Borderline cases can be independently confirmed using the polygon data (excluding the hatched SIGN overlay, which is not a probability rating) and the city's listed coordinates. The point-in-polygon test is performed on unprojected WGS84 (EPSG:4326) coordinates, which is the native coordinate system of the SPC GeoJSON data.  Resolution is based on the scheduled 01:00 UTC Day 1 Convective Outlook update issued on the following UTC calendar day. The SPC Day 1 outlook covers a 24-hour period from 12:00 UTC to 12:00 UTC the following day. That scheduled update is the revisions cutoff; subsequent revisions published after it will not be considered. If the SPC Day 1 Convective Outlook has not been published by the time the market closes, this market will r
+RULE where-will-it-rain-on-november-5-2026 | https://forecast.weather.gov/product_sites.php?site=NWS&product=CLI | This market will resolve to "Yes" for each listed city that records measurable precipitation on November 5, 2026. Otherwise, this market will resolve to "No".  Measurable precipitation means 0.01 inches or more as reported by the PRECIPITATION (IN) figure in the NWS Daily Climate Report (CLI) for the city's station.  A report of trace ("T") does not qualify.  The PRECIPITATION (IN) figure measures total liquid-equivalent precipitation and does not distinguish between precipitation types.  The observation period is the NWS climate day for each station: midnight to midnight local standard time. The final CLI report for a climate day is issued the following morning.  Each city is an independent market. Any number of cities may resolve "Yes", including all of them or none of them.  This market will resolve according to the NWS Daily Climate Report as published by 2:00 PM ET on the day following the observation date. If multiple versions of the report are issued, the last version published before that time governs. A governing report that gives the figure as missing ("M" or "MM") is treated as reporting 0.00 inches, and this market will resolve to "No". If no figure has been published by that time, this market will resolve to "No".  The resolution source for this market is the NWS Daily Climate Report (CLI) for each city's station.
+LIVE in-on-november-14-2026 Will it rain in Los Angeles, CA on November 14? ["0.9995", "0.0005"] (0.999, 6.0) None
+LIVE in-on-november-14-2026 Will it rain in Houston, TX on November 14? ["0.005", "0.995"] (0.001, 10.0) (0.009, 25.66)
+LIVE in-on-november-14-2026 Will it rain in Dallas, TX on November 14? ["0.705", "0.295"] (0.41, 7.0) None
+LIVE in-on-november-14-2026 Will it rain in Phoenix, AZ on November 14? ["0.005", "0.995"] None (0.01, 15.0)
+LIVE in-on-november-14-2026 Will it rain in Philadelphia, PA on November 14? ["0.0005", "0.9995"] None (0.001, 6.0)
+LIVE in-on-november-14-2026 Will it rain in Washington, DC on November 14? ["0.0005", "0.9995"] None (0.001, 7.0)
+LIVE in-on-november-14-2026 Will it rain in Atlanta, GA on November 14? ["0.0045", "0.9955"] None (0.009, 25.67)
+LIVE in-on-november-14-2026 Will it rain in Miami, FL on November 14? ["0.0045", "0.9955"] None (0.009, 25.67)
+LIVE in-on-november-14-2026 Will it rain in New Orleans, LA on November 14? ["0.0045", "0.9955"] None (0.009, 25.66)
+LIVE in-on-november-14-2026 Will it rain in San Francisco, CA on November 14? ["0.996", "0.004"] (0.992, 100.0) None
+LIVE in-on-november-15-2026 Will it rain in Los Angeles, CA on November 15? ["0.455", "0.545"] (0.001, 65.0) (0.909, 45.0)
+LIVE in-on-november-15-2026 Will it rain in Houston, TX on November 15? ["0.7495", "0.2505"] (0.5, 39.0) (0.999, 65.0)
+LIVE in-on-november-15-2026 Will it rain in Dallas, TX on November 15? ["0.545", "0.455"] (0.091, 45.0) (0.999, 65.0)
+LIVE in-on-november-15-2026 Will it rain in Phoenix, AZ on November 15? ["0.0055", "0.9945"] (0.001, 65.0) (0.01, 20.0)
+LIVE in-on-november-15-2026 Will it rain in Philadelphia, PA on November 15? ["0.4945", "0.5055"] (0.001, 65.0) (0.988, 10.2)
+LIVE in-on-november-15-2026 Will it rain in Washington, DC on November 15? ["0.46", "0.54"] (0.01, 10.0) (0.909, 45.0)
+LIVE in-on-november-15-2026 Will it rain in Atlanta, GA on November 15? ["0.011", "0.989"] (0.001, 65.0) (0.021, 40.2)
+LIVE in-on-november-15-2026 Will it rain in Miami, FL on November 15? ["0.006", "0.994"] (0.002, 20.0) (0.01, 20.0)
+LIVE in-on-november-15-2026 Will it rain in New Orleans, LA on November 15? ["0.515", "0.485"] (0.37, 9.0) (0.67, 29.0)
+LIVE in-on-november-15-2026 Will it rain in San Francisco, CA on November 15? ["0.5015", "0.4985"] (0.013, 13.0) (0.99, 10.0)
+LIVE in-on-november-16-2026 Will it rain in Los Angeles, CA on November 16? ["0.5", "0.5"] (0.02, 30.0) (0.98, 55.0)
+LIVE in-on-november-16-2026 Will it rain in Houston, TX on November 16? ["0.5", "0.5"] (0.01, 277.0) (0.99, 277.0)
+LIVE in-on-november-16-2026 Will it rain in Dallas, TX on November 16? ["0.5", "0.5"] (0.02, 41.0) (0.98, 36.0)
+LIVE in-on-november-16-2026 Will it rain in Phoenix, AZ on November 16? ["0.5", "0.5"] (0.01, 277.0) (0.99, 277.0)
+LIVE in-on-november-16-2026 Will it rain in Philadelphia, PA on November 16? ["0.41", "0.59"] (0.01, 256.79) (0.81, 18.0)
+LIVE in-on-november-16-2026 Will it rain in Washington, DC on November 16? ["0.005", "0.995"] None (0.01, 40.1)
+LIVE in-on-november-16-2026 Will it rain in Atlanta, GA on November 16? ["0.0055", "0.9945"] (0.001, 45.0) (0.01, 60.1)
+LIVE in-on-november-16-2026 Will it rain in Miami, FL on November 16? ["0.5", "0.5"] (0.02, 44.0) (0.98, 20.0)
+LIVE in-on-november-16-2026 Will it rain in New Orleans, LA on November 16? ["0.52", "0.48"] (0.08, 20.0) (0.97, 19.0)
+LIVE in-on-november-16-2026 Will it rain in San Francisco, CA on November 16? ["0.5", "0.5"] (0.02, 55.0) (0.98, 30.0)
+SPC day1_cat [{'LABEL': 'TSTM', 'LABEL2': 'General Thunderstorms Risk', 'VALID': '202611151630', 'EXPIRE': '202611161200', 'ISSUE': '202611151607', 'DN': 2}, {'LABEL': 'MRGL', 'LABEL2': 'Marginal Risk', 'VALID': '202611151630', 'EXPIRE': '202611161200', 'ISSUE': '202611151607', 'DN': 3}]
+SPC day1_torn [{'LABEL': '0.02', 'LABEL2': '2% Tornado Risk', 'VALID': '202611151630', 'EXPIRE': '202611161200', 'ISSUE': '202611151607', 'DN': 2}]
+SPC day2_cat [{'LABEL': 'No Thunderstorms Forecast', 'LABEL2': '', 'VALID': '202611161200', 'EXPIRE': '202611171200', 'ISSUE': '202611151642', 'DN': 0}]
