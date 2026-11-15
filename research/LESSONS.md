@@ -93,6 +93,9 @@ survives them. Add a lesson whenever an idea dies for a reason not already here.
 25. **Check when the resolving source publishes before calling it an early read** (11-15, ship transits): IMF PortWatch posts daily
     transits ~7 days late, so a weekly market 'ends' long before its number exists and the price is set by people with faster raw data
     (AIS). 'Resolves on a public dataset' is an edge only if that dataset (or something we can read) arrives before the price settles.
+26. **A public answer before the close is priced within the hour; what is left is crumbs** (11-15, rain markets): METARs decide 357/361
+    rain markets and the CLI is out 1-2 h after the climate day, so after-day fills on the right side were +9 pts but only 7 fills on 26
+    dates. Before building an 'early read' tracker, count how many fills happen AFTER the read is possible, not how good the read is.
 
 ## Where edges plausibly still live (derived from the above)
 - Information the crowd processes slowly and bots don't cover: resolution-rule details (exact station, exact candle,

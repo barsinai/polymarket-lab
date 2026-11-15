@@ -420,3 +420,22 @@
   old pilot-log (2) / script-log (1) ones; no MemoryErrors. Pilot STOP, no orders.
 - Next: LP-1 v2 48 h 11-16 ~10 UTC; box office settlements Monday; lock_p week mark 11-17 (it is a few cheap fills; N25 forward says no);
   N47 METAR check (Iowa Mesonet ASOS) for the hb 6-13 rain fills; N45 tracker for 11-30; options N42 forward 11-19.
+
+## 11-15 21:00-21:40 UTC cycle 20 (scheduled)
+- Read-outs (fast trades.jsonl, last settled 20:09): lock_x 19 / 17 +8.8% (no signal since 11-14), lock_p 42 / 37 +5.1% (37 end-times, one new
+  loss), lock_p_majors 15/15 +13.3%; lock_m 204 / 186 -2.2%, lock_b 51 / 47 -0.5%, lock_p_z2 238 / 217 -0.2%. N21 forward BTC/ETH 43 / 41
+  +1.7%, alts 48 / 40 -6.2% (2 days). N25 forward < 0.80 6 / 2 -65.5% (5 end-times) -> DEAD; >= 0.80 73 / 68 -0.1% (52 end-times).
+  Slow (20:13-20:16): converge 9 / 8 -$13, 85 open mark -$34; young 52 / 20 -$201 (38 open); options 40 / 12 -$52, 68 open, N42 forward 0
+  settled; box office 9 open (Monday); charts 2/2 +$3; mention 1 / 0 -$10. LP-1 v2 39 runs / 1.42 d: formula $1,386 (upper bound), trading
+  -$221, pessimistic -$529; 12 markets still quoted, 157 of 178 saw a competitor; forward_other 23 markets $322 vs -$196, forward_core 9
+  markets $31 vs -$7. COPY-1 33 h: sharp 60 primaries, 4 settled 4/4 (n=4); control 25 settled +0.1 pts.
+- Test (N47 READY + adjacent N48, riskday_metar.py via Actions, IEM METARs + archived CLI, 361 rain markets / 26 dates): METAR day sum agrees with
+  the resolution on 357/361 (CLI 359/361) - the answer is public - but the CLI is out 1-2 h after the climate day and only 23 fills traded
+  after it: 7 on the METAR side +9.4 pts [-23, +34] (5 dates), 16 against, all lost. N48 (YES after METARs already show rain): 9/9 won +8.5 pts
+  on 4 dates. Right but crumbs -> both DEAD (capacity), LESSONS 26. Tornado part parked (series stopped).
+- New (outside the box N49, election_late_census.py, local): midterm races after election night. 133 races in the tape; pre-election favourite
+  +5.3 [-0.2, +9.7] (one night), election night +2.4 [-6, +9], after-night only 5 resolved races (-9.5) -> not testable here, PARKED.
+- Health: fast paper 20:13, slow 20:17, follow 21:02 (report 20:55, < 70 min), boosts 20:03, MM v2 20:31, books 21:00 - OK. Tracebacks only the
+  old pilot-log (2) / script-log (1) ones; no MemoryErrors. IEM rate-limits (429) but retries passed. Pilot STOP, no orders.
+- Next: LP-1 v2 48 h 11-16 ~10 UTC (forward_other failing, forward_core still tiny); box office settlements Monday; lock_p week mark 11-17
+  (+5.1% on 37 end-times, but the profit is a few cheap fills and N25 forward says those lose); N45 tracker for 11-30; options N42 11-19.

@@ -743,3 +743,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - N46 month-end rank markets (largest company, Chinese AI) DEAD (largest company favourite -40 pts on 6 events). N47 rain / tornado-risk city
   binaries: rain favourite after the climate day ends but before the NWS report +6.3 pts [3.6, 10.0] on 7 dates -> READY (METAR check, then
   forward paper; books very thin). N25 forward cheap locks 5 / 1 -75%, >= 0.80 +0.8% (decayed). Next: LP-1 48 h 11-16, lock_p 11-17.
+
+## 11-15 21:40 cycle 20
+- N47 rain markets: METARs decide 357/361, but only 23 fills trade after the climate day (CLI out 1-2 h later) -> DEAD for capacity, with N48
+  (YES once rain is on the METARs, 9/9 +8.5 pts, 9 fills in 12 weeks); LESSONS 26. N25 cheap locks DEAD (forward 6 / 2 -65.5%). N49 midterm
+  late-count races PARKED (5 resolved late races in the tape). Next: LP-1 48 h 11-16, lock_p 11-17, N45 11-30.
