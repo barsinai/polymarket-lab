@@ -475,6 +475,8 @@
   +5.7 [1.4, 9.7] and small -2.3 (lesson 17 again).
 - Health: fast paper 04:16, slow 04:19, follow 04:26 (report 04:26, < 70 min), boosts 04:53, MM v2 04:32, books 05:00 - OK. Tracebacks only the
   old pilot-log (2) / script-log (1); no MemoryErrors. Pilot STOP, no orders. FIX: charts_paper.py saw 0 chart events in every run (same
-  capped end-date scan bug as box office / converge_day) -> text search + scan to 20,000; dispatched once to check.
+  capped end-date scan bug as box office / converge_day) -> text search + scan to 20,000. Check (charts_probe.py via Actions, 05:08): the
+  search finds 50 chart events, but none ends in the 2-24 h window right now (next: Netflix weekly 11-18 04:59, so first entries 11-17
+  ~05 UTC); the fixed tracker ran clean (0 seen is true at this hour). Check again next cycle that it enters.
 - Next: LP-1 v2 48 h read ~10 UTC (forward_core only live piece); box office settlements today; lock_p week mark 11-17 (now +1.5%, fading);
   N21 11-21 (below bar); N45 11-30; check charts tracker sees events.
