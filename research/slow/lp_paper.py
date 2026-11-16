@@ -72,6 +72,11 @@ gm = {}
 for i in range(0, len(cands), 40):
     for m in collect.get(f"{collect.GAMMA}/markets", [("condition_ids", c) for c in cands[i:i + 40]] + [("limit", 100)], tries=3) or []:
         gm[m.get("conditionId")] = m
+# 11-16 FIX: Gamma's list drops closed markets unless asked, so no market was ever settled and leftover inventory stayed marked at
+# the fair price of our last run there (126 of 128 inventory markets after 2.3 days). Ask for the closed ones of the held set too.
+for i in range(0, len(held), 40):
+    for m in collect.get(f"{collect.GAMMA}/markets", [("condition_ids", c) for c in held[i:i + 40]] + [("limit", 100), ("closed", "true")], tries=3) or []:
+        gm[m.get("conditionId")] = m
 books = {}
 toks = [cfg[c]["toks"][0] for c in cands if c in cfg]
 for i in range(0, len(toks), 50):
@@ -93,11 +98,25 @@ for c in cands:
             pr = [float(p) for p in json.loads(g.get("outcomePrices") or "[]")]
         except Exception:  # noqa: BLE001
             pr = []
-        if pr and max(pr) >= 0.99 and x.get("settled") is None:
+        yes_pay = None
+        if len(pr) == 2 and max(pr) >= 0.99:
             yes_pay = 1.0 if pr[0] >= 0.99 else 0.0
+        elif len(pr) == 2 and abs(pr[0] - 0.5) < 0.01:
+            yes_pay = 0.5                                     # resolved 50-50
+        if yes_pay is not None and x.get("settled") is None:
             x["cash"] += x["inv"] * yes_pay; x["inv"] = 0.0; x["active"] = False; x["settled"] = yes_pay
             x["cash2"] = x.get("cash2", 0.0) + x.get("inv2", 0.0) * yes_pay; x["inv2"] = 0.0
         continue
+    # leftover inventory in a market we no longer quote: mark it at today's price (book middle when the spread is <= 10c, else the
+    # last trade), not at the fair price of our last run
+    if x and not x.get("active") and g:
+        try:
+            gb, ga, gl = float(g.get("bestBid") or 0), float(g.get("bestAsk") or 0), float(g.get("lastTradePrice") or 0)
+        except Exception:  # noqa: BLE001
+            gb = ga = gl = 0.0
+        mk = (gb + ga) / 2 if (0 < gb < ga < 1 and ga - gb <= 0.10) else gl if 0 < gl < 1 else None
+        if mk is not None:
+            x["fair"] = mk; x["src"] = "mark"
     if not k:
         if x:
             x["active"] = False; x["why_off"] = "pool removed"
@@ -220,6 +239,8 @@ rep = {"updated": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d %H:%M"), "
        "markets_with_competition_seen": sum(1 for x in ms.values() if x["comp_runs"]),
        "pessimistic_fills": sum(x.get("fills2", 0) for x in ms.values()),
        "pessimistic_trading_pnl": round(sum(x.get("cash2", 0.0) + x.get("inv2", 0.0) * (x.get("fair") or 0) for x in ms.values()), 2),
+       "settled_markets": sum(1 for x in ms.values() if x.get("settled") is not None),
+       "open_leftover_markets": sum(1 for x in ms.values() if not x.get("active") and x.get("settled") is None and (abs(x["inv"]) > 1e-9 or abs(x.get("inv2", 0)) > 1e-9)),
        "worst": sorted(([round(pnl(x), 2), x["q"][:70], len(x["fills"])] for x in ms.values()), key=lambda r: r[0])[:5],
        "top_reward": sorted(([round(x["reward"], 2), x["q"][:70], x.get("share")] for x in ms.values()), key=lambda r: -r[0])[:5]}
 # the user's proposed live test (48 h, <= $200), simulated only: the markets a $200 budget would have taken, in entry order and
