@@ -1,5 +1,5 @@
 {
-"scanned": "2026-11-15 23:17",
+"scanned": "2026-11-16 00:17",
 "events": 2100,
 "groups": 2037,
 "books": 16878,
@@ -16,8 +16,8 @@
 "cost": 0.995,
 "edge": 0.005,
 "edge_after_fee": 0.001,
-"size_shares": 544.48,
-"usd_at_size": 541.76
+"size_shares": 547.71,
+"usd_at_size": 544.97
 },
 {
 "kind": "ladder_num",
@@ -31,8 +31,8 @@
 "cost": 0.997,
 "edge": 0.003,
 "edge_after_fee": -0.0032,
-"size_shares": 779.43,
-"usd_at_size": 777.09
+"size_shares": 829.43,
+"usd_at_size": 826.94
 },
 {
 "kind": "ladder_num",
@@ -46,8 +46,8 @@
 "cost": 0.996,
 "edge": 0.004,
 "edge_after_fee": -0.0001,
-"size_shares": 544.48,
-"usd_at_size": 542.3
+"size_shares": 600.0,
+"usd_at_size": 597.6
 },
 {
 "kind": "ladder_num",
@@ -65,19 +65,28 @@
 "usd_at_size": 608.22
 },
 {
-"kind": "ladder_num",
-"event": "Abstract FDV above ___ one day after launch?",
-"slug": "abstract-fdv-above-one-day-after-launch",
-"easy": "Abstract FDV above $200M one day after launch?",
-"hard": "Abstract FDV above $400M one day after launch?",
-"easy_yes_ask": 0.029,
-"hard_no_ask": 0.968,
-"hard_yes_bid": 0.032,
-"cost": 0.997,
-"edge": 0.003,
-"edge_after_fee": -0.0011,
-"size_shares": 602.07,
-"usd_at_size": 600.26
+"kind": "negrisk_all_no",
+"event": "Anthropic IPO Closing Market Cap (Middle Brackets)",
+"slug": "anthropic-ipo-closing-market-cap-979",
+"n": 7,
+"cost": 5.993,
+"payoff": 6,
+"edge": 0.007,
+"edge_after_fee": -0.0407,
+"size_shares": 200.0,
+"usd_at_size": 1198.6
+},
+{
+"kind": "negrisk_all_no",
+"event": "Anthropic IPO Closing Market Cap",
+"slug": "anthropic-ipo-closing-market-cap-higher-strikes",
+"n": 10,
+"cost": 8.991,
+"payoff": 9,
+"edge": 0.009,
+"edge_after_fee": -0.0412,
+"size_shares": 147.09,
+"usd_at_size": 1322.49
 },
 {
 "kind": "ladder_num",
@@ -110,38 +119,24 @@
 "usd_at_size": 11.83
 },
 {
-"kind": "negrisk_all_no",
-"event": "Anthropic IPO Closing Market Cap",
-"slug": "anthropic-ipo-closing-market-cap-higher-strikes",
-"n": 10,
-"cost": 8.982,
-"payoff": 9,
-"edge": 0.018,
-"edge_after_fee": -0.0325,
-"size_shares": 22.31,
-"usd_at_size": 200.39
-},
-{
 "kind": "negrisk_all_yes",
-"event": "Japan 10Y Bond Yield: End of 2026",
-"slug": "japan-10y-bond-yield-end-of-2026",
-"n": 7,
+"event": "Maduro Prison Time?",
+"slug": "maduro-prison-time-527",
+"n": 5,
 "has_other": false,
 "outcomes": [
-"<2.0%",
-"2.0-2.2%",
-"2.2-2.4%",
-"2.4-2.6%",
-"2.6-2.8%",
-"2.8-3.0%",
-"3.0%+"
+"No prison time",
+"<20",
+"20\u201340",
+"40\u201360",
+"60+"
 ],
-"cost": 0.97,
+"cost": 0.986,
 "payoff": 1,
-"edge": 0.03,
-"edge_after_fee": -0.0244,
-"size_shares": 10.0,
-"usd_at_size": 9.7
+"edge": 0.014,
+"edge_after_fee": -0.0206,
+"size_shares": 16.78,
+"usd_at_size": 16.55
 },
 {
 "kind": "negrisk_all_yes",
@@ -160,32 +155,12 @@
 "4.5%+",
 "4.0-4.4%"
 ],
-"cost": 0.989,
+"cost": 0.993,
 "payoff": 1,
-"edge": 0.011,
-"edge_after_fee": -0.0313,
+"edge": 0.007,
+"edge_after_fee": -0.0356,
 "size_shares": 20.0,
-"usd_at_size": 19.78
-},
-{
-"kind": "negrisk_all_yes",
-"event": "Maduro Prison Time?",
-"slug": "maduro-prison-time-527",
-"n": 5,
-"has_other": false,
-"outcomes": [
-"No prison time",
-"<20",
-"20\u201340",
-"40\u201360",
-"60+"
-],
-"cost": 0.987,
-"payoff": 1,
-"edge": 0.013,
-"edge_after_fee": -0.0216,
-"size_shares": 16.78,
-"usd_at_size": 16.56
+"usd_at_size": 19.86
 },
 {
 "kind": "ladder_date",
@@ -229,18 +204,33 @@
 },
 {
 "kind": "ladder_num",
+"event": "Decibel FDV above ___ one day after launch?",
+"slug": "decibel-fdv-above-one-day-after-launch",
+"easy": "Decibel FDV above $200M one day after launch?",
+"hard": "Decibel FDV above $300M one day after launch?",
+"easy_yes_ask": 0.23,
+"hard_no_ask": 0.765,
+"hard_yes_bid": 0.235,
+"cost": 0.995,
+"edge": 0.005,
+"edge_after_fee": -0.02,
+"size_shares": 13.56,
+"usd_at_size": 13.49
+},
+{
+"kind": "ladder_num",
 "event": "How high will US unemployment go in 2026?",
 "slug": "how-high-will-us-unemployment-go-in-2026",
 "easy": "Will US unemployment reach at least 6.0% in 2026?",
 "hard": "Will US unemployment reach at least 10.0% in 2026?",
 "easy_yes_ask": 0.007,
-"hard_no_ask": 0.989,
-"hard_yes_bid": 0.011,
-"cost": 0.996,
-"edge": 0.004,
-"edge_after_fee": 0.0028,
-"size_shares": 15.74,
-"usd_at_size": 15.68
+"hard_no_ask": 0.988,
+"hard_yes_bid": 0.012,
+"cost": 0.995,
+"edge": 0.005,
+"edge_after_fee": 0.0037,
+"size_shares": 12.8,
+"usd_at_size": 12.74
 },
 {
 "kind": "ladder_num",
@@ -274,16 +264,31 @@
 },
 {
 "kind": "ladder_num",
+"event": "Abstract FDV above ___ one day after launch?",
+"slug": "abstract-fdv-above-one-day-after-launch",
+"easy": "Abstract FDV above $200M one day after launch?",
+"hard": "Abstract FDV above $400M one day after launch?",
+"easy_yes_ask": 0.029,
+"hard_no_ask": 0.967,
+"hard_yes_bid": 0.033,
+"cost": 0.996,
+"edge": 0.004,
+"edge_after_fee": -0.0002,
+"size_shares": 11.33,
+"usd_at_size": 11.28
+},
+{
+"kind": "ladder_num",
 "event": "Printr FDV above ___ one day after launch?",
 "slug": "printr-fdv-above-one-day-after-launch",
 "easy": "Printr FDV above $500M one day after launch?",
 "hard": "Printr FDV above $1B one day after launch?",
 "easy_yes_ask": 0.049,
-"hard_no_ask": 0.935,
-"hard_yes_bid": 0.065,
-"cost": 0.984,
-"edge": 0.016,
-"edge_after_fee": 0.0085,
+"hard_no_ask": 0.934,
+"hard_yes_bid": 0.066,
+"cost": 0.983,
+"edge": 0.017,
+"edge_after_fee": 0.0094,
 "size_shares": 1.61,
 "usd_at_size": 1.58
 },
