@@ -758,3 +758,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - N52 status-page / running-count markets DEAD by rule (favourite +6.2 pts but end-day interval [-10.8, +15.4], 25 days; re-check next tape).
   N53 GPU rental index buckets DEAD (-0.2 pts, 5 month-ends). Charts tracker bug (0 events seen) fixed. lock_p down to +1.5% (40 end-times).
   Next: LP-1 48 h ~10 UTC, box office settlements, lock_p 11-17.
+
+## 11-16 09:40 cycle 23
+- N54 US macro release buckets DEAD (favourite 6-168 h -10.0 pts [-21.5, +2.7], 27 releases; newer half -18). N55 Treasury-yield touch
+  ladders DEAD by rule (2 finished months). LP-1 v2 48 h: formula $1,513 vs pessimistic -$566, 179/202 contested; forward_other failing,
+  forward_core -11% of formula on 23 markets (only live LP piece). N21 BTC/ETH forward -3.2%. Next: box office settlements, lock_p 11-17.

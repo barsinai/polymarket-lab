@@ -480,3 +480,23 @@
   ~05 UTC); the fixed tracker ran clean (0 seen is true at this hour). Check again next cycle that it enters.
 - Next: LP-1 v2 48 h read ~10 UTC (forward_core only live piece); box office settlements today; lock_p week mark 11-17 (now +1.5%, fading);
   N21 11-21 (below bar); N45 11-30; check charts tracker sees events.
+
+## 11-16 09:00-09:40 UTC cycle 23 (scheduled)
+- Read-outs (fast trades.jsonl, last settled 09:01): lock_x 21 / 18 +7.2% (no signal since 04:34), lock_p 46 / 39 +1.5% (40 end-times),
+  lock_p_majors 17 / 16 +5.4%; lock_m 214 / 194 -2.8%, lock_b 59 / 54 -0.9%, lock_p_z2 250 / 226 -1.1%. N21 forward BTC/ETH 57 / 52 -3.2%
+  (3 days; failing, formal decision 11-21), alts 56 / 46 -8.2%.
+  Slow (08:17-08:22): converge 13 / 12 -$11 (non-sports 12/12 +3.8%), 81 open mark -$29; young 55 / 23 -$187 (38 open); options 59 / 21
+  +$169 / $559 (two long shots), 56 open; N42 forward tails 1 / 0, rest 2 / 2 +20.5 pts (n tiny); box office 9 open, 0 settled yet; charts
+  0 events seen (expected: next chart event enters 11-17 ~05 UTC); mention 1 / 0 -$10.
+  LP-1 v2 48-h read (53 runs / 1.93 d): formula $1,513 (upper bound), trading -$224, pessimistic 158 fills -$566; 179 of 202 markets saw a
+  competitor, 7 still quoted. forward_other 38 markets $425 vs -$197 (-46% of formula: N35 failing), forward_core 23 markets $119 vs -$13
+  (-11%: passing, but 23 markets / 2 days; rule needs 40+ markets, 3+ days). COPY-1 45.5 h: sharp 98 primaries, 12 settled / 7 events 10 won
+  +12.3 pts (n tiny); control 39 / 16 events +1.9 pts.
+- Test (outside the box N54, macro_census.py, local, 12-week tape): US macro release buckets (CPI, core CPI, PPI, ISM, unemployment, UMich,
+  eggs; 27 releases): favourite 6-168 h -10.0 pts [-21.5, +2.7], halves +2.2 / -18.1; after the release +3.9 on 17 releases (crumbs) -> DEAD.
+- Test (adjacent N55, same script): Treasury-yield touch ladders: only 2 finished months -> DEAD by rule; favourite -9.0, YES long shots +8.9
+  (two moving months, not a market property).
+- Health: fast paper 08:17, slow 08:20, follow 08:27 (report 08:22, < 70 min), boosts 08:09, MM v2 09:00, books 09:00 - OK. Tracebacks only the
+  old pilot-log (2) / script-log (1); no MemoryErrors. Pilot STOP, no orders.
+- Next: box office settlements (today/tomorrow); lock_p week mark 11-17 (+1.5% on 40 end-times, below the +5% bar -> expect to close it);
+  charts tracker first entries 11-17 ~05 UTC; LP-1 forward_core to 40 markets (11-17..19); N21 11-21; options N42 11-19; N45 11-30.
