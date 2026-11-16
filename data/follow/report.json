@@ -1,6 +1,6 @@
 {
- "updated": "2026-11-16 04:11",
- "tracking_hours": 41.35,
+ "updated": "2026-11-16 04:26",
+ "tracking_hours": 41.6,
  "signal_wallets": 148,
  "rule": "primary = first position per market+direction+UTC day after a taker order/accumulation by a signal wallet (>= $50) or, control, every 5th order >= $1,000 by another wallet; non-sports, ends in 1 h - 60 d; ask 0.03-0.97 and <= their average price + 3c; $20 at the ask; fee paid",
  "decision_rule": "sharp primary: >= 300 settled over >= 100 events and >= 10 days; >= +1.5 pts with the 95% interval above 0 -> propose a small live test; < +0.5 or interval top < +1.5 -> DEAD",
@@ -10,7 +10,7 @@
   "settled": 23,
   "primary": 85,
   "primary_settled": 8,
-  "primary_per_day": 49.3,
+  "primary_per_day": 49.0,
   "PRIMARY": {
    "all": {
     "n": 8,
@@ -248,7 +248,7 @@
   "settled": 60,
   "primary": 158,
   "primary_settled": 25,
-  "primary_per_day": 91.7,
+  "primary_per_day": 91.2,
   "PRIMARY": {
    "all": {
     "n": 25,
@@ -467,8 +467,8 @@
   },
   "mark_24h_all_primary": {
    "all": {
-    "n": 85,
-    "mid_minus_ask_pts": 0.15
+    "n": 87,
+    "mid_minus_ask_pts": 0.11
    },
    "crypto": {
     "n": 47,
@@ -479,12 +479,12 @@
     "mid_minus_ask_pts": 11.25
    },
    "economy": {
-    "n": 9,
-    "mid_minus_ask_pts": -0.08
+    "n": 10,
+    "mid_minus_ask_pts": -0.1
    },
    "geopolitics": {
-    "n": 18,
-    "mid_minus_ask_pts": -0.02
+    "n": 19,
+    "mid_minus_ask_pts": -0.18
    },
    "politics": {
     "n": 5,
@@ -519,19 +519,19 @@
  "settled": 83,
  "primary": 243,
  "totals": {
-  "control crossings $2500": 1549,
-  "skip: fast: sports": 3925,
+  "control crossings $2500": 1551,
+  "skip: fast: sports": 3931,
   "control crossings $10000": 408,
-  "control crossings $1000": 2785,
-  "skip: fast: crypto up/down": 365,
+  "control crossings $1000": 2793,
+  "skip: fast: crypto up/down": 367,
   "control primary follows": 158,
   "control paper positions": 260,
   "skip: closed or ends in < 1 h": 111,
-  "sharp crossings $250": 147,
+  "sharp crossings $250": 148,
   "sharp paper positions": 262,
   "sharp crossings $50": 478,
-  "skip: ask outside 0.03-0.97": 177,
-  "skip: ends in > 60 days": 172,
+  "skip: ask outside 0.03-0.97": 179,
+  "skip: ends in > 60 days": 173,
   "sharp primary follows": 85,
   "skip: fast: sports parlay (combo)": 84,
   "skip: no ask in the book": 35,
@@ -539,17 +539,17 @@
   "sharp crossings $1000": 24
  },
  "this_run": {
-  "feed pages": 1087,
-  "polls": 892,
-  "fills": 80228,
-  "skip: ends in > 60 days": 27,
+  "feed pages": 1137,
+  "polls": 936,
+  "fills": 82913,
+  "skip: ends in > 60 days": 28,
   "sharp paper positions": 34,
-  "skip: fast: sports": 353,
+  "skip: fast: sports": 359,
   "skip: fast: sports parlay (combo)": 7,
-  "skip: fast: crypto up/down": 36,
+  "skip: fast: crypto up/down": 38,
   "skip: closed or ends in < 1 h": 6,
   "control paper positions": 12,
-  "skip: ask outside 0.03-0.97": 23,
+  "skip: ask outside 0.03-0.97": 25,
   "skip: no ask in the book": 3
  }
 }
