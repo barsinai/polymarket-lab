@@ -439,3 +439,22 @@
   old pilot-log (2) / script-log (1) ones; no MemoryErrors. IEM rate-limits (429) but retries passed. Pilot STOP, no orders.
 - Next: LP-1 v2 48 h 11-16 ~10 UTC (forward_other failing, forward_core still tiny); box office settlements Monday; lock_p week mark 11-17
   (+5.1% on 37 end-times, but the profit is a few cheap fills and N25 forward says those lose); N45 tracker for 11-30; options N42 11-19.
+
+## 11-16 01:00-01:35 UTC cycle 21 (scheduled)
+- Read-outs (fast trades.jsonl, last settled 00:10): lock_x 19 / 17 +8.9% (no signal since 11-14), lock_p 43 / 38 +5.1% (38 end-times),
+  lock_p_majors 15/15 +13.4%; lock_m 206 / 187 -2.8%, lock_b 52 / 48 -0.5%, lock_p_z2 240 / 218 -0.7%. N21 forward BTC/ETH 45 / 42 -0.8%
+  (3 days; was +5.4 -> +1.7 -> -0.8, under its +2% bar), alts 50 / 42 -5.5%. N25 forward >= 0.80 77 / 71 -1.3% (56 end-times).
+  Slow (00:15-00:17): converge 9 / 8 -$13, 85 open mark -$25; young 52 / 20 -$201 (38 open); options 40 / 12 -$52, 68 open, N42 forward 0
+  settled; box office 9 open (settle Monday); charts 2/2 +$3; mention 1 / 0 -$10. LP-1 v2 44 runs / 1.59 d: formula $1,450 (upper bound),
+  trading -$220, pessimistic -$557; 168 of 190 saw a competitor, 10 still quoted; forward_other 33 markets $379 vs -$196 (N35 failing),
+  forward_core 18 markets $73 vs -$12. N33 clock split not readable (all fills so far weekend). COPY-1 37 h: sharp 72 primaries, 4 settled
+  4/4 (n=4); control 25 settled / 12 events +0.1 pts.
+- Test (outside the box N50, tv_awards_census.py, local, 12-week tape): reality-TV eliminations / evictions (DWTS, Big Brother, AGT; 16
+  events): favourite 6-168 h +1.2 pts [-4.4, +7.5], halves -4.0 / +8.2, big takers +1.4 [-7, +9] -> DEAD.
+- Test (adjacent N51, same script): pre-decided awards (Ballon d'Or, Nobel, VMAs, Emmys; 43 events / 9 ceremonies): favourite 6-168 h
+  +3.7 [-1.7, +7.9] per event, by ceremony [-4.9, +5.2] -> DEAD. Big takers >= $200 +4.3 [0.9, 7.5] and small -2.0 (lesson 17 again), but
+  by ceremony [-2.4, +8.0] - nothing to build.
+- Health: fast paper 00:14, slow 00:17, follow 00:14 (report 00:05, < 70 min), boosts 00:28, MM v2 01:01, books 01:00 - OK. Tracebacks only
+  the old pilot-log (2) / script-log (1) ones; no MemoryErrors. Pilot STOP, no orders.
+- Next: LP-1 v2 48 h 11-16 ~10 UTC (forward_core is the only LP piece still alive; N33 clock split needs weekday fills); box office
+  settlements today; lock_p week mark 11-17 (+5.1% on 38 end-times; profit is a few cheap fills); N21 11-21 (now below bar); N45 11-30.

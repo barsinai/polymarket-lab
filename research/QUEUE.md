@@ -748,3 +748,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - N47 rain markets: METARs decide 357/361, but only 23 fills trade after the climate day (CLI out 1-2 h later) -> DEAD for capacity, with N48
   (YES once rain is on the METARs, 9/9 +8.5 pts, 9 fills in 12 weeks); LESSONS 26. N25 cheap locks DEAD (forward 6 / 2 -65.5%). N49 midterm
   late-count races PARKED (5 resolved late races in the tape). Next: LP-1 48 h 11-16, lock_p 11-17, N45 11-30.
+
+## 11-16 01:35 cycle 21
+- N50 reality-TV eliminations DEAD (favourite 6-168 h +1.2 pts [-4.4, +7.5], 15 events). N51 pre-decided awards favourite DEAD (+3.7 per event
+  but [-4.9, +5.2] by ceremony, 9 ceremonies). N21 forward BTC/ETH fell to -0.8% (45 windows). Next: LP-1 48 h 11-16 ~10 UTC, box office
+  settlements, lock_p 11-17.
