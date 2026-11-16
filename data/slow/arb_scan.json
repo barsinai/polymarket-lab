@@ -1,9 +1,21 @@
 {
-"scanned": "2026-11-16 06:19",
+"scanned": "2026-11-16 07:20",
 "events": 2100,
 "groups": 2037,
-"books": 16880,
+"books": 16878,
 "opps": [
+{
+"kind": "negrisk_all_no",
+"event": "Anthropic IPO Closing Market Cap",
+"slug": "anthropic-ipo-closing-market-cap-higher-strikes",
+"n": 10,
+"cost": 8.99,
+"payoff": 9,
+"edge": 0.01,
+"edge_after_fee": -0.0401,
+"size_shares": 343.18,
+"usd_at_size": 3085.19
+},
 {
 "kind": "ladder_num",
 "event": "Pacifica FDV above ___ one day after launch?",
@@ -16,8 +28,8 @@
 "cost": 0.995,
 "edge": 0.005,
 "edge_after_fee": 0.001,
-"size_shares": 454.48,
-"usd_at_size": 452.21
+"size_shares": 484.48,
+"usd_at_size": 482.06
 },
 {
 "kind": "ladder_num",
@@ -31,8 +43,23 @@
 "cost": 0.996,
 "edge": 0.004,
 "edge_after_fee": -0.0001,
-"size_shares": 454.48,
-"usd_at_size": 452.66
+"size_shares": 484.48,
+"usd_at_size": 482.54
+},
+{
+"kind": "ladder_num",
+"event": "What price will Sui hit in 2026?",
+"slug": "what-price-will-sui-hit-in-2026",
+"easy": "Will Sui reach $1.60 before 2027?",
+"hard": "Will Sui reach $1.80 before 2027?",
+"easy_yes_ask": 0.05,
+"hard_no_ask": 0.94,
+"hard_yes_bid": 0.06,
+"cost": 0.99,
+"edge": 0.01,
+"edge_after_fee": 0.0027,
+"size_shares": 101.0,
+"usd_at_size": 99.99
 },
 {
 "kind": "ladder_num",
@@ -48,18 +75,6 @@
 "edge_after_fee": 0.0015,
 "size_shares": 240.2,
 "usd_at_size": 239.24
-},
-{
-"kind": "negrisk_all_no",
-"event": "Anthropic IPO Closing Market Cap",
-"slug": "anthropic-ipo-closing-market-cap-higher-strikes",
-"n": 10,
-"cost": 8.986,
-"payoff": 9,
-"edge": 0.014,
-"edge_after_fee": -0.0363,
-"size_shares": 68.03,
-"usd_at_size": 611.32
 },
 {
 "kind": "ladder_date",
@@ -98,8 +113,8 @@
 "payoff": 1,
 "edge": 0.005,
 "edge_after_fee": -0.0419,
-"size_shares": 31.84,
-"usd_at_size": 31.68
+"size_shares": 29.9,
+"usd_at_size": 29.75
 },
 {
 "kind": "ladder_date",
@@ -133,21 +148,6 @@
 },
 {
 "kind": "ladder_num",
-"event": "Abstract FDV above ___ one day after launch?",
-"slug": "abstract-fdv-above-one-day-after-launch",
-"easy": "Abstract FDV above $200M one day after launch?",
-"hard": "Abstract FDV above $400M one day after launch?",
-"easy_yes_ask": 0.029,
-"hard_no_ask": 0.964,
-"hard_yes_bid": 0.036,
-"cost": 0.993,
-"edge": 0.007,
-"edge_after_fee": 0.0026,
-"size_shares": 6.33,
-"usd_at_size": 6.29
-},
-{
-"kind": "ladder_num",
 "event": "Printr FDV above ___ one day after launch?",
 "slug": "printr-fdv-above-one-day-after-launch",
 "easy": "Printr FDV above $500M one day after launch?",
@@ -175,6 +175,21 @@
 "edge_after_fee": 0.0057,
 "size_shares": 1.61,
 "usd_at_size": 1.59
+},
+{
+"kind": "ladder_num",
+"event": "Abstract FDV above ___ one day after launch?",
+"slug": "abstract-fdv-above-one-day-after-launch",
+"easy": "Abstract FDV above $200M one day after launch?",
+"hard": "Abstract FDV above $400M one day after launch?",
+"easy_yes_ask": 0.029,
+"hard_no_ask": 0.967,
+"hard_yes_bid": 0.033,
+"cost": 0.996,
+"edge": 0.004,
+"edge_after_fee": -0.0002,
+"size_shares": 5.0,
+"usd_at_size": 4.98
 }
 ]
 }
