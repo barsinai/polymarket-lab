@@ -1,5 +1,5 @@
-tag None: +263 events
-events scanned 2712
+tag None: +280 events
+events scanned 2730
 price-threshold markets: 617
 unmatched crypto price events (title | first question):
    What will the Bitcoin Implied Volatility Index hit by November 30? | Will the Bitcoin Volatility Index hit 70 by November 30?
@@ -11,15 +11,15 @@ unmatched crypto price events (title | first question):
    Will Ethereum hit $1,000 or $3,000 first? | Will Ethereum hit $1,000 or $3,000 first?
 example rules: Bitcoin above 66,800 on November 15, 10PM ET? | This market will resolve to "Yes" if the "Close" price for the BTC/USDT 1 hour candle that ends on the time and date specified in the title is higher than the price specified in the title. Otherwise, this market will resolve to "No".
 The resolution source for this market is Binance, specifically the BTC/USDT "Close" prices currently available at https://www.binance.com/en/trade/BTC_USDT with "1h"
-priced with both: 440
-mid - model: p10 -0.017 median +0.006 p90 +0.049
-  above      0-0.5  d: n  34  mid - model median +0.025  p10 -0.201  p90 +0.305
-  above    0.5-3    d: n  56  mid - model median +0.003  p10 -0.006  p90 +0.016
-  above      3-10   d: n  96  mid - model median +0.001  p10 -0.024  p90 +0.013
-  below    0.5-3    d: n   6  mid - model median -0.007  p10 -0.054  p90 +0.023
-  below      3-10   d: n   8  mid - model median +0.007  p10 -0.053  p90 +0.158
-  between  0.5-3    d: n  46  mid - model median +0.005  p10 -0.011  p90 +0.028
-  between    3-10   d: n  72  mid - model median +0.008  p10 -0.020  p90 +0.053
-  touch      0-0.5  d: n  30  mid - model median +0.005  p10 +0.002  p90 +0.033
-  touch     10-400  d: n  91  mid - model median +0.017  p10 +0.005  p90 +0.075
-paper: {'updated': '2026-11-16 02:17', 'open': 68, 'new': 0, 'settled': 40, 'won': 12, 'pnl': -51.55, 'staked_settled': 377.77}
+priced with both: 434
+mid - model: p10 -0.012 median +0.008 p90 +0.164
+  above      0-0.5  d: n  32  mid - model median +0.020  p10 -0.444  p90 +0.472
+  above    0.5-3    d: n  56  mid - model median +0.003  p10 -0.005  p90 +0.018
+  above      3-10   d: n  96  mid - model median +0.004  p10 -0.014  p90 +0.021
+  below    0.5-3    d: n   6  mid - model median +0.009  p10 -0.048  p90 +0.135
+  below      3-10   d: n   8  mid - model median +0.012  p10 -0.015  p90 +0.275
+  between  0.5-3    d: n  46  mid - model median +0.006  p10 -0.008  p90 +0.055
+  between    3-10   d: n  72  mid - model median +0.016  p10 -0.024  p90 +0.305
+  touch      0-0.5  d: n  26  mid - model median +0.006  p10 +0.003  p90 +0.044
+  touch     10-400  d: n  91  mid - model median +0.017  p10 +0.005  p90 +0.065
+paper: {'updated': '2026-11-16 02:54', 'open': 69, 'new': 1, 'settled': 40, 'won': 12, 'pnl': -51.55, 'staked_settled': 377.77}
