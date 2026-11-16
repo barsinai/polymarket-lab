@@ -1,0 +1,49 @@
+LP-1 v2: started 11-14 10:03 UTC, 62 runs, 2.35 days, 213 markets ever quoted
+markets holding leftover inventory: 128; resolved 61, still open 67, not found 0
+
+== trading P&L: as lp_paper reports it (leftovers at the last fair price) -> with leftovers at their real value
+   ALL                                markets 213  formula reward $ 1606.44 | trading P&L, tape fills: report $ -247.88 -> true $ -427.81 | pessimistic: report $ -610.43 -> true $ -737.17 | true pessimistic / formula   -46%
+   weather (same-day temperature)     markets  68  formula reward $  190.99 | trading P&L, tape fills: report $ -130.39 -> true $ -243.53 | pessimistic: report $ -258.78 -> true $ -307.40 | true pessimistic / formula  -161%
+   live count / mention / views       markets  18  formula reward $  534.51 | trading P&L, tape fills: report $ -162.35 -> true $ -219.18 | pessimistic: report $ -287.34 -> true $ -359.61 | true pessimistic / formula   -67%
+   core (everything else)             markets 127  formula reward $  880.94 | trading P&L, tape fills: report $  +44.86 -> true $  +34.90 | pessimistic: report $  -64.30 -> true $  -70.16 | true pessimistic / formula    -8%
+   forward core (opened >= 11-15 01h) markets  32  formula reward $  152.91 | trading P&L, tape fills: report $   +8.59 -> true $  +36.01 | pessimistic: report $  -21.73 -> true $  -21.20 | true pessimistic / formula   -14%
+   forward other (opened >= 11-14 21h) markets  49  formula reward $  489.09 | trading P&L, tape fills: report $  -52.47 -> true $  -59.43 | pessimistic: report $ -241.05 -> true $ -290.05 | true pessimistic / formula   -59%
+   only resolved-inventory + flat markets markets 146  formula reward $  800.59 | trading P&L, tape fills: report $ -213.36 -> true $ -348.20 | pessimistic: report $ -507.25 -> true $ -603.16 | true pessimistic / formula   -75%
+
+== net = formula reward x payout ratio + true trading P&L (tape fills | pessimistic)
+   paid 100% of the formula: $ +1178.63 | $  +869.27
+   paid  50% of the formula: $  +375.41 | $   +66.05
+   paid  20% of the formula: $  -106.52 | $  -415.88
+   break-even payout ratio: tape 27% | pessimistic 46%
+
+== the $200 slice (8 markets, $200 of quotes)
+   $200 slice                         markets   8  formula reward $   93.49 | trading P&L, tape fills: report $  -19.42 -> true $  -36.78 | pessimistic: report $  -45.36 -> true $  -68.92 | true pessimistic / formula   -74%
+   paid 100%: $  +56.71 | $  +24.57
+   paid  50%: $   +9.97 | $  -22.17
+   paid  20%: $  -18.08 | $  -50.22
+      reward $  4.19 quoted   4.2 h  tape   +0.00 pess   +0.00  flat     competitor inside the band   Will "Victorian Psycho" score at least 70 on the Rotten Toma
+      reward $  6.13 quoted   3.0 h  tape  -17.47 pess  -20.04  resolved pool removed                 Will the highest temperature in Warsaw be 6°C on November 14
+      reward $ 26.72 quoted  16.1 h  tape   -1.20 pess   -3.60  open     competitor inside the band   Will a dozen eggs cost between $2.40 and $2.50 in November?
+      reward $  5.62 quoted   3.0 h  tape  -12.22 pess  -16.68  resolved pool removed                 Will the highest temperature in Warsaw be 7°C on November 14
+      reward $  5.51 quoted   3.0 h  tape  +11.04 pess   -8.60  resolved pool removed                 Will the highest temperature in Munich be 6°C on November 14
+      reward $  4.04 quoted   4.0 h  tape   +0.00 pess   +0.00  flat     competitor inside the band   Will the highest temperature in Hong Kong be 26°C on Novembe
+      reward $ 11.92 quoted   8.0 h  tape  -19.00 pess  -19.00  resolved pool removed                 Will the Starship for SpaceX Starship Flight Test 15 achieve
+      reward $ 29.36 quoted  16.1 h  tape   +2.07 pess   -1.00  open     competitor inside the band   Will the next Fable model (5.2+) debut in the top 5 of the T
+
+== largest changes once leftovers are valued properly (pessimistic model)
+     -22.05  inv2  +100.0 last fair 0.255 -> 0.035 (open)  Will MrBeast's next video get between 80 and 90 million views on w
+     -21.00  inv2   +40.0 last fair 0.735 -> 0.210 (open)  Will White House post 200+ posts from November 13 to November 20, 
+     -20.50  inv2  -100.0 last fair 0.795 -> 1.000 (resolved)  Will The Life of a Showgirl (Taylor Swift) be nominated for Album 
+     -17.00  inv2   +50.0 last fair 0.340 -> 0.000 (resolved)  Will the Starship for SpaceX Starship Flight Test 15 achieve a suc
+     -13.00  inv2  -100.0 last fair 0.870 -> 1.000 (resolved)  Will Caedrel say "Dragon / Drake" 20+ times on stream?
+     -11.80  inv2   -40.0 last fair 0.705 -> 1.000 (resolved)  Will OpenRouter process between 210T and 220T tokens the week of N
+     -11.46  inv2   -20.0 last fair 0.427 -> 1.000 (resolved)  Will the highest temperature in Singapore be 31°C on November 16?
+     -10.86  inv2   +40.0 last fair 0.310 -> 0.039 (open)  Will MrBeast's next video get at least 110 million views on week 1
+      +5.50  inv2   +20.0 last fair 0.530 -> 0.805 (open)  Will there be no next Gemini Carbon model (4.1+) release by Decemb
+      +7.72  inv2   +20.0 last fair 0.614 -> 1.000 (resolved)  Will the highest temperature in New York City be between 46-47°F o
+     +10.30  inv2   +20.0 last fair 0.485 -> 1.000 (resolved)  Will the highest temperature in Los Angeles be between 72-73°F on 
+     +16.28  inv2   +20.0 last fair 0.186 -> 1.000 (resolved)  Will the highest temperature in Paris be 11°C on November 14?
+     +23.50  inv2  -100.0 last fair 0.905 -> 0.670 (open)  Anthropic vs OpenAI - greater valuation growth November 2026
+     +27.25  inv2   +50.0 last fair 0.085 -> 0.630 (open)  Will Caedrel say "Top gap / Top diff" 2+ times on stream?
+     +32.60  inv2   -40.0 last fair 0.815 -> 0.000 (resolved)  Will the highest temperature in Paris be 10°C on November 14?
+     +39.00  inv2  +100.0 last fair 0.610 -> 1.000 (resolved)  Will the chopsticks catch the Starship for SpaceX Starship Flight 
