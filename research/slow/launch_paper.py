@@ -142,6 +142,8 @@ def scan():
                 if L is None:
                     continue
                 age = now - L
+                if age < 86400:
+                    stats["seen once: markets < 24 h old (lesson 10 check)"] += 1
                 if age > 3600:                       # old market: never a candidate, remember it so we do not look again
                     seen.add(mid); continue
                 if age < 0:
@@ -224,6 +226,7 @@ def report():
     ages.sort()
     rep = {"updated": time.strftime("%Y-%m-%d %H:%M", time.gmtime()), "started": time.strftime("%Y-%m-%d %H:%M", time.gmtime(started)),
            "days": round((now - started) / 86400, 2),
+           "note": "tape base rate ~75 culture markets launch a day (~3 an hour): 0 candidates over a day is a bug, not a result",
            "rule": "new culture listing < 60 min old, lives >= 24 h, NO ask 0.05-0.90, NO spread <= 10c: $10 at the NO ask, fee paid; one per market",
            "decision": "kill if <= +1 pt or event CI low < -1 after 100 markets / 40 events; promote only after 300 / 100 / 3 weeks",
            "positions": len(P), "settled": len(done), "open": len(P) - len(done),
