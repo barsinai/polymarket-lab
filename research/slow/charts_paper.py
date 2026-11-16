@@ -68,14 +68,41 @@ for p in pos:
         y = int(pr[0] > pr[1]); win = (y == 1) == (p["side"] == "YES")
         p.update(resolved=True, y=y, won=int(win), pnl=round(p["shares"] * (1 if win else 0) - STAKE - p.get("fee", 0), 2), settled=now.strftime("%Y-%m-%d %H:%M"))
 
-seen = 0; n_new = 0; off = 0
-while off < 3000:
-    page = get(f"{GAMMA}/events", {"active": "true", "closed": "false", "limit": 100, "offset": off,
-               "end_date_min": (now + dt.timedelta(hours=2)).strftime("%Y-%m-%dT%H:%M:%SZ"),
-               "end_date_max": (now + dt.timedelta(hours=24)).strftime("%Y-%m-%dT%H:%M:%SZ")})
-    if not page:
-        break
-    off += 100
+def chart_events():
+    """11-16 c22 fix (same bug as boxoffice_paper / converge_day, LESSONS 10): the old loop paged events ending in 2-24 h with a
+    3,000 offset cap; crypto up/down events fill that window, so it reported chart_events_seen = 0 for days. Now: text search for
+    each chart keyword first, then the paged scan to 20,000 as a fallback. Returns events ending in 2..24 h, deduplicated."""
+    lo, hi = now + dt.timedelta(hours=2), now + dt.timedelta(hours=24)
+    out = {}
+    def add(e):
+        try:
+            end = dt.datetime.fromisoformat((e.get("endDate") or "").replace("Z", "+00:00"))
+        except ValueError:
+            return
+        if lo <= end <= hi and e.get("id") and PAT.search(e.get("title") or ""):
+            if not e.get("markets"):
+                e = get(f"{GAMMA}/events/{e['id']}") or e
+            out.setdefault(str(e["id"]), e)
+    for q in ("netflix", "app store", "spotify", "billboard", "hot 100", "play store"):
+        r = get(f"{GAMMA}/public-search", {"q": q, "events_status": "active", "limit_per_type": 50})
+        for e in (r or {}).get("events", []) or []:
+            add(e)
+    off = 0
+    while off < 20000:
+        page = get(f"{GAMMA}/events", {"active": "true", "closed": "false", "limit": 100, "offset": off,
+                   "end_date_min": lo.strftime("%Y-%m-%dT%H:%M:%SZ"), "end_date_max": hi.strftime("%Y-%m-%dT%H:%M:%SZ")})
+        if not page:
+            break
+        off += 100
+        for e in page:
+            add(e)
+        if len(page) < 100:
+            break
+    return list(out.values())
+
+
+seen = 0; n_new = 0
+for page in [chart_events()]:
     for e in page:
         title = e.get("title") or ""
         if not PAT.search(title) or re.search(r"say|mention|earnings|subscriber|nflx|spot\)|up or down|\bhit\b|stock|price", title, re.I):
@@ -117,8 +144,6 @@ while off < 3000:
             if na is not None and na <= 0.06 and na * nsz >= STAKE:
                 pos.append(dict(base, rule="tail", side="NO", ask=na, shares=round(STAKE / na, 2), fee=round(fee(na, STAKE / na, f["m"]), 4)))
                 held.add((e["id"], "tail")); n_new += 1
-    if len(page) < 100:
-        break
 
 with open(POS, "w") as fh:
     for p in pos:

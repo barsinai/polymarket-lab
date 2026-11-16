@@ -753,3 +753,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - N50 reality-TV eliminations DEAD (favourite 6-168 h +1.2 pts [-4.4, +7.5], 15 events). N51 pre-decided awards favourite DEAD (+3.7 per event
   but [-4.9, +5.2] by ceremony, 9 ceremonies). N21 forward BTC/ETH fell to -0.8% (45 windows). Next: LP-1 48 h 11-16 ~10 UTC, box office
   settlements, lock_p 11-17.
+
+## 11-16 05:40 cycle 22
+- N52 status-page / running-count markets DEAD by rule (favourite +6.2 pts but end-day interval [-10.8, +15.4], 25 days; re-check next tape).
+  N53 GPU rental index buckets DEAD (-0.2 pts, 5 month-ends). Charts tracker bug (0 events seen) fixed. lock_p down to +1.5% (40 end-times).
+  Next: LP-1 48 h ~10 UTC, box office settlements, lock_p 11-17.

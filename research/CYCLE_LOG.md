@@ -458,3 +458,23 @@
   the old pilot-log (2) / script-log (1) ones; no MemoryErrors. Pilot STOP, no orders.
 - Next: LP-1 v2 48 h 11-16 ~10 UTC (forward_core is the only LP piece still alive; N33 clock split needs weekday fills); box office
   settlements today; lock_p week mark 11-17 (+5.1% on 38 end-times; profit is a few cheap fills); N21 11-21 (now below bar); N45 11-30.
+
+## 11-16 05:00-05:40 UTC cycle 22 (scheduled)
+- Read-outs (fast trades.jsonl, last trade 04:03): lock_x 21 / 18 +7.2% (17 end-times), lock_p 46 / 39 +1.5% (40 end-times; was +5.1, three
+  new losses), lock_p_majors 17 / 16 +5.4%; lock_m 209 / 189 -3.0%, lock_b 55 / 50 -1.2%, lock_p_z2 244 / 220 -1.2%. N21 forward BTC/ETH 50 / 47
+  -0.2% (3 days, below its +2% bar), alts 51 / 42 -6.7%.
+  Slow (04:16-04:19): converge 11 / 10 -$12, 83 open mark -$30; young 52 / 20 -$201 (38 open); options 40 / 12 -$52, 69 open, N42 forward 0
+  settled (24 tails, 23 crash bets); box office 9 open (settle today); charts 2/2 +$3 BUT 0 events seen for days (bug, fixed below); mention
+  1 / 0 -$10. LP-1 v2 49 runs / 1.76 d: formula $1,483 (upper bound), trading -$225, pessimistic -$564; 175 of 194 saw a competitor, 5 still
+  quoted; forward_other 36 markets $402 vs -$196 (N35 failing), forward_core 21 markets $96 vs -$13 (pessimistic -13% of formula, passing so
+  far, tiny). COPY-1 41.6 h: sharp 85 primaries, 8 settled / 5 events 7 won +24.6 pts (n tiny); control 25 / 12 events +0.1 pts.
+- Test (outside the box N52, statuspage_census.py, local, 12-week tape): status-page / running-count markets (Claude 'go down', ChatGPT
+  outages, GitHub incident, Codex resets, SpaceX launches; 28 events): favourite 6-168 h +6.2 pts [-4.7, +13.9], by end day [-10.8, +15.4]
+  (25 days) -> DEAD by the pre-registered rule; positive everywhere but too few events per family; re-check on the next tape refresh.
+- Test (adjacent N53, same script): Ornn GPU rental index month-end buckets: favourite -0.2 [-9.5, +8.9] on 5 month-ends -> DEAD; big takers
+  +5.7 [1.4, 9.7] and small -2.3 (lesson 17 again).
+- Health: fast paper 04:16, slow 04:19, follow 04:26 (report 04:26, < 70 min), boosts 04:53, MM v2 04:32, books 05:00 - OK. Tracebacks only the
+  old pilot-log (2) / script-log (1); no MemoryErrors. Pilot STOP, no orders. FIX: charts_paper.py saw 0 chart events in every run (same
+  capped end-date scan bug as box office / converge_day) -> text search + scan to 20,000; dispatched once to check.
+- Next: LP-1 v2 48 h read ~10 UTC (forward_core only live piece); box office settlements today; lock_p week mark 11-17 (now +1.5%, fading);
+  N21 11-21 (below bar); N45 11-30; check charts tracker sees events.
