@@ -500,3 +500,23 @@
   old pilot-log (2) / script-log (1); no MemoryErrors. Pilot STOP, no orders.
 - Next: box office settlements (today/tomorrow); lock_p week mark 11-17 (+1.5% on 40 end-times, below the +5% bar -> expect to close it);
   charts tracker first entries 11-17 ~05 UTC; LP-1 forward_core to 40 markets (11-17..19); N21 11-21; options N42 11-19; N45 11-30.
+
+## 11-16 13:00-13:30 UTC cycle 24 (scheduled)
+- Read-outs (fast trades.jsonl, last settled 12:13): lock_x 23 / 20 +7.3% (19 end-times), lock_p 48 / 41 +1.8% (42 end-times), lock_p_majors
+  18 / 17 +5.3%; lock_m 221 / 201 -2.4%, lock_b 65 / 60 -0.0%, lock_p_z2 259 / 235 -0.7%. N21 forward BTC/ETH 67 / 62 -1.7% (3 days, below
+  its +2% bar), alts 63 / 53 -6.0%.
+  Slow (12:19-12:20): converge 13 / 12 -$11 (non-sports 12/12 +3.8%), 81 open mark -$28; young 55 / 23 -$187 (39 open); options unchanged
+  (N42 forward tails 1 / 0, rest 2 / 2 +20.5 pts, 61 open); box office 9 open, 0 settled (Monday resolution not in yet); charts 0 events
+  (expected until 11-17 ~05 UTC); mention 1 / 0 -$10. LP-1 v2 58 runs / 2.09 d: formula $1,563 (upper bound), trading -$247, pessimistic
+  -$605; 185 markets saw a competitor, 3 still quoted. forward_core 25 markets $148 vs +$6 trading / -$22 pessimistic (-15% of formula,
+  passing, still < 40 markets); forward_other 42 markets $471 vs -$236 (N35 failing). COPY-1 46.4 h: sharp 100 primaries, 14 settled /
+  9 events 11 won +4.7 pts (n tiny); control 39 / 16 events +1.9 pts.
+- Test (outside the box N56, fresh_wallet_census.py, local, 12-week tape): the insider footprint - follow a wallet's first-ever entry
+  (politics, geopolitics, ai/tech, economy): follower 60 s later -0.93 pts [-2.8, +0.4] on 949 events, halves +4.95 / -1.65, the >= $500
+  lookahead upper bound -1.05 [-3.8, +1.6] -> DEAD. New lesson 27 (the famous cases are the visible tail).
+- Test (adjacent N57, same script): fresh wallets in culture / mention: -3.19 [-4.5, -1.9] on 585 events (mention -7.6) -> DEAD.
+- Health: fast paper 12:19, slow 12:21, follow 12:40 (report 12:32, < 70 min), boosts 12:32, MM v2 13:01, books 13:00 - OK. Tracebacks only
+  the old pilot-log (2) / script-log (1); no MemoryErrors. Pilot STOP, no orders.
+- Next: box office settlements (check next cycle that they settle; if still 0 settled on 11-17, it is a bug until shown otherwise);
+  lock_p week mark 11-17 (+1.8%, below the +5% bar -> expect to close); charts first entries 11-17 ~05 UTC; LP-1 forward_core to 40
+  markets; N21 11-21; options N42 11-19; N45 11-30.

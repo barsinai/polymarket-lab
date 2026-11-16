@@ -763,3 +763,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - N54 US macro release buckets DEAD (favourite 6-168 h -10.0 pts [-21.5, +2.7], 27 releases; newer half -18). N55 Treasury-yield touch
   ladders DEAD by rule (2 finished months). LP-1 v2 48 h: formula $1,513 vs pessimistic -$566, 179/202 contested; forward_other failing,
   forward_core -11% of formula on 23 markets (only live LP piece). N21 BTC/ETH forward -3.2%. Next: box office settlements, lock_p 11-17.
+
+## 11-16 13:30 cycle 24
+- N56 insider footprint (follow fresh wallets) DEAD: -0.93 pts [-2.8, +0.4] on 949 politics/geo/tech events; >= $500 upper bound -1.05.
+  N57 fresh wallets in culture/mention DEAD: -3.19 [-4.5, -1.9] on 585 events. Lesson 27. Read-outs unchanged in direction: lock_x +7.3%
+  (19 end-times), lock_p +1.8%, LP forward_core -15% of formula on 25 markets. Next: box office settlements, lock_p 11-17.

@@ -24,6 +24,12 @@ Status: TESTING (paper/backtest running) · READY (next up) · PARKED (needs som
 | Research journal (my forecasts with sources) | reading + cross-checking beats the crowd on slow political/econ questions | forecast_log.py, Brier vs market | 11-10 | weeks |
 
 ## READY (ranked)
+N56. -> tested 11-16 (cycle 24), DEAD (see DEAD). **(outside the box) The insider footprint: follow FRESH wallets.** Famous insider cases
+   are new addresses that buy one political / geopolitical outcome big before the news; a first-ever trade is knowable when it prints.
+   COPY-1 follows wallets with a record, fresh ones have none. Exposed to 17 (new accounts are mostly retail), 22, 5/6, 1. Test:
+   fresh_wallet_census.py, group c, follower fill 60 s later + fee, by event, halves, pre-registered kill rule.
+N57. -> tested 11-16 (cycle 24), DEAD (see DEAD). **(adjacent to COPY-1 / lesson 17) Fresh wallets in culture / mention markets**, where
+   the tape says informed takers are paid most. Same script and rule, group a.
 N54. -> tested 11-16 (cycle 23), DEAD (see DEAD). **(outside the box) Scheduled US macro release buckets (CPI MoM / annual, core CPI,
    PPI, ISM, unemployment, UMich, eggs).** Backlog item 4 since 11-01, never run. Why: 0.1-wide buckets around a public consensus /
    Cleveland Fed nowcast; fans may spread money over surprise buckets. Exposed to 13, 5, 6. Test: macro_census.py, favourite 0.60-0.97
@@ -263,6 +269,12 @@ OLD N2. **(outside the box, 11-12) Box-office opening-weekend markets vs Thursda
 - Kalshi vs Polymarket automatic pairing (titles do not match; manual for named series only).
 
 ## DEAD (number that killed it)
+- N56 insider footprint / fresh wallets, politics-geo-tech-econ (11-16 c24, fresh_wallet_census.py, local, 12-week tape; fresh = the
+  address's first entry anywhere in the tape, >= 21 d after its start): follower 60 s later -0.93 pts [-2.8, +0.4] on 49,873 entries /
+  949 events; halves +4.95 (107 events) / -1.65; even the LOOKAHEAD upper bound (total cost >= $500) -1.05 [-3.8, +1.6] (264 events);
+  geopolitics -0.4, politics -1.6, ai/tech -1.5. Old wallets >= $500 +3.1 (lookahead, lesson 22 already killed the big-taker rule).
+- N57 fresh wallets in culture / mention (same script, group a): -3.19 pts [-4.5, -1.9] on 585 events, mention -7.6, pop-culture -2.5;
+  >= $500 upper bound +1.4 [-3.4, +7.1]. A first trade from a new address is a retail signal, not an insider one (lesson 27).
 - N54 US macro release buckets (11-16 c23, macro_census.py, local, 12-week tape, 27 releases / 21k taker fills): favourite 0.60-0.97
   6-168 h -10.0 pts [-21.5, +2.7] by release (15/27 positive), follower -12.0; older half +2.2, newer -18.1 [-31.9, -1.8]; long shots
   -2.4, mid 0.20-0.60 -0.2, after the release (< 6 h) +3.9 [-1.0, +9.5] on 17 releases (crumbs, lesson 26); small takers -4.1 [-5.9, -2.4],

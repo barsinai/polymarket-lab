@@ -97,6 +97,11 @@ survives them. Add a lesson whenever an idea dies for a reason not already here.
     rain markets and the CLI is out 1-2 h after the climate day, so after-day fills on the right side were +9 pts but only 7 fills on 26
     dates. Before building an 'early read' tracker, count how many fills happen AFTER the read is possible, not how good the read is.
 
+27. **The famous cases are the visible tail.** 'Fresh wallet buys big before the news' is how insider stories look, but on the 12-week
+    tape a first-ever trade by a new address loses 0.9 points per share (politics/geo/tech, 949 events) and 3.2 (culture, 585 events)
+    at the follower's fill, and the >= $500 subset is ~0 even with lookahead on size. Before building on an anecdote, measure the base
+    rate of the pattern, not the hits that made the news.
+
 ## Where edges plausibly still live (derived from the above)
 - Information the crowd processes slowly and bots don't cover: resolution-rule details (exact station, exact candle,
   rounding), public running tallies, scheduled data with good nowcasts, slow non-sports questions.
