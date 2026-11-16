@@ -1,24 +1,9 @@
 {
-"scanned": "2026-11-16 19:25",
+"scanned": "2026-11-16 20:23",
 "events": 2100,
 "groups": 2037,
-"books": 16842,
+"books": 16840,
 "opps": [
-{
-"kind": "ladder_num",
-"event": "Ink FDV above ___ one day after launch?",
-"slug": "ink-fdv-above-one-day-after-launch",
-"easy": "Ink FDV above $100M one day after launch?",
-"hard": "Ink FDV above $500M one day after launch?",
-"easy_yes_ask": 0.07,
-"hard_no_ask": 0.92,
-"hard_yes_bid": 0.08,
-"cost": 0.99,
-"edge": 0.01,
-"edge_after_fee": 0.0003,
-"size_shares": 881.58,
-"usd_at_size": 872.76
-},
 {
 "kind": "ladder_num",
 "event": "Hotstuff FDV above ___ one day after launch?",
@@ -31,8 +16,8 @@
 "cost": 0.99,
 "edge": 0.01,
 "edge_after_fee": -0.0173,
-"size_shares": 211.0,
-"usd_at_size": 208.89
+"size_shares": 241.0,
+"usd_at_size": 238.59
 },
 {
 "kind": "ladder_date",
@@ -51,36 +36,6 @@
 },
 {
 "kind": "ladder_num",
-"event": "Saturn FDV above ___ one day after launch?",
-"slug": "saturn-fdv-above-one-day-after-launch-20260623191408697",
-"easy": "Saturn FDV above $600M one day after launch",
-"hard": "Saturn FDV above $700M one day after launch",
-"easy_yes_ask": 0.02,
-"hard_no_ask": 0.973,
-"hard_yes_bid": 0.027,
-"cost": 0.993,
-"edge": 0.007,
-"edge_after_fee": 0.0038,
-"size_shares": 60.0,
-"usd_at_size": 59.58
-},
-{
-"kind": "ladder_num",
-"event": "Makina FDV above ___ one day after launch?",
-"slug": "makina-fdv-above-one-day-after-launch",
-"easy": "Makina FDV above $80M one day after launch?",
-"hard": "Makina FDV above $100M one day after launch?",
-"easy_yes_ask": 0.053,
-"hard_no_ask": 0.941,
-"hard_yes_bid": 0.059,
-"cost": 0.994,
-"edge": 0.006,
-"edge_after_fee": -0.0014,
-"size_shares": 64.0,
-"usd_at_size": 63.62
-},
-{
-"kind": "ladder_num",
 "event": "Hyperbeat FDV above ___ one day after launch?",
 "slug": "hyperbeat-fdv-above-one-day-after-launch",
 "easy": "Hyperbeat FDV above $300M one day after launch?",
@@ -91,45 +46,23 @@
 "cost": 0.996,
 "edge": 0.004,
 "edge_after_fee": 0.0015,
-"size_shares": 82.65,
-"usd_at_size": 82.32
-},
-{
-"kind": "negrisk_all_yes",
-"event": "OpenAI IPO Closing Market Cap",
-"slug": "openai-ipo-closing-market-cap-554",
-"n": 7,
-"has_other": false,
-"outcomes": [
-"<500B",
-"500\u2013750B",
-"750B\u20131T",
-"1T\u20131.25T",
-"1.25T\u20131.5T",
-"1.5T+",
-"No IPO by December 31, 2027"
-],
-"cost": 0.985,
-"payoff": 1,
-"edge": 0.015,
-"edge_after_fee": -0.0394,
-"size_shares": 20.92,
-"usd_at_size": 20.61
+"size_shares": 112.65,
+"usd_at_size": 112.2
 },
 {
 "kind": "ladder_num",
-"event": "Noble FDV above ___ one day after launch?",
-"slug": "noble-fdv-above-one-day-after-launch",
-"easy": "Noble FDV above $100M one day after launch?",
-"hard": "Noble FDV above $300M one day after launch?",
-"easy_yes_ask": 0.09,
-"hard_no_ask": 0.9,
-"hard_yes_bid": 0.1,
-"cost": 0.99,
-"edge": 0.01,
-"edge_after_fee": -0.002,
-"size_shares": 27.22,
-"usd_at_size": 26.95
+"event": "Reya FDV above ___ one day after launch?",
+"slug": "reya-fdv-above-one-day-after-launch",
+"easy": "Reya FDV above $200M one day after launch?",
+"hard": "Reya FDV above $400M one day after launch?",
+"easy_yes_ask": 0.049,
+"hard_no_ask": 0.948,
+"hard_yes_bid": 0.052,
+"cost": 0.997,
+"edge": 0.003,
+"edge_after_fee": -0.0037,
+"size_shares": 66.7,
+"usd_at_size": 66.5
 },
 {
 "kind": "ladder_num",
@@ -207,16 +140,26 @@
 "usd_at_size": 34.34
 },
 {
-"kind": "negrisk_all_no",
-"event": "Anthropic IPO Closing Market Cap",
-"slug": "anthropic-ipo-closing-market-cap-higher-strikes",
-"n": 10,
-"cost": 8.989,
-"payoff": 9,
-"edge": 0.011,
-"edge_after_fee": -0.0402,
-"size_shares": 9.58,
-"usd_at_size": 86.11
+"kind": "negrisk_all_yes",
+"event": "OpenAI IPO Closing Market Cap",
+"slug": "openai-ipo-closing-market-cap-554",
+"n": 7,
+"has_other": false,
+"outcomes": [
+"<500B",
+"500\u2013750B",
+"750B\u20131T",
+"1T\u20131.25T",
+"1.25T\u20131.5T",
+"1.5T+",
+"No IPO by December 31, 2027"
+],
+"cost": 0.985,
+"payoff": 1,
+"edge": 0.015,
+"edge_after_fee": -0.0394,
+"size_shares": 7.6,
+"usd_at_size": 7.49
 },
 {
 "kind": "ladder_num",
@@ -232,21 +175,6 @@
 "edge_after_fee": -0.0003,
 "size_shares": 34.48,
 "usd_at_size": 34.38
-},
-{
-"kind": "ladder_num",
-"event": "Reya FDV above ___ one day after launch?",
-"slug": "reya-fdv-above-one-day-after-launch",
-"easy": "Reya FDV above $200M one day after launch?",
-"hard": "Reya FDV above $400M one day after launch?",
-"easy_yes_ask": 0.049,
-"hard_no_ask": 0.948,
-"hard_yes_bid": 0.052,
-"cost": 0.997,
-"edge": 0.003,
-"edge_after_fee": -0.0037,
-"size_shares": 30.0,
-"usd_at_size": 29.91
 },
 {
 "kind": "ladder_date",
@@ -279,26 +207,19 @@
 "usd_at_size": 19.78
 },
 {
-"kind": "negrisk_all_yes",
-"event": "South Korea Annual Inflation 2026",
-"slug": "south-korea-annual-inflation-2026",
-"n": 7,
-"has_other": false,
-"outcomes": [
-"<1.5%",
-"1.5% to 1.7%",
-"1.8% to 2.0%",
-"2.1% to 2.3%",
-"2.4% to 2.6%",
-"2.7% to 2.9%",
-"3.0%+"
-],
-"cost": 0.963,
-"payoff": 1,
-"edge": 0.037,
-"edge_after_fee": -0.0088,
-"size_shares": 1.6,
-"usd_at_size": 1.54
+"kind": "ladder_num",
+"event": "Noble FDV above ___ one day after launch?",
+"slug": "noble-fdv-above-one-day-after-launch",
+"easy": "Noble FDV above $100M one day after launch?",
+"hard": "Noble FDV above $300M one day after launch?",
+"easy_yes_ask": 0.09,
+"hard_no_ask": 0.9,
+"hard_yes_bid": 0.1,
+"cost": 0.99,
+"edge": 0.01,
+"edge_after_fee": -0.002,
+"size_shares": 7.22,
+"usd_at_size": 7.15
 },
 {
 "kind": "ladder_num",
@@ -307,13 +228,13 @@
 "easy": "Printr FDV above $500M one day after launch?",
 "hard": "Printr FDV above $1B one day after launch?",
 "easy_yes_ask": 0.049,
-"hard_no_ask": 0.935,
-"hard_yes_bid": 0.065,
-"cost": 0.984,
-"edge": 0.016,
-"edge_after_fee": 0.0085,
+"hard_no_ask": 0.936,
+"hard_yes_bid": 0.064,
+"cost": 0.985,
+"edge": 0.015,
+"edge_after_fee": 0.0075,
 "size_shares": 1.61,
-"usd_at_size": 1.58
+"usd_at_size": 1.59
 },
 {
 "kind": "ladder_num",
@@ -344,6 +265,21 @@
 "edge_after_fee": 0.0038,
 "size_shares": 1.61,
 "usd_at_size": 1.59
+},
+{
+"kind": "ladder_num",
+"event": "What will Fed Rate hit before 2027?",
+"slug": "what-will-fed-rate-hit-before-2027",
+"easy": "Will the Fed\u2019s lower bound reach 2.5% or lower before 2027?",
+"hard": "Will the Fed\u2019s lower bound reach 0.25% or lower before 2027?",
+"easy_yes_ask": 0.011,
+"hard_no_ask": 0.986,
+"hard_yes_bid": 0.014,
+"cost": 0.997,
+"edge": 0.003,
+"edge_after_fee": 0.0013,
+"size_shares": 2.12,
+"usd_at_size": 2.11
 }
 ]
 }
