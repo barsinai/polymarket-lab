@@ -102,6 +102,12 @@ survives them. Add a lesson whenever an idea dies for a reason not already here.
     at the follower's fill, and the >= $500 subset is ~0 even with lookahead on size. Before building on an anecdote, measure the base
     rate of the pattern, not the hits that made the news.
 
+28. **A paper book that never settles flatters itself** (11-16, LP-1 v2; the same bug as options_probe on 11-13). Gamma's market list
+    drops closed markets unless `closed=true` is asked, so a tracker that looks its markets up that way never sees a resolution: LP-1
+    held leftover inventory in 126 markets at the fair price of its last run for up to two days and reported -$248 / -$610; settled and
+    re-marked it was -$436 / -$760. Guard for every paper report: print 'settled N' and 'open past their end M'; N = 0 with M > 0 after
+    a day is a bug, not a result. Inventory in a market we stopped quoting is marked at today's price, never at our last quote.
+
 ## Where edges plausibly still live (derived from the above)
 - Information the crowd processes slowly and bots don't cover: resolution-rule details (exact station, exact candle,
   rounding), public running tallies, scheduled data with good nowcasts, slow non-sports questions.

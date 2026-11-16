@@ -541,3 +541,21 @@
   only the old pilot-log (2) / script-log (1); no MemoryErrors. Pilot STOP, no orders.
 - Next: build the N58 forward tracker (new culture listings, real NO ask, first hour); box office settlements; lock_p week mark 11-17 (+1.8%,
   below the +5% bar -> close); charts first entries 11-17 ~05 UTC; LP-1 forward_core to 40 markets; N21 11-21; options N42 11-19; N45 11-30.
+
+## 11-16 17:00-17:50 UTC LP-1 read-out (scheduled one-shot, deep session)
+- BUG found and fixed in lp_paper.py: no market was ever settled (Gamma list drops closed markets) and leftovers were marked at our last
+  fair price. The 17:21 run settled 60 resolved markets and re-marked 67 open leftovers at today's price. The LP-1 trading numbers in
+  cycles 13-25 (incl. '-$248 / -$610' two entries above) were too rosy; the splits N35 / N38 moved too. LESSONS 28.
+- Corrected read (2.3 d, 63 runs, 213 markets): formula reward $1,615 (upper bound); trading -$436 on 648 tape fills, -$760 on 163
+  pessimistic fills; break-even payout ratio 27% / 47%. 188 of 213 got a competitor (median 2.3 h to exit), 92 pools removed, 2 still
+  quoted; formula accrual $1,047 first 24 h -> $354 last 24 h. Weather $191 vs -$240 / -$302; live count/mention/views $541 vs -$231 /
+  -$386; core $884 vs +$35 / -$73 (48 markets with open leftovers); forward_core 32 markets $156 vs +$29 / -$20 (-13%, passing, bar is
+  40 markets / 3 days); forward_other 49 markets $492 vs -$62 / -$286 (-58%: N35 fails). $200 slice: $93 vs -$37 / -$69.
+- Verdict sent to the user: the proposed 48-h / $200 / 5-market live test is not worth an OK. Proposed instead (waiting for his answer,
+  do NOT run without it - it uses the account key): a read-only query of our own reward history for the pilot days
+  (CLOB GET /rewards/user/markets?date=, L2 auth; docs.polymarket.com/api-reference/rewards) = the real payout ratio with no orders.
+- COPY-1 at 50.5 h: sharp 114 primaries, 19 settled / 13 events +6.5 pts (n tiny). Already clear: only 40% of their orders can be
+  followed within 3c (ask after their trade is a median 4.2c above their price) and our lag is ~2 min, not seconds (the public feed);
+  the 24-h mark of 34 sharp primaries is -6.3 pts vs the ask paid; control (99) -0.0. Decision rule unchanged (300 settled).
+- Next cycle: check the 18:21 LP run keeps settling (report fields settled_markets / open_leftover_markets); read N38 with the corrected
+  numbers; if the user OKs the read-only reward query, write it as a one-off script for the pilot workflow's secrets (no orders).
