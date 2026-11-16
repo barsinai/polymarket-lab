@@ -768,3 +768,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - N56 insider footprint (follow fresh wallets) DEAD: -0.93 pts [-2.8, +0.4] on 949 politics/geo/tech events; >= $500 upper bound -1.05.
   N57 fresh wallets in culture/mention DEAD: -3.19 [-4.5, -1.9] on 585 events. Lesson 27. Read-outs unchanged in direction: lock_x +7.3%
   (19 end-times), lock_p +1.8%, LP forward_core -15% of formula on 25 markets. Next: box office settlements, lock_p 11-17.
+
+## 11-16 17:15 cycle 25
+- N59 new market launches DEAD (launch-hour follower +0.3 pts [-0.5, +1.0], 3,379 events; halves +1.1 / -0.6). N58 culture launch-hour NO
+  READY (found after looking: +7.4 pts [5.5, 9.3] per market, 614 events, both halves; 24-72 h later +0.7) -> forward tracker next cycle.
+  Read-outs unchanged in direction. Next: N58 tracker, box office settlements, lock_p 11-17.

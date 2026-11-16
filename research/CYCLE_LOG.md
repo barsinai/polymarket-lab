@@ -520,3 +520,24 @@
 - Next: box office settlements (check next cycle that they settle; if still 0 settled on 11-17, it is a bug until shown otherwise);
   lock_p week mark 11-17 (+1.8%, below the +5% bar -> expect to close); charts first entries 11-17 ~05 UTC; LP-1 forward_core to 40
   markets; N21 11-21; options N42 11-19; N45 11-30.
+
+## 11-16 17:00-17:15 UTC cycle 25 (scheduled)
+- Read-outs (fast trades.jsonl, last lock settled 14:24): lock_x 23 settled +7.3% (19 end-times, no new signal), lock_p 48 +1.8% (42),
+  lock_p_majors 18 +5.3%; lock_m 222 -2.4%, lock_b 65 -0.0%, lock_p_z2 260 -0.6%. N21 forward BTC/ETH 68 / 63 -1.6% (3 days, below its +2%
+  bar), alts 66 / 56 -5.3%. Slow (16:20-16:23): converge 13 / 12 -$11 (non-sports 12/12 +3.8%), 81 open mark -$27; young 55 / 23 -$187
+  (45 open); options 59 / 21 +$169, 61 open, N42 forward tails 1 / 0 -14 pts, rest 2 / 2 +20.5 (n tiny); box office 9 open, 0 settled at
+  16:21 UTC (= 11:21 ET Monday; actuals usually post Monday afternoon US - check next cycle, a bug only if still unsettled 11-17); charts 0
+  events (expected until 11-17 ~05 UTC); mention 1 / 0 -$10. LP-1 v2 62 runs / 2.26 d: formula $1,606 (upper bound), trading -$248,
+  pessimistic -$610; 188 markets saw a competitor, 4 still quoted. forward_core 32 markets $153 vs +$9 trading / -$22 pessimistic (-14% of
+  formula, passing, < 40 markets); forward_other 49 markets $489 vs -$241 (N35 failing). COPY-1 50.5 h: sharp 114 primaries, 19 settled /
+  13 events 16 won +6.5 pts (weather -1.4, rest +17; n tiny); control 39 / 16 events +1.9 pts.
+- Test (outside the box N59, launch_census.py, local, 12-week tape): new market launches - follower fill in the first hour after a market's
+  first trade +0.3 pts [-0.5, +1.0] on 3,379 events, halves +1.06 / -0.58 -> DEAD by its pre-registered rule. First takers' own fills +0.5
+  [0.2, 0.9] vs -0.5 at 24-72 h (seed books a little stale, taken in seconds).
+- Adjacent N58 (found AFTER looking, lesson 22): culture launch-hour NO, one follower fill per market +7.4 pts [5.5, 9.3] on 614 events /
+  112 days, halves +8.7 / +5.6 [2.8, 8.4], non-mention +4.6 (both halves positive); the same NO 24-72 h later +0.7. -> READY with a
+  pre-registered forward rule (tracker on new listings next cycle, inside the follow.yml chain).
+- Health: fast paper 16:20, slow 16:24, follow 16:51 (report 16:43, < 70 min), boosts 16:58, MM v2 publishing, books 17:00 - OK. Tracebacks
+  only the old pilot-log (2) / script-log (1); no MemoryErrors. Pilot STOP, no orders.
+- Next: build the N58 forward tracker (new culture listings, real NO ask, first hour); box office settlements; lock_p week mark 11-17 (+1.8%,
+  below the +5% bar -> close); charts first entries 11-17 ~05 UTC; LP-1 forward_core to 40 markets; N21 11-21; options N42 11-19; N45 11-30.
