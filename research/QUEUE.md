@@ -773,3 +773,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - N59 new market launches DEAD (launch-hour follower +0.3 pts [-0.5, +1.0], 3,379 events; halves +1.1 / -0.6). N58 culture launch-hour NO
   READY (found after looking: +7.4 pts [5.5, 9.3] per market, 614 events, both halves; 24-72 h later +0.7) -> forward tracker next cycle.
   Read-outs unchanged in direction. Next: N58 tracker, box office settlements, lock_p 11-17.
+
+## 11-16 21:45 cycle 26
+- N60 latency check PASSED: culture launch-hour NO still +8.4 pts [6.0, 10.7] with the follower >= 300 s late (543 events, halves +10.6 / +5.8).
+  N58 forward tracker built (launch_paper.py in the follow.yml chain) -> TESTING. N61 year-end lists READY. Box office now settling (2/2).
+  Next: launch tracker first report, N61 history, lock_p 11-17.

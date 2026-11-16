@@ -562,3 +562,25 @@
 - 17:50 note: the run_script dispatch of lp_settle_probe.py (run 43915402685, 17:09) never left 'queued' and cannot be cancelled ('run is
   completed') - a ghost on GitHub's side, scheduled workflows kept running. The probe is redundant (the fixed lp_paper settled at 17:21 and
   the numbers above were recomputed locally from the committed state). Next cycle: confirm a fresh run_script dispatch starts normally.
+
+## 11-16 21:00-21:45 UTC cycle 26 (scheduled)
+- Read-outs (fast trades.jsonl, last settled 20:09): lock_x 24 / 21 +7.1% (20 end-times), lock_p 50 / 43 +1.9% (44), lock_p_majors 19 / 18 +5.2%;
+  lock_m 229 -2.1%, lock_b 71 +0.5%, lock_p_z2 268 -0.4%. N21 forward BTC/ETH 76 / 71 -0.9% (3 days, below its +2% bar), alts 75 / 64 -5.9%.
+  Slow (20:22-20:24): converge 14 / 13 -$10, 80 open mark -$29; young 55 / 23 -$187 (49 open); options 69 settled +$103, 51 open, N42 forward
+  tails 1 / 0 -14 pts, rest 2 / 2 +20.5 (unchanged); box office SETTLES now: 2 / 2 +$2.06, 7 open (the Monday worry is closed); charts 0 events
+  (expected until 11-17 ~05 UTC); mention 1 / 0 -$10. LP-1 v2 (fixed settlement) 66 runs / 2.43 d: formula $1,641 (upper bound), trading -$467,
+  pessimistic -$714; settled 65 markets, 62 open leftovers (guard OK: it settles); forward_core 35 markets $158 vs +$30 / -$22 (-14%, passing,
+  < 40 markets); forward_other 52 markets $494 vs -$69 / -$296 (N35 failing). COPY-1 54.7 h: sharp 26 primaries settled / 18 events 21 won
+  +7.2 pts (n tiny); control 42 / 19 events +2.7 pts.
+- Test (adjacent N60, launch_latency.py, local, 12-week tape): does N58 survive our latency? One culture NO fill per market in the launch hour:
+  follower >= 60 s +8.8 pts [6.5, 11.2] (554 events), >= 300 s +8.4 [6.0, 10.7] (543), halves +10.6 / +5.8, non-mention +5.6 [2.9, 8.1];
+  86% of fills in the first 10 min; median NO drift 60 -> 300 s 0c -> PASSED. Still found by looking (lesson 22): only the forward run counts.
+- Built: N58 forward paper launch_paper.py (TESTING), running inside the follow.yml chain from its next hand-over (poll 150 s, $10 at the real
+  NO ask, pre-registered kill/promote rule, settled / open_past_end guard). Logs to logs/launch-log.txt, data in data/launch/.
+- New (outside the box N61): year-end lists from one publisher (words of the year, Wrapped, Year in Search, TIME POY) where the sources publish
+  in stages -> READY; needs Gamma history (Actions).
+- Health: fast paper 20:21, slow 20:24, follow 21:04 (report 20:54, < 70 min), boosts 20:19, MM v2 21:01, books 21:00 - OK. The 17:09 'ghost'
+  run_script did publish 'Script output' at 18:21. Tracebacks only the old pilot-log (2) / script-log (1); no MemoryErrors. Pilot STOP, no orders.
+- Next: confirm data/launch/report.json appears after the next follow hand-over (~03:00 UTC) with candidates > 0 (0 candidates for a day = bug,
+  lesson 10); N61 history script; lock_p week mark 11-17 (+1.9%, below the +5% bar -> close); charts first entries 11-17 ~05 UTC; LP-1
+  forward_core to 40 markets; N21 11-21; options N42 11-19; N45 11-30.
