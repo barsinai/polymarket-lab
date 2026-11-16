@@ -584,3 +584,4 @@
 - Next: confirm data/launch/report.json appears after the next follow hand-over (~03:00 UTC) with candidates > 0 (0 candidates for a day = bug,
   lesson 10); N61 history script; lock_p week mark 11-17 (+1.9%, below the +5% bar -> close); charts first entries 11-17 ~05 UTC; LP-1
   forward_core to 40 markets; N21 11-21; options N42 11-19; N45 11-30.
+- 21:20 smoke run (run_script launch_smoke.py, 6 min, live API): tracker runs clean, 532 events listed over 4 polls, 0 new listings < 60 min in that window (base rate ~3 an hour, so plausible). Added a '< 24 h old' counter so the next cycle can tell a quiet hour from a discovery bug.
