@@ -559,3 +559,6 @@
   the 24-h mark of 34 sharp primaries is -6.3 pts vs the ask paid; control (99) -0.0. Decision rule unchanged (300 settled).
 - Next cycle: check the 18:21 LP run keeps settling (report fields settled_markets / open_leftover_markets); read N38 with the corrected
   numbers; if the user OKs the read-only reward query, write it as a one-off script for the pilot workflow's secrets (no orders).
+- 17:50 note: the run_script dispatch of lp_settle_probe.py (run 43915402685, 17:09) never left 'queued' and cannot be cancelled ('run is
+  completed') - a ghost on GitHub's side, scheduled workflows kept running. The probe is redundant (the fixed lp_paper settled at 17:21 and
+  the numbers above were recomputed locally from the committed state). Next cycle: confirm a fresh run_script dispatch starts normally.
