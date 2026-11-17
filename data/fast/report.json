@@ -1,47 +1,48 @@
 {
- "updated": "2026-11-17T11:26:53.288747+00:00",
- "trades": 35998,
- "settled": 35996,
- "obs_this_run": 29606,
+ "updated": "2026-11-17T12:27:09.617449+00:00",
+ "trades": 36130,
+ "settled": 36123,
+ "obs_this_run": 30046,
  "rest_ms": {
-  "n": 14976,
-  "min": 38.6,
-  "p50": 48.7,
-  "p90": 57.5
+  "n": 15234,
+  "min": 39.2,
+  "p50": 49.2,
+  "p90": 58.8
  },
  "feed": {
-  "msgs": 78322,
-  "connects": 2,
+  "msgs": 77692,
+  "connects": 4,
   "errors": 1,
-  "last_msg": 1794914812.9475188,
+  "last_msg": 1794918429.1980922,
+  "silent_reconnects": 2,
   "last_error": "no close frame received or sent"
  },
  "feed_topics": {
-  "crypto_prices": 21572,
-  "crypto_prices_chainlink": 28371,
-  "crypto_prices_twap_sixty": 28377
+  "crypto_prices": 21316,
+  "crypto_prices_chainlink": 28186,
+  "crypto_prices_twap_sixty": 28186
  },
  "bookws": {
   "ran_to_end": true
  },
  "by_strat": {
   "dog": {
-   "trades": 17240,
-   "won": 2686,
-   "staked": 101223.87,
-   "pnl": -21951.99
+   "trades": 17313,
+   "won": 2696,
+   "staked": 101750.28,
+   "pnl": -22120.75
   },
   "exact": {
-   "trades": 4362,
-   "won": 2727,
-   "staked": 47675.13,
-   "pnl": -2965.41
+   "trades": 4371,
+   "won": 2735,
+   "staked": 47783.82,
+   "pnl": -2972.89
   },
   "fav": {
-   "trades": 11564,
-   "won": 9054,
-   "staked": 155006.66,
-   "pnl": -8117.8
+   "trades": 11608,
+   "won": 9088,
+   "staked": 155683.28,
+   "pnl": -8196.76
   },
   "lock": {
    "trades": 427,
@@ -146,10 +147,10 @@
    "pnl": 23.5
   },
   "lock_p_z2": {
-   "trades": 306,
-   "won": 277,
-   "staked": 4934.46,
-   "pnl": -76.12
+   "trades": 307,
+   "won": 278,
+   "staked": 4944.16,
+   "pnl": -75.84
   },
   "lock_p_z3": {
    "trades": 23,
@@ -1360,22 +1361,22 @@
    "pnl": 27.41
   },
   "2026-11-17 dog": {
-   "trades": 915,
-   "won": 136,
-   "staked": 5476.83,
-   "pnl": -1701.53
+   "trades": 988,
+   "won": 146,
+   "staked": 6003.24,
+   "pnl": -1870.29
   },
   "2026-11-17 exact": {
-   "trades": 155,
-   "won": 123,
-   "staked": 2132.41,
-   "pnl": -77.91
+   "trades": 164,
+   "won": 131,
+   "staked": 2241.11,
+   "pnl": -85.38
   },
   "2026-11-17 fav": {
-   "trades": 585,
-   "won": 449,
-   "staked": 8584.17,
-   "pnl": -721.38
+   "trades": 629,
+   "won": 483,
+   "staked": 9260.79,
+   "pnl": -800.35
   },
   "2026-11-17 lock": {
    "trades": 27,
@@ -1462,10 +1463,10 @@
    "pnl": 2.33
   },
   "2026-11-17 lock_p_z2": {
-   "trades": 27,
-   "won": 23,
-   "staked": 484.05,
-   "pnl": -48.59
+   "trades": 28,
+   "won": 24,
+   "staked": 493.75,
+   "pnl": -48.31
   },
   "2026-11-17 lock_p_z3": {
    "trades": 1,
