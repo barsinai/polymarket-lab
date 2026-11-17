@@ -1,26 +1,26 @@
 {
- "updated": "2026-11-17 10:24",
- "tracking_hours": 68.2,
+ "updated": "2026-11-17 11:26",
+ "tracking_hours": 69.23,
  "signal_wallets": 148,
  "rule": "primary = first position per market+direction+UTC day after a taker order/accumulation by a signal wallet (>= $50) or, control, every 5th order >= $1,000 by another wallet; non-sports, ends in 1 h - 60 d; ask 0.03-0.97 and <= their average price + 3c; $20 at the ask; fee paid",
  "decision_rule": "sharp primary: >= 300 settled over >= 100 events and >= 10 days; >= +1.5 pts with the 95% interval above 0 -> propose a small live test; < +0.5 or interval top < +1.5 -> DEAD",
  "sharp": {
-  "positions": 559,
-  "open": 490,
-  "settled": 69,
-  "primary": 186,
-  "primary_settled": 30,
-  "primary_per_day": 65.5,
+  "positions": 568,
+  "open": 497,
+  "settled": 71,
+  "primary": 192,
+  "primary_settled": 31,
+  "primary_per_day": 66.6,
   "PRIMARY": {
    "all": {
-    "n": 30,
-    "events": 20,
-    "won": 22,
-    "avg_ask": 0.704,
-    "edge_pts": 2.29,
-    "edge_pts_5min_later": 1.6,
-    "pnl": -27.04,
-    "roi": -0.0451
+    "n": 31,
+    "events": 21,
+    "won": 23,
+    "avg_ask": 0.708,
+    "edge_pts": 2.68,
+    "edge_pts_5min_later": 2.03,
+    "pnl": -23.67,
+    "roi": -0.0382
    }
   },
   "by_category": {
@@ -75,14 +75,14 @@
     "roi": -1.0477
    },
    "weather": {
-    "n": 12,
-    "events": 10,
-    "won": 9,
-    "avg_ask": 0.784,
-    "edge_pts": -4.04,
-    "edge_pts_5min_later": -6.06,
-    "pnl": -20.51,
-    "roi": -0.0855
+    "n": 13,
+    "events": 11,
+    "won": 10,
+    "avg_ask": 0.789,
+    "edge_pts": -2.62,
+    "edge_pts_5min_later": -4.36,
+    "pnl": -17.13,
+    "roi": -0.0659
    }
   },
   "by_price": {
@@ -107,14 +107,14 @@
     "roi": 0.0283
    },
    "ask 0.80-0.97": {
-    "n": 15,
-    "events": 13,
-    "won": 14,
-    "avg_ask": 0.909,
-    "edge_pts": 2.06,
-    "edge_pts_5min_later": 1.14,
-    "pnl": 6.07,
-    "roi": 0.0202
+    "n": 16,
+    "events": 14,
+    "won": 15,
+    "avg_ask": 0.905,
+    "edge_pts": 2.83,
+    "edge_pts_5min_later": 2.02,
+    "pnl": 9.45,
+    "roi": 0.0295
    },
    "ask < 0.20": {
     "n": 3,
@@ -149,14 +149,14 @@
     "roi": 0.548
    },
    "ends in < 24 h": {
-    "n": 20,
-    "events": 15,
-    "won": 14,
-    "avg_ask": 0.733,
-    "edge_pts": -4.07,
-    "edge_pts_5min_later": -5.4,
-    "pnl": -42.99,
-    "roi": -0.1075
+    "n": 21,
+    "events": 16,
+    "won": 15,
+    "avg_ask": 0.739,
+    "edge_pts": -3.19,
+    "edge_pts_5min_later": -4.42,
+    "pnl": -39.61,
+    "roi": -0.0943
    }
   },
   "by_ask_vs_their_price": {
@@ -171,14 +171,14 @@
     "roi": -0.4645
    },
    "ask <= their price": {
-    "n": 13,
-    "events": 10,
-    "won": 11,
-    "avg_ask": 0.68,
-    "edge_pts": 16.07,
-    "edge_pts_5min_later": 15.78,
-    "pnl": 34.48,
-    "roi": 0.1326
+    "n": 14,
+    "events": 11,
+    "won": 12,
+    "avg_ask": 0.692,
+    "edge_pts": 15.95,
+    "edge_pts_5min_later": 15.68,
+    "pnl": 37.86,
+    "roi": 0.1352
    },
    "ask up to 1c above": {
     "n": 8,
@@ -213,26 +213,26 @@
     "roi": 0.101
    },
    "$50+": {
-    "n": 25,
-    "events": 17,
-    "won": 17,
-    "avg_ask": 0.661,
-    "edge_pts": 1.17,
-    "edge_pts_5min_later": 0.69,
-    "pnl": -36.17,
-    "roi": -0.0723
+    "n": 26,
+    "events": 18,
+    "won": 18,
+    "avg_ask": 0.668,
+    "edge_pts": 1.68,
+    "edge_pts_5min_later": 1.22,
+    "pnl": -32.79,
+    "roi": -0.0631
    }
   },
   "buys_vs_sells": {
    "real buys": {
-    "n": 25,
-    "events": 17,
-    "won": 18,
-    "avg_ask": 0.669,
-    "edge_pts": 4.38,
-    "edge_pts_5min_later": 3.64,
-    "pnl": -17.17,
-    "roi": -0.0343
+    "n": 26,
+    "events": 18,
+    "won": 19,
+    "avg_ask": 0.676,
+    "edge_pts": 4.77,
+    "edge_pts_5min_later": 4.07,
+    "pnl": -13.79,
+    "roi": -0.0265
    },
    "sells of the other side": {
     "n": 5,
@@ -259,8 +259,8 @@
   },
   "mark_24h_all_primary": {
    "all": {
-    "n": 68,
-    "mid_minus_ask_pts": -1.97
+    "n": 71,
+    "mid_minus_ask_pts": -1.82
    },
    "crypto": {
     "n": 2,
@@ -283,46 +283,47 @@
     "mid_minus_ask_pts": -0.81
    },
    "tech": {
-    "n": 14,
-    "mid_minus_ask_pts": 0.9
+    "n": 15,
+    "mid_minus_ask_pts": 0.77
    },
    "tweets": {
-    "n": 5,
-    "mid_minus_ask_pts": 6.01
+    "n": 6,
+    "mid_minus_ask_pts": -1.77
    },
    "weather": {
-    "n": 4,
-    "mid_minus_ask_pts": -15.7
+    "n": 5,
+    "mid_minus_ask_pts": -3.33
    }
   },
   "mark_72h_all_primary": {},
   "ask_minus_their_price": {
    "p25": 0.015,
-   "median": 0.046,
+   "median": 0.045,
    "p75": 0.102
   },
-  "share_cap_ok": 0.381,
-  "median_lag_s": 146,
+  "share_cap_ok": 0.387,
+  "median_lag_s": 147,
   "median_usd_at_ask": 30,
-  "median_usd_within_2c": 126,
+  "median_usd_within_2c": 127,
   "open_primary_by_category": {
    "weather": 14,
    "economy": 33,
    "crypto": 3,
    "politics": 14,
    "tech": 48,
-   "culture": 20,
+   "culture": 22,
    "geopolitics": 15,
-   "tweets": 9
+   "tweets": 11,
+   "mention": 1
   }
  },
  "control": {
-  "positions": 398,
-  "open": 301,
+  "positions": 400,
+  "open": 303,
   "settled": 97,
-  "primary": 232,
+  "primary": 234,
   "primary_settled": 45,
-  "primary_per_day": 81.6,
+  "primary_per_day": 81.1,
   "PRIMARY": {
    "all": {
     "n": 45,
@@ -541,12 +542,12 @@
   },
   "mark_24h_all_primary": {
    "all": {
-    "n": 127,
-    "mid_minus_ask_pts": -0.05
+    "n": 131,
+    "mid_minus_ask_pts": -0.01
    },
    "crypto": {
-    "n": 56,
-    "mid_minus_ask_pts": -0.63
+    "n": 58,
+    "mid_minus_ask_pts": -0.49
    },
    "culture": {
     "n": 6,
@@ -561,8 +562,8 @@
     "mid_minus_ask_pts": -0.69
    },
    "politics": {
-    "n": 10,
-    "mid_minus_ask_pts": 0.54
+    "n": 12,
+    "mid_minus_ask_pts": 0.37
    },
    "tech": {
     "n": 9,
@@ -573,7 +574,16 @@
     "mid_minus_ask_pts": 1.85
    }
   },
-  "mark_72h_all_primary": {},
+  "mark_72h_all_primary": {
+   "all": {
+    "n": 1,
+    "mid_minus_ask_pts": -0.5
+   },
+   "economy": {
+    "n": 1,
+    "mid_minus_ask_pts": -0.5
+   }
+  },
   "ask_minus_their_price": {
    "p25": 0.0,
    "median": 0.001,
@@ -586,48 +596,48 @@
   "open_primary_by_category": {
    "economy": 22,
    "crypto": 68,
-   "geopolitics": 44,
+   "geopolitics": 45,
    "culture": 9,
    "politics": 22,
-   "tech": 14,
+   "tech": 15,
    "tweets": 8
   }
  },
- "positions": 957,
- "settled": 166,
- "primary": 418,
+ "positions": 968,
+ "settled": 168,
+ "primary": 426,
  "totals": {
-  "control crossings $2500": 2185,
-  "skip: fast: sports": 5332,
+  "control crossings $2500": 2198,
+  "skip: fast: sports": 5369,
   "control crossings $10000": 539,
-  "control crossings $1000": 4048,
-  "skip: fast: crypto up/down": 639,
-  "control primary follows": 231,
-  "control paper positions": 397,
-  "skip: closed or ends in < 1 h": 182,
-  "sharp crossings $250": 275,
-  "sharp paper positions": 558,
-  "sharp crossings $50": 841,
-  "skip: ask outside 0.03-0.97": 294,
-  "skip: ends in > 60 days": 318,
-  "sharp primary follows": 186,
+  "control crossings $1000": 4089,
+  "skip: fast: crypto up/down": 654,
+  "control primary follows": 233,
+  "control paper positions": 399,
+  "skip: closed or ends in < 1 h": 185,
+  "sharp crossings $250": 281,
+  "sharp paper positions": 567,
+  "sharp crossings $50": 854,
+  "skip: ask outside 0.03-0.97": 298,
+  "skip: ends in > 60 days": 322,
+  "sharp primary follows": 192,
   "skip: fast: sports parlay (combo)": 144,
   "skip: no ask in the book": 75,
-  "settled": 166,
-  "sharp crossings $1000": 51
+  "settled": 168,
+  "sharp crossings $1000": 52
  },
  "this_run": {
-  "feed pages": 822,
-  "polls": 708,
-  "fills": 50825,
-  "skip: fast: sports": 81,
-  "skip: fast: crypto up/down": 37,
-  "sharp paper positions": 22,
-  "control paper positions": 26,
-  "skip: ask outside 0.03-0.97": 15,
+  "feed pages": 1038,
+  "polls": 893,
+  "fills": 65510,
+  "skip: fast: sports": 118,
+  "skip: fast: crypto up/down": 52,
+  "sharp paper positions": 31,
+  "control paper positions": 28,
+  "skip: ask outside 0.03-0.97": 19,
   "skip: no ask in the book": 4,
   "skip: fast: sports parlay (combo)": 6,
-  "skip: ends in > 60 days": 8,
-  "skip: closed or ends in < 1 h": 6
+  "skip: ends in > 60 days": 12,
+  "skip: closed or ends in < 1 h": 9
  }
 }
