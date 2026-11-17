@@ -1,8 +1,8 @@
 {
-"scanned": "2026-11-17 04:38",
+"scanned": "2026-11-17 05:27",
 "events": 2100,
 "groups": 2037,
-"books": 16802,
+"books": 16804,
 "opps": [
 {
 "kind": "ladder_num",
@@ -16,8 +16,8 @@
 "cost": 0.99,
 "edge": 0.01,
 "edge_after_fee": -0.0083,
-"size_shares": 264.93,
-"usd_at_size": 262.28
+"size_shares": 408.94,
+"usd_at_size": 404.85
 },
 {
 "kind": "ladder_num",
@@ -33,21 +33,6 @@
 "edge_after_fee": -0.0128,
 "size_shares": 97.1,
 "usd_at_size": 96.13
-},
-{
-"kind": "ladder_num",
-"event": "Makina FDV above ___ one day after launch?",
-"slug": "makina-fdv-above-one-day-after-launch",
-"easy": "Makina FDV above $80M one day after launch?",
-"hard": "Makina FDV above $100M one day after launch?",
-"easy_yes_ask": 0.053,
-"hard_no_ask": 0.942,
-"hard_yes_bid": 0.058,
-"cost": 0.995,
-"edge": 0.005,
-"edge_after_fee": -0.0023,
-"size_shares": 156.0,
-"usd_at_size": 155.22
 },
 {
 "kind": "ladder_date",
@@ -66,6 +51,21 @@
 },
 {
 "kind": "ladder_num",
+"event": "Next Google Gemini Pro Model: Arena Debut?",
+"slug": "next-google-gemini-pro-model-arena-debut",
+"easy": "Will the next Google Gemini Pro model added to the Arena Leaderboard debut at a score of at least 1480?",
+"hard": "Will the next Google Gemini Pro model added to the Arena Leaderboard debut at a score of at least 1495?",
+"easy_yes_ask": 0.063,
+"hard_no_ask": 0.93,
+"hard_yes_bid": 0.07,
+"cost": 0.993,
+"edge": 0.007,
+"edge_after_fee": -0.0017,
+"size_shares": 91.06,
+"usd_at_size": 90.42
+},
+{
+"kind": "ladder_num",
 "event": "Hyperbeat FDV above ___ one day after launch?",
 "slug": "hyperbeat-fdv-above-one-day-after-launch",
 "easy": "Hyperbeat FDV above $300M one day after launch?",
@@ -78,6 +78,36 @@
 "edge_after_fee": 0.0015,
 "size_shares": 112.65,
 "usd_at_size": 112.2
+},
+{
+"kind": "ladder_num",
+"event": "Next Google Gemini Pro Model: Arena Debut?",
+"slug": "next-google-gemini-pro-model-arena-debut",
+"easy": "Will the next Google Gemini Pro model added to the Arena Leaderboard debut at a score of at least 1480?",
+"hard": "Will the next Google Gemini Pro model added to the Arena Leaderboard debut at a score of at least 1490?",
+"easy_yes_ask": 0.063,
+"hard_no_ask": 0.928,
+"hard_yes_bid": 0.072,
+"cost": 0.991,
+"edge": 0.009,
+"edge_after_fee": 0.0002,
+"size_shares": 46.8,
+"usd_at_size": 46.38
+},
+{
+"kind": "ladder_num",
+"event": "Makina FDV above ___ one day after launch?",
+"slug": "makina-fdv-above-one-day-after-launch",
+"easy": "Makina FDV above $80M one day after launch?",
+"hard": "Makina FDV above $100M one day after launch?",
+"easy_yes_ask": 0.052,
+"hard_no_ask": 0.942,
+"hard_yes_bid": 0.058,
+"cost": 0.994,
+"edge": 0.006,
+"edge_after_fee": -0.0013,
+"size_shares": 50.0,
+"usd_at_size": 49.7
 },
 {
 "kind": "ladder_num",
@@ -110,29 +140,19 @@
 "usd_at_size": 89.73
 },
 {
-"kind": "negrisk_all_yes",
-"event": "South Africa Annual Inflation 2026",
-"slug": "south-africa-annual-inflation-2026",
-"n": 10,
-"has_other": false,
-"outcomes": [
-"<2.6%",
-"2.6-2.9%",
-"2.9-3.2%",
-"3.2-3.5%",
-"3.5-3.8%",
-"3.8-4.1%",
-"4.1-4.4%",
-"4.4-4.7%",
-"4.7-5.0%",
-">5.0%"
-],
-"cost": 0.959,
-"payoff": 1,
-"edge": 0.041,
-"edge_after_fee": -0.0041,
-"size_shares": 5.91,
-"usd_at_size": 5.67
+"kind": "ladder_num",
+"event": "Abstract FDV above ___ one day after launch?",
+"slug": "abstract-fdv-above-one-day-after-launch",
+"easy": "Abstract FDV above $400M one day after launch?",
+"hard": "Abstract FDV above $600M one day after launch?",
+"easy_yes_ask": 0.024,
+"hard_no_ask": 0.973,
+"hard_yes_bid": 0.027,
+"cost": 0.997,
+"edge": 0.003,
+"edge_after_fee": -0.0005,
+"size_shares": 63.49,
+"usd_at_size": 63.3
 },
 {
 "kind": "ladder_num",
@@ -150,23 +170,34 @@
 "usd_at_size": 35.38
 },
 {
-"kind": "negrisk_all_yes",
-"event": "US economic state at the end of 2026?",
-"slug": "us-economic-state-at-the-end-of-2026",
-"n": 4,
-"has_other": false,
-"outcomes": [
-"Soft Landing (Unemployment <5.0%, Inflation <3.5%)",
-"Stagflation (Unemployment \u22655.0%, Inflation \u22653.5%)",
-"Overheating (Unemployment <5.0%, Inflation \u22653.5%)",
-"Slack (Unemployment \u22655.0%, Inflation <3.5%)"
-],
-"cost": 0.993,
-"payoff": 1,
-"edge": 0.007,
-"edge_after_fee": -0.0259,
-"size_shares": 14.0,
-"usd_at_size": 13.9
+"kind": "ladder_num",
+"event": "Pacifica FDV above ___ one day after launch?",
+"slug": "pacifica-fdv-above-one-day-after-launch",
+"easy": "Pacifica FDV above $500M one day after launch?",
+"hard": "Pacifica FDV above $800M one day after launch?",
+"easy_yes_ask": 0.027,
+"hard_no_ask": 0.968,
+"hard_yes_bid": 0.032,
+"cost": 0.995,
+"edge": 0.005,
+"edge_after_fee": 0.001,
+"size_shares": 34.48,
+"usd_at_size": 34.31
+},
+{
+"kind": "ladder_num",
+"event": "Pacifica FDV above ___ one day after launch?",
+"slug": "pacifica-fdv-above-one-day-after-launch",
+"easy": "Pacifica FDV above $300M one day after launch?",
+"hard": "Pacifica FDV above $800M one day after launch?",
+"easy_yes_ask": 0.028,
+"hard_no_ask": 0.968,
+"hard_yes_bid": 0.032,
+"cost": 0.996,
+"edge": 0.004,
+"edge_after_fee": -0.0001,
+"size_shares": 34.48,
+"usd_at_size": 34.34
 },
 {
 "kind": "negrisk_all_yes",
@@ -189,6 +220,29 @@
 "edge_after_fee": -0.0425,
 "size_shares": 7.5,
 "usd_at_size": 7.41
+},
+{
+"kind": "negrisk_all_yes",
+"event": "Canada Annual Inflation 2026",
+"slug": "canada-annual-inflation-2026",
+"n": 8,
+"has_other": false,
+"outcomes": [
+"<1.0%",
+"1.0\u20131.4%",
+"1.5\u20131.9%",
+"2.0\u20132.4%",
+"2.5\u20132.9%",
+"4.0%+",
+"3.0-3.4%",
+"3.5-3.9%"
+],
+"cost": 0.992,
+"payoff": 1,
+"edge": 0.008,
+"edge_after_fee": -0.0429,
+"size_shares": 11.0,
+"usd_at_size": 10.91
 },
 {
 "kind": "ladder_num",
@@ -233,6 +287,27 @@
 "usd_at_size": 89.93
 },
 {
+"kind": "negrisk_all_yes",
+"event": "Where will 2026 rank among the hottest years on record?",
+"slug": "where-will-2026-rank-among-the-hottest-years-on-record",
+"n": 6,
+"has_other": false,
+"outcomes": [
+"1",
+"2",
+"3",
+"4",
+"5",
+"6 or lower"
+],
+"cost": 0.997,
+"payoff": 1,
+"edge": 0.003,
+"edge_after_fee": -0.0068,
+"size_shares": 12.01,
+"usd_at_size": 11.97
+},
+{
 "kind": "ladder_num",
 "event": "Printr FDV above ___ one day after launch?",
 "slug": "printr-fdv-above-one-day-after-launch",
@@ -261,36 +336,6 @@
 "edge_after_fee": 0.0066,
 "size_shares": 1.61,
 "usd_at_size": 1.59
-},
-{
-"kind": "ladder_num",
-"event": "Pacifica FDV above ___ one day after launch?",
-"slug": "pacifica-fdv-above-one-day-after-launch",
-"easy": "Pacifica FDV above $500M one day after launch?",
-"hard": "Pacifica FDV above $800M one day after launch?",
-"easy_yes_ask": 0.027,
-"hard_no_ask": 0.968,
-"hard_yes_bid": 0.032,
-"cost": 0.995,
-"edge": 0.005,
-"edge_after_fee": 0.001,
-"size_shares": 4.48,
-"usd_at_size": 4.46
-},
-{
-"kind": "ladder_num",
-"event": "Pacifica FDV above ___ one day after launch?",
-"slug": "pacifica-fdv-above-one-day-after-launch",
-"easy": "Pacifica FDV above $300M one day after launch?",
-"hard": "Pacifica FDV above $800M one day after launch?",
-"easy_yes_ask": 0.028,
-"hard_no_ask": 0.968,
-"hard_yes_bid": 0.032,
-"cost": 0.996,
-"edge": 0.004,
-"edge_after_fee": -0.0001,
-"size_shares": 4.48,
-"usd_at_size": 4.46
 }
 ]
 }
