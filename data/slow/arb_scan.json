@@ -1,23 +1,53 @@
 {
-"scanned": "2026-11-17 03:27",
+"scanned": "2026-11-17 04:27",
 "events": 2100,
 "groups": 2037,
 "books": 16806,
 "opps": [
 {
 "kind": "ladder_num",
+"event": "Unit FDV above ___ one day after launch?",
+"slug": "unit-fdv-above-one-day-after-launch",
+"easy": "Unit FDV above $1B one day after launch?",
+"hard": "Unit FDV above $1.5B one day after launch?",
+"easy_yes_ask": 0.15,
+"hard_no_ask": 0.84,
+"hard_yes_bid": 0.16,
+"cost": 0.99,
+"edge": 0.01,
+"edge_after_fee": -0.0083,
+"size_shares": 264.93,
+"usd_at_size": 262.28
+},
+{
+"kind": "ladder_num",
 "event": "Tori Finance FDV above ___ one day after launch?",
 "slug": "tori-finance-fdv-above-one-day-after-launch",
 "easy": "Tori FDV above $200M one day after launch?",
-"hard": "Tori FDV above $300M one day after launch?",
-"easy_yes_ask": 0.21,
-"hard_no_ask": 0.78,
-"hard_yes_bid": 0.22,
+"hard": "Tori FDV above $500M one day after launch?",
+"easy_yes_ask": 0.2,
+"hard_no_ask": 0.79,
+"hard_yes_bid": 0.21,
 "cost": 0.99,
 "edge": 0.01,
-"edge_after_fee": -0.0136,
-"size_shares": 86.72,
-"usd_at_size": 85.85
+"edge_after_fee": -0.0128,
+"size_shares": 97.1,
+"usd_at_size": 96.13
+},
+{
+"kind": "ladder_num",
+"event": "Makina FDV above ___ one day after launch?",
+"slug": "makina-fdv-above-one-day-after-launch",
+"easy": "Makina FDV above $80M one day after launch?",
+"hard": "Makina FDV above $100M one day after launch?",
+"easy_yes_ask": 0.053,
+"hard_no_ask": 0.942,
+"hard_yes_bid": 0.058,
+"cost": 0.995,
+"edge": 0.005,
+"edge_after_fee": -0.0023,
+"size_shares": 156.0,
+"usd_at_size": 155.22
 },
 {
 "kind": "ladder_date",
@@ -25,14 +55,14 @@
 "slug": "will-israel-annex-any-territory-by-december-31",
 "easy": "Will Israel annex any territory by December 31?",
 "hard": "Will Israel annex any territory by June 30?",
-"easy_yes_ask": 0.046,
+"easy_yes_ask": 0.048,
 "hard_no_ask": 0.9,
 "hard_yes_bid": 0.1,
-"cost": 0.946,
-"edge": 0.054,
-"edge_after_fee": 0.0446,
+"cost": 0.948,
+"edge": 0.052,
+"edge_after_fee": 0.0425,
 "size_shares": 12.5,
-"usd_at_size": 11.83
+"usd_at_size": 11.85
 },
 {
 "kind": "ladder_num",
@@ -78,21 +108,6 @@
 "edge_after_fee": -0.0003,
 "size_shares": 90.0,
 "usd_at_size": 89.73
-},
-{
-"kind": "ladder_num",
-"event": "Ethereal FDV above ___ one day after launch?",
-"slug": "ethereal-fdv-above-one-day-after-launch-774",
-"easy": "Ethereal FDV above $200M one day after launch?",
-"hard": "Ethereal FDV above $400M one day after launch?",
-"easy_yes_ask": 0.2,
-"hard_no_ask": 0.79,
-"hard_yes_bid": 0.21,
-"cost": 0.99,
-"edge": 0.01,
-"edge_after_fee": -0.0128,
-"size_shares": 19.18,
-"usd_at_size": 18.99
 },
 {
 "kind": "ladder_num",
@@ -152,21 +167,6 @@
 "usd_at_size": 34.34
 },
 {
-"kind": "ladder_num",
-"event": "What level will the Dubai Real Estate Index hit in 2026?",
-"slug": "what-level-will-the-dubai-real-estate-index-hit-in-2026",
-"easy": "Will the DFM Real Estate Index hit 14,000 in 2026?",
-"hard": "Will the DFM Real Estate Index hit 18,000 in 2026?",
-"easy_yes_ask": 0.015,
-"hard_no_ask": 0.982,
-"hard_yes_bid": 0.018,
-"cost": 0.997,
-"edge": 0.003,
-"edge_after_fee": 0.0007,
-"size_shares": 40.0,
-"usd_at_size": 39.88
-},
-{
 "kind": "negrisk_all_yes",
 "event": "OpenAI IPO Closing Market Cap",
 "slug": "openai-ipo-closing-market-cap-554",
@@ -187,21 +187,6 @@
 "edge_after_fee": -0.0425,
 "size_shares": 7.5,
 "usd_at_size": 7.41
-},
-{
-"kind": "ladder_date",
-"event": "Will Israel annex any territory by...?",
-"slug": "will-israel-annex-any-territory-by-december-31",
-"easy": "Will Israel annex any territory by December 31?",
-"hard": "Will Israel annex any territory by March 31?",
-"easy_yes_ask": 0.046,
-"hard_no_ask": 0.95,
-"hard_yes_bid": 0.05,
-"cost": 0.996,
-"edge": 0.004,
-"edge_after_fee": -0.0024,
-"size_shares": 20.0,
-"usd_at_size": 19.92
 },
 {
 "kind": "ladder_num",
@@ -232,6 +217,18 @@
 "edge_after_fee": -0.002,
 "size_shares": 7.22,
 "usd_at_size": 7.15
+},
+{
+"kind": "negrisk_all_no",
+"event": "Anthropic IPO Closing Market Cap",
+"slug": "anthropic-ipo-closing-market-cap-higher-strikes",
+"n": 10,
+"cost": 8.993,
+"payoff": 9,
+"edge": 0.007,
+"edge_after_fee": -0.0418,
+"size_shares": 10.0,
+"usd_at_size": 89.93
 },
 {
 "kind": "ladder_num",
