@@ -1,29 +1,9 @@
 {
-"scanned": "2026-11-17 20:34",
+"scanned": "2026-11-17 21:35",
 "events": 2100,
 "groups": 2037,
-"books": 16800,
+"books": 16784,
 "opps": [
-{
-"kind": "negrisk_all_yes",
-"event": "Maduro Prison Time?",
-"slug": "maduro-prison-time-527",
-"n": 5,
-"has_other": false,
-"outcomes": [
-"No prison time",
-"<20",
-"20\u201340",
-"40\u201360",
-"60+"
-],
-"cost": 0.953,
-"payoff": 1,
-"edge": 0.047,
-"edge_after_fee": 0.0115,
-"size_shares": 42.79,
-"usd_at_size": 40.78
-},
 {
 "kind": "ladder_num",
 "event": "Base FDV above ___ one day after launch?",
@@ -40,21 +20,6 @@
 "usd_at_size": 58.8
 },
 {
-"kind": "ladder_date",
-"event": "Will Israel annex any territory by...?",
-"slug": "will-israel-annex-any-territory-by-december-31",
-"easy": "Will Israel annex any territory by December 31?",
-"hard": "Will Israel annex any territory by June 30?",
-"easy_yes_ask": 0.028,
-"hard_no_ask": 0.9,
-"hard_yes_bid": 0.1,
-"cost": 0.928,
-"edge": 0.072,
-"edge_after_fee": 0.0638,
-"size_shares": 12.5,
-"usd_at_size": 11.6
-},
-{
 "kind": "ladder_num",
 "event": "Hyperbeat FDV above ___ one day after launch?",
 "slug": "hyperbeat-fdv-above-one-day-after-launch",
@@ -66,8 +31,23 @@
 "cost": 0.996,
 "edge": 0.004,
 "edge_after_fee": 0.0015,
-"size_shares": 221.25,
-"usd_at_size": 220.37
+"size_shares": 220.31,
+"usd_at_size": 219.43
+},
+{
+"kind": "ladder_date",
+"event": "Will Israel annex any territory by...?",
+"slug": "will-israel-annex-any-territory-by-december-31",
+"easy": "Will Israel annex any territory by December 31?",
+"hard": "Will Israel annex any territory by June 30?",
+"easy_yes_ask": 0.04,
+"hard_no_ask": 0.9,
+"hard_yes_bid": 0.1,
+"cost": 0.94,
+"edge": 0.06,
+"edge_after_fee": 0.051,
+"size_shares": 12.5,
+"usd_at_size": 11.75
 },
 {
 "kind": "ladder_num",
@@ -85,19 +65,69 @@
 "usd_at_size": 149.55
 },
 {
+"kind": "negrisk_all_yes",
+"event": "Maduro Prison Time?",
+"slug": "maduro-prison-time-527",
+"n": 5,
+"has_other": false,
+"outcomes": [
+"No prison time",
+"<20",
+"20\u201340",
+"40\u201360",
+"60+"
+],
+"cost": 0.958,
+"payoff": 1,
+"edge": 0.042,
+"edge_after_fee": 0.0062,
+"size_shares": 10.0,
+"usd_at_size": 9.58
+},
+{
+"kind": "ladder_num",
+"event": "Tori Finance FDV above ___ one day after launch?",
+"slug": "tori-finance-fdv-above-one-day-after-launch",
+"easy": "Tori FDV above $200M one day after launch?",
+"hard": "Tori FDV above $500M one day after launch?",
+"easy_yes_ask": 0.21,
+"hard_no_ask": 0.78,
+"hard_yes_bid": 0.22,
+"cost": 0.99,
+"edge": 0.01,
+"edge_after_fee": -0.0136,
+"size_shares": 41.54,
+"usd_at_size": 41.12
+},
+{
+"kind": "ladder_num",
+"event": "Saturn FDV above ___ one day after launch?",
+"slug": "saturn-fdv-above-one-day-after-launch-20260623191408697",
+"easy": "Saturn FDV above $300M one day after launch",
+"hard": "Saturn FDV above $400M one day after launch",
+"easy_yes_ask": 0.039,
+"hard_no_ask": 0.956,
+"hard_yes_bid": 0.044,
+"cost": 0.995,
+"edge": 0.005,
+"edge_after_fee": -0.0006,
+"size_shares": 60.0,
+"usd_at_size": 59.7
+},
+{
 "kind": "ladder_date",
 "event": "Will Israel annex any territory by...?",
 "slug": "will-israel-annex-any-territory-by-december-31",
 "easy": "Will Israel annex any territory by December 31?",
 "hard": "Will Israel annex any territory by March 31?",
-"easy_yes_ask": 0.028,
+"easy_yes_ask": 0.04,
 "hard_no_ask": 0.95,
 "hard_yes_bid": 0.05,
-"cost": 0.978,
-"edge": 0.022,
-"edge_after_fee": 0.0168,
+"cost": 0.99,
+"edge": 0.01,
+"edge_after_fee": 0.004,
 "size_shares": 20.0,
-"usd_at_size": 19.56
+"usd_at_size": 19.8
 },
 {
 "kind": "negrisk_all_yes",
@@ -136,21 +166,6 @@
 "usd_at_size": 29.45
 },
 {
-"kind": "ladder_num",
-"event": "Saturn FDV above ___ one day after launch?",
-"slug": "saturn-fdv-above-one-day-after-launch-20260623191408697",
-"easy": "Saturn FDV above $300M one day after launch",
-"hard": "Saturn FDV above $400M one day after launch",
-"easy_yes_ask": 0.039,
-"hard_no_ask": 0.952,
-"hard_yes_bid": 0.048,
-"cost": 0.991,
-"edge": 0.009,
-"edge_after_fee": 0.0032,
-"size_shares": 14.21,
-"usd_at_size": 14.08
-},
-{
 "kind": "negrisk_all_yes",
 "event": "OpenAI IPO Closing Market Cap",
 "slug": "openai-ipo-closing-market-cap-554",
@@ -179,13 +194,13 @@
 "easy": "Printr FDV above $500M one day after launch?",
 "hard": "Printr FDV above $1B one day after launch?",
 "easy_yes_ask": 0.049,
-"hard_no_ask": 0.937,
-"hard_yes_bid": 0.063,
-"cost": 0.986,
-"edge": 0.014,
-"edge_after_fee": 0.0066,
+"hard_no_ask": 0.934,
+"hard_yes_bid": 0.066,
+"cost": 0.983,
+"edge": 0.017,
+"edge_after_fee": 0.0094,
 "size_shares": 1.61,
-"usd_at_size": 1.59
+"usd_at_size": 1.58
 },
 {
 "kind": "ladder_num",
