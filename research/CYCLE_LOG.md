@@ -694,3 +694,23 @@
   Tracebacks only the old pilot-log (2) / script-log (1); no MemoryErrors. Pilot STOP, no orders. (Local main had diverged again - reset.)
 - Next: first 'late' arm positions (run #23); N58 first settlements; lock_x week mark 11-19; LP-1 5-day + forward_core read 11-19; options
   N42 11-19; N21 11-21; N63 calendars; N61 history; N67 history; N45 11-30.
+
+## 11-17 21:00-21:35 UTC cycle 32 (scheduled)
+- Read-outs (fast trades.jsonl, last settled 20:25): lock_x 32 trades / 28 end-times +6.4% (unchanged; needs 30 end-times, week mark 11-19),
+  lock_x50 +9.5%, lock_p_majors 26 / 24 +5.2%; lock_m 265 -2.7%, lock_b 97 +0.5%, lock_p_z2 320 -1.2%. N21 forward BTC/ETH 115 windows / 105
+  won -3.2% (4 days, below +2%; read 11-21), alts 118 / 103 -5.1%. Slow (20:30-20:34): converge 14 / 13 -$10, 82 open mark -$37; young 62 / 28
+  -$182 (57 open); options 85 settled +$178, 48 open, N42 forward tails 2 / 0 -9.8 pts, rest 7 / 6 +12.3 (4 events, unchanged); box office
+  9 / 8 -$0.96; charts 2 / 2 +$3.35, 1 open; mention 2 / 1 -$8.74, 3 open. LP-1 v2 93 runs / 3.44 d: formula $1,844 (upper bound), trading
+  -$490, pessimistic -$756; 83 settled, 68 open leftovers (guard OK), 4 quoted; forward_core 55 markets $320 vs +$38 / -$11 (-3% of formula,
+  passing; formal read 11-19); forward_other 76 markets $667 vs -$69 / -$289 (N35 failing). COPY-1 78.6 h: sharp 56 primaries settled /
+  37 events +4.2 pts (+3.5 at 5 min later; n far below the 300 / 100 bar), control 57 / 26 +0.7. N58 launch tracker (20:54, end of run #23):
+  6 open (3 first, 3 retry), 0 settled, open_past_end 0; the late arm looked at 20 markets in its first 4 h, 0 bought (16 ask outside
+  0.05-0.90, 4 spread > 10c) - not a bug (it saw candidates), just a tight band.
+- Test (adjacent N72, culture_endno.py, local, 12-week tape, rules fixed before looking): culture ex-mention NO 1-48 h before the end,
+  follower >= 300 s: -0.2 pts [-1.7, +1.4] on 289 events, halves +0.4 / -0.8, YES placebo -0.7 -> DEAD. The fan YES premium is a launch-time
+  effect only; the late end of the market is calibrated.
+- New (outside the box N73): esports pre-match winners vs sharp esports lines -> READY (one Actions snapshot decides if there is volume).
+- Health: fast paper 20:30, slow 20:34, follow 20:54 (< 70 min; run #24 took over), boosts 20:31, MM v2 21:01, books 21:00, rewards 20:48 -
+  OK. Tracebacks only the old pilot-log (2) / script-log (1); no MemoryErrors. Pilot STOP, no orders.
+- Next: lock_x week mark 11-19 (needs 30 end-times and >= +5%); LP-1 5-day + forward_core read 11-19; options N42 11-19; N58 first
+  settlements (positions from 11-17 01 UTC end >= 11-18); N21 11-21; N73 snapshot; N63 calendars; N61 history; N67 history; N45 11-30.

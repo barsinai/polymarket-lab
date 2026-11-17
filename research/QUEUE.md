@@ -805,3 +805,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - N70 culture launch-hour NO at 0.90-0.98 DEAD (-0.5 pts [-2.1, +1.0], 374 events; control band +8.7) -> tracker cap stays. N71 Pokemon
   price Over/Under DEAD by count (Under +22.6 pts but 2 end dates). Late arm live only since 16:53 (old run held the old code).
   Next: lock_x 11-19, LP-1 forward_core 11-19, N21 11-21, N58 settlements, N63, N61.
+
+## 11-17 21:35 cycle 32
+- N72 culture ex-mention NO in the last 48 h DEAD: -0.2 pts [-1.7, +1.4], 289 events, halves +0.4 / -0.8, YES placebo -0.7 (the fan premium
+  lives only at launch). N73 esports vs sharp lines READY. COPY-1 sharp +4.2 pts on 37 events (far from the 100-event bar).
+  Next: lock_x 11-19, LP-1 forward_core 11-19, options N42 11-19, N58 settlements, N21 11-21, N73 snapshot.

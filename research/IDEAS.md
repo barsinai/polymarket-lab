@@ -25,6 +25,15 @@ Status: TESTING (paper/backtest running) · READY (next up) · PARKED (needs som
 | Research journal (my forecasts with sources) | reading + cross-checking beats the crowd on slow political/econ questions | forecast_log.py, Brier vs market | 11-10 | weeks |
 
 ## READY (ranked)
+N73. **(outside the box, 11-17 c32) Esports match markets vs sharp esports lines.** Polymarket now lists many CS2 / LoL / Dota 2 /
+   Valorant match winners; Pinnacle-style books price the same matches with deep limits. Why the crowd could be wrong: esports books on
+   Polymarket are thin and fan-driven (team loyalty, regional fans, lesson 17 says fans over-price their side), and our sports compare
+   covers only NBA / NHL, so nobody we know of arbitrages tier-2 matches. Exposed to 1 (live in-match bots: PRE-MATCH only), 13 (the sharp
+   line is public), 9 (we bring no model, only the deeper market), 5 (one tournament = correlated teams). Cheapest decisive test: one
+   sharp_compare-style snapshot (Actions) of pre-match esports moneylines vs Polymarket asks: how many matches a day, how many with
+   no-vig fair - ask > fee + 2c; only if >= 10 / day, a paper arm in sharp_compare.py.
+N72. -> tested 11-17 (cycle 32), DEAD (see DEAD). **(adjacent to N58 / N68) Culture ex-mention NO in the last 48 h before the end.**
+   N68's placebo said fans over-price YES after listing; do they again near the release / show day? Exposed to 1, 2, 11/15, 24.
 N71. -> tested 11-17 (cycle 31), DEAD by count (see DEAD). **(outside the box) Collectible price Over/Under markets (Pokemon sealed
    product / single-card prices, strike ~ the price at listing, resolve ~1 month later on a public price tracker).** Why the crowd could be
    wrong: collectors buy 'Over' on what they love while new-set product usually drifts down. Exposed to 6 (one date = one bet), 5, 13.
@@ -325,6 +334,11 @@ OLD N2. **(outside the box, 11-12) Box-office opening-weekend markets vs Thursda
 - Kalshi vs Polymarket automatic pairing (titles do not match; manual for named series only).
 
 ## DEAD (number that killed it)
+- N72 culture ex-mention NO 1-48 h before the end (11-17 c32, culture_endno.py, 12-week tape, rules fixed before looking, market age >= 24 h,
+  lives >= 72 h, follower >= 300 s at the next print 0.05-0.90, first fill per market): -0.2 pts [-1.7, +1.4] on 289 events; halves +0.4 /
+  -0.8; 1-12 h -7.9 (35 events), 12-48 h +0.2; movies -5.0 [-8.1, -2.3], pop-culture +1.9 [0.0, 4.3] (one category of five, found by
+  looking: not a lead). YES placebo -0.7 [-2.1, +0.6] -> by the last two days culture books are calibrated; the fan YES premium is a
+  launch-time effect (N58 / N68 decay curve) and the end of the market does not bring it back.
 - N70 culture launch-hour NO at 0.90-0.98 (11-17 c31, culture_highno.py, 12-week tape, rules fixed before looking, follower >= 300 s, first
   fill per market < 1 h after listing): -0.5 pts [-2.1, +1.0] on 374 events (win 94.4% at avg 0.947); halves -1.0 / +0.0; ex-mention -1.0;
   0.90-0.95 +1.0 [-1.8, +3.5], 0.95-0.98 -1.2. Control (tracker band 0.05-0.90) reproduces +8.7 [6.4, 11.1] on 540 events. Fans over-price
