@@ -783,3 +783,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - lock_p CLOSED at its week mark (+2.2% on 47 end-times < +5%). N62 late-added outcomes (non-culture launch-hour NO) DEAD: -2.3 pts
   [-9.0, +3.9], 131 events, halves +3.4 / -13.5; culture late-adds +11.0 (inside N58). N63 slot-only events READY.
   Next: launch tracker first report ~03 UTC, LP-1 forward_core 3-day mark, lock_x 11-19, N63 calendars.
+
+## 11-17 05:40 cycle 28
+- N64 wide-event launch-hour NO outside culture: +1.04 pts [-0.2, +2.3], 362 events, halves +1.9 / +0.2 -> passes the letter by 0.04, PARKED
+  (lesson 24). N58 is not structural: culture singles +16.6, wide +4.2. N65 catch-all 'Other' YES DEAD (20 events, -1.2). Launch tracker live
+  (3 positions in 3 h). Next: first N58 settlements, LP-1 forward_core 3-day mark ~21 UTC, lock_x 11-19, N63 calendars, N61 history.

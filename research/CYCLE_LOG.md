@@ -605,3 +605,25 @@
   script-log (1); no MemoryErrors. Pilot STOP, no orders.
 - Next: data/launch/report.json after ~03 UTC with candidates > 0 (and the '< 24 h old' counter); LP-1 forward_core 3-day mark ~21 UTC;
   lock_x week mark 11-19; charts first entries ~05 UTC; N63 calendars + test; N61 history; N21 11-21; options N42 11-19; N45 11-30.
+
+## 11-17 05:00-05:45 UTC cycle 28 (scheduled)
+- Read-outs (fast trades.jsonl, last 04:23): lock_x 28 / 28 settled +6.8% (24 end-times, needs 30+, week mark 11-19), lock_p_majors 23 +5.3%;
+  lock_m 249 -3.3%, lock_b 84 -0.2%, lock_p_z2 293 -2.0% (lock_p closed last cycle, now 54 +2.3%). N21 forward BTC/ETH 98 windows / 90 won
+  -3.0% (4 days, below +2%; read 11-21), alts 91 / 77 -7.3%. Slow (04:35-04:37): converge 14 / 13 -$10, 81 open mark -$31; young 59 / 27 -$169
+  (49 open); options N42 forward tails 1 / 0 -14 pts, rest 2 / 2 +20.5 (unchanged), 54 open; box office 9 / 8 -$0.96 (no new weekend);
+  charts 2 / 2 +$3.35, 0 chart events at 04:36 (first entries expected ~05 UTC); mention 1 / 0 -$10, 4 open. LP-1 v2 76 runs / 2.77 d:
+  formula $1,723 (upper bound), trading -$514, pessimistic -$729; settled 69, 68 open leftovers (guard OK); only 5 markets still quoted;
+  forward_core 47 markets $223 vs +$18 / -$38 (-17% of formula, passing; 3-day mark ~21 UTC); forward_other 64 markets $559 vs -$76 / -$304
+  (N35 failing). COPY-1 61.9 h: sharp 29 primaries settled / 19 events +3.5 pts (unchanged), 147 primaries.
+- N58 launch tracker: first report is there (data/launch/report.json 04:15): 3 h, 72 polls, 129 new listings, 3 paper positions, 0 settled;
+  skips 86 'not accepting orders' (placeholder 'Person A..L' outcomes), 29 no NO ask, 7 spread > 10c, 4 ask outside band. Candidates > 0: no bug.
+  (The empty logs/launch-log.txt is expected - the tracker prints only on errors.)
+- Test (local, 12-week tape, wide_other_census.py, rules fixed before looking):
+  - adjacent N64 wide-event launch-hour NO outside culture: +1.04 pts [-0.2, +2.3] on 362 events; halves +1.9 / +0.2. Passes the letter by
+    0.04 pt; lesson 24 -> PARKED, not built. N58 diagnostic: culture edge is in single / narrow events (+16.6 / +7.5), wide +4.2 -> fans, not
+    overround.
+  - outside the box N65 catch-all 'Other' YES 6-168 h: -1.2 pts [-17.8, +20.6] on 20 events -> DEAD (< 30); the regex mostly catches titles.
+- Health: fast paper 04:24, slow 04:39, follow 04:16 (report 04:09, chain job running to ~06:20), boosts 04:00, MM v2 04:31, books 05:00 - OK.
+  Tracebacks only the old pilot-log (2) / script-log (1); no MemoryErrors. Pilot STOP, no orders.
+- Next: N58 first settlements (positions need >= 24 h); LP-1 forward_core 3-day mark ~21 UTC; lock_x week mark 11-19; charts entries; N63
+  calendars + test; N61 history; N21 11-21; options N42 11-19; N45 11-30.
