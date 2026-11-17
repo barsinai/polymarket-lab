@@ -1,38 +1,23 @@
 {
-"scanned": "2026-11-17 14:44",
+"scanned": "2026-11-17 15:34",
 "events": 2100,
 "groups": 2037,
 "books": 16790,
 "opps": [
 {
-"kind": "ladder_num",
-"event": "Unit FDV above ___ one day after launch?",
-"slug": "unit-fdv-above-one-day-after-launch",
-"easy": "Unit FDV above $1B one day after launch?",
-"hard": "Unit FDV above $1.5B one day after launch?",
-"easy_yes_ask": 0.12,
-"hard_no_ask": 0.87,
-"hard_yes_bid": 0.13,
+"kind": "ladder_date",
+"event": "Will Fhenix launch a token by ___?",
+"slug": "will-fhenix-launch-a-token-by",
+"easy": "Will Fhenix launch a token by September 30, 2027?",
+"hard": "Will Fhenix launch a token by June 30, 2027?",
+"easy_yes_ask": 0.55,
+"hard_no_ask": 0.44,
+"hard_yes_bid": 0.56,
 "cost": 0.99,
 "edge": 0.01,
-"edge_after_fee": -0.0053,
-"size_shares": 143.48,
-"usd_at_size": 142.05
-},
-{
-"kind": "ladder_num",
-"event": "Highest Kimi score on Humanity\u2019s Last Exam in 2026?",
-"slug": "highest-kimi-score-on-humanitys-last-exam-in-2026-20260723191206820",
-"easy": "Will the highest score achieved by a Moonshot Kimi model on Humanity\u2019s Last Exam in 2026 be 50% or higher?",
-"hard": "Will the highest score achieved by a Moonshot Kimi model on Humanity\u2019s Last Exam in 2026 be 55% or higher?",
-"easy_yes_ask": 0.09,
-"hard_no_ask": 0.9,
-"hard_yes_bid": 0.1,
-"cost": 0.99,
-"edge": 0.01,
-"edge_after_fee": -0.002,
-"size_shares": 111.11,
-"usd_at_size": 110.0
+"edge_after_fee": -0.0246,
+"size_shares": 235.3,
+"usd_at_size": 232.95
 },
 {
 "kind": "ladder_num",
@@ -55,14 +40,14 @@
 "slug": "will-israel-annex-any-territory-by-december-31",
 "easy": "Will Israel annex any territory by December 31?",
 "hard": "Will Israel annex any territory by June 30?",
-"easy_yes_ask": 0.026,
+"easy_yes_ask": 0.044,
 "hard_no_ask": 0.9,
 "hard_yes_bid": 0.1,
-"cost": 0.926,
-"edge": 0.074,
-"edge_after_fee": 0.0659,
-"size_shares": 9.14,
-"usd_at_size": 8.46
+"cost": 0.944,
+"edge": 0.056,
+"edge_after_fee": 0.0468,
+"size_shares": 12.5,
+"usd_at_size": 11.8
 },
 {
 "kind": "ladder_date",
@@ -78,21 +63,6 @@
 "edge_after_fee": -0.0246,
 "size_shares": 61.77,
 "usd_at_size": 61.15
-},
-{
-"kind": "ladder_date",
-"event": "Will Fhenix launch a token by ___?",
-"slug": "will-fhenix-launch-a-token-by",
-"easy": "Will Fhenix launch a token by September 30, 2027?",
-"hard": "Will Fhenix launch a token by June 30, 2027?",
-"easy_yes_ask": 0.55,
-"hard_no_ask": 0.44,
-"hard_yes_bid": 0.56,
-"cost": 0.99,
-"edge": 0.01,
-"edge_after_fee": -0.0246,
-"size_shares": 60.0,
-"usd_at_size": 59.4
 },
 {
 "kind": "negrisk_all_yes",
@@ -183,41 +153,16 @@
 "usd_at_size": 21.49
 },
 {
-"kind": "negrisk_all_yes",
-"event": "Japan 10Y Bond Yield: End of 2026",
-"slug": "japan-10y-bond-yield-end-of-2026",
-"n": 7,
-"has_other": false,
-"outcomes": [
-"<2.0%",
-"2.0-2.2%",
-"2.2-2.4%",
-"2.4-2.6%",
-"2.6-2.8%",
-"2.8-3.0%",
-"3.0%+"
-],
-"cost": 0.961,
-"payoff": 1,
-"edge": 0.039,
-"edge_after_fee": -0.0136,
-"size_shares": 5.8,
-"usd_at_size": 5.57
-},
-{
-"kind": "ladder_date",
-"event": "Will Israel annex any territory by...?",
-"slug": "will-israel-annex-any-territory-by-december-31",
-"easy": "Will Israel annex any territory by December 31?",
-"hard": "Will Israel annex any territory by March 31?",
-"easy_yes_ask": 0.026,
-"hard_no_ask": 0.95,
-"hard_yes_bid": 0.05,
-"cost": 0.976,
-"edge": 0.024,
-"edge_after_fee": 0.0189,
-"size_shares": 9.14,
-"usd_at_size": 8.92
+"kind": "negrisk_all_no",
+"event": "Anthropic IPO Closing Market Cap",
+"slug": "anthropic-ipo-closing-market-cap-higher-strikes",
+"n": 10,
+"cost": 8.984,
+"payoff": 9,
+"edge": 0.016,
+"edge_after_fee": -0.0342,
+"size_shares": 10.0,
+"usd_at_size": 89.84
 },
 {
 "kind": "ladder_num",
@@ -235,6 +180,46 @@
 "usd_at_size": 29.45
 },
 {
+"kind": "ladder_date",
+"event": "Will Israel annex any territory by...?",
+"slug": "will-israel-annex-any-territory-by-december-31",
+"easy": "Will Israel annex any territory by December 31?",
+"hard": "Will Israel annex any territory by March 31?",
+"easy_yes_ask": 0.044,
+"hard_no_ask": 0.95,
+"hard_yes_bid": 0.05,
+"cost": 0.994,
+"edge": 0.006,
+"edge_after_fee": -0.0003,
+"size_shares": 20.0,
+"usd_at_size": 19.88
+},
+{
+"kind": "negrisk_all_yes",
+"event": "South Africa Annual Inflation 2026",
+"slug": "south-africa-annual-inflation-2026",
+"n": 10,
+"has_other": false,
+"outcomes": [
+"<2.6%",
+"2.6-2.9%",
+"2.9-3.2%",
+"3.2-3.5%",
+"3.5-3.8%",
+"3.8-4.1%",
+"4.1-4.4%",
+"4.4-4.7%",
+"4.7-5.0%",
+">5.0%"
+],
+"cost": 0.995,
+"payoff": 1,
+"edge": 0.005,
+"edge_after_fee": -0.0417,
+"size_shares": 20.0,
+"usd_at_size": 19.9
+},
+{
 "kind": "negrisk_all_yes",
 "event": "What will OpenAI's IPO valuation be?",
 "slug": "what-will-openais-ipo-valuation-be",
@@ -250,24 +235,12 @@
 "$2.25T\u2013$2.5T",
 "$2.5T+"
 ],
-"cost": 0.993,
+"cost": 0.991,
 "payoff": 1,
-"edge": 0.007,
-"edge_after_fee": -0.0501,
+"edge": 0.009,
+"edge_after_fee": -0.048,
 "size_shares": 7.66,
-"usd_at_size": 7.61
-},
-{
-"kind": "negrisk_all_no",
-"event": "Anthropic IPO Closing Market Cap",
-"slug": "anthropic-ipo-closing-market-cap-higher-strikes",
-"n": 10,
-"cost": 8.995,
-"payoff": 9,
-"edge": 0.005,
-"edge_after_fee": -0.0449,
-"size_shares": 10.0,
-"usd_at_size": 89.95
+"usd_at_size": 7.59
 },
 {
 "kind": "ladder_num",
