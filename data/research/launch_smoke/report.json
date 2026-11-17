@@ -1,7 +1,8 @@
 {
- "updated": "2026-11-16 21:18",
+ "updated": "2026-11-17 09:31",
  "started": "2026-11-16 21:12",
- "days": 0.0,
+ "days": 0.51,
+ "note": "tape base rate ~75 culture markets launch a day (~3 an hour): 0 candidates over a day is a bug, not a result",
  "rule": "new culture listing < 60 min old, lives >= 24 h, NO ask 0.05-0.90, NO spread <= 10c: $10 at the NO ask, fee paid; one per market",
  "decision": "kill if <= +1 pt or event CI low < -1 after 100 markets / 40 events; promote only after 300 / 100 / 3 weeks",
  "positions": 0,
@@ -17,10 +18,22 @@
  "non_mention": {
   "n": 0
  },
+ "N58 first look (decision arm)": {
+  "n": 0
+ },
+ "N66 retry (transient skip, < 60 min)": {
+  "n": 0
+ },
+ "N66 activated placeholder (late-add)": {
+  "n": 0
+ },
+ "open_by_kind": {},
+ "watching": {},
  "candidates": {},
  "candidate_age_min_median": null,
  "this_run": {
-  "events listed": 532,
+  "events listed": 540,
+  "seen once: markets < 24 h old (lesson 10 check)": 183,
   "polls": 4
  }
 }
