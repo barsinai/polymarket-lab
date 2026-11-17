@@ -788,3 +788,9 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - N64 wide-event launch-hour NO outside culture: +1.04 pts [-0.2, +2.3], 362 events, halves +1.9 / +0.2 -> passes the letter by 0.04, PARKED
   (lesson 24). N58 is not structural: culture singles +16.6, wide +4.2. N65 catch-all 'Other' YES DEAD (20 events, -1.2). Launch tracker live
   (3 positions in 3 h). Next: first N58 settlements, LP-1 forward_core 3-day mark ~21 UTC, lock_x 11-19, N63 calendars, N61 history.
+
+## 11-17 09:40 cycle 29
+- N66 culture late-adds PASS on the tape (+11.0 pts [5.1, 16.5], 118 events, halves +9.9 / +11.7, ex-mention +9.7, top event 11%);
+  launch_paper.py now re-reads transient skips (< 60 min) and watches 'not accepting orders' placeholders until they open (new arms
+  'retry' / 'activated', live from the next follow hand-over ~13:30 UTC). N67 token-launch FDV ladders vs pre-launch perps READY.
+  Next: smoke run of the new tracker, first N58 settlements, LP-1 forward_core 3-day mark ~21 UTC, lock_x 11-19, N63 calendars, N61 history.

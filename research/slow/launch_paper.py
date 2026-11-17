@@ -112,7 +112,7 @@ def book(token):
 
 os.makedirs(D, exist_ok=True)
 st = load(STATE, {})
-seen = set(st.get("seen", [])); started = st.get("started") or int(time.time())
+watch = st.get("watch", {}); seen = set(st.get("seen", [])); started = st.get("started") or int(time.time())
 pos = {}
 for f in sorted(glob.glob(f"{D}/pos-*.jsonl")):
     for l in open(f):
@@ -128,7 +128,53 @@ for f in sorted(glob.glob(f"{D}/upd-*.jsonl")):
             pass
 
 
+TRANSIENT = {"not accepting orders", "no NO ask", "ask outside 0.05-0.90", "spread > 10c"}
+WATCH_DAYS = 14
+
+
+def evaluate(m, ev, tag, now, L, kind):
+    """One look at a market: log the candidate, paper-buy if the rule passes. Returns the skip reason (None = bought)."""
+    mid = str(m.get("id"))
+    c = {"mid": mid, "t": int(now), "age_s": int(now - L), "tag": tag, "cat": CAT.get(tag, "culture-other"), "ev": ev,
+         "q": (m.get("question") or "")[:100], "end": ts(m.get("endDate")), "kind": kind}
+    outs = [str(o).lower() for o in jl(m.get("outcomes"))]; tok = jl(m.get("clobTokenIds"))
+    why = None
+    if outs != ["yes", "no"] or len(tok) != 2:
+        why = "not a yes/no market"
+    elif not c["end"] or c["end"] - L < 86400:
+        why = "lives < 24 h"
+    elif c["end"] - now < 3600:
+        why = "ends in < 1 h"
+    elif m.get("closed") or m.get("acceptingOrders") is False:
+        why = "not accepting orders"
+    b = None if why else book(tok[1])
+    if not why and (not b or b["ask"] is None):
+        why = "no NO ask"
+    if b:
+        c.update(ask=b["ask"], bid=b["bid"], ask_sz=b["ask_sz"])
+    if not why and not (0.05 <= b["ask"] <= 0.90):
+        why = "ask outside 0.05-0.90"
+    if not why and (b["bid"] is None or b["ask"] - b["bid"] > 0.10 + 1e-9):
+        why = "spread > 10c"
+    c["skip"] = why
+    # log every first look, and a re-look only when it buys (keeps cand-*.jsonl comparable with the first 7 h)
+    if kind == "first" or not why:
+        append("cand", c)
+    stats[f"skip ({kind}): " + (why or "none, bought")] += 1
+    if why:
+        return why
+    fr = fee_rate(m); a = b["ask"]; sh = round(STAKE / a, 4)
+    p = dict(c, a=a, sh=sh, fee_rate=fr, fee=round(fr * a * (1 - a) * sh, 4), tok=tok[1])
+    pos[mid] = p; append("pos", p); stats[f"paper positions ({kind})"] += 1
+    return None
+
+
 def scan():
+    """N58 first look (decision arm, unchanged) + N66 (cycle 29): transient skips are looked at again.
+    'retry': a skip for a transient reason (no NO ask, ask outside band, spread) is re-read every poll while L < 60 min ago.
+    'activated': a 'not accepting orders' placeholder ('Person A..L') is watched up to 14 d; when it opens it is a culture LATE-ADD
+    (tape, cycle 29: +11.0 pts [5.1, 16.5], 118 events, halves +9.9 / +11.7) and L = the time it opened (first seen open).
+    Arms are reported separately; the N58 decision uses the 'first' arm only."""
     now = time.time()
     for tag in TAGS:
         evs = get(f"{G}/events", {"tag_slug": tag, "closed": "false", "order": "createdAt", "ascending": "false", "limit": 25}) or []
@@ -136,47 +182,59 @@ def scan():
         for e in evs:
             for m in e.get("markets") or []:
                 mid = str(m.get("id"))
-                if mid in seen:
+                if mid in seen or mid in pos:
                     continue
                 L = ts(m.get("acceptingOrdersTimestamp")) or ts(m.get("createdAt"))
                 if L is None:
                     continue
+                w = watch.get(mid)
+                if w and w["why"] == "not accepting orders":
+                    continue                         # placeholders are re-read by id in recheck()
                 age = now - L
-                if age < 86400:
+                if not w and age < 86400:
                     stats["seen once: markets < 24 h old (lesson 10 check)"] += 1
                 if age > 3600:                       # old market: never a candidate, remember it so we do not look again
-                    seen.add(mid); continue
+                    seen.add(mid); watch.pop(mid, None); continue
                 if age < 0:
                     continue                         # not open yet; look again next poll
-                seen.add(mid); stats["new listings"] += 1
-                c = {"mid": mid, "t": int(now), "age_s": int(age), "tag": tag, "cat": CAT.get(tag, "culture-other"), "ev": e.get("slug"),
-                     "q": (m.get("question") or "")[:100], "end": ts(m.get("endDate"))}
-                outs = [str(o).lower() for o in jl(m.get("outcomes"))]; tok = jl(m.get("clobTokenIds"))
-                why = None
-                if outs != ["yes", "no"] or len(tok) != 2:
-                    why = "not a yes/no market"
-                elif not c["end"] or c["end"] - L < 86400:
-                    why = "lives < 24 h"
-                elif c["end"] - now < 3600:
-                    why = "ends in < 1 h"
-                elif m.get("closed") or m.get("acceptingOrders") is False:
-                    why = "not accepting orders"
-                b = None if why else book(tok[1])
-                if not why and (not b or b["ask"] is None):
-                    why = "no NO ask"
-                if b:
-                    c.update(ask=b["ask"], bid=b["bid"], ask_sz=b["ask_sz"])
-                if not why and not (0.05 <= b["ask"] <= 0.90):
-                    why = "ask outside 0.05-0.90"
-                if not why and (b["bid"] is None or b["ask"] - b["bid"] > 0.10 + 1e-9):
-                    why = "spread > 10c"
-                c["skip"] = why
-                append("cand", c); stats["skip: " + (why or "none, bought")] += 1
-                if why:
-                    continue
-                fr = fee_rate(m); a = b["ask"]; sh = round(STAKE / a, 4)
-                p = dict(c, a=a, sh=sh, fee_rate=fr, fee=round(fr * a * (1 - a) * sh, 4), tok=tok[1])
-                pos[mid] = p; append("pos", p); stats["paper positions"] += 1
+                if not w:
+                    stats["new listings"] += 1
+                why = evaluate(m, e.get("slug"), tag, now, L, "retry" if w else "first")
+                if why in TRANSIENT:
+                    watch[mid] = {"why": why, "first": int(w["first"] if w else now), "ev": e.get("slug"), "tag": tag,
+                                  "L": int(L), "open_seen": None}
+                else:
+                    seen.add(mid); watch.pop(mid, None)
+
+
+def recheck():
+    """Re-read watched placeholders by id (their event may have dropped out of the newest-25 listing)."""
+    now = time.time()
+    ids = [k for k, w in watch.items() if w["why"] == "not accepting orders"]
+    for k in ids:
+        if now - watch[k]["first"] > WATCH_DAYS * 86400:
+            watch.pop(k); seen.add(k); stats["watch expired"] += 1
+    ids = [k for k in ids if k in watch]
+    for i in range(0, len(ids), 40):
+        d = get(f"{G}/markets", [("id", x) for x in ids[i:i + 40]] + [("limit", 100)])
+        for m in d or []:
+            mid = str(m.get("id")); w = watch.get(mid)
+            if not w or mid in pos:
+                continue
+            if m.get("closed"):
+                watch.pop(mid); seen.add(mid); continue
+            if m.get("acceptingOrders") is False:
+                continue
+            if not w.get("open_seen"):
+                ao = ts(m.get("acceptingOrdersTimestamp"))
+                w["open_seen"] = int(ao) if ao and ao > w["first"] else int(now)
+                stats["placeholders opened"] += 1
+            L = w["open_seen"]
+            if now - L > 3600:
+                watch.pop(mid); seen.add(mid); continue
+            why = evaluate(m, w["ev"], w["tag"], now, L, "activated")
+            if why not in TRANSIENT or why == "not accepting orders":
+                watch.pop(mid); seen.add(mid)
 
 
 def settle():
@@ -233,15 +291,22 @@ def report():
            "open_past_end": sum(1 for p in P if not p.get("res") and p.get("end") and p["end"] < now - 3600),
            "all": boot(done), "mention": boot([p for p in done if p["cat"] == "mention"]),
            "non_mention": boot([p for p in done if p["cat"] != "mention"]),
+           "N58 first look (decision arm)": boot([p for p in done if p.get("kind", "first") == "first"]),
+           "N66 retry (transient skip, < 60 min)": boot([p for p in done if p.get("kind") == "retry"]),
+           "N66 activated placeholder (late-add)": boot([p for p in done if p.get("kind") == "activated"]),
+           "open_by_kind": dict(collections.Counter(p.get("kind", "first") for p in P if not p.get("res"))),
+           "watching": dict(collections.Counter(w["why"] for w in watch.values())),
            "candidates": dict(cands), "candidate_age_min_median": round(ages[len(ages) // 2] / 60, 1) if ages else None,
            "this_run": dict(stats)}
     dump(rep, REP)
-    dump({"seen": sorted(seen)[-20000:], "started": started}, STATE)
+    dump({"seen": sorted(seen)[-20000:], "started": started, "watch": watch}, STATE)
 
 
 while True:
     try:
         scan(); stats["polls"] += 1
+        if stats["polls"] % 2 == 1:
+            recheck()
         if stats["polls"] % 8 == 1:
             settle()
         report()

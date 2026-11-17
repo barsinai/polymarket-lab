@@ -627,3 +627,24 @@
   Tracebacks only the old pilot-log (2) / script-log (1); no MemoryErrors. Pilot STOP, no orders.
 - Next: N58 first settlements (positions need >= 24 h); LP-1 forward_core 3-day mark ~21 UTC; lock_x week mark 11-19; charts entries; N63
   calendars + test; N61 history; N21 11-21; options N42 11-19; N45 11-30.
+
+## 11-17 09:00-09:45 UTC cycle 29 (scheduled)
+- Read-outs (fast trades.jsonl, last settled 08:19): lock_x 30 trades / 26 end-times +6.6% (needs 30 end-times, week mark 11-19), lock_x50
+  +10.0% (same 30), lock_p_majors 24 / 22 +5.3%; lock_m 253 -3.1%, lock_b 89 +0.2%, lock_p_z2 297 -1.7%. N21 forward BTC/ETH 103 windows / 93
+  won -4.3% (4 days, below +2%; read 11-21), alts 95 / 81 -6.6%. Slow (08:26-08:28): converge 14 / 13 -$10, 81 open mark -$34; young 60 / 28
+  -$162 (48 open); options N42 forward tails 2 / 0 -9.8 pts, rest 7 / 6 +12.3 (4 events), 53 open; box office 9 / 8 -$0.96; charts 2 / 2
+  +$3.35 (8 chart events seen, 0 entries); mention 1 / 0 -$10, 4 open. LP-1 v2 80 runs / 2.93 d: formula $1,770 (upper bound), trading
+  -$525, pessimistic -$765; 71 settled, 68 open leftovers; forward_core 50 markets $265 vs +$28 / -$46 (-17% of formula, passing; 3-day mark
+  ~21 UTC); forward_other 67 markets $601 vs -$64 / -$310 (N35 failing). COPY-1 66 h: sharp 30 primaries settled / 20 events +2.3 pts
+  (n tiny), control 45 / 21 +4.3. N58 launch tracker: 3 open, 0 settled, 161 candidates, 158 skipped.
+- Test (adjacent N66, lateadd_culture.py, local, 12-week tape, splits fixed before looking): culture late-add NO launch hour, follower
+  >= 300 s: +11.0 pts [5.1, 16.5], 118 events; halves +9.9 / +11.7; ex-mention +9.7 [2.2, 17.4]; top event 11% -> PASS.
+  Why it matters now: the tracker looked once and dropped 158 / 161 candidates for transient reasons; 86 were placeholders that later open as
+  late-adds. Built in launch_paper.py: 'retry' (re-read transient skips while < 60 min old) and 'activated' (placeholders watched 14 d by
+  id, L = when they open); reported separately, the N58 decision stays on the first-look arm. Local run impossible (no Gamma from here):
+  smoke run via run_script; live from the next follow hand-over (~13:30 UTC).
+- New (outside the box N67): token-launch FDV ladders vs pre-launch perps -> READY (needs Gamma + perp candle history via Actions).
+- Health: fast paper 08:26, slow 08:31, follow 08:29 (report 08:21, < 70 min), boosts 08:24, MM v2 09:01, books 09:00 - OK. Tracebacks only
+  the old pilot-log / script-log; no MemoryErrors. Pilot STOP, no orders.
+- Next: smoke result of the new tracker arms; first N58 settlements; LP-1 forward_core 3-day mark ~21 UTC; lock_x week mark 11-19; N63
+  calendars; N61 history; N67 history; N21 11-21; options N42 11-19; N45 11-30.
