@@ -651,3 +651,25 @@
 - 09:40 check: run_script smoke of the new tracker (live API, 6 min) ran clean (540 events listed, 0 errors, no new listing in the window);
   a mocked-API run exercised all three arms (first / retry / activated: 1 position each, watch emptied). (First dispatch failed: run_script
   paths are relative to research/, i.e. 'slow/launch_smoke.py'.)
+
+## 11-17 13:00-13:25 UTC cycle 30 (scheduled)
+- Read-outs (fast trades.jsonl, last settled 12:24): lock_x 31 trades / 27 end-times +6.5% (needs 30 end-times, week mark 11-19), lock_x50
+  +9.7%, lock_p_majors 25 / 23 +5.2%; lock_m 261 -2.8%, lock_b 94 +0.4%, lock_p_z2 307 -1.5%. N21 forward BTC/ETH 109 windows / 99 won -3.7%
+  (4 days, below +2%; read 11-21), alts 104 / 90 -5.7%. Slow (12:27-12:29): converge 14 / 13 -$10, 82 open mark -$37; young 61 / 28 -$172
+  (47 open); options N42 forward tails 2 / 0 -9.8 pts, rest 7 / 6 +12.3 (4 events, unchanged), 54 open; box office 9 / 8 -$0.96; charts
+  2 / 2 +$3.35, 1 open; mention 1 / 0 -$10, 4 open. LP-1 v2 84 runs / 3.1 d: formula $1,794 (upper bound), trading -$505, pessimistic -$737;
+  73 settled, 69 open leftovers (guard OK), 4 quoted; forward_core 50 markets $289 vs +$34 / -$42 (-15% of formula, passing; 3 days reached,
+  40-market bar reached -> read formally with LP-1 5-day mark 11-19); forward_other 68 markets $625 vs -$67 / -$308 (N35 failing).
+  COPY-1 70 h: sharp 31 primaries settled / 21 events +2.7 pts (n tiny), control 45 / 21 +4.3. N58 launch tracker (12:39): 3 open, 0 settled,
+  open_past_end 0; N66 arms not live yet (next follow hand-over).
+- Test (adjacent N68, culture_decay.py, local, 12-week tape, rules fixed before looking): culture NO 1-6 h after listing, follower >= 300 s,
+  one fill per market: +4.6 pts [2.6, 6.8] on 515 events; halves +6.7 / +2.5 [-0.3, +5.4]; ex-mention +3.7; top event 4%; markets with no
+  launch-hour fill +4.1 [1.0, 7.6] -> PASS. Decay < 1 h +7.1, 1-3 h +5.1, 3-6 h +4.6, 6-24 h +3.5 (24-72 h was +0.7 in c25). Placebo: YES side
+  same buckets -4.1 [-6.6, -1.5] -> fans over-price YES. Built: 'late' arm in launch_paper.py (one look at 1-6 h; mocked-API run: < 1 h ->
+  first, 2 h -> late, 8 h -> skipped). Live from the next follow hand-over.
+- New (outside the box N69): twin markets (same question in two events) -> DEAD by count: 36 groups in 12 weeks, ~20 independent topics,
+  mostly overlapping rolling 'by <date>' series; riskless-cents anyway (lesson 8).
+- Health: fast paper 12:27, slow 12:32, follow 12:41 (report 12:32, < 70 min), boosts 12:49, MM v2 12:31, books 13:00 - OK. Tracebacks only
+  the old pilot-log (2) / script-log (1); no MemoryErrors. Pilot STOP, no orders. (Local main had diverged from origin - reset to origin/main.)
+- Next: N58 + N66 + N68 arms in the next launch report; lock_x week mark 11-19; LP-1 5-day mark 11-19; N21 11-21; options N42 11-19; N63
+  calendars; N61 history; N67 history; N45 11-30.

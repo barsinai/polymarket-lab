@@ -794,3 +794,9 @@ Price drift in the trade's direction (what a market maker on the other side lose
   launch_paper.py now re-reads transient skips (< 60 min) and watches 'not accepting orders' placeholders until they open (new arms
   'retry' / 'activated', live from the next follow hand-over ~13:30 UTC). N67 token-launch FDV ladders vs pre-launch perps READY.
   Next: smoke run of the new tracker, first N58 settlements, LP-1 forward_core 3-day mark ~21 UTC, lock_x 11-19, N63 calendars, N61 history.
+
+## 11-17 13:20 cycle 30
+- N68 culture NO decay PASS on the tape: 1-6 h old +4.6 pts [2.6, 6.8], 515 events, halves +6.7 / +2.5, YES placebo -4.1; curve 7.1 / 5.1 /
+  4.6 / 3.5 (< 1 h / 1-3 / 3-6 / 6-24 h). Added as the 'late' arm of launch_paper.py. N69 twin markets DEAD by count (36 groups, ~20 topics).
+  lock_x reached 31 trades / 27 end-times +6.5% (week mark 11-19). N21 BTC/ETH forward -3.7% (109 windows, 4 days).
+  Next: lock_x 11-19 (needs 30 end-times and >= +5%), N21 11-21, N58 first settlements, LP-1 forward_core 3-day mark ~21 UTC, N63, N61.

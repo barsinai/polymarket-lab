@@ -1,0 +1,182 @@
+{
+ "rows": 21436,
+ "markets": 3132,
+ "split_at": "2026-09-17 16:53:58+00:00",
+ "< 1 h": {
+  "n": 1763,
+  "events": 600,
+  "pts": 7.06,
+  "ci": [
+   5.1,
+   9.1
+  ],
+  "avg_p": 0.64,
+  "top_event_share": 0.033
+ },
+ "1-3 h": {
+  "n": 893,
+  "events": 376,
+  "pts": 5.08,
+  "ci": [
+   2.2,
+   7.8
+  ],
+  "avg_p": 0.63,
+  "top_event_share": 0.052
+ },
+ "3-6 h": {
+  "n": 947,
+  "events": 416,
+  "pts": 4.63,
+  "ci": [
+   2.1,
+   7.2
+  ],
+  "avg_p": 0.628,
+  "top_event_share": 0.038
+ },
+ "6-24 h": {
+  "n": 2033,
+  "events": 645,
+  "pts": 3.54,
+  "ci": [
+   1.8,
+   5.1
+  ],
+  "avg_p": 0.607,
+  "top_event_share": 0.031
+ },
+ "DECISION 1-6 h": {
+  "n": 1436,
+  "events": 515,
+  "pts": 4.61,
+  "ci": [
+   2.6,
+   6.8
+  ],
+  "avg_p": 0.629,
+  "top_event_share": 0.036
+ },
+ "  older half": {
+  "n": 727,
+  "events": 268,
+  "pts": 6.7,
+  "ci": [
+   3.4,
+   9.4
+  ],
+  "avg_p": 0.626,
+  "top_event_share": 0.062
+ },
+ "  newer half": {
+  "n": 709,
+  "events": 250,
+  "pts": 2.47,
+  "ci": [
+   -0.3,
+   5.4
+  ],
+  "avg_p": 0.633,
+  "top_event_share": 0.046
+ },
+ "  ex-mention": {
+  "n": 1026,
+  "events": 395,
+  "pts": 3.69,
+  "ci": [
+   1.5,
+   6.3
+  ],
+  "avg_p": 0.671,
+  "top_event_share": 0.053
+ },
+ "  ADDED: markets with no launch-hour fill": {
+  "n": 482,
+  "events": 295,
+  "pts": 4.1,
+  "ci": [
+   1.0,
+   7.6
+  ],
+  "avg_p": 0.581,
+  "top_event_share": 0.029
+ },
+ "  overlap: markets that also had a launch-hour fill": {
+  "n": 954,
+  "events": 391,
+  "pts": 4.87,
+  "ci": [
+   2.2,
+   7.6
+  ],
+  "avg_p": 0.654,
+  "top_event_share": 0.037
+ },
+ "  cat pop-culture": {
+  "n": 434,
+  "events": 140,
+  "pts": 2.62,
+  "ci": [
+   -1.1,
+   6.4
+  ],
+  "avg_p": 0.689,
+  "top_event_share": 0.139
+ },
+ "  cat mention": {
+  "n": 410,
+  "events": 120,
+  "pts": 6.92,
+  "ci": [
+   3.0,
+   10.6
+  ],
+  "avg_p": 0.524,
+  "top_event_share": 0.071
+ },
+ "  cat movies": {
+  "n": 264,
+  "events": 131,
+  "pts": 3.14,
+  "ci": [
+   -2.1,
+   8.6
+  ],
+  "avg_p": 0.579,
+  "top_event_share": 0.088
+ },
+ "  cat youtube": {
+  "n": 189,
+  "events": 63,
+  "pts": 0.45,
+  "ci": [
+   -2.0,
+   2.9
+  ],
+  "avg_p": 0.761,
+  "top_event_share": 0.123
+ },
+ "  cat awards": {
+  "n": 90,
+  "events": 30,
+  "pts": 11.0,
+  "ci": [
+   6.1,
+   16.3
+  ],
+  "avg_p": 0.727,
+  "top_event_share": 0.133
+ },
+ "  cat music": {
+  "n": 49,
+  "events": 31,
+  "pts": 15.08,
+  "ci": [
+   4.4,
+   24.5
+  ],
+  "avg_p": 0.556,
+  "top_event_share": 0.25
+ },
+ "verdict": "PASS"
+}

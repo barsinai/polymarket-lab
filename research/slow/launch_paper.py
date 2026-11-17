@@ -128,6 +128,7 @@ for f in sorted(glob.glob(f"{D}/upd-*.jsonl")):
             pass
 
 
+LATE_MAX = 6 * 3600  # N68 (cycle 30): tape culture NO 1-6 h +4.6 pts [2.6, 6.8], 515 events, halves +6.7 / +2.5; YES placebo -4.1
 TRANSIENT = {"not accepting orders", "no NO ask", "ask outside 0.05-0.90", "spread > 10c"}
 WATCH_DAYS = 14
 
@@ -174,6 +175,8 @@ def scan():
     'retry': a skip for a transient reason (no NO ask, ask outside band, spread) is re-read every poll while L < 60 min ago.
     'activated': a 'not accepting orders' placeholder ('Person A..L') is watched up to 14 d; when it opens it is a culture LATE-ADD
     (tape, cycle 29: +11.0 pts [5.1, 16.5], 118 events, halves +9.9 / +11.7) and L = the time it opened (first seen open).
+    'late' (N68, cycle 30): a market first passing 60 min without a position (never seen before, or a transient skip whose retry
+    window ended) gets ONE look while L is 1-6 h ago; same buy rule. Kill rule as N58, per arm.
     Arms are reported separately; the N58 decision uses the 'first' arm only."""
     now = time.time()
     for tag in TAGS:
@@ -193,7 +196,9 @@ def scan():
                 age = now - L
                 if not w and age < 86400:
                     stats["seen once: markets < 24 h old (lesson 10 check)"] += 1
-                if age > 3600:                       # old market: never a candidate, remember it so we do not look again
+                if age > 3600:                       # old market: never a first-look candidate, remember it so we do not look again
+                    if age <= LATE_MAX and not (w and w["why"] == "not accepting orders"):
+                        evaluate(m, e.get("slug"), tag, now, L, "late")   # N68: one look at 1-6 h, its own arm
                     seen.add(mid); watch.pop(mid, None); continue
                 if age < 0:
                     continue                         # not open yet; look again next poll
@@ -294,6 +299,7 @@ def report():
            "N58 first look (decision arm)": boot([p for p in done if p.get("kind", "first") == "first"]),
            "N66 retry (transient skip, < 60 min)": boot([p for p in done if p.get("kind") == "retry"]),
            "N66 activated placeholder (late-add)": boot([p for p in done if p.get("kind") == "activated"]),
+           "N68 late look (1-6 h, one look)": boot([p for p in done if p.get("kind") == "late"]),
            "open_by_kind": dict(collections.Counter(p.get("kind", "first") for p in P if not p.get("res"))),
            "watching": dict(collections.Counter(w["why"] for w in watch.values())),
            "candidates": dict(cands), "candidate_age_min_median": round(ages[len(ages) // 2] / 60, 1) if ages else None,
