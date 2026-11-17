@@ -648,3 +648,6 @@
   the old pilot-log / script-log; no MemoryErrors. Pilot STOP, no orders.
 - Next: smoke result of the new tracker arms; first N58 settlements; LP-1 forward_core 3-day mark ~21 UTC; lock_x week mark 11-19; N63
   calendars; N61 history; N67 history; N21 11-21; options N42 11-19; N45 11-30.
+- 09:40 check: run_script smoke of the new tracker (live API, 6 min) ran clean (540 events listed, 0 errors, no new listing in the window);
+  a mocked-API run exercised all three arms (first / retry / activated: 1 position each, watch emptied). (First dispatch failed: run_script
+  paths are relative to research/, i.e. 'slow/launch_smoke.py'.)
