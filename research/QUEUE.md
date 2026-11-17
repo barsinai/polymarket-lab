@@ -800,3 +800,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
   4.6 / 3.5 (< 1 h / 1-3 / 3-6 / 6-24 h). Added as the 'late' arm of launch_paper.py. N69 twin markets DEAD by count (36 groups, ~20 topics).
   lock_x reached 31 trades / 27 end-times +6.5% (week mark 11-19). N21 BTC/ETH forward -3.7% (109 windows, 4 days).
   Next: lock_x 11-19 (needs 30 end-times and >= +5%), N21 11-21, N58 first settlements, LP-1 forward_core 3-day mark ~21 UTC, N63, N61.
+
+## 11-17 17:25 cycle 31
+- N70 culture launch-hour NO at 0.90-0.98 DEAD (-0.5 pts [-2.1, +1.0], 374 events; control band +8.7) -> tracker cap stays. N71 Pokemon
+  price Over/Under DEAD by count (Under +22.6 pts but 2 end dates). Late arm live only since 16:53 (old run held the old code).
+  Next: lock_x 11-19, LP-1 forward_core 11-19, N21 11-21, N58 settlements, N63, N61.

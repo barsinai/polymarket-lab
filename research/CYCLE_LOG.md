@@ -673,3 +673,24 @@
   the old pilot-log (2) / script-log (1); no MemoryErrors. Pilot STOP, no orders. (Local main had diverged from origin - reset to origin/main.)
 - Next: N58 + N66 + N68 arms in the next launch report; lock_x week mark 11-19; LP-1 5-day mark 11-19; N21 11-21; options N42 11-19; N63
   calendars; N61 history; N67 history; N45 11-30.
+
+## 11-17 17:00-17:25 UTC cycle 31 (scheduled)
+- Read-outs (fast trades.jsonl, last settled 16:24): lock_x 32 trades / 28 end-times +6.4% (needs 30 end-times, week mark 11-19), lock_x50
+  +9.5%, lock_p_majors 26 / 24 +5.2%; lock_m 263 -2.8%, lock_b 96 +0.5%, lock_p_z2 316 -1.3%. N21 forward BTC/ETH 114 windows / 104 won -3.3%
+  (4 days, below +2%; read 11-21), alts 112 / 98 -5.0%. Slow (16:29-16:31): converge 14 / 13 -$10, 82 open mark -$39; young 62 / 28 -$182
+  (51 open); options N42 forward tails 2 / 0 -9.8 pts, rest 7 / 6 +12.3 (4 events, unchanged), 57 open; box office 9 / 8 -$0.96; charts 2 / 2
+  +$3.35, 1 open; mention 2 / 1 -$8.74, 3 open. LP-1 v2 89 runs / 3.27 d: formula $1,805 (upper bound), trading -$503, pessimistic -$761;
+  80 settled, 67 open leftovers (guard OK), 4 quoted; forward_core 54 markets $300 vs +$37 / -$19 (-6% of formula, passing; formal read 11-19);
+  forward_other 72 markets $636 vs -$67 / -$293 (N35 failing). COPY-1 74.7 h: sharp 43 primaries settled / 31 events +2.4 pts (-$42: four
+  < 0.20 long shots -$84), control 45 / 21 +4.3. N58 launch tracker (16:52): 6 open (3 first, 3 retry), 0 settled, open_past_end 0.
+- Infra note: the report had no 'late' arm because follow.yml run #22 started 11:41, before the c30 commit (13:08), and ran on the old code
+  to 16:53 (lesson 10; the c30 '13:30 hand-over' estimate was wrong). Run #23 (16:53, head 48318461) carries the late arm. No fix needed.
+- Test (adjacent N70, culture_highno.py, local, 12-week tape, rules fixed before looking): culture launch-hour NO at 0.90-0.98, follower
+  >= 300 s: -0.5 pts [-2.1, +1.0] on 374 events, halves -1.0 / +0.0 -> DEAD; control band 0.05-0.90 reproduces +8.7 [6.4, 11.1] (540 events).
+  The tracker's 0.90 cap stays.
+- New (outside the box N71, collectible_ou.py): Pokemon price Over/Under markets: 'Under' +22.6 pts on 21 markets but only 2 end dates
+  -> DEAD by count (2 independent bets); revive if the monthly series returns.
+- Health: fast paper 16:28, slow 16:34, follow 16:53 (report 16:53, chain #23 running), boosts 16:05, MM v2 16:31, books 17:00 - OK.
+  Tracebacks only the old pilot-log (2) / script-log (1); no MemoryErrors. Pilot STOP, no orders. (Local main had diverged again - reset.)
+- Next: first 'late' arm positions (run #23); N58 first settlements; lock_x week mark 11-19; LP-1 5-day + forward_core read 11-19; options
+  N42 11-19; N21 11-21; N63 calendars; N61 history; N67 history; N45 11-30.

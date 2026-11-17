@@ -25,6 +25,12 @@ Status: TESTING (paper/backtest running) · READY (next up) · PARKED (needs som
 | Research journal (my forecasts with sources) | reading + cross-checking beats the crowd on slow political/econ questions | forecast_log.py, Brier vs market | 11-10 | weeks |
 
 ## READY (ranked)
+N71. -> tested 11-17 (cycle 31), DEAD by count (see DEAD). **(outside the box) Collectible price Over/Under markets (Pokemon sealed
+   product / single-card prices, strike ~ the price at listing, resolve ~1 month later on a public price tracker).** Why the crowd could be
+   wrong: collectors buy 'Over' on what they love while new-set product usually drifts down. Exposed to 6 (one date = one bet), 5, 13.
+N70. -> tested 11-17 (cycle 31), DEAD (see DEAD). **(adjacent to N58 / N68) Culture launch-hour NO above the tracker's band (NO 0.90-0.98).**
+   The largest priced skip of launch_paper.py is 'ask outside 0.05-0.90' (41 of 207 candidates). Do fans also keep a few cents of hope on
+   near-dead YES? Exposed to 2, 15, 8.
 N68. -> 11-17 (cycle 30), TESTING as the 'late' arm of the N58 tracker. **(adjacent to N58 / N66) How fast does culture launch-hour NO decay?**
    The tracker buys only < 60 min old markets (3 positions in 11 h). Tape (culture_decay.py, rules fixed before looking, follower >= 300 s,
    first fill per market per age bucket, clustered by event): NO < 1 h +7.1 pts [5.1, 9.1] (600 events), 1-3 h +5.1 [2.2, 7.8], 3-6 h +4.6
@@ -319,6 +325,14 @@ OLD N2. **(outside the box, 11-12) Box-office opening-weekend markets vs Thursda
 - Kalshi vs Polymarket automatic pairing (titles do not match; manual for named series only).
 
 ## DEAD (number that killed it)
+- N70 culture launch-hour NO at 0.90-0.98 (11-17 c31, culture_highno.py, 12-week tape, rules fixed before looking, follower >= 300 s, first
+  fill per market < 1 h after listing): -0.5 pts [-2.1, +1.0] on 374 events (win 94.4% at avg 0.947); halves -1.0 / +0.0; ex-mention -1.0;
+  0.90-0.95 +1.0 [-1.8, +3.5], 0.95-0.98 -1.2. Control (tracker band 0.05-0.90) reproduces +8.7 [6.4, 11.1] on 540 events. Fans over-price
+  YES in the middle, not on near-dead outcomes -> the tracker's 0.90 cap is right; no change.
+- N71 collectible price Over/Under (11-17 c31, collectible_ou.py, 12-week tape): 40 markets but only 2 end dates (09-01, 10-01; 20 products
+  each), YES won 14/40 at first prints ~0.50; follower 'Under' +22.6 pts on 21 markets (+11.2 / +37.7 by date), 'Over' -7.9 -> the direction
+  fits the idea but it is 2 independent bets (lesson 6) -> DEAD by count. The series is not in the tape after 10-01; revive only if it
+  returns monthly (then paper 'Under' at listing, read after 6+ dates).
 - N69 twin markets (11-17 c30, outside the box, local count on the 12-week tape meta): the same question (normalised text, end within 1 day)
   listed in two different events, priced by two crowds. Only 36 twin groups in 12 weeks outside sports, and most are overlapping rolling
   'by <date>' series of the same topic (Iran / Ukraine / GitHub incident) and v2 relistings -> ~20 independent topics < 30 -> DEAD by count;
