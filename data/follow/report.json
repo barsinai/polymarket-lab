@@ -1,16 +1,16 @@
 {
- "updated": "2026-11-17 06:28",
- "tracking_hours": 64.27,
+ "updated": "2026-11-17 07:20",
+ "tracking_hours": 65.12,
  "signal_wallets": 148,
  "rule": "primary = first position per market+direction+UTC day after a taker order/accumulation by a signal wallet (>= $50) or, control, every 5th order >= $1,000 by another wallet; non-sports, ends in 1 h - 60 d; ask 0.03-0.97 and <= their average price + 3c; $20 at the ask; fee paid",
  "decision_rule": "sharp primary: >= 300 settled over >= 100 events and >= 10 days; >= +1.5 pts with the 95% interval above 0 -> propose a small live test; < +0.5 or interval top < +1.5 -> DEAD",
  "sharp": {
-  "positions": 537,
-  "open": 468,
+  "positions": 544,
+  "open": 475,
   "settled": 69,
-  "primary": 177,
+  "primary": 180,
   "primary_settled": 30,
-  "primary_per_day": 66.1,
+  "primary_per_day": 66.3,
   "PRIMARY": {
    "all": {
     "n": 30,
@@ -299,30 +299,30 @@
   "ask_minus_their_price": {
    "p25": 0.015,
    "median": 0.046,
-   "p75": 0.102
+   "p75": 0.103
   },
-  "share_cap_ok": 0.38,
+  "share_cap_ok": 0.381,
   "median_lag_s": 145,
   "median_usd_at_ask": 30,
   "median_usd_within_2c": 129,
   "open_primary_by_category": {
-   "weather": 13,
+   "weather": 14,
    "economy": 30,
    "crypto": 3,
    "politics": 13,
-   "tech": 47,
+   "tech": 48,
    "culture": 18,
    "geopolitics": 15,
-   "tweets": 8
+   "tweets": 9
   }
  },
  "control": {
-  "positions": 372,
-  "open": 275,
+  "positions": 374,
+  "open": 277,
   "settled": 97,
-  "primary": 221,
+  "primary": 222,
   "primary_settled": 45,
-  "primary_per_day": 82.5,
+  "primary_per_day": 81.8,
   "PRIMARY": {
    "all": {
     "n": 45,
@@ -576,16 +576,16 @@
   "mark_72h_all_primary": {},
   "ask_minus_their_price": {
    "p25": 0.0,
-   "median": 0.002,
+   "median": 0.001,
    "p75": 0.01
   },
   "share_cap_ok": 0.93,
-  "median_lag_s": 126,
+  "median_lag_s": 129,
   "median_usd_at_ask": 243,
   "median_usd_within_2c": 7587,
   "open_primary_by_category": {
    "economy": 22,
-   "crypto": 66,
+   "crypto": 67,
    "geopolitics": 41,
    "culture": 8,
    "politics": 18,
@@ -593,41 +593,39 @@
    "tweets": 7
   }
  },
- "positions": 909,
+ "positions": 918,
  "settled": 166,
- "primary": 398,
+ "primary": 402,
  "totals": {
-  "control crossings $2500": 2131,
-  "skip: fast: sports": 5251,
-  "control crossings $10000": 527,
-  "control crossings $1000": 3950,
-  "skip: fast: crypto up/down": 602,
-  "control primary follows": 220,
-  "control paper positions": 371,
+  "control crossings $2500": 2141,
+  "skip: fast: sports": 5273,
+  "control crossings $10000": 528,
+  "control crossings $1000": 3968,
+  "skip: fast: crypto up/down": 606,
+  "control primary follows": 221,
+  "control paper positions": 373,
   "skip: closed or ends in < 1 h": 176,
-  "sharp crossings $250": 266,
-  "sharp paper positions": 536,
-  "sharp crossings $50": 810,
-  "skip: ask outside 0.03-0.97": 279,
+  "sharp crossings $250": 270,
+  "sharp paper positions": 543,
+  "sharp crossings $50": 816,
+  "skip: ask outside 0.03-0.97": 280,
   "skip: ends in > 60 days": 310,
-  "sharp primary follows": 177,
-  "skip: fast: sports parlay (combo)": 138,
-  "skip: no ask in the book": 71,
+  "sharp primary follows": 180,
+  "skip: fast: sports parlay (combo)": 140,
+  "skip: no ask in the book": 72,
   "settled": 166,
   "sharp crossings $1000": 50
  },
  "this_run": {
-  "feed pages": 1104,
-  "polls": 936,
-  "fills": 83296,
-  "skip: fast: sports": 322,
-  "sharp paper positions": 102,
-  "skip: ask outside 0.03-0.97": 13,
-  "skip: fast: crypto up/down": 61,
-  "skip: fast: sports parlay (combo)": 13,
-  "skip: closed or ends in < 1 h": 11,
-  "control paper positions": 13,
-  "skip: ends in > 60 days": 39,
-  "skip: no ask in the book": 5
+  "feed pages": 185,
+  "polls": 154,
+  "fills": 9007,
+  "skip: fast: sports": 22,
+  "skip: fast: crypto up/down": 4,
+  "sharp paper positions": 7,
+  "control paper positions": 2,
+  "skip: ask outside 0.03-0.97": 1,
+  "skip: no ask in the book": 1,
+  "skip: fast: sports parlay (combo)": 2
  }
 }
