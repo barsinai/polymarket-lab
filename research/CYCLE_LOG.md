@@ -585,3 +585,23 @@
   lesson 10); N61 history script; lock_p week mark 11-17 (+1.9%, below the +5% bar -> close); charts first entries 11-17 ~05 UTC; LP-1
   forward_core to 40 markets; N21 11-21; options N42 11-19; N45 11-30.
 - 21:20 smoke run (run_script launch_smoke.py, 6 min, live API): tracker runs clean, 532 events listed over 4 polls, 0 new listings < 60 min in that window (base rate ~3 an hour, so plausible). Added a '< 24 h old' counter so the next cycle can tell a quiet hour from a discovery bug.
+
+## 11-17 01:00-01:40 UTC cycle 27 (scheduled)
+- Read-outs (fast trades.jsonl, last settled 00:20): lock_p WEEK MARK +2.2% on 53 / 46 (47 end-times) < +5% bar -> CLOSED (DEAD); lock_x 27 / 24
+  +7.0% (23 end-times, needs 30+, week mark 11-19), lock_p_majors 22 / 21 +5.4%; lock_m 238 -2.6%, lock_p_z2 280 -0.6%. N21 forward BTC/ETH
+  87 / 81 -1.4% (3 days, below +2%; read 11-21), alts 84 / 72 -5.4%. Slow (00:23-00:27): converge 14 / 13 -$10, 80 open mark -$29; young 59 / 27
+  -$169 (45 open); options 69 settled +$103, 53 open, N42 forward tails 1 / 0 -14 pts, rest 2 / 2 +20.5 (unchanged); box office all 9 settled
+  8 won -$0.96 (2 weekends); charts 2 / 2 +$3.35 (app store), 0 chart events seen (first entries expected ~05 UTC); mention 1 / 0 -$10.
+  LP-1 v2 71 runs / 2.6 d: formula $1,688 (upper bound), trading -$492, pessimistic -$706; settled 68, 65 open leftovers; forward_core 47
+  markets $191 vs +$23 / -$27 (-14% of formula, passing; 40-market bar reached, 3-day mark ~11-17 21 UTC); forward_other 64 markets $527 vs
+  -$73 / -$292 (N35 failing). COPY-1 57.8 h: sharp 29 primaries settled / 19 events 22 won +3.5 pts (n tiny; was +7.2); 132 primaries.
+- Test (adjacent N62, lateadd_census.py, local, 12-week tape): outcomes added >= 24 h after their event listed, launch-hour NO, follower
+  >= 300 s, non-culture: -2.3 pts [-9.0, +3.9] on 131 events, halves +3.4 / -13.5 -> DEAD. Side read: culture late-adds NO +11.0 [5.0, 16.9]
+  (118 events) vs culture originals +5.6 - inside N58's scope; split the N58 forward run by event age at listing.
+- New (outside the box N63): 'slot-only' events (Congress in recess, no SCOTUS opinion day before a 'by <date>' deadline) -> READY, needs
+  the official 2026 calendars.
+- Health: fast paper 00:23, slow 00:28, follow 01:04 (report 23:59 -> 01:04 hand-over, OK), boosts 00:41, MM v2 01:01, books 01:00 - OK.
+  data/launch not there yet: expected after the next follow hand-over (~03 UTC), not a bug yet. Tracebacks only the old pilot-log (2) /
+  script-log (1); no MemoryErrors. Pilot STOP, no orders.
+- Next: data/launch/report.json after ~03 UTC with candidates > 0 (and the '< 24 h old' counter); LP-1 forward_core 3-day mark ~21 UTC;
+  lock_x week mark 11-19; charts first entries ~05 UTC; N63 calendars + test; N61 history; N21 11-21; options N42 11-19; N45 11-30.
