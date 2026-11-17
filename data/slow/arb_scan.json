@@ -1,31 +1,9 @@
 {
-"scanned": "2026-11-17 00:27",
+"scanned": "2026-11-17 01:26",
 "events": 2100,
 "groups": 2037,
 "books": 16806,
 "opps": [
-{
-"kind": "negrisk_all_yes",
-"event": "OpenAI IPO Closing Market Cap",
-"slug": "openai-ipo-closing-market-cap-554",
-"n": 7,
-"has_other": false,
-"outcomes": [
-"<500B",
-"500\u2013750B",
-"750B\u20131T",
-"1T\u20131.25T",
-"1.25T\u20131.5T",
-"1.5T+",
-"No IPO by December 31, 2027"
-],
-"cost": 0.984,
-"payoff": 1,
-"edge": 0.016,
-"edge_after_fee": -0.0383,
-"size_shares": 44.34,
-"usd_at_size": 43.63
-},
 {
 "kind": "ladder_date",
 "event": "Will Israel annex any territory by...?",
@@ -102,18 +80,6 @@
 "usd_at_size": 89.73
 },
 {
-"kind": "negrisk_all_no",
-"event": "Anthropic IPO Closing Market Cap",
-"slug": "anthropic-ipo-closing-market-cap-higher-strikes",
-"n": 10,
-"cost": 8.982,
-"payoff": 9,
-"edge": 0.018,
-"edge_after_fee": -0.0306,
-"size_shares": 10.0,
-"usd_at_size": 89.82
-},
-{
 "kind": "ladder_num",
 "event": "How high will US unemployment go in 2026?",
 "slug": "how-high-will-us-unemployment-go-in-2026",
@@ -144,6 +110,26 @@
 "usd_at_size": 34.31
 },
 {
+"kind": "negrisk_all_yes",
+"event": "Maduro Prison Time?",
+"slug": "maduro-prison-time-527",
+"n": 5,
+"has_other": false,
+"outcomes": [
+"No prison time",
+"<20",
+"20\u201340",
+"40\u201360",
+"60+"
+],
+"cost": 0.992,
+"payoff": 1,
+"edge": 0.008,
+"edge_after_fee": -0.0258,
+"size_shares": 18.29,
+"usd_at_size": 18.14
+},
+{
 "kind": "ladder_num",
 "event": "Pacifica FDV above ___ one day after launch?",
 "slug": "pacifica-fdv-above-one-day-after-launch",
@@ -159,19 +145,45 @@
 "usd_at_size": 34.34
 },
 {
-"kind": "ladder_num",
-"event": "What will Fed Rate hit before 2027?",
-"slug": "what-will-fed-rate-hit-before-2027",
-"easy": "Will the Fed\u2019s lower bound reach 2.5% or lower before 2027?",
-"hard": "Will the Fed\u2019s lower bound reach 0.25% or lower before 2027?",
-"easy_yes_ask": 0.011,
-"hard_no_ask": 0.985,
-"hard_yes_bid": 0.015,
-"cost": 0.996,
-"edge": 0.004,
-"edge_after_fee": 0.0022,
-"size_shares": 22.12,
-"usd_at_size": 22.03
+"kind": "negrisk_all_yes",
+"event": "OpenAI IPO Closing Market Cap",
+"slug": "openai-ipo-closing-market-cap-554",
+"n": 7,
+"has_other": false,
+"outcomes": [
+"<500B",
+"500\u2013750B",
+"750B\u20131T",
+"1T\u20131.25T",
+"1.25T\u20131.5T",
+"1.5T+",
+"No IPO by December 31, 2027"
+],
+"cost": 0.985,
+"payoff": 1,
+"edge": 0.015,
+"edge_after_fee": -0.0394,
+"size_shares": 7.5,
+"usd_at_size": 7.39
+},
+{
+"kind": "negrisk_all_yes",
+"event": "US economic state at the end of 2026?",
+"slug": "us-economic-state-at-the-end-of-2026",
+"n": 4,
+"has_other": false,
+"outcomes": [
+"Soft Landing (Unemployment <5.0%, Inflation <3.5%)",
+"Stagflation (Unemployment \u22655.0%, Inflation \u22653.5%)",
+"Overheating (Unemployment <5.0%, Inflation \u22653.5%)",
+"Slack (Unemployment \u22655.0%, Inflation <3.5%)"
+],
+"cost": 0.993,
+"payoff": 1,
+"edge": 0.007,
+"edge_after_fee": -0.0257,
+"size_shares": 14.0,
+"usd_at_size": 13.9
 },
 {
 "kind": "ladder_date",
@@ -220,21 +232,6 @@
 },
 {
 "kind": "ladder_num",
-"event": "Extended FDV above ___ one day after launch?",
-"slug": "extended-fdv-above-one-day-after-launch",
-"easy": "Extended FDV above $100M one day after launch?",
-"hard": "Extended FDV above $150M one day after launch?",
-"easy_yes_ask": 0.53,
-"hard_no_ask": 0.46,
-"hard_yes_bid": 0.54,
-"cost": 0.99,
-"edge": 0.01,
-"edge_after_fee": -0.0248,
-"size_shares": 5.1,
-"usd_at_size": 5.05
-},
-{
-"kind": "ladder_num",
 "event": "Printr FDV above ___ one day after launch?",
 "slug": "printr-fdv-above-one-day-after-launch",
 "easy": "Printr FDV above $500M one day after launch?",
@@ -262,28 +259,6 @@
 "edge_after_fee": 0.0066,
 "size_shares": 1.61,
 "usd_at_size": 1.59
-},
-{
-"kind": "negrisk_all_yes",
-"event": "South Korea Annual Inflation 2026",
-"slug": "south-korea-annual-inflation-2026",
-"n": 7,
-"has_other": false,
-"outcomes": [
-"<1.5%",
-"1.5% to 1.7%",
-"1.8% to 2.0%",
-"2.1% to 2.3%",
-"2.4% to 2.6%",
-"2.7% to 2.9%",
-"3.0%+"
-],
-"cost": 0.989,
-"payoff": 1,
-"edge": 0.011,
-"edge_after_fee": -0.0359,
-"size_shares": 1.6,
-"usd_at_size": 1.58
 }
 ]
 }
