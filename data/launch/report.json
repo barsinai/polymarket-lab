@@ -1,13 +1,13 @@
 {
- "updated": "2026-11-18 01:06",
+ "updated": "2026-11-18 02:05",
  "started": "2026-11-17 01:16",
- "days": 0.99,
+ "days": 1.03,
  "note": "tape base rate ~75 culture markets launch a day (~3 an hour): 0 candidates over a day is a bug, not a result",
  "rule": "new culture listing < 60 min old, lives >= 24 h, NO ask 0.05-0.90, NO spread <= 10c: $10 at the NO ask, fee paid; one per market",
  "decision": "kill if <= +1 pt or event CI low < -1 after 100 markets / 40 events; promote only after 300 / 100 / 3 weeks",
- "positions": 6,
+ "positions": 7,
  "settled": 0,
- "open": 6,
+ "open": 7,
  "open_past_end": 0,
  "all": {
   "n": 0
@@ -32,33 +32,34 @@
  },
  "open_by_kind": {
   "first": 3,
-  "retry": 3
+  "retry": 4
  },
  "watching": {
-  "not accepting orders": 119,
-  "ask outside 0.05-0.90": 85
+  "not accepting orders": 119
  },
  "candidates": {
   "ask outside 0.05-0.90": 150,
   "not accepting orders": 205,
   "no NO ask": 43,
-  "bought": 6,
+  "bought": 7,
   "spread > 10c": 7,
   "lives < 24 h": 7
  },
  "candidate_age_min_median": 3.0,
  "this_run": {
-  "events listed": 9652,
-  "polls": 71,
+  "events listed": 12600,
+  "polls": 93,
   "seen once: markets < 24 h old (lesson 10 check)": 195,
   "new listings": 195,
   "skip (first): ask outside 0.05-0.90": 99,
-  "skip (retry): ask outside 0.05-0.90": 1790,
-  "skip (retry): spread > 10c": 30,
-  "skip (late): spread > 10c": 2,
-  "skip (late): ask outside 0.05-0.90": 20,
+  "skip (retry): ask outside 0.05-0.90": 4234,
+  "skip (retry): spread > 10c": 95,
+  "skip (late): spread > 10c": 6,
+  "skip (late): ask outside 0.05-0.90": 100,
   "skip (first): not accepting orders": 88,
   "skip (first): no NO ask": 8,
-  "skip (retry): no NO ask": 11
+  "skip (retry): no NO ask": 11,
+  "skip (retry): none, bought": 1,
+  "paper positions (retry)": 1
  }
 }
