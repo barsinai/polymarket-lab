@@ -1,14 +1,14 @@
 {
- "updated": "2026-11-18 08:16",
- "tracking_hours": 90.02,
+ "updated": "2026-11-18 08:31",
+ "tracking_hours": 90.27,
  "signal_wallets": 148,
  "rule": "primary = first position per market+direction+UTC day after a taker order/accumulation by a signal wallet (>= $50) or, control, every 5th order >= $1,000 by another wallet; non-sports, ends in 1 h - 60 d; ask 0.03-0.97 and <= their average price + 3c; $20 at the ask; fee paid",
  "decision_rule": "sharp primary: >= 300 settled over >= 100 events and >= 10 days; >= +1.5 pts with the 95% interval above 0 -> propose a small live test; < +0.5 or interval top < +1.5 -> DEAD",
  "sharp": {
-  "positions": 751,
-  "open": 599,
+  "positions": 753,
+  "open": 601,
   "settled": 152,
-  "primary": 250,
+  "primary": 251,
   "primary_settled": 68,
   "primary_per_day": 66.7,
   "PRIMARY": {
@@ -269,8 +269,8 @@
   },
   "mark_24h_all_primary": {
    "all": {
-    "n": 143,
-    "mid_minus_ask_pts": -0.26
+    "n": 144,
+    "mid_minus_ask_pts": -0.25
    },
    "crypto": {
     "n": 3,
@@ -289,8 +289,8 @@
     "mid_minus_ask_pts": -4.93
    },
    "politics": {
-    "n": 13,
-    "mid_minus_ask_pts": 1.75
+    "n": 14,
+    "mid_minus_ask_pts": 1.7
    },
    "tech": {
     "n": 45,
@@ -307,8 +307,8 @@
   },
   "mark_72h_all_primary": {
    "all": {
-    "n": 14,
-    "mid_minus_ask_pts": 3.26
+    "n": 16,
+    "mid_minus_ask_pts": 2.49
    },
    "crypto": {
     "n": 1,
@@ -327,8 +327,8 @@
     "mid_minus_ask_pts": -2.48
    },
    "tech": {
-    "n": 3,
-    "mid_minus_ask_pts": 0.0
+    "n": 5,
+    "mid_minus_ask_pts": -1.15
    },
    "weather": {
     "n": 2,
@@ -338,18 +338,18 @@
   "ask_minus_their_price": {
    "p25": 0.013,
    "median": 0.046,
-   "p75": 0.103
+   "p75": 0.102
   },
   "share_cap_ok": 0.382,
   "median_lag_s": 147,
   "median_usd_at_ask": 29,
-  "median_usd_within_2c": 126,
+  "median_usd_within_2c": 127,
   "open_primary_by_category": {
    "economy": 38,
    "politics": 24,
    "tech": 60,
    "weather": 6,
-   "culture": 24,
+   "culture": 25,
    "geopolitics": 19,
    "tweets": 3,
    "crypto": 5,
@@ -363,7 +363,7 @@
   "settled": 133,
   "primary": 311,
   "primary_settled": 67,
-  "primary_per_day": 82.9,
+  "primary_per_day": 82.7,
   "PRIMARY": {
    "all": {
     "n": 67,
@@ -693,41 +693,42 @@
    "tweets": 6
   }
  },
- "positions": 1282,
+ "positions": 1284,
  "settled": 285,
- "primary": 561,
+ "primary": 562,
  "totals": {
-  "control crossings $2500": 2834,
-  "skip: fast: sports": 6793,
-  "control crossings $10000": 672,
-  "control crossings $1000": 5256,
-  "skip: fast: crypto up/down": 828,
+  "control crossings $2500": 2837,
+  "skip: fast: sports": 6799,
+  "control crossings $10000": 673,
+  "control crossings $1000": 5258,
+  "skip: fast: crypto up/down": 830,
   "control primary follows": 310,
   "control paper positions": 530,
-  "skip: closed or ends in < 1 h": 250,
-  "sharp crossings $250": 374,
-  "sharp paper positions": 750,
-  "sharp crossings $50": 1131,
-  "skip: ask outside 0.03-0.97": 413,
-  "skip: ends in > 60 days": 471,
-  "sharp primary follows": 250,
+  "skip: closed or ends in < 1 h": 251,
+  "sharp crossings $250": 376,
+  "sharp paper positions": 752,
+  "sharp crossings $50": 1138,
+  "skip: ask outside 0.03-0.97": 414,
+  "skip: ends in > 60 days": 474,
+  "sharp primary follows": 251,
   "skip: fast: sports parlay (combo)": 186,
   "skip: no ask in the book": 122,
   "settled": 285,
   "sharp crossings $1000": 76
  },
  "this_run": {
-  "feed pages": 1012,
-  "polls": 892,
-  "fills": 62486,
-  "skip: fast: sports": 226,
+  "feed pages": 1060,
+  "polls": 936,
+  "fills": 64808,
+  "skip: fast: sports": 232,
   "control paper positions": 22,
-  "skip: fast: crypto up/down": 36,
-  "skip: ask outside 0.03-0.97": 24,
-  "sharp paper positions": 28,
+  "skip: fast: crypto up/down": 38,
+  "skip: ask outside 0.03-0.97": 25,
+  "sharp paper positions": 30,
   "skip: fast: sports parlay (combo)": 8,
-  "skip: ends in > 60 days": 20,
-  "skip: closed or ends in < 1 h": 3,
-  "skip: no ask in the book": 7
+  "skip: ends in > 60 days": 23,
+  "skip: closed or ends in < 1 h": 4,
+  "skip: no ask in the book": 7,
+  "http error": 1
  }
 }
