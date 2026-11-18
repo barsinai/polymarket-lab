@@ -8,18 +8,18 @@
    Will Ethereum hit $1,000 or $3,000 first? | Will Ethereum hit $1,000 or $3,000 first?
 example rules: Bitcoin above 66,000 on November 18, 10AM ET? | This market will resolve to "Yes" if the "Close" price for the BTC/USDT 1 hour candle that ends on the time and date specified in the title is higher than the price specified in the title. Otherwise, this market will resolve to "No".
 The resolution source for this market is Binance, specifically the BTC/USDT "Close" prices currently available at https://www.binance.com/en/trade/BTC_USDT with "1h"
-priced with both: 445
-mid - model: p10 -0.023 median +0.007 p90 +0.050
-  above      0-0.5  d: n  42  mid - model median +0.025  p10 -0.386  p90 +0.400
-  above    0.5-3    d: n  40  mid - model median +0.003  p10 -0.027  p90 +0.013
-  above      3-10   d: n  96  mid - model median +0.003  p10 -0.018  p90 +0.019
-  below      0-0.5  d: n   1  mid - model median -0.032  p10 -0.032  p90 -0.032
-  below    0.5-3    d: n   4  mid - model median +0.023  p10 -0.001  p90 +0.028
-  below      3-10   d: n   8  mid - model median +0.004  p10 -0.011  p90 +0.010
-  between    0-0.5  d: n   6  mid - model median +0.020  p10 -0.065  p90 +0.037
-  between  0.5-3    d: n  31  mid - model median +0.003  p10 -0.022  p90 +0.012
-  between    3-10   d: n  72  mid - model median +0.008  p10 -0.031  p90 +0.130
-  touch    0.5-3    d: n  25  mid - model median +0.006  p10 -0.003  p90 +0.048
-  touch      3-10   d: n  28  mid - model median +0.009  p10 -0.007  p90 +0.043
-  touch     10-400  d: n  91  mid - model median +0.013  p10 +0.003  p90 +0.045
-paper: {'updated': '2026-11-18 14:18', 'open': 48, 'new': 0, 'settled': 92, 'won': 38, 'pnl': 162.36, 'staked_settled': 888.92}
+priced with both: 452
+mid - model: p10 -0.023 median +0.009 p90 +0.107
+  above      0-0.5  d: n  49  mid - model median +0.021  p10 -0.387  p90 +0.394
+  above    0.5-3    d: n  40  mid - model median +0.007  p10 -0.004  p90 +0.030
+  above      3-10   d: n  96  mid - model median +0.004  p10 -0.015  p90 +0.023
+  below      0-0.5  d: n   1  mid - model median -0.014  p10 -0.014  p90 -0.014
+  below    0.5-3    d: n   4  mid - model median +0.008  p10 -0.036  p90 +0.024
+  below      3-10   d: n   8  mid - model median +0.004  p10 -0.031  p90 +0.302
+  between    0-0.5  d: n   6  mid - model median +0.010  p10 -0.093  p90 +0.070
+  between  0.5-3    d: n  32  mid - model median +0.010  p10 -0.028  p90 +0.086
+  between    3-10   d: n  72  mid - model median +0.021  p10 -0.027  p90 +0.213
+  touch    0.5-3    d: n  24  mid - model median +0.008  p10 -0.016  p90 +0.040
+  touch      3-10   d: n  28  mid - model median +0.007  p10 -0.001  p90 +0.073
+  touch     10-400  d: n  91  mid - model median +0.013  p10 +0.003  p90 +0.043
+paper: {'updated': '2026-11-18 14:41', 'open': 49, 'new': 1, 'settled': 92, 'won': 38, 'pnl': 162.36, 'staked_settled': 888.92}
