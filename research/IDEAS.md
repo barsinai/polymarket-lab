@@ -24,6 +24,14 @@ Status: TESTING (paper/backtest running) · READY (next up) · PARKED (needs som
 | Research journal (my forecasts with sources) | reading + cross-checking beats the crowd on slow political/econ questions | forecast_log.py, Brier vs market | 11-10 | weeks |
 
 ## READY (ranked)
+N83. -> tested 11-18 (cycle 37), DEAD (see DEAD). **(outside the box, 11-18 c37) Earthquake markets vs the Gutenberg-Richter prior**
+   (daily 'biggest earthquake on <date>' ladders, weekly M5.5+ / M6.5+ counts). Why the crowd could be wrong: the base rate is a physics
+   law few traders look up and the buckets are narrow. Exposed to 13, 9, 26, 5.
+N82. -> tested 11-18 (cycle 37), UNCLEAR by the rule, no tracker change. **(adjacent to N58 / N60) Culture launch-hour NO on deadline
+   ladders ('X by Nov 24 / Nov 28 / Dec 1')** - on 11-18 N58 bought 18 of its 26 positions in five 'streamer finishes GTA VI by' ladders
+   in ~30 min (lesson 6). Tape: ladder +3.9 pts [-10.9, +20.0] on only 14 events / 58 markets (4% of N60 rows), earliest rung +2.0,
+   later rungs +4.5, one bet per event +12.7 [-4.0, +26.8]; non-deadline +8.4 [6.1, 10.7] (529 events). Too few ladders to cap them;
+   the forward N58 read must count events (its decision rule already does: 100 markets / 40 events).
 N81. **(outside the box, 11-18 c36) Weekend equity: Polymarket stock / index 'up or down' and 'close above X' markets that settle on the
    Monday (or Friday-close markets still trading after the bell) vs 24/7 equity perpetuals (Hyperliquid HIP-3 stock / index perps).** Why
    the crowd could be wrong: between Friday 21:00 and Monday 13:30 UTC the Polymarket book has no live underlying to anchor on, while the
@@ -364,6 +372,11 @@ OLD N2. **(outside the box, 11-12) Box-office opening-weekend markets vs Thursda
 - Kalshi vs Polymarket automatic pairing (titles do not match; manual for named series only).
 
 ## DEAD (number that killed it)
+- N83 earthquake markets vs Gutenberg-Richter (11-18 c37, quake_gr.py, local, 12-week tape group b, 142 markets / 23 events, textbook
+  constants N(M>=5) = 3.97/day, b = 1, fixed before looking): only 32 taker entries happen before the day / week starts (the trading is
+  intraday, after the catalog starts filling); rule GR - price >= 5c: 3 fills, -10.7 pts; all pre-period entries -2.4 [-10.0, +4.5]
+  (9 events); Brier market .115 vs GR .107 on 25 markets (no gap worth trading). After the day ends (+1 h) the winning side already
+  trades at 0.96-0.999 (34 markets / 9 days, 2 fills <= 0.95 on 1 day) -> DEAD (no pre-period volume; after-day read is crumbs, lesson 26).
 - N80 copy only at a small price gap (11-18 c36, copy_gap.py, local, 12-week tape groups a + c, tape_entries_an walk-forward 'good'
   wallets (1,540, picked on markets that ended in the older 6 weeks), their newer-half pre-event entries, follower = next same-way print
   >= 300 s later, fee paid, event-clustered, rules fixed before looking): gap <= 1c +0.33 pts [-0.1, +0.8] (36k entries / 1,077 events),

@@ -805,3 +805,25 @@
   Netflix / Spotify weekly event lists). STOP file in place, no orders. This run had no network to Polymarket and no Actions dispatch.
 - Next: 11-19 reads: lock_x week (32 end-times, needs >= +5%), LP-1 5-day + forward_core, options N42; N58 first settlements (split by
   series kind); N21 11-21; N73 esports snapshot (reuse sharp_compare); N81 / N63 / N61 / N67 need Actions; N45 11-30.
+
+## 11-18 17:05-17:45 UTC cycle 37 (scheduled)
+- Read-outs (fast trades.jsonl, last settled entry 16:34): lock_x 37 trades / 33 end-times 34 won +6.4% (formal week read 11-19 needs
+  >= +5%), lock_x50 +8.9%, lock_p_majors 29 / 27 end-times +5.3%; lock_m 299 -2.4%, lock_b 120 0.0%, lock_p_z2 360 -1.9%. N21 forward
+  BTC/ETH 138 windows / 125 won -3.5% (below +2%; read 11-21), alts 159 / 138 -6.3%. Slow (16:37-16:38): converge 16 / 15 -$9.55, 84 open
+  mark -$35; young 71 / 36 -$152 (57 open); options N42 forward rest 12 / 10 +13.1 pts (6 events), 53 open (13 tails); box office 9 / 8
+  -$0.96; charts 3 / 3 +$3.64; mention 5 / 4 -$4.62 (4 events), 5 open. LP-1 v2 115 runs / 4.27 d: formula $1,966 (upper bound), trading
+  -$429, pessimistic -$690; 95 settled, 71 open leftovers (guard OK), 3 quoted; forward_core 74 markets $399 vs +$37 / +$15 (passing;
+  formal read 11-19); forward_other 99 markets $788 vs -$45 / -$265 (N35 failing). COPY-1 98.4 h: sharp 71 primaries settled / 48 events
+  +3.4 pts (+2.6 at 5 min later; bar 300 / 100), control 69 / 33 +2.4. N58 launch tracker (16:42): 26 open (3 first, 22 retry, 1 late),
+  0 settled, open_past_end 0 - 19 new positions 15:20-16:00, 18 of 26 in five 'streamer finishes GTA VI by <date>' ladders (one theme,
+  lesson 6: ~9 events in the book, read it by event).
+- Test (adjacent N82, culture_ladder.py, local, exact N60 F300 rows, rules fixed before looking): launch-hour NO on deadline ladders
+  +3.9 pts [-10.9, +20.0] on 14 events / 58 markets (4% of rows), earliest rung +2.0, later +4.5; non-deadline +8.4 [6.1, 10.7] (529
+  events) -> UNCLEAR, no cap (too few ladders on the tape to decide).
+- New (outside the box N83, quake_gr.py): earthquake ladders / counts vs the Gutenberg-Richter prior: 32 pre-period entries, rule 3 fills
+  -10.7 pts, Brier market .115 vs GR .107; after the day ends the winner trades at 0.96-0.999 -> DEAD (lesson 26).
+- Health: fast paper 16:37, slow 16:41, follow 16:44 (report 16:37, < 70 min), boosts 16:22, MM v2 16:02, books 17:00, live snapshot
+  16:05 - OK. Tracebacks only the old pilot-log (2) / script-log (1); external-log clean after the c36 fix; no MemoryErrors. STOP in
+  place, no orders. No network to Polymarket / USGS from this run.
+- Next: 11-19 reads: lock_x week (33 end-times, needs >= +5%), LP-1 5-day + forward_core, options N42; N58 first settlements (by event
+  and series kind); N21 11-21; N73 esports snapshot; N81 / N63 / N61 / N67 need Actions; N45 11-30.

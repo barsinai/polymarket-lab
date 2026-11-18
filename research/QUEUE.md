@@ -831,3 +831,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - Sports vs Pinnacle DEAD (1 of 882 pairs >= 2c, 0 positions in a week). N80 copy-at-small-gap DEAD: follower +0.33 pts [-0.1, +0.8] at
   gap <= 1c, COPY-1's 3c cap +0.51 on the tape (bar +1.5) -> COPY-1 likely regresses. N81 weekend equity vs 24/7 perps READY (needs
   Actions). Fixed an open-meteo timeout crash in external/weather.py. Next: 11-19 reads (lock_x week, LP-1 forward_core, options N42).
+
+## 11-18 17:40 cycle 37
+- N82 culture ladders UNCLEAR: ladder launch-hour NO +3.9 pts [-10.9, +20.0] on 14 events (4% of rows) vs non-deadline +8.4 [6.1, 10.7];
+  no cap. N58 bought 18/26 positions in five GTA VI 'finish by' ladders today -> read it by event. N83 earthquakes vs Gutenberg-Richter
+  DEAD (32 pre-period entries; after-day winners at 0.96-0.999). lock_x 37 / 33 end-times +6.4%. Next: 11-19 reads.
