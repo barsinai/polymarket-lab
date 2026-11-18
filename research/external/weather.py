@@ -35,15 +35,19 @@ S = requests.Session(); S.headers["User-Agent"] = "polymarket-lab-research/0.1"
 os.makedirs("data/external/weather", exist_ok=True)
 for city, (lat, lon) in CITIES.items():
     out = f"data/external/weather/{city}.json.gz"
+    r = None
     for k in range(4):
-        r = S.get("https://previous-runs-api.open-meteo.com/v1/forecast",
-                  params={"latitude": lat, "longitude": lon, "timezone": "auto",
-                          "hourly": "temperature_2m,temperature_2m_previous_day1,temperature_2m_previous_day2",
-                          "start_date": "2024-06-01", "end_date": date.today().isoformat()}, timeout=120)
+        try:
+            r = S.get("https://previous-runs-api.open-meteo.com/v1/forecast",
+                      params={"latitude": lat, "longitude": lon, "timezone": "auto",
+                              "hourly": "temperature_2m,temperature_2m_previous_day1,temperature_2m_previous_day2",
+                              "start_date": "2024-06-01", "end_date": date.today().isoformat()}, timeout=120)
+        except requests.RequestException as e:  # 11-18 c36: one read timeout killed the remaining cities
+            print(city, "request failed:", type(e).__name__, flush=True); r = None; time.sleep(5 * (k + 1)); continue
         if r.status_code == 200:
             break
         print(city, r.status_code, r.text[:300], flush=True); time.sleep(5 * (k + 1))
-    if r.status_code != 200:
+    if r is None or r.status_code != 200:
         continue
     d = r.json(); h = d["hourly"]
     with gzip.open(out, "wt") as f:

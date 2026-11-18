@@ -780,3 +780,28 @@
   OK. Tracebacks only the old pilot-log (2) / script-log (1); no MemoryErrors. STOP file in place, no orders.
 - Next: 11-19 reads: lock_x week (31 end-times, needs >= +5%), LP-1 5-day + forward_core, options N42; N58 first settlements (split by
   series kind); N21 11-21; N73 esports snapshot; N63 calendars; N61 history; N67; N45 11-30.
+
+## 11-18 13:01-13:40 UTC cycle 36 (scheduled)
+- Read-outs (fast trades.jsonl, last settled entry 12:29): lock_x 36 trades / 32 end-times 33 won +6.5% (7 days; formal week read 11-19
+  needs >= +5%), lock_x50 +9.1%, lock_p_majors 28 / 26 end-times +5.3%; lock_m 296 -2.4%, lock_b 118 -0.1%, lock_p_z2 354 -1.6%. N21 forward
+  BTC/ETH 133 windows / 120 won -3.9% (below +2%; read 11-21), alts 151 / 132 -5.2%. Slow (12:36-12:37): converge 15 / 14 -$9.64, 83 open
+  mark -$40; young 71 / 36 -$152 (56 open); options N42 forward rest 12 / 10 +13.1 pts (6 events), 48 open; box office 9 / 8 -$0.96;
+  charts 3 / 3 +$3.64; mention 4 / 3 -$6.41, 6 open. LP-1 v2 110 runs / 4.11 d: formula $1,957 (upper bound), trading -$429, pessimistic
+  -$668; 95 settled, 66 open leftovers (guard OK), 6 quoted; forward_core 71 markets $390 vs +$47 / +$37 (passing; formal read 11-19);
+  forward_other 96 markets $780 vs -$44 / -$244 (N35 failing). COPY-1 94.2 h: sharp 69 primaries settled / 46 events +3.1 pts (+2.3 at 5
+  min later; bar 300 / 100), control 67 / 31 +2.3. N58 launch tracker (12:30): 7 open (3 first, 4 retry), 0 settled, open_past_end 0.
+- Sports vs Pinnacle (TESTING since 11-11, read-out date 11-18): 882 pairs / 113 games / 19 snapshots, fair - ask p99 +1.6c, max +2.8c,
+  1 pair >= 2c, 0 paper positions in a week -> DEAD (main-line books track Pinnacle within a cent).
+- Test (adjacent N80, copy_gap.py, local, 12-week tape a + c, walk-forward 'good' wallets, follower >= 300 s, rules fixed before looking):
+  copy only when the follower's price is <= the wallet's + 1c: +0.33 pts [-0.1, +0.8] (1,077 events), halves +0.4 / +0.3; COPY-1's own
+  <= 3c cap +0.51 [+0.1, +1.0]; placebo wallets -1.0 -> DEAD. Picking wallets beats random by ~1.3 pts, but the follower keeps ~0-0.5,
+  below COPY-1's +1.5 bar: expect its paper +3.1 to regress.
+- New (outside the box N81, READY, needs Actions): weekend equity up/down markets vs 24/7 equity perps (Hyperliquid HIP-3).
+- Health: fast paper 12:35, slow 12:40, follow 12:31 (report 12:27, < 70 min), boosts 11:57, books 13:00, live snapshot 12:05 - OK.
+  NEW: external-log 3 Tracebacks = one open-meteo read timeout in research/external/weather.py that killed the remaining cities (job
+  still committed 12:18) -> fixed (catch RequestException per city, retry, skip). Old pilot-log (2) / script-log (1). No MemoryErrors.
+  charts_paper chart_events_seen = 0 in all 6 runs today: the 09:03 active-market snapshot also has no chart market ending within days
+  (13 chart-like markets, all year-end) -> consistent with the weekly series being absent, not yet proven (lesson 10; recheck when a
+  Netflix / Spotify weekly event lists). STOP file in place, no orders. This run had no network to Polymarket and no Actions dispatch.
+- Next: 11-19 reads: lock_x week (32 end-times, needs >= +5%), LP-1 5-day + forward_core, options N42; N58 first settlements (split by
+  series kind); N21 11-21; N73 esports snapshot (reuse sharp_compare); N81 / N63 / N61 / N67 need Actions; N45 11-30.

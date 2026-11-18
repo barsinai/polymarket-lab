@@ -826,3 +826,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
   both halves; recurring ex-mention only +1.7 -> UNCLEAR by the rule (recurring > +1), no tracker change; split the N58 forward read-out by
   kind. N79 AI model release ladders DEAD (NO +0.7 [-6.8, +7.4], 20 model lines, halves -7.5 / +8.8). lock_x 35 / 31 end-times +6.3%.
   Next: 11-19 reads (lock_x week, LP-1 5-day + forward_core, options N42), N58 settlements.
+
+## 11-18 13:40 cycle 36
+- Sports vs Pinnacle DEAD (1 of 882 pairs >= 2c, 0 positions in a week). N80 copy-at-small-gap DEAD: follower +0.33 pts [-0.1, +0.8] at
+  gap <= 1c, COPY-1's 3c cap +0.51 on the tape (bar +1.5) -> COPY-1 likely regresses. N81 weekend equity vs 24/7 perps READY (needs
+  Actions). Fixed an open-meteo timeout crash in external/weather.py. Next: 11-19 reads (lock_x week, LP-1 forward_core, options N42).
