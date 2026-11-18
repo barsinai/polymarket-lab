@@ -1,8 +1,8 @@
 {
-"scanned": "2026-11-18 01:33",
+"scanned": "2026-11-18 02:34",
 "events": 2100,
 "groups": 2037,
-"books": 16808,
+"books": 16806,
 "opps": [
 {
 "kind": "ladder_num",
@@ -16,8 +16,23 @@
 "cost": 0.99,
 "edge": 0.01,
 "edge_after_fee": -0.0083,
-"size_shares": 133.11,
-"usd_at_size": 131.78
+"size_shares": 257.65,
+"usd_at_size": 255.07
+},
+{
+"kind": "ladder_date",
+"event": "Will Israel annex any territory by...?",
+"slug": "will-israel-annex-any-territory-by-december-31",
+"easy": "Will Israel annex any territory by December 31?",
+"hard": "Will Israel annex any territory by June 30?",
+"easy_yes_ask": 0.032,
+"hard_no_ask": 0.9,
+"hard_yes_bid": 0.1,
+"cost": 0.932,
+"edge": 0.068,
+"edge_after_fee": 0.0595,
+"size_shares": 12.5,
+"usd_at_size": 11.65
 },
 {
 "kind": "ladder_num",
@@ -33,51 +48,6 @@
 "edge_after_fee": 0.0015,
 "size_shares": 209.95,
 "usd_at_size": 209.11
-},
-{
-"kind": "ladder_date",
-"event": "Will Israel annex any territory by...?",
-"slug": "will-israel-annex-any-territory-by-december-31",
-"easy": "Will Israel annex any territory by December 31?",
-"hard": "Will Israel annex any territory by June 30?",
-"easy_yes_ask": 0.044,
-"hard_no_ask": 0.9,
-"hard_yes_bid": 0.1,
-"cost": 0.944,
-"edge": 0.056,
-"edge_after_fee": 0.0468,
-"size_shares": 12.5,
-"usd_at_size": 11.8
-},
-{
-"kind": "ladder_num",
-"event": "Saturn FDV above ___ one day after launch?",
-"slug": "saturn-fdv-above-one-day-after-launch-20260623191408697",
-"easy": "Saturn FDV above $300M one day after launch",
-"hard": "Saturn FDV above $400M one day after launch",
-"easy_yes_ask": 0.04,
-"hard_no_ask": 0.955,
-"hard_yes_bid": 0.045,
-"cost": 0.995,
-"edge": 0.005,
-"edge_after_fee": -0.0007,
-"size_shares": 120.0,
-"usd_at_size": 119.4
-},
-{
-"kind": "ladder_date",
-"event": "Will Predict.fun launch a token by ___?",
-"slug": "will-predictfun-launch-a-token-by",
-"easy": "Will Predict.fun launch a token by September 30, 2027?",
-"hard": "Will Predict.fun launch a token by June 30, 2027?",
-"easy_yes_ask": 0.962,
-"hard_no_ask": 0.03,
-"hard_yes_bid": 0.97,
-"cost": 0.992,
-"edge": 0.008,
-"edge_after_fee": 0.0034,
-"size_shares": 73.0,
-"usd_at_size": 72.42
 },
 {
 "kind": "negrisk_all_yes",
@@ -96,12 +66,12 @@
 "4.5%+",
 "4.0-4.4%"
 ],
-"cost": 0.975,
+"cost": 0.973,
 "payoff": 1,
-"edge": 0.025,
-"edge_after_fee": -0.0208,
+"edge": 0.027,
+"edge_after_fee": -0.0191,
 "size_shares": 20.0,
-"usd_at_size": 19.5
+"usd_at_size": 19.46
 },
 {
 "kind": "ladder_num",
@@ -134,19 +104,34 @@
 "usd_at_size": 38.61
 },
 {
+"kind": "ladder_date",
+"event": "Will Israel annex any territory by...?",
+"slug": "will-israel-annex-any-territory-by-december-31",
+"easy": "Will Israel annex any territory by December 31?",
+"hard": "Will Israel annex any territory by March 31?",
+"easy_yes_ask": 0.032,
+"hard_no_ask": 0.95,
+"hard_yes_bid": 0.05,
+"cost": 0.982,
+"edge": 0.018,
+"edge_after_fee": 0.0125,
+"size_shares": 20.0,
+"usd_at_size": 19.64
+},
+{
 "kind": "ladder_num",
-"event": "Tuyo FDV above ___ one day after launch?",
-"slug": "tuyo-fdv-above-one-day-after-launch",
-"easy": "Tuyo FDV above $500M one day after launch?",
-"hard": "Tuyo FDV above $700M one day after launch?",
-"easy_yes_ask": 0.15,
-"hard_no_ask": 0.84,
-"hard_yes_bid": 0.16,
-"cost": 0.99,
-"edge": 0.01,
-"edge_after_fee": -0.0083,
-"size_shares": 30.1,
-"usd_at_size": 29.8
+"event": "Ostium FDV above ___ one day after launch?",
+"slug": "ostium-fdv-above-one-day-after-launch",
+"easy": "Ostium FDV above $75M one day after launch?",
+"hard": "Ostium FDV above $100M one day after launch?",
+"easy_yes_ask": 0.02,
+"hard_no_ask": 0.974,
+"hard_yes_bid": 0.026,
+"cost": 0.994,
+"edge": 0.006,
+"edge_after_fee": 0.0029,
+"size_shares": 60.0,
+"usd_at_size": 59.64
 },
 {
 "kind": "ladder_num",
@@ -162,6 +147,21 @@
 "edge_after_fee": 0.0019,
 "size_shares": 58.82,
 "usd_at_size": 58.58
+},
+{
+"kind": "ladder_num",
+"event": "Makina FDV above ___ one day after launch?",
+"slug": "makina-fdv-above-one-day-after-launch",
+"easy": "Makina FDV above $80M one day after launch?",
+"hard": "Makina FDV above $100M one day after launch?",
+"easy_yes_ask": 0.055,
+"hard_no_ask": 0.942,
+"hard_yes_bid": 0.058,
+"cost": 0.997,
+"edge": 0.003,
+"edge_after_fee": -0.0045,
+"size_shares": 60.0,
+"usd_at_size": 59.82
 },
 {
 "kind": "negrisk_all_yes",
@@ -200,64 +200,19 @@
 "usd_at_size": 29.45
 },
 {
-"kind": "ladder_date",
-"event": "Will Israel annex any territory by...?",
-"slug": "will-israel-annex-any-territory-by-december-31",
-"easy": "Will Israel annex any territory by December 31?",
-"hard": "Will Israel annex any territory by March 31?",
-"easy_yes_ask": 0.044,
-"hard_no_ask": 0.95,
-"hard_yes_bid": 0.05,
-"cost": 0.994,
-"edge": 0.006,
-"edge_after_fee": -0.0003,
-"size_shares": 20.0,
-"usd_at_size": 19.88
-},
-{
-"kind": "ladder_num",
-"event": "Ostium FDV above ___ one day after launch?",
-"slug": "ostium-fdv-above-one-day-after-launch",
-"easy": "Ostium FDV above $75M one day after launch?",
-"hard": "Ostium FDV above $100M one day after launch?",
-"easy_yes_ask": 0.023,
-"hard_no_ask": 0.974,
-"hard_yes_bid": 0.026,
-"cost": 0.997,
-"edge": 0.003,
-"edge_after_fee": -0.0003,
-"size_shares": 39.0,
-"usd_at_size": 38.88
-},
-{
-"kind": "ladder_date",
-"event": "Will Predict.fun launch a token by ___?",
-"slug": "will-predictfun-launch-a-token-by",
-"easy": "Will Predict.fun launch a token by December 31, 2027?",
-"hard": "Will Predict.fun launch a token by June 30, 2027?",
-"easy_yes_ask": 0.967,
-"hard_no_ask": 0.03,
-"hard_yes_bid": 0.97,
-"cost": 0.997,
-"edge": 0.003,
-"edge_after_fee": -0.0013,
-"size_shares": 35.5,
-"usd_at_size": 35.39
-},
-{
 "kind": "ladder_num",
 "event": "Printr FDV above ___ one day after launch?",
 "slug": "printr-fdv-above-one-day-after-launch",
 "easy": "Printr FDV above $500M one day after launch?",
 "hard": "Printr FDV above $1B one day after launch?",
 "easy_yes_ask": 0.049,
-"hard_no_ask": 0.937,
-"hard_yes_bid": 0.063,
-"cost": 0.986,
-"edge": 0.014,
-"edge_after_fee": 0.0066,
+"hard_no_ask": 0.934,
+"hard_yes_bid": 0.066,
+"cost": 0.983,
+"edge": 0.017,
+"edge_after_fee": 0.0094,
 "size_shares": 1.61,
-"usd_at_size": 1.59
+"usd_at_size": 1.58
 },
 {
 "kind": "ladder_num",
@@ -266,11 +221,11 @@
 "easy": "Printr FDV above $500M one day after launch?",
 "hard": "Printr FDV above $800M one day after launch?",
 "easy_yes_ask": 0.049,
-"hard_no_ask": 0.939,
-"hard_yes_bid": 0.061,
-"cost": 0.988,
-"edge": 0.012,
-"edge_after_fee": 0.0047,
+"hard_no_ask": 0.937,
+"hard_yes_bid": 0.063,
+"cost": 0.986,
+"edge": 0.014,
+"edge_after_fee": 0.0066,
 "size_shares": 1.61,
 "usd_at_size": 1.59
 }
