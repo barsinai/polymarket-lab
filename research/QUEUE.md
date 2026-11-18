@@ -836,3 +836,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - N82 culture ladders UNCLEAR: ladder launch-hour NO +3.9 pts [-10.9, +20.0] on 14 events (4% of rows) vs non-deadline +8.4 [6.1, 10.7];
   no cap. N58 bought 18/26 positions in five GTA VI 'finish by' ladders today -> read it by event. N83 earthquakes vs Gutenberg-Richter
   DEAD (32 pre-period entries; after-day winners at 0.96-0.999). lock_x 37 / 33 end-times +6.4%. Next: 11-19 reads.
+
+## 11-18 21:40 cycle 38
+- N84 copy-by-horizon UNCLEAR: tape follower >= 24 h +0.57 pts [0.1, 1.0] (996 events), 7-60 d +1.0, < 24 h -0.1 -> no COPY-1 arm; the
+  paper's 1-7 d +17 is noise. N85 on-chain rule clarifications READY (needs Actions). Read-outs flat (lock_x 37 / 33 +6.4%).
+  Next: 11-19 reads (lock_x week, LP-1 forward_core, options N42), N58 settlements.

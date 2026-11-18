@@ -827,3 +827,23 @@
   place, no orders. No network to Polymarket / USGS from this run.
 - Next: 11-19 reads: lock_x week (33 end-times, needs >= +5%), LP-1 5-day + forward_core, options N42; N58 first settlements (by event
   and series kind); N21 11-21; N73 esports snapshot; N81 / N63 / N61 / N67 need Actions; N45 11-30.
+
+## 11-18 21:05-21:40 UTC cycle 38 (scheduled)
+- Read-outs (fast trades.jsonl, last settled entry 20:34): lock_x 37 trades / 33 end-times 34 won +6.4% (no new signal since c37; formal
+  week read 11-19 needs >= +5%), lock_x50 +8.9%, lock_p_majors 29 / 27 end-times +5.3%; lock_m 302 -2.3%, lock_b 121 +0.1%, lock_p_z2 365
+  -1.8%. N21 forward BTC/ETH 141 windows / 128 won -3.4% (below +2%; read 11-21), alts 166 / 145 -5.9%. Slow (20:39-20:41): converge 16 / 15
+  -$9.55, 86 open mark -$33; young 75 / 40 -$126 (62 open); options N42 forward tails 4 / 0 -7.9 pts (3 events), rest 12 / 10 +13.1 (6
+  events), 47 open; box office 9 / 8 -$0.96; charts 3 / 3 +$3.64 (chart_events_seen still 0); mention 5 / 4 -$4.62, 14 open. LP-1 v2 119
+  runs / 4.44 d: formula $1,985 (upper bound), trading -$433, pessimistic -$684; 96 settled, 73 open leftovers (guard OK), 2 quoted;
+  forward_core 76 markets $418 vs +$49 / +$21 (passing; formal read 11-19); forward_other 101 markets $808 vs -$33 / -$259 (N35 failing).
+  COPY-1 102.6 h: sharp 74 primaries settled / 50 events +3.2 pts (+2.4 at 5 min later; bar 300 / 100), control 76 / 37 +4.0. N58 launch
+  tracker (20:54): 28 open (3 first, 24 retry, 1 late), 0 settled, open_past_end 0.
+- Test (adjacent N84, copy_horizon.py, local, 12-week tape a + c, walk-forward good wallets, follower >= 300 s, 3c cap, rules fixed before
+  looking): by horizon at entry: < 24 h -0.1 pts [-1.5, +1.2] (379 events), 1-7 d +0.2 (667), 7-60 d +1.0 [+0.3, +1.7] (730), 24 h-60 d
+  +0.57 [+0.1, +1.0] (996 events, halves +0.7 / +0.4), placebo others -1.0 -> UNCLEAR by the rule (> +0.5, < +1.5), no COPY-1 arm. The
+  paper's 'ends 1-7 d +17 pts' is noise; the follower's ceiling stays ~+0.5..+1.
+- New (outside the box N85, READY, needs Actions): on-chain rule clarifications (UMA adapter bulletin-board updates) vs the book's reaction.
+- Health: fast paper 20:39, slow 20:44, follow 20:56 (report 20:49, < 70 min), boosts 20:43, MM v2 20:01, books 21:00, live snapshot
+  20:47 - OK. Tracebacks only the old pilot-log (2) / script-log (1); no MemoryErrors. STOP in place, no orders.
+- Next: 11-19 reads: lock_x week (33 end-times, needs >= +5%), LP-1 5-day + forward_core, options N42; N58 first settlements (by event
+  and series kind); N21 11-21; N73 esports snapshot; N85 / N81 / N63 / N61 / N67 need Actions; N45 11-30.
