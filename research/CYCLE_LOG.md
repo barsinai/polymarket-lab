@@ -757,3 +757,26 @@
   no MemoryErrors. No orders.
 - Next: lock_x week read 11-19 (30 end-times reached, needs >= +5%); LP-1 5-day + forward_core read 11-19; options N42 11-19; N58 first
   settlements; N21 11-21; N73 esports snapshot; N63 calendars; N61 history; N67; N45 11-30.
+
+## 11-18 09:02-09:35 UTC cycle 35 (scheduled)
+- Read-outs (fast trades.jsonl, last settled entry 08:29): lock_x 35 trades / 31 end-times 32 won +6.3% (7 days; formal week read 11-19
+  needs >= +5%), lock_x50 +9.0%, lock_p_majors 28 / 26 end-times +5.3%; lock_m 287 -2.7%, lock_b 113 -0.3%, lock_p_z2 344 -1.4%. N21 forward
+  BTC/ETH 129 windows / 117 won -3.4% (5 days, below +2%; read 11-21), alts 139 / 121 -5.6%. Slow (08:34-08:36): converge 14 / 13 -$10,
+  84 open mark -$41; young 71 / 36 -$152 (55 open); options N42 forward tails 4 / 0 -7.9 pts (3 events), rest 12 / 10 +13.1 (6 events);
+  box office 9 / 8 -$0.96; charts 3 / 3 +$3.64; mention 4 / 3 -$6.41, 6 open. LP-1 v2 106 runs / 3.94 d: formula $1,933 (upper bound),
+  trading -$442, pessimistic -$678; 93 settled, 65 open leftovers (guard OK), 6 quoted; forward_core 66 markets $374 vs +$63 / +$43
+  (passing; formal read 11-19); forward_other 91 markets $756 vs -$44 / -$249 (N35 failing). COPY-1 90.3 h: sharp 68 primaries settled /
+  45 events +4.1 pts (+3.3 at 5 min later; bar 300 / 100), control 67 / 31 +2.3. N58 launch tracker (08:29): 7 open (3 first, 4 retry),
+  0 settled, open_past_end 0.
+- Test (adjacent N78, culture_series.py, local, exact N60 F300 rows listed >= 7 d after tape start, rules fixed before looking): culture
+  launch-hour NO by series kind: one-off events +11.1 pts [7.7, 15.0] (249 events), recurring series +4.1 [1.2, 7.2] (243), first copy of
+  a series +8.6 (55); one-off - recurring +6.3 / +7.3 in the halves, recurring newer half +1.9 [-1.7, +6.0]. Rule needed recurring <= +1
+  -> UNCLEAR, no tracker change. Diagnostic (after looking): recurring ex-mention +1.7 [-1.2, +4.5] on 182 events (tweet counts +3.1,
+  MrBeast views +0.4, Netflix/box office -4.1) while recurring mention stays +11.2 -> the fan premium is weakest where a public count or
+  last week's copy anchors the price (lessons 13 / 26). Launch positions carry 'ev', so the forward book can be split the same way.
+- New (outside the box N79, ai_release_ladders.py): AI model release-date ladders (27 events, 203 markets with fills): NO side +0.7 pts
+  [-6.8, +7.4] on 20 model lines, halves -7.5 / +8.8; YES mirror -1.9 -> DEAD (count < 30 lines, sign flip).
+- Health: fast paper 08:34, slow 08:39, follow 08:31 (report 08:31, < 70 min), boosts 08:38, MM v2 09:01, books 09:00, live snapshot 09:06 -
+  OK. Tracebacks only the old pilot-log (2) / script-log (1); no MemoryErrors. STOP file in place, no orders.
+- Next: 11-19 reads: lock_x week (31 end-times, needs >= +5%), LP-1 5-day + forward_core, options N42; N58 first settlements (split by
+  series kind); N21 11-21; N73 esports snapshot; N63 calendars; N61 history; N67; N45 11-30.

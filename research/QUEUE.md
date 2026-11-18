@@ -820,3 +820,9 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - N76 culture launch-hour NO capacity: median market $8 of single-price NO taker money in the 5-60 min window, real takers +2.3 pts
   share-weighted (vs +8 per market) -> N58 is small-ticket ($10-20 / market). N77 holding-reward carry DEAD by arithmetic (= cash yield).
   lock_x reached 30 end-times at +6.4% (week read 11-19). Next: 11-19 reads (lock_x, LP-1 forward_core, options N42), N58 settlements.
+
+## 11-18 09:30 cycle 35
+- N78 culture launch-hour NO by series kind: one-off +11.1 pts [7.7, 15.0] (249 events) vs recurring +4.1 [1.2, 7.2] (243), gap ~+7 in
+  both halves; recurring ex-mention only +1.7 -> UNCLEAR by the rule (recurring > +1), no tracker change; split the N58 forward read-out by
+  kind. N79 AI model release ladders DEAD (NO +0.7 [-6.8, +7.4], 20 model lines, halves -7.5 / +8.8). lock_x 35 / 31 end-times +6.3%.
+  Next: 11-19 reads (lock_x week, LP-1 5-day + forward_core, options N42), N58 settlements.
