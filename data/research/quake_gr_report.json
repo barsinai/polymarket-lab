@@ -1,0 +1,43 @@
+{
+ "markets": 142,
+ "events": 23,
+ "entry_rows": 32,
+ "brier market": 0.1145,
+ "brier GR": 0.1074,
+ "calibration markets": 25,
+ "rule (GR - price >= 5c)": {
+  "n": 3,
+  "events": 3,
+  "pts": -10.67
+ },
+ "rule halves": [
+  76.0,
+  -54.0
+ ],
+ "rule daily": {
+  "n": 3,
+  "events": 3,
+  "pts": -10.67
+ },
+ "rule weekly": {
+  "n": 0
+ },
+ "rule buys YES-tail (GR < 0.20)": {
+  "n": 0
+ },
+ "rule buys >= 0.20": {
+  "n": 3,
+  "events": 3,
+  "pts": -10.67
+ },
+ "all entries (any side, no rule)": {
+  "n": 32,
+  "events": 9,
+  "pts": -2.36,
+  "ci": [
+   -10.0,
+   4.5
+  ]
+ },
+ "verdict": "DEAD"
+}
