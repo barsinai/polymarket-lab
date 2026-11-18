@@ -1,6 +1,3 @@
-events scanned 2674
-price-threshold markets: 602
-unmatched crypto price events (title | first question):
    Bitcoin hashprice: week of November 16? | Will Bitcoin hashprice be less than $25 for the week of November 16?
    What will the Bitcoin Implied Volatility Index hit by November 30? | Will the Bitcoin Volatility Index hit 70 by November 30?
    Will Bitcoin Dominance hit 70% before 2027? | Will Bitcoin Dominance hit 70% before 2027?
@@ -9,17 +6,20 @@ unmatched crypto price events (title | first question):
    What will the Ethereum Implied Volatility Index hit by November 30? | Will the Ethereum Volatility Index hit 100 by November 30?
    What will the average monthly Ethereum gas price hit before 2027? | Will the average monthly Ethereum gas price hit 5 Gwei before 2027?
    Will Ethereum hit $1,000 or $3,000 first? | Will Ethereum hit $1,000 or $3,000 first?
-example rules: Will Bitcoin reach $73,000 on November 17? | This market will immediately resolve to "Yes" if any Binance 1-minute candle for Bitcoin (BTC/USDT) on the date specified in the title, between 12:00 AM ET and 11:59 PM ET has a final "High" price equal to or greater than the price specified in the title. Otherwise, this market will resolve to "No".
-The resolution source for this market is Binance, specifically the BTC/USDT "High" prices availabl
-priced with both: 419
-mid - model: p10 -0.010 median +0.007 p90 +0.044
-  above      0-0.5  d: n  27  mid - model median +0.005  p10 -0.201  p90 +0.352
-  above    0.5-3    d: n  49  mid - model median +0.004  p10 -0.009  p90 +0.017
-  above      3-10   d: n  96  mid - model median +0.001  p10 -0.009  p90 +0.017
-  below    0.5-3    d: n   6  mid - model median +0.005  p10 -0.025  p90 +0.013
-  below      3-10   d: n   8  mid - model median +0.007  p10 -0.002  p90 +0.017
-  between  0.5-3    d: n  41  mid - model median +0.007  p10 -0.017  p90 +0.021
-  between    3-10   d: n  72  mid - model median +0.012  p10 -0.018  p90 +0.117
-  touch      3-10   d: n  28  mid - model median +0.007  p10 -0.001  p90 +0.030
-  touch     10-400  d: n  91  mid - model median +0.013  p10 +0.004  p90 +0.044
-paper: {'updated': '2026-11-18 04:39', 'open': 48, 'new': 0, 'settled': 85, 'won': 34, 'pnl': 177.98, 'staked_settled': 818.92}
+example rules: Bitcoin above 66,400 on November 18, 2AM ET? | This market will resolve to "Yes" if the "Close" price for the BTC/USDT 1 hour candle that ends on the time and date specified in the title is higher than the price specified in the title. Otherwise, this market will resolve to "No".
+The resolution source for this market is Binance, specifically the BTC/USDT "Close" prices currently available at https://www.binance.com/en/trade/BTC_USDT with "1h"
+priced with both: 438
+mid - model: p10 -0.012 median +0.005 p90 +0.028
+  above      0-0.5  d: n  34  mid - model median +0.004  p10 -0.320  p90 +0.275
+  above    0.5-3    d: n  39  mid - model median +0.004  p10 -0.011  p90 +0.012
+  above      3-10   d: n  96  mid - model median +0.002  p10 -0.014  p90 +0.010
+  below      0-0.5  d: n   1  mid - model median -0.033  p10 -0.033  p90 -0.033
+  below    0.5-3    d: n   4  mid - model median +0.008  p10 -0.005  p90 +0.009
+  below      3-10   d: n   8  mid - model median +0.007  p10 -0.006  p90 +0.016
+  between    0-0.5  d: n   8  mid - model median +0.013  p10 -0.022  p90 +0.023
+  between  0.5-3    d: n  32  mid - model median +0.004  p10 -0.018  p90 +0.018
+  between    3-10   d: n  72  mid - model median +0.001  p10 -0.017  p90 +0.021
+  touch    0.5-3    d: n  24  mid - model median +0.009  p10 -0.006  p90 +0.029
+  touch      3-10   d: n  28  mid - model median +0.007  p10 -0.001  p90 +0.040
+  touch     10-400  d: n  91  mid - model median +0.013  p10 +0.004  p90 +0.048
+paper: {'updated': '2026-11-18 06:38', 'open': 41, 'new': 0, 'settled': 92, 'won': 38, 'pnl': 162.36, 'staked_settled': 888.92}
