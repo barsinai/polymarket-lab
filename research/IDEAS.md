@@ -25,6 +25,11 @@ Status: TESTING (paper/backtest running) · READY (next up) · PARKED (needs som
 | Research journal (my forecasts with sources) | reading + cross-checking beats the crowd on slow political/econ questions | forecast_log.py, Brier vs market | 11-10 | weeks |
 
 ## READY (ranked)
+N75. -> tested 11-18 (cycle 33), DEAD (see DEAD). **(outside the box) YouTube view-count bucket ladders (MrBeast / MrBeast Gaming
+   'views on day N / week N', GTA VI trailer views).** Growth curves are regular and the count is public live; fans spread mass over
+   neighbouring buckets? Exposed to 26, 9, 6, 13.
+N74. -> tested 11-18 (cycle 33), DEAD as a mechanism (see DEAD). **(adjacent to N58 / N60) Culture launch-hour NO by the clock: is it
+   'nobody awake to correct the seed book' (US night / weekend) or fans buying YES (flat)?** Exposed to 5, 22, 24.
 N73. **(outside the box, 11-17 c32) Esports match markets vs sharp esports lines.** Polymarket now lists many CS2 / LoL / Dota 2 /
    Valorant match winners; Pinnacle-style books price the same matches with deep limits. Why the crowd could be wrong: esports books on
    Polymarket are thin and fan-driven (team loyalty, regional fans, lesson 17 says fans over-price their side), and our sports compare
@@ -334,6 +339,16 @@ OLD N2. **(outside the box, 11-12) Box-office opening-weekend markets vs Thursda
 - Kalshi vs Polymarket automatic pairing (titles do not match; manual for named series only).
 
 ## DEAD (number that killed it)
+- N74 culture launch-hour NO by the clock (11-18 c33, culture_clock.py, the exact N60 F300 rows, clock by listing time, rules fixed
+  before looking): US day (Mon-Fri 13-04 UTC) +9.5 pts [6.5, 12.5] (348 events), US night +8.6 [2.4, 14.6] (132), weekend +4.8 [0.2, 9.4]
+  (138); off-hours minus day -3.2 (halves -2.0 / -4.1) -> the 'nobody is awake' story is wrong (if anything the edge is LARGER when the
+  US is awake). Consistent with N68's placebo: fans buying YES, not absent correctors. The tracker keeps polling 24/7; no rule change
+  (a day-only filter would be a forking path, lesson 22).
+- N75 YouTube view-count bucket ladders (11-18 c33, views_buckets.py, 12-week tape, 624 markets / 89 events, entries 1-48 h before the
+  end, follower >= 300 s, first fill per market+side, clustered by video-date): FAV (token 0.50-0.95 on YES) -4.1 pts [-9.1, +1.3]
+  (108 fills / 41 units), halves -8.8 / +0.5; FADE (NO 0.50-0.95) -0.3 [-2.1, +1.5] (244 / 42), halves +0.2 / -0.7 -> DEAD: the live
+  public count is priced (lesson 26). Unit caveat: day-N events of one video carry different dates, so 'videos' overcount (~2x);
+  it only widens the intervals of two arms that are already <= 0.
 - N72 culture ex-mention NO 1-48 h before the end (11-17 c32, culture_endno.py, 12-week tape, rules fixed before looking, market age >= 24 h,
   lives >= 72 h, follower >= 300 s at the next print 0.05-0.90, first fill per market): -0.2 pts [-1.7, +1.4] on 289 events; halves +0.4 /
   -0.8; 1-12 h -7.9 (35 events), 12-48 h +0.2; movies -5.0 [-8.1, -2.3], pop-culture +1.9 [0.0, 4.3] (one category of five, found by

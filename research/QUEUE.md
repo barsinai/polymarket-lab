@@ -810,3 +810,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - N72 culture ex-mention NO in the last 48 h DEAD: -0.2 pts [-1.7, +1.4], 289 events, halves +0.4 / -0.8, YES placebo -0.7 (the fan premium
   lives only at launch). N73 esports vs sharp lines READY. COPY-1 sharp +4.2 pts on 37 events (far from the 100-event bar).
   Next: lock_x 11-19, LP-1 forward_core 11-19, options N42 11-19, N58 settlements, N21 11-21, N73 snapshot.
+
+## 11-18 01:30 cycle 33
+- N74 culture launch-hour NO by the clock: US day +9.5 pts, night +8.6, weekend +4.8 (off - day -3.2) -> the 'nobody awake' mechanism is
+  wrong; fans buying YES. No rule change. N75 YouTube view-count ladders DEAD (FAV -4.1, FADE -0.3). Read-outs flat; lock_x stuck at 28/30
+  end-times. Next: lock_x + LP-1 forward_core + options N42 on 11-19, N58 settlements, follow chain hand-over.

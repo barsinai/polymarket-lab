@@ -714,3 +714,24 @@
   OK. Tracebacks only the old pilot-log (2) / script-log (1); no MemoryErrors. Pilot STOP, no orders.
 - Next: lock_x week mark 11-19 (needs 30 end-times and >= +5%); LP-1 5-day + forward_core read 11-19; options N42 11-19; N58 first
   settlements (positions from 11-17 01 UTC end >= 11-18); N21 11-21; N73 snapshot; N63 calendars; N61 history; N67 history; N45 11-30.
+
+## 11-18 01:05-01:30 UTC cycle 33 (scheduled)
+- Read-outs (fast trades.jsonl, last settled 00:28): lock_x 32 trades / 28 end-times +6.4% (unchanged for a day; needs 30 end-times, week
+  mark 11-19), lock_x50 +9.5%, lock_p_majors 26 / 24 +5.2%; lock_m 268 -2.8%, lock_b 99 +0.2%, lock_p_z2 328 -1.1%. N21 forward BTC/ETH
+  118 windows / 107 won -3.4% (read 11-21), alts 123 / 108 -4.7%. Slow (00:32-00:35): converge 14 / 13 -$10, 82 open mark -$43; young
+  69 / 34 -$163 (53 open); options 85 settled +$178, 48 open, N42 forward tails 2 / 0 -9.8 pts, rest 7 / 6 +12.3 (unchanged); box office
+  9 / 8 -$0.96; charts 3 / 3 +$3.64; mention 2 / 1 -$8.74, 7 open. LP-1 v2 98 runs / 3.6 d: formula $1,889 (upper bound), trading -$477,
+  pessimistic -$702; 88 settled, 68 open leftovers (guard OK), 4 quoted; forward_core 60 markets $345 vs +$42 / +$9 (passing; formal read
+  11-19); forward_other 82 markets $711 vs -$71 / -$252 (N35 failing). COPY-1 81.7 h: sharp 59 primaries settled / 40 events +5.4 pts
+  (+4.8 at 5 min later; bar is 300 / 100), control 62 / 29 +2.3. N58 launch tracker (00:06): 6 open (3 first, 3 retry), 0 settled,
+  open_past_end 0.
+- Test (adjacent N74, culture_clock.py, local, exact N60 F300 rows, rules fixed before looking): culture launch-hour NO by listing clock:
+  US day +9.5 pts [6.5, 12.5] (348 events), US night +8.6 (132), weekend +4.8 (138); off-hours minus day -3.2 (halves -2.0 / -4.1) ->
+  'nobody awake' mechanism DEAD; the edge is fans buying YES while the US is awake. No tracker change.
+- New (outside the box N75, views_buckets.py): YouTube view-count bucket ladders (MrBeast / GTA VI, 624 markets): FAV -4.1 pts
+  [-9.1, +1.3], FADE -0.3 [-2.1, +1.5], ~40 video-date units -> DEAD (live public count is priced, lesson 26).
+- Health: fast paper 00:31, slow 00:35, boosts 00:57, books 01:00, live snapshot 01:05, MM v2 23:31. follow.yml run #25 in progress since
+  22:06 (last publish 00:06, report 'updated' 23:58 = 74 min at 01:12: slightly past the 70-min mark but the run is alive; not
+  re-dispatched to avoid two chains). Tracebacks only the old pilot-log (2) / script-log (1); no MemoryErrors. Pilot STOP, no orders.
+- Next: lock_x week mark 11-19 (needs 30 end-times and >= +5%); LP-1 5-day + forward_core read 11-19; options N42 11-19; N58 first
+  settlements; check follow chain hand-over (#25 -> #26); N21 11-21; N73 esports snapshot; N63 calendars; N61 history; N67; N45 11-30.
