@@ -815,3 +815,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - N74 culture launch-hour NO by the clock: US day +9.5 pts, night +8.6, weekend +4.8 (off - day -3.2) -> the 'nobody awake' mechanism is
   wrong; fans buying YES. No rule change. N75 YouTube view-count ladders DEAD (FAV -4.1, FADE -0.3). Read-outs flat; lock_x stuck at 28/30
   end-times. Next: lock_x + LP-1 forward_core + options N42 on 11-19, N58 settlements, follow chain hand-over.
+
+## 11-18 05:35 cycle 34
+- N76 culture launch-hour NO capacity: median market $8 of single-price NO taker money in the 5-60 min window, real takers +2.3 pts
+  share-weighted (vs +8 per market) -> N58 is small-ticket ($10-20 / market). N77 holding-reward carry DEAD by arithmetic (= cash yield).
+  lock_x reached 30 end-times at +6.4% (week read 11-19). Next: 11-19 reads (lock_x, LP-1 forward_core, options N42), N58 settlements.

@@ -735,3 +735,25 @@
   re-dispatched to avoid two chains). Tracebacks only the old pilot-log (2) / script-log (1); no MemoryErrors. Pilot STOP, no orders.
 - Next: lock_x week mark 11-19 (needs 30 end-times and >= +5%); LP-1 5-day + forward_core read 11-19; options N42 11-19; N58 first
   settlements; check follow chain hand-over (#25 -> #26); N21 11-21; N73 esports snapshot; N63 calendars; N61 history; N67; N45 11-30.
+
+## 11-18 05:00-05:35 UTC cycle 34 (scheduled)
+- Read-outs (fast trades.jsonl, last settled 04:30): lock_x 34 trades / 30 end-times 31 won +6.4% (7 days; the 30-end-time bar is reached,
+  formal week read 11-19 needs >= +5%), lock_x50 +9.2%, lock_p_majors 28 / 28 +5.3%; lock_m 280 -2.9%, lock_b 106 -0.6%, lock_p_z2 338
+  -1.6%. N21 forward BTC/ETH 126 windows / 114 won -3.6% (5 days, below +2%; read 11-21), alts 133 / 116 -5.2%. Slow (04:36-04:37):
+  converge 14 / 13 -$10, 84 open mark -$42; young 70 / 35 -$158 (56 open); options N42 forward tails 2 / 0 -9.8 pts, rest 7 / 6 +12.3
+  (4 events, unchanged), 48 open; box office 9 / 8 -$0.96; charts 3 / 3 +$3.64; mention 4 / 3 -$6.41, 6 open. LP-1 v2 102 runs / 3.77 d:
+  formula $1,917 (upper bound), trading -$441, pessimistic -$681; 91 settled, 66 open leftovers (guard OK), 3 quoted; forward_core 62
+  markets $373 vs +$59 / +$46 (passing; formal read 11-19); forward_other 85 markets $740 vs -$41 / -$240 (N35 failing). COPY-1 85.9 h:
+  sharp 67 primaries settled / 44 events +5.4 pts (+4.6 at 5 min later; bar 300 / 100), control 62 / 29 +2.3. N58 launch tracker (04:17):
+  7 open (3 first, 4 retry), 0 settled, open_past_end 0; 150 'ask outside' skips are all empty seed books (bid 0.01 / ask 0.99).
+- Test (adjacent N76, culture_capacity.py, local, 12-week tape, rules fixed before looking): how much money culture launch-hour NO holds.
+  11% of 7,825 markets had a NO taker 5-60 min after listing; single-price NO cost per market median $8 / p75 $23 / p90 $57; real takers'
+  dollar edge $48/day total, share-weighted +2.3 pts [-5.6, +10.2] (393 events) vs ~+8 per market at one $10 fill -> SMALL-TICKET: N58
+  can only ever be $10-20 per market (tens of dollars a day). No tracker change.
+- New (outside the box N77): holding-reward carry (266 markets with the 4%/yr reward, median 2 y): two-sided carry = cash yield; long-shot
+  NO adds +0.8%/yr median for 2028 tails on 20 events -> DEAD by arithmetic.
+- Health: fast paper 04:33, slow 04:39, follow 04:19 (report 04:09, run started 03:18 in progress - chain hand-over #25 -> #26 worked),
+  boosts 04:13 (in progress), MM v2 05:02, books 05:00, live snapshot 04:04 - OK. Tracebacks only the old pilot-log (2) / script-log (1);
+  no MemoryErrors. No orders.
+- Next: lock_x week read 11-19 (30 end-times reached, needs >= +5%); LP-1 5-day + forward_core read 11-19; options N42 11-19; N58 first
+  settlements; N21 11-21; N73 esports snapshot; N63 calendars; N61 history; N67; N45 11-30.
