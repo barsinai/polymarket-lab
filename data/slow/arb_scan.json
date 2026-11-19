@@ -1,5 +1,5 @@
 {
-"scanned": "2026-11-19 02:43",
+"scanned": "2026-11-19 03:42",
 "events": 2100,
 "groups": 2037,
 "books": 17092,
@@ -11,13 +11,33 @@
 "easy": "Metamask FDV above $3B one day after launch?",
 "hard": "Metamask FDV above $4B one day after launch?",
 "easy_yes_ask": 0.005,
-"hard_no_ask": 0.991,
-"hard_yes_bid": 0.009,
-"cost": 0.996,
-"edge": 0.004,
-"edge_after_fee": 0.003,
-"size_shares": 1075.97,
-"usd_at_size": 1071.67
+"hard_no_ask": 0.99,
+"hard_yes_bid": 0.01,
+"cost": 0.995,
+"edge": 0.005,
+"edge_after_fee": 0.004,
+"size_shares": 434.08,
+"usd_at_size": 431.91
+},
+{
+"kind": "negrisk_all_yes",
+"event": "Maduro Prison Time?",
+"slug": "maduro-prison-time-527",
+"n": 5,
+"has_other": false,
+"outcomes": [
+"No prison time",
+"<20",
+"20\u201340",
+"40\u201360",
+"60+"
+],
+"cost": 0.962,
+"payoff": 1,
+"edge": 0.038,
+"edge_after_fee": 0.0032,
+"size_shares": 21.89,
+"usd_at_size": 21.06
 },
 {
 "kind": "ladder_num",
@@ -31,8 +51,8 @@
 "cost": 0.996,
 "edge": 0.004,
 "edge_after_fee": 0.0015,
-"size_shares": 238.27,
-"usd_at_size": 237.32
+"size_shares": 194.95,
+"usd_at_size": 194.17
 },
 {
 "kind": "ladder_date",
@@ -61,8 +81,47 @@
 "cost": 0.992,
 "edge": 0.008,
 "edge_after_fee": 0.0043,
-"size_shares": 30.0,
-"usd_at_size": 29.76
+"size_shares": 60.0,
+"usd_at_size": 59.52
+},
+{
+"kind": "ladder_num",
+"event": "StandX FDV above ___ one day after launch?",
+"slug": "standx-fdv-above-one-day-after-launch",
+"easy": "StandX FDV above $50M one day after launch?",
+"hard": "StandX FDV above $800M one day after launch?",
+"easy_yes_ask": 0.023,
+"hard_no_ask": 0.97,
+"hard_yes_bid": 0.03,
+"cost": 0.993,
+"edge": 0.007,
+"edge_after_fee": 0.0034,
+"size_shares": 60.0,
+"usd_at_size": 59.58
+},
+{
+"kind": "negrisk_all_yes",
+"event": "Eurozone Annual GDP Growth 2026",
+"slug": "eurozone-annual-gdp-growth-2026",
+"n": 9,
+"has_other": false,
+"outcomes": [
+"<0%",
+"0-1.0%",
+"1.0-2.0%",
+"2.0-3.0%",
+"3.0-4.0%",
+"4.0-5.0%",
+"5.0-6.0%",
+"6.0-7.0%",
+"7.0%+"
+],
+"cost": 0.996,
+"payoff": 1,
+"edge": 0.004,
+"edge_after_fee": -0.0139,
+"size_shares": 61.0,
+"usd_at_size": 60.76
 },
 {
 "kind": "ladder_num",
@@ -96,18 +155,18 @@
 },
 {
 "kind": "ladder_num",
-"event": "StandX FDV above ___ one day after launch?",
-"slug": "standx-fdv-above-one-day-after-launch",
-"easy": "StandX FDV above $50M one day after launch?",
-"hard": "StandX FDV above $800M one day after launch?",
-"easy_yes_ask": 0.023,
-"hard_no_ask": 0.97,
-"hard_yes_bid": 0.03,
-"cost": 0.993,
-"edge": 0.007,
-"edge_after_fee": 0.0034,
-"size_shares": 30.0,
-"usd_at_size": 29.79
+"event": "Abstract FDV above ___ one day after launch?",
+"slug": "abstract-fdv-above-one-day-after-launch",
+"easy": "Abstract FDV above $400M one day after launch?",
+"hard": "Abstract FDV above $600M one day after launch?",
+"easy_yes_ask": 0.022,
+"hard_no_ask": 0.975,
+"hard_yes_bid": 0.025,
+"cost": 0.997,
+"edge": 0.003,
+"edge_after_fee": -0.0002,
+"size_shares": 63.49,
+"usd_at_size": 63.3
 },
 {
 "kind": "ladder_num",
@@ -138,26 +197,6 @@
 "edge_after_fee": 0.0037,
 "size_shares": 29.6,
 "usd_at_size": 29.45
-},
-{
-"kind": "negrisk_all_yes",
-"event": "Maduro Prison Time?",
-"slug": "maduro-prison-time-527",
-"n": 5,
-"has_other": false,
-"outcomes": [
-"No prison time",
-"<20",
-"20\u201340",
-"40\u201360",
-"60+"
-],
-"cost": 0.976,
-"payoff": 1,
-"edge": 0.024,
-"edge_after_fee": -0.0108,
-"size_shares": 5.8,
-"usd_at_size": 5.66
 },
 {
 "kind": "negrisk_all_yes",
