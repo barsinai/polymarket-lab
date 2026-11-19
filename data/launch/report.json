@@ -1,13 +1,13 @@
 {
- "updated": "2026-11-19 19:45",
+ "updated": "2026-11-19 20:44",
  "started": "2026-11-17 01:16",
- "days": 2.77,
+ "days": 2.81,
  "note": "tape base rate ~75 culture markets launch a day (~3 an hour): 0 candidates over a day is a bug, not a result",
  "rule": "new culture listing < 60 min old, lives >= 24 h, NO ask 0.05-0.90, NO spread <= 10c: $10 at the NO ask, fee paid; one per market",
  "decision": "kill if <= +1 pt or event CI low < -1 after 100 markets / 40 events; promote only after 300 / 100 / 3 weeks",
- "positions": 52,
+ "positions": 59,
  "settled": 4,
- "open": 48,
+ "open": 55,
  "open_past_end": 0,
  "all": {
   "n": 4,
@@ -56,36 +56,36 @@
   "n": 0
  },
  "open_by_kind": {
-  "retry": 47,
+  "retry": 54,
   "late": 1
  },
  "watching": {
-  "not accepting orders": 890,
-  "ask outside 0.05-0.90": 35,
-  "spread > 10c": 5
+  "not accepting orders": 1010,
+  "ask outside 0.05-0.90": 85,
+  "spread > 10c": 3
  },
  "candidates": {
-  "ask outside 0.05-0.90": 614,
-  "not accepting orders": 976,
+  "ask outside 0.05-0.90": 703,
+  "not accepting orders": 1096,
   "no NO ask": 88,
-  "bought": 52,
+  "bought": 59,
   "lives < 24 h": 13,
   "spread > 10c": 7
  },
- "candidate_age_min_median": 4.7,
+ "candidate_age_min_median": 4.2,
  "this_run": {
-  "events listed": 11655,
-  "skip (retry): ask outside 0.05-0.90": 2176,
-  "polls": 93,
-  "seen once: markets < 24 h old (lesson 10 check)": 200,
-  "new listings": 200,
-  "skip (first): ask outside 0.05-0.90": 101,
-  "skip (retry): none, bought": 13,
-  "paper positions (retry)": 13,
-  "skip (retry): spread > 10c": 107,
-  "skip (late): ask outside 0.05-0.90": 55,
-  "skip (late): spread > 10c": 5,
+  "events listed": 14449,
+  "skip (retry): ask outside 0.05-0.90": 3615,
+  "polls": 115,
+  "seen once: markets < 24 h old (lesson 10 check)": 459,
+  "new listings": 409,
+  "skip (first): ask outside 0.05-0.90": 190,
+  "skip (retry): none, bought": 20,
+  "paper positions (retry)": 20,
+  "skip (retry): spread > 10c": 240,
+  "skip (late): ask outside 0.05-0.90": 86,
+  "skip (late): spread > 10c": 8,
   "skip (first): lives < 24 h": 6,
-  "skip (first): not accepting orders": 93
+  "skip (first): not accepting orders": 213
  }
 }
