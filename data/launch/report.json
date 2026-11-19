@@ -1,13 +1,13 @@
 {
- "updated": "2026-11-19 18:45",
+ "updated": "2026-11-19 19:45",
  "started": "2026-11-17 01:16",
- "days": 2.73,
+ "days": 2.77,
  "note": "tape base rate ~75 culture markets launch a day (~3 an hour): 0 candidates over a day is a bug, not a result",
  "rule": "new culture listing < 60 min old, lives >= 24 h, NO ask 0.05-0.90, NO spread <= 10c: $10 at the NO ask, fee paid; one per market",
  "decision": "kill if <= +1 pt or event CI low < -1 after 100 markets / 40 events; promote only after 300 / 100 / 3 weeks",
- "positions": 47,
+ "positions": 52,
  "settled": 4,
- "open": 43,
+ "open": 48,
  "open_past_end": 0,
  "all": {
   "n": 4,
@@ -56,33 +56,36 @@
   "n": 0
  },
  "open_by_kind": {
-  "retry": 42,
+  "retry": 47,
   "late": 1
  },
  "watching": {
-  "not accepting orders": 797
+  "not accepting orders": 890,
+  "ask outside 0.05-0.90": 35,
+  "spread > 10c": 5
  },
  "candidates": {
-  "ask outside 0.05-0.90": 569,
-  "not accepting orders": 883,
+  "ask outside 0.05-0.90": 614,
+  "not accepting orders": 976,
   "no NO ask": 88,
-  "bought": 47,
+  "bought": 52,
   "lives < 24 h": 13,
   "spread > 10c": 7
  },
- "candidate_age_min_median": 5.0,
+ "candidate_age_min_median": 4.7,
  "this_run": {
-  "events listed": 8748,
-  "skip (retry): ask outside 0.05-0.90": 1511,
-  "polls": 70,
-  "seen once: markets < 24 h old (lesson 10 check)": 62,
-  "new listings": 62,
-  "skip (first): ask outside 0.05-0.90": 56,
-  "skip (retry): none, bought": 8,
-  "paper positions (retry)": 8,
-  "skip (retry): spread > 10c": 21,
+  "events listed": 11655,
+  "skip (retry): ask outside 0.05-0.90": 2176,
+  "polls": 93,
+  "seen once: markets < 24 h old (lesson 10 check)": 200,
+  "new listings": 200,
+  "skip (first): ask outside 0.05-0.90": 101,
+  "skip (retry): none, bought": 13,
+  "paper positions (retry)": 13,
+  "skip (retry): spread > 10c": 107,
   "skip (late): ask outside 0.05-0.90": 55,
   "skip (late): spread > 10c": 5,
-  "skip (first): lives < 24 h": 6
+  "skip (first): lives < 24 h": 6,
+  "skip (first): not accepting orders": 93
  }
 }
