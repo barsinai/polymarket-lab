@@ -1,8 +1,8 @@
 {
-"scanned": "2026-11-19 17:52",
+"scanned": "2026-11-19 18:50",
 "events": 2100,
 "groups": 2037,
-"books": 17156,
+"books": 17146,
 "opps": [
 {
 "kind": "ladder_num",
@@ -50,36 +50,6 @@
 "usd_at_size": 70.99
 },
 {
-"kind": "ladder_num",
-"event": "Hyperbeat FDV above ___ one day after launch?",
-"slug": "hyperbeat-fdv-above-one-day-after-launch",
-"easy": "Hyperbeat FDV above $300M one day after launch?",
-"hard": "Hyperbeat FDV above $400M one day after launch?",
-"easy_yes_ask": 0.016,
-"hard_no_ask": 0.978,
-"hard_yes_bid": 0.022,
-"cost": 0.994,
-"edge": 0.006,
-"edge_after_fee": 0.0034,
-"size_shares": 140.19,
-"usd_at_size": 139.35
-},
-{
-"kind": "ladder_num",
-"event": "Metamask FDV above ___ one day after launch?",
-"slug": "metamask-fdv-above-one-day-after-launch",
-"easy": "Metamask FDV above $3B one day after launch?",
-"hard": "Metamask FDV above $4B one day after launch?",
-"easy_yes_ask": 0.006,
-"hard_no_ask": 0.988,
-"hard_yes_bid": 0.012,
-"cost": 0.994,
-"edge": 0.006,
-"edge_after_fee": 0.0048,
-"size_shares": 114.33,
-"usd_at_size": 113.64
-},
-{
 "kind": "ladder_date",
 "event": "Will Israel annex any territory by...?",
 "slug": "will-israel-annex-any-territory-by-december-31",
@@ -125,6 +95,26 @@
 "usd_at_size": 83.74
 },
 {
+"kind": "negrisk_all_yes",
+"event": "Maduro Prison Time?",
+"slug": "maduro-prison-time-527",
+"n": 5,
+"has_other": false,
+"outcomes": [
+"No prison time",
+"<20",
+"20\u201340",
+"40\u201360",
+"60+"
+],
+"cost": 0.968,
+"payoff": 1,
+"edge": 0.032,
+"edge_after_fee": -0.003,
+"size_shares": 8.07,
+"usd_at_size": 7.81
+},
+{
 "kind": "ladder_num",
 "event": "StandX FDV above ___ one day after launch?",
 "slug": "standx-fdv-above-one-day-after-launch",
@@ -138,6 +128,21 @@
 "edge_after_fee": 0.0025,
 "size_shares": 84.08,
 "usd_at_size": 83.83
+},
+{
+"kind": "ladder_num",
+"event": "Hyperbeat FDV above ___ one day after launch?",
+"slug": "hyperbeat-fdv-above-one-day-after-launch",
+"easy": "Hyperbeat FDV above $300M one day after launch?",
+"hard": "Hyperbeat FDV above $400M one day after launch?",
+"easy_yes_ask": 0.016,
+"hard_no_ask": 0.978,
+"hard_yes_bid": 0.022,
+"cost": 0.994,
+"edge": 0.006,
+"edge_after_fee": 0.0034,
+"size_shares": 40.19,
+"usd_at_size": 39.95
 },
 {
 "kind": "ladder_date",
@@ -186,6 +191,21 @@
 },
 {
 "kind": "ladder_num",
+"event": "Metamask FDV above ___ one day after launch?",
+"slug": "metamask-fdv-above-one-day-after-launch",
+"easy": "Metamask FDV above $3B one day after launch?",
+"hard": "Metamask FDV above $4B one day after launch?",
+"easy_yes_ask": 0.006,
+"hard_no_ask": 0.988,
+"hard_yes_bid": 0.012,
+"cost": 0.994,
+"edge": 0.006,
+"edge_after_fee": 0.0048,
+"size_shares": 31.0,
+"usd_at_size": 30.81
+},
+{
+"kind": "ladder_num",
 "event": "How high will US unemployment go in 2026?",
 "slug": "how-high-will-us-unemployment-go-in-2026",
 "easy": "Will US unemployment reach at least 6.0% in 2026?",
@@ -198,26 +218,6 @@
 "edge_after_fee": 0.0037,
 "size_shares": 29.6,
 "usd_at_size": 29.45
-},
-{
-"kind": "negrisk_all_yes",
-"event": "Maduro Prison Time?",
-"slug": "maduro-prison-time-527",
-"n": 5,
-"has_other": false,
-"outcomes": [
-"No prison time",
-"<20",
-"20\u201340",
-"40\u201360",
-"60+"
-],
-"cost": 0.988,
-"payoff": 1,
-"edge": 0.012,
-"edge_after_fee": -0.0225,
-"size_shares": 8.07,
-"usd_at_size": 7.97
 },
 {
 "kind": "ladder_date",
@@ -241,28 +241,13 @@
 "easy": "Printr FDV above $500M one day after launch?",
 "hard": "Printr FDV above $1B one day after launch?",
 "easy_yes_ask": 0.049,
-"hard_no_ask": 0.929,
-"hard_yes_bid": 0.071,
-"cost": 0.978,
-"edge": 0.022,
-"edge_after_fee": 0.0141,
+"hard_no_ask": 0.931,
+"hard_yes_bid": 0.069,
+"cost": 0.98,
+"edge": 0.02,
+"edge_after_fee": 0.0122,
 "size_shares": 1.61,
-"usd_at_size": 1.57
-},
-{
-"kind": "ladder_num",
-"event": "Printr FDV above ___ one day after launch?",
-"slug": "printr-fdv-above-one-day-after-launch",
-"easy": "Printr FDV above $100M one day after launch?",
-"hard": "Printr FDV above $1B one day after launch?",
-"easy_yes_ask": 0.066,
-"hard_no_ask": 0.929,
-"hard_yes_bid": 0.071,
-"cost": 0.995,
-"edge": 0.005,
-"edge_after_fee": -0.0039,
-"size_shares": 6.6,
-"usd_at_size": 6.57
+"usd_at_size": 1.58
 },
 {
 "kind": "ladder_num",
