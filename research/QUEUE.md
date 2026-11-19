@@ -841,3 +841,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - N84 copy-by-horizon UNCLEAR: tape follower >= 24 h +0.57 pts [0.1, 1.0] (996 events), 7-60 d +1.0, < 24 h -0.1 -> no COPY-1 arm; the
   paper's 1-7 d +17 is noise. N85 on-chain rule clarifications READY (needs Actions). Read-outs flat (lock_x 37 / 33 +6.4%).
   Next: 11-19 reads (lock_x week, LP-1 forward_core, options N42), N58 settlements.
+
+## 11-19 01:40 cycle 39
+- lock_x week read: +6.5%/$ on 35 end-times passes the letter, but 84% of it is 3 cheap fills; >= 0.80 core +1.2%/$ -> not proposable,
+  new forward arm BTC/ETH >= 0.80. N38 LP-1 core PASSES 5-day bar ($422 formula vs +$26 pessimistic), N35 DEAD (-27%). N86 culture
+  launch-hour maker DEAD (+1.6 vs taker +8.2; lesson 29). N87 hurricanes DEAD by count. Next: N21 11-21, N58 settlements, N42 11-26.

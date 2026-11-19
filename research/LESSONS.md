@@ -108,6 +108,11 @@ survives them. Add a lesson whenever an idea dies for a reason not already here.
     re-marked it was -$436 / -$760. Guard for every paper report: print 'settled N' and 'open past their end M'; N = 0 with M > 0 after
     a day is a bug, not a result. Inventory in a market we stopped quoting is marked at today's price, never at our last quote.
 
+29. **A taker edge does not transfer to the maker seat on the same flow** (11-19, N86): culture launch-hour NO bought as a taker is +8.2
+    pts; sitting as the resting NO the fans' YES orders hit is +1.6 [-1.9, +4.9]. The resting order is filled most often where nobody
+    else takes NO - which is where YES is right. Before moving a taker result to a maker quote, measure the fills the quote would really
+    get (who arrives, conditional on arriving), not the price it would save.
+
 ## Where edges plausibly still live (derived from the above)
 - Information the crowd processes slowly and bots don't cover: resolution-rule details (exact station, exact candle,
   rounding), public running tallies, scheduled data with good nowcasts, slow non-sports questions.

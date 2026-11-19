@@ -1,0 +1,217 @@
+{
+ "maker markets": 863,
+ "split_at": "2026-09-14 21:17:49+00:00",
+ "same markets": 424,
+ "all maker": {
+  "n": 863,
+  "events": 426,
+  "pts": 1.55,
+  "ci": [
+   -1.9,
+   4.9
+  ]
+ },
+ "all taker (all its markets)": {
+  "n": 1459,
+  "events": 548,
+  "pts": 8.22,
+  "ci": [
+   5.9,
+   10.6
+  ]
+ },
+ "all same-market maker": {
+  "n": 424,
+  "events": 244,
+  "pts": 8.13,
+  "ci": [
+   3.4,
+   12.5
+  ]
+ },
+ "all same-market taker": {
+  "n": 424,
+  "events": 244,
+  "pts": 9.22,
+  "ci": [
+   4.7,
+   13.6
+  ]
+ },
+ "all placebo (maker holds YES)": {
+  "n": 973,
+  "events": 444,
+  "pts": -9.71,
+  "ci": [
+   -12.8,
+   -6.4
+  ]
+ },
+ "older maker": {
+  "n": 431,
+  "events": 203,
+  "pts": 2.15,
+  "ci": [
+   -2.8,
+   7.2
+  ]
+ },
+ "older taker (all its markets)": {
+  "n": 744,
+  "events": 266,
+  "pts": 10.67,
+  "ci": [
+   7.5,
+   13.8
+  ]
+ },
+ "older same-market maker": {
+  "n": 212,
+  "events": 115,
+  "pts": 10.23,
+  "ci": [
+   3.5,
+   17.1
+  ]
+ },
+ "older same-market taker": {
+  "n": 212,
+  "events": 115,
+  "pts": 12.52,
+  "ci": [
+   5.1,
+   19.4
+  ]
+ },
+ "older placebo (maker holds YES)": {
+  "n": 469,
+  "events": 201,
+  "pts": -13.45,
+  "ci": [
+   -18.1,
+   -9.3
+  ]
+ },
+ "newer maker": {
+  "n": 432,
+  "events": 225,
+  "pts": 0.96,
+  "ci": [
+   -3.0,
+   5.0
+  ]
+ },
+ "newer taker (all its markets)": {
+  "n": 715,
+  "events": 285,
+  "pts": 5.67,
+  "ci": [
+   2.5,
+   8.8
+  ]
+ },
+ "newer same-market maker": {
+  "n": 212,
+  "events": 130,
+  "pts": 6.04,
+  "ci": [
+   0.4,
+   11.3
+  ]
+ },
+ "newer same-market taker": {
+  "n": 212,
+  "events": 130,
+  "pts": 5.92,
+  "ci": [
+   -0.0,
+   11.3
+  ]
+ },
+ "newer placebo (maker holds YES)": {
+  "n": 504,
+  "events": 244,
+  "pts": -6.23,
+  "ci": [
+   -10.7,
+   -2.5
+  ]
+ },
+ "maker - taker same markets (pts)": {
+  "all": -1.09,
+  "older": -2.29,
+  "newer": 0.12
+ },
+ "ex-mention maker": {
+  "n": 518,
+  "events": 289,
+  "pts": 0.89,
+  "ci": [
+   -2.9,
+   4.8
+  ]
+ },
+ "  cat mention": {
+  "n": 345,
+  "events": 137,
+  "pts": 2.55,
+  "ci": [
+   -2.3,
+   7.7
+  ]
+ },
+ "  cat pop-culture": {
+  "n": 213,
+  "events": 106,
+  "pts": 3.37,
+  "ci": [
+   -3.1,
+   10.0
+  ]
+ },
+ "  cat movies": {
+  "n": 158,
+  "events": 95,
+  "pts": -1.36,
+  "ci": [
+   -8.9,
+   6.2
+  ]
+ },
+ "  cat youtube": {
+  "n": 78,
+  "events": 44,
+  "pts": -4.67,
+  "ci": [
+   -11.7,
+   1.8
+  ]
+ },
+ "  cat music": {
+  "n": 40,
+  "events": 30,
+  "pts": 1.95,
+  "ci": [
+   -11.4,
+   14.2
+  ]
+ },
+ "  cat awards": {
+  "n": 29,
+  "events": 14,
+  "pts": 8.41,
+  "ci": [
+   -5.4,
+   26.5
+  ]
+ },
+ "capacity: YES entering wallets / market (median, p75)": [
+  1,
+  2
+ ],
+ "capacity: their notional upper bound $ / market (median, p75)": [
+  17.2,
+  50.7
+ ],
+ "verdict": "dead"
+}

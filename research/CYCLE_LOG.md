@@ -847,3 +847,28 @@
   20:47 - OK. Tracebacks only the old pilot-log (2) / script-log (1); no MemoryErrors. STOP in place, no orders.
 - Next: 11-19 reads: lock_x week (33 end-times, needs >= +5%), LP-1 5-day + forward_core, options N42; N58 first settlements (by event
   and series kind); N21 11-21; N73 esports snapshot; N85 / N81 / N63 / N61 / N67 need Actions; N45 11-30.
+
+## 11-19 01:00-01:40 UTC cycle 39 (scheduled)
+- Read-outs (fast trades.jsonl, last settled entry 00:33; slow 00:41-00:45). lock_x WEEK READ (lock_x_week.py): 39 trades / 35 end-times /
+  8 days, 36 won, +6.5%/$ (+$44) - meets the +5% letter, but 3 fills at 0.52-0.69 made $37 of it; the 36 fills >= 0.80 are +1.2%/$
+  (-2.3 pts/share [-12.3, +5.9]); total +0.7 pts [-9.7, +8.6] by end-time; halves +8.8% / +4.4%. BTC/ETH 19/19 +10.1% (>= 0.80: 17/17
+  +5.5%) is a post-hoc split and N21's wider BTC/ETH forward is -2.6% (150 windows / 6 days) -> NOT proposable; keep running, new
+  pre-registered forward arm 'lock_x BTC/ETH >= 0.80 from 11-19 01:00', read at 30 end-times (>= +3%/$). lock_x50 +8.8%, lock_p_majors
+  30 / 28 +5.5%; lock_m 311 -1.9%, lock_b 128 +0.6%, lock_p_z2 376 -1.4%. N21 forward alts 172 / 151 -5.4% (decision 11-21).
+  LP-1 v2 124 runs / 4.61 d: formula $1,989 (upper bound), trading -$424, pessimistic -$650; 99 settled, 72 open leftovers (guard OK), 3
+  quoted. 5-day reads: N38 forward_core 79 markets $422 vs +$42 / +$26 -> PASSES (still needs Yoav's OK for the read-only reward-history
+  query before anything else); N35 forward_other 104 markets $811 vs -$28 / -$222 (-27%) -> DEAD. Options N42 forward rest 12 / 10 +13.1
+  pts on 6 coin-dates (needs 8+), tails 4 / 0 -7.9, 49 open -> next read 11-26. converge 16 / 15 -$9.55 (86 open, mark -$43); young 81 / 44
+  -$123; box office 9 / 8 -$0.96; charts 3 / 3 +$3.64; mention 9 / 7 -$7.50 (5 events). COPY-1 105.9 h: sharp 76 primaries settled / 52
+  events +3.2 pts (+2.4 at 5 min; bar 300 / 100), control 77 / 38 +4.1. N58 launch tracker: 39 open (3 first, 35 retry, 1 late), 0
+  settled, open_past_end 0.
+- Test (adjacent N86, culture_maker.py, local, tape group a, rules fixed before looking): launch-hour NO as the MAKER the fans' YES hits:
+  +1.55 pts [-1.9, +4.9] on 426 events vs the taker +8.2 [5.9, 10.6] (548); same 424 markets maker +8.1 vs taker +9.2 (halves -2.3 /
+  +0.1); placebo -9.7; capacity median 1 wallet / ~$17 -> DEAD (lesson 29: resting fills land where YES is right).
+- New (outside the box N87): hurricane / tropical-storm markets vs NHC outlooks -> DEAD by count (39 markets / ~30 questions in 5 seasons,
+  no price history). Steam / Twitch count markets: 3 events on the tape - too few.
+- Health: fast paper 00:40, slow 00:45, follow 00:08 (< 70 min at 01:00), boosts 00:05, MM v2 00:31, books 00:45, live snapshot 00:07 -
+  OK. Tracebacks only the old pilot-log (2) / script-log (1); no MemoryErrors. STOP in place, no orders. No network to Polymarket from
+  this run (proxy refuses gamma / clob).
+- Next: N21 decision 11-21; lock_x BTC/ETH forward arm (30 end-times); N58 first settlements (by event and series kind); N42 11-26;
+  COPY-1 to 300 / 100; N85 / N81 / N63 / N61 / N67 need Actions; N45 11-30.
