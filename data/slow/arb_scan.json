@@ -1,8 +1,8 @@
 {
-"scanned": "2026-11-19 22:52",
+"scanned": "2026-11-19 23:52",
 "events": 2100,
 "groups": 2037,
-"books": 17140,
+"books": 17126,
 "opps": [
 {
 "kind": "ladder_num",
@@ -31,43 +31,8 @@
 "cost": 0.99,
 "edge": 0.01,
 "edge_after_fee": -0.0083,
-"size_shares": 108.52,
-"usd_at_size": 107.43
-},
-{
-"kind": "ladder_num",
-"event": "StandX FDV above ___ one day after launch?",
-"slug": "standx-fdv-above-one-day-after-launch",
-"easy": "StandX FDV above $2B one day after launch?",
-"hard": "StandX FDV above $3B one day after launch?",
-"easy_yes_ask": 0.002,
-"hard_no_ask": 0.985,
-"hard_yes_bid": 0.015,
-"cost": 0.987,
-"edge": 0.013,
-"edge_after_fee": 0.0118,
-"size_shares": 71.92,
-"usd_at_size": 70.99
-},
-{
-"kind": "negrisk_all_yes",
-"event": "Maduro Prison Time?",
-"slug": "maduro-prison-time-527",
-"n": 5,
-"has_other": false,
-"outcomes": [
-"No prison time",
-"<20",
-"20\u201340",
-"40\u201360",
-"60+"
-],
-"cost": 0.969,
-"payoff": 1,
-"edge": 0.031,
-"edge_after_fee": -0.004,
-"size_shares": 21.89,
-"usd_at_size": 21.21
+"size_shares": 138.52,
+"usd_at_size": 137.13
 },
 {
 "kind": "ladder_date",
@@ -101,6 +66,21 @@
 },
 {
 "kind": "ladder_num",
+"event": "StandX FDV above ___ one day after launch?",
+"slug": "standx-fdv-above-one-day-after-launch",
+"easy": "StandX FDV above $2B one day after launch?",
+"hard": "StandX FDV above $3B one day after launch?",
+"easy_yes_ask": 0.002,
+"hard_no_ask": 0.984,
+"hard_yes_bid": 0.016,
+"cost": 0.986,
+"edge": 0.014,
+"edge_after_fee": 0.0128,
+"size_shares": 36.0,
+"usd_at_size": 35.5
+},
+{
+"kind": "ladder_num",
 "event": "Hyperbeat FDV above ___ one day after launch?",
 "slug": "hyperbeat-fdv-above-one-day-after-launch",
 "easy": "Hyperbeat FDV above $300M one day after launch?",
@@ -131,26 +111,23 @@
 },
 {
 "kind": "negrisk_all_yes",
-"event": "What will OpenAI's IPO valuation be?",
-"slug": "what-will-openais-ipo-valuation-be",
-"n": 8,
+"event": "Maduro Prison Time?",
+"slug": "maduro-prison-time-527",
+"n": 5,
 "has_other": false,
 "outcomes": [
-"<$1T",
-"$1.0T\u2013$1.25T",
-"$1.25T\u2013$1.5T",
-"$1.5T\u2013$1.75T",
-"$1.75T\u2013$2.0T",
-"$2.0T\u2013$2.25T",
-"$2.25T\u2013$2.5T",
-"$2.5T+"
+"No prison time",
+"<20",
+"20\u201340",
+"40\u201360",
+"60+"
 ],
-"cost": 0.983,
+"cost": 0.968,
 "payoff": 1,
-"edge": 0.017,
-"edge_after_fee": -0.0391,
-"size_shares": 15.0,
-"usd_at_size": 14.75
+"edge": 0.032,
+"edge_after_fee": -0.003,
+"size_shares": 8.07,
+"usd_at_size": 7.81
 },
 {
 "kind": "ladder_num",
@@ -228,6 +205,29 @@
 "usd_at_size": 30.81
 },
 {
+"kind": "negrisk_all_yes",
+"event": "What will OpenAI's IPO valuation be?",
+"slug": "what-will-openais-ipo-valuation-be",
+"n": 8,
+"has_other": false,
+"outcomes": [
+"<$1T",
+"$1.0T\u2013$1.25T",
+"$1.25T\u2013$1.5T",
+"$1.5T\u2013$1.75T",
+"$1.75T\u2013$2.0T",
+"$2.0T\u2013$2.25T",
+"$2.25T\u2013$2.5T",
+"$2.5T+"
+],
+"cost": 0.982,
+"payoff": 1,
+"edge": 0.018,
+"edge_after_fee": -0.038,
+"size_shares": 9.05,
+"usd_at_size": 8.89
+},
+{
 "kind": "ladder_num",
 "event": "How high will US unemployment go in 2026?",
 "slug": "how-high-will-us-unemployment-go-in-2026",
@@ -241,6 +241,21 @@
 "edge_after_fee": 0.0037,
 "size_shares": 29.6,
 "usd_at_size": 29.45
+},
+{
+"kind": "ladder_num",
+"event": "Probable FDV above ___ one day after launch?",
+"slug": "probable-fdv-above-one-day-after-launch",
+"easy": "Probable FDV above $50M one day after launch?",
+"hard": "Probable FDV above $500M one day after launch?",
+"easy_yes_ask": 0.12,
+"hard_no_ask": 0.876,
+"hard_yes_bid": 0.124,
+"cost": 0.996,
+"edge": 0.004,
+"edge_after_fee": -0.011,
+"size_shares": 34.17,
+"usd_at_size": 34.03
 },
 {
 "kind": "ladder_date",
@@ -264,13 +279,13 @@
 "easy": "Printr FDV above $500M one day after launch?",
 "hard": "Printr FDV above $1B one day after launch?",
 "easy_yes_ask": 0.049,
-"hard_no_ask": 0.929,
-"hard_yes_bid": 0.071,
-"cost": 0.978,
-"edge": 0.022,
-"edge_after_fee": 0.0141,
+"hard_no_ask": 0.93,
+"hard_yes_bid": 0.07,
+"cost": 0.979,
+"edge": 0.021,
+"edge_after_fee": 0.0132,
 "size_shares": 1.61,
-"usd_at_size": 1.57
+"usd_at_size": 1.58
 },
 {
 "kind": "ladder_num",
@@ -279,11 +294,11 @@
 "easy": "Printr FDV above $100M one day after launch?",
 "hard": "Printr FDV above $1B one day after launch?",
 "easy_yes_ask": 0.066,
-"hard_no_ask": 0.929,
-"hard_yes_bid": 0.071,
-"cost": 0.995,
-"edge": 0.005,
-"edge_after_fee": -0.0039,
+"hard_no_ask": 0.93,
+"hard_yes_bid": 0.07,
+"cost": 0.996,
+"edge": 0.004,
+"edge_after_fee": -0.0049,
 "size_shares": 6.6,
 "usd_at_size": 6.57
 },
