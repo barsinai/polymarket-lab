@@ -894,3 +894,26 @@
   refuses Polymarket / Kalshi / Deribit / Hyperliquid), so no Actions-dependent idea could be run.
 - Next: N21 decision 11-21; lock_x BTC/ETH >= 0.80 forward arm (30 end-times); N58 first settlements (by event; one-off vs recurring);
   N42 11-26; COPY-1 to 300 / 100 (watch sharp - control); N85 / N81 / N63 / N61 / N67 need Actions; N45 11-30.
+
+## 11-19 09:02-09:45 UTC cycle 41 (scheduled)
+- Read-outs (fast trades.jsonl, last settled entry 08:39; slow 08:43-08:45): lock_x 44 trades / 39 end-times 41 won +6.3%/$ (>= 0.80 core
+  41 / 37 +1.6%/$, -1.3 pts/share [-10.2, +5.9]; the 3 cheap fills still carry it); BTC/ETH >= 0.80 forward arm since 01:00: 4 trades / 3
+  end-times, all won, +$3.96 (needs 30). lock_x50 +8.4%, lock_p_majors 34 / 31 +5.4%; lock_m 327 -2.0%, lock_b 138 +0.8%, lock_p_z2 388
+  -1.4%. N21 forward BTC/ETH 162 windows / 148 won -2.7%, alts 185 / 162 -5.8% (decision 11-21). LP-1 v2 132 runs / 4.94 d: formula
+  $2,019 (upper bound), trading -$424, pessimistic -$698; 102 settled, 71 open leftovers (guard OK), 3 quoted; forward_core 82 markets $452
+  vs +$34 / +$5 (passed c39; waits for Yoav's OK on the read-only reward-history query). Options N42 (options_tail_readout.py): forward rest
+  20 / 16 won +10.3 pts on 8 coin-dates (6 positive) -> reached the 8-coin-date line, survives its kill rule; forward tails 5 / 0 -7.7 (4);
+  48 open -> next read 11-26 (lesson 6: still ~8 direction bets). converge 22 / 21 -$3.33 (81 open, mark -$39); young 81 / 44 -$123 (56
+  open); box office 9 / 8 -$0.96; charts 3 / 3 +$3.64 (chart_events_seen 0); mention 9 / 7 -$7.50, 15 open. COPY-1 114 h: sharp 81
+  primaries settled / 55 events +4.0 pts (+3.2 at 5 min; bar 300 / 100), control 80 / 40 +4.4 (control >= sharp: no wallet skill yet).
+  N58 launch tracker (08:20): 39 open, 0 settled, open_past_end 0, no new first-look candidate since 11-18 22:04 (11 h); the tracker's own
+  history has a 14-h gap on 11-18 01-15 too (launches come in batches) -> not yet a bug; recheck at c42 (lesson 10: > 24 h = bug).
+- Test (outside the box N91, twin_markets.py, local, tape a + c): same question in two events, ends within 24 h: ~7 genuine twin questions
+  with overlapping prints in 12 weeks -> DEAD by count (lesson 8).
+- Test (adjacent N90, relist_no.py, local, tape a + c, rules fixed before looking): 'another X by <date>' relists, launch-day NO -14.0 pts
+  [-28.3, -1.6] on 39 events vs +3.6 for all other launch-day NO -> DEAD (wrong sign). YES mirror +12.4 [-3.6, +29.1] is one half only.
+- Health: fast paper 08:43, slow 08:46, follow 08:21 (report 08:15, < 70 min), boosts 08:55, MM v2 08:31, books 09:00, live snapshot 08:05
+  - OK. Tracebacks only the old pilot-log (2) / script-log (1); no MemoryErrors. STOP in place, no orders. No network to Polymarket from
+  this run (proxy refuses gamma).
+- Next: N21 decision 11-21; lock_x BTC/ETH >= 0.80 forward arm (30 end-times); N58 candidate gap recheck + first settlements; N42 11-26;
+  COPY-1 to 300 / 100; N85 / N81 / N63 / N61 / N67 need Actions; N45 11-30.

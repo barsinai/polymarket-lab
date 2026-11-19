@@ -851,3 +851,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - N89 question wording DEAD: negated / 'stay' questions are 1.2% of markets (33 events), YES -7.7 pts [-19.3, +6.1]; mid-life has no side
   edge either way (YES -0.5, NO +0.5). N88 culture width: 96% of launch rows are wide events -> no split. Read-outs flat; lock_x forward
   arm 1/1. Next: N21 11-21, N58 settlements, N42 11-26, LP-1 core waits for Yoav's OK on the read-only reward query.
+
+## 11-19 09:40 cycle 41
+- N91 twin markets DEAD by count (~7 genuine twin questions in 12 weeks, lesson 8). N90 'another X by <date>' relist launch-day NO DEAD
+  (-14.0 pts [-28.3, -1.6], 39 events; YES mirror one half only). N42 forward rest +10.3 pts on 8 coin-dates -> survives its kill line.
+  lock_x 44 / 39 end-times +6.3%; BTC/ETH >= 0.80 forward arm 4 / 3 end-times won. Next: N21 11-21, N58 settlements, N42 11-26.
