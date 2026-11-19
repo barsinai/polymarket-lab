@@ -970,3 +970,29 @@
   Polymarket / Polygon RPC) and gh has no valid token -> no Actions dispatch (N85 / N81 / N63 / N61 / N67 still wait).
 - Next: N95 split test (time-to-end, top rung, older half) on the tape; N21 decision 11-21; lock_x BTC/ETH >= 0.80 forward arm (30
   end-times); N58 first + retry settlements; N42 11-26; COPY-1 to 300 / 100.
+
+## 11-19 21:00-21:40 UTC cycle 44 (scheduled)
+- Read-outs (fast trades.jsonl, last entry 20:48; slow 20:49): lock_x 45 trades / 40 end-times 41 won +5.1%/$ - no new lock_x signal since
+  12:24 (lock_m / lock_b / lock_p_z2 still trading to 20:39, so the bot is up); BTC/ETH >= 0.80 forward arm still 4 / 3 end-times won (needs
+  30). lock_x50 +7.8%, lock_p_majors 36 / 33 +4.5%; lock_m 339 -2.0%, lock_b 149 +1.2%, lock_p_z2 402 -1.5%. LP-1 v2 145 runs / 5.45 d:
+  formula $2,109 (upper bound), trading -$448, pessimistic -$748; 109 settled, 74 open leftovers, 4 quoted. Options N42 forward rest 23 / 19
+  won +13.6 pts on 8 coin-dates (6 positive), tails 5 / 0 -7.7, 50 open -> 11-26. converge 25 / 24 -$0.61 (79 open, mark -$42); young 93 /
+  45 -$225 (+10 settled, 1 won: the 11-16 week's stock / ETF 'hit LOW' touches and 11-18 'close above' - one sell-off bet, lesson 6;
+  decision at the 11-30 end dates); box office 9 / 8 -$0.96; charts 3 / 3 +$3.64; mention 24 / 20 -$5.64 (7 events). COPY-1 126.7 h:
+  sharp 99 primaries settled / 65 events +3.5 pts (+1.9 at 5 min; bar 300 / 100), control 91 / 47 +4.8 -> control still >= sharp. N58:
+  61 positions, 4 settled (2 events) +0.3 pts, 57 open, open_past_end 0.
+- Test (adjacent N95, rt_ladder.py, local, tape a - the only group with RT markets, rules fixed in c43): RT ladder NO +11.4 pts [2.8, 19.8]
+  on 36 films, older half +3.3 (kill line +3 -> survives by 0.3), newer +19.4; pre-registered splits: 24-168 h before end +12.0 [2.0, 21.4]
+  on 30 films, halves +7.5 / +16.2; middle rungs +14.3 [4.9, 23.5]; NO 0.30-0.60 +15.0 [3.8, 25.1]; top rung +3.7, bottom -4.3, > 7 d
+  +10.8 (older -0.6). -> TESTING as a forward paper tracker on the time split only (rt_paper.py, hourly in spike_paper.yml, $10 at the
+  real NO ask; rung and price logged, not filtered). Honest caveat: found by looking (lesson 22), ~3 films a week -> 15 films ~5 weeks.
+  rt_paper.py ran offline here without crashing (no network); first real run is the next slow-paper hour - check rt_report.json
+  rt_markets_seen > 0 at c45 (lesson 10).
+- Test (outside the box N96, local_language.py, local, tape c politics, rules fixed before looking): big takers (>= $200) in markets about
+  non-English-speaking countries, follower a300: -0.65 pts [-3.1, +1.8] on 74 events (halves -0.5 / -0.9) vs US +1.8 [0.6, 3.1] -> DEAD,
+  wrong sign; no general mispricing there either (first entries YES -2.4, NO +0.7).
+- Health: fast paper 20:48, slow 20:51, follow 20:58 (report 20:58), launch 20:56, boosts log to 19:20+, books 21:00 - OK. Tracebacks only
+  the old pilot-log (2) / script-log (1); no MemoryErrors. STOP in place, no orders. No network (proxy refuses Polymarket) and gh has no
+  valid token -> no Actions dispatch (N85 / N81 / N63 / N61 / N67 still wait).
+- Next: c45 check rt_paper's first run (markets seen, positions); N21 decision 11-21; lock_x BTC/ETH >= 0.80 forward arm (30 end-times);
+  N58 settlements; N42 11-26; young 11-30; COPY-1 to 300 / 100.

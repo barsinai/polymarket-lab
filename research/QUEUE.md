@@ -867,3 +867,9 @@ Price drift in the trade's direction (what a market maker on the other side lose
   +7.4). Spawned N95 RT score ladders (NO +11.4 [2.7, 20.0], 36 films, halves +3.3 / +19.4) READY. N3 later-weekend box office DEAD by
   count (25 ladders in 12 weeks). N58: first-look arm is starved by empty 0.01/0.99 seed books (all 58 first looks today); 39 of 43
   positions are retry -> read the decision on first + retry. Next: N95 split test, N21 11-21, N42 11-26.
+
+## 11-19 21:40 cycle 44
+- N95 RT score ladders -> TESTING (rt_paper.py hourly): tape NO +11.4 pts on 36 films, older half +3.3 (passes the +3 line by a hair),
+  24-168 h split +12.0 [2.0, 21.4] on 30 films, both halves positive. Found by looking -> the forward paper is the test (15 films ~5 weeks).
+  N96 local-language politics DEAD (big takers -0.65 pts on 74 events vs US +1.8). Young NO 93 settled -$225 (one sell-off bet). Next:
+  check rt_paper first run (c45), N21 11-21, N42 11-26, young 11-30.

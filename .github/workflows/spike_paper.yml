@@ -36,6 +36,7 @@ jobs:
       - run: timeout 300 python -u research/slow/boxoffice_paper.py 2>&1 | tail -3 | tee logs/boxoffice-log.txt || true
       - run: timeout 300 python -u research/slow/charts_paper.py 2>&1 | tail -3 | tee logs/charts-log.txt || true
       - run: timeout 300 python -u research/slow/mention_paper.py 2>&1 | tail -3 | tee logs/mention-log.txt || true
+      - run: timeout 300 python -u research/slow/rt_paper.py 2>&1 | tail -3 | tee logs/rt-log.txt || true   # N95 RT ladder NO paper (11-19 c44), no orders
       - name: "Sharp-odds snapshot, 3 a day at 10, 16, 22 UTC (NBA + NHL keep the free odds plan under 500 credits a month)"
         if: always()
         env:
@@ -55,6 +56,6 @@ jobs:
       - name: Save
         run: |
           git config user.name "lab-bot" && git config user.email "lab-bot@users.noreply.github.com"
-          for p in data/slow/spike_positions.jsonl data/slow/spike_report.json data/slow/converge_positions.jsonl data/slow/converge_report.json data/slow/arb_scan.json data/slow/arb_log.jsonl data/slow/young_positions.jsonl data/slow/young_report.json data/slow/boxoffice_positions.jsonl data/slow/boxoffice_report.json data/slow/charts_positions.jsonl data/slow/charts_report.json data/slow/mention_positions.jsonl data/slow/mention_report.json data/slow/sports_fav_positions.jsonl data/slow/sports_fav_report.json data/slow/converge_day_positions.jsonl data/slow/converge_day_report.json data/slow/lp_paper_state.json data/slow/lp_paper_report.json data/research/scoreboard.json data/research/options_obs.jsonl data/research/options_positions.jsonl data/research/options_report.json data/research/options_probe.json data/weather data/sharp logs; do [ -e "$p" ] && git add --sparse "$p"; done
+          for p in data/slow/spike_positions.jsonl data/slow/spike_report.json data/slow/converge_positions.jsonl data/slow/converge_report.json data/slow/arb_scan.json data/slow/arb_log.jsonl data/slow/young_positions.jsonl data/slow/young_report.json data/slow/boxoffice_positions.jsonl data/slow/boxoffice_report.json data/slow/charts_positions.jsonl data/slow/charts_report.json data/slow/mention_positions.jsonl data/slow/mention_report.json data/slow/rt_positions.jsonl data/slow/rt_report.json data/slow/sports_fav_positions.jsonl data/slow/sports_fav_report.json data/slow/converge_day_positions.jsonl data/slow/converge_day_report.json data/slow/lp_paper_state.json data/slow/lp_paper_report.json data/research/scoreboard.json data/research/options_obs.jsonl data/research/options_positions.jsonl data/research/options_report.json data/research/options_probe.json data/weather data/sharp logs; do [ -e "$p" ] && git add --sparse "$p"; done
           git commit -qm "Slow paper $(date -u +%FT%H:%M) [skip ci]" || exit 0
           for i in 1 2 3; do git pull -q --rebase --autostash -X theirs origin main && git push -q && break; sleep 5; done
