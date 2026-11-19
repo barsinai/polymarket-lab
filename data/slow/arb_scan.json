@@ -1,8 +1,8 @@
 {
-"scanned": "2026-11-19 16:51",
+"scanned": "2026-11-19 17:52",
 "events": 2100,
 "groups": 2037,
-"books": 17158,
+"books": 17156,
 "opps": [
 {
 "kind": "ladder_num",
@@ -31,8 +31,23 @@
 "cost": 0.99,
 "edge": 0.01,
 "edge_after_fee": -0.0083,
-"size_shares": 138.52,
-"usd_at_size": 137.13
+"size_shares": 108.52,
+"usd_at_size": 107.43
+},
+{
+"kind": "ladder_num",
+"event": "StandX FDV above ___ one day after launch?",
+"slug": "standx-fdv-above-one-day-after-launch",
+"easy": "StandX FDV above $2B one day after launch?",
+"hard": "StandX FDV above $3B one day after launch?",
+"easy_yes_ask": 0.002,
+"hard_no_ask": 0.985,
+"hard_yes_bid": 0.015,
+"cost": 0.987,
+"edge": 0.013,
+"edge_after_fee": 0.0118,
+"size_shares": 71.92,
+"usd_at_size": 70.99
 },
 {
 "kind": "ladder_num",
@@ -48,6 +63,21 @@
 "edge_after_fee": 0.0034,
 "size_shares": 140.19,
 "usd_at_size": 139.35
+},
+{
+"kind": "ladder_num",
+"event": "Metamask FDV above ___ one day after launch?",
+"slug": "metamask-fdv-above-one-day-after-launch",
+"easy": "Metamask FDV above $3B one day after launch?",
+"hard": "Metamask FDV above $4B one day after launch?",
+"easy_yes_ask": 0.006,
+"hard_no_ask": 0.988,
+"hard_yes_bid": 0.012,
+"cost": 0.994,
+"edge": 0.006,
+"edge_after_fee": 0.0048,
+"size_shares": 114.33,
+"usd_at_size": 113.64
 },
 {
 "kind": "ladder_date",
@@ -84,33 +114,6 @@
 "event": "StandX FDV above ___ one day after launch?",
 "slug": "standx-fdv-above-one-day-after-launch",
 "easy": "StandX FDV above $2B one day after launch?",
-"hard": "StandX FDV above $3B one day after launch?",
-"easy_yes_ask": 0.002,
-"hard_no_ask": 0.985,
-"hard_yes_bid": 0.015,
-"cost": 0.987,
-"edge": 0.013,
-"edge_after_fee": 0.0118,
-"size_shares": 35.92,
-"usd_at_size": 35.45
-},
-{
-"kind": "negrisk_all_no",
-"event": "GPU rental prices (H100) end of 2026?",
-"slug": "gpu-rental-prices-h100-end-of-2026-20260709164334623",
-"n": 7,
-"cost": 5.979,
-"payoff": 6,
-"edge": 0.021,
-"edge_after_fee": -0.0364,
-"size_shares": 17.59,
-"usd_at_size": 105.17
-},
-{
-"kind": "ladder_num",
-"event": "StandX FDV above ___ one day after launch?",
-"slug": "standx-fdv-above-one-day-after-launch",
-"easy": "StandX FDV above $2B one day after launch?",
 "hard": "StandX FDV above $7B one day after launch?",
 "easy_yes_ask": 0.002,
 "hard_no_ask": 0.994,
@@ -120,30 +123,6 @@
 "edge_after_fee": 0.0034,
 "size_shares": 84.08,
 "usd_at_size": 83.74
-},
-{
-"kind": "negrisk_all_yes",
-"event": "Eurozone Annual GDP Growth 2026",
-"slug": "eurozone-annual-gdp-growth-2026",
-"n": 9,
-"has_other": false,
-"outcomes": [
-"<0%",
-"0-1.0%",
-"1.0-2.0%",
-"2.0-3.0%",
-"3.0-4.0%",
-"4.0-5.0%",
-"5.0-6.0%",
-"6.0-7.0%",
-"7.0%+"
-],
-"cost": 0.997,
-"payoff": 1,
-"edge": 0.003,
-"edge_after_fee": -0.0139,
-"size_shares": 100.0,
-"usd_at_size": 99.7
 },
 {
 "kind": "ladder_num",
@@ -159,26 +138,6 @@
 "edge_after_fee": 0.0025,
 "size_shares": 84.08,
 "usd_at_size": 83.83
-},
-{
-"kind": "negrisk_all_yes",
-"event": "Maduro Prison Time?",
-"slug": "maduro-prison-time-527",
-"n": 5,
-"has_other": false,
-"outcomes": [
-"No prison time",
-"<20",
-"20\u201340",
-"40\u201360",
-"60+"
-],
-"cost": 0.979,
-"payoff": 1,
-"edge": 0.021,
-"edge_after_fee": -0.0132,
-"size_shares": 10.0,
-"usd_at_size": 9.79
 },
 {
 "kind": "ladder_date",
@@ -212,18 +171,18 @@
 },
 {
 "kind": "ladder_num",
-"event": "Metamask FDV above ___ one day after launch?",
-"slug": "metamask-fdv-above-one-day-after-launch",
-"easy": "Metamask FDV above $3B one day after launch?",
-"hard": "Metamask FDV above $4B one day after launch?",
-"easy_yes_ask": 0.006,
-"hard_no_ask": 0.988,
-"hard_yes_bid": 0.012,
-"cost": 0.994,
-"edge": 0.006,
-"edge_after_fee": 0.0048,
-"size_shares": 31.0,
-"usd_at_size": 30.81
+"event": "Abstract FDV above ___ one day after launch?",
+"slug": "abstract-fdv-above-one-day-after-launch",
+"easy": "Abstract FDV above $400M one day after launch?",
+"hard": "Abstract FDV above $600M one day after launch?",
+"easy_yes_ask": 0.022,
+"hard_no_ask": 0.975,
+"hard_yes_bid": 0.025,
+"cost": 0.997,
+"edge": 0.003,
+"edge_after_fee": -0.0002,
+"size_shares": 63.49,
+"usd_at_size": 63.3
 },
 {
 "kind": "ladder_num",
@@ -239,6 +198,26 @@
 "edge_after_fee": 0.0037,
 "size_shares": 29.6,
 "usd_at_size": 29.45
+},
+{
+"kind": "negrisk_all_yes",
+"event": "Maduro Prison Time?",
+"slug": "maduro-prison-time-527",
+"n": 5,
+"has_other": false,
+"outcomes": [
+"No prison time",
+"<20",
+"20\u201340",
+"40\u201360",
+"60+"
+],
+"cost": 0.988,
+"payoff": 1,
+"edge": 0.012,
+"edge_after_fee": -0.0225,
+"size_shares": 8.07,
+"usd_at_size": 7.97
 },
 {
 "kind": "ladder_date",
