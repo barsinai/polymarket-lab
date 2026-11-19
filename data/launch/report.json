@@ -1,21 +1,21 @@
 {
- "updated": "2026-11-19 17:43",
+ "updated": "2026-11-19 18:45",
  "started": "2026-11-17 01:16",
- "days": 2.69,
+ "days": 2.73,
  "note": "tape base rate ~75 culture markets launch a day (~3 an hour): 0 candidates over a day is a bug, not a result",
  "rule": "new culture listing < 60 min old, lives >= 24 h, NO ask 0.05-0.90, NO spread <= 10c: $10 at the NO ask, fee paid; one per market",
  "decision": "kill if <= +1 pt or event CI low < -1 after 100 markets / 40 events; promote only after 300 / 100 / 3 weeks",
  "positions": 47,
- "settled": 3,
- "open": 44,
+ "settled": 4,
+ "open": 43,
  "open_past_end": 0,
  "all": {
-  "n": 3,
-  "events": 1,
-  "won": 2,
-  "avg_ask": 0.697,
-  "pts": -3.66,
-  "pnl": -6.83
+  "n": 4,
+  "events": 2,
+  "won": 3,
+  "avg_ask": 0.742,
+  "pts": 0.26,
+  "pnl": -5.47
  },
  "mention": {
   "n": 3,
@@ -26,7 +26,12 @@
   "pnl": -6.83
  },
  "non_mention": {
-  "n": 0
+  "n": 1,
+  "events": 1,
+  "won": 1,
+  "avg_ask": 0.88,
+  "pts": 12.0,
+  "pnl": 1.36
  },
  "N58 first look (decision arm)": {
   "n": 3,
@@ -37,7 +42,12 @@
   "pnl": -6.83
  },
  "N66 retry (transient skip, < 60 min)": {
-  "n": 0
+  "n": 1,
+  "events": 1,
+  "won": 1,
+  "avg_ask": 0.88,
+  "pts": 12.0,
+  "pnl": 1.36
  },
  "N66 activated placeholder (late-add)": {
   "n": 0
@@ -46,12 +56,11 @@
   "n": 0
  },
  "open_by_kind": {
-  "retry": 43,
+  "retry": 42,
   "late": 1
  },
  "watching": {
-  "not accepting orders": 797,
-  "ask outside 0.05-0.90": 6
+  "not accepting orders": 797
  },
  "candidates": {
   "ask outside 0.05-0.90": 569,
@@ -63,16 +72,16 @@
  },
  "candidate_age_min_median": 5.0,
  "this_run": {
-  "events listed": 5724,
-  "skip (retry): ask outside 0.05-0.90": 1457,
-  "polls": 46,
+  "events listed": 8748,
+  "skip (retry): ask outside 0.05-0.90": 1511,
+  "polls": 70,
   "seen once: markets < 24 h old (lesson 10 check)": 62,
   "new listings": 62,
   "skip (first): ask outside 0.05-0.90": 56,
   "skip (retry): none, bought": 8,
   "paper positions (retry)": 8,
   "skip (retry): spread > 10c": 21,
-  "skip (late): ask outside 0.05-0.90": 49,
+  "skip (late): ask outside 0.05-0.90": 55,
   "skip (late): spread > 10c": 5,
   "skip (first): lives < 24 h": 6
  }
