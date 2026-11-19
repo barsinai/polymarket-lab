@@ -856,3 +856,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - N91 twin markets DEAD by count (~7 genuine twin questions in 12 weeks, lesson 8). N90 'another X by <date>' relist launch-day NO DEAD
   (-14.0 pts [-28.3, -1.6], 39 events; YES mirror one half only). N42 forward rest +10.3 pts on 8 coin-dates -> survives its kill line.
   lock_x 44 / 39 end-times +6.3%; BTC/ETH >= 0.80 forward arm 4 / 3 end-times won. Next: N21 11-21, N58 settlements, N42 11-26.
+
+## 11-19 13:40 cycle 42
+- N92 culture launch-hour NO split by a big YES order first DEAD (fires on 0.8% of markets, wrong sign: +13.6 vs +8.2). N93 court-docket
+  markets DEAD by count (~25 legal events a year). lock_x 45 / 40 end-times +5.1%/$ after a cheap ETH loss; forward BTC/ETH >= 0.80 arm
+  4 / 3 won. N58 first settlement lost; no new candidate for 15 h -> check at c43. Next: N21 11-21, N42 11-26.

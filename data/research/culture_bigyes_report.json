@@ -1,0 +1,114 @@
+{
+ "markets": 1458,
+ "all": {
+  "n": 1458,
+  "events": 547,
+  "pts": 8.2,
+  "ci": [
+   5.8,
+   10.4
+  ],
+  "avg_p": 0.578
+ },
+ "split_at": "2026-09-12 16:55:00+00:00",
+ "all NONE (no big YES before)": {
+  "n": 1446,
+  "events": 543,
+  "pts": 8.16,
+  "ci": [
+   5.8,
+   10.5
+  ],
+  "avg_p": 0.578
+ },
+ "all BIG (>= 1 YES order >= $200 before)": {
+  "n": 12,
+  "events": 10,
+  "pts": 13.57,
+  "ci": [
+   -11.2,
+   33.6
+  ],
+  "avg_p": 0.523
+ },
+ "older NONE (no big YES before)": {
+  "n": 722,
+  "events": 257,
+  "pts": 10.58,
+  "ci": [
+   7.2,
+   14.0
+  ],
+  "avg_p": 0.566
+ },
+ "older BIG (>= 1 YES order >= $200 before)": {
+  "n": 7,
+  "events": 6,
+  "pts": 17.23,
+  "ci": [
+   -10.3,
+   38.1
+  ],
+  "avg_p": 0.39
+ },
+ "newer NONE (no big YES before)": {
+  "n": 724,
+  "events": 290,
+  "pts": 5.74,
+  "ci": [
+   2.8,
+   8.9
+  ],
+  "avg_p": 0.591
+ },
+ "newer BIG (>= 1 YES order >= $200 before)": {
+  "n": 5,
+  "events": 4,
+  "pts": 8.46
+ },
+ "  print only: big NO order before": {
+  "n": 38,
+  "events": 33,
+  "pts": 7.92,
+  "ci": [
+   -5.1,
+   19.1
+  ],
+  "avg_p": 0.756
+ },
+ "  print only: big YES and no big NO": {
+  "n": 11,
+  "events": 10,
+  "pts": 12.19,
+  "ci": [
+   -9.0,
+   33.5
+  ],
+  "avg_p": 0.507
+ },
+ "  print only: ex-mention NONE": {
+  "n": 900,
+  "events": 386,
+  "pts": 5.5,
+  "ci": [
+   2.8,
+   8.1
+  ],
+  "avg_p": 0.639
+ },
+ "  print only: ex-mention BIG": {
+  "n": 10,
+  "events": 9,
+  "pts": 7.5,
+  "ci": [
+   -16.1,
+   28.5
+  ],
+  "avg_p": 0.517
+ },
+ "verdict": "DEAD",
+ "NONE - BIG by half": {
+  "older": -6.65,
+  "newer": -2.7200000000000006
+ }
+}

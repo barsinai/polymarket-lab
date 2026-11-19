@@ -917,3 +917,29 @@
   this run (proxy refuses gamma).
 - Next: N21 decision 11-21; lock_x BTC/ETH >= 0.80 forward arm (30 end-times); N58 candidate gap recheck + first settlements; N42 11-26;
   COPY-1 to 300 / 100; N85 / N81 / N63 / N61 / N67 need Actions; N45 11-30.
+
+## 11-19 13:00-13:40 UTC cycle 42 (scheduled)
+- Read-outs (fast trades.jsonl, last settled entry 12:38; slow 12:45-12:47): lock_x 45 trades / 40 end-times 41 won +5.1%/$ (-0.1 pts/share
+  [-9.8, +7.0]); a cheap ETH fill at 0.58 lost at 12:24, >= 0.80 core 41 / 37 +1.6%/$ (-1.3 pts [-10.2, +5.9]); BTC/ETH >= 0.80 all-time
+  21 / 20 end-times all won +5.3 pts (post-hoc); the pre-registered forward arm since 01:00: 4 trades / 3 end-times all won +$3.96 (needs
+  30). lock_x50 +7.8%, lock_p_majors 36 +4.5%; lock_m 333 -2.2%, lock_b 143 +1.0%, lock_p_z2 396 -1.6%. N21 forward BTC/ETH 168 windows /
+  152 won -3.4%, alts 194 / 170 -5.4% (decision 11-21). LP-1 v2 136 runs / 5.11 d: formula $2,048 (upper bound), trading -$419,
+  pessimistic -$701; 107 settled, 70 open leftovers (guard OK), 4 quoted; forward_core 82 markets $453 vs +$28 / +$6 (passed c39; waits
+  for Yoav's OK on the read-only reward-history query). Options N42 forward rest 20 / 16 +10.3 pts (8 coin-dates), tails 5 / 0 -7.7, 51
+  open -> 11-26. converge 23 / 22 -$2.14 (0.94-0.97: 19 / 19 +3.4%; 0.90-0.94 4 / 3 -18.8%), 81 open, mark -$40; young 82 / 44 -$133 (57
+  open); box office 9 / 8 -$0.96; charts 3 / 3 +$3.64 (chart_events_seen 0); mention 19 / 16 -$2.46 (6 events), 6 open. COPY-1 118 h:
+  sharp 84 primaries settled / 57 events +2.9 pts (+2.1 at 5 min; bar 300 / 100), control 82 / 42 +4.4 -> control still >= sharp. N58
+  launch tracker (12:32): 39 positions, first settlement 1 mention market lost (-$10.24); 38 open, open_past_end 0; no new candidate since
+  11-18 22:04 (15 h, 797 listings 'not accepting orders' on watch) -> c43: if still none and the tape / listing shows culture launches, it
+  is a bug (lesson 10).
+- Test (adjacent N92, culture_bigyes.py, local, exact N78 rows + orders_a, rules fixed before looking): launch-hour NO where a YES taker
+  order >= $200 came before the follower's fill: 12 markets / 10 events of 1,458 / 547 (0.8%), +13.6 pts [-11.2, +33.6]; the rest +8.2
+  [5.8, 10.5]; NONE - BIG -6.7 / -2.7 by half -> DEAD (no filter; the launch hour is small tickets only, as N76 said). N58 rows by half:
+  older +10.6, newer +5.7 [2.8, 8.9] - still positive, watch (lesson 24).
+- New (outside the box N93): court-docket markets vs the public docket -> DEAD by count (125 legal-titled events since 2020 in the
+  closed-event list, ~25 a year, mostly one-off headline cases; tape group c 7 markets / 6 events in 12 weeks).
+- Health: fast paper 12:45, slow 12:50, follow 12:33 (report 12:26, < 70 min at 13:03), boosts 12:10, MM v2 12:31, perps 12:50, books
+  13:00, live snapshot 11:04, external 12:10 - OK. Tracebacks only the old pilot-log (2) / script-log (1); no MemoryErrors. STOP in place,
+  no orders. gh has no valid token in this run, so no Actions dispatch (N85 / N81 / N63 / N61 / N67 still wait).
+- Next: N58 candidate-gap check (c43); N21 decision 11-21; lock_x BTC/ETH >= 0.80 forward arm (30 end-times); N42 11-26; COPY-1 to
+  300 / 100 (sharp vs control); N45 11-30.
