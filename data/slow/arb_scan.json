@@ -1,5 +1,5 @@
 {
-"scanned": "2026-11-19 03:42",
+"scanned": "2026-11-19 03:45",
 "events": 2100,
 "groups": 2037,
 "books": 17092,
@@ -11,13 +11,43 @@
 "easy": "Metamask FDV above $3B one day after launch?",
 "hard": "Metamask FDV above $4B one day after launch?",
 "easy_yes_ask": 0.005,
-"hard_no_ask": 0.99,
-"hard_yes_bid": 0.01,
-"cost": 0.995,
-"edge": 0.005,
-"edge_after_fee": 0.004,
+"hard_no_ask": 0.991,
+"hard_yes_bid": 0.009,
+"cost": 0.996,
+"edge": 0.004,
+"edge_after_fee": 0.003,
 "size_shares": 434.08,
-"usd_at_size": 431.91
+"usd_at_size": 432.34
+},
+{
+"kind": "ladder_date",
+"event": "Will Israel annex any territory by...?",
+"slug": "will-israel-annex-any-territory-by-december-31",
+"easy": "Will Israel annex any territory by December 31?",
+"hard": "Will Israel annex any territory by June 30?",
+"easy_yes_ask": 0.028,
+"hard_no_ask": 0.9,
+"hard_yes_bid": 0.1,
+"cost": 0.928,
+"edge": 0.072,
+"edge_after_fee": 0.0638,
+"size_shares": 12.5,
+"usd_at_size": 11.6
+},
+{
+"kind": "ladder_num",
+"event": "Hyperbeat FDV above ___ one day after launch?",
+"slug": "hyperbeat-fdv-above-one-day-after-launch",
+"easy": "Hyperbeat FDV above $300M one day after launch?",
+"hard": "Hyperbeat FDV above $400M one day after launch?",
+"easy_yes_ask": 0.016,
+"hard_no_ask": 0.98,
+"hard_yes_bid": 0.02,
+"cost": 0.996,
+"edge": 0.004,
+"edge_after_fee": 0.0015,
+"size_shares": 209.95,
+"usd_at_size": 209.11
 },
 {
 "kind": "negrisk_all_yes",
@@ -32,42 +62,12 @@
 "40\u201360",
 "60+"
 ],
-"cost": 0.962,
+"cost": 0.964,
 "payoff": 1,
-"edge": 0.038,
-"edge_after_fee": 0.0032,
+"edge": 0.036,
+"edge_after_fee": 0.0011,
 "size_shares": 21.89,
-"usd_at_size": 21.06
-},
-{
-"kind": "ladder_num",
-"event": "Hyperbeat FDV above ___ one day after launch?",
-"slug": "hyperbeat-fdv-above-one-day-after-launch",
-"easy": "Hyperbeat FDV above $300M one day after launch?",
-"hard": "Hyperbeat FDV above $400M one day after launch?",
-"easy_yes_ask": 0.016,
-"hard_no_ask": 0.98,
-"hard_yes_bid": 0.02,
-"cost": 0.996,
-"edge": 0.004,
-"edge_after_fee": 0.0015,
-"size_shares": 194.95,
-"usd_at_size": 194.17
-},
-{
-"kind": "ladder_date",
-"event": "Will Israel annex any territory by...?",
-"slug": "will-israel-annex-any-territory-by-december-31",
-"easy": "Will Israel annex any territory by December 31?",
-"hard": "Will Israel annex any territory by June 30?",
-"easy_yes_ask": 0.046,
-"hard_no_ask": 0.9,
-"hard_yes_bid": 0.1,
-"cost": 0.946,
-"edge": 0.054,
-"edge_after_fee": 0.0446,
-"size_shares": 12.5,
-"usd_at_size": 11.83
+"usd_at_size": 21.1
 },
 {
 "kind": "ladder_num",
@@ -85,6 +85,21 @@
 "usd_at_size": 59.52
 },
 {
+"kind": "ladder_date",
+"event": "Will Israel annex any territory by...?",
+"slug": "will-israel-annex-any-territory-by-december-31",
+"easy": "Will Israel annex any territory by December 31?",
+"hard": "Will Israel annex any territory by March 31?",
+"easy_yes_ask": 0.028,
+"hard_no_ask": 0.95,
+"hard_yes_bid": 0.05,
+"cost": 0.978,
+"edge": 0.022,
+"edge_after_fee": 0.0168,
+"size_shares": 20.0,
+"usd_at_size": 19.56
+},
+{
 "kind": "ladder_num",
 "event": "StandX FDV above ___ one day after launch?",
 "slug": "standx-fdv-above-one-day-after-launch",
@@ -98,30 +113,6 @@
 "edge_after_fee": 0.0034,
 "size_shares": 60.0,
 "usd_at_size": 59.58
-},
-{
-"kind": "negrisk_all_yes",
-"event": "Eurozone Annual GDP Growth 2026",
-"slug": "eurozone-annual-gdp-growth-2026",
-"n": 9,
-"has_other": false,
-"outcomes": [
-"<0%",
-"0-1.0%",
-"1.0-2.0%",
-"2.0-3.0%",
-"3.0-4.0%",
-"4.0-5.0%",
-"5.0-6.0%",
-"6.0-7.0%",
-"7.0%+"
-],
-"cost": 0.996,
-"payoff": 1,
-"edge": 0.004,
-"edge_after_fee": -0.0139,
-"size_shares": 61.0,
-"usd_at_size": 60.76
 },
 {
 "kind": "ladder_num",
@@ -222,21 +213,6 @@
 "edge_after_fee": -0.038,
 "size_shares": 14.0,
 "usd_at_size": 13.89
-},
-{
-"kind": "ladder_date",
-"event": "Will Israel annex any territory by...?",
-"slug": "will-israel-annex-any-territory-by-december-31",
-"easy": "Will Israel annex any territory by December 31?",
-"hard": "Will Israel annex any territory by March 31?",
-"easy_yes_ask": 0.046,
-"hard_no_ask": 0.95,
-"hard_yes_bid": 0.05,
-"cost": 0.996,
-"edge": 0.004,
-"edge_after_fee": -0.0024,
-"size_shares": 20.0,
-"usd_at_size": 19.92
 },
 {
 "kind": "ladder_num",
