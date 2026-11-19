@@ -943,3 +943,30 @@
   no orders. gh has no valid token in this run, so no Actions dispatch (N85 / N81 / N63 / N61 / N67 still wait).
 - Next: N58 candidate-gap check (c43); N21 decision 11-21; lock_x BTC/ETH >= 0.80 forward arm (30 end-times); N42 11-26; COPY-1 to
   300 / 100 (sharp vs control); N45 11-30.
+
+## 11-19 17:02-17:40 UTC cycle 43 (scheduled)
+- Read-outs (fast trades.jsonl unchanged since c42; slow 16:46-16:48): lock_x 45 trades / 40 end-times 41 won +5.1%/$ (-0.1 pts/share
+  [-9.8, +7.0]); >= 0.80 core 41 / 37 +1.6%/$; BTC/ETH >= 0.80 all-time 21 / 20 end-times won +5.3 pts (post-hoc); forward arm since 01:00
+  unchanged 4 trades / 3 end-times (needs 30). N21 forward BTC/ETH 169 windows / 153 won -3.3%, alts 203 / 179 -4.8% (decision 11-21).
+  LP-1 v2 141 runs / 5.28 d: formula $2,086 (upper bound), trading -$414, pessimistic -$728; 108 settled, 70 open leftovers (guard OK), 5
+  quoted; forward_core 83 markets $453 vs +$21 / +$3 (passed c39; waits for Yoav's OK on the read-only reward-history query). Options N42
+  forward rest 20 / 16 +10.3 pts (8 coin-dates), tails 5 / 0 -7.7, 56 open -> 11-26. converge 24 / 23 -$1.74 (80 open, mark -$36); young
+  83 / 44 -$143 (58 open); box office 9 / 8 -$0.96; charts 3 / 3 +$3.64; mention 24 / 20 -$5.64 (7 events). COPY-1 122 h: sharp 94
+  primaries settled / 60 events +2.4 pts (+1.1 at 5 min; bar 300 / 100), control 83 / 43 +4.8 -> control still >= sharp. N58 launch
+  tracker: 43 positions, 3 settled (1 mention event, -3.7 pts), 40 open, open_past_end 0.
+- N58 candidate-gap check (lesson 10): NOT a bug. Listings arrive at the base rate (58 first looks on 11-19 by 16:45, ~3.5 / h), but every
+  first look meets the empty 0.01 / 0.99 seed book and is skipped 'ask outside'; the retry arm buys the first real book (4 today, 39 of 43
+  positions). That is the tape test's design (follower at the first real fill), so the decision read is first + retry from now (fixed
+  before any retry position settled).
+- Test (outside the box N94, round_threshold.py, local, tape a + c ex-mention, rules fixed before looking): round thresholds (one
+  significant digit) NO +8.7 pts [2.8, 13.5] on 169 events vs non-round +6.0 [1.6, 10.4] (175), halves +4.7 / +12.6 -> letter-PASS, but
+  robustness kills the mechanism: ex-Rotten-Tomatoes round +2.3 [-3.2, 8.2] vs other +7.4; group c round +2.5 vs other +6.9; paired gap
+  +7.1 [-4.7, 18.4] (53 events) -> DEAD as a mechanism; it is the RT ladders. Spawned N95 (RT score ladders NO +11.4 [2.7, 20.0], 36
+  films, halves +3.3 / +19.4) -> READY.
+- Test (adjacent N3, boxoffice_later.py, local, tape a): later-weekend box-office ladders 25 in 12 weeks; Saturday favourite +3.5 pts
+  [-7.0, +10.0] on 15 events; drop-ratio chain 5 events -> DEAD by count.
+- Health: fast paper 16:46, slow 16:52, follow 16:46 (report 16:37, < 70 min), boosts 16:37, MM v2 16:01, perps 12:50, books 17:00 - OK.
+  Tracebacks only the old pilot-log (2) / script-log (1); no MemoryErrors. STOP in place, no orders. No network (proxy refuses
+  Polymarket / Polygon RPC) and gh has no valid token -> no Actions dispatch (N85 / N81 / N63 / N61 / N67 still wait).
+- Next: N95 split test (time-to-end, top rung, older half) on the tape; N21 decision 11-21; lock_x BTC/ETH >= 0.80 forward arm (30
+  end-times); N58 first + retry settlements; N42 11-26; COPY-1 to 300 / 100.

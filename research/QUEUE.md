@@ -861,3 +861,9 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - N92 culture launch-hour NO split by a big YES order first DEAD (fires on 0.8% of markets, wrong sign: +13.6 vs +8.2). N93 court-docket
   markets DEAD by count (~25 legal events a year). lock_x 45 / 40 end-times +5.1%/$ after a cheap ETH loss; forward BTC/ETH >= 0.80 arm
   4 / 3 won. N58 first settlement lost; no new candidate for 15 h -> check at c43. Next: N21 11-21, N42 11-26.
+
+## 11-19 17:40 cycle 43
+- N94 round-number thresholds DEAD as a mechanism (letter-PASS +8.7 vs +6.0 pts was all Rotten Tomatoes ladders; ex-RT round +2.3 vs
+  +7.4). Spawned N95 RT score ladders (NO +11.4 [2.7, 20.0], 36 films, halves +3.3 / +19.4) READY. N3 later-weekend box office DEAD by
+  count (25 ladders in 12 weeks). N58: first-look arm is starved by empty 0.01/0.99 seed books (all 58 first looks today); 39 of 43
+  positions are retry -> read the decision on first + retry. Next: N95 split test, N21 11-21, N42 11-26.

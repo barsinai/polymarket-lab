@@ -1,0 +1,301 @@
+{
+ "rows": 1138,
+ "split_at": "2026-10-01 03:59:00+00:00",
+ "examples ROUND": [
+  "Will \"Wild Horse Nine\" score at least 90 on the Rotten Tomatoes Tomato",
+  "Will \"Wild Horse Nine\" score at least 90 on the Rotten Tomatoes Tomato",
+  "Will \"Godzilla Minus Zero\" score at least 80 on the Rotten Tomatoes To",
+  "Will \"Godzilla Minus Zero\" score at least 90 on the Rotten Tomatoes To"
+ ],
+ "examples OTHER": [
+  "Will \"Wild Horse Nine\" score at least 92 on the Rotten Tomatoes Tomato",
+  "Will \"Wild Horse Nine\" score at least 92 on the Rotten Tomatoes Tomato",
+  "Will \"Wild Horse Nine\" score at least 95 on the Rotten Tomatoes Tomato",
+  "Will \"Wild Horse Nine\" score at least 95 on the Rotten Tomatoes Tomato"
+ ],
+ "ROUND NO": {
+  "n": 282,
+  "events": 169,
+  "pts": 8.65,
+  "avg_p": 0.581,
+  "ci": [
+   2.8,
+   13.5
+  ]
+ },
+ "  ROUND NO older": {
+  "n": 142,
+  "events": 85,
+  "pts": 4.74,
+  "avg_p": 0.586,
+  "ci": [
+   -2.6,
+   12.3
+  ]
+ },
+ "  ROUND NO newer": {
+  "n": 140,
+  "events": 84,
+  "pts": 12.62,
+  "avg_p": 0.576,
+  "ci": [
+   4.5,
+   20.0
+  ]
+ },
+ "  ROUND NO by cat": {
+  "ai/tech": {
+   "n": 29,
+   "events": 21,
+   "pts": 4.26,
+   "avg_p": 0.469,
+   "ci": [
+    -12.5,
+    24.3
+   ]
+  },
+  "awards": {
+   "n": 1,
+   "events": 1,
+   "pts": 10.18,
+   "avg_p": 0.893
+  },
+  "economy": {
+   "n": 20,
+   "events": 15,
+   "pts": 6.06,
+   "avg_p": 0.886,
+   "ci": [
+    -5.9,
+    13.5
+   ]
+  },
+  "geopolitics": {
+   "n": 38,
+   "events": 27,
+   "pts": 10.87,
+   "avg_p": 0.784,
+   "ci": [
+    -0.1,
+    18.5
+   ]
+  },
+  "movies": {
+   "n": 121,
+   "events": 44,
+   "pts": 16.43,
+   "avg_p": 0.473,
+   "ci": [
+    6.6,
+    25.3
+   ]
+  },
+  "music": {
+   "n": 9,
+   "events": 4,
+   "pts": 16.95,
+   "avg_p": 0.599
+  },
+  "politics": {
+   "n": 47,
+   "events": 40,
+   "pts": -6.99,
+   "avg_p": 0.532,
+   "ci": [
+    -19.8,
+    5.4
+   ]
+  },
+  "pop-culture": {
+   "n": 9,
+   "events": 9,
+   "pts": 2.17,
+   "avg_p": 0.864,
+   "ci": [
+    -14.3,
+    13.8
+   ]
+  },
+  "youtube": {
+   "n": 8,
+   "events": 8,
+   "pts": -7.52,
+   "avg_p": 0.82,
+   "ci": [
+    -31.6,
+    14.8
+   ]
+  }
+ },
+ "ROUND YES": {
+  "n": 245,
+  "events": 154,
+  "pts": -7.17,
+  "avg_p": 0.457,
+  "ci": [
+   -12.4,
+   -1.4
+  ]
+ },
+ "  ROUND YES older": {
+  "n": 120,
+  "events": 76,
+  "pts": -1.57,
+  "avg_p": 0.458,
+  "ci": [
+   -8.5,
+   6.0
+  ]
+ },
+ "  ROUND YES newer": {
+  "n": 125,
+  "events": 78,
+  "pts": -12.56,
+  "avg_p": 0.456,
+  "ci": [
+   -19.9,
+   -3.8
+  ]
+ },
+ "OTHER NO": {
+  "n": 312,
+  "events": 175,
+  "pts": 5.96,
+  "avg_p": 0.598,
+  "ci": [
+   1.6,
+   10.4
+  ]
+ },
+ "  OTHER NO older": {
+  "n": 136,
+  "events": 81,
+  "pts": 2.67,
+  "avg_p": 0.621,
+  "ci": [
+   -3.0,
+   8.2
+  ]
+ },
+ "  OTHER NO newer": {
+  "n": 176,
+  "events": 94,
+  "pts": 8.51,
+  "avg_p": 0.58,
+  "ci": [
+   1.4,
+   15.1
+  ]
+ },
+ "  OTHER NO by cat": {
+  "ai/tech": {
+   "n": 30,
+   "events": 16,
+   "pts": 9.59,
+   "avg_p": 0.532,
+   "ci": [
+    -3.3,
+    20.4
+   ]
+  },
+  "economy": {
+   "n": 23,
+   "events": 18,
+   "pts": 13.19,
+   "avg_p": 0.734,
+   "ci": [
+    -0.3,
+    22.4
+   ]
+  },
+  "geopolitics": {
+   "n": 19,
+   "events": 18,
+   "pts": 14.1,
+   "avg_p": 0.805,
+   "ci": [
+    7.2,
+    21.7
+   ]
+  },
+  "movies": {
+   "n": 155,
+   "events": 77,
+   "pts": 3.35,
+   "avg_p": 0.559,
+   "ci": [
+    -3.7,
+    10.7
+   ]
+  },
+  "music": {
+   "n": 24,
+   "events": 7,
+   "pts": 16.51,
+   "avg_p": 0.535,
+   "ci": [
+    -7.5,
+    33.2
+   ]
+  },
+  "politics": {
+   "n": 35,
+   "events": 21,
+   "pts": -3.38,
+   "avg_p": 0.631,
+   "ci": [
+    -17.9,
+    11.4
+   ]
+  },
+  "youtube": {
+   "n": 26,
+   "events": 18,
+   "pts": 7.81,
+   "avg_p": 0.646,
+   "ci": [
+    -7.4,
+    18.4
+   ]
+  }
+ },
+ "OTHER YES": {
+  "n": 299,
+  "events": 161,
+  "pts": -2.39,
+  "avg_p": 0.439,
+  "ci": [
+   -7.1,
+   2.3
+  ]
+ },
+ "  OTHER YES older": {
+  "n": 136,
+  "events": 77,
+  "pts": 0.31,
+  "avg_p": 0.453,
+  "ci": [
+   -5.3,
+   6.2
+  ]
+ },
+ "  OTHER YES newer": {
+  "n": 163,
+  "events": 84,
+  "pts": -4.65,
+  "avg_p": 0.428,
+  "ci": [
+   -11.7,
+   2.3
+  ]
+ },
+ "verdict": "DEAD as a mechanism: the letter-PASS is the Rotten Tomatoes ladders (thresholds 80/90 are 'round'); ex-RT the sign reverses -> N95",
+ "robustness (c43, after the letter-PASS)": {
+  "group a ROUND NO": "+14.3 [6.2, 21.7] 66 ev",
+  "group c ROUND NO": "+2.5 [-4.2, 8.9] 103 ev vs OTHER +6.9",
+  "ex-Rotten-Tomatoes ROUND NO": "+2.3 [-3.2, 8.2] 136 ev vs OTHER +7.4 [1.8, 12.6]",
+  "paired within-event gap": "+7.1 [-4.7, 18.4] 53 events",
+  "events with one kind only": "ROUND +4.1 vs OTHER +7.3",
+  "Rotten Tomatoes ladders NO (all thresholds)": "+11.4 [2.7, 20.0] 36 films, halves +3.3 / +19.4"
+ }
+}
