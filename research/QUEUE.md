@@ -846,3 +846,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - lock_x week read: +6.5%/$ on 35 end-times passes the letter, but 84% of it is 3 cheap fills; >= 0.80 core +1.2%/$ -> not proposable,
   new forward arm BTC/ETH >= 0.80. N38 LP-1 core PASSES 5-day bar ($422 formula vs +$26 pessimistic), N35 DEAD (-27%). N86 culture
   launch-hour maker DEAD (+1.6 vs taker +8.2; lesson 29). N87 hurricanes DEAD by count. Next: N21 11-21, N58 settlements, N42 11-26.
+
+## 11-19 05:40 cycle 40
+- N89 question wording DEAD: negated / 'stay' questions are 1.2% of markets (33 events), YES -7.7 pts [-19.3, +6.1]; mid-life has no side
+  edge either way (YES -0.5, NO +0.5). N88 culture width: 96% of launch rows are wide events -> no split. Read-outs flat; lock_x forward
+  arm 1/1. Next: N21 11-21, N58 settlements, N42 11-26, LP-1 core waits for Yoav's OK on the read-only reward query.

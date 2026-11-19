@@ -872,3 +872,25 @@
   this run (proxy refuses gamma / clob).
 - Next: N21 decision 11-21; lock_x BTC/ETH forward arm (30 end-times); N58 first settlements (by event and series kind); N42 11-26;
   COPY-1 to 300 / 100; N85 / N81 / N63 / N61 / N67 need Actions; N45 11-30.
+
+## 11-19 05:00-05:40 UTC cycle 40 (scheduled)
+- Read-outs (fast trades.jsonl, last settled entry 04:38; slow 04:42-04:44): lock_x 41 trades / 37 end-times 38 won +6.4%/$ (>= 0.80 core
+  38 / 35 +1.3%/$, -1.8 pts/share [-11.5, +5.7]; the cheap 3 fills still carry it); new forward arm BTC/ETH >= 0.80 since 01:00: 1 / 1
+  won (needs 30 end-times). lock_x50 +8.7%, lock_p_majors 31 / 29 +5.4%; lock_m 318 -1.8%, lock_b 133 +0.7%, lock_p_z2 380 -1.3%. N21
+  forward BTC/ETH 152 windows / 139 won -2.5%, alts 179 / 157 -5.9% (decision 11-21). LP-1 v2 128 runs / 4.78 d: formula $1,999 (upper
+  bound), trading -$426, pessimistic -$664; 101 settled, 71 open leftovers (guard OK), 2 quoted; forward_core 81 markets $432 vs +$40 /
+  +$29 (passed c39; waits for Yoav's OK on the read-only reward-history query). Options N42 forward rest 12 / 10 +13.1 pts (6 coin-dates),
+  54 open (11 tails) -> 11-26. converge 19 / 18 -$6.60 (84 open, mark -$34); young 81 / 44 -$123 (56 open); box office 9 / 8 -$0.96;
+  charts 3 / 3 +$3.64 (chart_events_seen 0); mention 9 / 7 -$7.50, 15 open. COPY-1 109.8 h: sharp 79 primaries settled / 54 events +4.4
+  pts (+3.6 at 5 min; bar 300 / 100), control 77 / 38 +4.1 (control ~ sharp -> no wallet skill visible yet). N58 launch tracker (04:06):
+  39 open, 0 settled, open_past_end 0.
+- Test (outside the box N89, wording_side.py, local, tape a ex-mention + c, mid-life entries, rules fixed before looking): negated /
+  'stay-remain' questions are 1.2% of markets (66 / 33 events): YES -7.7 pts [-19.3, +6.1], NO +5.7 [-6.1, +17.0]; mid-life baseline YES
+  -0.5, NO +0.5 -> DEAD (drama story wrong in sign, too rare). Caught a bug before reading: the tape's win bit is per direction.
+- Test (adjacent N88, culture_width.py, exact N78 rows): 96% of launch-hour NO rows are in 5+ market events (wide +8.0 [5.6, 10.3],
+  halves +10.1 / +5.9) -> no split possible, no tracker change.
+- Health: fast paper 04:41, slow 04:45, follow 04:08 (report 04:03, ~60 min at 05:03), boosts 04:30, MM v2 04:01, books 04:45 - OK.
+  Tracebacks only the old pilot-log (2) / script-log (1); no MemoryErrors. STOP in place, no orders. No network from this run (proxy
+  refuses Polymarket / Kalshi / Deribit / Hyperliquid), so no Actions-dependent idea could be run.
+- Next: N21 decision 11-21; lock_x BTC/ETH >= 0.80 forward arm (30 end-times); N58 first settlements (by event; one-off vs recurring);
+  N42 11-26; COPY-1 to 300 / 100 (watch sharp - control); N85 / N81 / N63 / N61 / N67 need Actions; N45 11-30.

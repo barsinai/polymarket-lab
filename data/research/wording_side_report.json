@@ -1,0 +1,212 @@
+{
+ "rows": 10978,
+ "split_at": "2026-10-01 03:59:00+00:00",
+ "classes (markets)": {
+  "AFF": 5013,
+  "LOW": 216,
+  "STAY": 53,
+  "NEG": 13
+ },
+ "YES AFF": {
+  "n": 5013,
+  "events": 1528,
+  "pts": -0.52,
+  "ci": [
+   -1.7,
+   0.7
+  ],
+  "avg_p": 0.358
+ },
+ "YES NEG": {
+  "n": 13,
+  "events": 10,
+  "pts": 4.38,
+  "ci": [
+   -6.5,
+   23.0
+  ],
+  "avg_p": 0.489
+ },
+ "YES STAY": {
+  "n": 53,
+  "events": 23,
+  "pts": -10.6,
+  "ci": [
+   -24.5,
+   5.6
+  ],
+  "avg_p": 0.404
+ },
+ "YES LOW": {
+  "n": 216,
+  "events": 168,
+  "pts": -1.01,
+  "ci": [
+   -8.4,
+   5.9
+  ],
+  "avg_p": 0.311
+ },
+ "YES NEG+STAY": {
+  "n": 66,
+  "events": 33,
+  "pts": -7.65,
+  "ci": [
+   -19.3,
+   6.1
+  ],
+  "avg_p": 0.421
+ },
+ "  YES NEG+STAY older": {
+  "n": 49,
+  "events": 26,
+  "pts": -6.5,
+  "ci": [
+   -20.2,
+   8.4
+  ],
+  "avg_p": 0.408
+ },
+ "  YES NEG+STAY newer": {
+  "n": 17,
+  "events": 10,
+  "pts": -10.96,
+  "ci": [
+   -37.1,
+   8.9
+  ],
+  "avg_p": 0.459
+ },
+ "  YES NEG+STAY by group": {
+  "a": {
+   "n": 19,
+   "events": 15,
+   "pts": -5.42,
+   "ci": [
+    -23.9,
+    16.1
+   ],
+   "avg_p": 0.415
+  },
+  "c": {
+   "n": 47,
+   "events": 18,
+   "pts": -8.56,
+   "ci": [
+    -23.4,
+    7.9
+   ],
+   "avg_p": 0.423
+  }
+ },
+ "NO AFF": {
+  "n": 5377,
+  "events": 1502,
+  "pts": 0.46,
+  "ci": [
+   -0.6,
+   1.4
+  ],
+  "avg_p": 0.675
+ },
+ "NO NEG": {
+  "n": 17,
+  "events": 11,
+  "pts": -5.73,
+  "ci": [
+   -18.5,
+   2.5
+  ],
+  "avg_p": 0.699
+ },
+ "NO STAY": {
+  "n": 55,
+  "events": 27,
+  "pts": 9.17,
+  "ci": [
+   -6.1,
+   22.6
+  ],
+  "avg_p": 0.578
+ },
+ "NO LOW": {
+  "n": 234,
+  "events": 182,
+  "pts": -0.08,
+  "ci": [
+   -7.5,
+   7.0
+  ],
+  "avg_p": 0.71
+ },
+ "NO NEG+STAY": {
+  "n": 72,
+  "events": 38,
+  "pts": 5.65,
+  "ci": [
+   -6.1,
+   17.0
+  ],
+  "avg_p": 0.606
+ },
+ "  NO NEG+STAY older": {
+  "n": 53,
+  "events": 30,
+  "pts": 3.6,
+  "ci": [
+   -8.5,
+   17.4
+  ],
+  "avg_p": 0.62
+ },
+ "  NO NEG+STAY newer": {
+  "n": 19,
+  "events": 11,
+  "pts": 11.37,
+  "ci": [
+   -5.0,
+   35.1
+  ],
+  "avg_p": 0.567
+ },
+ "  NO NEG+STAY by group": {
+  "a": {
+   "n": 22,
+   "events": 17,
+   "pts": 0.35,
+   "ci": [
+    -17.2,
+    20.0
+   ],
+   "avg_p": 0.626
+  },
+  "c": {
+   "n": 50,
+   "events": 21,
+   "pts": 7.98,
+   "ci": [
+    -6.1,
+    21.6
+   ],
+   "avg_p": 0.598
+  }
+ },
+ "examples NEG+STAY": [
+  "2-spotify-song-this-week-september-25",
+  "aca-credits-extended-house-winner-2026",
+  "bank-of-israel-decision-in-august",
+  "bank-of-korea-decision-in-august",
+  "bank-of-korea-decision-in-october",
+  "billboard-200-1-album-week-of-september-12",
+  "coppertech-metals-ipo-closing-market-cap-20260625160623001",
+  "haiti-elections-delayed-again",
+  "how-many-republican-governors-after-the-2026-midterm-elections",
+  "les-republicains-seat-count-after-french-senate-election",
+  "openai-resumes-training-on",
+  "peoples-bank-of-china-rate-change-by-september-30-20260630000252021",
+  "rod-wave-dont-look-down-first-week-album-sales-20260804154138580",
+  "russia-x-ukraine-any-diplomatic-meeting-byptptpt-20260629155934230",
+  "russia-x-ukraine-any-diplomatic-meeting-byptptpt-20260819"
+ ],
+ "verdict": "token bias (YES rich even when YES = nothing happens)"
+}
