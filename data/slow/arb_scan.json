@@ -1,8 +1,8 @@
 {
-"scanned": "2026-11-19 19:50",
+"scanned": "2026-11-19 20:50",
 "events": 2100,
 "groups": 2037,
-"books": 17160,
+"books": 17144,
 "opps": [
 {
 "kind": "ladder_num",
@@ -11,13 +11,43 @@
 "easy": "Metamask FDV above $3B one day after launch?",
 "hard": "Metamask FDV above $4B one day after launch?",
 "easy_yes_ask": 0.006,
-"hard_no_ask": 0.991,
-"hard_yes_bid": 0.009,
-"cost": 0.997,
-"edge": 0.003,
-"edge_after_fee": 0.002,
-"size_shares": 1035.17,
-"usd_at_size": 1032.06
+"hard_no_ask": 0.99,
+"hard_yes_bid": 0.01,
+"cost": 0.996,
+"edge": 0.004,
+"edge_after_fee": 0.0029,
+"size_shares": 1103.26,
+"usd_at_size": 1098.85
+},
+{
+"kind": "ladder_num",
+"event": "Base FDV above ___ one day after launch?",
+"slug": "base-fdv-above-one-day-after-launch",
+"easy": "Base FDV above $8B one day after launch?",
+"hard": "Base FDV above $10B one day after launch?",
+"easy_yes_ask": 0.15,
+"hard_no_ask": 0.84,
+"hard_yes_bid": 0.16,
+"cost": 0.99,
+"edge": 0.01,
+"edge_after_fee": -0.0083,
+"size_shares": 213.11,
+"usd_at_size": 210.98
+},
+{
+"kind": "ladder_num",
+"event": "Base FDV above ___ one day after launch?",
+"slug": "base-fdv-above-one-day-after-launch",
+"easy": "Base FDV above $8B one day after launch?",
+"hard": "Base FDV above $12B one day after launch?",
+"easy_yes_ask": 0.15,
+"hard_no_ask": 0.84,
+"hard_yes_bid": 0.16,
+"cost": 0.99,
+"edge": 0.01,
+"edge_after_fee": -0.0083,
+"size_shares": 138.52,
+"usd_at_size": 137.13
 },
 {
 "kind": "ladder_num",
@@ -35,26 +65,6 @@
 "usd_at_size": 70.99
 },
 {
-"kind": "negrisk_all_yes",
-"event": "Maduro Prison Time?",
-"slug": "maduro-prison-time-527",
-"n": 5,
-"has_other": false,
-"outcomes": [
-"No prison time",
-"<20",
-"20\u201340",
-"40\u201360",
-"60+"
-],
-"cost": 0.969,
-"payoff": 1,
-"edge": 0.031,
-"edge_after_fee": -0.004,
-"size_shares": 21.89,
-"usd_at_size": 21.21
-},
-{
 "kind": "ladder_date",
 "event": "Will Israel annex any territory by...?",
 "slug": "will-israel-annex-any-territory-by-december-31",
@@ -68,36 +78,6 @@
 "edge_after_fee": 0.0446,
 "size_shares": 12.5,
 "usd_at_size": 11.83
-},
-{
-"kind": "ladder_num",
-"event": "Base FDV above ___ one day after launch?",
-"slug": "base-fdv-above-one-day-after-launch",
-"easy": "Base FDV above $8B one day after launch?",
-"hard": "Base FDV above $10B one day after launch?",
-"easy_yes_ask": 0.15,
-"hard_no_ask": 0.84,
-"hard_yes_bid": 0.16,
-"cost": 0.99,
-"edge": 0.01,
-"edge_after_fee": -0.0083,
-"size_shares": 60.0,
-"usd_at_size": 59.4
-},
-{
-"kind": "ladder_num",
-"event": "Base FDV above ___ one day after launch?",
-"slug": "base-fdv-above-one-day-after-launch",
-"easy": "Base FDV above $8B one day after launch?",
-"hard": "Base FDV above $12B one day after launch?",
-"easy_yes_ask": 0.15,
-"hard_no_ask": 0.84,
-"hard_yes_bid": 0.16,
-"cost": 0.99,
-"edge": 0.01,
-"edge_after_fee": -0.0083,
-"size_shares": 60.0,
-"usd_at_size": 59.4
 },
 {
 "kind": "ladder_num",
@@ -143,6 +123,26 @@
 "edge_after_fee": 0.0034,
 "size_shares": 84.08,
 "usd_at_size": 83.74
+},
+{
+"kind": "negrisk_all_yes",
+"event": "Maduro Prison Time?",
+"slug": "maduro-prison-time-527",
+"n": 5,
+"has_other": false,
+"outcomes": [
+"No prison time",
+"<20",
+"20\u201340",
+"40\u201360",
+"60+"
+],
+"cost": 0.968,
+"payoff": 1,
+"edge": 0.032,
+"edge_after_fee": -0.003,
+"size_shares": 8.07,
+"usd_at_size": 7.81
 },
 {
 "kind": "ladder_num",
@@ -220,6 +220,21 @@
 "usd_at_size": 29.45
 },
 {
+"kind": "ladder_num",
+"event": "Probable FDV above ___ one day after launch?",
+"slug": "probable-fdv-above-one-day-after-launch",
+"easy": "Probable FDV above $50M one day after launch?",
+"hard": "Probable FDV above $500M one day after launch?",
+"easy_yes_ask": 0.12,
+"hard_no_ask": 0.873,
+"hard_yes_bid": 0.127,
+"cost": 0.993,
+"edge": 0.007,
+"edge_after_fee": -0.0082,
+"size_shares": 14.07,
+"usd_at_size": 13.97
+},
+{
 "kind": "ladder_date",
 "event": "Will Israel annex any territory by...?",
 "slug": "will-israel-annex-any-territory-by-december-31",
@@ -248,21 +263,6 @@
 "edge_after_fee": 0.0132,
 "size_shares": 1.61,
 "usd_at_size": 1.58
-},
-{
-"kind": "ladder_num",
-"event": "Ostium FDV above ___ one day after launch?",
-"slug": "ostium-fdv-above-one-day-after-launch",
-"easy": "Ostium FDV above $75M one day after launch?",
-"hard": "Ostium FDV above $100M one day after launch?",
-"easy_yes_ask": 0.023,
-"hard_no_ask": 0.974,
-"hard_yes_bid": 0.026,
-"cost": 0.997,
-"edge": 0.003,
-"edge_after_fee": -0.0003,
-"size_shares": 10.0,
-"usd_at_size": 9.97
 },
 {
 "kind": "ladder_num",
