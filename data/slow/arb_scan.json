@@ -1,9 +1,33 @@
 {
-"scanned": "2026-11-19 07:46",
+"scanned": "2026-11-19 08:45",
 "events": 2100,
 "groups": 2037,
 "books": 17158,
 "opps": [
+{
+"kind": "negrisk_all_yes",
+"event": "U.K. Annual Inflation 2026",
+"slug": "uk-annual-inflation-in-2026",
+"n": 9,
+"has_other": false,
+"outcomes": [
+"<1.0%",
+"1.0\u20131.4%",
+"1.5\u20131.9%",
+"2.0\u20132.4%",
+"2.5\u20132.9%",
+"3.0\u20133.4%",
+"3.5\u20133.9%",
+"4.5%+",
+"4.0-4.4%"
+],
+"cost": 0.95,
+"payoff": 1,
+"edge": 0.05,
+"edge_after_fee": 0.001,
+"size_shares": 20.0,
+"usd_at_size": 19.0
+},
 {
 "kind": "ladder_num",
 "event": "Metamask FDV above ___ one day after launch?",
@@ -16,8 +40,8 @@
 "cost": 0.997,
 "edge": 0.003,
 "edge_after_fee": 0.002,
-"size_shares": 376.41,
-"usd_at_size": 375.28
+"size_shares": 265.3,
+"usd_at_size": 264.5
 },
 {
 "kind": "ladder_date",
@@ -25,14 +49,14 @@
 "slug": "will-israel-annex-any-territory-by-december-31",
 "easy": "Will Israel annex any territory by December 31?",
 "hard": "Will Israel annex any territory by June 30?",
-"easy_yes_ask": 0.038,
+"easy_yes_ask": 0.031,
 "hard_no_ask": 0.9,
 "hard_yes_bid": 0.1,
-"cost": 0.938,
-"edge": 0.062,
-"edge_after_fee": 0.0531,
-"size_shares": 12.5,
-"usd_at_size": 11.73
+"cost": 0.931,
+"edge": 0.069,
+"edge_after_fee": 0.0606,
+"size_shares": 9.66,
+"usd_at_size": 8.99
 },
 {
 "kind": "ladder_num",
@@ -51,30 +75,6 @@
 },
 {
 "kind": "negrisk_all_yes",
-"event": "U.K. Annual Inflation 2026",
-"slug": "uk-annual-inflation-in-2026",
-"n": 9,
-"has_other": false,
-"outcomes": [
-"<1.0%",
-"1.0\u20131.4%",
-"1.5\u20131.9%",
-"2.0\u20132.4%",
-"2.5\u20132.9%",
-"3.0\u20133.4%",
-"3.5\u20133.9%",
-"4.5%+",
-"4.0-4.4%"
-],
-"cost": 0.975,
-"payoff": 1,
-"edge": 0.025,
-"edge_after_fee": -0.0244,
-"size_shares": 20.0,
-"usd_at_size": 19.5
-},
-{
-"kind": "negrisk_all_yes",
 "event": "Maduro Prison Time?",
 "slug": "maduro-prison-time-527",
 "n": 5,
@@ -86,27 +86,12 @@
 "40\u201360",
 "60+"
 ],
-"cost": 0.98,
+"cost": 0.958,
 "payoff": 1,
-"edge": 0.02,
-"edge_after_fee": -0.0149,
-"size_shares": 13.18,
-"usd_at_size": 12.92
-},
-{
-"kind": "ladder_date",
-"event": "Will Israel annex any territory by...?",
-"slug": "will-israel-annex-any-territory-by-december-31",
-"easy": "Will Israel annex any territory by December 31?",
-"hard": "Will Israel annex any territory by March 31?",
-"easy_yes_ask": 0.038,
-"hard_no_ask": 0.95,
-"hard_yes_bid": 0.05,
-"cost": 0.988,
-"edge": 0.012,
-"edge_after_fee": 0.0061,
-"size_shares": 20.0,
-"usd_at_size": 19.76
+"edge": 0.042,
+"edge_after_fee": 0.0081,
+"size_shares": 8.07,
+"usd_at_size": 7.73
 },
 {
 "kind": "ladder_num",
@@ -124,19 +109,19 @@
 "usd_at_size": 30.65
 },
 {
-"kind": "ladder_num",
-"event": "Noble FDV above ___ one day after launch?",
-"slug": "noble-fdv-above-one-day-after-launch",
-"easy": "Noble FDV above $200M one day after launch?",
-"hard": "Noble FDV above $300M one day after launch?",
-"easy_yes_ask": 0.11,
-"hard_no_ask": 0.87,
-"hard_yes_bid": 0.13,
-"cost": 0.98,
-"edge": 0.02,
-"edge_after_fee": 0.0052,
-"size_shares": 7.88,
-"usd_at_size": 7.72
+"kind": "ladder_date",
+"event": "Will Israel annex any territory by...?",
+"slug": "will-israel-annex-any-territory-by-december-31",
+"easy": "Will Israel annex any territory by December 31?",
+"hard": "Will Israel annex any territory by March 31?",
+"easy_yes_ask": 0.031,
+"hard_no_ask": 0.95,
+"hard_yes_bid": 0.05,
+"cost": 0.981,
+"edge": 0.019,
+"edge_after_fee": 0.0136,
+"size_shares": 9.66,
+"usd_at_size": 9.48
 },
 {
 "kind": "ladder_num",
@@ -207,28 +192,6 @@
 "edge_after_fee": 0.0047,
 "size_shares": 1.61,
 "usd_at_size": 1.59
-},
-{
-"kind": "negrisk_all_yes",
-"event": "Anthropic IPO Closing Market Cap (Middle Brackets)",
-"slug": "anthropic-ipo-closing-market-cap-979",
-"n": 7,
-"has_other": false,
-"outcomes": [
-"<0.6T",
-"0.6\u20130.9T",
-"0.9\u20131.2T",
-"1.2\u20131.5T",
-"1.5\u20131.8T",
-"1.8T+",
-"No IPO by December 31, 2027"
-],
-"cost": 0.993,
-"payoff": 1,
-"edge": 0.007,
-"edge_after_fee": -0.0334,
-"size_shares": 0.1,
-"usd_at_size": 0.1
 }
 ]
 }
