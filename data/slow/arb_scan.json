@@ -1,5 +1,5 @@
 {
-"scanned": "2026-11-19 21:51",
+"scanned": "2026-11-19 22:20",
 "events": 2100,
 "groups": 2037,
 "books": 17140,
@@ -33,21 +33,6 @@
 "edge_after_fee": -0.0083,
 "size_shares": 138.52,
 "usd_at_size": 137.13
-},
-{
-"kind": "ladder_num",
-"event": "Metamask FDV above ___ one day after launch?",
-"slug": "metamask-fdv-above-one-day-after-launch",
-"easy": "Metamask FDV above $3B one day after launch?",
-"hard": "Metamask FDV above $4B one day after launch?",
-"easy_yes_ask": 0.006,
-"hard_no_ask": 0.99,
-"hard_yes_bid": 0.01,
-"cost": 0.996,
-"edge": 0.004,
-"edge_after_fee": 0.0029,
-"size_shares": 280.0,
-"usd_at_size": 278.88
 },
 {
 "kind": "ladder_num",
@@ -93,6 +78,44 @@
 "edge_after_fee": 0.0083,
 "size_shares": 58.82,
 "usd_at_size": 58.23
+},
+{
+"kind": "ladder_num",
+"event": "Hyperbeat FDV above ___ one day after launch?",
+"slug": "hyperbeat-fdv-above-one-day-after-launch",
+"easy": "Hyperbeat FDV above $300M one day after launch?",
+"hard": "Hyperbeat FDV above $400M one day after launch?",
+"easy_yes_ask": 0.016,
+"hard_no_ask": 0.978,
+"hard_yes_bid": 0.022,
+"cost": 0.994,
+"edge": 0.006,
+"edge_after_fee": 0.0034,
+"size_shares": 70.19,
+"usd_at_size": 69.77
+},
+{
+"kind": "negrisk_all_yes",
+"event": "What will OpenAI's IPO valuation be?",
+"slug": "what-will-openais-ipo-valuation-be",
+"n": 8,
+"has_other": false,
+"outcomes": [
+"<$1T",
+"$1.0T\u2013$1.25T",
+"$1.25T\u2013$1.5T",
+"$1.5T\u2013$1.75T",
+"$1.75T\u2013$2.0T",
+"$2.0T\u2013$2.25T",
+"$2.25T\u2013$2.5T",
+"$2.5T+"
+],
+"cost": 0.984,
+"payoff": 1,
+"edge": 0.016,
+"edge_after_fee": -0.0401,
+"size_shares": 24.0,
+"usd_at_size": 23.62
 },
 {
 "kind": "ladder_num",
@@ -145,21 +168,6 @@
 "usd_at_size": 83.83
 },
 {
-"kind": "ladder_num",
-"event": "Hyperbeat FDV above ___ one day after launch?",
-"slug": "hyperbeat-fdv-above-one-day-after-launch",
-"easy": "Hyperbeat FDV above $300M one day after launch?",
-"hard": "Hyperbeat FDV above $400M one day after launch?",
-"easy_yes_ask": 0.016,
-"hard_no_ask": 0.978,
-"hard_yes_bid": 0.022,
-"cost": 0.994,
-"edge": 0.006,
-"edge_after_fee": 0.0034,
-"size_shares": 40.19,
-"usd_at_size": 39.95
-},
-{
 "kind": "ladder_date",
 "event": "Will Linera launch a token by ___?",
 "slug": "will-linera-launch-a-token-by",
@@ -203,6 +211,21 @@
 "edge_after_fee": -0.0002,
 "size_shares": 63.49,
 "usd_at_size": 63.3
+},
+{
+"kind": "ladder_num",
+"event": "Metamask FDV above ___ one day after launch?",
+"slug": "metamask-fdv-above-one-day-after-launch",
+"easy": "Metamask FDV above $3B one day after launch?",
+"hard": "Metamask FDV above $4B one day after launch?",
+"easy_yes_ask": 0.006,
+"hard_no_ask": 0.989,
+"hard_yes_bid": 0.011,
+"cost": 0.995,
+"edge": 0.005,
+"edge_after_fee": 0.0038,
+"size_shares": 30.0,
+"usd_at_size": 29.85
 },
 {
 "kind": "ladder_num",
