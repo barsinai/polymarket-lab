@@ -1,5 +1,5 @@
 {
-"scanned": "2026-11-20 21:03",
+"scanned": "2026-11-20 21:19",
 "events": 2100,
 "groups": 2037,
 "books": 17284,
@@ -16,8 +16,8 @@
 "cost": 0.99,
 "edge": 0.01,
 "edge_after_fee": -0.0074,
-"size_shares": 3171.78,
-"usd_at_size": 3140.06
+"size_shares": 3111.78,
+"usd_at_size": 3080.66
 },
 {
 "kind": "ladder_num",
@@ -31,8 +31,8 @@
 "cost": 0.99,
 "edge": 0.01,
 "edge_after_fee": -0.0074,
-"size_shares": 1396.09,
-"usd_at_size": 1382.13
+"size_shares": 1336.09,
+"usd_at_size": 1322.73
 },
 {
 "kind": "ladder_num",
@@ -48,6 +48,30 @@
 "edge_after_fee": -0.0136,
 "size_shares": 163.0,
 "usd_at_size": 161.37
+},
+{
+"kind": "negrisk_all_yes",
+"event": "China Annual Inflation 2026",
+"slug": "china-annual-inflation-2026",
+"n": 9,
+"has_other": false,
+"outcomes": [
+"<-1.0%",
+"-0.9 \u2013 -0.5%",
+"-0.4 \u2013 0.0%",
+"0.1 \u2013 0.5%",
+"0.6 \u2013 1.0%",
+"1.1 \u2013 1.5%",
+"1.6 \u2013 2.0%",
+"2.5%+",
+"2.0-2.4%"
+],
+"cost": 0.96,
+"payoff": 1,
+"edge": 0.04,
+"edge_after_fee": -0.002,
+"size_shares": 20.0,
+"usd_at_size": 19.2
 },
 {
 "kind": "ladder_num",
@@ -155,30 +179,6 @@
 "usd_at_size": 75.25
 },
 {
-"kind": "negrisk_all_yes",
-"event": "China Annual Inflation 2026",
-"slug": "china-annual-inflation-2026",
-"n": 9,
-"has_other": false,
-"outcomes": [
-"<-1.0%",
-"-0.9 \u2013 -0.5%",
-"-0.4 \u2013 0.0%",
-"0.1 \u2013 0.5%",
-"0.6 \u2013 1.0%",
-"1.1 \u2013 1.5%",
-"1.6 \u2013 2.0%",
-"2.5%+",
-"2.0-2.4%"
-],
-"cost": 0.97,
-"payoff": 1,
-"edge": 0.03,
-"edge_after_fee": -0.0121,
-"size_shares": 7.6,
-"usd_at_size": 7.37
-},
-{
 "kind": "ladder_num",
 "event": "Abstract FDV above ___ one day after launch?",
 "slug": "abstract-fdv-above-one-day-after-launch",
@@ -209,6 +209,18 @@
 "usd_at_size": 35.42
 },
 {
+"kind": "negrisk_all_no",
+"event": "South Africa Annual Inflation 2026",
+"slug": "south-africa-annual-inflation-2026",
+"n": 10,
+"cost": 8.987,
+"payoff": 9,
+"edge": 0.013,
+"edge_after_fee": -0.0276,
+"size_shares": 9.24,
+"usd_at_size": 83.04
+},
+{
 "kind": "ladder_num",
 "event": "Metamask FDV above ___ one day after launch?",
 "slug": "metamask-fdv-above-one-day-after-launch",
@@ -237,18 +249,6 @@
 "edge_after_fee": 0.0109,
 "size_shares": 6.0,
 "usd_at_size": 5.93
-},
-{
-"kind": "negrisk_all_no",
-"event": "South Africa Annual Inflation 2026",
-"slug": "south-africa-annual-inflation-2026",
-"n": 10,
-"cost": 8.992,
-"payoff": 9,
-"edge": 0.008,
-"edge_after_fee": -0.0326,
-"size_shares": 7.38,
-"usd_at_size": 66.36
 },
 {
 "kind": "ladder_num",
