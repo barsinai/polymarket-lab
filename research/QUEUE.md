@@ -898,3 +898,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - N105 second agreeing big taker DEAD (+3.1 vs first big taker +2.5 pts, adds +0.6). N106 fade a one-sided crowd DEAD (-4.6 pts on 2,301
   events); its control, FOLLOW the one-sided crowd, +3.5 [2.5, 4.5] (halves +3.5 / +3.5; same price band elsewhere -0.5) -> N107 out-of-
   sample pull dispatched (herd_oos.py). Young NO -$269 (4 more losses). Next: N107 OOS read (c50), N21 11-21, N42 11-26, young 11-30.
+
+## 11-20 21:40 cycle 50
+- N107 herd-follow: c49's OOS verdict was a cut bug (groups a / c had 0 markets); re-scored by id: +2.47 pts on 127 unseen events -> PASS by
+  a hair -> TESTING as rolling OOS pulls (11-27). N108 herd pullback DEAD (tape +6.7 on 1,785 events, OOS +1.1 on 94). COPY-1 sharp +4.3 vs
+  control +0.8. N58 15 settled, -28.8 pts (mostly retry arm). Next: N21 11-21, N109 count test, N107 pull #2 11-27, N42 11-26, young 11-30.

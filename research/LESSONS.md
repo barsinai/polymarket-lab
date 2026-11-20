@@ -32,6 +32,9 @@ survives them. Add a lesson whenever an idea dies for a reason not already here.
     A chained tracker can run for hours and save nothing (11-20: follow.yml's hourly save hit a half-done `git pull --rebase` while the
     tracker kept writing, and every later save failed on the leftover rebase - 4 h of COPY-1 / N58 lost): read the report's own 'updated'
     stamp, not the job status.
+    'Unseen' must be defined by id, not by date (11-20, N107): c49's out-of-sample cut = the latest scheduled end in the old tape, but
+    markets that resolve early keep their Dec / Jan scheduled end, so 2 of 3 groups scored 0 markets and the verdict read DEAD on 75
+    events instead of PASS on 127. An arm with 0 events is a bug, not a result.
 11. **Early settlements are a biased sample.** Path questions ('hit X', 'announced by') resolve YES the moment they happen
     and NO only at the end; the first paper settlements and the newest history half are therefore YES-heavy (young NO: 0/9
     in paper, 2026H2 history YES 36-39%). Read a tracker at its end dates, or compare only markets that are all finished.

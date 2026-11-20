@@ -1108,3 +1108,25 @@
   Tracebacks only the old pilot-log / script-log; no MemoryErrors. STOP in place, no orders.
 - Next: c50 read herd_oos_report.json (N107); N21 decision 11-21 (expect DEAD); lock_x BTC/ETH >= 0.80 forward arm (30 end-times); N95 / N58
   settlements; N42 11-26; young 11-30; COPY-1 to 300 / 100.
+
+## 11-20 21:00-21:40 UTC cycle 50 (scheduled)
+- Read-outs (fast trades.jsonl, last entry 20:53; slow 19:57-21:03): lock_x 69 settled / 53 end-times 61 won +3.8%/$ (count by settled
+  result; c49 counted 65 / 60); BTC/ETH >= 0.80 forward arm since 11-19 01:00: 8 trades / 7 end-times, 7 won - first loss (needs 30).
+  lock_p_majors 46 +5.4%; lock_m 389 -1.7%, lock_b 194 +1.4%, lock_p_z2 461 -0.8%. LP-1 v2 171 runs / 6.41 d: formula $2,155 (upper bound),
+  trading -$413, pessimistic -$695; 121 settled, 74 open leftovers, 0 quoted. converge 29 / 28 +$3.68 (79 open, mark -$40); young 103 / 49
+  -$261 (98 open; 11-30); box office 9 / 8 -$0.96; charts 5 / 5 +$4.53; mention 25 / 20 -$15.86 (one -$10 loss; 3 open). N95 rt_paper 91
+  seen, 9 open, 0 settled, open_past_end 0. COPY-1 146.2 h: sharp 123 primaries / 79 events +4.3 pts (+3.3 at 5 min; bar 300 / 100),
+  control 148 / 62 +0.8 (+0.9 at 5 min) -> sharp now clearly ahead of control (first time by > 3 pts). N58 86 positions, 15 settled
+  (was 4): -28.8 pts on 4 events (12 of them N66 retries in 2 mention events, -35); decision arm 3 / 1 event; open_past_end 0 - far from the
+  100 / 40 kill read, but the retry arm is the one to watch. No row crossed a kill or promote line.
+- N107 OOS read (herd_oos_report.json, c49 dispatch) said DEAD on 75 events, but groups a and c scored 0 markets: the 'unseen' cut was
+  max(old scheduled end) and early-resolved markets keep Dec / Jan ends (lesson 10, added). herd_oos2.py (unseen = condition id not in the
+  canonical tape, rule and line unchanged): HERD +2.47 pts [-1.9, +6.7] on 127 events (halves +4.2 / +0.8; a +7.1 / b +0.3 / c +1.7),
+  HERD_B +1.1 vs BASE -1.6 -> PASS by a hair -> TESTING as rolling OOS pulls (next 11-27), kill if pooled < +1 after 300 events.
+- Test (adjacent N108, herd_dip.py, local, rules fixed before looking): herd-way entry only on a pullback >= 3c below the herd's VWAP:
+  canonical +6.7 [5.6, 7.7] on 1,785 events (halves +6.0 / +7.3), OOS +1.1 [-4.5, +6.5] on 94 events -> DEAD by its rule (OOS >= +2).
+- New (outside the box N109): moved deadlines (endDate edits) -> READY, cheapest test = diff endDate across markets_active snapshots in git.
+- Health: fast paper 20:57, slow 21:03, follow 20:42 (report 20:38), boosts 20:17, MM v2 20:31, replay 20:24, books 21:00, live snapshot
+  21:04 - OK. Tracebacks only the old pilot-log / script-log; no MemoryErrors. STOP in place, no orders. No dispatch needed.
+- Next: N21 decision 11-21 (expect DEAD); N109 count test; N107 pull #2 11-27; lock_x BTC/ETH forward arm (30 end-times); N58 retry arm;
+  N95 settlements; N42 11-26; young 11-30; COPY-1 to 300 / 100.
