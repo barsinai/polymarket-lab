@@ -1,8 +1,8 @@
 {
-"scanned": "2026-11-20 18:00",
+"scanned": "2026-11-20 19:02",
 "events": 2100,
 "groups": 2037,
-"books": 17292,
+"books": 17290,
 "opps": [
 {
 "kind": "ladder_num",
@@ -126,21 +126,6 @@
 },
 {
 "kind": "ladder_num",
-"event": "Hyperbeat FDV above ___ one day after launch?",
-"slug": "hyperbeat-fdv-above-one-day-after-launch",
-"easy": "Hyperbeat FDV above $300M one day after launch?",
-"hard": "Hyperbeat FDV above $400M one day after launch?",
-"easy_yes_ask": 0.016,
-"hard_no_ask": 0.98,
-"hard_yes_bid": 0.02,
-"cost": 0.996,
-"edge": 0.004,
-"edge_after_fee": 0.0015,
-"size_shares": 105.55,
-"usd_at_size": 105.13
-},
-{
-"kind": "ladder_num",
 "event": "StandX FDV above ___ one day after launch?",
 "slug": "standx-fdv-above-one-day-after-launch",
 "easy": "StandX FDV above $2B one day after launch?",
@@ -156,18 +141,18 @@
 },
 {
 "kind": "ladder_num",
-"event": "GMGN FDV above ___ one day after launch?",
-"slug": "gmgn-fdv-above-one-day-after-launch",
-"easy": "GMGN FDV above $500M one day after launch",
-"hard": "GMGN FDV above $600M one day after launch",
-"easy_yes_ask": 0.13,
-"hard_no_ask": 0.86,
-"hard_yes_bid": 0.14,
-"cost": 0.99,
-"edge": 0.01,
-"edge_after_fee": -0.0063,
-"size_shares": 30.0,
-"usd_at_size": 29.7
+"event": "Hyperbeat FDV above ___ one day after launch?",
+"slug": "hyperbeat-fdv-above-one-day-after-launch",
+"easy": "Hyperbeat FDV above $300M one day after launch?",
+"hard": "Hyperbeat FDV above $400M one day after launch?",
+"easy_yes_ask": 0.016,
+"hard_no_ask": 0.98,
+"hard_yes_bid": 0.02,
+"cost": 0.996,
+"edge": 0.004,
+"edge_after_fee": 0.0015,
+"size_shares": 75.55,
+"usd_at_size": 75.25
 },
 {
 "kind": "negrisk_all_yes",
@@ -186,12 +171,12 @@
 "2.5%+",
 "2.0-2.4%"
 ],
-"cost": 0.986,
+"cost": 0.985,
 "payoff": 1,
-"edge": 0.014,
-"edge_after_fee": -0.0283,
+"edge": 0.015,
+"edge_after_fee": -0.0272,
 "size_shares": 18.81,
-"usd_at_size": 18.55
+"usd_at_size": 18.53
 },
 {
 "kind": "ladder_num",
@@ -207,26 +192,6 @@
 "edge_after_fee": -0.0002,
 "size_shares": 63.49,
 "usd_at_size": 63.3
-},
-{
-"kind": "negrisk_all_yes",
-"event": "Maduro Prison Time?",
-"slug": "maduro-prison-time-527",
-"n": 5,
-"has_other": false,
-"outcomes": [
-"No prison time",
-"<20",
-"20\u201340",
-"40\u201360",
-"60+"
-],
-"cost": 0.972,
-"payoff": 1,
-"edge": 0.028,
-"edge_after_fee": -0.0072,
-"size_shares": 5.8,
-"usd_at_size": 5.64
 },
 {
 "kind": "ladder_num",
@@ -245,28 +210,23 @@
 },
 {
 "kind": "negrisk_all_yes",
-"event": "GPU rental prices (B200) end of 2026?",
-"slug": "gpu-rental-prices-b200-end-of-2026-20260709165336437",
-"n": 10,
+"event": "Maduro Prison Time?",
+"slug": "maduro-prison-time-527",
+"n": 5,
 "has_other": false,
 "outcomes": [
-"<$3.00",
-"$3.00-$3.50",
-"$3.50-$4.00",
-"$4.00-$4.50",
-"$4.50-$5.00",
-"$5.00-$5.50",
-"$5.50-$6.00",
-"$6.00-$6.50",
-"$6.50-$7.00",
-"$7.00+"
+"No prison time",
+"<20",
+"20\u201340",
+"40\u201360",
+"60+"
 ],
-"cost": 0.994,
+"cost": 0.983,
 "payoff": 1,
-"edge": 0.006,
-"edge_after_fee": -0.0162,
-"size_shares": 20.0,
-"usd_at_size": 19.88
+"edge": 0.017,
+"edge_after_fee": -0.0209,
+"size_shares": 8.07,
+"usd_at_size": 7.93
 },
 {
 "kind": "ladder_num",
@@ -305,11 +265,11 @@
 "easy": "Printr FDV above $500M one day after launch?",
 "hard": "Printr FDV above $1B one day after launch?",
 "easy_yes_ask": 0.049,
-"hard_no_ask": 0.93,
-"hard_yes_bid": 0.07,
-"cost": 0.979,
-"edge": 0.021,
-"edge_after_fee": 0.0132,
+"hard_no_ask": 0.935,
+"hard_yes_bid": 0.065,
+"cost": 0.984,
+"edge": 0.016,
+"edge_after_fee": 0.0085,
 "size_shares": 1.61,
 "usd_at_size": 1.58
 },
