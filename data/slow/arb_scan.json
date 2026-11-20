@@ -1,8 +1,8 @@
 {
-"scanned": "2026-11-20 19:02",
+"scanned": "2026-11-20 19:59",
 "events": 2100,
 "groups": 2037,
-"books": 17290,
+"books": 17288,
 "opps": [
 {
 "kind": "ladder_num",
@@ -16,8 +16,8 @@
 "cost": 0.99,
 "edge": 0.01,
 "edge_after_fee": -0.0074,
-"size_shares": 163.68,
-"usd_at_size": 162.04
+"size_shares": 3171.78,
+"usd_at_size": 3140.06
 },
 {
 "kind": "ladder_num",
@@ -31,8 +31,8 @@
 "cost": 0.99,
 "edge": 0.01,
 "edge_after_fee": -0.0074,
-"size_shares": 163.68,
-"usd_at_size": 162.04
+"size_shares": 1396.09,
+"usd_at_size": 1382.13
 },
 {
 "kind": "ladder_num",
@@ -46,8 +46,8 @@
 "cost": 0.99,
 "edge": 0.01,
 "edge_after_fee": -0.0136,
-"size_shares": 163.0,
-"usd_at_size": 161.37
+"size_shares": 133.0,
+"usd_at_size": 131.67
 },
 {
 "kind": "ladder_num",
@@ -125,6 +125,30 @@
 "usd_at_size": 116.75
 },
 {
+"kind": "negrisk_all_yes",
+"event": "China Annual Inflation 2026",
+"slug": "china-annual-inflation-2026",
+"n": 9,
+"has_other": false,
+"outcomes": [
+"<-1.0%",
+"-0.9 \u2013 -0.5%",
+"-0.4 \u2013 0.0%",
+"0.1 \u2013 0.5%",
+"0.6 \u2013 1.0%",
+"1.1 \u2013 1.5%",
+"1.6 \u2013 2.0%",
+"2.5%+",
+"2.0-2.4%"
+],
+"cost": 0.98,
+"payoff": 1,
+"edge": 0.02,
+"edge_after_fee": -0.0221,
+"size_shares": 18.81,
+"usd_at_size": 18.43
+},
+{
 "kind": "ladder_num",
 "event": "StandX FDV above ___ one day after launch?",
 "slug": "standx-fdv-above-one-day-after-launch",
@@ -153,30 +177,6 @@
 "edge_after_fee": 0.0015,
 "size_shares": 75.55,
 "usd_at_size": 75.25
-},
-{
-"kind": "negrisk_all_yes",
-"event": "China Annual Inflation 2026",
-"slug": "china-annual-inflation-2026",
-"n": 9,
-"has_other": false,
-"outcomes": [
-"<-1.0%",
-"-0.9 \u2013 -0.5%",
-"-0.4 \u2013 0.0%",
-"0.1 \u2013 0.5%",
-"0.6 \u2013 1.0%",
-"1.1 \u2013 1.5%",
-"1.6 \u2013 2.0%",
-"2.5%+",
-"2.0-2.4%"
-],
-"cost": 0.985,
-"payoff": 1,
-"edge": 0.015,
-"edge_after_fee": -0.0272,
-"size_shares": 18.81,
-"usd_at_size": 18.53
 },
 {
 "kind": "ladder_num",
@@ -209,39 +209,19 @@
 "usd_at_size": 35.42
 },
 {
-"kind": "negrisk_all_yes",
-"event": "Maduro Prison Time?",
-"slug": "maduro-prison-time-527",
-"n": 5,
-"has_other": false,
-"outcomes": [
-"No prison time",
-"<20",
-"20\u201340",
-"40\u201360",
-"60+"
-],
-"cost": 0.983,
-"payoff": 1,
-"edge": 0.017,
-"edge_after_fee": -0.0209,
-"size_shares": 8.07,
-"usd_at_size": 7.93
-},
-{
 "kind": "ladder_num",
 "event": "Metamask FDV above ___ one day after launch?",
 "slug": "metamask-fdv-above-one-day-after-launch",
 "easy": "Metamask FDV above $3B one day after launch?",
 "hard": "Metamask FDV above $4B one day after launch?",
 "easy_yes_ask": 0.007,
-"hard_no_ask": 0.988,
-"hard_yes_bid": 0.012,
-"cost": 0.995,
-"edge": 0.005,
-"edge_after_fee": 0.0037,
-"size_shares": 21.0,
-"usd_at_size": 20.89
+"hard_no_ask": 0.989,
+"hard_yes_bid": 0.011,
+"cost": 0.996,
+"edge": 0.004,
+"edge_after_fee": 0.0028,
+"size_shares": 30.17,
+"usd_at_size": 30.05
 },
 {
 "kind": "ladder_num",
@@ -250,13 +230,25 @@
 "easy": "StandX FDV above $2B one day after launch?",
 "hard": "StandX FDV above $3B one day after launch?",
 "easy_yes_ask": 0.002,
-"hard_no_ask": 0.988,
-"hard_yes_bid": 0.012,
-"cost": 0.99,
-"edge": 0.01,
-"edge_after_fee": 0.009,
-"size_shares": 10.0,
-"usd_at_size": 9.9
+"hard_no_ask": 0.987,
+"hard_yes_bid": 0.013,
+"cost": 0.989,
+"edge": 0.011,
+"edge_after_fee": 0.01,
+"size_shares": 6.0,
+"usd_at_size": 5.93
+},
+{
+"kind": "negrisk_all_no",
+"event": "South Africa Annual Inflation 2026",
+"slug": "south-africa-annual-inflation-2026",
+"n": 10,
+"cost": 8.991,
+"payoff": 9,
+"edge": 0.009,
+"edge_after_fee": -0.0311,
+"size_shares": 6.0,
+"usd_at_size": 53.95
 },
 {
 "kind": "ladder_num",
@@ -265,13 +257,13 @@
 "easy": "Printr FDV above $500M one day after launch?",
 "hard": "Printr FDV above $1B one day after launch?",
 "easy_yes_ask": 0.049,
-"hard_no_ask": 0.935,
-"hard_yes_bid": 0.065,
-"cost": 0.984,
-"edge": 0.016,
-"edge_after_fee": 0.0085,
+"hard_no_ask": 0.938,
+"hard_yes_bid": 0.062,
+"cost": 0.987,
+"edge": 0.013,
+"edge_after_fee": 0.0057,
 "size_shares": 1.61,
-"usd_at_size": 1.58
+"usd_at_size": 1.59
 },
 {
 "kind": "ladder_num",
