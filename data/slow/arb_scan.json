@@ -1,21 +1,9 @@
 {
-"scanned": "2026-11-20 16:59",
+"scanned": "2026-11-20 18:00",
 "events": 2100,
 "groups": 2037,
-"books": 17294,
+"books": 17292,
 "opps": [
-{
-"kind": "negrisk_all_no",
-"event": "Fed Decision in December?",
-"slug": "fed-decision-in-december-20260729232808632",
-"n": 5,
-"cost": 3.996,
-"payoff": 4,
-"edge": 0.004,
-"edge_after_fee": -0.0091,
-"size_shares": 1768.48,
-"usd_at_size": 7066.85
-},
 {
 "kind": "ladder_num",
 "event": "Base FDV above ___ one day after launch?",
@@ -58,8 +46,8 @@
 "cost": 0.99,
 "edge": 0.01,
 "edge_after_fee": -0.0136,
-"size_shares": 133.0,
-"usd_at_size": 131.67
+"size_shares": 163.0,
+"usd_at_size": 161.37
 },
 {
 "kind": "ladder_num",
@@ -168,6 +156,45 @@
 },
 {
 "kind": "ladder_num",
+"event": "GMGN FDV above ___ one day after launch?",
+"slug": "gmgn-fdv-above-one-day-after-launch",
+"easy": "GMGN FDV above $500M one day after launch",
+"hard": "GMGN FDV above $600M one day after launch",
+"easy_yes_ask": 0.13,
+"hard_no_ask": 0.86,
+"hard_yes_bid": 0.14,
+"cost": 0.99,
+"edge": 0.01,
+"edge_after_fee": -0.0063,
+"size_shares": 30.0,
+"usd_at_size": 29.7
+},
+{
+"kind": "negrisk_all_yes",
+"event": "China Annual Inflation 2026",
+"slug": "china-annual-inflation-2026",
+"n": 9,
+"has_other": false,
+"outcomes": [
+"<-1.0%",
+"-0.9 \u2013 -0.5%",
+"-0.4 \u2013 0.0%",
+"0.1 \u2013 0.5%",
+"0.6 \u2013 1.0%",
+"1.1 \u2013 1.5%",
+"1.6 \u2013 2.0%",
+"2.5%+",
+"2.0-2.4%"
+],
+"cost": 0.986,
+"payoff": 1,
+"edge": 0.014,
+"edge_after_fee": -0.0283,
+"size_shares": 18.81,
+"usd_at_size": 18.55
+},
+{
+"kind": "ladder_num",
 "event": "Abstract FDV above ___ one day after launch?",
 "slug": "abstract-fdv-above-one-day-after-launch",
 "easy": "Abstract FDV above $400M one day after launch?",
@@ -217,21 +244,6 @@
 "usd_at_size": 35.42
 },
 {
-"kind": "ladder_num",
-"event": "Metamask FDV above ___ one day after launch?",
-"slug": "metamask-fdv-above-one-day-after-launch",
-"easy": "Metamask FDV above $3B one day after launch?",
-"hard": "Metamask FDV above $4B one day after launch?",
-"easy_yes_ask": 0.007,
-"hard_no_ask": 0.988,
-"hard_yes_bid": 0.012,
-"cost": 0.995,
-"edge": 0.005,
-"edge_after_fee": 0.0037,
-"size_shares": 20.89,
-"usd_at_size": 20.79
-},
-{
 "kind": "negrisk_all_yes",
 "event": "GPU rental prices (B200) end of 2026?",
 "slug": "gpu-rental-prices-b200-end-of-2026-20260709165336437",
@@ -249,12 +261,27 @@
 "$6.50-$7.00",
 "$7.00+"
 ],
-"cost": 0.995,
+"cost": 0.994,
 "payoff": 1,
-"edge": 0.005,
-"edge_after_fee": -0.0173,
+"edge": 0.006,
+"edge_after_fee": -0.0162,
 "size_shares": 20.0,
-"usd_at_size": 19.9
+"usd_at_size": 19.88
+},
+{
+"kind": "ladder_num",
+"event": "Metamask FDV above ___ one day after launch?",
+"slug": "metamask-fdv-above-one-day-after-launch",
+"easy": "Metamask FDV above $3B one day after launch?",
+"hard": "Metamask FDV above $4B one day after launch?",
+"easy_yes_ask": 0.007,
+"hard_no_ask": 0.988,
+"hard_yes_bid": 0.012,
+"cost": 0.995,
+"edge": 0.005,
+"edge_after_fee": 0.0037,
+"size_shares": 21.0,
+"usd_at_size": 20.89
 },
 {
 "kind": "ladder_num",
@@ -278,11 +305,11 @@
 "easy": "Printr FDV above $500M one day after launch?",
 "hard": "Printr FDV above $1B one day after launch?",
 "easy_yes_ask": 0.049,
-"hard_no_ask": 0.935,
-"hard_yes_bid": 0.065,
-"cost": 0.984,
-"edge": 0.016,
-"edge_after_fee": 0.0085,
+"hard_no_ask": 0.93,
+"hard_yes_bid": 0.07,
+"cost": 0.979,
+"edge": 0.021,
+"edge_after_fee": 0.0132,
 "size_shares": 1.61,
 "usd_at_size": 1.58
 },
