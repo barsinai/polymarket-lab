@@ -1,21 +1,25 @@
 {
- "updated": "2026-11-20 21:54",
+ "updated": "2026-11-20 22:53",
  "started": "2026-11-17 01:16",
- "days": 3.86,
+ "days": 3.9,
  "note": "tape base rate ~75 culture markets launch a day (~3 an hour): 0 candidates over a day is a bug, not a result",
  "rule": "new culture listing < 60 min old, lives >= 24 h, NO ask 0.05-0.90, NO spread <= 10c: $10 at the NO ask, fee paid; one per market",
  "decision": "kill if <= +1 pt or event CI low < -1 after 100 markets / 40 events; promote only after 300 / 100 / 3 weeks",
  "positions": 86,
- "settled": 17,
- "open": 69,
+ "settled": 18,
+ "open": 68,
  "open_past_end": 0,
  "all": {
-  "n": 17,
-  "events": 4,
-  "won": 5,
-  "avg_ask": 0.485,
-  "pts": -19.81,
-  "pnl": -99.26
+  "n": 18,
+  "events": 5,
+  "won": 6,
+  "avg_ask": 0.507,
+  "pts": -18.07,
+  "pnl": -97.95,
+  "ci": [
+   -25.2,
+   5.1
+  ]
  },
  "mention": {
   "n": 14,
@@ -26,12 +30,12 @@
   "pnl": -79.84
  },
  "non_mention": {
-  "n": 3,
-  "events": 2,
-  "won": 1,
-  "avg_ask": 0.437,
-  "pts": -10.81,
-  "pnl": -19.42
+  "n": 4,
+  "events": 3,
+  "won": 2,
+  "avg_ask": 0.547,
+  "pts": -5.24,
+  "pnl": -18.12
  },
  "N58 first look (decision arm)": {
   "n": 3,
@@ -42,12 +46,12 @@
   "pnl": -6.83
  },
  "N66 retry (transient skip, < 60 min)": {
-  "n": 14,
-  "events": 3,
-  "won": 3,
-  "avg_ask": 0.439,
-  "pts": -23.27,
-  "pnl": -92.42
+  "n": 15,
+  "events": 4,
+  "won": 4,
+  "avg_ask": 0.469,
+  "pts": -20.96,
+  "pnl": -91.12
  },
  "N66 activated placeholder (late-add)": {
   "n": 0
@@ -56,7 +60,7 @@
   "n": 0
  },
  "open_by_kind": {
-  "retry": 43,
+  "retry": 42,
   "late": 26
  },
  "watching": {
@@ -66,25 +70,15 @@
  },
  "candidates": {
   "ask outside 0.05-0.90": 722,
+  "not accepting orders": 1163,
+  "no NO ask": 89,
   "bought": 86,
   "lives < 24 h": 13,
-  "not accepting orders": 1163,
-  "spread > 10c": 7,
-  "no NO ask": 89
+  "spread > 10c": 7
  },
  "candidate_age_min_median": 4.1,
  "this_run": {
-  "events listed": 14642,
-  "polls": 122,
-  "seen once: markets < 24 h old (lesson 10 check)": 21,
-  "new listings": 21,
-  "skip (first): no NO ask": 1,
-  "skip (first): ask outside 0.05-0.90": 14,
-  "skip (retry): no NO ask": 1,
-  "skip (retry): ask outside 0.05-0.90": 265,
-  "skip (retry): spread > 10c": 265,
-  "skip (first): not accepting orders": 6,
-  "skip (late): spread > 10c": 8,
-  "skip (late): ask outside 0.05-0.90": 7
+  "events listed": 2808,
+  "polls": 24
  }
 }
