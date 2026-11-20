@@ -1,8 +1,8 @@
 {
-"scanned": "2026-11-19 23:52",
+"scanned": "2026-11-20 00:51",
 "events": 2100,
 "groups": 2037,
-"books": 17126,
+"books": 17174,
 "opps": [
 {
 "kind": "ladder_num",
@@ -111,23 +111,26 @@
 },
 {
 "kind": "negrisk_all_yes",
-"event": "Maduro Prison Time?",
-"slug": "maduro-prison-time-527",
-"n": 5,
+"event": "What will OpenAI's IPO valuation be?",
+"slug": "what-will-openais-ipo-valuation-be",
+"n": 8,
 "has_other": false,
 "outcomes": [
-"No prison time",
-"<20",
-"20\u201340",
-"40\u201360",
-"60+"
+"<$1T",
+"$1.0T\u2013$1.25T",
+"$1.25T\u2013$1.5T",
+"$1.5T\u2013$1.75T",
+"$1.75T\u2013$2.0T",
+"$2.0T\u2013$2.25T",
+"$2.25T\u2013$2.5T",
+"$2.5T+"
 ],
-"cost": 0.968,
+"cost": 0.971,
 "payoff": 1,
-"edge": 0.032,
-"edge_after_fee": -0.003,
-"size_shares": 8.07,
-"usd_at_size": 7.81
+"edge": 0.029,
+"edge_after_fee": -0.0267,
+"size_shares": 9.05,
+"usd_at_size": 8.79
 },
 {
 "kind": "ladder_num",
@@ -206,26 +209,23 @@
 },
 {
 "kind": "negrisk_all_yes",
-"event": "What will OpenAI's IPO valuation be?",
-"slug": "what-will-openais-ipo-valuation-be",
-"n": 8,
+"event": "Maduro Prison Time?",
+"slug": "maduro-prison-time-527",
+"n": 5,
 "has_other": false,
 "outcomes": [
-"<$1T",
-"$1.0T\u2013$1.25T",
-"$1.25T\u2013$1.5T",
-"$1.5T\u2013$1.75T",
-"$1.75T\u2013$2.0T",
-"$2.0T\u2013$2.25T",
-"$2.25T\u2013$2.5T",
-"$2.5T+"
+"No prison time",
+"<20",
+"20\u201340",
+"40\u201360",
+"60+"
 ],
-"cost": 0.982,
+"cost": 0.968,
 "payoff": 1,
-"edge": 0.018,
-"edge_after_fee": -0.038,
-"size_shares": 9.05,
-"usd_at_size": 8.89
+"edge": 0.032,
+"edge_after_fee": -0.003,
+"size_shares": 5.8,
+"usd_at_size": 5.61
 },
 {
 "kind": "ladder_num",
@@ -256,6 +256,21 @@
 "edge_after_fee": -0.011,
 "size_shares": 34.17,
 "usd_at_size": 34.03
+},
+{
+"kind": "ladder_num",
+"event": "Next Google Gemini Pro Model: Arena Debut?",
+"slug": "next-google-gemini-pro-model-arena-debut",
+"easy": "Will the next Google Gemini Pro model added to the Arena Leaderboard debut at a score of at least 1480?",
+"hard": "Will the next Google Gemini Pro model added to the Arena Leaderboard debut at a score of at least 1500?",
+"easy_yes_ask": 0.094,
+"hard_no_ask": 0.9,
+"hard_yes_bid": 0.1,
+"cost": 0.994,
+"edge": 0.006,
+"edge_after_fee": -0.0063,
+"size_shares": 20.1,
+"usd_at_size": 19.98
 },
 {
 "kind": "ladder_date",
