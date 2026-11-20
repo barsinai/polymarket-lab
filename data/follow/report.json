@@ -1,14 +1,14 @@
 {
- "updated": "2026-11-20 11:15",
- "tracking_hours": 136.83,
+ "updated": "2026-11-20 11:29",
+ "tracking_hours": 137.07,
  "signal_wallets": 148,
  "rule": "primary = first position per market+direction+UTC day after a taker order/accumulation by a signal wallet (>= $50) or, control, every 5th order >= $1,000 by another wallet; non-sports, ends in 1 h - 60 d; ask 0.03-0.97 and <= their average price + 3c; $20 at the ask; fee paid",
  "decision_rule": "sharp primary: >= 300 settled over >= 100 events and >= 10 days; >= +1.5 pts with the 95% interval above 0 -> propose a small live test; < +0.5 or interval top < +1.5 -> DEAD",
  "sharp": {
-  "positions": 1086,
-  "open": 794,
+  "positions": 1087,
+  "open": 795,
   "settled": 292,
-  "primary": 379,
+  "primary": 380,
   "primary_settled": 103,
   "primary_per_day": 66.5,
   "PRIMARY": {
@@ -382,10 +382,10 @@
    "median": 0.042,
    "p75": 0.099
   },
-  "share_cap_ok": 0.402,
+  "share_cap_ok": 0.403,
   "median_lag_s": 149,
   "median_usd_at_ask": 28,
-  "median_usd_within_2c": 129,
+  "median_usd_within_2c": 128,
   "open_primary_by_category": {
    "politics": 28,
    "tech": 80,
@@ -393,15 +393,15 @@
    "culture": 62,
    "geopolitics": 39,
    "tweets": 9,
-   "crypto": 6,
+   "crypto": 7,
    "weather": 7
   }
  },
  "control": {
-  "positions": 782,
-  "open": 588,
+  "positions": 783,
+  "open": 589,
   "settled": 194,
-  "primary": 467,
+  "primary": 468,
   "primary_settled": 104,
   "primary_per_day": 81.9,
   "PRIMARY": {
@@ -662,8 +662,8 @@
   },
   "mark_24h_all_primary": {
    "all": {
-    "n": 296,
-    "mid_minus_ask_pts": -0.33
+    "n": 298,
+    "mid_minus_ask_pts": -0.34
    },
    "crypto": {
     "n": 95,
@@ -678,11 +678,11 @@
     "mid_minus_ask_pts": -0.75
    },
    "geopolitics": {
-    "n": 83,
-    "mid_minus_ask_pts": -0.11
+    "n": 84,
+    "mid_minus_ask_pts": -0.15
    },
    "politics": {
-    "n": 33,
+    "n": 34,
     "mid_minus_ask_pts": -0.38
    },
    "tech": {
@@ -735,55 +735,55 @@
   },
   "share_cap_ok": 0.917,
   "median_lag_s": 138,
-  "median_usd_at_ask": 243,
-  "median_usd_within_2c": 7335,
+  "median_usd_at_ask": 242,
+  "median_usd_within_2c": 7253,
   "open_primary_by_category": {
    "economy": 43,
    "crypto": 113,
    "geopolitics": 106,
-   "culture": 24,
+   "culture": 25,
    "politics": 43,
    "tech": 26,
    "tweets": 7,
    "weather": 1
   }
  },
- "positions": 1868,
+ "positions": 1870,
  "settled": 486,
- "primary": 846,
+ "primary": 848,
  "totals": {
-  "control crossings $2500": 3856,
-  "skip: fast: sports": 8863,
+  "control crossings $2500": 3865,
+  "skip: fast: sports": 8883,
   "control crossings $10000": 894,
-  "control crossings $1000": 7350,
-  "skip: fast: crypto up/down": 1270,
-  "control primary follows": 466,
-  "control paper positions": 781,
-  "skip: closed or ends in < 1 h": 346,
+  "control crossings $1000": 7369,
+  "skip: fast: crypto up/down": 1277,
+  "control primary follows": 467,
+  "control paper positions": 782,
+  "skip: closed or ends in < 1 h": 348,
   "sharp crossings $250": 543,
-  "sharp paper positions": 1085,
-  "sharp crossings $50": 1738,
-  "skip: ask outside 0.03-0.97": 695,
+  "sharp paper positions": 1086,
+  "sharp crossings $50": 1742,
+  "skip: ask outside 0.03-0.97": 696,
   "skip: ends in > 60 days": 1018,
-  "sharp primary follows": 379,
+  "sharp primary follows": 380,
   "skip: fast: sports parlay (combo)": 260,
   "skip: no ask in the book": 190,
   "settled": 486,
   "sharp crossings $1000": 127
  },
  "this_run": {
-  "feed pages": 1027,
-  "polls": 894,
-  "fills": 61173,
-  "skip: fast: sports": 102,
-  "sharp paper positions": 21,
-  "skip: fast: crypto up/down": 49,
-  "skip: ask outside 0.03-0.97": 38,
+  "feed pages": 1078,
+  "polls": 936,
+  "fills": 65567,
+  "skip: fast: sports": 122,
+  "sharp paper positions": 22,
+  "skip: fast: crypto up/down": 56,
+  "skip: ask outside 0.03-0.97": 39,
   "skip: ends in > 60 days": 23,
-  "control paper positions": 27,
+  "control paper positions": 28,
   "skip: fast: sports parlay (combo)": 6,
   "skip: no ask in the book": 9,
-  "skip: closed or ends in < 1 h": 2,
+  "skip: closed or ends in < 1 h": 4,
   "http error": 2
  }
 }
