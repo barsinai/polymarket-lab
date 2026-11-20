@@ -996,3 +996,26 @@
   valid token -> no Actions dispatch (N85 / N81 / N63 / N61 / N67 still wait).
 - Next: c45 check rt_paper's first run (markets seen, positions); N21 decision 11-21; lock_x BTC/ETH >= 0.80 forward arm (30 end-times);
   N58 settlements; N42 11-26; young 11-30; COPY-1 to 300 / 100.
+
+## 11-20 01:00-01:40 UTC cycle 45 (scheduled)
+- Read-outs (fast trades.jsonl, last settled entry 00:44; slow 00:50): lock_x 46 trades / 41 end-times 42 won +5.0%/$ (-0.04 pts/share
+  [-9.1, +7.0]); >= 0.80 core 42 / 38 +1.7%/$; 11-19 day -$3.99 (an alt loss). BTC/ETH >= 0.80 forward arm since 11-19 01:00: 5 trades / 4
+  end-times all won (needs 30). lock_x50 +7.7%, lock_p_majors 37 +4.5%; lock_m 342 -1.9%, lock_b 151 +1.3%, lock_p_z2 406 -1.4%. N21 forward
+  BTC/ETH 174 windows / 158 won -3.0%, alts 216 / 191 -4.5% (decision 11-21). LP-1 v2 150 runs / 5.62 d: formula $2,125 (upper bound),
+  trading -$443, pessimistic -$761; 116 settled, 72 open leftovers, 1 quoted; forward_core 90 markets $469 vs +$4 / -$5 (passed c39; waits
+  for Yoav's OK on the read-only reward-history query). Options N42 forward rest 23 / 19 +13.6 pts (8 coin-dates), tails 5 / 0 -7.7, 54
+  open -> 11-26. converge 25 / 24 -$0.61 (79 open, mark -$43); young 94 / 46 -$219 (95 open; 11-30); box office 9 / 8 -$0.96; charts 3 / 3
+  +$3.64; mention 24 / 20 -$5.64 (3 open). N95 rt_paper first runs OK: 82 RT markets seen, 16 in window, 7 open, 0 settled, open_past_end 0.
+  COPY-1 / N58 frozen at 20:58 (see Health): sharp 99 / 65 events +3.5 pts, control 91 / 47 +4.8; N58 61 positions, 4 settled.
+- Test (adjacent N97, fan_ladder.py, local, tape a, rules fixed before looking): fan-count ladders ex-RT, NO upper rungs -3.9 pts [-19.7,
+  +8.7] on 13 events -> DEAD. Lesson-10 check: box office / views events hold one 'at least' market each, so a kill-only post-hoc read
+  (fan_ladder_single.py): single-threshold NO +0.8 [-5.6, +6.9] on 106 events, halves +7.8 / -6.0 -> the RT effect does not generalise.
+- New (outside the box N98): conjunction questions -> DEAD by count (~2 genuine compound questions in 12 weeks on tapes a + c).
+- Health: fast paper 00:49, slow 00:52, MM v2 01:02, boosts 00:23, books 01:00, live snapshot 00:05 - OK. Tracebacks only the old pilot-log
+  (2) / script-log (1); no MemoryErrors. STOP in place, no orders. BROKEN: follow.yml run 38 (from 20:58) saved nothing for 4 h - its
+  21:58 save hit 'local changes would be overwritten' mid-rebase (the tracker writes upd-*.jsonl while git rebases) and every later save
+  failed on the leftover rebase-merge. Fixed save() (abort a stuck rebase first, --autostash, abort after a failed pull), pushed, cancelled
+  run 38 and the old-code run 39; the Hand-over step re-dispatches on main with the fix. The 20:58-01:03 COPY-1 / N58 polls are lost (no
+  orders involved). No network to Polymarket from this run.
+- Next: c46 check follow report 'updated' moves hourly with the fixed save (lesson 10); N21 decision 11-21; lock_x BTC/ETH >= 0.80 forward
+  arm (30 end-times); N95 first settlements; N58 settlements; N42 11-26; young 11-30; COPY-1 to 300 / 100.

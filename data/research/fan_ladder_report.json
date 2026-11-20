@@ -1,0 +1,152 @@
+{
+ "markets_parsed": 375,
+ "ladder_markets": 142,
+ "ladders": 24,
+ "rows": 87,
+ "split_at": "2026-09-01 23:59:00+00:00",
+ "NO upper": {
+  "n": 24,
+  "events": 13,
+  "pts": -3.92,
+  "avg_p": 0.615,
+  "ci": [
+   -19.7,
+   8.7
+  ]
+ },
+ "NO upper halves": {
+  "older": {
+   "n": 10,
+   "events": 2,
+   "pts": -6.03,
+   "avg_p": 0.551
+  },
+  "newer": {
+   "n": 14,
+   "events": 11,
+   "pts": -2.42,
+   "avg_p": 0.661,
+   "ci": [
+    -24.9,
+    12.8
+   ]
+  }
+ },
+ "NO lower (placebo)": {
+  "n": 18,
+  "events": 7,
+  "pts": -16.4,
+  "avg_p": 0.547,
+  "ci": [
+   -28.5,
+   -2.3
+  ]
+ },
+ "YES upper": {
+  "n": 27,
+  "events": 12,
+  "pts": 3.55,
+  "avg_p": 0.439,
+  "ci": [
+   -9.3,
+   15.5
+  ]
+ },
+ "NO all": {
+  "n": 42,
+  "events": 15,
+  "pts": -9.27,
+  "avg_p": 0.586,
+  "ci": [
+   -18.7,
+   2.5
+  ]
+ },
+ "NO upper box office": {
+  "n": 0,
+  "events": 0,
+  "older": [
+   null,
+   0
+  ],
+  "newer": [
+   null,
+   0
+  ]
+ },
+ "NO upper views": {
+  "n": 0,
+  "events": 0,
+  "older": [
+   null,
+   0
+  ],
+  "newer": [
+   null,
+   0
+  ]
+ },
+ "NO upper netflix": {
+  "n": 12,
+  "events": 9,
+  "pts": 7.2,
+  "avg_p": 0.672,
+  "ci": [
+   -6.2,
+   17.5
+  ],
+  "older": [
+   null,
+   0
+  ],
+  "newer": [
+   7.2,
+   9
+  ]
+ },
+ "NO upper sales": {
+  "n": 0,
+  "events": 0,
+  "older": [
+   null,
+   0
+  ],
+  "newer": [
+   null,
+   0
+  ]
+ },
+ "NO upper other": {
+  "n": 12,
+  "events": 4,
+  "pts": -15.05,
+  "avg_p": 0.558,
+  "older": [
+   -6.03,
+   2
+  ],
+  "newer": [
+   -60.16,
+   2
+  ]
+ },
+ "NO upper 24-168h": {
+  "n": 20,
+  "events": 12,
+  "pts": 0.37,
+  "avg_p": 0.588,
+  "ci": [
+   -16.3,
+   11.1
+  ],
+  "older": [
+   -7.59,
+   2
+  ],
+  "newer": [
+   4.65,
+   10
+  ]
+ },
+ "verdict": "DEAD (fails the fixed rule)"
+}

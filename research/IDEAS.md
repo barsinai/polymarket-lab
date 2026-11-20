@@ -24,6 +24,12 @@ Status: TESTING (paper/backtest running) · READY (next up) · PARKED (needs som
 | Research journal (my forecasts with sources) | reading + cross-checking beats the crowd on slow political/econ questions | forecast_log.py, Brier vs market | 11-10 | weeks |
 
 ## READY (ranked)
+N98. -> 11-20 (cycle 45), DEAD by count (see DEAD). **(outside the box, 11-20 c45) Conjunction questions ('Will X and Y both happen'):**
+   the conjunction fallacy says people price 'A and B' above what A and B imply, so YES on compound questions should lose. Exposed to 8
+   (count), 13, 5/6. Cheapest test: count genuine compound questions on tapes a + c.
+N97. -> 11-20 (cycle 45), DEAD (see DEAD). **(adjacent to N95, 11-20 c45) Fan-count ladders ex-RT:** if fans overbuy high Tomatometer
+   rungs, they should overbuy high box-office / YouTube-views / Netflix-views / album-sales thresholds too -> NO on upper rungs. Exposed to
+   22 (RT was found by looking), 24, 13, 26. fan_ladder.py + fan_ladder_single.py.
 N96. -> tested 11-19 (cycle 44), DEAD (see DEAD). **(outside the box, 11-19 c44) Local-language politics:** markets about non-English-
    speaking countries (Brazil, Japan, Poland, Latvia, Israel ...) are priced by an English-speaking crowd reading translated headlines late;
    local readers should show up as big takers who win more there than in US politics. Exposed to 22, 24, 5/6, 27, 13. local_language.py.
@@ -428,6 +434,14 @@ OLD N2. **(outside the box, 11-12) Box-office opening-weekend markets vs Thursda
 - Kalshi vs Polymarket automatic pairing (titles do not match; manual for named series only).
 
 ## DEAD (number that killed it)
+- N97 fan-count ladders ex-RT (11-20 c45, fan_ladder.py, local, tape a movies / pop-culture / youtube / music / awards ex-mention ex-RT,
+  rules fixed before looking): ladders with >= 3 parsed rungs, NO on the upper half, first taker entry, follower a300, fee: -3.9 pts
+  [-19.7, +8.7] on 13 events (halves -6.0 / -2.4); lower-rung placebo -16.4; YES upper +3.6 -> DEAD. Lesson 10 check: box office / views
+  events carry ONE 'at least' market each (the open top bracket next to 'between' brackets), so the fixed rule saw none of them;
+  fan_ladder_single.py (post-hoc, kill-only): single-threshold NO +0.8 [-5.6, +6.9] on 106 events, halves +7.8 / -6.0; box office +4.1
+  [-6.7, +15.4] (42), views -5.8 (43). The RT effect does not generalise to other fan counts; N95's forward paper is its only test.
+- N98 conjunction questions (11-20 c45, count only): genuine 'A and B' questions on tapes a + c: ~2 events in 12 weeks (Hormuz deal x
+  Senate, oil x Senate); every other ' and ' match is a title ('Klara and the Sun') or a pair of countries -> DEAD by count (lesson 8).
 - N96 local-language politics (11-19 c44, local_language.py, local, tape group c politics, rules fixed before looking): first taker entry >= $200 per market+side, follower a300, fee: LOCAL (non-English-speaking countries, 509 markets) -0.65 pts [-3.1, +1.8] on 74 events, halves -0.5 / -0.9, vs US +1.8 [0.6, 3.1] (334 events) -> DEAD, wrong sign. Any-size first entries LOCAL YES -2.4, NO +0.7: no general mispricing either. ANGLO (UK / Canada / ...) big NO +9.4 [0.6, 20.2] on 17 events is one post-hoc cell (and the keyword class leaks: a Brazilian governor race landed in ANGLO) - not followed up.
 - N94 round-number thresholds (11-19 c43, round_threshold.py, local, tape a + c ex-mention, upward-threshold questions with a number >= 10,
   first entry per market+side, follower a300, fee; rules fixed before looking): ROUND NO +8.7 pts [2.8, 13.5] on 169 events vs OTHER NO

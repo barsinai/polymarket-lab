@@ -873,3 +873,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
   24-168 h split +12.0 [2.0, 21.4] on 30 films, both halves positive. Found by looking -> the forward paper is the test (15 films ~5 weeks).
   N96 local-language politics DEAD (big takers -0.65 pts on 74 events vs US +1.8). Young NO 93 settled -$225 (one sell-off bet). Next:
   check rt_paper first run (c45), N21 11-21, N42 11-26, young 11-30.
+
+## 11-20 01:40 cycle 45
+- follow.yml chain saved nothing 20:58-01:03 (stuck rebase); save() fixed, chain re-dispatched. N97 fan-count ladders ex-RT DEAD (NO upper
+  -3.9 pts on 13 events; single-threshold NO +0.8 on 106 events, newer half -6.0). N98 conjunction questions DEAD by count. rt_paper first
+  runs OK (82 seen, 7 open). Next: confirm follow saves hourly (c46), N21 11-21, N42 11-26, young 11-30.
