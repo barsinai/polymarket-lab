@@ -1,9 +1,21 @@
 {
-"scanned": "2026-11-20 04:53",
+"scanned": "2026-11-20 05:54",
 "events": 2100,
 "groups": 2037,
-"books": 17174,
+"books": 17212,
 "opps": [
+{
+"kind": "negrisk_all_no",
+"event": "Fed Decision in January?",
+"slug": "fed-decision-in-january-20260729233815502",
+"n": 5,
+"cost": 3.991,
+"payoff": 4,
+"edge": 0.009,
+"edge_after_fee": -0.026,
+"size_shares": 262.31,
+"usd_at_size": 1046.88
+},
 {
 "kind": "ladder_date",
 "event": "Will $ANSEM flip $PUMP by ___?",
@@ -18,6 +30,36 @@
 "edge_after_fee": 0.0085,
 "size_shares": 66.89,
 "usd_at_size": 65.55
+},
+{
+"kind": "ladder_num",
+"event": "StandX FDV above ___ one day after launch?",
+"slug": "standx-fdv-above-one-day-after-launch",
+"easy": "StandX FDV above $2B one day after launch?",
+"hard": "StandX FDV above $3B one day after launch?",
+"easy_yes_ask": 0.002,
+"hard_no_ask": 0.983,
+"hard_yes_bid": 0.017,
+"cost": 0.985,
+"edge": 0.015,
+"edge_after_fee": 0.0137,
+"size_shares": 66.0,
+"usd_at_size": 65.01
+},
+{
+"kind": "ladder_num",
+"event": "What level will the Dubai Real Estate Index hit in 2026?",
+"slug": "what-level-will-the-dubai-real-estate-index-hit-in-2026",
+"easy": "Will the DFM Real Estate Index hit 14,000 in 2026?",
+"hard": "Will the DFM Real Estate Index hit 18,000 in 2026?",
+"easy_yes_ask": 0.005,
+"hard_no_ask": 0.983,
+"hard_yes_bid": 0.017,
+"cost": 0.988,
+"edge": 0.012,
+"edge_after_fee": 0.0105,
+"size_shares": 58.82,
+"usd_at_size": 58.11
 },
 {
 "kind": "ladder_date",
@@ -36,18 +78,18 @@
 },
 {
 "kind": "ladder_num",
-"event": "What level will the Dubai Real Estate Index hit in 2026?",
-"slug": "what-level-will-the-dubai-real-estate-index-hit-in-2026",
-"easy": "Will the DFM Real Estate Index hit 14,000 in 2026?",
-"hard": "Will the DFM Real Estate Index hit 18,000 in 2026?",
-"easy_yes_ask": 0.005,
-"hard_no_ask": 0.982,
-"hard_yes_bid": 0.018,
-"cost": 0.987,
-"edge": 0.013,
-"edge_after_fee": 0.0114,
-"size_shares": 40.0,
-"usd_at_size": 39.48
+"event": "Probable FDV above ___ one day after launch?",
+"slug": "probable-fdv-above-one-day-after-launch",
+"easy": "Probable FDV above $50M one day after launch?",
+"hard": "Probable FDV above $500M one day after launch?",
+"easy_yes_ask": 0.12,
+"hard_no_ask": 0.863,
+"hard_yes_bid": 0.137,
+"cost": 0.983,
+"edge": 0.017,
+"edge_after_fee": 0.0013,
+"size_shares": 34.17,
+"usd_at_size": 33.59
 },
 {
 "kind": "ladder_num",
@@ -66,21 +108,6 @@
 },
 {
 "kind": "ladder_num",
-"event": "StandX FDV above ___ one day after launch?",
-"slug": "standx-fdv-above-one-day-after-launch",
-"easy": "StandX FDV above $2B one day after launch?",
-"hard": "StandX FDV above $3B one day after launch?",
-"easy_yes_ask": 0.002,
-"hard_no_ask": 0.985,
-"hard_yes_bid": 0.015,
-"cost": 0.987,
-"edge": 0.013,
-"edge_after_fee": 0.0118,
-"size_shares": 35.92,
-"usd_at_size": 35.45
-},
-{
-"kind": "ladder_num",
 "event": "Hyperbeat FDV above ___ one day after launch?",
 "slug": "hyperbeat-fdv-above-one-day-after-launch",
 "easy": "Hyperbeat FDV above $300M one day after launch?",
@@ -96,21 +123,6 @@
 },
 {
 "kind": "ladder_num",
-"event": "Probable FDV above ___ one day after launch?",
-"slug": "probable-fdv-above-one-day-after-launch",
-"easy": "Probable FDV above $50M one day after launch?",
-"hard": "Probable FDV above $500M one day after launch?",
-"easy_yes_ask": 0.12,
-"hard_no_ask": 0.868,
-"hard_yes_bid": 0.132,
-"cost": 0.988,
-"edge": 0.012,
-"edge_after_fee": -0.0034,
-"size_shares": 34.17,
-"usd_at_size": 33.76
-},
-{
-"kind": "ladder_num",
 "event": "StandX FDV above ___ one day after launch?",
 "slug": "standx-fdv-above-one-day-after-launch",
 "easy": "StandX FDV above $2B one day after launch?",
@@ -121,31 +133,8 @@
 "cost": 0.996,
 "edge": 0.004,
 "edge_after_fee": 0.0034,
-"size_shares": 84.08,
-"usd_at_size": 83.74
-},
-{
-"kind": "negrisk_all_yes",
-"event": "What will OpenAI's IPO valuation be?",
-"slug": "what-will-openais-ipo-valuation-be",
-"n": 8,
-"has_other": false,
-"outcomes": [
-"<$1T",
-"$1.0T\u2013$1.25T",
-"$1.25T\u2013$1.5T",
-"$1.5T\u2013$1.75T",
-"$1.75T\u2013$2.0T",
-"$2.0T\u2013$2.25T",
-"$2.25T\u2013$2.5T",
-"$2.5T+"
-],
-"cost": 0.986,
-"payoff": 1,
-"edge": 0.014,
-"edge_after_fee": -0.0422,
-"size_shares": 24.0,
-"usd_at_size": 23.66
+"size_shares": 79.62,
+"usd_at_size": 79.3
 },
 {
 "kind": "negrisk_all_yes",
@@ -183,8 +172,8 @@
 "cost": 0.997,
 "edge": 0.003,
 "edge_after_fee": 0.0025,
-"size_shares": 84.08,
-"usd_at_size": 83.83
+"size_shares": 79.62,
+"usd_at_size": 79.38
 },
 {
 "kind": "ladder_num",
@@ -244,27 +233,12 @@
 "40\u201360",
 "60+"
 ],
-"cost": 0.968,
+"cost": 0.969,
 "payoff": 1,
-"edge": 0.032,
-"edge_after_fee": -0.003,
+"edge": 0.031,
+"edge_after_fee": -0.004,
 "size_shares": 5.8,
-"usd_at_size": 5.61
-},
-{
-"kind": "ladder_num",
-"event": "StandX FDV above ___ one day after launch?",
-"slug": "standx-fdv-above-one-day-after-launch",
-"easy": "StandX FDV above $50M one day after launch?",
-"hard": "StandX FDV above $200M one day after launch?",
-"easy_yes_ask": 0.023,
-"hard_no_ask": 0.974,
-"hard_yes_bid": 0.026,
-"cost": 0.997,
-"edge": 0.003,
-"edge_after_fee": -0.0003,
-"size_shares": 60.0,
-"usd_at_size": 59.82
+"usd_at_size": 5.62
 },
 {
 "kind": "ladder_num",
@@ -312,44 +286,34 @@
 "usd_at_size": 19.92
 },
 {
-"kind": "negrisk_all_yes",
-"event": "South Africa Annual Inflation 2026",
-"slug": "south-africa-annual-inflation-2026",
-"n": 10,
-"has_other": false,
-"outcomes": [
-"<2.6%",
-"2.6-2.9%",
-"2.9-3.2%",
-"3.2-3.5%",
-"3.5-3.8%",
-"3.8-4.1%",
-"4.1-4.4%",
-"4.4-4.7%",
-"4.7-5.0%",
-">5.0%"
-],
-"cost": 0.992,
-"payoff": 1,
-"edge": 0.008,
-"edge_after_fee": -0.037,
-"size_shares": 8.0,
-"usd_at_size": 7.94
-},
-{
 "kind": "ladder_num",
 "event": "Printr FDV above ___ one day after launch?",
 "slug": "printr-fdv-above-one-day-after-launch",
 "easy": "Printr FDV above $500M one day after launch?",
 "hard": "Printr FDV above $1B one day after launch?",
 "easy_yes_ask": 0.049,
-"hard_no_ask": 0.931,
-"hard_yes_bid": 0.069,
-"cost": 0.98,
-"edge": 0.02,
-"edge_after_fee": 0.0122,
+"hard_no_ask": 0.929,
+"hard_yes_bid": 0.071,
+"cost": 0.978,
+"edge": 0.022,
+"edge_after_fee": 0.0141,
 "size_shares": 1.61,
-"usd_at_size": 1.58
+"usd_at_size": 1.57
+},
+{
+"kind": "ladder_num",
+"event": "Printr FDV above ___ one day after launch?",
+"slug": "printr-fdv-above-one-day-after-launch",
+"easy": "Printr FDV above $100M one day after launch?",
+"hard": "Printr FDV above $1B one day after launch?",
+"easy_yes_ask": 0.066,
+"hard_no_ask": 0.929,
+"hard_yes_bid": 0.071,
+"cost": 0.995,
+"edge": 0.005,
+"edge_after_fee": -0.0039,
+"size_shares": 6.6,
+"usd_at_size": 6.57
 },
 {
 "kind": "ladder_num",
