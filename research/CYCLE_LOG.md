@@ -1085,3 +1085,26 @@
   Tracebacks only the old pilot-log (2) / script-log (1); no MemoryErrors. STOP in place, no orders. No Actions dispatch needed.
 - Next: N21 decision 11-21 (forward -1.8% / -3.3% -> expect DEAD); lock_x BTC/ETH >= 0.80 forward arm (30 end-times; by breadth); N95 / N58
   settlements; N42 11-26; young 11-30; COPY-1 to 300 / 100.
+
+## 11-20 17:00-17:40 UTC cycle 49 (scheduled)
+- Read-outs (fast trades.jsonl, last settled entry 16:49; slow 16:56-16:58): lock_x 65 trades / 50 end-times 60 won +7.5%/$ (+3.2 pts/share
+  [-5.2, +9.6]); >= 0.80 core 54 / 45 +3.4%/$ (+1.0 pts); BTC/ETH >= 0.80 forward arm since 11-19 01:00 still 7 trades / 6 end-times all won
+  (needs 30). N21 forward BTC/ETH 193 windows / 177 won -1.7%, alts 259 / 230 -2.9% (decision 11-21, still negative). LP-1 v2 168 runs / 6.29
+  d: formula $2,151 (upper bound), trading -$454, pessimistic -$745; 121 settled, 73 open leftovers, 1 quoted. Options N42 forward rest 28 /
+  22 +11.0 pts (10 coin-dates, 7 positive), 61 open -> 11-26. converge 29 / 28 +$3.68 (78 open, mark -$39); young 99 / 46 -$269 (4 new
+  settlements all lost, -$40; 95 open; 11-30); box office 9 / 8 -$0.96; charts 3 / 3 +$3.64 (2 open); mention 24 / 20 -$5.64 (4 open). N95
+  rt_paper 82 seen, 10 in window, 9 open, 0 settled, open_past_end 0. COPY-1 142.3 h: sharp 112 primaries / 74 events +4.7 pts (+3.3 at 5
+  min; bar 300 / 100), control 115 / 56 +3.4 (+3.8 at 5 min) -> sharp ahead at the fill, equal at 5 min. N58 86 positions, 4 settled (+0.3
+  pts), 82 open, open_past_end 0. No row crossed a kill or promote line.
+- Test (adjacent N105, second_big.py, local, tapes a + b + c, rules fixed before looking): a second different wallet >= $200 the same way
+  within 48 h: +3.1 pts [2.2, 4.0] on 2,039 events vs the first big taker +2.5 [1.9, 3.1] on 3,070 -> adds +0.6 (rule +1.5) -> DEAD.
+- Test (outside the box N106, herd_contra.py, local, same tapes, rules fixed before looking): fade a crowd whose first 30 entrants put >= 80%
+  of $ one way: -4.6 pts [-5.6, -3.7] on 2,301 events -> DEAD, wrong sign. Its HERD control (follow the majority at the next majority-way
+  a300) +3.5 [2.5, 4.5] on 2,291 events, halves +3.5 / +3.5. Post-hoc kill check (herd_follow_check.py): same a300 band 0.70-0.92 in all
+  markets -0.5, in non-herd markets -3.6, herd +3.3 [2.0, 4.5] (1,727 events), share >= 0.9 +5.5; every fortnight with > 80 events positive.
+  Found by looking -> N107: out-of-sample pull of the newest closed markets (herd_oos.py via run_script.yml; tape_entries.py got OUT_TAG so
+  the canonical tapes are untouched), scored only on markets ending after the canonical tape. PASS -> forward paper tracker.
+- Health: fast paper 16:56, slow 17:00, follow 16:42 (report 16:42), boosts 16:56, MM v2 17:01, books 17:00, live snapshot 17:04 - OK.
+  Tracebacks only the old pilot-log / script-log; no MemoryErrors. STOP in place, no orders.
+- Next: c50 read herd_oos_report.json (N107); N21 decision 11-21 (expect DEAD); lock_x BTC/ETH >= 0.80 forward arm (30 end-times); N95 / N58
+  settlements; N42 11-26; young 11-30; COPY-1 to 300 / 100.

@@ -24,6 +24,18 @@ Status: TESTING (paper/backtest running) · READY (next up) · PARKED (needs som
 | Research journal (my forecasts with sources) | reading + cross-checking beats the crowd on slow political/econ questions | forecast_log.py, Brier vs market | 11-10 | weeks |
 
 ## READY (ranked)
+N107. -> 11-20 (cycle 49), RUNNING out of sample (herd_oos.py via run_script.yml). **(spawned by N106's control arm, 11-20 c49) Follow a
+   one-sided crowd:** when >= 80% of the first 30 entrants' dollars went one way, the next majority-way taker's a300 fill won +3.5 pts
+   [2.5, 4.5] on 2,291 events (tapes a + b + c, halves +3.5 / +3.5, every group positive); at a300 0.70-0.92 +3.3 [2.0, 4.5] on 1,727 events
+   vs the same price band in all markets -0.5 [-1.3, +0.2] and in non-herd markets -3.6; share >= 0.9 +5.5. Every fortnight with > 80 events
+   positive (+1.3 .. +6.0). Why it could be real: a lopsided first crowd is many independent people seeing the same answer (wisdom, not a
+   herd), and the 0.80 price still leaves the stubborn minority's money on the table. Found by looking (it was the CONTROL of N106) ->
+   lesson 22: second period first. Exposed to 15 (favourite strategy: 12 weeks, no big tail month?), 16 (>= 31 entrants is a count known at
+   the trigger, not final volume), 11, 22. PASS if OOS HERD >= +2 on >= 100 events and HERD_B - BASE >= +2 -> forward paper tracker.
+N106. -> 11-20 (cycle 49), DEAD (see DEAD). **(outside the box, 11-20 c49) Fade a one-sided crowd:** score the SHAPE of the crowd, not who
+   trades: when >= 80% of the first 30 entrants' dollars went one way, the minority side should be the informed one. herd_contra.py.
+N105. -> 11-20 (cycle 49), DEAD (see DEAD). **(adjacent to COPY-1 / lesson 17 / 30, 11-20 c49) A second independent big taker agreeing:**
+   a different wallet putting >= $200 the same way within 48 h of the first big taker = independent agreement. second_big.py.
 N104. -> 11-20 (cycle 48), DEAD (see DEAD). **(outside the box, 11-20 c48) The first taker in a dormant market:** nobody (bot or MM)
    watches a market untouched for 2+ days, so the wake-up trade should be a news alarm against a stale book -> follow its direction.
    Exposed to 27, 22, 24, 2, 5/6. dormant_wake.py.
@@ -453,6 +465,13 @@ OLD N2. **(outside the box, 11-12) Box-office opening-weekend markets vs Thursda
 - Kalshi vs Polymarket automatic pairing (titles do not match; manual for named series only).
 
 ## DEAD (number that killed it)
+- N106 fade a one-sided crowd (11-20 c49, herd_contra.py, local, tapes a + b + c, rules fixed before looking; >= 80% of the first 30
+  entrants' $ one way, the next minority-way entry's a300): -4.6 pts [-5.6, -3.7] on 2,301 events, halves -4.3 / -5.0 -> DEAD, wrong sign.
+  The majority (HERD) control was +3.5 [2.5, 4.5] -> spawned N107 (needs a second period, lesson 22). Balanced markets ~0 (YES +0.5, NO -1.8).
+- N105 second independent big taker (11-20 c49, second_big.py, local, tapes a + b + c, rules fixed before looking): AGREE +3.1 pts [2.2, 4.0]
+  on 2,039 events (halves +3.9 / +2.3) vs the FIRST big taker +2.5 [1.9, 3.1] on 3,070 events -> agreement adds +0.6, rule needed +1.5 ->
+  DEAD. CONFLICT (a big taker the other way) +1.2. Gap <= 6 h vs 6-48 h the same (+3.0 / +3.1). Confirms the big-taker base rate (COPY-1
+  control), nothing on top.
 - N104 dormant-market wake-up (11-20 c48, dormant_wake.py, local, tapes a + b + c, rules fixed before looking; first entry after >= 48 h with
   no new trader and no $100+ order, market >= 72 h old, >= 24 h left, follower a300): +1.95 pts [0.4, 3.5] on 833 events, but halves +4.5 /
   -0.4 (lesson 24) and below the +3 line -> DEAD. Placebo (gap 6-24 h) -1.5 on 1,317 events, so the wake does carry ~3.5 pts vs a normal

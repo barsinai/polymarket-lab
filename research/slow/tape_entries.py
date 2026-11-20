@@ -14,7 +14,7 @@ from concurrent.futures import ThreadPoolExecutor
 import requests
 
 G = "https://gamma-api.polymarket.com"; DA = "https://data-api.polymarket.com"
-T0 = time.time(); T_MAX = float(os.environ.get("T_MAX", "2900")); WEEKS = int(os.environ.get("WEEKS", "12")); GROUP = os.environ.get("GROUP", "a")
+T0 = time.time(); T_MAX = float(os.environ.get("T_MAX", "2900")); WEEKS = int(os.environ.get("WEEKS", "12")); GROUP = os.environ.get("GROUP", "a"); TAG = os.environ.get("OUT_TAG", "")  # OUT_TAG: write entries_<g><tag> (c49 out-of-sample pulls)
 MAXPAGES = 40
 PLANS = {"a": [("mention-markets", "mention", 1), ("earnings-calls", "mention", 1), ("mrbeast", "youtube", 1), ("youtube", "youtube", 1),
                ("movies", "movies", 1), ("music", "music", 1), ("awards", "awards", 1), ("pop-culture", "pop-culture", 1)],
@@ -196,12 +196,12 @@ markets = []; wallets = {}; wl = []; blob = bytearray(); blob2 = bytearray(); n_
 
 
 def save():
-    with gzip.open(f"data/research/entries_{GROUP}.bin.gz", "wb") as fh:
+    with gzip.open(f"data/research/entries_{GROUP}{TAG}.bin.gz", "wb") as fh:
         fh.write(bytes(blob))
-    with gzip.open(f"data/research/orders_{GROUP}.bin.gz", "wb") as fh:
+    with gzip.open(f"data/research/orders_{GROUP}{TAG}.bin.gz", "wb") as fh:
         fh.write(bytes(blob2))
     json.dump({"at": now.strftime("%Y-%m-%d %H:%M"), "group": GROUP, "weeks": WEEKS, "row": ROW.format, "row2": ROW2.format, "markets": markets, "wallets": wl,
-               "trades": n_tr, "truncated_markets": n_trunc}, gzip.open(f"data/research/entries_{GROUP}_meta.json.gz", "wt"), separators=(",", ":"))
+               "trades": n_tr, "truncated_markets": n_trunc}, gzip.open(f"data/research/entries_{GROUP}{TAG}_meta.json.gz", "wt"), separators=(",", ":"))
 
 
 os.makedirs("data/research", exist_ok=True); last_save = time.time()
