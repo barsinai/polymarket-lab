@@ -1,29 +1,29 @@
 {
- "updated": "2026-11-20 20:42",
+ "updated": "2026-11-20 21:41",
  "started": "2026-11-17 01:16",
- "days": 3.81,
+ "days": 3.85,
  "note": "tape base rate ~75 culture markets launch a day (~3 an hour): 0 candidates over a day is a bug, not a result",
  "rule": "new culture listing < 60 min old, lives >= 24 h, NO ask 0.05-0.90, NO spread <= 10c: $10 at the NO ask, fee paid; one per market",
  "decision": "kill if <= +1 pt or event CI low < -1 after 100 markets / 40 events; promote only after 300 / 100 / 3 weeks",
  "positions": 86,
- "settled": 15,
- "open": 71,
+ "settled": 17,
+ "open": 69,
  "open_past_end": 0,
  "all": {
-  "n": 15,
+  "n": 17,
   "events": 4,
-  "won": 3,
-  "avg_ask": 0.481,
-  "pts": -28.79,
-  "pnl": -118.33
+  "won": 5,
+  "avg_ask": 0.485,
+  "pts": -19.81,
+  "pnl": -99.26
  },
  "mention": {
-  "n": 12,
+  "n": 14,
   "events": 2,
-  "won": 2,
-  "avg_ask": 0.492,
-  "pts": -33.28,
-  "pnl": -98.91
+  "won": 4,
+  "avg_ask": 0.495,
+  "pts": -21.74,
+  "pnl": -79.84
  },
  "non_mention": {
   "n": 3,
@@ -42,12 +42,12 @@
   "pnl": -6.83
  },
  "N66 retry (transient skip, < 60 min)": {
-  "n": 12,
+  "n": 14,
   "events": 3,
-  "won": 1,
-  "avg_ask": 0.427,
-  "pts": -35.07,
-  "pnl": -111.5
+  "won": 3,
+  "avg_ask": 0.439,
+  "pts": -23.27,
+  "pnl": -92.42
  },
  "N66 activated placeholder (late-add)": {
   "n": 0
@@ -56,7 +56,7 @@
   "n": 0
  },
  "open_by_kind": {
-  "retry": 45,
+  "retry": 43,
   "late": 26
  },
  "watching": {
@@ -74,8 +74,8 @@
  },
  "candidate_age_min_median": 4.1,
  "this_run": {
-  "events listed": 11360,
-  "polls": 94,
+  "events listed": 14057,
+  "polls": 117,
   "seen once: markets < 24 h old (lesson 10 check)": 21,
   "new listings": 21,
   "skip (first): no NO ask": 1,
