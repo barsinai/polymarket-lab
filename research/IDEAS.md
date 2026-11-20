@@ -24,6 +24,12 @@ Status: TESTING (paper/backtest running) · READY (next up) · PARKED (needs som
 | Research journal (my forecasts with sources) | reading + cross-checking beats the crowd on slow political/econ questions | forecast_log.py, Brier vs market | 11-10 | weeks |
 
 ## READY (ranked)
+N104. -> 11-20 (cycle 48), DEAD (see DEAD). **(outside the box, 11-20 c48) The first taker in a dormant market:** nobody (bot or MM)
+   watches a market untouched for 2+ days, so the wake-up trade should be a news alarm against a stale book -> follow its direction.
+   Exposed to 27, 22, 24, 2, 5/6. dormant_wake.py.
+N103. -> 11-20 (cycle 48), DEAD (see DEAD). **(adjacent to COPY-1 / lesson 17, 11-20 c48) Urgent big takers:** an order >= $200 that sweeps
+   the book (worst fill >= 5c above the last same-way print) is a trader who would not wait - urgency as the sign of private information.
+   Exposed to 1, 22, 23, 24. urgent_taker.py.
 N102. -> 11-20 (cycle 47), DEAD (see DEAD). **(outside the box, 11-20 c47) Date-ladder hazard consistency:** in 'X by Oct 31 / by Nov 30 /
    by Dec 31' events each rung trades alone; YES holders of the near rung keep their hope to the last day, so the near rung should decay
    slower than the far rung's constant-hazard price implies (P1_fair = 1 - (1 - P2)^(t1/t2)) -> NO on a 'rich' near rung. Lesson 8 only
@@ -447,6 +453,15 @@ OLD N2. **(outside the box, 11-12) Box-office opening-weekend markets vs Thursda
 - Kalshi vs Polymarket automatic pairing (titles do not match; manual for named series only).
 
 ## DEAD (number that killed it)
+- N104 dormant-market wake-up (11-20 c48, dormant_wake.py, local, tapes a + b + c, rules fixed before looking; first entry after >= 48 h with
+  no new trader and no $100+ order, market >= 72 h old, >= 24 h left, follower a300): +1.95 pts [0.4, 3.5] on 833 events, but halves +4.5 /
+  -0.4 (lesson 24) and below the +3 line -> DEAD. Placebo (gap 6-24 h) -1.5 on 1,317 events, so the wake does carry ~3.5 pts vs a normal
+  entry, all in the older half. Printed only: waker's own fill +4.1, NO side +3.4 vs YES +0.2, >= 7 d gap +1.4, big waker +0.4. Not an arm
+  (post-hoc side split, lesson 22); if a future idea needs it, the NO-side wake is the cell to re-test on a NEW tape period.
+- N103 urgent big takers (11-20 c48, urgent_taker.py, local, tapes a + b + c, rules fixed before looking; orders >= $200, sweep = worst fill
+  minus the last same-way print, follower a300): URGENT (sweep >= 5c) -2.8 pts [-4.7, -0.8] on 1,105 events, halves -2.1 / -3.4; CALM (<= 1c)
+  -1.4 [-2.5, -0.4] on 2,340 -> DEAD, wrong sign. Even at their OWN fill sweepers lose (-2.2) while calm big takers win (+1.8 [0.8, 2.8]);
+  sweep >= 10c -4.3. Urgency is overpaying, not information (lesson 30). A fade is not computable on the tape (other side's ask missing).
 - N102 date-ladder hazard consistency (11-20 c47, date_ladder_hazard.py, local, tapes a + b + c, finished 'by/before' events with >= 2
   end days, nearest open rung, far-rung YES from its last print <= 6 h old, NO 0.50-0.95, 1-14 d before end, follower a300, fee, rules fixed
   before looking): RICH near rung (gap >= +5c over the constant-hazard fair) NO -9.4 pts [-18.9, +0.2] on 68 events (halves -0.1 / -19.2);

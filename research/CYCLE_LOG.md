@@ -1064,3 +1064,24 @@
   09:00, live snapshot 04:04 - OK. Tracebacks only the old pilot-log (2) / script-log (1); no MemoryErrors. STOP in place, no orders.
 - Next: N21 decision 11-21 (forward -2.0% / -3.2% -> expect DEAD); lock_x BTC/ETH >= 0.80 forward arm (30 end-times; read it by window
   breadth too); N95 first settlements; N58 settlements; N42 11-26; young 11-30; COPY-1 to 300 / 100.
+
+## 11-20 13:00-13:40 UTC cycle 48 (scheduled)
+- Read-outs (fast trades.jsonl, last entry 12:54; slow 12:55): lock_x 64 trades / 49 end-times 59 won +7.5%/$ (one new loss 11:09, -$17.4;
+  the 06:04 broad move still carries most of the total, see N101); >= 0.80 core 53 / 44 +3.3%/$. BTC/ETH >= 0.80 forward arm since 11-19
+  01:00: 7 trades / 6 end-times all won (needs 30). lock_x50 +9.0%, lock_p_majors 45 / 39 +8.1%; lock_m 376 -0.8%, lock_b 181 +2.9%,
+  lock_p_z2 446 -0.4%. N21 forward BTC/ETH 189 windows / 173 won -1.8%, alts 249 / 220 -3.3% (decision 11-21, still negative). LP-1 v2
+  163 runs / 6.12 d: formula $2,147 (upper bound), trading -$439, pessimistic -$747; 118 settled, 76 open leftovers, 0 quoted; forward_core
+  95 markets $487 vs +$19 / -$10. Options N42 forward rest 28 / 22 +11.0 pts (10 coin-dates, 7 positive), tails 7 / 0 -7.8, 59 open ->
+  11-26. converge 29 / 28 +$3.68 (77 open, mark -$33); young 95 / 46 -$229 (98 open; 11-30); box office 9 / 8 -$0.96; charts 3 / 3 +$3.64;
+  mention 24 / 20 -$5.64. N95 rt_paper 82 seen, 9 open, 0 settled, open_past_end 0. COPY-1 137.9 h: sharp 104 primaries / 70 events +4.0
+  pts (+2.5 at 5 min; bar 300 / 100), control 105 / 52 +3.9 (+4.5 at 5 min) -> sharp = control. N58 86 positions, 4 settled (+0.3 pts), 82
+  open, open_past_end 0. No row crossed a kill or promote line.
+- Test (adjacent N103, urgent_taker.py, local, tapes a + b + c, rules fixed before looking): big takers who swept >= 5c above the last
+  same-way print, follower a300: -2.8 pts [-4.7, -0.8] on 1,105 events, halves -2.1 / -3.4; calm big takers -1.4 -> DEAD, wrong sign. At
+  their own fill sweepers -2.2 vs calm +1.8 [0.8, 2.8] -> LESSONS 30 (urgency is overpaying, not information).
+- Test (outside the box N104, dormant_wake.py, local, tapes a + b + c, rules fixed before looking): follow the first taker after >= 48 h of
+  silence: +1.95 pts [0.4, 3.5] on 833 events, placebo (6-24 h) -1.5, but halves +4.5 / -0.4 and below the +3 line -> DEAD (lesson 24).
+- Health: fast paper 12:54, slow 12:57, follow 12:30 (report 12:20), boosts 12:34, MM v2 13:01, books 13:00, live snapshot 12:05 - OK.
+  Tracebacks only the old pilot-log (2) / script-log (1); no MemoryErrors. STOP in place, no orders. No Actions dispatch needed.
+- Next: N21 decision 11-21 (forward -1.8% / -3.3% -> expect DEAD); lock_x BTC/ETH >= 0.80 forward arm (30 end-times; by breadth); N95 / N58
+  settlements; N42 11-26; young 11-30; COPY-1 to 300 / 100.

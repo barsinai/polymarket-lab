@@ -888,3 +888,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - N102 date-ladder hazard DEAD (NO on 'rich' near rungs -9.4 pts on 68 events, base -13.1; wrong sign). N101 lock_x breadth: the jump to
   +9.2%/$ is one 06:04 move on 7 coins; windows with 1-2 locked assets are +0.15 pts on 45 end-times -> lock_x is ~0 outside broad moves.
   Next: N21 11-21, N95 / N58 settlements, N42 11-26, young 11-30.
+
+## 11-20 13:40 cycle 48
+- N103 urgent big takers DEAD (sweepers -2.8 pts at the follower's fill on 1,105 events, -2.2 even at their own fill; calm big takers +1.8 at
+  their own fill) -> LESSONS 30. N104 dormant-market wake-up DEAD by halves (+1.95 [0.4, 3.5] on 833 events, older +4.5 / newer -0.4). Read-
+  outs flat; lock_x one new loss. Next: N21 11-21, N95 / N58 settlements, N42 11-26, young 11-30.

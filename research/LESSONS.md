@@ -116,6 +116,10 @@ survives them. Add a lesson whenever an idea dies for a reason not already here.
     else takes NO - which is where YES is right. Before moving a taker result to a maker quote, measure the fills the quote would really
     get (who arrives, conditional on arriving), not the price it would save.
 
+30. **Paying up is not information; patience is** (11-20, N103, 12-week tape): big takers (>= $200) whose order swept 5c+ above the last
+    same-way print lost 2.2 pts per share at their OWN fill (1,105 events) while big takers filling at the last print won +1.8. The urgent
+    trader is the one chasing a move; the informed one waits for the book. Never read 'aggressive' as 'knows something' without measuring it.
+
 ## Where edges plausibly still live (derived from the above)
 - Information the crowd processes slowly and bots don't cover: resolution-rule details (exact station, exact candle,
   rounding), public running tallies, scheduled data with good nowcasts, slow non-sports questions.
