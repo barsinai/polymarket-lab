@@ -1042,3 +1042,25 @@
   Tracebacks only the old pilot-log (2) / script-log (1); no MemoryErrors. STOP in place, no orders.
 - Next: N21 decision 11-21 (forward -3.0% / -4.8% -> expect DEAD); lock_x BTC/ETH >= 0.80 forward arm (30 end-times); N95 first
   settlements; N58 settlements; N42 11-26; young 11-30; COPY-1 to 300 / 100.
+
+## 11-20 09:00-09:40 UTC cycle 47 (scheduled)
+- Read-outs (fast trades.jsonl, last entry 08:49; slow 08:53-08:54): lock_x 63 trades / 48 end-times 59 won +9.2%/$ (+4.3 pts/share [-3.6,
+  +10.5]) - up from 49 / 43 because of ONE move: 11-20 06:04-06:14 13 trades on 7 coins all won (+$60 of the day's +$61, lesson 6). Split by
+  breadth (N101): 3+ assets in a window 3 end-times +16.2 pts; 1-2 assets 45 end-times +0.15 pts [-8.3, +7.5] -> honest lock_x number is ~0.
+  >= 0.80 core 53 / 44 +3.3%/$ (+0.9 pts [-6.5, +6.5]). BTC/ETH >= 0.80 forward arm since 11-19 01:00: 7 trades / 6 end-times all won (needs
+  30). lock_x50 +9.8%, lock_p_majors 45 +8.1%; lock_m 370 -0.8%, lock_b 177 +3.1%, lock_p_z2 438 -0.3% (all lifted by the same move). N21
+  forward BTC/ETH 183 windows / 167 won -2.0%, alts 244 / 216 -3.2% (decision 11-21, still negative). LP-1 v2 159 runs / 5.95 d: formula
+  $2,147 (upper bound), trading -$437, pessimistic -$744; 118 settled, 73 open leftovers, 2 quoted. Options N42 forward rest 28 / 22 won
+  +11.0 pts on 10 coin-dates (7 positive), tails 7 / 0 -7.8, 57 open -> 11-26. converge 29 / 28 +$3.68 (0.94-0.97 24 / 24 +3.6%, 0.90-0.94
+  5 / 4 -13.4%; 77 open, mark -$33); young 95 / 46 -$229 (96 open; 11-30); box office 9 / 8 -$0.96; charts 3 / 3 +$3.64 (1 open); mention 24
+  / 20 -$5.64 (4 open). N95 rt_paper 82 seen, 8 open, 0 settled, open_past_end 0. COPY-1 133.7 h: sharp 103 primaries / 69 events +3.8 pts
+  (+2.2 at 5 min; bar 300 / 100), control 104 / 52 +3.9 (+4.5 at 5 min) -> control still >= sharp. N58 86 positions, 4 settled (+0.3 pts),
+  82 open, open_past_end 0. No row crossed a kill or promote line.
+- Test (outside the box N102, date_ladder_hazard.py, local, tapes a + b + c, rules fixed before looking): NO on a near date-ladder rung
+  priced >= 5c above the far rung's constant-hazard fair: -9.4 pts [-18.9, +0.2] on 68 events (halves -0.1 / -19.2); base arm -13.1
+  [-21.7, -5.6] on 81 events -> DEAD, wrong sign (near-rung NO loses in its last 2 weeks; the newer half is election 'concede by' ladders).
+- Test (adjacent N101, lock_x breadth split, see read-outs) -> no arm by count (3 broad end-times); recorded as the lock_x caveat.
+- Health: fast paper 08:52, slow 08:55, follow 08:17 (report 08:09, < 70 min at 09:00), boosts 08:09, MM v2 08:31, replay 08:00, books
+  09:00, live snapshot 04:04 - OK. Tracebacks only the old pilot-log (2) / script-log (1); no MemoryErrors. STOP in place, no orders.
+- Next: N21 decision 11-21 (forward -2.0% / -3.2% -> expect DEAD); lock_x BTC/ETH >= 0.80 forward arm (30 end-times; read it by window
+  breadth too); N95 first settlements; N58 settlements; N42 11-26; young 11-30; COPY-1 to 300 / 100.

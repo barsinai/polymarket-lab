@@ -883,3 +883,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - N100 forced exits / flip legs DEAD (follow the flip -1.2 pts on 3,139 events; big flips +3.5 = big-taker base rate +2.3 plus ~1 pt).
   N99 post-count brackets NO above the leader DEAD (-2.9 pts on 83 events, wrong sign). Follow chain saves hourly again. Read-outs flat.
   Next: N21 11-21, N95 / N58 settlements, N42 11-26, young 11-30.
+
+## 11-20 09:40 cycle 47
+- N102 date-ladder hazard DEAD (NO on 'rich' near rungs -9.4 pts on 68 events, base -13.1; wrong sign). N101 lock_x breadth: the jump to
+  +9.2%/$ is one 06:04 move on 7 coins; windows with 1-2 locked assets are +0.15 pts on 45 end-times -> lock_x is ~0 outside broad moves.
+  Next: N21 11-21, N95 / N58 settlements, N42 11-26, young 11-30.

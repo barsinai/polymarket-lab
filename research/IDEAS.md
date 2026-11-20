@@ -24,6 +24,12 @@ Status: TESTING (paper/backtest running) · READY (next up) · PARKED (needs som
 | Research journal (my forecasts with sources) | reading + cross-checking beats the crowd on slow political/econ questions | forecast_log.py, Brier vs market | 11-10 | weeks |
 
 ## READY (ranked)
+N102. -> 11-20 (cycle 47), DEAD (see DEAD). **(outside the box, 11-20 c47) Date-ladder hazard consistency:** in 'X by Oct 31 / by Nov 30 /
+   by Dec 31' events each rung trades alone; YES holders of the near rung keep their hope to the last day, so the near rung should decay
+   slower than the far rung's constant-hazard price implies (P1_fair = 1 - (1 - P2)^(t1/t2)) -> NO on a 'rich' near rung. Lesson 8 only
+   used ladders as riskless sums. Exposed to 2, 11, 6, 13, 22, 24. date_ladder_hazard.py.
+N101. -> 11-20 (cycle 47), read-out split, no arm (see DEAD). **(adjacent to lock_x, 11-20 c47) lock_x breadth:** a lock signal that fires
+   on 3+ coins in the same window is one market-wide move (lesson 6); split lock_x by how many assets locked in the window.
 N100. -> 11-20 (cycle 46), DEAD (see DEAD). **(outside the box, 11-20 c46) Forced exits / flip legs:** a taker who bought one way and later
    trades the other way in the same market is mostly exiting for reasons of his own book (stop-loss, capital, profit-taking), so the flip leg
    could be uninformed (fade it) - or a reversal by someone who was in the market is the strongest tape signal (follow it). Every earlier tape
@@ -441,6 +447,15 @@ OLD N2. **(outside the box, 11-12) Box-office opening-weekend markets vs Thursda
 - Kalshi vs Polymarket automatic pairing (titles do not match; manual for named series only).
 
 ## DEAD (number that killed it)
+- N102 date-ladder hazard consistency (11-20 c47, date_ladder_hazard.py, local, tapes a + b + c, finished 'by/before' events with >= 2
+  end days, nearest open rung, far-rung YES from its last print <= 6 h old, NO 0.50-0.95, 1-14 d before end, follower a300, fee, rules fixed
+  before looking): RICH near rung (gap >= +5c over the constant-hazard fair) NO -9.4 pts [-18.9, +0.2] on 68 events (halves -0.1 / -19.2);
+  BASE (gap < 5c) NO -13.1 [-21.7, -5.6] on 81 events -> DEAD, wrong sign. Near-rung NO in the last 2 weeks loses in both arms (1-3 d
+  -20.3); the newer half is the November election 'concede by' / geopolitics ladders. Not a YES arm: one half only (lesson 24), found
+  by looking (22).
+- N101 lock_x breadth (11-20 c47, read-out split of data/fast/trades.jsonl, post-hoc): end-times where 3+ assets locked: 16 trades / 3
+  end-times all won, +16.2 pts per end-time (11-20 06:04-06:14 alone 13 trades, +$60 of the day's +$61); 1-2 assets: 47 trades / 45
+  end-times 43 won, +0.15 pts [-8.3, +7.5]. -> no arm (3 end-times); the read-out to quote for lock_x is the narrow one: ~0 pts per share.
 - N100 forced exits / flip legs (11-20 c46, flip_leg.py, local, tapes a ex-mention + b + c, rules fixed before looking): a wallet's first
   trade the other way within 7 d of its first leg (>= $20), >= 1 h before the end, follower a300, fee: follow the flip -1.2 pts [-1.5, -0.8]
   on 3,139 events (halves -1.2 / -1.2; a -0.4, b weather -2.1, c -0.3); placebo first legs -0.3 -> neither FOLLOW (>= +3) nor FADE
