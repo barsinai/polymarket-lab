@@ -878,3 +878,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - follow.yml chain saved nothing 20:58-01:03 (stuck rebase); save() fixed, chain re-dispatched. N97 fan-count ladders ex-RT DEAD (NO upper
   -3.9 pts on 13 events; single-threshold NO +0.8 on 106 events, newer half -6.0). N98 conjunction questions DEAD by count. rt_paper first
   runs OK (82 seen, 7 open). Next: confirm follow saves hourly (c46), N21 11-21, N42 11-26, young 11-30.
+
+## 11-20 05:30 cycle 46
+- N100 forced exits / flip legs DEAD (follow the flip -1.2 pts on 3,139 events; big flips +3.5 = big-taker base rate +2.3 plus ~1 pt).
+  N99 post-count brackets NO above the leader DEAD (-2.9 pts on 83 events, wrong sign). Follow chain saves hourly again. Read-outs flat.
+  Next: N21 11-21, N95 / N58 settlements, N42 11-26, young 11-30.

@@ -1019,3 +1019,26 @@
   orders involved). No network to Polymarket from this run.
 - Next: c46 check follow report 'updated' moves hourly with the fixed save (lesson 10); N21 decision 11-21; lock_x BTC/ETH >= 0.80 forward
   arm (30 end-times); N95 first settlements; N58 settlements; N42 11-26; young 11-30; COPY-1 to 300 / 100.
+
+## 11-20 05:00-05:30 UTC cycle 46 (scheduled)
+- Read-outs (fast trades.jsonl, last entry 04:48; slow 04:52): lock_x 49 trades / 43 end-times 45 won +4.9%/$ (+0.14 pts/share [-8.6,
+  +7.0]); >= 0.80 core 45 / 40 +1.8%/$; BTC/ETH >= 0.80 all-time 22 / 21 end-times all won +5.2 pts (post-hoc); forward arm since 11-19
+  01:00 still 5 trades / 4 end-times all won (needs 30). Halves +8.8%/$ (<= 11-14) vs +2.6% (>= 11-15). lock_x50 +7.3%, lock_p_majors 38
+  +4.4%; lock_m 350 -2.1%, lock_b 156 +0.8%, lock_p_z2 412 -1.4%. N21 forward BTC/ETH 175 windows / 159 won -3.0%, alts 224 / 197 -4.8%
+  (decision 11-21 - heading for DEAD). LP-1 v2 155 runs / 5.78 d: formula $2,133 (upper bound), trading -$446, pessimistic -$741; 117
+  settled, 72 open leftovers, 1 quoted. Options N42 forward rest 23 / 19 +13.6 pts (8 coin-dates, 6 positive), tails 5 / 0, 57 open ->
+  11-26. converge 25 / 24 -$0.61 (81 open, mark -$43); young 94 / 46 -$219 (97 open; 11-30); box office 9 / 8 -$0.96; charts 3 / 3 +$3.64;
+  mention 24 / 20 -$5.64 (4 open). N95 rt_paper 82 seen, 11 in window, 8 open, 0 settled, open_past_end 0. COPY-1 129.6 h: sharp 101
+  primaries / 67 events +3.5 pts (+1.9 at 5 min), control 99 / 51 +3.75 (+4.4 at 5 min) -> control still >= sharp. N58 86 positions, 4
+  settled, 82 open, open_past_end 0. No row crossed a kill or promote line this cycle.
+- Follow chain (c45 fix) CONFIRMED: Follow paper commits 02:05, 03:05, 04:05, 05:05 - hourly saves work again.
+- Test (outside the box N100, flip_leg.py, local, tapes a ex-mention + b + c, rules fixed before looking): follow a wallet's flip leg (first
+  trade the other way within 7 d) at a300: -1.2 pts [-1.5, -0.8] on 3,139 events, halves -1.2 / -1.2 -> DEAD (too small to fade after the
+  spread, wrong sign to follow). Post-hoc kill-only: big flips (>= $200) +3.5 [2.6, 4.4] on 1,883 events vs big never-flipped entries +2.3
+  [1.6, 2.9] -> a big flip is a big taker + ~1 pt, the price band carries it; no new arm (it backs COPY-1's control arm).
+- Test (adjacent N99, count_bracket_upper.py, local, tapes a + c, rules fixed before looking): NO on post-count brackets above the leading
+  bracket, 0.60-0.90, 6-120 h: -2.9 pts [-6.5, +0.7] on 83 events, halves -2.7 / -3.1; placebo below +2.3 -> DEAD, wrong sign.
+- Health: fast paper 04:51, slow 04:53, follow 05:05 (report 03:59 -> 05:05 commit), boosts 04:48, MM v2 05:01, books 05:00 - OK.
+  Tracebacks only the old pilot-log (2) / script-log (1); no MemoryErrors. STOP in place, no orders.
+- Next: N21 decision 11-21 (forward -3.0% / -4.8% -> expect DEAD); lock_x BTC/ETH >= 0.80 forward arm (30 end-times); N95 first
+  settlements; N58 settlements; N42 11-26; young 11-30; COPY-1 to 300 / 100.

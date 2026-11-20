@@ -24,6 +24,13 @@ Status: TESTING (paper/backtest running) · READY (next up) · PARKED (needs som
 | Research journal (my forecasts with sources) | reading + cross-checking beats the crowd on slow political/econ questions | forecast_log.py, Brier vs market | 11-10 | weeks |
 
 ## READY (ranked)
+N100. -> 11-20 (cycle 46), DEAD (see DEAD). **(outside the box, 11-20 c46) Forced exits / flip legs:** a taker who bought one way and later
+   trades the other way in the same market is mostly exiting for reasons of his own book (stop-loss, capital, profit-taking), so the flip leg
+   could be uninformed (fade it) - or a reversal by someone who was in the market is the strongest tape signal (follow it). Every earlier tape
+   study used first entries only. Exposed to 22, 24, 23, 17, 5/6. flip_leg.py + flip_leg_big.py (post-hoc).
+N99. -> 11-20 (cycle 46), DEAD (see DEAD). **(adjacent to N95 / N97, 11-20 c46) Post-count brackets, NO above the leading bracket:** fans buy
+   the 'spree' brackets above the current favourite of Elon / CZ weekly post-count events, like RT upper rungs. Exposed to 2, 13, 22, 24.
+   count_bracket_upper.py.
 N98. -> 11-20 (cycle 45), DEAD by count (see DEAD). **(outside the box, 11-20 c45) Conjunction questions ('Will X and Y both happen'):**
    the conjunction fallacy says people price 'A and B' above what A and B imply, so YES on compound questions should lose. Exposed to 8
    (count), 13, 5/6. Cheapest test: count genuine compound questions on tapes a + c.
@@ -434,6 +441,18 @@ OLD N2. **(outside the box, 11-12) Box-office opening-weekend markets vs Thursda
 - Kalshi vs Polymarket automatic pairing (titles do not match; manual for named series only).
 
 ## DEAD (number that killed it)
+- N100 forced exits / flip legs (11-20 c46, flip_leg.py, local, tapes a ex-mention + b + c, rules fixed before looking): a wallet's first
+  trade the other way within 7 d of its first leg (>= $20), >= 1 h before the end, follower a300, fee: follow the flip -1.2 pts [-1.5, -0.8]
+  on 3,139 events (halves -1.2 / -1.2; a -0.4, b weather -2.1, c -0.3); placebo first legs -0.3 -> neither FOLLOW (>= +3) nor FADE
+  (<= -4, the opposite ask's spread eats 2-5 pts) -> DEAD. Post-hoc (flip_leg_big.py, kill-only): big flips (>= $200) +3.5 [2.6, 4.4]
+  on 1,883 events, halves +3.7 / +3.3, all three groups +3.3..+3.8 - but big first entries by wallets that never flipped are +2.3
+  [1.6, 2.9] on 2,659 events, and both are carried by the cheap side (p < 0.40: +9.7 vs +5.6; p >= 0.70: -0.5 vs +1.0). A big flip is
+  a big taker (COPY-1 control's +3.75) plus ~1 pt: no separate mechanism, no new arm.
+- N99 post-count brackets, NO above the leading bracket (11-20 c46, count_bracket_upper.py, local, tapes a + c, Elon / CZ 'post N-M'
+  events with >= 4 brackets, favourite = highest YES among brackets that printed in the prior 6 h, NO 0.60-0.90, 6-120 h before end,
+  follower a300, fee, rules fixed before looking): -2.9 pts [-6.5, +0.7] on 83 events, halves -2.7 / -3.1; below-favourite placebo +2.3
+  [-3.2, +7.6] -> DEAD, wrong sign (the brackets above the leader are if anything cheap: posting sprees happen). The RT upper-rung effect
+  does not carry to running post counts (with N97: it is RT-specific or noise; N95's forward paper decides).
 - N97 fan-count ladders ex-RT (11-20 c45, fan_ladder.py, local, tape a movies / pop-culture / youtube / music / awards ex-mention ex-RT,
   rules fixed before looking): ladders with >= 3 parsed rungs, NO on the upper half, first taker entry, follower a300, fee: -3.9 pts
   [-19.7, +8.7] on 13 events (halves -6.0 / -2.4); lower-rung placebo -16.4; YES upper +3.6 -> DEAD. Lesson 10 check: box office / views
