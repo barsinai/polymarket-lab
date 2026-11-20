@@ -1,0 +1,64 @@
+  2000/2027 markets, 180577 trades, entries 61932, big orders 16454, wallets 6877, truncated 0, 429s 0, 159s
+group a: markets done 2027 (kept 1230), not reached 0, trades 201336, entries 67866, wallets 7147, truncated 0, 429s 0, 163s
+group a pulled, 163s
+  2000/4626 markets, 107920 trades, entries 64317, big orders 2923, wallets 4534, truncated 0, 429s 0, 147s
+  4000/4626 markets, 222939 trades, entries 129674, big orders 6002, wallets 5895, truncated 0, 429s 0, 288s
+group b: markets done 4626 (kept 4444), not reached 0, trades 257952, entries 150342, wallets 6056, truncated 0, 429s 0, 333s
+group b pulled, 496s
+  2000/2582 markets, 258260 trades, entries 94594, big orders 25837, wallets 16218, truncated 6, 429s 0, 166s
+group c: markets done 2582 (kept 1417), not reached 0, trades 508517, entries 131911, wallets 18334, truncated 9, 429s 0, 233s
+group c pulled, 730s
+{
+ "HERD": {
+  "n": 111,
+  "events": 75,
+  "pts": 0.27,
+  "ci": [
+   -6.02,
+   6.59
+  ]
+ },
+ "HERD_B": {
+  "n": 67,
+  "events": 55,
+  "pts": -0.56,
+  "ci": [
+   -9.53,
+   7.59
+  ]
+ },
+ "BASE": {
+  "n": 315,
+  "events": 108,
+  "pts": -0.81,
+  "ci": [
+   -5.02,
+   3.25
+  ]
+ },
+ "HERD share>=0.9": {
+  "n": 40,
+  "events": 35,
+  "pts": 9.57,
+  "ci": [
+   2.61,
+   15.93
+  ]
+ },
+ "HERD group a": {
+  "events": 0
+ },
+ "HERD group b": {
+  "n": 111,
+  "events": 75,
+  "pts": 0.27,
+  "ci": [
+   -6.34,
+   6.04
+  ]
+ },
+ "HERD group c": {
+  "events": 0
+ },
+ "verdict": "DEAD"
+}
