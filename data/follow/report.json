@@ -1,16 +1,16 @@
 {
- "updated": "2026-11-21 18:29",
- "tracking_hours": 168.02,
+ "updated": "2026-11-21 18:44",
+ "tracking_hours": 168.27,
  "signal_wallets": 148,
  "rule": "primary = first position per market+direction+UTC day after a taker order/accumulation by a signal wallet (>= $50) or, control, every 5th order >= $1,000 by another wallet; non-sports, ends in 1 h - 60 d; ask 0.03-0.97 and <= their average price + 3c; $20 at the ask; fee paid",
  "decision_rule": "sharp primary: >= 300 settled over >= 100 events and >= 10 days; >= +1.5 pts with the 95% interval above 0 -> propose a small live test; < +0.5 or interval top < +1.5 -> DEAD",
  "sharp": {
-  "positions": 1310,
-  "open": 903,
+  "positions": 1311,
+  "open": 904,
   "settled": 407,
-  "primary": 479,
+  "primary": 480,
   "primary_settled": 145,
-  "primary_per_day": 68.4,
+  "primary_per_day": 68.5,
   "PRIMARY": {
    "all": {
     "n": 145,
@@ -394,14 +394,14 @@
    "geopolitics": 55,
    "tweets": 8,
    "crypto": 10,
-   "weather": 11
+   "weather": 12
   }
  },
  "control": {
-  "positions": 1070,
-  "open": 763,
+  "positions": 1071,
+  "open": 764,
   "settled": 307,
-  "primary": 610,
+  "primary": 611,
   "primary_settled": 176,
   "primary_per_day": 87.1,
   "PRIMARY": {
@@ -662,12 +662,12 @@
   },
   "mark_24h_all_primary": {
    "all": {
-    "n": 388,
-    "mid_minus_ask_pts": -0.66
+    "n": 389,
+    "mid_minus_ask_pts": -0.64
    },
    "crypto": {
-    "n": 121,
-    "mid_minus_ask_pts": -2.25
+    "n": 122,
+    "mid_minus_ask_pts": -2.2
    },
    "culture": {
     "n": 25,
@@ -696,8 +696,8 @@
   },
   "mark_72h_all_primary": {
    "all": {
-    "n": 247,
-    "mid_minus_ask_pts": -1.27
+    "n": 248,
+    "mid_minus_ask_pts": -1.3
    },
    "crypto": {
     "n": 80,
@@ -716,8 +716,8 @@
     "mid_minus_ask_pts": 1.23
    },
    "politics": {
-    "n": 28,
-    "mid_minus_ask_pts": -0.14
+    "n": 29,
+    "mid_minus_ask_pts": -0.48
    },
    "tech": {
     "n": 20,
@@ -734,56 +734,56 @@
    "p75": 0.01
   },
   "share_cap_ok": 0.902,
-  "median_lag_s": 135,
+  "median_lag_s": 134,
   "median_usd_at_ask": 207,
-  "median_usd_within_2c": 5962,
+  "median_usd_within_2c": 5948,
   "open_primary_by_category": {
    "economy": 60,
    "crypto": 134,
    "geopolitics": 128,
    "politics": 53,
    "culture": 22,
-   "tech": 35,
+   "tech": 36,
    "tweets": 2
   }
  },
- "positions": 2380,
+ "positions": 2382,
  "settled": 714,
- "primary": 1089,
+ "primary": 1091,
  "totals": {
-  "control crossings $2500": 4838,
-  "skip: fast: sports": 11206,
-  "control crossings $10000": 1095,
-  "control crossings $1000": 9273,
+  "control crossings $2500": 4853,
+  "skip: fast: sports": 11257,
+  "control crossings $10000": 1097,
+  "control crossings $1000": 9307,
   "skip: fast: crypto up/down": 1530,
-  "control primary follows": 609,
-  "control paper positions": 1069,
-  "skip: closed or ends in < 1 h": 426,
-  "sharp crossings $250": 678,
-  "sharp paper positions": 1309,
-  "sharp crossings $50": 2055,
-  "skip: ask outside 0.03-0.97": 848,
+  "control primary follows": 610,
+  "control paper positions": 1070,
+  "skip: closed or ends in < 1 h": 427,
+  "sharp crossings $250": 679,
+  "sharp paper positions": 1310,
+  "sharp crossings $50": 2059,
+  "skip: ask outside 0.03-0.97": 850,
   "skip: ends in > 60 days": 1162,
-  "sharp primary follows": 479,
+  "sharp primary follows": 480,
   "skip: fast: sports parlay (combo)": 326,
   "skip: no ask in the book": 233,
   "settled": 714,
   "sharp crossings $1000": 170
  },
  "this_run": {
-  "feed pages": 1369,
-  "polls": 892,
-  "fills": 130467,
-  "skip: fast: sports": 771,
+  "feed pages": 1440,
+  "polls": 936,
+  "fills": 136304,
+  "skip: fast: sports": 822,
   "skip: fast: sports parlay (combo)": 30,
   "skip: fast: crypto up/down": 25,
-  "sharp paper positions": 35,
+  "sharp paper positions": 36,
   "skip: no ask in the book": 3,
   "skip: ends in > 60 days": 15,
-  "skip: closed or ends in < 1 h": 16,
-  "control paper positions": 34,
+  "skip: closed or ends in < 1 h": 17,
+  "control paper positions": 35,
   "http 404": 1,
-  "skip: ask outside 0.03-0.97": 21,
+  "skip: ask outside 0.03-0.97": 23,
   "http 500": 1,
   "feed failures": 1
  }
