@@ -1,5 +1,5 @@
 {
-"scanned": "2026-11-21 13:08",
+"scanned": "2026-11-21 14:08",
 "events": 2100,
 "groups": 2037,
 "books": 17270,
@@ -31,8 +31,28 @@
 "cost": 0.99,
 "edge": 0.01,
 "edge_after_fee": -0.0074,
-"size_shares": 1624.64,
-"usd_at_size": 1608.39
+"size_shares": 1594.64,
+"usd_at_size": 1578.69
+},
+{
+"kind": "negrisk_all_yes",
+"event": "Fed Decision in January?",
+"slug": "fed-decision-in-january-20260729233815502",
+"n": 5,
+"has_other": false,
+"outcomes": [
+"50+ bps decrease",
+"25 bps decrease",
+"No change",
+"25 bps increase",
+"50+ bps increase"
+],
+"cost": 0.991,
+"payoff": 1,
+"edge": 0.009,
+"edge_after_fee": -0.0287,
+"size_shares": 773.07,
+"usd_at_size": 766.11
 },
 {
 "kind": "ladder_num",
@@ -51,26 +71,6 @@
 },
 {
 "kind": "negrisk_all_yes",
-"event": "Fed Decision in January?",
-"slug": "fed-decision-in-january-20260729233815502",
-"n": 5,
-"has_other": false,
-"outcomes": [
-"50+ bps decrease",
-"25 bps decrease",
-"No change",
-"25 bps increase",
-"50+ bps increase"
-],
-"cost": 0.99,
-"payoff": 1,
-"edge": 0.01,
-"edge_after_fee": -0.0276,
-"size_shares": 292.99,
-"usd_at_size": 290.06
-},
-{
-"kind": "negrisk_all_yes",
 "event": "China Annual Inflation 2026",
 "slug": "china-annual-inflation-2026",
 "n": 9,
@@ -86,12 +86,12 @@
 "2.5%+",
 "2.0-2.4%"
 ],
-"cost": 0.953,
+"cost": 0.952,
 "payoff": 1,
-"edge": 0.047,
-"edge_after_fee": 0.0051,
+"edge": 0.048,
+"edge_after_fee": 0.0061,
 "size_shares": 20.0,
-"usd_at_size": 19.06
+"usd_at_size": 19.04
 },
 {
 "kind": "ladder_num",
@@ -242,6 +242,28 @@
 "edge_after_fee": 0.01,
 "size_shares": 6.0,
 "usd_at_size": 5.93
+},
+{
+"kind": "negrisk_all_yes",
+"event": "South Korea Annual Inflation 2026",
+"slug": "south-korea-annual-inflation-2026",
+"n": 7,
+"has_other": false,
+"outcomes": [
+"<1.5%",
+"1.5% to 1.7%",
+"1.8% to 2.0%",
+"2.1% to 2.3%",
+"2.4% to 2.6%",
+"2.7% to 2.9%",
+"3.0%+"
+],
+"cost": 0.993,
+"payoff": 1,
+"edge": 0.007,
+"edge_after_fee": -0.0385,
+"size_shares": 5.0,
+"usd_at_size": 4.96
 },
 {
 "kind": "ladder_num",
