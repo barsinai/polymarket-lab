@@ -1,8 +1,8 @@
 {
-"scanned": "2026-11-21 15:07",
+"scanned": "2026-11-21 16:09",
 "events": 2100,
 "groups": 2037,
-"books": 17270,
+"books": 17268,
 "opps": [
 {
 "kind": "ladder_num",
@@ -35,26 +35,6 @@
 "usd_at_size": 1352.43
 },
 {
-"kind": "negrisk_all_yes",
-"event": "Fed Decision in January?",
-"slug": "fed-decision-in-january-20260729233815502",
-"n": 5,
-"has_other": false,
-"outcomes": [
-"50+ bps decrease",
-"25 bps decrease",
-"No change",
-"25 bps increase",
-"50+ bps increase"
-],
-"cost": 0.99,
-"payoff": 1,
-"edge": 0.01,
-"edge_after_fee": -0.0276,
-"size_shares": 773.07,
-"usd_at_size": 765.34
-},
-{
 "kind": "ladder_num",
 "event": "City Protocol FDV above ___ one day after launch?",
 "slug": "city-protocol-fdv-above-one-day-after-launch",
@@ -66,32 +46,8 @@
 "cost": 0.99,
 "edge": 0.01,
 "edge_after_fee": -0.0136,
-"size_shares": 220.0,
-"usd_at_size": 217.8
-},
-{
-"kind": "negrisk_all_yes",
-"event": "China Annual Inflation 2026",
-"slug": "china-annual-inflation-2026",
-"n": 9,
-"has_other": false,
-"outcomes": [
-"<-1.0%",
-"-0.9 \u2013 -0.5%",
-"-0.4 \u2013 0.0%",
-"0.1 \u2013 0.5%",
-"0.6 \u2013 1.0%",
-"1.1 \u2013 1.5%",
-"1.6 \u2013 2.0%",
-"2.5%+",
-"2.0-2.4%"
-],
-"cost": 0.94,
-"payoff": 1,
-"edge": 0.06,
-"edge_after_fee": 0.0183,
-"size_shares": 20.0,
-"usd_at_size": 18.8
+"size_shares": 290.0,
+"usd_at_size": 287.1
 },
 {
 "kind": "ladder_num",
@@ -152,6 +108,45 @@
 "edge_after_fee": 0.0034,
 "size_shares": 117.22,
 "usd_at_size": 116.75
+},
+{
+"kind": "negrisk_all_yes",
+"event": "China Annual Inflation 2026",
+"slug": "china-annual-inflation-2026",
+"n": 9,
+"has_other": false,
+"outcomes": [
+"<-1.0%",
+"-0.9 \u2013 -0.5%",
+"-0.4 \u2013 0.0%",
+"0.1 \u2013 0.5%",
+"0.6 \u2013 1.0%",
+"1.1 \u2013 1.5%",
+"1.6 \u2013 2.0%",
+"2.5%+",
+"2.0-2.4%"
+],
+"cost": 0.97,
+"payoff": 1,
+"edge": 0.03,
+"edge_after_fee": -0.0125,
+"size_shares": 12.45,
+"usd_at_size": 12.08
+},
+{
+"kind": "ladder_num",
+"event": "Metamask FDV above ___ one day after launch?",
+"slug": "metamask-fdv-above-one-day-after-launch",
+"easy": "Metamask FDV above $3B one day after launch?",
+"hard": "Metamask FDV above $4B one day after launch?",
+"easy_yes_ask": 0.009,
+"hard_no_ask": 0.987,
+"hard_yes_bid": 0.013,
+"cost": 0.996,
+"edge": 0.004,
+"edge_after_fee": 0.0025,
+"size_shares": 88.0,
+"usd_at_size": 87.65
 },
 {
 "kind": "ladder_num",
@@ -242,43 +237,6 @@
 "edge_after_fee": 0.01,
 "size_shares": 6.0,
 "usd_at_size": 5.93
-},
-{
-"kind": "negrisk_all_yes",
-"event": "South Korea Annual Inflation 2026",
-"slug": "south-korea-annual-inflation-2026",
-"n": 7,
-"has_other": false,
-"outcomes": [
-"<1.5%",
-"1.5% to 1.7%",
-"1.8% to 2.0%",
-"2.1% to 2.3%",
-"2.4% to 2.6%",
-"2.7% to 2.9%",
-"3.0%+"
-],
-"cost": 0.99,
-"payoff": 1,
-"edge": 0.01,
-"edge_after_fee": -0.0355,
-"size_shares": 5.0,
-"usd_at_size": 4.95
-},
-{
-"kind": "ladder_num",
-"event": "Metamask FDV above ___ one day after launch?",
-"slug": "metamask-fdv-above-one-day-after-launch",
-"easy": "Metamask FDV above $3B one day after launch?",
-"hard": "Metamask FDV above $4B one day after launch?",
-"easy_yes_ask": 0.009,
-"hard_no_ask": 0.988,
-"hard_yes_bid": 0.012,
-"cost": 0.997,
-"edge": 0.003,
-"edge_after_fee": 0.0015,
-"size_shares": 11.0,
-"usd_at_size": 10.97
 },
 {
 "kind": "ladder_num",
