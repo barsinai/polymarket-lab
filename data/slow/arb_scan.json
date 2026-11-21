@@ -1,5 +1,5 @@
 {
-"scanned": "2026-11-21 08:05",
+"scanned": "2026-11-21 09:04",
 "events": 2100,
 "groups": 2037,
 "books": 17274,
@@ -16,8 +16,8 @@
 "cost": 0.99,
 "edge": 0.01,
 "edge_after_fee": -0.0074,
-"size_shares": 3206.78,
-"usd_at_size": 3174.71
+"size_shares": 3201.78,
+"usd_at_size": 3169.76
 },
 {
 "kind": "ladder_num",
@@ -46,8 +46,8 @@
 "cost": 0.99,
 "edge": 0.01,
 "edge_after_fee": -0.0136,
-"size_shares": 163.0,
-"usd_at_size": 161.37
+"size_shares": 220.0,
+"usd_at_size": 217.8
 },
 {
 "kind": "ladder_num",
@@ -77,12 +77,36 @@
 "25 bps increase",
 "50+ bps increase"
 ],
-"cost": 0.99,
+"cost": 0.989,
 "payoff": 1,
-"edge": 0.01,
-"edge_after_fee": -0.0277,
+"edge": 0.011,
+"edge_after_fee": -0.0266,
 "size_shares": 88.4,
-"usd_at_size": 87.52
+"usd_at_size": 87.43
+},
+{
+"kind": "negrisk_all_yes",
+"event": "China Annual Inflation 2026",
+"slug": "china-annual-inflation-2026",
+"n": 9,
+"has_other": false,
+"outcomes": [
+"<-1.0%",
+"-0.9 \u2013 -0.5%",
+"-0.4 \u2013 0.0%",
+"0.1 \u2013 0.5%",
+"0.6 \u2013 1.0%",
+"1.1 \u2013 1.5%",
+"1.6 \u2013 2.0%",
+"2.5%+",
+"2.0-2.4%"
+],
+"cost": 0.958,
+"payoff": 1,
+"edge": 0.042,
+"edge_after_fee": -0.0,
+"size_shares": 20.0,
+"usd_at_size": 19.16
 },
 {
 "kind": "ladder_num",
@@ -176,18 +200,30 @@
 },
 {
 "kind": "ladder_num",
-"event": "Probable FDV above ___ one day after launch?",
-"slug": "probable-fdv-above-one-day-after-launch",
-"easy": "Probable FDV above $50M one day after launch?",
-"hard": "Probable FDV above $500M one day after launch?",
-"easy_yes_ask": 0.12,
-"hard_no_ask": 0.864,
-"hard_yes_bid": 0.136,
-"cost": 0.984,
-"edge": 0.016,
-"edge_after_fee": 0.0004,
-"size_shares": 19.7,
-"usd_at_size": 19.38
+"event": "Metamask FDV above ___ one day after launch?",
+"slug": "metamask-fdv-above-one-day-after-launch",
+"easy": "Metamask FDV above $3B one day after launch?",
+"hard": "Metamask FDV above $4B one day after launch?",
+"easy_yes_ask": 0.009,
+"hard_no_ask": 0.988,
+"hard_yes_bid": 0.012,
+"cost": 0.997,
+"edge": 0.003,
+"edge_after_fee": 0.0015,
+"size_shares": 84.0,
+"usd_at_size": 83.75
+},
+{
+"kind": "negrisk_all_no",
+"event": "OpenAI IPO Closing Market Cap",
+"slug": "openai-ipo-closing-market-cap-554",
+"n": 7,
+"cost": 5.997,
+"payoff": 6,
+"edge": 0.003,
+"edge_after_fee": -0.0523,
+"size_shares": 66.66,
+"usd_at_size": 399.76
 },
 {
 "kind": "ladder_num",
@@ -201,8 +237,8 @@
 "cost": 0.997,
 "edge": 0.003,
 "edge_after_fee": -0.0002,
-"size_shares": 93.49,
-"usd_at_size": 93.21
+"size_shares": 63.49,
+"usd_at_size": 63.3
 },
 {
 "kind": "ladder_num",
@@ -218,43 +254,6 @@
 "edge_after_fee": -0.0042,
 "size_shares": 7.88,
 "usd_at_size": 7.8
-},
-{
-"kind": "negrisk_all_yes",
-"event": "Next leader out of power before 2027?",
-"slug": "next-leader-out-of-power-before-2027-no-starmer-or-petro-20260630194619406",
-"n": 22,
-"has_other": true,
-"outcomes": [
-"Macron - France President",
-"Erdo\u011fan - T\u00fcrkiye President",
-"Kim - Supreme Leader of North Korea",
-"Xi - General Secretary of the CCP",
-"Netanyahu - Israel PM",
-"Albanese - Australia PM",
-"Newsom - California Governor",
-"Milei - Argentina President",
-"Trump - USA President",
-"Zelenskyy - Ukraine President",
-"Putin - Russia President",
-"Lula da Silva - Brazil President",
-"Lecornu - France PM",
-"Takaichi - Japan PM",
-"Abbas - President of Palestine",
-"Merz - German Chancellor",
-"S\u00e1nchez - Spanish PM",
-"Sheinbaum - Mexico President",
-"D\u00edaz-Canel - Cuba President",
-"Rodr\u00edguez - Venezuela Acting President",
-"al-Sharaa - Syria President",
-"None before 2027"
-],
-"cost": 0.992,
-"payoff": 1,
-"edge": 0.008,
-"edge_after_fee": -0.0334,
-"size_shares": 9.61,
-"usd_at_size": 9.53
 },
 {
 "kind": "ladder_num",
@@ -273,18 +272,18 @@
 },
 {
 "kind": "ladder_num",
-"event": "Metamask FDV above ___ one day after launch?",
-"slug": "metamask-fdv-above-one-day-after-launch",
-"easy": "Metamask FDV above $3B one day after launch?",
-"hard": "Metamask FDV above $4B one day after launch?",
-"easy_yes_ask": 0.009,
-"hard_no_ask": 0.988,
-"hard_yes_bid": 0.012,
-"cost": 0.997,
-"edge": 0.003,
-"edge_after_fee": 0.0015,
-"size_shares": 11.0,
-"usd_at_size": 10.97
+"event": "Probable FDV above ___ one day after launch?",
+"slug": "probable-fdv-above-one-day-after-launch",
+"easy": "Probable FDV above $50M one day after launch?",
+"hard": "Probable FDV above $500M one day after launch?",
+"easy_yes_ask": 0.12,
+"hard_no_ask": 0.872,
+"hard_yes_bid": 0.128,
+"cost": 0.992,
+"edge": 0.008,
+"edge_after_fee": -0.0072,
+"size_shares": 5.0,
+"usd_at_size": 4.96
 },
 {
 "kind": "ladder_num",
