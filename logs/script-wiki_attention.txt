@@ -1,0 +1,84 @@
+events pulled 3864
+1 carnaval-de-luz-first-week-album-sales lead 45k+ 0.575 True | fav 45k+ 0.575 True
+2 1-spotify-song-this-week-november-20 lead Nicole Kidman - ADÉLA 0.2265 False | fav Stop The Wedding! - Ashe 0.485 False
+3 2-spotify-song-in-the-us-this-week-november-20 lead Thriller - Michael Jackson 0.03 False | fav Stop The Wedding! - Ashe 0.475 True
+4 cma-male-vocalist-of-the-year-2026 lead Chris Stapleton 0.1165 True | fav Cody Johnson 0.645 False
+5 cma-musician-of-the-year-2026 lead Paul Franklin 0.51 False | fav Paul Franklin 0.51 False
+6 cma-vocal-duo-of-the-year-2026 lead Brooks & Dunn 0.685 True | fav Brooks & Dunn 0.685 True
+7 cma-music-video-of-the-year-2026 lead Gary (Stephen Wilson Jr.) 0.255 False | fav Choosin' Texas (Ella Langley) 0.57 True
+8 what-will-be-the-top-us-netflix-show-this-week-november-17 lead From: Season 1 0.49 False | fav Taken: Natalee Holloway: Season 1 0.5 True
+9 what-will-be-the-2-us-netflix-show-this-week-november-17 lead Black Doves: Season 2 0.23 False | fav Power: Season 1 0.495 False
+10 what-will-be-the-top-global-netflix-show-this-week-november-17 lead Black Doves: Season 2 0.235 False | fav Taken: Natalee Holloway: Season 1 0.495 True
+11 what-will-be-the-2-global-netflix-show-this-week-november-17 lead Below: Limited Series 0.485 False | fav Black Doves: Season 2 0.485 True
+12 what-will-be-the-top-global-netflix-movie-this-week-november-17 lead Final Destination: Bloodlines 0.495 False | fav Final Destination: Bloodlines 0.495 False
+13 what-will-be-the-2-global-netflix-movie-this-week-november-17 lead A Dog's Perfect Christmas 0.295 True | fav The Gospel of Christmas 0.495 False
+14 what-will-be-the-top-us-netflix-movie-this-week-november-17 lead The Day After Tomorrow 0.46 False | fav The Gospel of Christmas 0.48 False
+15 what-will-be-the-2-us-netflix-movie-this-week-november-17 lead Funny Money: The Dane Cook Story 0.355 False | fav Heartland 0.49 False
+16 billboard-hot-100-2-song-week-of-november-21 lead Nicole Kidman - ADELA 0.027 False | fav Boston - Stella Lefty 0.5065 True
+17 eurovision-asia-winner-2026 lead Philippines 0.32 True | fav Philippines 0.32 True
+18 eurovision-asia-2nd-place-2026 lead Bangladesh 0.0115 False | fav Malaysia 0.26 False
+19 eurovision-asia-3rd-place-2026 lead Philippines 0.2125 False | fav Philippines 0.2125 False
+20 1-spotify-song-this-week-november-13-20261106 lead Nicole Kidman - ADÉLA 0.05 False | fav Stop The Wedding! - Ashe 0.199 False
+21 1-spotify-song-in-the-us-this-week-november-13-20261106 lead Nicole Kidman - ADÉLA 0.1 False | fav Housewife - Tate McRae 0.525 False
+22 the-streamer-awards-streamer-of-the-year-2026 lead IShowSpeed 0.825 True | fav IShowSpeed 0.825 True
+23 fresh-first-week-album-sales lead 140k+ 0.51 False | fav 60k+ 0.885 True
+24 billboard-hot-100-2-song-week-of-november-14 lead Thriller - Michael Jackson 0.029 True | fav Housewife - Tate McRae 0.972 False
+25 godzilla-minus-zero-opening-weekend-box-office lead 37m-40m 0.2 False | fav 28m-31m 0.22 True
+26 1-spotify-song-this-week-october-30 lead expectations - Olivia Rodrigo & Chappell Roan 0.023 False | fav Housewife - Tate McRae 0.765 True
+27 2-spotify-song-this-week-october-30 lead Nicole Kidman - ADÉLA 0.105 False | fav BbY WOW - KAROL G, Judeline, rusowsky 0.59 True
+28 wildwood-opening-weekend-box-office lead 12m-14m 0.2 True | fav 10m-12m 0.33 False
+29 whalefall-opening-weekend-box-office lead 8-10m 0.145 False | fav <8m 0.625 True
+30 street-fighter-opening-weekend-box-office lead 35-40m 0.135 False | fav <25m 0.442 False
+31 you-can-see-everything-opening-weekend-box-office-20261007000529685 lead 4-5m 0.031 False | fav 7m+ 0.69 True
+32 billboard-200-1-album-week-of-october-17 lead The Life of a Showgirl: The Encore 0.962 True | fav The Life of a Showgirl: The Encore 0.962 True
+33 other-mommy-opening-weekend-box-office lead 30-33m 0.19 False | fav 33m+ 0.255 False
+34 2-spotify-song-this-week-october-9-20261002t140000000z lead Patient Zero - Taylor Swift 0.495 False | fav Patient Zero - Taylor Swift 0.495 False
+{
+ "rule": "- events: gamma closed events ending 2024-01-01 .. now, tag culture / pop-culture / music / awards / movies, >= 4 markets with a\n  groupItemTitle, exactly one market resolved YES; outcomes named 'other', 'none', 'no one', 'someone else', 'tie' dropped.\n- entry time T = end - 7 d. Price = last CLOB prices-history point (fidelity 60) at or before T; outcome kept only if price in\n  0.01-0.99. Event kept only if >= 4 kept outcomes map to a Wikipedia article with views and the winner is among them.\n- attention: en.wikipedia search (top hit for the outcome name) -> daily user pageviews over the 30 days ENDING AT T (c54's wording\n  'the 30 d before end' would look ahead 7 days - lesson 4 - so the window ends at the entry).\n- LEADER = most views; FAV = highest price. Score per event: leader points = won - (p + 0.01) - 0.07 p(1-p) at T.\nDEAD if < 20 events, or leader points <= +3, or leader hit rate <= favourite hit rate. Printed: events where leader != favourite\n(the only ones that matter), per-year split, rising-views variant (last 7 d / prior 23 d) leader.",
+ "skips": {
+  "outcomes not 4-40": 49,
+  "< 4 mapped or winner unmapped": 131,
+  "winner != 1": 31,
+  "time cap 45 min": 1
+ },
+ "events_pulled": 3864,
+ "leader": {
+  "events": 34,
+  "pts": -5.04,
+  "hits": 9
+ },
+ "favourite": {
+  "events": 34,
+  "pts": -5.3,
+  "hits": 17
+ },
+ "rising": {
+  "events": 34,
+  "pts": -1.82,
+  "hits": 8
+ },
+ "leader_when_differ": {
+  "events": 25,
+  "pts": -5.68,
+  "hits": 4
+ },
+ "fav_when_differ": {
+  "events": 25,
+  "pts": -6.03,
+  "hits": 12
+ },
+ "by_year": {
+  "2024": {
+   "events": 0
+  },
+  "2025": {
+   "events": 0
+  },
+  "2026": {
+   "events": 34,
+   "pts": -5.04,
+   "hits": 9
+  }
+ },
+ "decision": "DEAD"
+}
