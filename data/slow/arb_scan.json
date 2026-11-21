@@ -1,5 +1,5 @@
 {
-"scanned": "2026-11-21 04:04",
+"scanned": "2026-11-21 05:04",
 "events": 2100,
 "groups": 2037,
 "books": 17278,
@@ -16,8 +16,8 @@
 "cost": 0.99,
 "edge": 0.01,
 "edge_after_fee": -0.0074,
-"size_shares": 3301.78,
-"usd_at_size": 3268.76
+"size_shares": 3149.78,
+"usd_at_size": 3118.28
 },
 {
 "kind": "ladder_num",
@@ -31,8 +31,8 @@
 "cost": 0.99,
 "edge": 0.01,
 "edge_after_fee": -0.0074,
-"size_shares": 1396.09,
-"usd_at_size": 1382.13
+"size_shares": 1448.09,
+"usd_at_size": 1433.61
 },
 {
 "kind": "ladder_num",
@@ -48,26 +48,6 @@
 "edge_after_fee": -0.0136,
 "size_shares": 163.0,
 "usd_at_size": 161.37
-},
-{
-"kind": "negrisk_all_yes",
-"event": "Fed Decision in January?",
-"slug": "fed-decision-in-january-20260729233815502",
-"n": 5,
-"has_other": false,
-"outcomes": [
-"50+ bps decrease",
-"25 bps decrease",
-"No change",
-"25 bps increase",
-"50+ bps increase"
-],
-"cost": 0.992,
-"payoff": 1,
-"edge": 0.008,
-"edge_after_fee": -0.0297,
-"size_shares": 194.16,
-"usd_at_size": 192.61
 },
 {
 "kind": "ladder_num",
@@ -175,6 +155,21 @@
 "usd_at_size": 116.87
 },
 {
+"kind": "ladder_num",
+"event": "Abstract FDV above ___ one day after launch?",
+"slug": "abstract-fdv-above-one-day-after-launch",
+"easy": "Abstract FDV above $400M one day after launch?",
+"hard": "Abstract FDV above $600M one day after launch?",
+"easy_yes_ask": 0.022,
+"hard_no_ask": 0.975,
+"hard_yes_bid": 0.025,
+"cost": 0.997,
+"edge": 0.003,
+"edge_after_fee": -0.0002,
+"size_shares": 93.49,
+"usd_at_size": 93.21
+},
+{
 "kind": "negrisk_all_yes",
 "event": "How many dissent at the December Fed meeting?",
 "slug": "how-many-dissent-at-the-december-fed-meeting-20260730000304473",
@@ -187,12 +182,12 @@
 "3",
 "4+"
 ],
-"cost": 0.987,
+"cost": 0.99,
 "payoff": 1,
-"edge": 0.013,
-"edge_after_fee": -0.0237,
-"size_shares": 19.2,
-"usd_at_size": 18.95
+"edge": 0.01,
+"edge_after_fee": -0.0267,
+"size_shares": 15.0,
+"usd_at_size": 14.85
 },
 {
 "kind": "ladder_num",
@@ -225,39 +220,19 @@
 "usd_at_size": 12.74
 },
 {
-"kind": "negrisk_all_yes",
-"event": "Maduro Prison Time?",
-"slug": "maduro-prison-time-527",
-"n": 5,
-"has_other": false,
-"outcomes": [
-"No prison time",
-"<20",
-"20\u201340",
-"40\u201360",
-"60+"
-],
-"cost": 0.967,
-"payoff": 1,
-"edge": 0.033,
-"edge_after_fee": -0.0033,
-"size_shares": 1.89,
-"usd_at_size": 1.83
-},
-{
 "kind": "ladder_num",
 "event": "Printr FDV above ___ one day after launch?",
 "slug": "printr-fdv-above-one-day-after-launch",
 "easy": "Printr FDV above $500M one day after launch?",
 "hard": "Printr FDV above $1B one day after launch?",
 "easy_yes_ask": 0.049,
-"hard_no_ask": 0.923,
-"hard_yes_bid": 0.077,
-"cost": 0.972,
-"edge": 0.028,
-"edge_after_fee": 0.0198,
+"hard_no_ask": 0.927,
+"hard_yes_bid": 0.073,
+"cost": 0.976,
+"edge": 0.024,
+"edge_after_fee": 0.016,
 "size_shares": 1.61,
-"usd_at_size": 1.56
+"usd_at_size": 1.57
 },
 {
 "kind": "ladder_num",
