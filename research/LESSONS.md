@@ -129,6 +129,11 @@ survives them. Add a lesson whenever an idea dies for a reason not already here.
     a headcount herd won +3.2 (2,099). The edge was a few big tickets (the big-taker base rate), not the crowd. When a rule has a story,
     split it by the variable the story names before building on the story.
 
+32. **A widened spread is a cost, not a signal** (11-21, N115, 15-min top-book snapshots): when one side of a tight book jumps 3c+ away,
+    buying the side that moved lost 9.4 pts per share on 208 events and fading it lost 7.5, against 3.6 for a random tight-book round trip.
+    The gap is a momentary hole that refills; whoever enters while it is open pays it. Test book-shape signals against the round-trip cost
+    of entering at that moment, not against zero.
+
 ## Where edges plausibly still live (derived from the above)
 - Information the crowd processes slowly and bots don't cover: resolution-rule details (exact station, exact candle,
   rounding), public running tallies, scheduled data with good nowcasts, slow non-sports questions.

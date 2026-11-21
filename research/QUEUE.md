@@ -913,3 +913,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - N113 copy-trade cascades DEAD both ways (follow -0.1 pts on 2,762 events, fade -1.4 on 2,853); its placebo's +5.7 was a lookahead filter
   (+0.05 when knowable). N112 headcount herd DEAD (-4.7 on 117 events vs dollar-only herd +3.2 on 2,099): N107 = big early money, LESSONS 31.
   No tracker crossed a line. Next: N110 tagging, N107 pull #2 11-27, N42 11-26, young 11-30, COPY-1 to 300 / 100.
+
+## 11-21 09:45 cycle 53
+- N115 quote pulls DEAD (follow the jumped side -9.4 pts on 208 events, fade -7.5, placebo -3.6: the hole refills) -> LESSONS 32. N42 forward
+  rest fell to -1.5 pts on 12 coin-dates (below the kill line; decide 11-26); forward tails +14.6 on 7 -> N114 READY (one bet per coin-date).
+  Next: N114 arm, N42 11-26, N107 pull #2 11-27, young 11-30, COPY-1 to 300 / 100.

@@ -1169,3 +1169,21 @@
   books 05:00, live snapshot 04:05 - OK. Tracebacks only the old pilot-log (2) / script-log (1); no MemoryErrors. STOP in place, no orders.
 - Next: N110 tagging script for follow primaries (now read it as 'sharp WITH big early money'); N107 pull #2 11-27; lock_x BTC/ETH forward
   arm (30 end-times); N58 kill read at 100 / 40; N95 settlements; N42 11-26; young 11-30; COPY-1 to 300 / 100.
+
+## 11-21 09:00-09:45 UTC cycle 53 (scheduled)
+- Read-outs (fast trades.jsonl, last entry 08:58; slow 08:02-08:06): lock_x 73 settled / 57 end-times 64 won +3.6%/$ (-1.6 pts/share
+  [-11.0, +5.9]); BTC/ETH >= 0.80 forward arm since 11-19 01:00: 9 trades, 8 won, -$10.7 (needs 30). lock_x50 +5.8%, lock_p_majors 48 +5.7%;
+  lock_m 410 -1.6%, lock_b 209 +1.2%, lock_p_z2 481 -0.7%. LP-1 v2 185 runs / 6.92 d: formula $2,180 (upper bound), trading -$434,
+  pessimistic -$723; 126 settled. Options N42 forward rest 37 / 25 won -1.5 pts on 12 coin-dates (was +9.2 on 31 / 10) -> below the kill
+  line, decision 11-26; forward tails 9 / 2 won +14.6 on 7 coin-dates (2 positive); 103 open. converge 29 / 28 +$3.68 (81 open, mark -$73);
+  young 126 / 69 -$188 (127 open; 11-30); box office 9 / 8 -$0.96; charts 5 / 5 +$4.53; mention 27 / 22 -$7.21. N95 rt_paper 91 seen,
+  9 open, 0 settled, open_past_end 0. COPY-1 157.9 h: sharp 123 primaries / 79 events +4.3 pts (+3.3 at 5 min; bar 300 / 100). N58 105
+  positions, 18 settled -18.1 pts on 5 events, 87 open, open_past_end 0. No row crossed a kill or promote line except N42 rest (read 11-26).
+- Test (outside the box N115, quote_pull.py, local, 2,012 15-min book snapshots of the top ~380 markets, rules fixed before looking): follow
+  the side of a tight book that jumped >= 3c: -9.4 pts [-13.6, -5.1] on 208 events (halves -9.9 / -9.0), fade -7.5, placebo round trip
+  -3.6 -> DEAD; the hole refills (LESSONS 32).
+- New (adjacent N114): options tails, one bet per coin-date -> READY as a forward read-out arm (positions opened >= 11-21 12:00).
+- Health: fast paper 09:02, slow 08:06, follow report 08:19 (commit 08:19), boosts 08:26, MM v2 08:31, replay 07:56, books 09:00, live
+  snapshot 08:05 - OK. Tracebacks only the old pilot-log (2) / script-log (1); no MemoryErrors. STOP in place, no orders. No dispatch needed.
+- Next: N114 arm in options_tail_readout.py; N42 decision 11-26 (rest now -1.5); N110 tagging; N107 pull #2 11-27; lock_x BTC/ETH forward
+  arm (30 end-times); N58 kill read at 100 / 40; N95 settlements; young 11-30; COPY-1 to 300 / 100.
