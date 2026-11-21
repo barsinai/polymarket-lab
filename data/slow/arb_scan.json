@@ -1,5 +1,5 @@
 {
-"scanned": "2026-11-20 23:04",
+"scanned": "2026-11-21 00:03",
 "events": 2100,
 "groups": 2037,
 "books": 17278,
@@ -61,8 +61,8 @@
 "cost": 0.992,
 "edge": 0.008,
 "edge_after_fee": 0.0037,
-"size_shares": 159.0,
-"usd_at_size": 157.73
+"size_shares": 148.0,
+"usd_at_size": 146.82
 },
 {
 "kind": "ladder_num",
@@ -170,30 +170,6 @@
 "usd_at_size": 75.25
 },
 {
-"kind": "negrisk_all_yes",
-"event": "China Annual Inflation 2026",
-"slug": "china-annual-inflation-2026",
-"n": 9,
-"has_other": false,
-"outcomes": [
-"<-1.0%",
-"-0.9 \u2013 -0.5%",
-"-0.4 \u2013 0.0%",
-"0.1 \u2013 0.5%",
-"0.6 \u2013 1.0%",
-"1.1 \u2013 1.5%",
-"1.6 \u2013 2.0%",
-"2.5%+",
-"2.0-2.4%"
-],
-"cost": 0.985,
-"payoff": 1,
-"edge": 0.015,
-"edge_after_fee": -0.0275,
-"size_shares": 18.81,
-"usd_at_size": 18.53
-},
-{
 "kind": "ladder_num",
 "event": "Abstract FDV above ___ one day after launch?",
 "slug": "abstract-fdv-above-one-day-after-launch",
@@ -230,40 +206,33 @@
 "easy": "Metamask FDV above $3B one day after launch?",
 "hard": "Metamask FDV above $4B one day after launch?",
 "easy_yes_ask": 0.007,
-"hard_no_ask": 0.989,
-"hard_yes_bid": 0.011,
+"hard_no_ask": 0.988,
+"hard_yes_bid": 0.012,
+"cost": 0.995,
+"edge": 0.005,
+"edge_after_fee": 0.0037,
+"size_shares": 21.0,
+"usd_at_size": 20.89
+},
+{
+"kind": "negrisk_all_yes",
+"event": "How many dissent at the December Fed meeting?",
+"slug": "how-many-dissent-at-the-december-fed-meeting-20260730000304473",
+"n": 5,
+"has_other": true,
+"outcomes": [
+"0",
+"1",
+"2",
+"3",
+"4+"
+],
 "cost": 0.996,
+"payoff": 1,
 "edge": 0.004,
-"edge_after_fee": 0.0028,
-"size_shares": 30.17,
-"usd_at_size": 30.05
-},
-{
-"kind": "negrisk_all_no",
-"event": "South Africa Annual Inflation 2026",
-"slug": "south-africa-annual-inflation-2026",
-"n": 10,
-"cost": 8.99,
-"payoff": 9,
-"edge": 0.01,
-"edge_after_fee": -0.0306,
-"size_shares": 9.24,
-"usd_at_size": 83.07
-},
-{
-"kind": "ladder_num",
-"event": "Theo FDV above ___ one day after launch?",
-"slug": "theo-fdv-above-one-day-after-launch",
-"easy": "Theo FDV above $100M one day after launch?",
-"hard": "Theo FDV above $300M one day after launch?",
-"easy_yes_ask": 0.049,
-"hard_no_ask": 0.948,
-"hard_yes_bid": 0.052,
-"cost": 0.997,
-"edge": 0.003,
-"edge_after_fee": -0.0037,
-"size_shares": 30.32,
-"usd_at_size": 30.23
+"edge_after_fee": -0.0332,
+"size_shares": 19.99,
+"usd_at_size": 19.91
 },
 {
 "kind": "ladder_num",
@@ -272,13 +241,13 @@
 "easy": "StandX FDV above $2B one day after launch?",
 "hard": "StandX FDV above $3B one day after launch?",
 "easy_yes_ask": 0.002,
-"hard_no_ask": 0.988,
-"hard_yes_bid": 0.012,
-"cost": 0.99,
-"edge": 0.01,
-"edge_after_fee": 0.009,
+"hard_no_ask": 0.987,
+"hard_yes_bid": 0.013,
+"cost": 0.989,
+"edge": 0.011,
+"edge_after_fee": 0.01,
 "size_shares": 6.0,
-"usd_at_size": 5.94
+"usd_at_size": 5.93
 },
 {
 "kind": "ladder_num",
@@ -287,11 +256,11 @@
 "easy": "Printr FDV above $500M one day after launch?",
 "hard": "Printr FDV above $1B one day after launch?",
 "easy_yes_ask": 0.049,
-"hard_no_ask": 0.938,
-"hard_yes_bid": 0.062,
-"cost": 0.987,
-"edge": 0.013,
-"edge_after_fee": 0.0057,
+"hard_no_ask": 0.936,
+"hard_yes_bid": 0.064,
+"cost": 0.985,
+"edge": 0.015,
+"edge_after_fee": 0.0075,
 "size_shares": 1.61,
 "usd_at_size": 1.59
 },
