@@ -1,5 +1,5 @@
 {
-"scanned": "2026-11-21 11:26",
+"scanned": "2026-11-21 12:07",
 "events": 2100,
 "groups": 2037,
 "books": 17274,
@@ -31,8 +31,8 @@
 "cost": 0.99,
 "edge": 0.01,
 "edge_after_fee": -0.0074,
-"size_shares": 1594.64,
-"usd_at_size": 1578.69
+"size_shares": 1564.64,
+"usd_at_size": 1548.99
 },
 {
 "kind": "ladder_num",
@@ -46,55 +46,8 @@
 "cost": 0.99,
 "edge": 0.01,
 "edge_after_fee": -0.0136,
-"size_shares": 220.0,
-"usd_at_size": 217.8
-},
-{
-"kind": "negrisk_all_no",
-"event": "OpenAI IPO Closing Market Cap",
-"slug": "openai-ipo-closing-market-cap-554",
-"n": 7,
-"cost": 5.995,
-"payoff": 6,
-"edge": 0.005,
-"edge_after_fee": -0.0504,
-"size_shares": 265.99,
-"usd_at_size": 1594.61
-},
-{
-"kind": "ladder_num",
-"event": "StandX FDV above ___ one day after launch?",
-"slug": "standx-fdv-above-one-day-after-launch",
-"easy": "StandX FDV above $2B one day after launch?",
-"hard": "StandX FDV above $3B one day after launch?",
-"easy_yes_ask": 0.002,
-"hard_no_ask": 0.989,
-"hard_yes_bid": 0.011,
-"cost": 0.991,
-"edge": 0.009,
-"edge_after_fee": 0.0081,
-"size_shares": 117.22,
-"usd_at_size": 116.17
-},
-{
-"kind": "negrisk_all_yes",
-"event": "Fed Decision in January?",
-"slug": "fed-decision-in-january-20260729233815502",
-"n": 5,
-"has_other": false,
-"outcomes": [
-"50+ bps decrease",
-"25 bps decrease",
-"No change",
-"25 bps increase",
-"50+ bps increase"
-],
-"cost": 0.99,
-"payoff": 1,
-"edge": 0.01,
-"edge_after_fee": -0.0277,
-"size_shares": 95.75,
-"usd_at_size": 94.79
+"size_shares": 250.0,
+"usd_at_size": 247.5
 },
 {
 "kind": "negrisk_all_yes",
@@ -212,21 +165,6 @@
 },
 {
 "kind": "ladder_num",
-"event": "Metamask FDV above ___ one day after launch?",
-"slug": "metamask-fdv-above-one-day-after-launch",
-"easy": "Metamask FDV above $3B one day after launch?",
-"hard": "Metamask FDV above $4B one day after launch?",
-"easy_yes_ask": 0.009,
-"hard_no_ask": 0.988,
-"hard_yes_bid": 0.012,
-"cost": 0.997,
-"edge": 0.003,
-"edge_after_fee": 0.0015,
-"size_shares": 84.0,
-"usd_at_size": 83.75
-},
-{
-"kind": "ladder_num",
 "event": "StandX FDV above ___ one day after launch?",
 "slug": "standx-fdv-above-one-day-after-launch",
 "easy": "StandX FDV above $2B one day after launch?",
@@ -239,6 +177,21 @@
 "edge_after_fee": 0.0109,
 "size_shares": 10.8,
 "usd_at_size": 10.67
+},
+{
+"kind": "ladder_num",
+"event": "How many Senators will vote for the Clarity Act?",
+"slug": "how-many-senators-will-vote-for-the-clarity-act-20260729193533306",
+"easy": "Will over 55 Senators vote for the Clarity Act?",
+"hard": "Will over 62 Senators vote for the Clarity Act?",
+"easy_yes_ask": 0.02,
+"hard_no_ask": 0.959,
+"hard_yes_bid": 0.041,
+"cost": 0.979,
+"edge": 0.021,
+"edge_after_fee": 0.0169,
+"size_shares": 5.0,
+"usd_at_size": 4.89
 },
 {
 "kind": "ladder_num",
@@ -272,18 +225,63 @@
 },
 {
 "kind": "ladder_num",
+"event": "StandX FDV above ___ one day after launch?",
+"slug": "standx-fdv-above-one-day-after-launch",
+"easy": "StandX FDV above $2B one day after launch?",
+"hard": "StandX FDV above $3B one day after launch?",
+"easy_yes_ask": 0.002,
+"hard_no_ask": 0.988,
+"hard_yes_bid": 0.012,
+"cost": 0.99,
+"edge": 0.01,
+"edge_after_fee": 0.009,
+"size_shares": 6.0,
+"usd_at_size": 5.94
+},
+{
+"kind": "ladder_num",
 "event": "How many Senators will vote for the Clarity Act?",
 "slug": "how-many-senators-will-vote-for-the-clarity-act-20260729193533306",
-"easy": "Will over 55 Senators vote for the Clarity Act?",
+"easy": "Will over 58 Senators vote for the Clarity Act?",
 "hard": "Will over 62 Senators vote for the Clarity Act?",
-"easy_yes_ask": 0.03,
+"easy_yes_ask": 0.033,
 "hard_no_ask": 0.959,
 "hard_yes_bid": 0.041,
-"cost": 0.989,
-"edge": 0.011,
-"edge_after_fee": 0.0062,
+"cost": 0.992,
+"edge": 0.008,
+"edge_after_fee": 0.003,
 "size_shares": 5.0,
-"usd_at_size": 4.95
+"usd_at_size": 4.96
+},
+{
+"kind": "ladder_num",
+"event": "Hyperbeat FDV above ___ one day after launch?",
+"slug": "hyperbeat-fdv-above-one-day-after-launch",
+"easy": "Hyperbeat FDV above $50M one day after launch?",
+"hard": "Hyperbeat FDV above $100M one day after launch?",
+"easy_yes_ask": 0.029,
+"hard_no_ask": 0.968,
+"hard_yes_bid": 0.032,
+"cost": 0.997,
+"edge": 0.003,
+"edge_after_fee": -0.0011,
+"size_shares": 10.5,
+"usd_at_size": 10.47
+},
+{
+"kind": "ladder_num",
+"event": "How many Senators will vote for the Clarity Act?",
+"slug": "how-many-senators-will-vote-for-the-clarity-act-20260729193533306",
+"easy": "Will over 60 Senators vote for the Clarity Act?",
+"hard": "Will over 62 Senators vote for the Clarity Act?",
+"easy_yes_ask": 0.037,
+"hard_no_ask": 0.959,
+"hard_yes_bid": 0.041,
+"cost": 0.996,
+"edge": 0.004,
+"edge_after_fee": -0.0012,
+"size_shares": 5.0,
+"usd_at_size": 4.98
 },
 {
 "kind": "ladder_num",
