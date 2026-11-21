@@ -1,5 +1,5 @@
 {
-"scanned": "2026-11-21 16:09",
+"scanned": "2026-11-21 17:09",
 "events": 2100,
 "groups": 2037,
 "books": 17268,
@@ -16,8 +16,8 @@
 "cost": 0.99,
 "edge": 0.01,
 "edge_after_fee": -0.0074,
-"size_shares": 3176.78,
-"usd_at_size": 3145.01
+"size_shares": 3206.78,
+"usd_at_size": 3174.71
 },
 {
 "kind": "ladder_num",
@@ -31,8 +31,28 @@
 "cost": 0.99,
 "edge": 0.01,
 "edge_after_fee": -0.0074,
-"size_shares": 1366.09,
-"usd_at_size": 1352.43
+"size_shares": 1624.64,
+"usd_at_size": 1608.39
+},
+{
+"kind": "negrisk_all_yes",
+"event": "Fed Decision in January?",
+"slug": "fed-decision-in-january-20260729233815502",
+"n": 5,
+"has_other": false,
+"outcomes": [
+"50+ bps decrease",
+"25 bps decrease",
+"No change",
+"25 bps increase",
+"50+ bps increase"
+],
+"cost": 0.99,
+"payoff": 1,
+"edge": 0.01,
+"edge_after_fee": -0.0276,
+"size_shares": 676.35,
+"usd_at_size": 669.59
 },
 {
 "kind": "ladder_num",
@@ -46,8 +66,8 @@
 "cost": 0.99,
 "edge": 0.01,
 "edge_after_fee": -0.0136,
-"size_shares": 290.0,
-"usd_at_size": 287.1
+"size_shares": 320.0,
+"usd_at_size": 316.8
 },
 {
 "kind": "ladder_num",
@@ -78,6 +98,21 @@
 "edge_after_fee": 0.0425,
 "size_shares": 12.5,
 "usd_at_size": 11.85
+},
+{
+"kind": "ladder_date",
+"event": "Will Abstract launch a token by ___?",
+"slug": "will-abstract-launch-a-token-in-2025",
+"easy": "Will Abstract launch a token by September 30, 2027?",
+"hard": "Will Abstract launch a token by June 30, 2027?",
+"easy_yes_ask": 0.045,
+"hard_no_ask": 0.951,
+"hard_yes_bid": 0.049,
+"cost": 0.996,
+"edge": 0.004,
+"edge_after_fee": -0.0023,
+"size_shares": 140.0,
+"usd_at_size": 139.44
 },
 {
 "kind": "ladder_num",
@@ -111,42 +146,38 @@
 },
 {
 "kind": "negrisk_all_yes",
-"event": "China Annual Inflation 2026",
-"slug": "china-annual-inflation-2026",
-"n": 9,
+"event": "Fed Decision in December?",
+"slug": "fed-decision-in-december-20260729232808632",
+"n": 5,
 "has_other": false,
 "outcomes": [
-"<-1.0%",
-"-0.9 \u2013 -0.5%",
-"-0.4 \u2013 0.0%",
-"0.1 \u2013 0.5%",
-"0.6 \u2013 1.0%",
-"1.1 \u2013 1.5%",
-"1.6 \u2013 2.0%",
-"2.5%+",
-"2.0-2.4%"
+"50+ bps decrease",
+"25 bps decrease",
+"No change",
+"25 bps increase",
+"50+ bps increase"
 ],
-"cost": 0.97,
+"cost": 0.997,
 "payoff": 1,
-"edge": 0.03,
-"edge_after_fee": -0.0125,
-"size_shares": 12.45,
-"usd_at_size": 12.08
+"edge": 0.003,
+"edge_after_fee": -0.0109,
+"size_shares": 142.77,
+"usd_at_size": 142.34
 },
 {
 "kind": "ladder_num",
-"event": "Metamask FDV above ___ one day after launch?",
-"slug": "metamask-fdv-above-one-day-after-launch",
-"easy": "Metamask FDV above $3B one day after launch?",
-"hard": "Metamask FDV above $4B one day after launch?",
-"easy_yes_ask": 0.009,
-"hard_no_ask": 0.987,
-"hard_yes_bid": 0.013,
-"cost": 0.996,
-"edge": 0.004,
-"edge_after_fee": 0.0025,
-"size_shares": 88.0,
-"usd_at_size": 87.65
+"event": "Hyperbeat FDV above ___ one day after launch?",
+"slug": "hyperbeat-fdv-above-one-day-after-launch",
+"easy": "Hyperbeat FDV above $50M one day after launch?",
+"hard": "Hyperbeat FDV above $100M one day after launch?",
+"easy_yes_ask": 0.029,
+"hard_no_ask": 0.968,
+"hard_yes_bid": 0.032,
+"cost": 0.997,
+"edge": 0.003,
+"edge_after_fee": -0.0011,
+"size_shares": 120.21,
+"usd_at_size": 119.85
 },
 {
 "kind": "ladder_num",
@@ -164,19 +195,31 @@
 "usd_at_size": 116.87
 },
 {
+"kind": "negrisk_all_no",
+"event": "Bitcoin vs. Gold vs. S&P 500 in 2026",
+"slug": "bitcoin-vs-gold-vs-sp-500-in-2026",
+"n": 3,
+"cost": 1.996,
+"payoff": 2,
+"edge": 0.004,
+"edge_after_fee": -0.0055,
+"size_shares": 59.2,
+"usd_at_size": 118.16
+},
+{
 "kind": "ladder_num",
 "event": "Abstract FDV above ___ one day after launch?",
 "slug": "abstract-fdv-above-one-day-after-launch",
-"easy": "Abstract FDV above $400M one day after launch?",
-"hard": "Abstract FDV above $600M one day after launch?",
-"easy_yes_ask": 0.022,
+"easy": "Abstract FDV above $1B one day after launch?",
+"hard": "Abstract FDV above $1.5B one day after launch?",
+"easy_yes_ask": 0.019,
 "hard_no_ask": 0.975,
 "hard_yes_bid": 0.025,
-"cost": 0.997,
-"edge": 0.003,
-"edge_after_fee": -0.0002,
-"size_shares": 63.49,
-"usd_at_size": 63.3
+"cost": 0.994,
+"edge": 0.006,
+"edge_after_fee": 0.003,
+"size_shares": 28.9,
+"usd_at_size": 28.73
 },
 {
 "kind": "ladder_num",
@@ -192,6 +235,21 @@
 "edge_after_fee": 0.0109,
 "size_shares": 10.8,
 "usd_at_size": 10.67
+},
+{
+"kind": "ladder_num",
+"event": "Next Google Gemini Pro Model: Arena Debut?",
+"slug": "next-google-gemini-pro-model-arena-debut",
+"easy": "Will the next Google Gemini Pro model added to the Arena Leaderboard debut at a score of at least 1480?",
+"hard": "Will the next Google Gemini Pro model added to the Arena Leaderboard debut at a score of at least 1495?",
+"easy_yes_ask": 0.086,
+"hard_no_ask": 0.91,
+"hard_yes_bid": 0.09,
+"cost": 0.996,
+"edge": 0.004,
+"edge_after_fee": -0.0072,
+"size_shares": 26.0,
+"usd_at_size": 25.9
 },
 {
 "kind": "ladder_num",
@@ -237,6 +295,21 @@
 "edge_after_fee": 0.01,
 "size_shares": 6.0,
 "usd_at_size": 5.93
+},
+{
+"kind": "ladder_num",
+"event": "Metamask FDV above ___ one day after launch?",
+"slug": "metamask-fdv-above-one-day-after-launch",
+"easy": "Metamask FDV above $3B one day after launch?",
+"hard": "Metamask FDV above $4B one day after launch?",
+"easy_yes_ask": 0.009,
+"hard_no_ask": 0.988,
+"hard_yes_bid": 0.012,
+"cost": 0.997,
+"edge": 0.003,
+"edge_after_fee": 0.0015,
+"size_shares": 11.0,
+"usd_at_size": 10.97
 },
 {
 "kind": "ladder_num",
