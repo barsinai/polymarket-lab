@@ -1,16 +1,16 @@
 {
- "updated": "2026-11-21 15:25",
- "tracking_hours": 164.95,
+ "updated": "2026-11-21 16:26",
+ "tracking_hours": 165.97,
  "signal_wallets": 148,
  "rule": "primary = first position per market+direction+UTC day after a taker order/accumulation by a signal wallet (>= $50) or, control, every 5th order >= $1,000 by another wallet; non-sports, ends in 1 h - 60 d; ask 0.03-0.97 and <= their average price + 3c; $20 at the ask; fee paid",
  "decision_rule": "sharp primary: >= 300 settled over >= 100 events and >= 10 days; >= +1.5 pts with the 95% interval above 0 -> propose a small live test; < +0.5 or interval top < +1.5 -> DEAD",
  "sharp": {
-  "positions": 1292,
-  "open": 887,
+  "positions": 1296,
+  "open": 891,
   "settled": 405,
   "primary": 474,
   "primary_settled": 144,
-  "primary_per_day": 69.0,
+  "primary_per_day": 68.5,
   "PRIMARY": {
    "all": {
     "n": 144,
@@ -299,8 +299,8 @@
   },
   "mark_24h_all_primary": {
    "all": {
-    "n": 311,
-    "mid_minus_ask_pts": 0.91
+    "n": 317,
+    "mid_minus_ask_pts": 0.93
    },
    "crypto": {
     "n": 8,
@@ -323,12 +323,12 @@
     "mid_minus_ask_pts": 9.12
    },
    "politics": {
-    "n": 34,
-    "mid_minus_ask_pts": -0.31
+    "n": 35,
+    "mid_minus_ask_pts": -0.26
    },
    "tech": {
-    "n": 79,
-    "mid_minus_ask_pts": 1.49
+    "n": 84,
+    "mid_minus_ask_pts": 1.53
    },
    "tweets": {
     "n": 12,
@@ -341,8 +341,8 @@
   },
   "mark_72h_all_primary": {
    "all": {
-    "n": 170,
-    "mid_minus_ask_pts": 2.13
+    "n": 172,
+    "mid_minus_ask_pts": 2.18
    },
    "crypto": {
     "n": 5,
@@ -365,8 +365,8 @@
     "mid_minus_ask_pts": 3.26
    },
    "tech": {
-    "n": 61,
-    "mid_minus_ask_pts": 0.05
+    "n": 63,
+    "mid_minus_ask_pts": 0.24
    },
    "tweets": {
     "n": 3,
@@ -380,10 +380,10 @@
   "ask_minus_their_price": {
    "p25": 0.01,
    "median": 0.04,
-   "p75": 0.095
+   "p75": 0.096
   },
-  "share_cap_ok": 0.422,
-  "median_lag_s": 147,
+  "share_cap_ok": 0.421,
+  "median_lag_s": 148,
   "median_usd_at_ask": 28,
   "median_usd_within_2c": 134,
   "open_primary_by_category": {
@@ -398,12 +398,12 @@
   }
  },
  "control": {
-  "positions": 1053,
-  "open": 757,
+  "positions": 1057,
+  "open": 761,
   "settled": 296,
-  "primary": 601,
+  "primary": 603,
   "primary_settled": 169,
-  "primary_per_day": 87.4,
+  "primary_per_day": 87.2,
   "PRIMARY": {
    "all": {
     "n": 169,
@@ -662,20 +662,20 @@
   },
   "mark_24h_all_primary": {
    "all": {
-    "n": 367,
-    "mid_minus_ask_pts": -0.66
+    "n": 377,
+    "mid_minus_ask_pts": -0.8
    },
    "crypto": {
-    "n": 112,
-    "mid_minus_ask_pts": -2.48
+    "n": 117,
+    "mid_minus_ask_pts": -2.42
    },
    "culture": {
     "n": 25,
     "mid_minus_ask_pts": 4.02
    },
    "economy": {
-    "n": 50,
-    "mid_minus_ask_pts": 0.19
+    "n": 54,
+    "mid_minus_ask_pts": -0.59
    },
    "geopolitics": {
     "n": 104,
@@ -686,8 +686,8 @@
     "mid_minus_ask_pts": -0.59
    },
    "tech": {
-    "n": 26,
-    "mid_minus_ask_pts": -0.24
+    "n": 27,
+    "mid_minus_ask_pts": -0.7
    },
    "tweets": {
     "n": 6,
@@ -696,12 +696,12 @@
   },
   "mark_72h_all_primary": {
    "all": {
-    "n": 238,
-    "mid_minus_ask_pts": -1.25
+    "n": 240,
+    "mid_minus_ask_pts": -1.21
    },
    "crypto": {
-    "n": 76,
-    "mid_minus_ask_pts": -4.87
+    "n": 77,
+    "mid_minus_ask_pts": -4.81
    },
    "culture": {
     "n": 15,
@@ -712,8 +712,8 @@
     "mid_minus_ask_pts": -1.95
    },
    "geopolitics": {
-    "n": 62,
-    "mid_minus_ask_pts": 1.18
+    "n": 63,
+    "mid_minus_ask_pts": 1.25
    },
    "politics": {
     "n": 28,
@@ -733,56 +733,58 @@
    "median": 0.002,
    "p75": 0.01
   },
-  "share_cap_ok": 0.9,
+  "share_cap_ok": 0.901,
   "median_lag_s": 134,
-  "median_usd_at_ask": 211,
+  "median_usd_at_ask": 207,
   "median_usd_within_2c": 5980,
   "open_primary_by_category": {
    "economy": 60,
    "crypto": 139,
-   "geopolitics": 126,
+   "geopolitics": 127,
    "politics": 51,
-   "culture": 21,
+   "culture": 22,
    "tech": 33,
    "tweets": 2
   }
  },
- "positions": 2345,
+ "positions": 2353,
  "settled": 701,
- "primary": 1075,
+ "primary": 1077,
  "totals": {
-  "control crossings $2500": 4644,
-  "skip: fast: sports": 10684,
-  "control crossings $10000": 1053,
-  "control crossings $1000": 8940,
-  "skip: fast: crypto up/down": 1516,
-  "control primary follows": 600,
-  "control paper positions": 1052,
-  "skip: closed or ends in < 1 h": 416,
-  "sharp crossings $250": 663,
-  "sharp paper positions": 1291,
-  "sharp crossings $50": 2017,
-  "skip: ask outside 0.03-0.97": 835,
-  "skip: ends in > 60 days": 1151,
+  "control crossings $2500": 4707,
+  "skip: fast: sports": 10865,
+  "control crossings $10000": 1067,
+  "control crossings $1000": 9052,
+  "skip: fast: crypto up/down": 1520,
+  "control primary follows": 602,
+  "control paper positions": 1056,
+  "skip: closed or ends in < 1 h": 419,
+  "sharp crossings $250": 668,
+  "sharp paper positions": 1295,
+  "sharp crossings $50": 2033,
+  "skip: ask outside 0.03-0.97": 840,
+  "skip: ends in > 60 days": 1156,
   "sharp primary follows": 474,
-  "skip: fast: sports parlay (combo)": 307,
+  "skip: fast: sports parlay (combo)": 311,
   "skip: no ask in the book": 232,
   "settled": 701,
   "sharp crossings $1000": 167
  },
  "this_run": {
-  "feed pages": 593,
-  "polls": 339,
-  "fills": 50503,
-  "skip: fast: sports": 249,
-  "skip: fast: sports parlay (combo)": 11,
-  "skip: fast: crypto up/down": 11,
-  "sharp paper positions": 17,
+  "feed pages": 861,
+  "polls": 523,
+  "fills": 79210,
+  "skip: fast: sports": 430,
+  "skip: fast: sports parlay (combo)": 15,
+  "skip: fast: crypto up/down": 15,
+  "sharp paper positions": 21,
   "skip: no ask in the book": 2,
-  "skip: ends in > 60 days": 4,
-  "skip: closed or ends in < 1 h": 6,
-  "control paper positions": 17,
+  "skip: ends in > 60 days": 9,
+  "skip: closed or ends in < 1 h": 9,
+  "control paper positions": 21,
   "http 404": 1,
-  "skip: ask outside 0.03-0.97": 8
+  "skip: ask outside 0.03-0.97": 13,
+  "http 500": 1,
+  "feed failures": 1
  }
 }
