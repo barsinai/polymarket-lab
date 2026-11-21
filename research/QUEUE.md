@@ -918,3 +918,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - N115 quote pulls DEAD (follow the jumped side -9.4 pts on 208 events, fade -7.5, placebo -3.6: the hole refills) -> LESSONS 32. N42 forward
   rest fell to -1.5 pts on 12 coin-dates (below the kill line; decide 11-26); forward tails +14.6 on 7 -> N114 READY (one bet per coin-date).
   Next: N114 arm, N42 11-26, N107 pull #2 11-27, young 11-30, COPY-1 to 300 / 100.
+
+## 11-21 13:40 cycle 54
+- N116 off-hours big takers DEAD (weekend / US-night +2.2 pts on 2,331 events vs US hours +3.0; oos1 -1.2 vs +7.0; the follower's print comes
+  sooner off-hours). N114 tails-per-coin-date arm live in options_tail_readout.py (0 coin-dates). N117 Wikipedia pageviews READY. Read-outs
+  flat. Next: N117 pull, N42 11-26, N107 pull #2 11-27, young 11-30, COPY-1 to 300 / 100.

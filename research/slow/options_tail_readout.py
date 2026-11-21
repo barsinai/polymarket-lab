@@ -30,4 +30,16 @@ for per in ("in_sample", "forward"):
 openv = [p for p in P if not p.get("result")]
 out["open"] = {"n": len(openv), "tails": sum(p["price"] < 0.20 for p in openv), "tails_down_bets": sum(1 for p in openv if p["price"] < 0.20 and down_bet(p)),
                "rest_down_bets": sum(1 for p in openv if p["price"] >= 0.20 and down_bet(p)), "rest": sum(p["price"] >= 0.20 for p in openv)}
+# N114 (c53, rule fixed then): tails opened >= 11-21 12:00, ONE position per coin+date (the largest edge), kill if <= 0 pts after 15 coin-dates
+N114 = "2026-11-21 12:00"
+best = {}
+for p in P:
+    if p["opened"] >= N114 and p["price"] < 0.20:
+        k = (p["coin"], p["T"][:10])
+        if k not in best or p["edge"] > best[k]["edge"]:
+            best[k] = p
+done = [p for p in best.values() if p.get("result")]
+out["N114 tails one per coin-date"] = {"coin_dates": len(best), "settled": len(done), "won": sum(p["result"] == "won" for p in done),
+    "pts_per_share": round(100 * sum((1 if p["result"] == "won" else 0) - p["price"] for p in done) / len(done), 1) if done else None,
+    "down_bets": sum(1 for p in best.values() if down_bet(p)), "kill_rule": "<= 0 pts after 15 settled coin-dates"}
 print(json.dumps(out, indent=1))

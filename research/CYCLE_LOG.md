@@ -1187,3 +1187,21 @@
   snapshot 08:05 - OK. Tracebacks only the old pilot-log (2) / script-log (1); no MemoryErrors. STOP in place, no orders. No dispatch needed.
 - Next: N114 arm in options_tail_readout.py; N42 decision 11-26 (rest now -1.5); N110 tagging; N107 pull #2 11-27; lock_x BTC/ETH forward
   arm (30 end-times); N58 kill read at 100 / 40; N95 settlements; young 11-30; COPY-1 to 300 / 100.
+
+## 11-21 13:00-13:40 UTC cycle 54 (scheduled)
+- Read-outs (fast trades.jsonl, last entry 13:03; slow 12:03-12:08): lock_x 74 trades / 58 end-times 65 won +3.6%/$ (-1.5 pts/share
+  [-10.7, +6.1]); >= 0.80 62 / 52 -1.0%/$; BTC/ETH >= 0.80 26 / 25 +1.4%/$ (+1.8 pts). LP-1 v2 190 runs / 7.08 d: formula $2,187 (upper
+  bound), trading -$486, pessimistic -$713; 126 settled, 71 open leftovers, 1 quoted. Options N42 forward rest 37 / 25 won -1.5 pts on 12
+  coin-dates (decision 11-26), forward tails 9 / 2 +14.6 on 7; 106 open. N114 arm added to options_tail_readout.py (tails opened >= 11-21
+  12:00, one per coin-date): 0 coin-dates yet. converge 30 / 29 +$3.98 (80 open, mark -$74); young 126 / 69 -$188 (127 open; 11-30); box
+  office 9 / 8 -$0.96; charts 5 / 5 +$4.53; mention 27 / 22 -$7.21. N95 rt 91 seen, 9 open, 0 settled, open_past_end 0. COPY-1 161.8 h:
+  sharp 123 primaries / 79 events +4.3 pts (+3.3 at 5 min; bar 300 / 100), control 163 / 65 -0.1. N58 105 positions, 18 settled -18.1 pts
+  on 5 events, 87 open, open_past_end 0. No row crossed a kill or promote line.
+- Test (adjacent N116, offhours_big.py, local, tapes a + b + c + oos1 unseen ids, rules fixed before looking): first >= $200 taker,
+  follower a300: OFF-hours (weekend / Mon-Fri 04-12 UTC) +2.2 pts [1.3, 3.2] on 2,331 events vs ON-hours +3.0 [1.6, 4.3] on 1,540; oos1
+  OFF -1.2 on 142 vs ON +7.0 on 83 -> DEAD. The a300 print is sooner off-hours (median 21 vs 28 min): no slow night book.
+- New (outside the box N117): Wikipedia pageviews vs price in multi-outcome culture events -> READY (run_script, needs network).
+- Health: fast paper 13:04, slow 12:08, follow 12:20 (report 12:16, < 70 min), boosts 12:51, MM v2 13:01, books 13:00, live snapshot 13:05,
+  perps 09:37 - OK. Tracebacks only the old pilot-log (2) / script-log (1); no MemoryErrors. STOP in place, no orders. No dispatch needed.
+- Next: N117 pageview pull; N42 decision 11-26; N114 coin-dates; N110 tagging; N107 pull #2 11-27; N58 kill read at 100 / 40; N95
+  settlements; young 11-30; COPY-1 to 300 / 100.
