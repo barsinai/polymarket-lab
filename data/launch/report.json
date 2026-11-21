@@ -1,13 +1,13 @@
 {
- "updated": "2026-11-21 16:31",
+ "updated": "2026-11-21 17:30",
  "started": "2026-11-17 01:16",
- "days": 4.64,
+ "days": 4.68,
  "note": "tape base rate ~75 culture markets launch a day (~3 an hour): 0 candidates over a day is a bug, not a result",
  "rule": "new culture listing < 60 min old, lives >= 24 h, NO ask 0.05-0.90, NO spread <= 10c: $10 at the NO ask, fee paid; one per market",
  "decision": "kill if <= +1 pt or event CI low < -1 after 100 markets / 40 events; promote only after 300 / 100 / 3 weeks",
- "positions": 107,
+ "positions": 126,
  "settled": 19,
- "open": 88,
+ "open": 107,
  "open_past_end": 0,
  "all": {
   "n": 19,
@@ -64,34 +64,39 @@
   "n": 0
  },
  "open_by_kind": {
-  "retry": 62,
-  "late": 26
+  "retry": 80,
+  "late": 27
  },
  "watching": {
   "not accepting orders": 1134,
-  "spread > 10c": 10,
-  "ask outside 0.05-0.90": 28
+  "spread > 10c": 1,
+  "ask outside 0.05-0.90": 7
  },
  "candidates": {
-  "ask outside 0.05-0.90": 853,
-  "bought": 107,
+  "ask outside 0.05-0.90": 861,
+  "bought": 126,
   "lives < 24 h": 13,
   "not accepting orders": 1220,
-  "spread > 10c": 7,
+  "spread > 10c": 9,
   "no NO ask": 95
  },
- "candidate_age_min_median": 4.0,
+ "candidate_age_min_median": 4.1,
  "this_run": {
-  "events listed": 8284,
-  "polls": 70,
-  "seen once: markets < 24 h old (lesson 10 check)": 38,
-  "new listings": 38,
-  "skip (first): ask outside 0.05-0.90": 37,
-  "skip (retry): ask outside 0.05-0.90": 330,
-  "skip (retry): none, bought": 2,
-  "paper positions (retry)": 2,
-  "skip (retry): spread > 10c": 57,
+  "events listed": 11012,
+  "polls": 92,
+  "seen once: markets < 24 h old (lesson 10 check)": 48,
+  "new listings": 48,
+  "skip (first): ask outside 0.05-0.90": 45,
+  "skip (retry): ask outside 0.05-0.90": 758,
+  "skip (retry): none, bought": 20,
+  "paper positions (retry)": 20,
+  "skip (retry): spread > 10c": 445,
   "skip (first): no NO ask": 1,
-  "skip (retry): no NO ask": 3
+  "skip (retry): no NO ask": 3,
+  "skip (late): spread > 10c": 11,
+  "skip (late): ask outside 0.05-0.90": 10,
+  "skip (first): spread > 10c": 2,
+  "skip (late): none, bought": 1,
+  "paper positions (late)": 1
  }
 }
