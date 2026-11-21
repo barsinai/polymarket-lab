@@ -908,3 +908,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - N21 lock_be DEAD at its decision date (forward BTC/ETH -2.0%/$ on 202 windows). N109 moved deadlines DEAD by count (1 qualifying edit in
   22 days of books snapshots). N111 attention-spike fade DEAD (-3.7 pts on 20 events; follow and placebo also negative = spread cost). N110
   COPY-1 x HERD READY. Next: N110 tagging, N107 pull #2 11-27, N42 11-26, young 11-30, COPY-1 to 300 / 100.
+
+## 11-21 05:45 cycle 52
+- N113 copy-trade cascades DEAD both ways (follow -0.1 pts on 2,762 events, fade -1.4 on 2,853); its placebo's +5.7 was a lookahead filter
+  (+0.05 when knowable). N112 headcount herd DEAD (-4.7 on 117 events vs dollar-only herd +3.2 on 2,099): N107 = big early money, LESSONS 31.
+  No tracker crossed a line. Next: N110 tagging, N107 pull #2 11-27, N42 11-26, young 11-30, COPY-1 to 300 / 100.

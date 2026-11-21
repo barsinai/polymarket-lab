@@ -1150,3 +1150,22 @@
   books 01:00, live snapshot 00:04 - OK. Tracebacks only the old pilot-log (2) / script-log (1); no MemoryErrors. STOP in place, no orders.
 - Next: N110 tagging script for follow primaries; N107 pull #2 11-27; lock_x BTC/ETH forward arm (30 end-times); N58 kill read at 100 / 40;
   N95 settlements; N42 11-26; young 11-30; COPY-1 to 300 / 100.
+
+## 11-21 05:00-05:45 UTC cycle 52 (scheduled)
+- Read-outs (fast trades.jsonl, last entry 04:59; slow 04:01-04:06): lock_x 72 settled / 56 end-times 63 won +3.4%/$ (one new loss); BTC/ETH
+  >= 0.80 forward arm since 11-19 01:00: 9 trades / 8 end-times, 8 won, -$10.7 (needs 30). lock_x50 +5.7%, lock_p_majors 47 +5.4%; lock_m
+  405 -1.7%, lock_b 206 +1.1%, lock_p_z2 475 -0.8%. LP-1 v2 181 runs / 6.75 d: formula $2,167 (upper bound), trading -$423, pessimistic
+  -$709; 125 settled, 71 open leftovers, 1 quoted. Options N42 forward rest 31 / 24 +9.2 pts (10 coin-dates, 7 positive), 72 open -> 11-26.
+  converge 29 / 28 +$3.68 (81 open, mark -$69, was -$38); young 126 / 69 -$188 (126 open; 11-30); box office 9 / 8 -$0.96; charts 5 / 5
+  +$4.53; mention 27 / 22 -$7.21 (1 open). N95 rt_paper 91 seen, 9 open, 0 settled, open_past_end 0. COPY-1 153.5 h: sharp 123 primaries /
+  79 events +4.3 pts (+3.3 at 5 min; bar 300 / 100), control 156 / 63 -0.3. N58 103 positions, 18 settled -18.1 pts on 5 events (retry arm
+  15 / 4 events -21.0), 85 open, open_past_end 0. No row crossed a kill or promote line.
+- Test (outside the box N113, copy_burst.py, local, tapes a + b + c + oos1, rules fixed before looking): 5 wallets' first entries the same
+  way in <= 120 s: FOLLOW -0.1 pts [-1.0, +0.8] on 2,762 events, FADE -1.4 [-2.3, -0.6] on 2,853 -> DEAD both ways. Its placebo (+5.7 on
+  1,270) was a lookahead filter; knowable version +0.05 on 3,142 (lesson 4 note).
+- Test (adjacent N112, herd_count.py, same tapes, rules fixed before looking): headcount-only herd -4.7 pts on 117 events, dollar-only herd
+  +3.2 [2.1, 4.3] on 2,099 (OOS +1.9 on 121) -> DEAD as a switch; N107 is big money early, not many heads (LESSONS 31).
+- Health: fast paper 05:01, slow 05:05, follow chain run 47 in progress since 03:07 (report 03:58, commit 04:07), boosts 04:01, MM v2 04:32,
+  books 05:00, live snapshot 04:05 - OK. Tracebacks only the old pilot-log (2) / script-log (1); no MemoryErrors. STOP in place, no orders.
+- Next: N110 tagging script for follow primaries (now read it as 'sharp WITH big early money'); N107 pull #2 11-27; lock_x BTC/ETH forward
+  arm (30 end-times); N58 kill read at 100 / 40; N95 settlements; N42 11-26; young 11-30; COPY-1 to 300 / 100.

@@ -13,7 +13,8 @@ survives them. Add a lesson whenever an idea dies for a reason not already here.
    prices are often mids of empty books (young markets). Every backtest uses the ask/bid that existed then + 0.07p(1-p).
 4. **Lookahead hides in timestamps.** The +21..+39% websocket replay used Chainlink prints at their source time, 1.45 s
    before they arrived; 11-01 crypto fair value used exchange prices up to 1 h fresher than the market price. Always
-   replay by RECEIVE time and ask "could I have known this then?"
+   replay by RECEIVE time and ask "could I have known this then?" A FILTER can look ahead too (11-21, N113): 'markets with no burst' used
+   the whole life of the market; the slow-cluster arm read +5.7 pts on 1,270 events and +0.05 once the filter only saw the past.
 5. **Small samples are lumpy and regress.** lock_m: one hour -$74 next to seven positive ones; flow filter +4.2 local
    became -8.3 on the server; 17/17 out of sample means little when trades cluster in a few windows. Count independent
    events (windows, days, underlyings), not trades; replicate on a second period before believing.
@@ -122,6 +123,11 @@ survives them. Add a lesson whenever an idea dies for a reason not already here.
 30. **Paying up is not information; patience is** (11-20, N103, 12-week tape): big takers (>= $200) whose order swept 5c+ above the last
     same-way print lost 2.2 pts per share at their OWN fill (1,105 events) while big takers filling at the last print won +1.8. The urgent
     trader is the one chasing a move; the informed one waits for the book. Never read 'aggressive' as 'knows something' without measuring it.
+
+31. **Check the story against its own weighting** (11-21, N112): HERD-follow was explained as 'many independent people saw the same
+    answer', but its share was dollar-weighted. A headcount herd without a dollar herd lost 4.7 pts (117 events); a dollar herd without
+    a headcount herd won +3.2 (2,099). The edge was a few big tickets (the big-taker base rate), not the crowd. When a rule has a story,
+    split it by the variable the story names before building on the story.
 
 ## Where edges plausibly still live (derived from the above)
 - Information the crowd processes slowly and bots don't cover: resolution-rule details (exact station, exact candle,
