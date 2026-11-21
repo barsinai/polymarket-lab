@@ -1,8 +1,8 @@
 {
-"scanned": "2026-11-21 07:04",
+"scanned": "2026-11-21 08:05",
 "events": 2100,
 "groups": 2037,
-"books": 17276,
+"books": 17274,
 "opps": [
 {
 "kind": "ladder_num",
@@ -31,8 +31,8 @@
 "cost": 0.99,
 "edge": 0.01,
 "edge_after_fee": -0.0074,
-"size_shares": 1502.09,
-"usd_at_size": 1487.07
+"size_shares": 1448.09,
+"usd_at_size": 1433.61
 },
 {
 "kind": "ladder_num",
@@ -63,6 +63,26 @@
 "edge_after_fee": 0.0081,
 "size_shares": 117.22,
 "usd_at_size": 116.17
+},
+{
+"kind": "negrisk_all_yes",
+"event": "Fed Decision in January?",
+"slug": "fed-decision-in-january-20260729233815502",
+"n": 5,
+"has_other": false,
+"outcomes": [
+"50+ bps decrease",
+"25 bps decrease",
+"No change",
+"25 bps increase",
+"50+ bps increase"
+],
+"cost": 0.99,
+"payoff": 1,
+"edge": 0.01,
+"edge_after_fee": -0.0277,
+"size_shares": 88.4,
+"usd_at_size": 87.52
 },
 {
 "kind": "ladder_num",
@@ -156,6 +176,21 @@
 },
 {
 "kind": "ladder_num",
+"event": "Probable FDV above ___ one day after launch?",
+"slug": "probable-fdv-above-one-day-after-launch",
+"easy": "Probable FDV above $50M one day after launch?",
+"hard": "Probable FDV above $500M one day after launch?",
+"easy_yes_ask": 0.12,
+"hard_no_ask": 0.864,
+"hard_yes_bid": 0.136,
+"cost": 0.984,
+"edge": 0.016,
+"edge_after_fee": 0.0004,
+"size_shares": 19.7,
+"usd_at_size": 19.38
+},
+{
+"kind": "ladder_num",
 "event": "Abstract FDV above ___ one day after launch?",
 "slug": "abstract-fdv-above-one-day-after-launch",
 "easy": "Abstract FDV above $400M one day after launch?",
@@ -185,6 +220,43 @@
 "usd_at_size": 7.8
 },
 {
+"kind": "negrisk_all_yes",
+"event": "Next leader out of power before 2027?",
+"slug": "next-leader-out-of-power-before-2027-no-starmer-or-petro-20260630194619406",
+"n": 22,
+"has_other": true,
+"outcomes": [
+"Macron - France President",
+"Erdo\u011fan - T\u00fcrkiye President",
+"Kim - Supreme Leader of North Korea",
+"Xi - General Secretary of the CCP",
+"Netanyahu - Israel PM",
+"Albanese - Australia PM",
+"Newsom - California Governor",
+"Milei - Argentina President",
+"Trump - USA President",
+"Zelenskyy - Ukraine President",
+"Putin - Russia President",
+"Lula da Silva - Brazil President",
+"Lecornu - France PM",
+"Takaichi - Japan PM",
+"Abbas - President of Palestine",
+"Merz - German Chancellor",
+"S\u00e1nchez - Spanish PM",
+"Sheinbaum - Mexico President",
+"D\u00edaz-Canel - Cuba President",
+"Rodr\u00edguez - Venezuela Acting President",
+"al-Sharaa - Syria President",
+"None before 2027"
+],
+"cost": 0.992,
+"payoff": 1,
+"edge": 0.008,
+"edge_after_fee": -0.0334,
+"size_shares": 9.61,
+"usd_at_size": 9.53
+},
+{
 "kind": "ladder_num",
 "event": "How high will US unemployment go in 2026?",
 "slug": "how-high-will-us-unemployment-go-in-2026",
@@ -201,21 +273,6 @@
 },
 {
 "kind": "ladder_num",
-"event": "Printr FDV above ___ one day after launch?",
-"slug": "printr-fdv-above-one-day-after-launch",
-"easy": "Printr FDV above $500M one day after launch?",
-"hard": "Printr FDV above $1B one day after launch?",
-"easy_yes_ask": 0.049,
-"hard_no_ask": 0.928,
-"hard_yes_bid": 0.072,
-"cost": 0.977,
-"edge": 0.023,
-"edge_after_fee": 0.0151,
-"size_shares": 1.61,
-"usd_at_size": 1.57
-},
-{
-"kind": "ladder_num",
 "event": "Metamask FDV above ___ one day after launch?",
 "slug": "metamask-fdv-above-one-day-after-launch",
 "easy": "Metamask FDV above $3B one day after launch?",
@@ -228,6 +285,21 @@
 "edge_after_fee": 0.0015,
 "size_shares": 11.0,
 "usd_at_size": 10.97
+},
+{
+"kind": "ladder_num",
+"event": "Printr FDV above ___ one day after launch?",
+"slug": "printr-fdv-above-one-day-after-launch",
+"easy": "Printr FDV above $500M one day after launch?",
+"hard": "Printr FDV above $1B one day after launch?",
+"easy_yes_ask": 0.049,
+"hard_no_ask": 0.938,
+"hard_yes_bid": 0.062,
+"cost": 0.987,
+"edge": 0.013,
+"edge_after_fee": 0.0057,
+"size_shares": 1.61,
+"usd_at_size": 1.59
 },
 {
 "kind": "ladder_num",
