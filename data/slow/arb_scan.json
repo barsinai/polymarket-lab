@@ -1,5 +1,5 @@
 {
-"scanned": "2026-11-21 02:03",
+"scanned": "2026-11-21 02:31",
 "events": 2100,
 "groups": 2037,
 "books": 17278,
@@ -16,8 +16,8 @@
 "cost": 0.99,
 "edge": 0.01,
 "edge_after_fee": -0.0074,
-"size_shares": 3119.78,
-"usd_at_size": 3088.58
+"size_shares": 3171.78,
+"usd_at_size": 3140.06
 },
 {
 "kind": "ladder_num",
@@ -54,6 +54,21 @@
 "event": "StandX FDV above ___ one day after launch?",
 "slug": "standx-fdv-above-one-day-after-launch",
 "easy": "StandX FDV above $2B one day after launch?",
+"hard": "StandX FDV above $3B one day after launch?",
+"easy_yes_ask": 0.002,
+"hard_no_ask": 0.989,
+"hard_yes_bid": 0.011,
+"cost": 0.991,
+"edge": 0.009,
+"edge_after_fee": 0.0081,
+"size_shares": 117.22,
+"usd_at_size": 116.17
+},
+{
+"kind": "ladder_num",
+"event": "StandX FDV above ___ one day after launch?",
+"slug": "standx-fdv-above-one-day-after-launch",
+"easy": "StandX FDV above $2B one day after launch?",
 "hard": "StandX FDV above $5B one day after launch?",
 "easy_yes_ask": 0.002,
 "hard_no_ask": 0.987,
@@ -78,26 +93,6 @@
 "edge_after_fee": 0.0425,
 "size_shares": 12.5,
 "usd_at_size": 11.85
-},
-{
-"kind": "negrisk_all_yes",
-"event": "Fed Decision in January?",
-"slug": "fed-decision-in-january-20260729233815502",
-"n": 5,
-"has_other": false,
-"outcomes": [
-"50+ bps decrease",
-"25 bps decrease",
-"No change",
-"25 bps increase",
-"50+ bps increase"
-],
-"cost": 0.997,
-"payoff": 1,
-"edge": 0.003,
-"edge_after_fee": -0.0344,
-"size_shares": 191.83,
-"usd_at_size": 191.25
 },
 {
 "kind": "ladder_num",
@@ -145,6 +140,26 @@
 "usd_at_size": 116.75
 },
 {
+"kind": "negrisk_all_yes",
+"event": "Fed Decision in January?",
+"slug": "fed-decision-in-january-20260729233815502",
+"n": 5,
+"has_other": false,
+"outcomes": [
+"50+ bps decrease",
+"25 bps decrease",
+"No change",
+"25 bps increase",
+"50+ bps increase"
+],
+"cost": 0.996,
+"payoff": 1,
+"edge": 0.004,
+"edge_after_fee": -0.0333,
+"size_shares": 88.71,
+"usd_at_size": 88.36
+},
+{
 "kind": "ladder_num",
 "event": "StandX FDV above ___ one day after launch?",
 "slug": "standx-fdv-above-one-day-after-launch",
@@ -175,6 +190,18 @@
 "usd_at_size": 75.25
 },
 {
+"kind": "negrisk_all_no",
+"event": "OpenAI IPO Closing Market Cap",
+"slug": "openai-ipo-closing-market-cap-554",
+"n": 7,
+"cost": 5.997,
+"payoff": 6,
+"edge": 0.003,
+"edge_after_fee": -0.0515,
+"size_shares": 100.1,
+"usd_at_size": 600.3
+},
+{
 "kind": "ladder_num",
 "event": "Abstract FDV above ___ one day after launch?",
 "slug": "abstract-fdv-above-one-day-after-launch",
@@ -202,12 +229,12 @@
 "3",
 "4+"
 ],
-"cost": 0.995,
+"cost": 0.99,
 "payoff": 1,
-"edge": 0.005,
-"edge_after_fee": -0.0321,
-"size_shares": 14.99,
-"usd_at_size": 14.92
+"edge": 0.01,
+"edge_after_fee": -0.0268,
+"size_shares": 15.0,
+"usd_at_size": 14.85
 },
 {
 "kind": "ladder_num",
@@ -225,36 +252,6 @@
 "usd_at_size": 12.74
 },
 {
-"kind": "ladder_num",
-"event": "StandX FDV above ___ one day after launch?",
-"slug": "standx-fdv-above-one-day-after-launch",
-"easy": "StandX FDV above $2B one day after launch?",
-"hard": "StandX FDV above $3B one day after launch?",
-"easy_yes_ask": 0.002,
-"hard_no_ask": 0.988,
-"hard_yes_bid": 0.012,
-"cost": 0.99,
-"edge": 0.01,
-"edge_after_fee": 0.009,
-"size_shares": 6.0,
-"usd_at_size": 5.94
-},
-{
-"kind": "ladder_num",
-"event": "Printr FDV above ___ one day after launch?",
-"slug": "printr-fdv-above-one-day-after-launch",
-"easy": "Printr FDV above $500M one day after launch?",
-"hard": "Printr FDV above $1B one day after launch?",
-"easy_yes_ask": 0.049,
-"hard_no_ask": 0.923,
-"hard_yes_bid": 0.077,
-"cost": 0.972,
-"edge": 0.028,
-"edge_after_fee": 0.0198,
-"size_shares": 1.61,
-"usd_at_size": 1.56
-},
-{
 "kind": "negrisk_all_yes",
 "event": "Maduro Prison Time?",
 "slug": "maduro-prison-time-527",
@@ -267,12 +264,27 @@
 "40\u201360",
 "60+"
 ],
-"cost": 0.978,
+"cost": 0.979,
 "payoff": 1,
-"edge": 0.022,
-"edge_after_fee": -0.0148,
+"edge": 0.021,
+"edge_after_fee": -0.0159,
 "size_shares": 1.89,
 "usd_at_size": 1.85
+},
+{
+"kind": "ladder_num",
+"event": "Printr FDV above ___ one day after launch?",
+"slug": "printr-fdv-above-one-day-after-launch",
+"easy": "Printr FDV above $500M one day after launch?",
+"hard": "Printr FDV above $1B one day after launch?",
+"easy_yes_ask": 0.049,
+"hard_no_ask": 0.938,
+"hard_yes_bid": 0.062,
+"cost": 0.987,
+"edge": 0.013,
+"edge_after_fee": 0.0057,
+"size_shares": 1.61,
+"usd_at_size": 1.59
 },
 {
 "kind": "ladder_num",
