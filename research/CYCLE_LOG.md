@@ -1130,3 +1130,23 @@
   21:04 - OK. Tracebacks only the old pilot-log / script-log; no MemoryErrors. STOP in place, no orders. No dispatch needed.
 - Next: N21 decision 11-21 (expect DEAD); N109 count test; N107 pull #2 11-27; lock_x BTC/ETH forward arm (30 end-times); N58 retry arm;
   N95 settlements; N42 11-26; young 11-30; COPY-1 to 300 / 100.
+
+## 11-21 01:00-01:45 UTC cycle 51 (scheduled)
+- Read-outs (fast trades.jsonl, last entry 00:59; slow 00:00-00:04): lock_x 71 trades / 55 end-times 63 won +3.8%/$ (-0.65 pts/share
+  [-9.6, +6.8]); >= 0.80 60 / 50 -0.6%/$; BTC/ETH >= 0.80 forward arm since 11-19 01:00: 9 trades / 8 end-times, 8 won, -$10.7 (needs 30).
+  lock_x50 +5.9%, lock_p_majors 47 +5.4%; lock_m 398 -1.5%, lock_b 200 +1.6%, lock_p_z2 469 -0.8%. N21 DECISION: forward BTC/ETH -2.0%/$ on
+  202 windows / 8 days, alts -3.8% on 280 -> DEAD. LP-1 v2 176 runs / 6.58 d: formula $2,156 (upper bound), trading -$420, pessimistic -$709;
+  125 settled, 71 open leftovers, 1 quoted; forward_core 96 markets $495 vs +$47 / +$35. Options N42 forward rest 31 / 24 +9.2 pts (10
+  coin-dates, 7 positive), tails 7 / 0 -7.8, 60 open -> 11-26. converge 29 / 28 +$3.68 (80 open, mark -$38); young 123 / 66 -$206 (125 open;
+  11-30); box office 9 / 8 -$0.96; charts 5 / 5 +$4.53; mention 27 / 22 -$7.21. N95 rt_paper 91 seen, 9 open, 0 settled, open_past_end 0.
+  COPY-1 150.4 h: sharp 123 primaries / 79 events +4.3 pts (+3.3 at 5 min; bar 300 / 100), control 149 / 63 +0.8. N58 98 positions, 18
+  settled -18.1 pts on 5 events (CI [-25, +5]; retry arm 15 / 4 events -21.0; decision arm 3 / 1), open_past_end 0. No other row crossed a line.
+- Test (READY N109, moved_deadline.py, local, 494 hourly books snapshots, 13,324 markets, 22 days): 285 endDate edits, 15 later by >= 1 d,
+  1 with >= 3 d left on the old end -> DEAD by count (rule needed >= 8 here).
+- Test (outside the box N111, attention_spike.py, local, books snapshots, rules fixed before looking): fade a >= 5c 24 h move when 24 h
+  volume jumps >= 5x: -3.7 pts [-6.1, -1.4] on 20 events; follow -2.8; placebo fade -4.2 on 80 -> DEAD (round-trip spread, no overreaction).
+- New (adjacent N110): COPY-1 x HERD agreement -> READY (forward split only, rule fixed now).
+- Health: fast paper 00:59, slow 00:04, follow 00:55 (report 00:50, chain saving), boosts 00:45, MM v2 00:01, replay 21:06 (6-hourly),
+  books 01:00, live snapshot 00:04 - OK. Tracebacks only the old pilot-log (2) / script-log (1); no MemoryErrors. STOP in place, no orders.
+- Next: N110 tagging script for follow primaries; N107 pull #2 11-27; lock_x BTC/ETH forward arm (30 end-times); N58 kill read at 100 / 40;
+  N95 settlements; N42 11-26; young 11-30; COPY-1 to 300 / 100.

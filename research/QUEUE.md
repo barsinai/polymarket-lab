@@ -903,3 +903,8 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - N107 herd-follow: c49's OOS verdict was a cut bug (groups a / c had 0 markets); re-scored by id: +2.47 pts on 127 unseen events -> PASS by
   a hair -> TESTING as rolling OOS pulls (11-27). N108 herd pullback DEAD (tape +6.7 on 1,785 events, OOS +1.1 on 94). COPY-1 sharp +4.3 vs
   control +0.8. N58 15 settled, -28.8 pts (mostly retry arm). Next: N21 11-21, N109 count test, N107 pull #2 11-27, N42 11-26, young 11-30.
+
+## 11-21 01:45 cycle 51
+- N21 lock_be DEAD at its decision date (forward BTC/ETH -2.0%/$ on 202 windows). N109 moved deadlines DEAD by count (1 qualifying edit in
+  22 days of books snapshots). N111 attention-spike fade DEAD (-3.7 pts on 20 events; follow and placebo also negative = spread cost). N110
+  COPY-1 x HERD READY. Next: N110 tagging, N107 pull #2 11-27, N42 11-26, young 11-30, COPY-1 to 300 / 100.
