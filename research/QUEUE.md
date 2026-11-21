@@ -923,3 +923,6 @@ Price drift in the trade's direction (what a market maker on the other side lose
 - N116 off-hours big takers DEAD (weekend / US-night +2.2 pts on 2,331 events vs US hours +3.0; oos1 -1.2 vs +7.0; the follower's print comes
   sooner off-hours). N114 tails-per-coin-date arm live in options_tail_readout.py (0 coin-dates). N117 Wikipedia pageviews READY. Read-outs
   flat. Next: N117 pull, N42 11-26, N107 pull #2 11-27, young 11-30, COPY-1 to 300 / 100.
+- 11-21 c55: N118 big ticket in a small pond DEAD (-0.4 pts on 1,468 events at the follower's fill; own fill +2.5, the wait eats it; oos1 -10.3).
+  N119 holding-reward carry DEAD by census (2028 NO carry +0.1..0.4%/yr before the reward = priced). N117 wiki_attention.py dispatched.
+  COPY-1 sharp fell to +0.6 pts on 144 / 81 (culture -8.9). Next: N117 read c56, N42 11-26, N107 pull #2 11-27, young 11-30, COPY-1 to 300 / 100.

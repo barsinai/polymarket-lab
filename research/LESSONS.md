@@ -92,6 +92,8 @@ survives them. Add a lesson whenever an idea dies for a reason not already here.
     per market side the maker who sold to them earned +1.8 points; per print he lost 1.5; a resting bid pegged to the last print
     lost 1.8 [-2.6, -0.8]; a live-pegged bid got -0.1 [-1.0, +0.9]. Choose the unit by how the strategy would really be filled
     (one fill per market, at the price that existed when we could act) and replay the sequence.
+    In a thin market the gap is the wait (11-21, N118): a big ticket that is >= 25% of the market's volume so far wins +2.5 pts at its own
+    fill and -0.4 at the follower's next print, a median 17 min later (1,468 events). Thin books are slow for the follower too.
 
 24. **An edge that is in one half and not in the other is gone.** Mention markets, buy NO at <= 0.50 at the first real fill:
     +16.9 points [13.2, 21.0] in Aug 17 - Sep 30, +0.8 [-3.0, +4.2] in Oct - Nov. The 12-week average (+9.3 [6.4, 12.3]) would have

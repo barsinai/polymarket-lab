@@ -1205,3 +1205,26 @@
   perps 09:37 - OK. Tracebacks only the old pilot-log (2) / script-log (1); no MemoryErrors. STOP in place, no orders. No dispatch needed.
 - Next: N117 pageview pull; N42 decision 11-26; N114 coin-dates; N110 tagging; N107 pull #2 11-27; N58 kill read at 100 / 40; N95
   settlements; young 11-30; COPY-1 to 300 / 100.
+
+## 11-21 17:00-17:45 UTC cycle 55 (scheduled)
+- Read-outs (fast trades.jsonl 17:05; slow 16:06-16:10; follow report 16:26): lock_x 75 trades / 59 end-times 66 won +3.7%/$ (-1.4 pts/share
+  [-10.4, +6.2]); >= 0.80 63 / 53 -0.8%/$ (-4.4 pts); BTC/ETH >= 0.80 26 / 25 +1.4%/$ (+1.8 pts) - unchanged. COPY-1 166.0 h: sharp 144
+  primaries / 81 events +0.59 pts (-0.25 at 5 min), was +4.3 on 123 / 79 -> 21 new settlements took 3.7 pts (culture -8.9 on 56 / 22,
+  mention -17.8 on 8 / 2); control 169 / 67 -1.0. Kill line is < +0.5 at 300 / 100 - not there yet, but the 'sharp ahead of control'
+  read of c50 is gone. LP-1 v2 194 runs / 7.25 d: formula $2,189 (upper bound), trading -$485, pessimistic -$727; 128 settled, 71 open
+  leftovers, 2 quoted. Options N42 forward rest 37 / 25 -1.5 pts on 12 coin-dates (decision 11-26); N114 0 coin-dates; 111 open.
+  converge 30 / 29 +$3.98 (80 open, mark -$67); young 128 / 69 -$208 (2 new settlements lost; 126 open; 11-30); box office 9 / 8 -$0.96
+  (2 new opens); charts 5 / 5 +$4.53; mention 27 / 22 -$7.21. N95 rt 91 seen, 9 open, 0 settled, open_past_end 0. N58 not recomputed.
+  No row crossed a kill or promote line.
+- Test (adjacent N118, pond_size.py, local, big-order tapes a + b + c + oos1 unseen ids, rules fixed before looking): first >= $200 order
+  that is >= 25% of the market's $ so far: -0.43 pts [-2.0, +1.2] on 1,468 events (own fill +2.5, follower waits a median 1,007 s);
+  small-fish +0.05 on 100; oos1 big-fish -10.3 on 66 -> DEAD (LESSONS 23 note). With volp >= $500 no arm keeps the +2.5 first-big-taker
+  base rate -> that base rate sits in a market's first $500 (note, not a rule).
+- Test (outside the box N119, holding-reward carry, census of 275 holdingRewardsEnabled markets): 2028 NO asks 0.993-0.998 = +0.1..0.4%/yr
+  before the ~4%/yr reward -> the reward is the whole return, priced -> DEAD by census.
+- N117 Wikipedia pageviews: wiki_attention.py written (window fixed to the 30 d ending at entry, c54's wording looked ahead) and dispatched
+  via run_script.yml; read the report in c56.
+- Health: fast paper 17:05, slow 16:10, follow 16:32 (report 16:26, < 70 min), boosts 16:12, MM v2 16:31, books 17:00 - OK. Tracebacks only
+  the old pilot-log (2) / script-log (1); no MemoryErrors. STOP in place, no orders. No re-dispatch needed.
+- Next: c56 read wiki_attention_report.json (N117); watch COPY-1 culture drag (no rule change - lesson 22); N42 decision 11-26; N107
+  pull #2 11-27; N110 tagging; N58 kill read at 100 / 40; young 11-30; COPY-1 to 300 / 100.
